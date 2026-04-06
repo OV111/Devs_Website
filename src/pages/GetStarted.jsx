@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Toaster, toast } from "react-hot-toast";
-import { Eye, EyeOff, BookOpen, Bookmark, Users } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../stores/useAuthStore";
 // import Lottie from "lottie-react";
-import codingAnimation from "../assets/animations/coding.json";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const GetStarted = () => {
@@ -98,18 +97,6 @@ const GetStarted = () => {
     setAuthUiMessage("");
     reset();
   };
-
-  const features = [
-    {
-      icon: <BookOpen size={18} />,
-      text: "Access in-depth dev articles & tutorials",
-    },
-    {
-      icon: <Bookmark size={18} />,
-      text: "Save your favorite posts for later",
-    },
-    { icon: <Users size={18} />, text: "Join a community of developers" },
-  ];
 
   return (
     <React.Fragment>
@@ -245,6 +232,7 @@ const GetStarted = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
                   className="absolute top-9 right-3 cursor-pointer text-gray-400 dark:text-zinc-500 sm:top-10 sm:right-5"
                 >
                   {showPassword ? (
@@ -287,6 +275,7 @@ const GetStarted = () => {
                       onClick={() => {
                         setShowConfirmPassword(!showConfirmPassword);
                       }}
+                      aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
                       className="absolute top-9 right-3 cursor-pointer text-gray-400 dark:text-zinc-500 sm:top-10 sm:right-5"
                     >
                       {showConfirmPassword ? (

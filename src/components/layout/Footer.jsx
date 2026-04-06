@@ -94,9 +94,9 @@ const Footer = () => {
           {/* Quick Links */}
           <div className="grid grid-cols-1 gap-8 min-[480px]:grid-cols-2 sm:gap-10">
             <div className="grid gap-1">
-              <h3 className="text-xl font-bold mb-2  text-purple-400">
+              <h2 className="text-xl font-bold mb-2  text-purple-400">
                 Quick Links
-              </h3>
+              </h2>
               {QuickLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -112,9 +112,9 @@ const Footer = () => {
 
             {/* Categories Part */}
             <div className="grid gap-1 space-y-0">
-              <h3 className="text-xl font-bold mb-2  text-purple-400">
+              <h2 className="text-xl font-bold mb-2  text-purple-400">
                 Categories
-              </h3>
+              </h2>
               {Categories.map((category) => (
                 <Link
                   key={category.href}
@@ -132,9 +132,9 @@ const Footer = () => {
           </div>
           {/* Email Part */}
           <div className="flex flex-col gap-4 mt-5 lg:mt-0 ">
-            <h3 className="text-2xl font-bold mb-0 w-50 text-purple-400">
+            <h2 className="text-2xl font-bold mb-0 w-50 text-purple-400">
               Stay Updated!
-            </h3>
+            </h2>
             <p className="text-purple-200 mb-4 lg:mb-0 w-60">
               Subscribe to our newsletter for the latest articles and updates.
             </p>
@@ -152,6 +152,7 @@ const Footer = () => {
                 />
                 <button
                   type="submit"
+                  aria-label="Subscribe to newsletter"
                   className="p-2 bg-purple-600 cursor-pointer   hover:bg-purple-700 text-white  rounded-md shadow-sm transition-colors duration-200"
                 >
                   <Send className="w-6 h-6 lg:mx-4 my-0 "></Send>

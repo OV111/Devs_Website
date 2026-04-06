@@ -11,7 +11,18 @@
     "server": "nodemon ./server.js",
     "lint": "eslint .",
     "preview": "vite preview",
-    "dev:full": "concurrently \"npm run dev\" \"nodemon backend/server.js\""
+    "dev:full": "concurrently \"npm run dev\" \"nodemon backend/server.js\"",
+    "test:unit": "vitest run --config vitest.config.js",
+    "test:unit:watch": "vitest --config vitest.config.js",
+    "test:unit:coverage": "vitest run --config vitest.config.js --coverage",
+    "test:integration": "vitest run --config vitest.integration.config.js",
+    "test:integration:watch": "vitest --config vitest.integration.config.js",
+    "test:concurrency": "vitest run --config vitest.concurrency.config.js",
+    "test:api": "vitest run --config vitest.api.config.js",
+    "test:websocket": "vitest run --config vitest.websocket.config.js",
+    "test:queue": "vitest run --config vitest.queue.config.js",
+    "test:performance": "vitest run --config vitest.performance.config.js",
+    "test:security": "vitest run --config vitest.security.config.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -57,6 +68,7 @@
     "zustand": "^5.0.8"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.1",
     "@eslint/js": "^9.30.1",
     "@playwright/test": "^1.58.2",
     "@types/node": "^25.5.0",
@@ -69,9 +81,12 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
+    "mongodb-memory-server": "^11.0.1",
     "nodemon": "^3.1.11",
     "postcss": "^8.5.6",
+    "supertest": "^7.2.2",
     "tailwindcss": "^4.1.17",
-    "vite": "^7.0.4"
+    "vite": "^7.0.4",
+    "vitest": "^4.1.2"
   }
 }

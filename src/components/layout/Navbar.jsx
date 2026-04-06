@@ -292,6 +292,7 @@ const Navbar = () => {
             <li className="hidden md:block">
               <button
                 onClick={setTheme}
+                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
                 className="relative flex justify-center items-center cursor-pointer"
               >
                 {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
@@ -302,7 +303,7 @@ const Navbar = () => {
 
         {/* Hamburger */}
         <li className="list-none">
-          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden mb-1">
+          <button onClick={() => setIsOpen(!isOpen)} aria-label={isOpen ? "Close menu" : "Open menu"} className="md:hidden mb-1">
             {isOpen ? <X size={15} /> : <Menu size={15} />}
           </button>
         </li>
