@@ -12,8 +12,7 @@ export const createToken = (user) => {
 export const verifyToken = (token) => {
   try {
    return jwt.verify(token,process.env.JWT_Secret)
-  } catch(err) { 
-    console.log(err)
+  } catch(err) {
     return null;
   }
 };

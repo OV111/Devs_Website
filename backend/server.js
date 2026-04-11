@@ -177,8 +177,8 @@ const StartServer = async () => {
         // ! Initial Lines
       } else if (req.method === "GET" && req.url.startsWith("/categories/")) {
         try {
-          const categoryName = req.url.split("/")[2];
-          const isDefault = req.url.split("/")[3] === "default";
+          const categoryName = decodeURIComponent(req.url.split("/")[2]);
+          const isDefault = decodeURIComponent(req.url.split("/")[3]) === "default";
 
           let result;
           if (isDefault) {

@@ -51,4 +51,8 @@ const NotificationWorker = new Worker(
   { connection },
 );
 
+NotificationWorker.on("ready", () => {
+  console.log("Redis connected successfully!");
+});
+
 export default NotificationWorker;
