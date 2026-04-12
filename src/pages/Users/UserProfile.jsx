@@ -140,7 +140,8 @@ export default function UserProfile() {
         <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
           <img
             src={
-              stats?.bannerImage || "src/assets/user_profile/User_Banner.png"
+              stats?.bannerImage?.replace("/upload/", "/upload/w_1200,h_280,c_fill,f_auto,q_auto/") ||
+              "src/assets/user_profile/User_Banner.png"
             }
             alt="Banner"
             className="w-full h-40 sm:h-56 object-cover"

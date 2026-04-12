@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-// import { Send, Github, Twitter, Mail } from "lucide-react";
-import { Send } from "lucide-react";                                                                             
-      import GitHubIcon from "@mui/icons-material/GitHub";                                                             
-      import XIcon from "@mui/icons-material/X";                                                                       
-      import MailOutlineIcon from "@mui/icons-material/MailOutline";  
+import { Send, Github, Mail } from "lucide-react";
+import useAuthStore from "../../stores/useAuthStore";
+import { CATEGORY_OPTIONS } from "../../../constants/Categories";
 
 const QuickLinks = [
   { title: "Home", href: "/" },
@@ -12,18 +10,17 @@ const QuickLinks = [
   { title: "Contact", href: "/contact" },
   { title: "Privacy Policy", href: "/privacy" },
 ];
-const Categories = [
-  { title: "Full Stack", href: "/categories/fullstack" },
-  { title: "Backend", href: "/categories/backend" },
-  { title: "AI & ML", href: "/categories/ai&ml" },
-  { title: "Mobile", href: "/categories/mobile" },
-  { title: "Game Dev", href: "/categories/gamedev" },
-  { title: "Quality Assurance", href: "/categories/qa" },
-  { title: "DevOps", href: "/categories/devops" },
+const AuthLinks = [
+  { title: "My Profile", href: "/my-profile" },
+  { title: "Roadmaps", href: "/roadmaps" },
+  { title: "Coding Libs", href: "/coding-libs" },
+  { title: "Challenges", href: "/coding-challenges" },
+  { title: "Privacy Policy", href: "/privacy" },
 ];
 
 const Footer = () => {
   const { pathname } = useLocation();
+  const { auth } = useAuthStore();
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
@@ -36,8 +33,8 @@ const Footer = () => {
 
   return (
     <React.Fragment>
-      <footer className="relative z-1 bg-linear-to-r from-purple-600 to-purple-800 px-5 pt-10 text-white dark:from-purple-700 dark:to-purple-800 sm:px-8 lg:px-12">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-12">
+      <footer className="relative z-1 bg-linear-to-r from-purple-600 to-purple-800 px-5 pt-7 text-white dark:from-purple-700 dark:to-purple-800 sm:px-8 lg:px-12">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.8fr_1fr_1fr_1fr] lg:gap-10">
           <div className="flex flex-col items-start">
             <Link to="/" className="flex items-center gap-2 mb-4">
               <img src={null} width={0} height={0} alt="Logo" />
@@ -45,10 +42,8 @@ const Footer = () => {
                 DevsWebs
               </h1>
             </Link>
-            <p className="mb-6 max-w-sm text-sm leading-6 text-purple-200 sm:text-base">
-              A blog dedicated to modern web development, AI trends, and quality
-              assurance — insights, tutorials, and real-world guides for
-              developers and tech enthusiasts.
+            <p className="mb-6 text-sm leading-6 text-purple-200 sm:text-base">
+              DevsFlow is where developers learn, build, and grow — community content, structured roadmaps you have to earn, and a personal AI agent that knows exactly where you are in your journey.
             </p>
 
             {/* Social Links */}
@@ -60,82 +55,71 @@ const Footer = () => {
                 <Link
                   to="https://github.com/OV111"
                   aria-label="Visit our GitHub"
-                  className="group flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-sm transition duration-200 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20"
+                  className="group flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-sm transition duration-200 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20"
                 >
-                  <GitHubIcon
-                    className="text-lg text-white/85 transition group-hover:text-white"
-                    fontSize="medium"
-                  />
+                  <Github size={18} className="text-white/85 transition group-hover:text-white" />
                 </Link>
                 <Link
                   to="/"
                   aria-label="Visit our X profile"
-                  className="group flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-sm transition duration-200 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20"
+                  className="group flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-sm transition duration-200 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20"
                 >
-                  <XIcon
-                    className="text-lg text-white/85 transition group-hover:text-white"
-                    fontSize="medium"
-                  />
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="w-[18px] h-[18px] fill-white/85 transition group-hover:fill-white"
+                    aria-hidden="true"
+                  >
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
                 </Link>
                 <Link
                   to="/"
                   aria-label="Send us an email"
-                  className="group flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-sm transition duration-200 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20"
+                  className="group flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-sm transition duration-200 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20"
                 >
-                  <MailOutlineIcon
-                    className="text-lg text-white/85 transition group-hover:text-white"
-                    fontSize="medium"
-                  />
+                  <Mail size={18} className="text-white/85 transition group-hover:text-white" />
                 </Link>
               </div>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div className="grid grid-cols-1 gap-8 min-[480px]:grid-cols-2 sm:gap-10">
-            <div className="grid gap-1">
-              <h2 className="text-xl font-bold mb-2  text-purple-400">
-                Quick Links
-              </h2>
-              {QuickLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  className={`text-base hover:text-purple-300 transition sm:text-lg ${
-                    pathname === link.href ? "text-purple-400" : "text-white"
-                  }`}
-                >
-                  {link.title}
-                </Link>
-              ))}
-            </div>
+          <div className="flex flex-col gap-1">
+            <h2 className="text-xl font-bold mb-2 text-purple-400">Quick Links</h2>
+            {(auth ? AuthLinks : QuickLinks).map((link) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                className={`text-base hover:text-purple-300 transition sm:text-lg ${
+                  pathname === link.href ? "text-purple-400" : "text-white"
+                }`}
+              >
+                {link.title}
+              </Link>
+            ))}
+          </div>
 
-            {/* Categories Part */}
-            <div className="grid gap-1 space-y-0">
-              <h2 className="text-xl font-bold mb-2  text-purple-400">
-                Categories
-              </h2>
-              {Categories.map((category) => (
-                <Link
-                  key={category.href}
-                  to={category.href}
-                  className={`text-base hover:text-purple-300 transition sm:text-lg ${
-                    pathname === category.href
-                      ? "text-purple-500"
-                      : "text-white"
-                  }`}
-                >
-                  {category.title}
-                </Link>
-              ))}
-            </div>
+          {/* Categories */}
+          <div className="flex flex-col gap-1">
+            <h2 className="text-xl font-bold mb-2 text-purple-400">Categories</h2>
+            {CATEGORY_OPTIONS.map(({ title, slug }) => (
+              <Link
+                key={slug}
+                to={`/categories/${slug}`}
+                className={`text-base hover:text-purple-300 transition sm:text-lg ${
+                  pathname === `/categories/${slug}` ? "text-purple-500" : "text-white"
+                }`}
+              >
+                {title}
+              </Link>
+            ))}
           </div>
           {/* Email Part */}
-          <div className="flex flex-col gap-4 mt-5 lg:mt-0 ">
-            <h2 className="text-2xl font-bold mb-0 w-50 text-purple-400">
+          <div className="flex flex-col gap-4 mt-5 lg:mt-0">
+            <h2 className="text-2xl font-bold mb-0 text-purple-400">
               Stay Updated!
             </h2>
-            <p className="text-purple-200 mb-4 lg:mb-0 w-60">
+            <p className="text-purple-200 mb-4 lg:mb-0">
               Subscribe to our newsletter for the latest articles and updates.
             </p>
             {subscribed ? (
@@ -162,7 +146,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mx-auto mt-8 max-w-7xl py-8 text-center text-sm text-purple-300 sm:text-base">
+        <div className="mx-auto mt-6 max-w-7xl py-5 text-center text-sm text-purple-300 sm:text-base">
           © {new Date().getFullYear()} Devs Webs. All rights reserved!
         </div>
       </footer>

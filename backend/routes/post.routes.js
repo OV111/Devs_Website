@@ -1,6 +1,4 @@
 import { Router } from "express";
-import { postHandling } from "./postHandling.js";
-import { defaultPostsHandling } from "./handleDefPosts.js";
 import { verifyToken } from "../utils/jwtToken.js";
 
 const router = Router();
@@ -8,8 +6,11 @@ const router = Router();
 // Must be before /categories/:categoryName to avoid :categoryName catching "default"
 router.get("/categories/:categoryName/default", async (req, res) => {
   try {
-    const result = await defaultPostsHandling(req.params.categoryName);
-    res.status(result.status).json(result.data);
+    const db = req.app.locals.db;
+    const posts = await db.collection("posts-default")
+      .find({ category: req.params.categoryName })
+      .toArray();
+    res.status(200).json(posts);
   } catch (err) {
     res.status(500).json({ message: "Server Error!", code: 500 });
   }
@@ -17,8 +18,11 @@ router.get("/categories/:categoryName/default", async (req, res) => {
 
 router.get("/categories/:categoryName", async (req, res) => {
   try {
-    const result = await postHandling(req.params.categoryName);
-    res.status(result.status).json(result.data);
+    const db = req.app.locals.db;
+    const posts = await db.collection("posts")
+      .find({ category: req.params.categoryName })
+      .toArray();
+    res.status(200).json(posts);
   } catch (err) {
     res.status(500).json({ message: "Server Error!", code: 500 });
   }

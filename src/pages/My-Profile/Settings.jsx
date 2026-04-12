@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect,  useState } from "react";
 import DeleteAccount from "@/features/profile/components/DeleteAccount";
 import { Toaster, toast } from "react-hot-toast";
 import SideBar from "./components/SideBar";
@@ -6,8 +6,10 @@ import useProfileStore from "@/stores/useProfileStore";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import useThemeStore from "@/stores/useThemeStore";
-
+import ImageDropZone from "./components/ImageDropZone";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+
 const Settings = () => {
   const { user, stats, isLoading, fetchProfile, updateStats } =
     useProfileStore();
@@ -152,53 +154,28 @@ const Settings = () => {
             </div>
           </div>
 
-          <div className="grid gap-6 max-w-sm">
-            <div className="grid gap-2">
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Profile Image
-              </label>
-              {isLoading ? (
-                <Skeleton height={48} {...skeletonProps} />
-              ) : (
-                <label className="flex cursor-pointer items-center justify-between rounded-lg border border-dashed border-gray-300 px-4 py-3 transition duration-300 hover:border-purple-500 dark:border-gray-700 dark:hover:border-purple-400">
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
-                    {profileImage ? profileImage.name : "Choose an image"}
-                  </span>
-                  <span className="text-sm font-medium text-purple-600 dark:text-purple-400">
-                    Browse
-                  </span>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={(e) => setProfileImage(e.target.files?.[0])}
-                  />
-                </label>
-              )}
-            </div>
-            <div className="grid gap-2">
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Banner Image
-              </label>
-              {isLoading ? (
-                <Skeleton height={48} {...skeletonProps} />
-              ) : (
-                <label className="flex cursor-pointer items-center justify-between rounded-lg border border-dashed border-gray-300 px-4 py-3 transition duration-300 hover:border-purple-500 dark:border-gray-700 dark:hover:border-purple-400">
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
-                    {bannerImage ? bannerImage.name : "Choose an image"}
-                  </span>
-                  <span className="text-sm font-medium text-purple-600 dark:text-purple-400">
-                    Browse
-                  </span>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={(e) => setBannerImage(e.target.files?.[0])}
-                  />
-                </label>
-              )}
-            </div>
+          <div className="flex gap-6 max-w-3xl">
+            {isLoading ? (
+              <>
+                <div className="flex-1"><Skeleton height={120} {...skeletonProps} /></div>
+                <div className="flex-1"><Skeleton height={120} {...skeletonProps} /></div>
+              </>
+            ) : (
+              <>
+                <ImageDropZone
+                  label="Profile Image"
+                  image={profileImage}
+                  currentUrl={stats?.profileImage}
+                  onImageChange={setProfileImage}
+                />
+                <ImageDropZone
+                  label="Banner Image"
+                  image={bannerImage}
+                  currentUrl={stats?.bannerImage}
+                  onImageChange={setBannerImage}
+                />
+              </>
+            )}
           </div>
 
           <div className="flex flex-col lg:flex-row gap-4 lg:gap-20">

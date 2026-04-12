@@ -65,12 +65,17 @@ export default function SideBar({ isOpen, onClose }) {
             >
               {isLoading ? (
                 <div className="lg:mx-0 mx-auto w-8 h-8 rounded-full bg-gray-200 animate-pulse dark:bg-gray-700" />
-              ) : (
+              ) : avatarSrc ? (
                 <img
                   src={avatarSrc}
                   alt="Profile"
-                  className="lg:mx-0 mx-auto w-8 h-8 object-cover rounded-full bg-purple-100"
+                  className="lg:mx-0 mx-auto w-8 h-8 object-cover rounded-full"
                 />
+              ) : (
+                <div className="lg:mx-0 mx-auto w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-700 flex items-center justify-center text-xs font-bold text-purple-700 dark:text-white">
+                  {user?.firstName?.[0]?.toUpperCase()}
+                  {user?.lastName?.[0]?.toUpperCase()}
+                </div>
               )}
             </button>
             <div className="hidden lg:block min-w-0 overflow-hidden">
@@ -106,7 +111,7 @@ export default function SideBar({ isOpen, onClose }) {
         </div>
         {openImage && (
           <div
-            className="fixed inset-0 z-5 flex items-center  justify-center bg-black/70 p-4"
+            className="fixed inset-0 z-5 flex items-center justify-center bg-black/70 p-4"
             onClick={() => setOpenImage(false)}
           >
             <img

@@ -39,9 +39,9 @@ const Home = () => {
             colors={["#8A2BE2", "#FF1493", "#FF00FF", "#9c40ff", "#00FF00"]}
             animationSpeed={8}
             showBorder={false}
-            className="px-1 py-1 w-full md:w-[420px] lg:w-full font-medium text-lg sm:text-xl md:text-2xl lg:text-[36px] text-start"
+            className="px-1 py-1 w-full font-medium text-xl sm:text-2xl md:text-3xl lg:text-[36px] text-start"
           >
-            A place to read, teach, write and understand topics.
+            Read, write, and grow guided by an AI that knows your journey.
           </GradientText>
 
           <div className="flex gap-4 items-center mt-2">

@@ -69,12 +69,16 @@ router.put("/settings", (req, res) => {
     return res.status(401).json("Unauthorized: Invalid Token!");
   }
 
-  const bb = busboy({ headers: req.headers });
+  const bb = busboy({ headers: req.headers, limits: { fileSize: 5 * 1024 * 1024 } });
   const fields = {};
   const files = {};
 
   bb.on("file", (fieldname, file) => {
     const uploadPromise = new Promise((resolve, reject) => {
+      file.on("limit", () => {
+        reject(new Error("File too large. Maximum size is 5 MB."));
+        file.resume();
+      });
       const stream = cloudinary.uploader.upload_stream(
         { folder: "devs_website" },
         (error, result) => {

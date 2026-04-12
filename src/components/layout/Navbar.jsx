@@ -83,21 +83,6 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
-  const ThemeToggle = ({
-    spanClassName,
-    buttonClassName = "cursor-pointer",
-  }) => (
-    <>
-      <span className={spanClassName}>
-        {theme === "dark" ? <Moon size={15} /> : <Sun size={15} />}
-        {theme === "dark" ? "Dark mode" : "Light mode"}
-      </span>
-      <button onClick={setTheme} className={buttonClassName}>
-        {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
-      </button>
-    </>
-  );
-
   const MobileNavLink = ({ to, children, className }) => (
     <li className="font-medium text-base hover:text-purple-300 transition">
       <NavLink to={to} onClick={() => setIsOpen(false)} className={className}>
@@ -261,10 +246,16 @@ const Navbar = () => {
 
                   {/* Theme toggle */}
                   <div className="flex items-center justify-between px-4 py-2">
-                    <ThemeToggle
-                      spanClassName="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-200"
-                      buttonClassName="cursor-pointer text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-100 transition"
-                    />
+                    <span className="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-200">
+                      {theme === "dark" ? <Moon size={15} /> : <Sun size={15} />}
+                      {theme === "dark" ? "Dark mode" : "Light mode"}
+                    </span>
+                    <button
+                      onClick={setTheme}
+                      className="cursor-pointer text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-100 transition"
+                    >
+                      {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+                    </button>
                   </div>
 
                   <div className="border-t border-gray-100 dark:border-gray-700 my-1" />
@@ -288,18 +279,19 @@ const Navbar = () => {
             <li className="hidden md:block font-medium text-sm lg:text-base px-1 py-1 hover:text-purple-300 transition">
               <NavLink to="get-started">Get Started</NavLink>
             </li>
-            {/* Theme toggle — guests only in navbar */}
-            <li className="hidden md:block">
-              <button
-                onClick={setTheme}
-                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-                className="relative flex justify-center items-center cursor-pointer"
-              >
-                {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
-              </button>
-            </li>
           </>
         )}
+
+        {/* Theme toggle — guests only on desktop */}
+        {!auth && <li className="hidden md:block">
+          <button
+            onClick={setTheme}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            className="flex justify-center items-center cursor-pointer hover:text-purple-300 transition"
+          >
+            {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+          </button>
+        </li>}
 
         {/* Hamburger */}
         <li className="list-none">
@@ -331,6 +323,8 @@ const Navbar = () => {
                 </div>
               </li>
             )}
+
+            <MobileNavLink to="/">Home</MobileNavLink>
 
             {/* Categories — mobile */}
             <li className="relative text-base font-medium hover:text-purple-300 transition">
@@ -385,11 +379,6 @@ const Navbar = () => {
                   </MobileNavLink>
                 ))}
 
-                {/* Theme toggle — mobile */}
-                <li className="flex items-center justify-between border-t border-white/20 pt-2 mt-1">
-                  <ThemeToggle spanClassName="flex items-center gap-2 text-base font-medium" />
-                </li>
-
                 {/* Logout */}
                 <li className="border-t border-white/20 pt-2">
                   <button
@@ -405,14 +394,22 @@ const Navbar = () => {
 
             {!auth && (
               <>
-                <MobileNavLink to="/">Home</MobileNavLink>
                 <MobileNavLink to="about">About</MobileNavLink>
                 <MobileNavLink to="get-started">Get Started</MobileNavLink>
-                <li className="flex items-center justify-between border-t border-white/20 pt-0 mt-0">
-                  <ThemeToggle spanClassName="flex items-center gap-0 text-base font-medium" />
-                </li>
               </>
             )}
+
+            {/* Theme toggle — always at bottom of mobile menu */}
+            <li className="flex items-center gap-2 border-t border-white/20 pt-2 mt-1">
+              <button
+                onClick={setTheme}
+                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+                className="flex items-center gap-2 text-base font-medium cursor-pointer hover:text-purple-300 transition"
+              >
+                {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+                {theme === "dark" ? "Dark mode" : "Light mode"}
+              </button>
+            </li>
           </ul>
         )}
       </ul>

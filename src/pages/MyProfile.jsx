@@ -74,21 +74,28 @@ const MyProfile = () => {
         <div className="relative">
           <img
             src={
-              stats?.bannerImage || "src/assets/user_profile/User_Banner.png"
+              stats?.bannerImage?.replace("/upload/", "/upload/w_1200,h_280,c_fill,f_auto,q_auto/") ||
+              "src/assets/user_profile/User_Banner.png"
             }
             alt="Banner"
-            className="w-full h-40 sm:h-56 object-cover"
+            className="w-full h-40 sm:h-56 object-cover z-0"
           />
 
-          <div className="absolute -bottom-10 sm:-bottom-13 lg:-bottom-14 left-14 sm:left-16 lg:left-10 -translate-x-1/2  lg:translate-x-0">
-            <img
-              src={
-                stats?.profileImage ||
-                "src/assets/user_profile/User_Profile.jpg"
-              }
-              alt="User"
-              className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-full  object-cover"
-            />
+          <div className="absolute -bottom-10 sm:-bottom-13 lg:-bottom-14 left-14 sm:left-16 lg:left-10 -translate-x-1/2 lg:translate-x-0 z-1">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden border-4 border-white dark:border-gray-900 shadow-md">
+              {stats?.profileImage ? (
+                <img
+                  src={stats.profileImage.replace("/upload/", "/upload/w_112,h_112,c_fill,f_auto,q_auto/")}
+                  alt="User"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-purple-100 dark:bg-purple-700 text-purple-700 dark:text-white text-2xl sm:text-3xl font-bold">
+                  {user?.firstName?.[0]?.toUpperCase()}
+                  {user?.lastName?.[0]?.toUpperCase()}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
