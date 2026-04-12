@@ -12,7 +12,6 @@ router.get("/users", async (req, res) => {
     if (!query) {
       return res.status(200).json({ results: [] });
     }
-
     const db = req.app.locals.db;
     const users = db.collection("users");
     const regex = new RegExp(escapeRegex(query), "i");
