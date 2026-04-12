@@ -35,11 +35,11 @@ const buildDefaultUserStats = (userId) => ({
   location: "",
   profileImage: "",
   bannerImage: "",
-  lastActive: new Date(),
   // likesReceived: 0,
   // commentsCount: 0,
   // badges: [],
   // devs-coins: null || 0,
+  lastActive: new Date(),
 });
 
 const signUp = async (data) => {
