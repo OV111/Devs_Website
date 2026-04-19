@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useMemo } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import Sidebar from "../components/SideBar";
 import { ChevronDown, SquarePen } from "lucide-react";
@@ -49,14 +49,18 @@ const Chats = () => {
   const clickedUser =
     `${userSelected?.firstName ?? ""} ${userSelected?.lastName ?? ""}`.trim() ||
     "Name Surname";
-  const sortedFollowers =
-    sortOrder === "Newest" ? mutualFollowers : [...mutualFollowers].reverse();
-  const filteredFollowers = sortedFollowers.filter((user) => {
-    const fullName = `${user.firstName ?? ""} ${user.lastName ?? ""}`
-      .trim()
-      .toLowerCase();
-    return fullName.includes(filter.trim().toLowerCase());
-  });
+  const filteredFollowers = useMemo(() => {
+    const sorted =
+      sortOrder === "Newest" ? mutualFollowers : [...mutualFollowers].reverse();
+
+    return sorted.filter((user) => {
+      const fullName = `${user.firstName ?? ""} ${user.lastName ?? ""}`
+        .trim()
+        .toLowerCase();
+
+      return fullName.includes(filter.trim().toLowerCase());
+    });
+  }, [mutualFollowers, sortOrder, filter]);
 
   const skeletonBaseColor = isDarkMode ? "#1f2937" : "#ebebeb";
   const skeletonHighlightColor = isDarkMode ? "#374151" : "#f5f5f5";
@@ -76,7 +80,7 @@ const Chats = () => {
 
     ws.onopen = () => {
       console.log("WebSocket connection opened");
-      ws.send(JSON.stringify({type:"auth",token}))
+      ws.send(JSON.stringify({ type: "auth", token }));
       ws.send(
         JSON.stringify({
           type: "load_last_messages",
@@ -112,6 +116,7 @@ const Chats = () => {
     ws.onclose = () => {
       return () => ws.close();
     };
+    return () => ws.close();
   }, []);
 
   useEffect(() => {
@@ -237,7 +242,7 @@ const Chats = () => {
         <div className="px-3 pt-5">
           <label
             htmlFor="chat-search"
-            className="flex items-center gap-2 rounded-2xl border border-gray-200 bg-gradient-to-r from-white to-gray-50 px-4 py-2 transition focus-within:border-purple-400 dark:border-gray-700 dark:from-gray-900 dark:to-gray-950"
+            className="flex items-center gap-2 rounded-2xl border border-gray-200 bg-linear-to-r from-white to-gray-50 px-4 py-2 transition focus-within:border-purple-400 dark:border-gray-700 dark:from-gray-900 dark:to-gray-950"
           >
             <SearchIcon className="text-gray-400" sx={{ fontSize: "18px" }} />
             <input
@@ -320,7 +325,7 @@ const Chats = () => {
                     `}
                 >
                   <img
-                    src={userStats?.profileImage}
+                    src={user.stats?.profileImage}
                     alt="Profile"
                     className="h-8 w-8 shrink-0 rounded-full bg-purple-100 object-cover"
                   />
