@@ -12,6 +12,7 @@ const Notifications = lazy(() => import("./pages/My-Profile/Notifications"));
 const Settings = lazy(() => import("./pages/My-Profile/Settings"));
 
 import Home from "./pages/Home";
+import OAuthSuccess from "./components/feedback/OAuthSuccess";
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Privacy = lazy(() => import("./pages/Privacy"));
@@ -50,6 +51,8 @@ const router = createBrowserRouter([
       { path: "contact", element: <Contact /> },
       { path: "privacy", element: <Privacy /> },
       { path: "roadmaps", element: <RoadmapPage /> },
+      { path: "oath-success", element: <OAuthSuccess /> },
+
       {
         path: "coding-libs",
         children: [

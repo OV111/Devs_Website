@@ -4,6 +4,8 @@ import { Toaster, toast } from "react-hot-toast";
 import { Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../stores/useAuthStore";
+import { GoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 // import Lottie from "lottie-react";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -98,6 +100,32 @@ const GetStarted = () => {
     reset();
   };
 
+  const handleGoogleLogin = async (credentialResponse) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/google/auth`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tokenId: credentialResponse.credential }), // ← ID token JWT
+      });
+      const result = await res.json();
+      if (res.ok) {
+        toast.success("Google login successful");
+        login(result.token);
+        navigate("/");
+      } else {
+        toast.error(result.message || "Google auth failed");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Google auth failed");
+    }
+  };
+  const googleLogin = useGoogleLogin({
+    onSuccess: (tokenResponse) => handleGoogleLogin(tokenResponse),
+    onError: () => toast.error("Google Sign-In failed"),
+    flow: "implicit", // or "implicit" depending on your backend
+  });
+  const googleBtnRef = React.useRef(null);
   return (
     <React.Fragment>
       <Toaster position="top-center" reverseOrder={false} />
@@ -275,7 +303,11 @@ const GetStarted = () => {
                       onClick={() => {
                         setShowConfirmPassword(!showConfirmPassword);
                       }}
-                      aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
+                      aria-label={
+                        showConfirmPassword
+                          ? "Hide confirm password"
+                          : "Show confirm password"
+                      }
                       className="absolute top-9 right-3 cursor-pointer text-gray-400 dark:text-zinc-500 sm:top-10 sm:right-5"
                     >
                       {showConfirmPassword ? (
@@ -284,6 +316,7 @@ const GetStarted = () => {
                         <EyeOff size={18} className="sm:w-5 sm:h-5" />
                       )}
                     </button>
+
                     {errors.confirmPassword && (
                       <p className="text-red-500 text-xs sm:text-sm mt-1">
                         {errors.confirmPassword.message}
@@ -292,6 +325,75 @@ const GetStarted = () => {
                   </div>
                 </>
               )}
+              <div className="mt-4 w-full space-y-3 ">
+                <div className="flex items-center">
+                  <div className="grow border-t border-gray-300 dark:border-zinc-700" />
+                  <span className="mx-3 text-sm text-gray-500">or</span>
+                  <div className="grow border-t border-gray-300 dark:border-zinc-700" />
+                </div>
+
+                <div className="flex items-center justify-center gap-3 flex-wrap">
+                  <div ref={googleBtnRef} className="hidden">
+                    <GoogleLogin
+                      onSuccess={handleGoogleLogin}
+                      onError={() => toast.error("Google Sign-In failed")}
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      googleBtnRef.current
+                        ?.querySelector("div[role=button]")
+                        ?.click()
+                    }
+                    className="flex w-[220px] cursor-pointer items-center justify-center gap-2.5 rounded-lg border border-[#dadce0] bg-white py-2.5 px-4 text-sm font-medium text-[#3c4043] transition hover:bg-gray-50 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 48 48"
+                    >
+                      <path
+                        fill="#EA4335"
+                        d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"
+                      />
+                      <path
+                        fill="#4285F4"
+                        d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"
+                      />
+                      <path
+                        fill="#FBBC05"
+                        d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"
+                      />
+                      <path
+                        fill="#34A853"
+                        d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-3.58-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
+                      />
+                    </svg>
+                    Continue with Google
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      window.location.href = `${API_BASE_URL}/auth/github`;
+                    }}
+                    className="flex w-[220px] cursor-pointer items-center justify-center gap-2.5 rounded-lg border border-[#30363d] bg-[#24292e] py-2.5 px-4 text-sm font-medium text-white transition hover:bg-[#2f363d] dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-800"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      width="18"
+                      height="18"
+                    >
+                      <path d="M12 .5C5.65.5.75 5.4.75 11.75c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.25.8-.55v-2c-3.2.7-3.9-1.5-3.9-1.5-.55-1.35-1.3-1.7-1.3-1.7-1.05-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.05 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.75-1.6-2.55-.3-5.25-1.25-5.25-5.6 0-1.25.45-2.25 1.2-3.05-.1-.3-.5-1.55.1-3.2 0 0 .95-.3 3.1 1.2.9-.25 1.85-.4 2.8-.4s1.9.15 2.8.4c2.15-1.5 3.1-1.2 3.1-1.2.6 1.65.2 2.9.1 3.2.75.8 1.2 1.8 1.2 3.05 0 4.35-2.7 5.3-5.3 5.6.45.4.85 1.1.85 2.25v3.35c0 .3.2.7.8.55 4.6-1.5 7.9-5.8 7.9-10.9C23.25 5.4 18.35.5 12 .5z" />
+                    </svg>
+                    Continue with GitHub
+                  </button>
+                </div>
+              </div>
               <button
                 type="submit"
                 disabled={isLoading}
