@@ -289,7 +289,7 @@ const ChatInterface = ({
 
           <div className="flex items-center gap-2 border-t border-gray-100 bg-white p-2 dark:border-gray-800 dark:bg-gray-900">
             <CirclePlus
-              size={34}
+              size={26}
               className="cursor-pointer text-xl mx-2 text-gray-600 transition-colors hover:text-fuchsia-600 dark:text-gray-400 dark:hover:text-fuchsia-400"
             />
             <input
@@ -301,12 +301,12 @@ const ChatInterface = ({
               className="w-full rounded-3xl border border-gray-200 bg-transparent px-4 py-2 text-sm text-gray-900 placeholder:text-gray-400 outline-none duration-300 focus:border-fuchsia-400 focus:placeholder:opacity-0 dark:border-gray-700 dark:text-gray-100 dark:placeholder:text-gray-500"
             />
             <AudioLines
-              size={34}
+              size={26}
               className="mx-2 cursor-pointer text-gray-600 transition-colors duration-400 hover:text-fuchsia-600 dark:text-gray-400 dark:hover:text-fuchsia-400"
             />
             <Send
               onClick={handleSendMessage}
-              size={34}
+              size={26}
               className="mr-2 cursor-pointer text-fuchsia-600 transition-colors duration-400 hover:text-fuchsia-700 dark:text-fuchsia-400 dark:hover:text-fuchsia-300"
             />
           </div>
