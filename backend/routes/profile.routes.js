@@ -37,7 +37,10 @@ router.get("/", async (req, res) => {
       return res.status(404).json({ message: "User Not Found!" });
     }
 
-    await usersStats.updateOne({ userId }, { $set: { lastActive: new Date() } });
+    await usersStats.updateOne(
+      { userId },
+      { $set: { lastActive: new Date() } },
+    );
     const { password, ...userWithoutPassword } = user;
 
     res.status(200).json({ userWithoutPassword, stats });
@@ -69,7 +72,10 @@ router.put("/settings", (req, res) => {
     return res.status(401).json("Unauthorized: Invalid Token!");
   }
 
-  const bb = busboy({ headers: req.headers, limits: { fileSize: 5 * 1024 * 1024 } });
+  const bb = busboy({
+    headers: req.headers,
+    limits: { fileSize: 5 * 1024 * 1024 },
+  });
   const fields = {};
   const files = {};
 
@@ -113,10 +119,14 @@ router.put("/settings", (req, res) => {
 
       const statsUpdate = { lastActive: new Date() };
       if (fields.bio !== undefined) statsUpdate.bio = fields.bio;
-      if (fields.postsCount !== undefined) statsUpdate.postsCount = Number(fields.postsCount);
-      if (fields.githubLink !== undefined) statsUpdate.githubLink = fields.githubLink;
-      if (fields.linkedinLink !== undefined) statsUpdate.linkedinLink = fields.linkedinLink;
-      if (fields.twitterLink !== undefined) statsUpdate.twitterLink = fields.twitterLink;
+      if (fields.postsCount !== undefined)
+        statsUpdate.postsCount = Number(fields.postsCount);
+      if (fields.githubLink !== undefined)
+        statsUpdate.githubLink = fields.githubLink;
+      if (fields.linkedinLink !== undefined)
+        statsUpdate.linkedinLink = fields.linkedinLink;
+      if (fields.twitterLink !== undefined)
+        statsUpdate.twitterLink = fields.twitterLink;
       if (fields.location !== undefined) statsUpdate.location = fields.location;
       if (files.profileImage) statsUpdate.profileImage = files.profileImage;
       if (files.bannerImage) statsUpdate.bannerImage = files.bannerImage;
@@ -148,7 +158,9 @@ router.put("/settings", (req, res) => {
         stats: updatedStats,
       });
     } catch (err) {
-      res.status(500).json({ message: "Error updating profile", error: err.message });
+      res
+        .status(500)
+        .json({ message: "Error updating profile", error: err.message });
     }
   });
 
@@ -217,19 +229,51 @@ router.get("/chats/mutual-followers", async (req, res) => {
 
   const db = req.app.locals.db;
   const userId = auth.userObjectId;
+  const users = db.collection("users");
   const follows = db.collection("follows");
 
-  const followingDocs = await follows.find({ followerId: new ObjectId(userId) }).toArray();
-  const followersDocs = await follows.find({ followingId: new ObjectId(userId) }).toArray();
+  const [followingDocs, followersDocs] = await Promise.all([
+    follows.find({ followerId: userId }).toArray(),
+    follows.find({ followingId: userId }).toArray(),
+  ]);
   const followingIds = followingDocs.map((doc) => doc.followingId);
   const followersIds = followersDocs.map((doc) => doc.followerId);
-  const mutualFollowerIds = followingIds.filter((id) =>
-    followersIds.some((fid) => fid.equals(id)),
-  );
+  const followersSet = new Set(followersIds.map((id) => id.toString()));
 
-  const users = db.collection("users");
+  const mutualFollowerIds = followingIds.filter((id) =>
+    followersSet.has(id.toString()),
+  );
   const mutualFollowers = await users
-    .find({ _id: { $in: mutualFollowerIds } }, { projection: { password: 0 } })
+    .aggregate([
+      {
+        $match: {
+          _id: { $in: mutualFollowerIds },
+        },
+      },
+      {
+        $lookup: {
+          from: "usersStats",
+          localField: "_id",
+          foreignField: "userId",
+          as: "stats",
+        },
+      },
+      {
+        $unwind: {
+          path: "$stats",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $project: {
+          firstName: 1,
+          lastName: 1,
+          username: 1,
+          email: 1,
+          stats: 1,
+        },
+      },
+    ])
     .toArray();
 
   res.status(200).json({ mutualFollowers });
@@ -245,16 +289,22 @@ router.get("/chats/:receiverId/stats", async (req, res) => {
 
     const { receiverId } = req.params;
     if (!ObjectId.isValid(receiverId)) {
-      return res.status(400).json({ message: "Bad Request, invalid receiver id" });
+      return res
+        .status(400)
+        .json({ message: "Bad Request, invalid receiver id" });
     }
 
     const db = req.app.locals.db;
     const usersStats = db.collection("usersStats");
-    const stats = await usersStats.findOne({ userId: new ObjectId(receiverId) });
+    const stats = await usersStats.findOne({
+      userId: new ObjectId(receiverId),
+    });
 
     res.status(200).json({ message: "Success", code: 200, stats });
   } catch (err) {
-    res.status(500).json({ message: "Server Error", code: 500, error: err.message });
+    res
+      .status(500)
+      .json({ message: "Server Error", code: 500, error: err.message });
   }
 });
 
