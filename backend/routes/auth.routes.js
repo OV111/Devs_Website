@@ -1,5 +1,11 @@
 import { Router } from "express";
-import { signUp, login } from "../controllers/authController.js";
+import {
+  signUp,
+  login,
+  googleAuth,
+  githubRedirect,
+  githubCallback,
+} from "../controllers/authController.js";
 import { verifyToken } from "../utils/jwtToken.js";
 
 const router = Router();
@@ -31,7 +37,9 @@ router.post("/get-started", async (req, res) => {
     const result = await signUp(req.body);
     res.status(result.status ?? result.code ?? 500).json(result);
   } catch (err) {
-    res.status(500).json({ message: "Server Error.", code: 500, error: err.message });
+    res
+      .status(500)
+      .json({ message: "Server Error.", code: 500, error: err.message });
   }
 });
 
@@ -60,7 +68,9 @@ router.post("/login", async (req, res) => {
     }
     res.status(result.status).json(result);
   } catch (err) {
-    res.status(500).json({ message: "Server Error.", code: 500, error: err.message });
+    res
+      .status(500)
+      .json({ message: "Server Error.", code: 500, error: err.message });
   }
 });
 
@@ -74,7 +84,9 @@ router.delete("/log-out", (req, res) => {
     });
     res.status(200).json({ message: "Logged out succesfully", code: 200 });
   } catch (err) {
-    res.status(500).json({ message: "Logout Error", code: 500, error: err.message });
+    res
+      .status(500)
+      .json({ message: "Logout Error", code: 500, error: err.message });
   }
 });
 
@@ -83,5 +95,21 @@ router.get("/verify-token", (req, res) => {
   const isValid = verifyToken(token);
   res.status(200).json({ valid: !!isValid });
 });
+
+router.post("/google/auth", async (req, res) => {
+  try {
+    const result = await googleAuth(req.body);
+    res.status(result.status).json(result);
+  } catch (err) {
+    res.status(500).json({
+      message: "Google Authentication Error",
+      code: 500,
+      error: err.message,
+    });
+  }
+});
+
+router.get("/auth/github", githubRedirect);
+router.get("/auth/github/callback", githubCallback);
 
 export default router;
