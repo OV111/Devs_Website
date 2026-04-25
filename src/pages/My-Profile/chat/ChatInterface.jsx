@@ -100,15 +100,15 @@ const ChatInterface = ({
   return (
     <div className="min-w-0 flex-1 bg-white dark:bg-gray-950">
       <div className="flex h-screen flex-col justify-between overflow-hidden">
-        <div className="flex items-center justify-between border-b border-gray-100 bg-white px-8 py-3 dark:border-gray-800 dark:bg-gray-900 lg:px-3">
-          <div className="flex">
+        <div className="flex items-center justify-between border-b border-gray-100 bg-white px-2 lg:px-3 py-2.5 dark:border-gray-800 dark:bg-gray-900">
+          <div className="flex justify-center items-center">
             <button onClick={onBack}>
               <ArrowLeft
-                size={20}
-                className="mr-4 cursor-pointer text-gray-700 dark:text-gray-100 "
+                // size={18}
+                className="w-4 h-4 lg:w-5 lg:h-5 lg:mr-4 mr-2 cursor-pointer text-gray-700 dark:text-gray-100 "
               />
             </button>
-            <div className="flex items-center gap-3">
+            <div className="flex justify-center items-center gap-3">
               {isLoadingUserStats ? (
                 <Skeleton
                   circle
@@ -124,7 +124,7 @@ const ChatInterface = ({
                   className="lg:mx-0 mx-auto h-8 w-8 object-cover rounded-full bg-purple-100"
                 />
               )}
-              <div className="hidden lg:block">
+              <div className=" ">
                 {isLoadingUserStats ? (
                   <div className="space-y-0">
                     <Skeleton
@@ -143,8 +143,8 @@ const ChatInterface = ({
                     />
                   </div>
                 ) : (
-                  <>
-                    <p className="overflow-x-auto text-sm font-medium text-gray-800 dark:text-gray-100">
+                  <div>
+                    <p className="text-sm lg:text-base text-gray-800 dark:text-gray-100 ">
                       {clickedUser}
                     </p>
 
@@ -162,7 +162,7 @@ const ChatInterface = ({
                         </p>
                       )}
                     </div>
-                  </>
+                  </div>
                 )}
               </div>
             </div>
@@ -175,7 +175,7 @@ const ChatInterface = ({
               onClick={() => setIsMenuOpen((prev) => !prev)}
               className="cursor-pointer rounded-2xl bg-gray-200 p-1 text-gray-700 transition-colors hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
             >
-              <Ellipsis size={20} />
+              <Ellipsis className="w-4 h-4 lg:w-5 lg:h-5" />
             </button>
 
             {isMenuOpen && (

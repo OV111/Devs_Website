@@ -53,8 +53,8 @@ export default function SideBar({ isOpen, onClose }) {
 
   return (
     <>
-      <aside className="flex min-h-screen w-10 flex-col overflow-hidden border-r border-gray-200 bg-white transition-all duration-300 dark:border-gray-800 dark:bg-gray-950 lg:w-56 lg:static lg:sticky  lg:top-0">
-        <div className="border-b border-gray-100 py-3 px-0 dark:border-gray-800 lg:px-3">
+      <aside className="flex min-h-screen w-10 flex-col overflow-hidden border-r border-gray-100 bg-white transition-all duration-300 dark:border-gray-800 dark:bg-gray-950 lg:w-56 lg:static lg:sticky  lg:top-0">
+        <div className="py-3  border-b  border-gray-100 dark:border-gray-800 px-0  lg:px-3">
           <div className="flex items-center justify-center gap-3 mx-auto">
             <button
               onClick={() => {
@@ -125,7 +125,7 @@ export default function SideBar({ isOpen, onClose }) {
           </div>
         )}
 
-        <nav className="flex min-h-0 flex-1 flex-col overflow-y-auto px-0 mt-2 lg:mt-0 gap-3 lg:gap-0 py-0 lg:px-2 lg:py-2">
+        <nav className="flex min-h-0 flex-1  flex-col  mt-2 lg:mt-0 gap-3 lg:gap-0 py-0 lg:px-2 lg:py-2">
           {sidebarArr.map((group) => (
             <div
               key={group.section}
@@ -166,7 +166,7 @@ export default function SideBar({ isOpen, onClose }) {
           onClick={() => {
             handleLogOut();
           }}
-          className="group mt-auto flex cursor-pointer items-center justify-center border-t border-gray-100 py-3.5 text-gray-700 transition-colors hover:bg-red-50 hover:text-red-600 dark:border-gray-800 dark:text-gray-100 dark:hover:bg-red-950/40 dark:hover:text-red-400 lg:justify-between lg:px-4"
+          className="group mt-auto flex cursor-pointer items-center justify-center border-t  border-gray-100 py-3.5 text-gray-700 transition-colors hover:bg-red-50 hover:text-red-600 dark:border-gray-800 dark:text-gray-100 dark:hover:bg-red-950/40 dark:hover:text-red-400 lg:justify-between lg:px-4"
         >
           <p className="hidden text-[16px] font-medium lg:block">Logout</p>
           <LogOut size={16} />
