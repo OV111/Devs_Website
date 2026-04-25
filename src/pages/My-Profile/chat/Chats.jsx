@@ -10,6 +10,8 @@ import ChatInterface from "./ChatInterface";
 import { formatTimeAgo } from "./ChatInterface";
 import Skeleton from "react-loading-skeleton";
 import useThemeStore from "../../../stores/useThemeStore";
+
+import VoiceChatSvg from "../../../assets/Voice chat-amico.svg";
 const getUserIdFromJWT = (token) => {
   if (!token) return null;
   try {
@@ -236,164 +238,180 @@ const Chats = () => {
     <div className="flex min-h-screen bg-gray-50 dark:bg-gray-950">
       <Sidebar />
       {!userSelected ? (
-        <div className="border-r w-full border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950 lg:w-70 lg:pt-4  lg:px-0 lg:text-lg">
-          <div className="flex items-center justify-between px-3">
-            <h1 className="mt-3 lg:mt-0 text-lg font-semibold text-gray-900 dark:text-gray-100">
-              Messages
-            </h1>
-            {/* Add new chat */}
-            <SquarePen
-              size={18}
-              className="mt-3 lg:mt-0 cursor-pointer text-gray-400 transition-colors hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-200"
-            />
-          </div>
-
-          <div className="px-3 pt-5">
-            <label
-              htmlFor="chat-search"
-              className="flex items-center gap-2 rounded-2xl border border-gray-200 bg-linear-to-r from-white to-gray-50 px-4 py-2 transition focus-within:border-purple-400 dark:border-gray-700 dark:from-gray-900 dark:to-gray-950"
-            >
-              <SearchIcon className="text-gray-400" sx={{ fontSize: "18px" }} />
-              <input
-                id="chat-search"
-                type="text"
-                value={filter}
-                onChange={(e) => setFilter(e.target.value)}
-                placeholder="Search conversations"
-                className="w-full bg-transparent text-sm text-gray-700 outline-none placeholder:text-gray-400 dark:text-gray-200"
+        <>
+          <div className="border-r w-full border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950 lg:w-70 lg:pt-4  lg:px-0 lg:text-lg">
+            <div className="flex items-center justify-between px-3">
+              <h1 className="mt-3 lg:mt-0 text-lg font-semibold text-gray-900 dark:text-gray-100">
+                Messages
+              </h1>
+              {/* Add new chat */}
+              <SquarePen
+                size={18}
+                className="mt-3 lg:mt-0 cursor-pointer text-gray-400 transition-colors hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-200"
               />
-            </label>
-
-            <div className="relative flex justify-end py-2">
-              <button
-                type="button"
-                onClick={() => setIsSortOpen((prev) => !prev)}
-                className="flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800"
-              >
-                <ArrowUpDown size={16} />
-                <div className="flex items-center justify-center gap-1 hover:text-gray-500 dark:hover:text-gray-300">
-                  <span>{sortOrder}</span>
-                  <ChevronDown
-                    size={16}
-                    className={`transition-transform duration-200 ${
-                      isSortOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </div>
-              </button>
-
-              {isSortOpen && (
-                <div className="absolute top-full mt-0 w-36 overflow-hidden rounded-xl border border-gray-200 bg-white  dark:border-gray-700 dark:bg-gray-900">
-                  {["Newest", "Oldest"].map((option) => (
-                    <button
-                      key={option}
-                      type="button"
-                      onClick={() => {
-                        setSortOrder(option);
-                        setIsSortOpen(false);
-                      }}
-                      className={`block w-full px-3 py-2 text-left text-sm transition hover:bg-gray-50 dark:hover:bg-gray-800 ${
-                        sortOrder === option
-                          ? "bg-purple-50 text-purple-600 dark:bg-gray-800 dark:text-purple-400"
-                          : "text-gray-700 dark:text-gray-200"
-                      }`}
-                    >
-                      {option}
-                    </button>
-                  ))}
-                </div>
-              )}
             </div>
-          </div>
 
-          <div className="max-h-[calc(100vh-180px)] overflow-y-auto bg-white dark:bg-gray-950">
-            {isLoadingChats ? (
-              <div className="flex justify-center items-center px-3 py-6 text-sm text-gray-500 dark:text-gray-100">
-                <LoadingChatSuspense />
+            <div className="px-3 pt-5">
+              <label
+                htmlFor="chat-search"
+                className="flex items-center gap-2 rounded-2xl border border-gray-200 bg-linear-to-r from-white to-gray-50 px-4 py-2 transition focus-within:border-purple-400 dark:border-gray-700 dark:from-gray-900 dark:to-gray-950"
+              >
+                <SearchIcon
+                  className="text-gray-400"
+                  sx={{ fontSize: "18px" }}
+                />
+                <input
+                  id="chat-search"
+                  type="text"
+                  value={filter}
+                  onChange={(e) => setFilter(e.target.value)}
+                  placeholder="Search conversations"
+                  className="w-full bg-transparent text-sm text-gray-700 outline-none placeholder:text-gray-400 dark:text-gray-200"
+                />
+              </label>
+
+              <div className="relative flex justify-end py-2">
+                <button
+                  type="button"
+                  onClick={() => setIsSortOpen((prev) => !prev)}
+                  className="flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800"
+                >
+                  <ArrowUpDown size={16} />
+                  <div className="flex items-center justify-center gap-1 hover:text-gray-500 dark:hover:text-gray-300">
+                    <span>{sortOrder}</span>
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform duration-200 ${
+                        isSortOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
+                </button>
+
+                {isSortOpen && (
+                  <div className="absolute top-full mt-0 w-36 overflow-hidden rounded-xl border border-gray-200 bg-white  dark:border-gray-700 dark:bg-gray-900">
+                    {["Newest", "Oldest"].map((option) => (
+                      <button
+                        key={option}
+                        type="button"
+                        onClick={() => {
+                          setSortOrder(option);
+                          setIsSortOpen(false);
+                        }}
+                        className={`block w-full px-3 py-2 text-left text-sm transition hover:bg-gray-50 dark:hover:bg-gray-800 ${
+                          sortOrder === option
+                            ? "bg-purple-50 text-purple-600 dark:bg-gray-800 dark:text-purple-400"
+                            : "text-gray-700 dark:text-gray-200"
+                        }`}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
-            ) : filteredFollowers.length > 0 ? (
-              filteredFollowers.map((user) => {
-                const roomIdForUser =
-                  senderId && user._id
-                    ? [String(senderId), String(user._id)].sort().join("_")
-                    : "";
-                const roomPreview = lastMessagesByRoom[roomIdForUser];
-                const shouldShowLastMessageSkeleton =
-                  isLoadingLastMessages && !roomPreview;
-                return (
-                  <button
-                    key={user._id}
-                    type="button"
-                    onClick={() => setUserSelected(user)}
-                    className={`flex w-full items-center gap-3 border-b text-purple-600 border-gray-100 px-3 py-3 text-left transition-colors first:border-t dark:border-gray-800
+            </div>
+
+            <div className="max-h-[calc(100vh-180px)] overflow-y-auto bg-white dark:bg-gray-950">
+              {isLoadingChats ? (
+                <div className="flex justify-center items-center px-3 py-6 text-sm text-gray-500 dark:text-gray-100">
+                  <LoadingChatSuspense />
+                </div>
+              ) : filteredFollowers.length > 0 ? (
+                filteredFollowers.map((user) => {
+                  const roomIdForUser =
+                    senderId && user._id
+                      ? [String(senderId), String(user._id)].sort().join("_")
+                      : "";
+                  const roomPreview = lastMessagesByRoom[roomIdForUser];
+                  const shouldShowLastMessageSkeleton =
+                    isLoadingLastMessages && !roomPreview;
+                  return (
+                    <button
+                      key={user._id}
+                      type="button"
+                      onClick={() => setUserSelected(user)}
+                      className={`flex w-full items-center gap-3 border-b text-purple-600 border-gray-100 px-3 py-3 text-left transition-colors first:border-t dark:border-gray-800
                   ${
                     userSelected?._id === user._id
                       ? "lg:bg-purple-50 dark:bg-fuchsia-950/30 "
                       : "hover:bg-gray-50 dark:hover:bg-gray-900/70"
                   }
                     `}
-                  >
-                    <img
-                      src={user.stats?.profileImage}
-                      alt="Profile"
-                      className="h-8 w-8 shrink-0 rounded-full bg-purple-100 object-cover"
-                    />
-                    <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-medium text-gray-900 dark:text-gray-100">
-                        {user.firstName} {user.lastName}
-                      </p>
-                      <div className="flex justify-between items-center">
-                        {shouldShowLastMessageSkeleton ? (
-                          <>
-                            <Skeleton
-                              width={120}
-                              height={12}
-                              borderRadius={6}
-                              baseColor={skeletonBaseColor}
-                              highlightColor={skeletonHighlightColor}
-                              className="opacity-80"
-                            />
-                            <Skeleton
-                              width={44}
-                              height={12}
-                              borderRadius={6}
-                              baseColor={skeletonBaseColor}
-                              highlightColor={skeletonHighlightColor}
-                              className="opacity-80"
-                            />
-                          </>
-                        ) : (
-                          <>
-                            <p className="truncate text-xs font-medium text-gray-500 dark:text-gray-400">
-                              {roomPreview?.text || "Last message"}
-                            </p>
-                            <p className="truncate text-[14px] font-medium text-gray-500 dark:text-gray-400">
-                              {formatTimeAgo(roomPreview?.updatedAt) ||
-                                "Last Time"}
-                            </p>
-                          </>
-                        )}
+                    >
+                      <img
+                        src={user.stats?.profileImage}
+                        alt="Profile"
+                        className="h-8 w-8 shrink-0 rounded-full bg-purple-100 object-cover"
+                      />
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-medium text-gray-900 dark:text-gray-100">
+                          {user.firstName} {user.lastName}
+                        </p>
+                        <div className="flex justify-between items-center">
+                          {shouldShowLastMessageSkeleton ? (
+                            <>
+                              <Skeleton
+                                width={120}
+                                height={12}
+                                borderRadius={6}
+                                baseColor={skeletonBaseColor}
+                                highlightColor={skeletonHighlightColor}
+                                className="opacity-80"
+                              />
+                              <Skeleton
+                                width={44}
+                                height={12}
+                                borderRadius={6}
+                                baseColor={skeletonBaseColor}
+                                highlightColor={skeletonHighlightColor}
+                                className="opacity-80"
+                              />
+                            </>
+                          ) : (
+                            <>
+                              <p className="truncate text-xs font-medium text-gray-500 dark:text-gray-400">
+                                {roomPreview?.text || "Last message"}
+                              </p>
+                              <p className="truncate text-[14px] font-medium text-gray-500 dark:text-gray-400">
+                                {formatTimeAgo(roomPreview?.updatedAt) ||
+                                  "Last Time"}
+                              </p>
+                            </>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  </button>
-                );
-              })
-            ) : mutualFollowers.length > 0 ? (
-              <p className="flex justify-center items-center px-3 py-6 text-sm text-gray-500 dark:text-gray-400">
-                No conversations found
-              </p>
-            ) : (
-              <p className="flex justify-center items-center px-3 py-6 text-sm text-gray-500 dark:text-gray-400">
-                No users found
-              </p>
-            )}
+                    </button>
+                  );
+                })
+              ) : mutualFollowers.length > 0 ? (
+                <p className="flex justify-center items-center px-3 py-6 text-sm text-gray-500 dark:text-gray-400">
+                  No conversations found
+                </p>
+              ) : (
+                <p className="flex justify-center items-center px-3 py-6 text-sm text-gray-500 dark:text-gray-400">
+                  No users found
+                </p>
+              )}
+            </div>
           </div>
-        </div>
+          <div className="hidden lg:m-4 lg:mx-auto lg:flex items-center  ">
+            <div className="mx-auto grid items-center justify-center text-center text-gray-500 dark:text-gray-400">
+              <img src={VoiceChatSvg} alt="select a chat" />
+              <h2 className="pt-2 text-xl font-semibold text-gray-800 dark:text-gray-100">
+                Select a chat
+              </h2>
+              <p className=" mt-2">
+                Choose a conversation from the left to start messaging.
+              </p>
+            </div>
+          </div>
+        </>
       ) : (
-        <>
           <ChatInterface
             userSelected={userSelected}
             userStats={userStats}
+            isMobile={isMobile}
             isLoadingUserStats={isLoadingUserStats}
             clickedUser={clickedUser}
             isLoadingHistory={isLoadingHistory}
@@ -405,7 +423,6 @@ const Chats = () => {
             handleSendMessage={handleSendMessage}
             onBack={() => setUserSelected(null)}
           />
-        </>
       )}
     </div>
   );
