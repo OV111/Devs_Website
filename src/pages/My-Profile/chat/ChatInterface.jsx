@@ -1,5 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import { AudioLines, CirclePlus, Ellipsis, Send } from "lucide-react";
+import {
+  AudioLines,
+  CirclePlus,
+  Ellipsis,
+  Send,
+  ArrowLeft,
+} from "lucide-react";
 import Skeleton from "react-loading-skeleton";
 import useThemeStore from "../../../stores/useThemeStore";
 import StartChatSvg from "../../../assets/StartChat.svg";
@@ -48,6 +54,7 @@ const ChatInterface = ({
   setDraftMessage,
   handleKeyDown,
   handleSendMessage,
+  onBack,
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const messagesContainerRef = useRef(null);
@@ -95,65 +102,72 @@ const ChatInterface = ({
       {userSelected ? (
         <div className="flex h-screen flex-col justify-between overflow-hidden">
           <div className="flex items-center justify-between border-b border-gray-100 bg-white px-8 py-3 dark:border-gray-800 dark:bg-gray-900 lg:px-3">
-            <div className="flex items-center gap-3">
-              {isLoadingUserStats ? (
-                <Skeleton
-                  circle
-                  width={32}
-                  height={32}
-                  baseColor={skeletonBaseColor}
-                  highlightColor={skeletonHighlightColor}
+            <div className="flex">
+              <button onClick={onBack}>
+                <ArrowLeft
+                  size={20}
+                  className="mr-4 cursor-pointer text-gray-700 dark:text-gray-100 "
                 />
-              ) : (
-                <img
-                  src={userStats?.profileImage}
-                  alt="Profile"
-                  className="lg:mx-0 mx-auto h-8 w-8 object-cover rounded-full bg-purple-100"
-                />
-              )}
-              <div className="hidden lg:block">
+              </button>
+              <div className="flex items-center gap-3">
                 {isLoadingUserStats ? (
-                  <div className="space-y-0">
-                    <Skeleton
-                      width={130}
-                      height={12}
-                      borderRadius={6}
-                      baseColor={skeletonBaseColor}
-                      highlightColor={skeletonHighlightColor}
-                    />
-                    <Skeleton
-                      width={90}
-                      height={10}
-                      borderRadius={6}
-                      baseColor={skeletonBaseColor}
-                      highlightColor={skeletonHighlightColor}
-                    />
-                  </div>
+                  <Skeleton
+                    circle
+                    width={32}
+                    height={32}
+                    baseColor={skeletonBaseColor}
+                    highlightColor={skeletonHighlightColor}
+                  />
                 ) : (
-                  <>
-                    <p className="overflow-x-auto text-sm font-medium text-gray-800 dark:text-gray-100">
-                      {clickedUser}
-                    </p>
-
-                    <div className="flex items-center gap-2 overflow-x-auto text-xs text-gray-500 dark:text-gray-400">
-                      {isOnlineByLastActive(userStats?.lastActive) ? (
-                        <>
-                          <span className="h-2.5 w-2.5 rounded-full bg-green-400" />
-                          <p className="text-xs text-gray-500 dark:text-gray-400">
-                            Online
-                          </p>
-                        </>
-                      ) : (
-                        <p className="text-xs text-gray-500 dark:text-gray-400">
-                          {formatTimeAgo(userStats?.lastActive)}
-                        </p>
-                      )}
-                    </div>
-                  </>
+                  <img
+                    src={userStats?.profileImage}
+                    alt="Profile"
+                    className="lg:mx-0 mx-auto h-8 w-8 object-cover rounded-full bg-purple-100"
+                  />
                 )}
+                <div className="hidden lg:block">
+                  {isLoadingUserStats ? (
+                    <div className="space-y-0">
+                      <Skeleton
+                        width={130}
+                        height={12}
+                        borderRadius={6}
+                        baseColor={skeletonBaseColor}
+                        highlightColor={skeletonHighlightColor}
+                      />
+                      <Skeleton
+                        width={90}
+                        height={10}
+                        borderRadius={6}
+                        baseColor={skeletonBaseColor}
+                        highlightColor={skeletonHighlightColor}
+                      />
+                    </div>
+                  ) : (
+                    <>
+                      <p className="overflow-x-auto text-sm font-medium text-gray-800 dark:text-gray-100">
+                        {clickedUser}
+                      </p>
+
+                      <div className="flex items-center gap-2 overflow-x-auto text-xs text-gray-500 dark:text-gray-400">
+                        {isOnlineByLastActive(userStats?.lastActive) ? (
+                          <>
+                            <span className="h-2.5 w-2.5 rounded-full bg-green-400" />
+                            <p className="text-xs text-gray-500 dark:text-gray-400">
+                              Online
+                            </p>
+                          </>
+                        ) : (
+                          <p className="text-xs text-gray-500 dark:text-gray-400">
+                            {formatTimeAgo(userStats?.lastActive)}
+                          </p>
+                        )}
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
-
             <div className="relative" ref={menuRef}>
               <button
                 type="button"
@@ -271,10 +285,7 @@ const ChatInterface = ({
               ) : (
                 <div className="flex h-full items-center justify-center py-16">
                   <div className="rounded-3xl bg-transparent px-6 py-8 text-center">
-                    <img
-                      src={StartChatSvg}
-                      alt="no messages"
-                    />
+                    <img src={StartChatSvg} alt="no messages" />
                     <p className="text-sm font-medium text-gray-700 dark:text-gray-200">
                       No messages yet
                     </p>
@@ -290,7 +301,7 @@ const ChatInterface = ({
           <div className="flex items-center gap-2 border-t border-gray-100 bg-white p-2 dark:border-gray-800 dark:bg-gray-900">
             <CirclePlus
               size={26}
-              className="cursor-pointer text-xl mx-2 text-gray-600 transition-colors hover:text-fuchsia-600 dark:text-gray-400 dark:hover:text-fuchsia-400"
+              className="cursor-pointer text-xl mx-2 text-gray-700 transition-colors hover:text-fuchsia-600 dark:text-gray-100 dark:hover:text-fuchsia-400"
             />
             <input
               type="text"
@@ -298,11 +309,11 @@ const ChatInterface = ({
               placeholder="Write your message..."
               onChange={(e) => setDraftMessage(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="w-full rounded-3xl border border-gray-200 bg-transparent px-4 py-2 text-sm text-gray-900 placeholder:text-gray-400 outline-none duration-300 focus:border-fuchsia-400 focus:placeholder:opacity-0 dark:border-gray-700 dark:text-gray-100 dark:placeholder:text-gray-500"
+              className="w-full rounded-3xl border border-gray-200 bg-transparent px-4 py-[7px] text-sm text-gray-900 placeholder:text-gray-400 outline-none duration-300 focus:border-fuchsia-400 focus:placeholder:opacity-0 dark:border-gray-700 dark:text-gray-100 dark:placeholder:text-gray-500"
             />
             <AudioLines
               size={26}
-              className="mx-2 cursor-pointer text-gray-600 transition-colors duration-400 hover:text-fuchsia-600 dark:text-gray-400 dark:hover:text-fuchsia-400"
+              className="mx-2 cursor-pointer text-gray-700 transition-colors duration-400 hover:text-fuchsia-600 dark:text-gray-100 dark:hover:text-fuchsia-400"
             />
             <Send
               onClick={handleSendMessage}
@@ -312,16 +323,13 @@ const ChatInterface = ({
           </div>
         </div>
       ) : (
-        <div className="m-4 flex items-center gap-3 pt-6">
+        <div className="hidden lg:m-4 lg:flex items-center lg:gap-3 lg:pt-6 ">
           <div className="mx-auto grid items-center justify-center text-center text-gray-500 dark:text-gray-400">
-            <img
-              src={VoiceChatSvg}
-              alt="select a chat"
-            />
+            <img src={VoiceChatSvg} alt="select a chat" />
             <h2 className="pt-2 text-xl font-semibold text-gray-800 dark:text-gray-100">
               Select a chat
             </h2>
-            <p className="mt-2">
+            <p className=" mt-2">
               Choose a conversation from the left to start messaging.
             </p>
           </div>
