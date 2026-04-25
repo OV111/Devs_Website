@@ -51,7 +51,7 @@ const router = createBrowserRouter([
       { path: "contact", element: <Contact /> },
       { path: "privacy", element: <Privacy /> },
       { path: "roadmaps", element: <RoadmapPage /> },
-      { path: "oath-success", element: <OAuthSuccess /> },
+      { path: "oauth-success", element: <OAuthSuccess /> },
 
       {
         path: "coding-libs",

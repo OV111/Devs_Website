@@ -259,10 +259,10 @@ const githubCallback = async (req, res) => {
       user = { _id: result.insertedId };
     }
     const jwt = createToken({ id: user._id });
-    res.redirect(`http://localhost:5173/oauth-success?token=${jwt}`);
+    res.redirect(`${process.env.FRONTEND_URL}/oauth-success?token=${jwt}`);
   } catch (err) {
     console.log(err);
-    res.redirect("http://localhost:5173/oauth-failure");
+res.redirect(`${process.env.FRONTEND_URL}/oauth-failure`);
   }
 };
 
