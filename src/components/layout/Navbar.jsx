@@ -138,7 +138,9 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="relative space-x-1 flex items-center justify-between px-3 gap-10 py-1 shadow z-3 w-full bg-linear-to-r from-purple-600 to-purple-800 dark:from-purple-700 dark:to-purple-800 lg:gap-10 lg:py-2">
+    // bg-linear-to-r from-purple-600 to-purple-800 dark:from-purple-700 dark:to-purple-800 
+  
+    <nav className="sticky space-x-1 flex items-center justify-between px-3 gap-10 py-1  z-3 w-full   lg:gap-10 lg:py-2">
       <h2 className="text-base font-bold my-1 lg:my-0.5 cursor-pointer sm:text-xl text-gray-100 md:text-xl lg:text-xl lg:w-auto lg:ml-3">
         <NavLink to="/">DevsWebs</NavLink>
       </h2>
@@ -245,7 +247,7 @@ const Navbar = () => {
                   <div className="border-t border-gray-100 dark:border-gray-700 my-1" />
 
                   {/* Theme toggle */}
-                  <div className="flex items-center justify-between px-4 py-2">
+                  {/* <div className="flex items-center justify-between px-4 py-2">
                     <span className="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-200">
                       {theme === "dark" ? <Moon size={15} /> : <Sun size={15} />}
                       {theme === "dark" ? "Dark mode" : "Light mode"}
@@ -256,7 +258,7 @@ const Navbar = () => {
                     >
                       {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
                     </button>
-                  </div>
+                  </div> */}
 
                   <div className="border-t border-gray-100 dark:border-gray-700 my-1" />
 
@@ -283,7 +285,7 @@ const Navbar = () => {
         )}
 
         {/* Theme toggle — guests only on desktop */}
-        {!auth && <li className="hidden md:block">
+        {/* {!auth && <li className="hidden md:block">
           <button
             onClick={setTheme}
             aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
@@ -291,7 +293,7 @@ const Navbar = () => {
           >
             {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
           </button>
-        </li>}
+        </li>} */}
 
         {/* Hamburger */}
         <li className="list-none">

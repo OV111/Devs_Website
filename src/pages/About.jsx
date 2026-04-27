@@ -214,7 +214,7 @@ const About = () => {
             <ShinyText
               text="Developer Community Platform"
               speed={4}
-              className="text-xs sm:text-sm font-semibold tracking-widest uppercase"
+              className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-purple-600"
             />
           </motion.div>
 
