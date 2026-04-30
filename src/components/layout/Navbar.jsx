@@ -5,7 +5,10 @@ import useThemeStore from "../../stores/useThemeStore";
 import SearchBar from "../search/SearchBar";
 import { ChevronDown, LogOut, Sun, Moon, Menu, X } from "lucide-react";
 import { CATEGORY_OPTIONS } from "../../../constants/Categories";
-import { AVATAR_MENU_ITEMS, MOBILE_EXTRA_LINKS } from "../../../constants/Navbar";
+import {
+  AVATAR_MENU_ITEMS,
+  MOBILE_EXTRA_LINKS,
+} from "../../../constants/Navbar";
 import useProfileStore from "@/stores/useProfileStore";
 const SearchResults = lazy(() => import("../search/SearchResults"));
 
@@ -93,7 +96,7 @@ const Navbar = () => {
 
   const AvatarImage = ({ inDropdown = false }) => (
     <div
-      className={`w-8 h-8 rounded-full shrink-0 border overflow-hidden flex justify-center items-center ${
+      className={`w-7 h-7 my-1 rounded-full shrink-0 border overflow-hidden flex justify-center items-center ${
         inDropdown ? "border-gray-200 dark:border-gray-600" : "border-white/50"
       }`}
     >
@@ -121,7 +124,7 @@ const Navbar = () => {
     </div>
   );
 
-const CategoryList = ({ onClose }) => (
+  const CategoryList = ({ onClose }) => (
     <ul className="absolute top-full mt-0 left-0 w-44 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 py-0 z-4">
       {CATEGORY_OPTIONS.map(({ title, slug }) => (
         <li key={slug}>
@@ -135,11 +138,11 @@ const CategoryList = ({ onClose }) => (
         </li>
       ))}
     </ul>
-);
+  );
 
   return (
-    // bg-linear-to-r from-purple-600 to-purple-800 dark:from-purple-700 dark:to-purple-800 
-  
+    // bg-linear-to-r from-purple-600 to-purple-800 dark:from-purple-700 dark:to-purple-800
+
     <nav className="sticky space-x-1 flex items-center justify-between px-3 gap-10 py-1  z-3 w-full   lg:gap-10 lg:py-2">
       <h2 className="text-base font-bold my-1 lg:my-0.5 cursor-pointer sm:text-xl text-gray-100 md:text-xl lg:text-xl lg:w-auto lg:ml-3">
         <NavLink to="/">DevsWebs</NavLink>
@@ -176,14 +179,15 @@ const CategoryList = ({ onClose }) => (
         <li
           className="relative hidden md:block text-sm lg:text-base font-medium px-1 py-1 hover:text-purple-300 transition-all duration-200 ease-out"
           ref={dropdownRef}
-          onMouseLeave={()=>{setShowDropdown(false)}}
-          onMouseEnter={() => {setShowDropdown(true)}}
+          onMouseLeave={() => {
+            setShowDropdown(false);
+          }}
+          onMouseEnter={() => {
+            setShowDropdown(true);
+          }}
         >
-          <button
-            className="flex lg:gap-1 justify-center items-center cursor-pointer transition-all duration-200"
-          >
+          <button className="flex lg:gap-1 justify-center items-center cursor-pointer transition-all duration-200">
             Categories
-            
           </button>
           {showDropdown && <CategoryList onClose={closeDropdown} />}
         </li>
@@ -202,14 +206,16 @@ const CategoryList = ({ onClose }) => (
 
             {/* Avatar dropdown — desktop */}
             <li
-              className="relative hidden md:block flex items-center px-1 "
+              className="relative hidden md:block flex items-center px-1"
               ref={avatarRef}
-              onMouseLeave={() => {setAvatarMenuOpen(false)}}
-              onMouseEnter={() => {setAvatarMenuOpen(true)}}
+              onMouseLeave={() => {
+                setAvatarMenuOpen(false);
+              }}
+              onMouseEnter={() => {
+                setAvatarMenuOpen(true);
+              }}
             >
-              <button
-                className="flex items-center cursor-pointer  transition-all duration-200 ease-out"
-              >
+              <button className="flex items-center cursor-pointer  transition-all duration-200 ease-out">
                 <AvatarImage />
               </button>
 
@@ -296,7 +302,11 @@ const CategoryList = ({ onClose }) => (
 
         {/* Hamburger */}
         <li className="list-none">
-          <button onClick={() => setIsOpen(!isOpen)} aria-label={isOpen ? "Close menu" : "Open menu"} className="md:hidden mb-1">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            className="md:hidden mb-1"
+          >
             {isOpen ? <X size={15} /> : <Menu size={15} />}
           </button>
         </li>
@@ -404,7 +414,11 @@ const CategoryList = ({ onClose }) => (
             <li className="flex items-center gap-2 border-t border-white/20 pt-2 mt-1">
               <button
                 onClick={setTheme}
-                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+                aria-label={
+                  theme === "dark"
+                    ? "Switch to light mode"
+                    : "Switch to dark mode"
+                }
                 className="flex items-center gap-2 text-base font-medium cursor-pointer hover:text-purple-300 transition"
               >
                 {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
