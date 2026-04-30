@@ -11,57 +11,49 @@ import { FaRegBookmark, FaRegComment, FaRegHeart } from "react-icons/fa6";
 import { FiShare } from "react-icons/fi";
 import useAuthStore from "../../stores/useAuthStore";
 
+import JohnDoe from "../../assets/postsProfiles/JohnDoe.png";
+import AdaByte from "../../assets/postsProfiles/AdaByte.png";
+import DmitryPetrov from "../../assets/postsProfiles/DmitryPetrov.png";
+import AliceKeyes from "../../assets/postsProfiles/AliceKeyes.png";
+import WilliamChen from "../../assets/postsProfiles/WilliamChen.png";
+import GraceHopper from "../../assets/postsProfiles/GraceHopper.png";
+
+const pictureMap = {
+  "JohnDoe.png": JohnDoe,
+  "AdaByte.png": AdaByte,
+  "DmitryPetrov.png": DmitryPetrov,
+  "AliceKeyes.png": AliceKeyes,
+  "WilliamChen.png": WilliamChen,
+  "GraceHopper.png": GraceHopper,
+};
+
 const FictionalUsers = [
-  {
-    name: "John Doe",
-    userName: "@johndoe",
-    picture: new URL("../assets/postsProfiles/JohnDoe.png", import.meta.url)
-      .href,
-  },
-  {
-    name: "Ada Byte",
-    userName: "@adabyte",
-    picture: new URL("../assets/postsProfiles/AdaByte.png", import.meta.url)
-      .href,
-  },
-  {
-    name: "Dmitry Petrov",
-    userName: "@dmit_petrov",
-    picture: new URL(
-      "../assets/postsProfiles/DmitryPetrov.png",
-      import.meta.url,
-    ).href,
-  },
-  {
-    name: "Alice Keyes",
-    userName: "@alice_keys",
-    picture: new URL("../assets/postsProfiles/AliceKeyes.png", import.meta.url)
-      .href,
-  },
-  {
-    name: "William Chen",
-    userName: "@will_chen",
-    picture: new URL("../assets/postsProfiles/WilliamChen.png", import.meta.url)
-      .href,
-  },
-  {
-    name: "Grace Hopper",
-    userName: "@gracehopper",
-    picture: new URL("../assets/postsProfiles/GraceHopper.png", import.meta.url)
-      .href,
-  },
+  { name: "John Doe", userName: "@johndoe", pictures: JohnDoe },
+  { name: "Ada Byte", userName: "@adabyte", pictures: AdaByte },
+  { name: "Dmitry Petrov", userName: "@dmit_petrov", pictures: DmitryPetrov },
+  { name: "Alice Keyes", userName: "@alice_keys", pictures: AliceKeyes },
+  { name: "William Chen", userName: "@will_chen", pictures: WilliamChen },
+  { name: "Grace Hopper", userName: "@gracehopper", pictures: GraceHopper },
 ];
+
 const BlogCard = ({ card }) => {
   const { auth } = useAuthStore();
+
   const fallbackSeed = String(card.id ?? card.title ?? "");
   const fallbackIndex =
     [...fallbackSeed].reduce((sum, char) => sum + char.charCodeAt(0), 0) %
     FictionalUsers.length;
   const fallbackUser = FictionalUsers[fallbackIndex];
+
+  const resolvedPicture = auth
+    ? pictureMap[card.pictures?.split("/").pop()]
+    : fallbackUser.pictures;
+
   const authorName = auth
     ? `${card.firstName ?? ""} ${card.lastName ?? ""}`.trim() || "Unknown User"
     : fallbackUser.name;
   const userName = auth ? card.userName || "@userName" : fallbackUser.userName;
+
   const tags = Array.isArray(card.tags)
     ? card.tags
     : typeof card.tags === "string"
@@ -97,7 +89,17 @@ const BlogCard = ({ card }) => {
           </div>
           <Link
             to={`post/${card.id}`}
-            state={{ post: card }}
+            state={{
+              post: {
+                ...card,
+                // pass the already-resolved fallback values
+                _displayName: authorName,
+                _displayUserName: userName,
+                _displayPicture: auth
+                  ? card.pictures?.split("/").pop()
+                  : (fallbackUser.pictures?.split("/").pop() ?? null),
+              },
+            }}
             className="shrink-0 rounded-full bg-violet-500/90 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-violet-400 dark:bg-violet-600 dark:hover:bg-violet-500"
           >
             Read More
@@ -130,12 +132,12 @@ const BlogCard = ({ card }) => {
       <CardFooter className="items-center justify-between border-t border-violet-100 px-6 py-3 dark:border-slate-700">
         <div className="flex items-center gap-3">
           <img
-            src={auth ? card.picture : fallbackUser.picture}
-            alt={auth ? card.name : fallbackUser.name}
-            className="h-10 w-10 rounded-full "
+            src={resolvedPicture}
+            alt={auth ? authorName : fallbackUser.name}
+            className="h-10 w-10 rounded-full"
           />
           <div className="flex flex-col">
-            <span className="h-5 text-sm font-semibold text-slate-700 overflow-x-hidden dark:text-slate-200">
+            <span className="h-5 overflow-x-hidden text-sm font-semibold text-slate-700 dark:text-slate-200">
               {authorName}
             </span>
             <span className="h-4 overflow-x-hidden text-xs font-semibold text-gray-400 dark:text-slate-400">
@@ -158,7 +160,7 @@ const BlogCard = ({ card }) => {
           </button>
           <button
             type="button"
-            className="cursor-pointer rounded-full p-2  transition hover:bg-emerald-50 hover:text-emerald-500"
+            className="cursor-pointer rounded-full p-2 transition hover:bg-emerald-50 hover:text-emerald-500"
           >
             <FiShare />
           </button>

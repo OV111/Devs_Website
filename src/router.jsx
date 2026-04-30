@@ -35,6 +35,7 @@ const Backend = lazy(() => import("./pages/CategoryPages/Backend"));
 const Mobile = lazy(() => import("./pages/CategoryPages/Mobile"));
 const AIandML = lazy(() => import("./pages/CategoryPages/AI&ML"));
 const QA = lazy(() => import("./pages/CategoryPages/QA"));
+const DataScience = lazy(() => import("./pages/CategoryPages/DataScience"));
 const DevOps = lazy(() => import("./pages/CategoryPages/DevOps"));
 const GameDev = lazy(() => import("./pages/CategoryPages/GameDev"));
 
@@ -155,15 +156,18 @@ const router = createBrowserRouter([
 
           { path: "ai&ml", element: <AIandML /> },
           { path: "ai&ml/post/:id", element: <ReadMore /> },
+          
+          { path: "devops", element: <DevOps /> },
+          { path: "devops/post/:id", element: <ReadMore /> },
+          
+          {path: "datascience", element: <DataScience />},
+          { path: "datascience/post/:id", element: <ReadMore /> },
+          
+          { path: "gamedev", element: <GameDev /> },
+          { path: "gamedev/post/:id", element: <ReadMore /> },
 
           { path: "qa", element: <QA /> },
           { path: "qa/post/:id", element: <ReadMore /> },
-
-          { path: "devops", element: <DevOps /> },
-          { path: "devops/post/:id", element: <ReadMore /> },
-
-          { path: "gamedev", element: <GameDev /> },
-          { path: "gamedev/post/:id", element: <ReadMore /> },
         ],
       },
     ],
