@@ -121,8 +121,8 @@ const Navbar = () => {
     </div>
   );
 
-  const CategoryList = ({ onClose }) => (
-    <ul className="absolute top-full mt-2 left-0 w-44 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 py-0 z-4">
+const CategoryList = ({ onClose }) => (
+    <ul className="absolute top-full mt-0 left-0 w-44 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 py-0 z-4">
       {CATEGORY_OPTIONS.map(({ title, slug }) => (
         <li key={slug}>
           <NavLink
@@ -135,7 +135,7 @@ const Navbar = () => {
         </li>
       ))}
     </ul>
-  );
+);
 
   return (
     // bg-linear-to-r from-purple-600 to-purple-800 dark:from-purple-700 dark:to-purple-800 
@@ -174,18 +174,16 @@ const Navbar = () => {
 
         {/* Categories — desktop */}
         <li
-          className="relative hidden md:block text-sm lg:text-base font-medium px-1 py-1 hover:text-purple-300 transition"
+          className="relative hidden md:block text-sm lg:text-base font-medium px-1 py-1 hover:text-purple-300 transition-all duration-200 ease-out"
           ref={dropdownRef}
+          onMouseLeave={()=>{setShowDropdown(false)}}
+          onMouseEnter={() => {setShowDropdown(true)}}
         >
           <button
-            onClick={() => setShowDropdown(!showDropdown)}
-            className="flex lg:gap-1 justify-center items-center cursor-pointer"
+            className="flex lg:gap-1 justify-center items-center cursor-pointer transition-all duration-200"
           >
             Categories
-            <ChevronDown
-              size={15}
-              className={`transition-transform duration-200 ${showDropdown ? "rotate-180" : ""}`}
-            />
+            
           </button>
           {showDropdown && <CategoryList onClose={closeDropdown} />}
         </li>
@@ -204,24 +202,25 @@ const Navbar = () => {
 
             {/* Avatar dropdown — desktop */}
             <li
-              className="relative hidden md:block flex items-center px-1"
+              className="relative hidden md:block flex items-center px-1 "
               ref={avatarRef}
+              onMouseLeave={() => {setAvatarMenuOpen(false)}}
+              onMouseEnter={() => {setAvatarMenuOpen(true)}}
             >
               <button
-                onClick={() => setAvatarMenuOpen(!avatarMenuOpen)}
-                className="flex items-center cursor-pointer"
+                className="flex items-center cursor-pointer  transition-all duration-200 ease-out"
               >
                 <AvatarImage />
               </button>
 
               {avatarMenuOpen && (
-                <div className="absolute right-0 top-full mt-2 w-52 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 py-1 z-4">
+                <div className="absolute right-0 top-full mt-0 w-52 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 py-0 z-4">
                   {/* User info header */}
-                  <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-100 dark:border-gray-700">
+                  <div className="flex items-center gap-3 px-4 py-2 border-b border-gray-100 dark:border-gray-700">
                     <AvatarImage inDropdown />
                     <div className="min-w-0">
                       <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">
-                        {user?.firstName}
+                        {user?.firstName} {user?.lastName}
                       </p>
                       {user?.username && (
                         <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
@@ -244,7 +243,7 @@ const Navbar = () => {
                     </NavLink>
                   ))}
 
-                  <div className="border-t border-gray-100 dark:border-gray-700 my-1" />
+                  <div className="border-t border-gray-100 dark:border-gray-700 my-0" />
 
                   {/* Theme toggle */}
                   {/* <div className="flex items-center justify-between px-4 py-2">
@@ -260,11 +259,11 @@ const Navbar = () => {
                     </button>
                   </div> */}
 
-                  <div className="border-t border-gray-100 dark:border-gray-700 my-1" />
+                  {/* <div className="border-t border-gray-100 dark:border-gray-700 my-1" /> */}
 
                   <button
                     onClick={handleLogout}
-                    className="flex items-center gap-3 w-full px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-gray-700 transition cursor-pointer"
+                    className="flex items-center gap-3 w-full px-4 py-2 text-sm rounded-b-lg text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-gray-700 transition cursor-pointer"
                   >
                     <LogOut size={15} />
                     Logout

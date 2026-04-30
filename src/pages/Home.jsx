@@ -75,14 +75,14 @@ const Home = () => {
         </div>
 
         <div className="hidden lg:block shrink-0 ">
-          <img
+          {/* <img
             src={heroIllustration}
             alt="hero illustration"
             width={500}
             height={500}
             fetchPriority="high"
             className="w-[500px] drop-shadow-2xl dark:drop-shadow-[0_20px_40px_rgba(147,51,234,0.3)]"
-          />
+          /> */}
         </div>
       </section>
 
