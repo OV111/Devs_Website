@@ -67,7 +67,7 @@ export default function SearchResults({ query = "", onSelect, boundaryRef }) {
 
   if (!open) return null;
   return (
-    <div className="absolute top-[calc(100%+6px)] w-full max-w-[500px] z-4 overflow-hidden rounded-2xl border border-white/10 bg-linear-to-r from-purple-800 to-purple-900 shadow-xl backdrop-blur ">
+    <div className="absolute top-[calc(100%+6px)] w-full max-w-[400px] z-4 overflow-hidden rounded-2xl border border-white/10 bg-linear-to-r from-dark-800 to-dark-900 shadow-2xl backdrop-blur-3xl ">
       <div className="max-h-80 overflow-auto p-2">
         {isLoading && (
           <div className="px-3 py-2 text-sm text-white/70">Searching...</div>

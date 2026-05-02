@@ -194,13 +194,13 @@ const Navbar = () => {
 
         {auth ? (
           <>
-            <li className="hidden md:block font-medium text-sm lg:text-base px-1 hover:text-purple-300 transition">
+            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 hover:text-purple-300 transition">
               <NavLink to="roadmaps">Roadmaps</NavLink>
             </li>
-            <li className="hidden md:block font-medium text-sm lg:text-base px-1 hover:text-purple-300 transition">
+            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 hover:text-purple-300 transition">
               <NavLink to="coding-libs">Coding Libs</NavLink>
             </li>
-            <li className="hidden md:block font-medium text-sm lg:text-base px-1 hover:text-purple-300 transition">
+            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 hover:text-purple-300 transition">
               <NavLink to="coding-challenges">Challenges</NavLink>
             </li>
 
