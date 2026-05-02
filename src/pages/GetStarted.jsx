@@ -346,7 +346,7 @@ const GetStarted = () => {
                         ?.querySelector("div[role=button]")
                         ?.click()
                     }
-                    className="flex w-[220px] cursor-pointer items-center justify-center gap-2.5 rounded-lg border border-[#dadce0] bg-white py-2.5 px-4 text-sm font-medium text-[#3c4043] transition hover:bg-gray-50 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
+                    className="flex w-[246px] cursor-pointer items-center justify-center gap-2.5 rounded-lg border border-[#dadce0] bg-white py-2.5 px-4 text-sm font-medium text-[#3c4043] transition hover:bg-gray-50 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -379,7 +379,7 @@ const GetStarted = () => {
                     onClick={() => {
                       window.location.href = `${API_BASE_URL}/auth/github`;
                     }}
-                    className="flex w-[220px] cursor-pointer items-center justify-center gap-2.5 rounded-lg border border-[#30363d] bg-[#24292e] py-2.5 px-4 text-sm font-medium text-white transition hover:bg-[#2f363d] dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-800"
+                    className="flex w-[246px] cursor-pointer items-center justify-center gap-2.5 rounded-lg border border-[#30363d] bg-[#24292e] py-2.5 px-4 text-sm font-medium text-white transition hover:bg-[#2f363d] dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-800"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

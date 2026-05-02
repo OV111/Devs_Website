@@ -133,7 +133,7 @@ export default function AddBlog() {
             label="Title"
             required
             value={title}
-            className="w-100 rounded-lg border border-gray-300 text-base outline-none lg:max-w-100"
+            className="w-100 rounded-lg border  border-gray-300 text-base outline-none lg:max-w-100"
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter a compelling title for your post..."
             fullWidth
@@ -146,6 +146,7 @@ export default function AddBlog() {
                 color: isDarkMode ? "#d1d5db" : "#374151",
               },
               "& .MuiOutlinedInput-root": {
+                borderRadius: "8px",
                 color: isDarkMode ? "#f3f4f6" : "#111827",
                 backgroundColor: isDarkMode ? "#111827" : "#ffffff",
                 "& fieldset": {
@@ -180,6 +181,7 @@ export default function AddBlog() {
                 color: isDarkMode ? "#d1d5db" : "#374151",
               },
               "& .MuiOutlinedInput-root": {
+                borderRadius: "8px",
                 color: isDarkMode ? "#f3f4f6" : "#111827",
                 backgroundColor: isDarkMode ? "#111827" : "#ffffff",
                 "& fieldset": {
@@ -219,6 +221,7 @@ export default function AddBlog() {
               placeholder="Write your post content here…"
               sx={{
                 "& .MuiOutlinedInput-root": {
+                  borderRadius: "8px",
                   color: isDarkMode ? "#f3f4f6" : "#111827",
                   backgroundColor: isDarkMode ? "#111827" : "#ffffff",
                   "& fieldset": {
