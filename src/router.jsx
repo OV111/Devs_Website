@@ -21,6 +21,7 @@ const GetStarted = lazy(() => import("./pages/GetStarted"));
 
 const UserProfile = lazy(() => import("./pages/Users/UserProfile"));
 
+const Blogs = lazy(() => import ('./features/Blogs/Blogs'));
 const RoadmapPage = lazy(() => import("./features/Roadmap/RoadmapPage"));
 const CodingLibs = lazy(() => import("./features/CodingLibs/CodingLibs"));
 const Books = lazy(() => import("./features/CodingLibs/Books"));
@@ -68,6 +69,7 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {path:"blogs",element:<Blogs />},
       { path: "coding-challenges", element: <CodingChallenges /> },
       { path: "get-started", element: <GetStarted /> },
       { path: "users/:username", element: <UserProfile /> },

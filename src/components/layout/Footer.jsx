@@ -34,7 +34,7 @@ const Footer = () => {
   return (
     <React.Fragment>
       {/* bg-linear-to-r from-purple-600 to-purple-800 dark:from-purple-700 dark:to-purple-800 */}
-      <footer className="relative z-1 px-5 pt-7 text-white  sm:px-8 lg:px-12">
+      <footer className="relative z-1 px-5 pt-17 text-white  sm:px-8 lg:px-12">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.8fr_1fr_1fr_1fr] lg:gap-10">
           <div className="flex flex-col items-start">
             <Link to="/" className="flex items-center gap-2 mb-4">
@@ -147,7 +147,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mx-auto mt-6 max-w-7xl py-5 text-center text-sm text-purple-300 sm:text-base">
+        <div className="mx-auto mt-6 max-w-7xl py-5 text-center text-sm text-white sm:text-base">
           © {new Date().getFullYear()} Devs Webs. All rights reserved!
         </div>
       </footer>

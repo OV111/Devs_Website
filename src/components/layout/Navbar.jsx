@@ -280,10 +280,10 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <li className="hidden md:block font-medium text-sm lg:text-base px-1 py-1 hover:text-purple-300 transition">
+            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 py-1 hover:text-purple-300 transition">
               <NavLink to="about">About</NavLink>
             </li>
-            <li className="hidden md:block font-medium text-sm lg:text-base px-1 py-1 hover:text-purple-300 transition">
+            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 py-1 hover:text-purple-300 transition">
               <NavLink to="get-started">Get Started</NavLink>
             </li>
           </>
