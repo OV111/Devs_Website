@@ -21,7 +21,7 @@ const GetStarted = lazy(() => import("./pages/GetStarted"));
 
 const UserProfile = lazy(() => import("./pages/Users/UserProfile"));
 
-const Blogs = lazy(() => import ('./features/Blogs/Blogs'));
+const Blogs = lazy(() => import("./features/Blogs/Blogs"));
 const RoadmapPage = lazy(() => import("./features/Roadmap/RoadmapPage"));
 const CodingLibs = lazy(() => import("./features/CodingLibs/CodingLibs"));
 const Books = lazy(() => import("./features/CodingLibs/Books"));
@@ -69,7 +69,14 @@ const router = createBrowserRouter([
           },
         ],
       },
-      {path:"blogs",element:<Blogs />},
+      {
+        path: "blogs",
+        element: (
+          <ProtectedMyProfile>
+            <Blogs />
+          </ProtectedMyProfile>
+        ),
+      },
       { path: "coding-challenges", element: <CodingChallenges /> },
       { path: "get-started", element: <GetStarted /> },
       { path: "users/:username", element: <UserProfile /> },
@@ -158,13 +165,13 @@ const router = createBrowserRouter([
 
           { path: "ai&ml", element: <AIandML /> },
           { path: "ai&ml/post/:id", element: <ReadMore /> },
-          
+
           { path: "devops", element: <DevOps /> },
           { path: "devops/post/:id", element: <ReadMore /> },
-          
-          {path: "datascience", element: <DataScience />},
+
+          { path: "datascience", element: <DataScience /> },
           { path: "datascience/post/:id", element: <ReadMore /> },
-          
+
           { path: "gamedev", element: <GameDev /> },
           { path: "gamedev/post/:id", element: <ReadMore /> },
 

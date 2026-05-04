@@ -26,13 +26,12 @@ const Blogs = () => {
     fetchBlogs();
   }, [page]);
 
-
   return (
     <div>
       <h1>Blogs</h1>
 
       {blogs.map((blog) => (
-        <div key={blog._id}>
+        <div key={blog._id} className="text-white">
           <h2>{blog.title}</h2>
           <p>{blog.description}</p>
         </div>
@@ -40,7 +39,7 @@ const Blogs = () => {
 
       {pagination && (
         <div>
-            <button onClick={() => setPage((p) => p-1)}></button>
+          <button onClick={() => setPage((p) => p - 1)}></button>
         </div>
       )}
       <p>some</p>

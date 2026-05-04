@@ -129,7 +129,7 @@ const GetStarted = () => {
   return (
     <React.Fragment>
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="flex min-h-screen">
+      <div className="flex min-h-screen justify-end">
         {/* Left Panel */}
         {/* <div className="hidden lg:flex lg:w-1/2 flex-col items-center justify-center bg-zinc-100 dark:bg-gray-950 px-12 py-16">
           <Lottie
