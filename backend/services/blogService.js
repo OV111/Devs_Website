@@ -1,5 +1,3 @@
-import { paginationClasses } from "@mui/material";
-import { data } from "react-router-dom";
 
 export const buildBlogDocument = ({
   title,
@@ -7,6 +5,7 @@ export const buildBlogDocument = ({
   content,
   tags,
   category,
+  difficulty,
   status,
   coverImage,
   author,
@@ -18,6 +17,7 @@ export const buildBlogDocument = ({
     title,
     slug,
     category,
+    difficulty,
     description,
     content,
     tags,
@@ -108,6 +108,6 @@ export const getBlogBySlugService = async (db, slug) => {
     throw new Error("Blog not found");
   }
   await blogs.updateOne({ _id: blog._id }, { $inc: { views: 1 } });
-
+  
   return blog;
 };

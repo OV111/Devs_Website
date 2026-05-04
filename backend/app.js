@@ -9,7 +9,7 @@ import profileRoutes from "./routes/profile.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import searchRoutes from "./routes/search.routes.js";
 import accountRoutes from "./routes/account.routes.js";
-import blogRoutes from "./routes/blog.routes.js";
+import blogRoutes from "./routes/blogs.routes.js";
 
 export function createApp(db) {
   const app = express();
@@ -24,6 +24,9 @@ export function createApp(db) {
       credentials: true,
     }),
   );
+// Need to fix this later,
+  app.use("/blogs", blogRoutes);
+
   app.use(express.json());
   app.use(cookieParser());
 
@@ -37,7 +40,6 @@ export function createApp(db) {
 
   app.use(authRoutes);
   app.use(postRoutes);
-  app.use("/blogs", blogRoutes);
   app.use("/my-profile", profileRoutes);
   app.use(userRoutes);
   app.use("/search", searchRoutes);

@@ -1,7 +1,5 @@
 import Busboy from "busboy";
-import fs from "fs";
-import path from "path";
-import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
+import { uploadImage } from "../utils/uploadImage.js";
 import {
   createBlogService,
   getBlogsService,
@@ -12,7 +10,7 @@ export const createBlog = async (req, res) => {
   const busboy = Busboy({ headers: req.headers });
 
   let body = {};
-  let filePath = null;
+  let fileUploadPromise = null;
 
   busboy.on("field", (name, value) => {
     body[name] = value;
@@ -20,90 +18,38 @@ export const createBlog = async (req, res) => {
 
   busboy.on("file", (name, file, info) => {
     const { filename } = info;
+    if (!filename) {
+      file.resume();
+      return;
+    }
 
-    const safeName = `${Date.now()}-${filename.replace(/\s+/g, "-")}`;
-    const saveTo = path.join("uploads", safeName);
-
-    const stream = fs.createWriteStream(saveTo);
-    file.pipe(stream);
-
-    filePath = saveTo;
+    const uploadPromise = uploadImage(file, "blogs");
+    fileUploadPromise = uploadPromise;
   });
 
   busboy.on("finish", async () => {
     try {
       const db = req.app.locals.db;
-      const user = req.user || { _id: null };
+      const user = req.user;
 
-      let coverImageUrl = null;
-
-      if (filePath && fs.existsSync(filePath)) {
-        coverImageUrl = await uploadToCloudinary(filePath);
-
-        fs.unlinkSync(filePath);
+      let coverImage = null;
+      if (fileUploadPromise) {
+        coverImage = await fileUploadPromise; // { url, public_id }
       }
 
       const blog = await createBlogService(db, body, user, {
-        path: coverImageUrl,
+        path: coverImage?.url ?? null,
       });
 
-      res.status(201).json({
-        success: true,
-        data: blog,
-      });
+      res.status(201).json({ success: true, data: blog });
     } catch (err) {
-      res.status(500).json({
-        success: false,
-        message: err.message || "Failed to create blog",
-      });
+      console.error("createBlog error:", err);
+      res.status(500).json({ success: false, message: err.message });
     }
   });
 
   req.pipe(busboy);
 };
-
-// export const getBlogs = async (req, res) => {
-//   try {
-//     const db = req.app.locals.db;
-//     const { page = 1, limit = 10, category, tag } = req.query;
-
-//     const pageNumber = Math.max(1, parseInt(page));
-//     const limitNumber = Math.max(1, Math.min(100, parseInt(limit)));
-
-//     const result = await getBlogsService(db, {
-//       page: pageNumber,
-//       limit: limitNumber,
-//       category,
-//       tag,
-//     });
-
-//     if (result.pagination) {
-//       return res.json({
-//         success: true,
-//         ...result,
-//       });
-//     }
-//     const total = result.length;
-
-//     res.json({
-//       success: true,
-//       data: result,
-//       pagination: {
-//         total,
-//         page: pageNumber,
-//         limit: limitNumber,
-//         totalPages: Math.ceil(total / limitNumber),
-//         hasNextPage: pageNumber * limitNumber < total,
-//         hasPrevPage: pageNumber > 1,
-//       },
-//     });
-//   } catch (err) {
-//     res.status(500).json({
-//       success: false,
-//       message: err.message || "Failed to fetch blogs",
-//     });
-//   }
-// };
 
 export const getBlogs = async (req, res) => {
   try {
