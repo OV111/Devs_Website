@@ -11,7 +11,7 @@ import { formatTimeAgo } from "./ChatInterface";
 import Skeleton from "react-loading-skeleton";
 import useThemeStore from "../../../stores/useThemeStore";
 
-import VoiceChatSvg from "../../../assets/Voice chat-amico.svg";
+// import VoiceChatSvg from "../../../assets/Voice chat-amico.svg";
 const getUserIdFromJWT = (token) => {
   if (!token) return null;
   try {
@@ -397,7 +397,7 @@ const Chats = () => {
           </div>
           <div className="hidden lg:m-4 lg:mx-auto lg:flex items-center  ">
             <div className="mx-auto grid items-center justify-center text-center text-gray-500 dark:text-gray-400">
-              <img src={VoiceChatSvg} alt="select a chat" />
+              {/* <img src={VoiceChatSvg} alt="select a chat" /> */}
               <h2 className="pt-2 text-xl font-semibold text-gray-800 dark:text-gray-100">
                 Select a chat
               </h2>

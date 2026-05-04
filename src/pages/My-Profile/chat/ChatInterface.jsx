@@ -8,8 +8,8 @@ import {
 } from "lucide-react";
 import Skeleton from "react-loading-skeleton";
 import useThemeStore from "../../../stores/useThemeStore";
-import StartChatSvg from "../../../assets/StartChat.svg";
-import VoiceChatSvg from "../../../assets/Voice chat-amico.svg";
+// import StartChatSvg from "../../../assets/StartChat.svg";
+// import VoiceChatSvg from "../../../assets/Voice chat-amico.svg";
 export function formatTimeAgo(dateString) {
   if (!dateString) return "recently";
   const date = new Date(dateString);
@@ -252,7 +252,7 @@ const ChatInterface = ({
                     className={`flex ${isMine ? "justify-end" : "justify-start"}`}
                   >
                     <div
-                      className={`flex flex-col w-auto max-w-[75%]  ${isMine ? "items-end" : "items-start"}`}
+                      className={`flex flex-col w-auto max-w-[56%]  ${isMine ? "items-end" : "items-start"}`}
                     >
                       <p
                         className={`inline-block w-fit max-w-full break-words rounded-3xl px-3 py-2 text-sm ${
@@ -284,7 +284,7 @@ const ChatInterface = ({
             ) : (
               <div className="flex h-full items-center justify-center py-16">
                 <div className="rounded-3xl bg-transparent px-6 py-8 text-center">
-                  <img src={StartChatSvg} alt="no messages" />
+                  {/* <img src={StartChatSvg} alt="no messages" /> */}
                   <p className="text-sm font-medium text-gray-700 dark:text-gray-200">
                     No messages yet
                   </p>

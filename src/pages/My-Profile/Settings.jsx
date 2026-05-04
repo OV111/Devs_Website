@@ -111,9 +111,19 @@ const Settings = () => {
       <SideBar />
 
       <div className="flex-1 p-4 sm:p-6 lg:p-8">
+        <div className="flex justify-between items-center lg:gap-50">
+
         <h1 className="mb-2 font-semibold text-xl text-gray-900 dark:text-gray-100 lg:text-2xl">
           Settings
         </h1>
+
+        <button
+            onClick={SaveChanges}
+            className=" cursor-pointer rounded-lg bg-fuchsia-600 px-4 py-2 text-sm font-semibold text-white transition duration-300 hover:bg-fuchsia-700 dark:bg-fuchsia-500 dark:hover:bg-fuchsia-600 w-fit"
+            >
+            Save Changes
+          </button>
+            </div>
         <p className="max-w-xl pb-8 text-sm text-gray-700 dark:text-gray-300 lg:text-lg">
           Manage your account settings and preferences
         </p>
@@ -285,12 +295,7 @@ const Settings = () => {
             </div>
           </div>
 
-          <button
-            onClick={SaveChanges}
-            className="w-full cursor-pointer rounded-lg bg-fuchsia-600 px-6 py-3 text-lg font-semibold text-white transition duration-300 hover:bg-fuchsia-700 dark:bg-fuchsia-500 dark:hover:bg-fuchsia-600 lg:w-full sm:w-fit"
-          >
-            Save Changes
-          </button>
+          
           <DeleteAccount />
         </div>
       </div>
