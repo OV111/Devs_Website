@@ -119,7 +119,7 @@ const Settings = () => {
 
         <button
             onClick={SaveChanges}
-            className=" cursor-pointer rounded-lg bg-fuchsia-600 px-4 py-2 text-sm font-semibold text-white transition duration-300 hover:bg-fuchsia-700 dark:bg-fuchsia-500 dark:hover:bg-fuchsia-600 w-fit"
+            className="w-40 cursor-pointer rounded-lg bg-fuchsia-600 px-4 py-2 text-sm font-semibold text-white transition duration-300 hover:bg-fuchsia-700 dark:bg-fuchsia-500 dark:hover:bg-fuchsia-600"
             >
             Save Changes
           </button>
@@ -164,7 +164,7 @@ const Settings = () => {
             </div>
           </div>
 
-          <div className="flex gap-6 max-w-3xl">
+          <div className="flex gap-6 max-w-[880px]">
             {isLoading ? (
               <>
                 <div className="flex-1"><Skeleton height={120} {...skeletonProps} /></div>

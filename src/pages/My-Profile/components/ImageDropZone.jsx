@@ -58,7 +58,7 @@ const ImageDropZone = ({ label, image, currentUrl, onImageChange }) => {
             <img
               src={preview}
               alt="preview"
-              className="h-24 w-full object-cover rounded-md"
+              className="h-50 w-full object-cover rounded-md"
             />
             <button
               type="button"

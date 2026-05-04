@@ -11,7 +11,13 @@ import SaveAsOutlinedIcon from "@mui/icons-material/SaveAsOutlined";
 import { Toaster, toast } from "react-hot-toast";
 import SideBar from "./components/SideBar";
 import useThemeStore from "../../stores/useThemeStore";
-import { CATEGORIES, DIFFICULTIES, RECOMMENDED_TAGS } from "../../../constants/addBlog.js";
+
+import ImageDropZone from "./components/ImageDropZone";
+import {
+  CATEGORIES,
+  DIFFICULTIES,
+  RECOMMENDED_TAGS,
+} from "../../../constants/addBlog.js";
 
 // ── useForm ────────────────────────────────────────────────────────────────
 function useForm(initial) {
@@ -60,33 +66,6 @@ function useForm(initial) {
 // }
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
-// const RECOMMENDED_TAGS = [
-//   "JavaScript",
-//   "React",
-//   "TypeScript",
-//   "Node.js",
-//   "CSS",
-//   "HTML",
-//   "Python",
-// ];
-
-// const CATEGORIES = [
-//   "Full Stack Development",
-//   "Mobile Development",
-//   "Game Development",
-//   "ML & AI",
-//   "Backend Development",
-//   "Quality Assurance",
-//   "DevOps",
-//   "Data Science",
-//   "Cybersecurity",
-//   "Cloud Computing",
-//   "Database Management",
-//   "Quantum Computing",
-// ];
-
-// const DIFFICULTIES = ["Beginner", "Intermediate", "Advanced"];
 
 const INITIAL_FIELDS = {
   title: "",
@@ -338,42 +317,15 @@ export default function AddBlog() {
             </select>
           </div>
 
-          <div>
-            <FormLabel sx={{ color: isDarkMode ? "#d1d5db" : "#374151" }}>
-              Cover image
-            </FormLabel>
-            <label className="mt-2 block h-40 cursor-pointer rounded-lg border border-dashed border-gray-300 bg-white p-6 text-center transition duration-300 hover:border-purple-500 dark:border-gray-700 dark:bg-gray-900 dark:hover:border-purple-400">
-              {fields.preview ? (
-                <div className="relative">
-                  <img
-                    src={fields.preview}
-                    alt="Cover preview"
-                    className="h-48 w-full rounded-lg object-cover"
-                  />
-                  <button
-                    onClick={clearCover}
-                    className="absolute right-2 top-2 rounded-full bg-black/60 p-1 text-white"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                </div>
-              ) : (
-                <div className="flex flex-col items-center gap-2 text-gray-700 dark:text-gray-300">
-                  <ImagePlus className="h-8 w-8" />
-                  <p>Click to upload cover image</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                    PNG / JPG • up to 10MB
-                  </p>
-                </div>
-              )}
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleFileChange}
-                hidden
-              />
-            </label>
-          </div>
+          <ImageDropZone
+            label="Cover Image"
+            image={fields.cover}
+            currentUrl={fields.preview}
+            onImageChange={(file) => {
+              set("cover", file);
+              set("preview", file ? URL.createObjectURL(file) : null);
+            }}
+          />
         </section>
       </main>
     </div>

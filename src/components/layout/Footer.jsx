@@ -34,7 +34,7 @@ const Footer = () => {
   return (
     <React.Fragment>
       {/* bg-linear-to-r from-purple-600 to-purple-800 dark:from-purple-700 dark:to-purple-800 */}
-      <footer className="relative z-1 px-5 pt-17 sm:px-8 lg:px-12">
+      <footer className="relative z-1 px-5 pt-24 sm:px-8 lg:px-12">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.8fr_1fr_1fr_1fr] lg:gap-10">
           <div className="flex flex-col items-start">
             <Link to="/" className="flex items-center gap-2 mb-4">
@@ -58,7 +58,7 @@ const Footer = () => {
                 <Link
                   to="https://github.com/OV111"
                   aria-label="Visit our GitHub"
-                  className="group flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-sm transition duration-200 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20"
+                  className="group flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 transition duration-200  hover:border-white/40 hover:bg-white/20"
                 >
                   <Github
                     size={18}
@@ -68,7 +68,7 @@ const Footer = () => {
                 <Link
                   to="/"
                   aria-label="Visit our X profile"
-                  className="group flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-sm transition duration-200 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20"
+                  className="group flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 transition duration-200  hover:border-white/40 hover:bg-white/20"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -81,7 +81,7 @@ const Footer = () => {
                 <Link
                   to="/"
                   aria-label="Send us an email"
-                  className="group flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-sm transition duration-200 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20"
+                  className="group flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-sm transition duration-200 hover:border-white/40 hover:bg-white/20"
                 >
                   <Mail
                     size={18}

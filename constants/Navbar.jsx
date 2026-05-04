@@ -16,3 +16,10 @@ export const MOBILE_EXTRA_LINKS = [
   { label: "About", to: "about" },
   { label: "Privacy", to: "privacy" },
 ];
+
+export const LIBS_OPTIONS = [
+    { title: "Books", slug: "books" },
+    { title: "Documents", slug: "docs" },
+    { title: "Guides", slug: "guides" },
+    { title: "Sheets", slug: "sheets" },
+  ];
