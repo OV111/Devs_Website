@@ -11,7 +11,9 @@ const ProtectedMyProfile = ({ children }) => {
       navigate("/get-started");
     }
   }, [auth, isLoading, navigate]);
-
+  
+  if (isLoading) return null;
+  if (!auth) return null;
 
   return children;
 };

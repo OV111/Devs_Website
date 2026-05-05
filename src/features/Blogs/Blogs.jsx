@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-
+// import BlogCard from "@/components/blog/BlogCard";
+import { useState, useEffect, lazy } from "react";
+const BlogCard = lazy(() => import("@/components/blog/BlogCard"));
 const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Blogs = () => {
@@ -31,12 +32,12 @@ const Blogs = () => {
       <h1>Blogs</h1>
 
       {blogs.map((blog) => (
-        <div key={blog._id} className="text-white">
-          <h2>{blog.title}</h2>
-          <p>{blog.description}</p>
-        </div>
+<BlogCard key={blog._id} card={blog}/>
+        // <div key={blog._id} className="text-white">
+        //   <h2>{blog.title}</h2>
+        //   <p>{blog.description}</p>
+        // </div>
       ))}
-
       {pagination && (
         <div>
           <button onClick={() => setPage((p) => p - 1)}></button>

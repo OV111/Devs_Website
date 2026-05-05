@@ -36,28 +36,67 @@ const FictionalUsers = [
   { name: "Grace Hopper", userName: "@gracehopper", pictures: GraceHopper },
 ];
 
+const normalizePost = (post) => {
+  const isDefault = post.isDefault === true;
+
+  const rawId = isDefault ? post.id : String(post._id);
+  const prefixedId = `${isDefault ? "sys" : "blog"}_${rawId}`;
+
+  const readTime =
+    typeof post.readTime === "number"
+      ? `${post.readTime} min`
+      : (post.readTime ?? "1 min");
+
+  return {
+    id: prefixedId,
+    rawId,
+    isDefault,
+    title: post.title ?? "Untitled",
+    description: post.description ?? post.content ?? "",
+    image: post.image ?? post.coverImage ?? "",
+    pictures: post.pictures ?? null,
+    tags: Array.isArray(post.tags)
+      ? post.tags
+      : typeof post.tags === "string"
+        ? post.tags
+            .split(",")
+            .map((t) => t.trim())
+            .filter(Boolean)
+        : [],
+    readTime,
+    createdAt: post.createdAt ? new Date(post.createdAt) : new Date(),
+    firstName: post.firstName ?? null,
+    lastName: post.lastName ?? null,
+    userName: post.userName ?? null,
+    author: post.author ?? null,
+    slug: post.slug ?? null,
+  };
+};
+
 const BlogCard = ({ card }) => {
   const { auth } = useAuthStore();
 
-  const fallbackSeed = String(card.id ?? card.title ?? "");
+  const post = normalizePost(card);
+
+  const fallbackSeed = String(post.id ?? post.title ?? "");
   const fallbackIndex =
     [...fallbackSeed].reduce((sum, char) => sum + char.charCodeAt(0), 0) %
     FictionalUsers.length;
   const fallbackUser = FictionalUsers[fallbackIndex];
 
   const resolvedPicture = auth
-    ? pictureMap[card.pictures?.split("/").pop()]
+    ? pictureMap[post.pictures?.split("/").pop()]
     : fallbackUser.pictures;
 
   const authorName = auth
-    ? `${card.firstName ?? ""} ${card.lastName ?? ""}`.trim() || "Unknown User"
+    ? `${post.firstName ?? ""} ${post.lastName ?? ""}`.trim() || "Unknown User"
     : fallbackUser.name;
-  const userName = auth ? card.userName || "@userName" : fallbackUser.userName;
+  const userName = auth ? post.userName || "@userName" : fallbackUser.userName;
 
-  const tags = Array.isArray(card.tags)
-    ? card.tags
-    : typeof card.tags === "string"
-      ? card.tags
+  const tags = Array.isArray(post.tags)
+    ? post.tags
+    : typeof post.tags === "string"
+      ? post.tags
           .split(",")
           .map((tag) => tag.trim())
           .filter(Boolean)
@@ -67,8 +106,8 @@ const BlogCard = ({ card }) => {
     <Card className="w-full max-w-[400px] overflow-hidden rounded-2xl border-none bg-violet-50/40 dark:bg-slate-900">
       <div className="relative h-56 border-b border-violet-200 bg-violet-200/60 dark:border-slate-700 dark:bg-slate-800">
         <img
-          src={card.image || null}
-          alt={card.title}
+          src={post.image || null}
+          alt={post.title}
           className="h-full w-full object-cover"
         />
         <button className="absolute right-4 top-4 cursor-pointer rounded-full bg-white/95 p-2 font-medium text-slate-700 shadow-sm transition-colors duration-200 hover:bg-violet-600 hover:text-white dark:bg-slate-800/90 dark:text-slate-200">
@@ -88,15 +127,14 @@ const BlogCard = ({ card }) => {
             ))}
           </div>
           <Link
-            to={`post/${card.id}`}
+            to={`/posts/${post.id}`}
             state={{
               post: {
-                ...card,
-                // pass the already-resolved fallback values
+                ...post,
                 _displayName: authorName,
                 _displayUserName: userName,
                 _displayPicture: auth
-                  ? card.pictures?.split("/").pop()
+                  ? post.pictures?.split("/").pop()
                   : (fallbackUser.pictures?.split("/").pop() ?? null),
               },
             }}
@@ -109,23 +147,23 @@ const BlogCard = ({ card }) => {
       <CardHeader className="space-y-3 px-6 pb-0 pt-4">
         <div className="flex items-center justify-between text-xs font-medium uppercase text-slate-500 dark:text-slate-400">
           <span>
-            {new Date(card.createdAt).toLocaleDateString("en-US", {
+            {new Date(post.createdAt).toLocaleDateString("en-US", {
               month: "short",
               day: "numeric",
               year: "numeric",
             })}
           </span>
           <CardDescription className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
-            {card.readTime} read
+            {post.readTime} read
           </CardDescription>
         </div>
         <CardTitle className="overflow-hidden pb-3 text-xl leading-tight text-slate-900 dark:text-slate-100">
-          {card.title}
+          {post.title}
         </CardTitle>
       </CardHeader>
       <CardContent className="px-6 pb-2 pt-0">
         <p className="h-[72px] overflow-hidden text-sm leading-6 text-slate-600 dark:text-slate-300">
-          {card.description}
+          {post.description}
         </p>
       </CardContent>
 
