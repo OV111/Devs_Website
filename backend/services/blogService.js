@@ -1,4 +1,4 @@
-
+import { ObjectId } from "mongodb";
 export const buildBlogDocument = ({
   title,
   description,
@@ -32,6 +32,33 @@ export const buildBlogDocument = ({
     updatedAt: new Date(),
   };
 };
+
+const authorLookup = [
+  {
+    $lookup: {
+      from: "users",
+      localField: "author",
+      foreignField: "_id",
+      as: "author",
+      pipeline: [
+        {
+          $project: {
+            firstName: 1,
+            lastName: 1,
+            userName: 1,
+            pictures: 1,
+          },
+        },
+      ],
+    },
+  },
+  {
+    $unwind: {
+      path: "$author",
+      preserveNullAndEmptyArrays: true, // keeps blog if author deleted
+    },
+  },
+];
 
 export const createBlogService = async (db, body, user, file) => {
   const blogs = db.collection("blogs");
@@ -82,32 +109,49 @@ export const getBlogsService = async (db, query) => {
   const total = await blogsCollection.countDocuments(filter);
 
   const blogs = await blogsCollection
-    .find(filter)
-    .sort({ createdAt: -1 })
-    .skip((+pageNumber - 1) * +limitNumber)
-    .limit(+limitNumber)
+    .aggregate([
+      { $match: filter },
+      { $sort: { createdAt: -1 } },
+      { $skip: (pageNumber - 1) * limitNumber },
+      { $limit: limitNumber },
+      ...authorLookup,
+    ])
     .toArray();
   return {
     data: blogs,
     pagination: {
       total,
-      page: +pageNumber,
-      limit: +limitNumber,
+      page: pageNumber,
+      limit: limitNumber,
       totalPages: Math.ceil(total / limitNumber),
-      hasNextPage: +pageNumber * +limitNumber < total,
-      hasPrevPage: +pageNumber > 1,
+      hasNextPage: pageNumber * limitNumber < total,
+      hasPrevPage: pageNumber > 1,
     },
   };
 };
 
+export const getBlogByIdService = async (db, rawId) => {
+  const blogs = db.collection("blogs");
+  const [blog] = await blogs
+    .aggregate([{ $match: { _id: new ObjectId(rawId) } }, ...authorLookup])
+    .toArray();
+
+  if (!blog) throw new Error("Blog not found");
+  await blogs.updateOne({ _id: blog._id }, { $inc: { views: 1 } });
+
+  return blog;
+};
+
 export const getBlogBySlugService = async (db, slug) => {
   const blogs = db.collection("blogs");
-  const blog = await blogs.findOne({ slug, status: "published" });
 
-  if (!blog) {
-    throw new Error("Blog not found");
-  }
+  const [blog] = await blogs
+    .aggregate([{ $match: { slug, status: "published" } }, ...authorLookup])
+    .toArray();
+
+  if (!blog) throw new Error("Blog not found");
+
   await blogs.updateOne({ _id: blog._id }, { $inc: { views: 1 } });
-  
+
   return blog;
 };
