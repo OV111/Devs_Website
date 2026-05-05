@@ -47,6 +47,12 @@ const normalizePost = (post) => {
       ? `${post.readTime} min`
       : (post.readTime ?? "1 min");
 
+  const authorObj = post.author && typeof post.author === "object" ? post.author : {};
+  const firstName = post.firstName ?? authorObj.firstName ?? null;
+  const lastName = post.lastName ?? authorObj.lastName ?? null;
+  const userName = post.userName ?? authorObj.userName ?? null;
+  const pictures = post.pictures ?? authorObj.pictures ?? null;
+
   return {
     id: prefixedId,
     rawId,
@@ -54,7 +60,7 @@ const normalizePost = (post) => {
     title: post.title ?? "Untitled",
     description: post.description ?? post.content ?? "",
     image: post.image ?? post.coverImage ?? "",
-    pictures: post.pictures ?? null,
+    pictures,
     tags: Array.isArray(post.tags)
       ? post.tags
       : typeof post.tags === "string"
@@ -65,9 +71,9 @@ const normalizePost = (post) => {
         : [],
     readTime,
     createdAt: post.createdAt ? new Date(post.createdAt) : new Date(),
-    firstName: post.firstName ?? null,
-    lastName: post.lastName ?? null,
-    userName: post.userName ?? null,
+    firstName,
+    lastName,
+    userName,
     author: post.author ?? null,
     slug: post.slug ?? null,
   };
@@ -77,15 +83,16 @@ const BlogCard = ({ card }) => {
   const { auth } = useAuthStore();
 
   const post = normalizePost(card);
+  console.log(post);
 
-  const fallbackSeed = String(post.id ?? post.title ?? "");
+  const fallbackSeed = String(post.rowId ?? post.title ?? "");
   const fallbackIndex =
     [...fallbackSeed].reduce((sum, char) => sum + char.charCodeAt(0), 0) %
     FictionalUsers.length;
   const fallbackUser = FictionalUsers[fallbackIndex];
 
   const resolvedPicture = auth
-    ? pictureMap[post.pictures?.split("/").pop()]
+    ? pictureMap[post.pictures?.split("/").pop()] ?? fallbackUser.pictures
     : fallbackUser.pictures;
 
   const authorName = auth
@@ -93,14 +100,7 @@ const BlogCard = ({ card }) => {
     : fallbackUser.name;
   const userName = auth ? post.userName || "@userName" : fallbackUser.userName;
 
-  const tags = Array.isArray(post.tags)
-    ? post.tags
-    : typeof post.tags === "string"
-      ? post.tags
-          .split(",")
-          .map((tag) => tag.trim())
-          .filter(Boolean)
-      : [];
+  const tags = post.tags
 
   return (
     <Card className="w-full max-w-[400px] overflow-hidden rounded-2xl border-none bg-violet-50/40 dark:bg-slate-900">
