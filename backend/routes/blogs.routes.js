@@ -1,5 +1,6 @@
 import {
   createBlog,
+  getBlogById,
   getBlogBySlug,
   getBlogs,
 } from "../controllers/blogController.js";
@@ -10,7 +11,7 @@ const router = Router();
 
 router.get("/", getBlogs);
 router.post("/", authenticate, createBlog);
-
+router.get("/id/:id",getBlogById);
 router.get("/:slug", getBlogBySlug);
 
 export default router;

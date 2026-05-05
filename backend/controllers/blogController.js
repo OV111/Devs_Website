@@ -4,6 +4,7 @@ import {
   createBlogService,
   getBlogsService,
   getBlogBySlugService,
+  getBlogByIdService,
 } from "../services/blogService.js";
 
 export const createBlog = async (req, res) => {
@@ -22,9 +23,7 @@ export const createBlog = async (req, res) => {
       file.resume();
       return;
     }
-
-    const uploadPromise = uploadImage(file, "blogs");
-    fileUploadPromise = uploadPromise;
+    fileUploadPromise = uploadImage(file, "blogs");
   });
 
   busboy.on("finish", async () => {
@@ -34,7 +33,7 @@ export const createBlog = async (req, res) => {
 
       let coverImage = null;
       if (fileUploadPromise) {
-        coverImage = await fileUploadPromise; // { url, public_id }
+        coverImage = await fileUploadPromise;
       }
 
       const blog = await createBlogService(db, body, user, {
@@ -54,13 +53,8 @@ export const createBlog = async (req, res) => {
 export const getBlogs = async (req, res) => {
   try {
     const db = req.app.locals.db;
-
     const result = await getBlogsService(db, req.query);
-
-    res.json({
-      success: true,
-      ...result,
-    });
+    res.json({ success: true, ...result });
   } catch (err) {
     res.status(500).json({
       success: false,
@@ -68,6 +62,20 @@ export const getBlogs = async (req, res) => {
     });
   }
 };
+
+export const getBlogById = async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const blog = await getBlogByIdService(db, req.params.id);
+    res.json({ success: true, data: blog });
+  } catch (err) {
+    res.status(404).json({
+      success: false,
+      message: err.message || "Blog not found",
+    });
+  }
+};
+
 export const getBlogBySlug = async (req, res) => {
   try {
     const db = req.app.locals.db;
