@@ -26,10 +26,14 @@ const Navbar = () => {
 
   const { pathname } = useLocation();
   const { auth, logout } = useAuthStore();
-  const { theme, setTheme } = useThemeStore();
+  // const { theme, setTheme } = useThemeStore();
   const { user, stats, fetchProfile, clearProfile } = useProfileStore();
 
   const showSearch = pathname !== "/";
+
+  useEffect(() => {
+  setOpenDropdown(null);
+}, [auth]);
 
   useEffect(() => {
     if (!auth) {
@@ -165,7 +169,7 @@ const Navbar = () => {
         </li> */}
 
         <li
-          className="relative hidden md:block text-sm lg:text-sm font-medium px-1 py-1 hover:text-purple-300 transition-all duration-200 ease-out"
+          className="relative hidden md:block text-sm lg:text-sm font-medium px-1 py-1 hover:text-purple-500 transition-all duration-200 ease-out"
           onMouseLeave={closeMenu}
           onMouseEnter={() => {
             openMenu("categories");
@@ -181,18 +185,18 @@ const Navbar = () => {
 
         {auth ? (
           <>
-            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 hover:text-purple-300 transition">
+            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 hover:text-purple-500 transition">
               <NavLink to="roadmaps">Roadmaps</NavLink>
             </li>
             <li
               onMouseEnter={() => openMenu("libs")}
               onMouseLeave={closeMenu}
-              className="relative hidden md:block text-sm lg:text-sm font-medium px-1 py-1 hover:text-purple-300 transition-all duration-200 ease-out"
+              className="relative hidden md:block text-sm lg:text-sm font-medium px-1 py-1 hover:text-purple-500 transition-all duration-200 ease-out"
             >
               <NavLink to="coding-libs">Coding Libs</NavLink>
               {openDropdown === "libs" && <LibsList onClose={closeMenu} />}
             </li>
-            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 hover:text-purple-300 transition">
+            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 hover:text-purple-500 transition">
               <NavLink to="coding-challenges">Challenges</NavLink>
             </li>
 
@@ -264,10 +268,10 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 py-1 hover:text-purple-300 transition">
+            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 py-1 hover:text-purple-500 transition">
               <NavLink to="about">About</NavLink>
             </li>
-            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 py-1 hover:text-purple-300 transition">
+            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 py-1 hover:text-purple-500 transition">
               <NavLink to="get-started">Get Started</NavLink>
             </li>
           </>

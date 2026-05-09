@@ -6,6 +6,7 @@ import ProtectedLayout from "./layouts/ProtectedLayout";
 
 import Home from "./pages/Home";
 import OAuthSuccess from "./components/feedback/OAuthSuccess";
+import PublicOnlyRoute from "./layouts/PublicOnlyRoute";
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Privacy = lazy(() => import("./pages/Privacy"));
@@ -27,7 +28,9 @@ const RoadmapPage = lazy(() => import("./features/Roadmap/RoadmapPage"));
 const CodingLibs = lazy(() => import("./features/CodingLibs/CodingLibs"));
 const Books = lazy(() => import("./features/CodingLibs/Books"));
 const Docs = lazy(() => import("./features/CodingLibs/Docs"));
-const CodingChallenges = lazy(() => import("./features/CodingChallenges/CodingChallenges"));
+const CodingChallenges = lazy(
+  () => import("./features/CodingChallenges/CodingChallenges"),
+);
 
 const Fundamentals = lazy(() => import("./pages/CategoryPages/Fundamentals"));
 const FullStack = lazy(() => import("./pages/CategoryPages/FullStack"));
@@ -39,61 +42,67 @@ const DataScience = lazy(() => import("./pages/CategoryPages/DataScience"));
 const DevOps = lazy(() => import("./pages/CategoryPages/DevOps"));
 const GameDev = lazy(() => import("./pages/CategoryPages/GameDev"));
 
-
 const router = createBrowserRouter([
   {
     element: <MainLayout />,
     errorElement: <NotFound />,
     children: [
       // ✅ Public routes — no wrapper needed
-      { path: "/",             element: <Home /> },
-      { path: "about",         element: <About /> },
-      { path: "contact",       element: <Contact /> },
-      { path: "privacy",       element: <Privacy /> },
+      { path: "/", element: <Home /> },
+      { path: "about", element: <About /> },
+      { path: "contact", element: <Contact /> },
+      { path: "privacy", element: <Privacy /> },
       { path: "oauth-success", element: <OAuthSuccess /> },
-      { path: "get-started",   element: <GetStarted /> },
-      { path: "posts/:id",     element: <ReadMore /> },
+      {
+        path: "get-started",
+        element: (
+          <PublicOnlyRoute>
+            <GetStarted />
+          </PublicOnlyRoute>
+        ),
+      },
+      { path: "posts/:id", element: <ReadMore /> },
       {
         path: "categories",
         children: [
           { path: "fundamentals", element: <Fundamentals /> },
-          { path: "fullstack",    element: <FullStack /> },
-          { path: "backend",      element: <Backend /> },
-          { path: "mobile",       element: <Mobile /> },
-          { path: "ai&ml",        element: <AIandML /> },
-          { path: "devops",       element: <DevOps /> },
-          { path: "datascience",  element: <DataScience /> },
-          { path: "gamedev",      element: <GameDev /> },
-          { path: "qa",           element: <QA /> },
+          { path: "fullstack", element: <FullStack /> },
+          { path: "backend", element: <Backend /> },
+          { path: "mobile", element: <Mobile /> },
+          { path: "ai&ml", element: <AIandML /> },
+          { path: "devops", element: <DevOps /> },
+          { path: "datascience", element: <DataScience /> },
+          { path: "gamedev", element: <GameDev /> },
+          { path: "qa", element: <QA /> },
         ],
       },
       // ✅ All protected routes grouped here — one wrapper for all
       {
         element: <ProtectedLayout />,
         children: [
-          { path: "blogs",              element: <Blogs /> },
-          { path: "roadmaps",           element: <RoadmapPage /> },
-          { path: "coding-challenges",  element: <CodingChallenges /> },
-          { path: "users/:username",    element: <UserProfile /> },
+          { path: "blogs", element: <Blogs /> },
+          { path: "roadmaps", element: <RoadmapPage /> },
+          { path: "coding-challenges", element: <CodingChallenges /> },
+          { path: "users/:username", element: <UserProfile /> },
           {
             path: "coding-libs",
             children: [
-              { index: true,   element: <CodingLibs /> },
+              { index: true, element: <CodingLibs /> },
               { path: "books", element: <Books /> },
-              { path: "docs",  element: <Docs /> },
+              { path: "docs", element: <Docs /> },
             ],
           },
           {
             path: "my-profile",
             children: [
-              { index: true,              element: <MyProfile /> },
-              { path: "settings",         element: <Settings /> },
-              { path: "followers",        element: <Followers /> },
-              { path: "following",        element: <Followers /> },
-              { path: "add-blog",         element: <AddBlog /> },
-              { path: "chats",            element: <Chats /> },
-              { path: "notifications",    element: <Notifications /> },
-              { path: "favourites",       element: <Favorites /> },
+              { index: true, element: <MyProfile /> },
+              { path: "settings", element: <Settings /> },
+              { path: "followers", element: <Followers /> },
+              { path: "following", element: <Followers /> },
+              { path: "add-blog", element: <AddBlog /> },
+              { path: "chats", element: <Chats /> },
+              { path: "notifications", element: <Notifications /> },
+              { path: "favourites", element: <Favorites /> },
             ],
           },
         ],

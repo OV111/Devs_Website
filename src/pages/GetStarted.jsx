@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Toaster, toast } from "react-hot-toast";
 import { Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../stores/useAuthStore";
 import { GoogleLogin } from "@react-oauth/google";
-import { useGoogleLogin } from "@react-oauth/google";
-// import Lottie from "lottie-react";
+import { sanitizeInput } from "../utils/sanitize";
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const GetStarted = () => {
@@ -17,6 +17,7 @@ const GetStarted = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [authUiMessage, setAuthUiMessage] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -35,16 +36,17 @@ const GetStarted = () => {
     )
       .toString()
       .padStart(2, "0")}`;
-
     return `${base || "dev"}_${suffix}`;
   };
 
   const onSubmit = async (data) => {
     setAuthUiMessage("");
     setIsLoading(true);
+
     const url = isSignedUp
       ? `${API_BASE_URL}/get-started`
       : `${API_BASE_URL}/login`;
+
     const payload = isSignedUp
       ? {
           ...data,
@@ -62,10 +64,8 @@ const GetStarted = () => {
 
       if (response.ok) {
         toast.success(`${result.message}`, { duration: 900 });
-        setTimeout(() => {
-          navigate("/");
-          login(result.token);
-        }, 950);
+        login(result.token);
+        navigate("/");
       } else if (response.status === 409) {
         setAuthUiMessage(result.message);
         toast.error(result.message);
@@ -77,7 +77,10 @@ const GetStarted = () => {
         toast.error(result.message);
       } else if (response.status === 429) {
         setAuthUiMessage(
-          result.message || "Too many login attempts. Please try again later.",
+          result.message || "Too many attempts. Please try again later.",
+        );
+        toast.error(
+          result.message || "Too many attempts. Please try again later.",
         );
       } else {
         setAuthUiMessage(result.message || "Request failed");
@@ -90,6 +93,7 @@ const GetStarted = () => {
         duration: 2500,
       });
     }
+
     setIsLoading(false);
     reset();
   };
@@ -105,7 +109,7 @@ const GetStarted = () => {
       const res = await fetch(`${API_BASE_URL}/google/auth`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ tokenId: credentialResponse.credential }), // ← ID token JWT
+        body: JSON.stringify({ tokenId: credentialResponse.credential }),
       });
       const result = await res.json();
       if (res.ok) {
@@ -120,142 +124,129 @@ const GetStarted = () => {
       toast.error("Google auth failed");
     }
   };
-  const googleLogin = useGoogleLogin({
-    onSuccess: (tokenResponse) => handleGoogleLogin(tokenResponse),
-    onError: () => toast.error("Google Sign-In failed"),
-    flow: "implicit", // or "implicit" depending on your backend
-  });
-  const googleBtnRef = React.useRef(null);
+
+  const googleBtnRef = useRef(null);
+
+  const inputBase =
+    "w-full rounded-lg border px-3 py-2 text-sm focus:outline-none dark:bg-zinc-900 dark:text-white dark:placeholder:text-zinc-500 sm:px-4 sm:text-base";
+  const inputError = "border-red-500";
+  const inputNormal = "border-gray-300 dark:border-zinc-700";
+  const labelClass =
+    "block mb-1 font-medium text-sm text-slate-700 dark:text-zinc-200 sm:text-base";
+  const errorClass = "text-red-500 text-xs sm:text-sm mt-1";
+
   return (
     <React.Fragment>
       <Toaster position="top-center" reverseOrder={false} />
       <div className="flex min-h-screen justify-end">
-        {/* Left Panel */}
-        {/* <div className="hidden lg:flex lg:w-1/2 flex-col items-center justify-center bg-zinc-100 dark:bg-gray-950 px-12 py-16">
-          <Lottie
-            animationData={codingAnimation}
-            loop
-            className="w-full max-w-sm"
-          />
-          <ul className="mt-6 space-y-4 w-full max-w-sm">
-            {features.map((f, i) => (
-              <li
-                key={i}
-                className="flex items-center gap-3 rounded-xl bg-purple-50 dark:bg-zinc-800/60 px-4 py-3"
-              >
-                <span className="text-purple-500 dark:text-purple-400">
-                  {f.icon}
-                </span>
-                <span className="text-sm font-medium text-purple-700 dark:text-zinc-200">
-                  {f.text}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div> */}
-        {/* Right Panel — Form */}
         <div className="flex min-h-screen w-full lg:w-1/2 items-center justify-center px-4 py-8 sm:px-6 sm:py-10 md:px-8">
-          <div className="w-full max-w-xl rounded-2xl border border-violet-100 bg-white p-4  dark:border-zinc-800 dark:bg-gray-950  sm:p-6 md:p-8">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8 text-purple-700 dark:text-purple-600">
+          <div className="w-full max-w-xl rounded-2xl border border-violet-100 bg-white p-4 dark:border-zinc-800 dark:bg-gray-950 sm:p-6 md:p-8">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8 text-purple-700 dark:text-purple-600">
               {isSignedUp ? "Get Started" : "Welcome Back"}
             </h2>
+
             {authUiMessage && (
               <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700 dark:border-red-900 dark:bg-red-950/50 dark:text-red-300">
                 {authUiMessage}
               </div>
             )}
+
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
               {isSignedUp && (
-                <>
-                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                    <div className="flex-1">
-                      <label className="block mb-1 font-medium text-sm text-slate-700 dark:text-zinc-200 sm:text-base">
-                        First Name
-                      </label>
-                      <input
-                        placeholder="Enter Your First Name"
-                        {...register("firstName", {
-                          required: "First name is required.",
-                        })}
-                        className={`w-full rounded-lg border px-3 py-2 text-sm focus:outline-none  dark:bg-zinc-900 dark:text-white dark:placeholder:text-zinc-500 sm:px-4 sm:text-base ${
-                          errors.firstName
-                            ? "border-red-500"
-                            : "border-gray-300 dark:border-zinc-700"
-                        }`}
-                      />
-                      {errors.firstName && (
-                        <p className="text-red-500 text-xs sm:text-sm mt-1">
-                          {errors.firstName.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="flex-1">
-                      <label className="block mb-1 font-medium text-sm text-slate-700 dark:text-zinc-200 sm:text-base">
-                        Last Name
-                      </label>
-                      <input
-                        placeholder="Enter Your Last Name"
-                        {...register("lastName", {
-                          required: "Last name is required.",
-                        })}
-                        className={`w-full rounded-lg border px-3 py-2 text-sm focus:outline-none dark:bg-zinc-900 dark:text-white dark:placeholder:text-zinc-500 sm:px-4 sm:text-base ${
-                          errors.lastName
-                            ? "border-red-500"
-                            : "border-gray-300 dark:border-zinc-700"
-                        }`}
-                      />
-                      {errors.lastName && (
-                        <p className="text-red-500 text-xs sm:text-sm mt-1">
-                          {errors.lastName.message}
-                        </p>
-                      )}
-                    </div>
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                  <div className="flex-1">
+                    <label className={labelClass}>First Name</label>
+                    <input
+                      placeholder="Enter Your First Name"
+                      maxLength={50}
+                      {...register("firstName", {
+                        required: "First name is required.",
+                        minLength: {
+                          value: 2,
+                          message: "At least 2 characters.",
+                        },
+                        maxLength: { value: 50, message: "Max 50 characters." },
+                        pattern: {
+                          value: /^[a-zA-Z\s'-]+$/,
+                          message:
+                            "Only letters, spaces, hyphens, apostrophes.",
+                        },
+                        setValueAs: (v) => sanitizeInput(v),
+                      })}
+                      className={`${inputBase} ${errors.firstName ? inputError : inputNormal}`}
+                    />
+                    {errors.firstName && (
+                      <p className={errorClass}>{errors.firstName.message}</p>
+                    )}
                   </div>
-                </>
+
+                  <div className="flex-1">
+                    <label className={labelClass}>Last Name</label>
+                    <input
+                      placeholder="Enter Your Last Name"
+                      maxLength={50}
+                      {...register("lastName", {
+                        required: "Last name is required.",
+                        minLength: {
+                          value: 2,
+                          message: "At least 2 characters.",
+                        },
+                        maxLength: { value: 50, message: "Max 50 characters." },
+                        pattern: {
+                          value: /^[a-zA-Z\s'-]+$/,
+                          message:
+                            "Only letters, spaces, hyphens, apostrophes.",
+                        },
+                        setValueAs: (v) => sanitizeInput(v),
+                      })}
+                      className={`${inputBase} ${errors.lastName ? inputError : inputNormal}`}
+                    />
+                    {errors.lastName && (
+                      <p className={errorClass}>{errors.lastName.message}</p>
+                    )}
+                  </div>
+                </div>
               )}
 
               <div>
-                <label className="block mb-1 font-medium text-sm text-slate-700 dark:text-zinc-200 sm:text-base">
-                  Enter Email
-                </label>
+                <label className={labelClass}>Enter Email</label>
                 <input
                   type="email"
                   placeholder="Enter Your Email"
-                  {...register("email", { required: "Email is required." })}
-                  className={`w-full rounded-lg border px-3 py-2 text-sm focus:outline-none dark:bg-zinc-900 dark:text-white dark:placeholder:text-zinc-500 sm:px-4 sm:text-base ${
-                    errors.email
-                      ? "border-red-500"
-                      : "border-gray-300 dark:border-zinc-700"
-                  }`}
+                  maxLength={254}
+                  {...register("email", {
+                    required: "Email is required.",
+                    maxLength: { value: 254, message: "Max 254 characters." },
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: "Enter a valid email address.",
+                    },
+                    setValueAs: (v) => sanitizeInput(v),
+                  })}
+                  className={`${inputBase} ${errors.email ? inputError : inputNormal}`}
                 />
                 {errors.email && (
-                  <p className="text-red-500 text-xs sm:text-sm mt-1">
-                    {errors.email.message}
-                  </p>
+                  <p className={errorClass}>{errors.email.message}</p>
                 )}
               </div>
 
               <div className="relative">
-                <label className="block mb-1 font-medium text-sm text-slate-700 dark:text-zinc-200 sm:text-base">
-                  Enter Password
-                </label>
+                <label className={labelClass}>Enter Password</label>
                 <input
                   type={showPassword ? "text" : "password"}
                   autoComplete="new-password"
                   placeholder="Enter Your Password"
+                  maxLength={72}
                   {...register("password", {
-                    required: "Password is required!",
-                    minLength: {
-                      value: 6,
-                      message: "Password must contain at least 6 chars!",
+                    required: "Password is required.",
+                    minLength: { value: 6, message: "At least 6 characters." },
+                    maxLength: { value: 72, message: "Max 72 characters." },
+                    pattern: {
+                      value: /^(?=.*[!@#$%^&*])/,
+                      message: "Must include at least one symbol (!@#$%^&*).",
                     },
                   })}
-                  className={`w-full rounded-lg border px-3 py-2 pr-10 text-sm focus:outline-none dark:bg-zinc-900 dark:text-white dark:placeholder:text-zinc-500 sm:px-4 sm:pr-12 sm:text-base ${
-                    errors.password
-                      ? "border-red-500"
-                      : "border-gray-300 dark:border-zinc-700"
-                  }`}
+                  className={`${inputBase} pr-10 sm:pr-12 ${errors.password ? inputError : inputNormal}`}
                 />
                 <button
                   type="button"
@@ -270,62 +261,51 @@ const GetStarted = () => {
                   )}
                 </button>
                 {errors.password && (
-                  <p className="text-red-500 text-xs sm:text-sm mt-1">
-                    {errors.password.message}
-                  </p>
+                  <p className={errorClass}>{errors.password.message}</p>
                 )}
               </div>
 
               {isSignedUp && (
-                <>
-                  <div className="relative">
-                    <label className="block mb-1 font-medium text-sm text-slate-700 dark:text-zinc-200 sm:text-base">
-                      Confirm Password
-                    </label>
-                    <input
-                      type={showConfirmPassword ? "text" : "password"}
-                      autoComplete="new-password"
-                      placeholder="Confirm Password"
-                      {...register("confirmPassword", {
-                        required: "Please confirm your password!",
-                        validate: (value) =>
-                          value === getValues("password") ||
-                          "Passwords don't match!",
-                      })}
-                      className={`w-full rounded-lg border px-3 py-2 pr-10 text-sm focus:outline-none  dark:bg-zinc-900 dark:text-white dark:placeholder:text-zinc-500 sm:px-4 sm:pr-12 sm:text-base ${
-                        errors.confirmPassword
-                          ? "border-red-500"
-                          : "border-gray-300 dark:border-zinc-700"
-                      }`}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setShowConfirmPassword(!showConfirmPassword);
-                      }}
-                      aria-label={
-                        showConfirmPassword
-                          ? "Hide confirm password"
-                          : "Show confirm password"
-                      }
-                      className="absolute top-9 right-3 cursor-pointer text-gray-400 dark:text-zinc-500 sm:top-10 sm:right-5"
-                    >
-                      {showConfirmPassword ? (
-                        <Eye size={18} className="sm:w-5 sm:h-5" />
-                      ) : (
-                        <EyeOff size={18} className="sm:w-5 sm:h-5" />
-                      )}
-                    </button>
-
-                    {errors.confirmPassword && (
-                      <p className="text-red-500 text-xs sm:text-sm mt-1">
-                        {errors.confirmPassword.message}
-                      </p>
+                <div className="relative">
+                  <label className={labelClass}>Confirm Password</label>
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    autoComplete="new-password"
+                    placeholder="Confirm Password"
+                    maxLength={72}
+                    {...register("confirmPassword", {
+                      required: "Please confirm your password.",
+                      maxLength: { value: 72, message: "Max 72 characters." },
+                      validate: (value) =>
+                        value === getValues("password") ||
+                        "Passwords don't match.",
+                    })}
+                    className={`${inputBase} pr-10 sm:pr-12 ${errors.confirmPassword ? inputError : inputNormal}`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    aria-label={
+                      showConfirmPassword
+                        ? "Hide confirm password"
+                        : "Show confirm password"
+                    }
+                    className="absolute top-9 right-3 cursor-pointer text-gray-400 dark:text-zinc-500 sm:top-10 sm:right-5"
+                  >
+                    {showConfirmPassword ? (
+                      <Eye size={18} className="sm:w-5 sm:h-5" />
+                    ) : (
+                      <EyeOff size={18} className="sm:w-5 sm:h-5" />
                     )}
-                  </div>
-                </>
+                  </button>
+                  {errors.confirmPassword && (
+                    <p className={errorClass}>
+                      {errors.confirmPassword.message}
+                    </p>
+                  )}
+                </div>
               )}
-              <div className="mt-4 w-full space-y-3 ">
+              <div className="mt-4 w-full space-y-3">
                 <div className="flex items-center">
                   <div className="grow border-t border-gray-300 dark:border-zinc-700" />
                   <span className="mx-3 text-sm text-gray-500">or</span>
@@ -394,6 +374,7 @@ const GetStarted = () => {
                   </button>
                 </div>
               </div>
+
               <button
                 type="submit"
                 disabled={isLoading}
@@ -421,4 +402,5 @@ const GetStarted = () => {
     </React.Fragment>
   );
 };
+
 export default GetStarted;

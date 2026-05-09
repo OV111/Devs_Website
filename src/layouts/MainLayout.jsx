@@ -5,9 +5,9 @@ import Footer from "../components/layout/Footer";
 import { Toaster } from "react-hot-toast";
 const MainLayout = () => {
   return (
-    <div className="bg-zinc-100 dark:bg-gray-950 min-h-screen">
+    <div className="bg-gray-950 min-h-screen">
       <Navbar />
-      <main className="min-h-screen">
+      <main className="min-h-screen bg-gray-950">
         <Outlet />
       </main>
       <Footer />

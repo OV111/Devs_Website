@@ -41,11 +41,11 @@ const Footer = () => {
           <div className="flex flex-col items-start">
             <Link to="/" className="flex items-center gap-2 mb-4">
               <img src={null} width={0} height={0} alt="Logo" />
-              <h1 className="text-3xl font-extrabold  tracking-wide text-[#F7F7F8]">
+              <h1 className="text-xl font-bold tracking-wide text-[#F7F7F8]">
                 DevsWebs
               </h1>
             </Link>
-            <p className="mb-6 text-sm leading-6 text-[#A1A0AB] sm:text-base">
+            <p className="mb-6 text-sx leading-6 text-[#A1A0AB] ">
               DevsFlow is where developers learn, build, and grow — community
               content, structured roadmaps you have to earn, and a personal AI
               agent that knows exactly where you are in your journey.
@@ -53,28 +53,28 @@ const Footer = () => {
 
             {/* Social Links */}
             <div className="mb-2">
-              <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-[#F7F7F8]">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-[#F7F7F8]">
                 Follow Us
               </p>
               <div className="flex flex-wrap items-center gap-3">
                 <Link
                   to="https://github.com/OV111"
                   aria-label="Visit our GitHub"
-                  className="group flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 transition duration-200  hover:border-white/40 hover:bg-white/20"
+                  className="group flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/10 transition duration-200  hover:border-white/40 hover:bg-white/20"
                 >
                   <Github
-                    size={18}
+                    size={16}
                     className="text-[#A1A0AB] transition group-hover:text-white"
                   />
                 </Link>
                 <Link
                   to="/"
                   aria-label="Visit our X profile"
-                  className="group flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 transition duration-200  hover:border-white/40 hover:bg-white/20"
+                  className="group flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/10 transition duration-200  hover:border-white/40 hover:bg-white/20"
                 >
                   <svg
                     viewBox="0 0 24 24"
-                    className="w-[18px] h-[18px] fill-[#A1A0AB] transition group-hover:fill-white"
+                    className="w-[16px] h-[16px] fill-[#A1A0AB] transition group-hover:fill-white"
                     aria-hidden="true"
                   >
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -83,10 +83,10 @@ const Footer = () => {
                 <Link
                   to="/"
                   aria-label="Send us an email"
-                  className="group flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-sm transition duration-200 hover:border-white/40 hover:bg-white/20"
+                  className="group flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-sm transition duration-200 hover:border-white/40 hover:bg-white/20"
                 >
                   <Mail
-                    size={18}
+                    size={16}
                     className="text-[#A1A0AB] transition group-hover:text-white"
                   />
                 </Link>
@@ -103,8 +103,8 @@ const Footer = () => {
               <Link
                 key={link.href}
                 to={link.href}
-                className={`text-base hover:text-purple-300 transition sm:text-lg ${
-                  pathname === link.href ? "text-purple-400" : "text-[#A1A0AB]"
+                className={`text-sx hover:text-purple-500 transition ${
+                  pathname === link.href ? "text-purple-500" : "text-[#A1A0AB]"
                 }`}
               >
                 {link.title}
@@ -121,7 +121,7 @@ const Footer = () => {
               <Link
                 key={slug}
                 to={`/categories/${slug}`}
-                className={`text-base hover:text-purple-300 transition sm:text-lg ${
+                className={`text-sx hover:text-purple-500 transition  ${
                   pathname === `/categories/${slug}`
                     ? "text-purple-500"
                     : "text-[#A1A0AB]"
@@ -133,10 +133,10 @@ const Footer = () => {
           </div>
           {/* Email Part */}
           <div className="flex flex-col gap-4 mt-5 lg:mt-0">
-            <h2 className="text-2xl font-bold mb-0 text-[#F7F7F8]">
+            <h2 className="text-xl font-bold mb-0 text-[#F7F7F8]">
               Stay Updated!
             </h2>
-            <p className="text-[#A1A0AB] mb-4 lg:mb-0">
+            <p className="text-[#A1A0AB] text-sx mb-4 lg:mb-0">
               Subscribe to our newsletter for the latest articles and updates.
             </p>
             {subscribed ? (
@@ -149,14 +149,15 @@ const Footer = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="p-2 flex-grow rounded-md pl-2 outline-none bg-purple-700 border-purple-600 text-white placeholder-purple-300 focus:ring-purple-500 focus:border-purple-500"
+                  className="flex-1 px-4 py-2 rounded-md bg-zinc-900 border border-zinc-700 text-white placeholder-zinc-500 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+
                 />
                 <button
                   type="submit"
                   aria-label="Subscribe to newsletter"
-                  className="p-2 bg-purple-600 cursor-pointer   hover:bg-purple-700 text-white  rounded-md shadow-sm transition-colors duration-200"
+                  className="p-0 bg-purple-600 cursor-pointer   hover:bg-purple-700 text-white  rounded-md shadow-sm transition-colors duration-200"
                 >
-                  <Send className="w-6 h-6 lg:mx-4 my-0 "></Send>
+                  <Send className="w-4 h-4 lg:mx-4 my-0 "></Send>
                 </button>
               </form>
             )}
