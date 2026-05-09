@@ -5,7 +5,7 @@ import useAuthStore from "../../stores/useAuthStore";
 import { CATEGORY_OPTIONS } from "../../../constants/Categories";
 
 const QuickLinks = [
-  { title: "Home", href: "/" },
+  // { title: "Home", href: "/" },  
   { title: "About", href: "/about" },
   { title: "Contact", href: "/contact" },
   { title: "Privacy Policy", href: "/privacy" },

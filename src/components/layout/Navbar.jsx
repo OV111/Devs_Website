@@ -160,9 +160,9 @@ const Navbar = () => {
       )}
 
       <ul className="flex items-center gap-1 text-gray-100 my-2 lg:my-0.5">
-        <li className="hidden md:block font-medium text-sm lg:text-sm px-1 py-1 hover:text-purple-300 transition">
+        {/* <li className="hidden md:block font-medium text-sm lg:text-sm px-1 py-1 hover:text-purple-300 transition">
           <NavLink to="/">Home</NavLink>
-        </li>
+        </li> */}
 
         <li
           className="relative hidden md:block text-sm lg:text-sm font-medium px-1 py-1 hover:text-purple-300 transition-all duration-200 ease-out"
