@@ -15,6 +15,8 @@ const AuthLinks = [
   { title: "Roadmaps", href: "/roadmaps" },
   { title: "Coding Libs", href: "/coding-libs" },
   { title: "Challenges", href: "/coding-challenges" },
+  { title: "About", href: "/about" },
+  { title: "Contact", href: "/contact" },
   { title: "Privacy Policy", href: "/privacy" },
 ];
 
