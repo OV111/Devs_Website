@@ -33,7 +33,7 @@ export const buildBlogDocument = ({
   };
 };
 
-const authorLookup = [
+export const authorLookup = [
   {
     $lookup: {
       from: "users",
@@ -43,10 +43,10 @@ const authorLookup = [
       pipeline: [
         {
           $project: {
+            _id: 1,
             firstName: 1,
             lastName: 1,
-            userName: 1,
-            pictures: 1,
+            username: 1,
           },
         },
       ],
@@ -55,13 +55,52 @@ const authorLookup = [
   {
     $unwind: {
       path: "$author",
-      preserveNullAndEmptyArrays: true, // keeps blog if author deleted
+      preserveNullAndEmptyArrays: true,
+    },
+  },
+  {
+    $lookup: {
+      from: "usersStats",
+      localField: "author._id",
+      foreignField: "userId",
+      as: "authorProfile",
+      pipeline: [
+        {
+          $project: {
+            profileImage: 1,
+            bio: 1,
+            followersCount: 1,
+          },
+        },
+      ],
+    },
+  },
+  {
+    $unwind: {
+      path: "$authorProfile",
+      preserveNullAndEmptyArrays: true,
+    },
+  },
+  {
+    $addFields: {
+      "author.userName": "$author.username",
+      "author.pictures": "$authorProfile.profileImage",
+      "author.bio": "$authorProfile.bio",
+      "author.followersCount": "$authorProfile.followersCount",
+    },
+  },
+  {
+    $project: {
+      authorProfile: 0,
+      "author.username": 0,
     },
   },
 ];
 
 export const createBlogService = async (db, body, user, file) => {
   const blogs = db.collection("blogs");
+  const users = db.collection("users");
+  const statsCollection = db.collection("usersStats");
 
   if (!body.title || !body.content || !body.category) {
     throw new Error("Title, content and category are required");
@@ -85,15 +124,45 @@ export const createBlogService = async (db, body, user, file) => {
   while (await blogs.findOne({ slug })) {
     slug = `${baseSlug}-${counter++}`;
   }
+  // ✅ Ensure authorId is always a proper ObjectId
+  const authorId =
+    user._id instanceof ObjectId ? user._id : new ObjectId(String(user._id));
+
   const doc = buildBlogDocument({
     ...body,
     slug,
     tags: parsedTags,
     coverImage: file?.path ?? null,
-    author: user._id,
+    author: authorId,
   });
   const result = await blogs.insertOne(doc);
-  return { ...doc, _id: result.insertedId };
+  const [authorData, statsData] = await Promise.all([
+    users.findOne(
+      { _id: authorId },
+      {
+        projection: {
+          firstName: 1,
+          lastName: 1,
+          username: 1,
+          pictures: 1,
+        },
+      },
+    ),
+    statsCollection.findOne({ userId: authorId.toString() }),
+  ]);
+  return {
+    ...doc,
+    _id: result.insertedId,
+    author: authorData
+      ? {
+          _id: authorData._id,
+          firstName: authorData.firstName,
+          lastName: authorData.lastName,
+          userName: authorData.username,
+          pictures: statsData?.profileImage ?? null,
+        }
+      : null,
+  };
 };
 
 export const getBlogsService = async (db, query) => {
@@ -154,4 +223,16 @@ export const getBlogBySlugService = async (db, slug) => {
   await blogs.updateOne({ _id: blog._id }, { $inc: { views: 1 } });
 
   return blog;
+};
+
+export const getUserBlogsService = async (db, userId) => {
+  const blogsCollection = db.collection("blogs");
+  const blogs = await blogsCollection
+    .aggregate([
+      { $match: { author: new ObjectId(userId), status: "published" } },
+      { $sort: { createdAt: -1 } },
+      ...authorLookup,
+    ])
+    .toArray();
+    return blogs;
 };

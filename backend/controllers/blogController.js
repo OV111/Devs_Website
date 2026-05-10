@@ -5,6 +5,7 @@ import {
   getBlogsService,
   getBlogBySlugService,
   getBlogByIdService,
+  getUserBlogsService,
 } from "../services/blogService.js";
 
 export const createBlog = async (req, res) => {
@@ -76,6 +77,18 @@ export const getBlogById = async (req, res) => {
   }
 };
 
+export const getUserBlogs = async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const blogs = await getUserBlogsService(db, req.params.userId);
+    res.json({ success: true, data: blogs });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message || "Failed to fetch user's blogs",
+    });
+  }
+};
 export const getBlogBySlug = async (req, res) => {
   try {
     const db = req.app.locals.db;
