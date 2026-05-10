@@ -47,12 +47,13 @@ const normalizePost = (post) => {
       ? `${post.readTime} min`
       : (post.readTime ?? "1 min");
 
-  const authorObj = post.author && typeof post.author === "object" ? post.author : {};
-  const firstName = post.firstName ?? authorObj.firstName ?? null;
-  const lastName = post.lastName ?? authorObj.lastName ?? null;
-  const userName = post.userName ?? authorObj.userName ?? null;
-  const pictures = post.pictures ?? authorObj.pictures ?? null;
+  const authorObj =
+    post.author && typeof post.author === "object" ? post.author : {};
 
+  const firstName = authorObj.firstName ?? null;
+  const lastName = authorObj.lastName ?? null;
+  const userName = authorObj.userName ?? null;
+  const pictures = authorObj.pictures ?? null;
   return {
     id: prefixedId,
     rawId,
@@ -85,14 +86,17 @@ const BlogCard = ({ card }) => {
   const post = normalizePost(card);
   console.log(post);
 
-  const fallbackSeed = String(post.rowId ?? post.title ?? "");
+  const fallbackSeed = String(post.rawId ?? post.title ?? "");
   const fallbackIndex =
     [...fallbackSeed].reduce((sum, char) => sum + char.charCodeAt(0), 0) %
     FictionalUsers.length;
   const fallbackUser = FictionalUsers[fallbackIndex];
 
+  // ✅ If it's a Cloudinary URL use directly, otherwise try pictureMap, otherwise fallback
   const resolvedPicture = auth
-    ? pictureMap[post.pictures?.split("/").pop()] ?? fallbackUser.pictures
+    ? post.pictures?.startsWith("http")
+      ? post.pictures
+      : (pictureMap[post.pictures?.split("/").pop()] ?? fallbackUser.pictures)
     : fallbackUser.pictures;
 
   const authorName = auth
@@ -100,7 +104,7 @@ const BlogCard = ({ card }) => {
     : fallbackUser.name;
   const userName = auth ? post.userName || "@userName" : fallbackUser.userName;
 
-  const tags = post.tags
+  const tags = post.tags;
 
   return (
     <Card className="w-full max-w-[400px] overflow-hidden rounded-2xl border-none bg-violet-50/40 dark:bg-slate-900">
@@ -133,9 +137,7 @@ const BlogCard = ({ card }) => {
                 ...post,
                 _displayName: authorName,
                 _displayUserName: userName,
-                _displayPicture: auth
-                  ? post.pictures?.split("/").pop()
-                  : (fallbackUser.pictures?.split("/").pop() ?? null),
+                _displayPicture: auth ? (post.pictures ?? null) : null,
               },
             }}
             className="shrink-0 rounded-full bg-violet-500/90 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-violet-400 dark:bg-violet-600 dark:hover:bg-violet-500"
