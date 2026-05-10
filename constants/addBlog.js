@@ -9,6 +9,7 @@ export const RECOMMENDED_TAGS = [
 ];
 
 export const CATEGORIES = [
+  "Blockchain Development",
   "Full Stack Development",
   "Mobile Development",
   "Game Development",
