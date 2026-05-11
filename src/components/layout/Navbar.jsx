@@ -55,11 +55,11 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
-  const handleSearchSubmit = (query) => {
-    const trimmedQuery = query.trim();
-    navigate(
-      trimmedQuery ? `/?search=${encodeURIComponent(trimmedQuery)}` : "/",
-    );
+  const handleSearchSubmit = () => {
+    // const trimmedQuery = query.trim();
+    // navigate(
+    //   trimmedQuery ? `/?search=${encodeURIComponent(trimmedQuery)}` : "/",
+    // );
     setIsOpen(false);
   };
 

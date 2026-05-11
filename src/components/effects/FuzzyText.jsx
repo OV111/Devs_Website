@@ -5,7 +5,7 @@ const FuzzyText = ({
   fontSize = "clamp(5rem, 10vw, 10rem)",
   fontWeight = 900,
   fontFamily = "inherit",
-  color = "#black",
+  color = "purple",
   enableHover = true,
   baseIntensity = 0.18,
   hoverIntensity = 0.5,
@@ -99,7 +99,7 @@ const FuzzyText = ({
           -fuzzRange,
           -fuzzRange,
           offscreenWidth + 2 * fuzzRange,
-          tightHeight + 2 * fuzzRange
+          tightHeight + 2 * fuzzRange,
         );
         const intensity = isHovering ? hoverIntensity : baseIntensity;
         for (let j = 0; j < tightHeight; j++) {
@@ -113,7 +113,7 @@ const FuzzyText = ({
             dx,
             j,
             offscreenWidth,
-            1
+            1,
           );
         }
         animationFrameId = window.requestAnimationFrame(run);
@@ -159,7 +159,9 @@ const FuzzyText = ({
       if (enableHover) {
         canvas.addEventListener("mousemove", handleMouseMove);
         canvas.addEventListener("mouseleave", handleMouseLeave);
-        canvas.addEventListener("touchmove", handleTouchMove, { passive: false });
+        canvas.addEventListener("touchmove", handleTouchMove, {
+          passive: false,
+        });
         canvas.addEventListener("touchend", handleTouchEnd);
       }
 
