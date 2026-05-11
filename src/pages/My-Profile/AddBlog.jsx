@@ -229,12 +229,19 @@ export default function AddBlog() {
             helperText={`${fields.description.length}/100 characters recommended`}
             sx={{
               ...inputSx,
+
               "& .MuiFormHelperText-root": {
                 color: isDarkMode ? "#9ca3af" : "#6b7280",
               },
-              "& .MuiInputBase-root": { height: 90 },
+
+              // remove fixed height
+              "& .MuiInputBase-root": {
+                minHeight: 90,
+                alignItems: "flex-start",
+              },
+
               "& .MuiInputBase-input": {
-                padding: "4px 8px",
+                padding: "12px 8px",
                 fontSize: { lg: "16px", xs: "12px" },
               },
             }}

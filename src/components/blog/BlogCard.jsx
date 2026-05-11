@@ -47,12 +47,13 @@ const normalizePost = (post) => {
       ? `${post.readTime} min`
       : (post.readTime ?? "1 min");
 
-  const authorObj = post.author && typeof post.author === "object" ? post.author : {};
-  const firstName = post.firstName ?? authorObj.firstName ?? null;
-  const lastName = post.lastName ?? authorObj.lastName ?? null;
-  const userName = post.userName ?? authorObj.userName ?? null;
-  const pictures = post.pictures ?? authorObj.pictures ?? null;
+  const authorObj =
+    post.author && typeof post.author === "object" ? post.author : {};
 
+  const firstName = authorObj.firstName ?? post.firstName ?? null;
+  const lastName = authorObj.lastName ?? post.lastName ?? null;
+  const userName = authorObj.userName ?? post.userName ?? post.username ?? null;
+  const pictures = authorObj.pictures ?? post.pictures ?? null;
   return {
     id: prefixedId,
     rawId,
@@ -85,14 +86,17 @@ const BlogCard = ({ card }) => {
   const post = normalizePost(card);
   console.log(post);
 
-  const fallbackSeed = String(post.rowId ?? post.title ?? "");
+  const fallbackSeed = String(post.rawId ?? post.title ?? "");
   const fallbackIndex =
     [...fallbackSeed].reduce((sum, char) => sum + char.charCodeAt(0), 0) %
     FictionalUsers.length;
   const fallbackUser = FictionalUsers[fallbackIndex];
 
+  // ✅ If it's a Cloudinary URL use directly, otherwise try pictureMap, otherwise fallback
   const resolvedPicture = auth
-    ? pictureMap[post.pictures?.split("/").pop()] ?? fallbackUser.pictures
+    ? post.pictures?.startsWith("http")
+      ? post.pictures
+      : (pictureMap[post.pictures?.split("/").pop()] ?? fallbackUser.pictures)
     : fallbackUser.pictures;
 
   const authorName = auth
@@ -100,7 +104,7 @@ const BlogCard = ({ card }) => {
     : fallbackUser.name;
   const userName = auth ? post.userName || "@userName" : fallbackUser.userName;
 
-  const tags = post.tags
+  const tags = post.tags;
 
   return (
     <Card className="w-full max-w-[400px] overflow-hidden rounded-2xl border-none bg-violet-50/40 dark:bg-slate-900">
@@ -133,9 +137,7 @@ const BlogCard = ({ card }) => {
                 ...post,
                 _displayName: authorName,
                 _displayUserName: userName,
-                _displayPicture: auth
-                  ? post.pictures?.split("/").pop()
-                  : (fallbackUser.pictures?.split("/").pop() ?? null),
+                _displayPicture: auth ? (post.pictures ?? null) : null,
               },
             }}
             className="shrink-0 rounded-full bg-violet-500/90 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-violet-400 dark:bg-violet-600 dark:hover:bg-violet-500"
@@ -167,40 +169,41 @@ const BlogCard = ({ card }) => {
         </p>
       </CardContent>
 
-      <CardFooter className="items-center justify-between border-t border-violet-100 px-6 py-3 dark:border-slate-700">
-        <div className="flex items-center gap-3">
+      <CardFooter className="items-center justify-between border-t border-violet-100 px-4 py-3 dark:border-slate-700 sm:px-6">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           <img
             src={resolvedPicture}
             alt={auth ? authorName : fallbackUser.name}
-            className="h-10 w-10 rounded-full"
+            className="h-8 w-8 sm:h-10 sm:w-10 rounded-full shrink-0"
           />
-          <div className="flex flex-col">
-            <span className="h-5 overflow-x-hidden text-sm font-semibold text-slate-700 dark:text-slate-200">
+          <div className="flex flex-col min-w-0">
+            <span className="h-5 overflow-x-hidden text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200 truncate max-w-[100px] sm:max-w-40">
               {authorName}
             </span>
-            <span className="h-4 overflow-x-hidden text-xs font-semibold text-gray-400 dark:text-slate-400">
+            <span className="h-4 overflow-x-hidden capitalize truncate text-xs font-semibold text-gray-400 dark:text-slate-400 max-w-20 sm:max-w-[150px]">
               {userName}
             </span>
           </div>
         </div>
-        <div className="flex items-center gap-1 text-slate-400 dark:text-slate-500">
+
+        <div className="flex items-center gap-0.5 sm:gap-1 text-slate-400 dark:text-slate-500 shrink-0">
           <button
             type="button"
-            className={`rounded-full p-2 ${auth ? "cursor-pointer" : "cursor-not-allowed"} transition hover:bg-rose-50 hover:text-rose-500`}
+            className={`rounded-full p-1.5 sm:p-2 ${auth ? "cursor-pointer" : "cursor-not-allowed"} transition hover:bg-rose-50 hover:text-rose-500`}
           >
-            <FaRegHeart />
+            <FaRegHeart className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           </button>
           <button
             type="button"
-            className={`rounded-full p-2 ${auth ? "cursor-pointer" : "cursor-not-allowed"} transition hover:bg-rose-50 hover:text-blue-500`}
+            className={`rounded-full p-1.5 sm:p-2 ${auth ? "cursor-pointer" : "cursor-not-allowed"} transition hover:bg-rose-50 hover:text-blue-500`}
           >
-            <FaRegComment />
+            <FaRegComment className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           </button>
           <button
             type="button"
-            className="cursor-pointer rounded-full p-2 transition hover:bg-emerald-50 hover:text-emerald-500"
+            className="cursor-pointer rounded-full p-1.5 sm:p-2 transition hover:bg-emerald-50 hover:text-emerald-500"
           >
-            <FiShare />
+            <FiShare className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           </button>
         </div>
       </CardFooter>

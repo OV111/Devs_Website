@@ -1,10 +1,12 @@
 import Busboy from "busboy";
+import { ObjectId } from "mongodb";
 import { uploadImage } from "../utils/uploadImage.js";
 import {
   createBlogService,
   getBlogsService,
   getBlogBySlugService,
   getBlogByIdService,
+  getUserBlogsService,
 } from "../services/blogService.js";
 
 export const createBlog = async (req, res) => {
@@ -72,6 +74,25 @@ export const getBlogById = async (req, res) => {
     res.status(404).json({
       success: false,
       message: err.message || "Blog not found",
+    });
+  }
+};
+
+export const getUserBlogs = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    if (!ObjectId.isValid(userId)) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Bad Request, invalid user id" });
+    }
+    const db = req.app.locals.db;
+    const blogs = await getUserBlogsService(db, req.params.userId);
+    res.json({ success: true, data: blogs });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message || "Failed to fetch user's blogs",
     });
   }
 };

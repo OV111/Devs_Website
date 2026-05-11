@@ -5,13 +5,22 @@ import XIcon from "@mui/icons-material/X";
 import LoadingSuspense from "../components/feedback/LoadingSuspense";
 import SideBar from "./My-Profile/components/SideBar";
 import useProfileStore from "@/stores/useProfileStore";
+import BlogCard from "@/components/blog/BlogCard";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const MyProfile = () => {
   const navigate = useNavigate();
-  const { user, stats, isLoading, fetchProfile, updateStats } =
-    useProfileStore();
+  const {
+    user,
+    stats,
+    blogs,
+    isLoading,
+    isBlogsLoading,
+    fetchProfile,
+    updateStats,
+    fetchUserBlogs,
+  } = useProfileStore();
 
   const [isSideBarOpened, setIsSideBarOpened] = useState(
     window.innerWidth >= 1024,
@@ -46,6 +55,7 @@ const MyProfile = () => {
   useEffect(() => {
     if (!stats?.userId) return;
     isActive(stats.userId);
+    fetchUserBlogs(stats.userId);
   }, [stats?.userId]);
 
   useEffect(() => {
@@ -74,8 +84,10 @@ const MyProfile = () => {
         <div className="relative">
           <img
             src={
-              stats?.bannerImage?.replace("/upload/", "/upload/w_1200,h_280,c_fill,f_auto,q_auto/") ||
-              "src/assets/user_profile/User_Banner.png"
+              stats?.bannerImage?.replace(
+                "/upload/",
+                "/upload/w_1200,h_280,c_fill,f_auto,q_auto/",
+              ) || "src/assets/user_profile/User_Banner.png"
             }
             alt="Banner"
             className="w-full h-40 sm:h-56 object-cover z-0"
@@ -85,7 +97,10 @@ const MyProfile = () => {
             <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden border-4 border-white dark:border-gray-900 shadow-md">
               {stats?.profileImage ? (
                 <img
-                  src={stats.profileImage.replace("/upload/", "/upload/w_112,h_112,c_fill,f_auto,q_auto/")}
+                  src={stats.profileImage.replace(
+                    "/upload/",
+                    "/upload/w_112,h_112,c_fill,f_auto,q_auto/",
+                  )}
                   alt="User"
                   className="w-full h-full object-cover"
                 />
@@ -161,12 +176,31 @@ const MyProfile = () => {
           </div>
 
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4].map((i) => (
-              <div
-                key={i}
-                className="h-40 rounded-xl bg-gray-300 animate-pulse dark:bg-gray-800"
-              />
-            ))}
+            {isBlogsLoading ? (
+              <div className="col-span-3 flex items-center justify-center py-20">
+                <p className="text-sm text-gray-400">Loading posts...</p>
+              </div>
+            ) : blogs.length === 0 ? (
+              <div className="col-span-3 flex flex-col items-center justify-center py-20 text-center">
+                <div className="mb-4 text-5xl">✍️</div>
+                <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+                  No posts yet
+                </h3>
+                <p className="mt-1 text-sm text-gray-400">
+                  You haven't published anything yet. Share your first post!
+                </p>
+                <Link
+                  to="add-blog"
+                  className="mt-5 rounded-xl bg-violet-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-violet-500"
+                >
+                  Write a post
+                </Link>
+              </div>
+            ) : (
+              blogs.map((blog) => (
+                <BlogCard key={String(blog._id)} card={blog} />
+              ))
+            )}
           </div>
         </div>
       </div>
