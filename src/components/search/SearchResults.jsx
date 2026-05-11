@@ -20,7 +20,9 @@ export default function SearchResults({ query = "", onSelect, boundaryRef }) {
       }
 
       setIsLoading(true);
-      const userResults = auth ? await fetchUserData(normalizedQuery, auth) : [];
+      const userResults = auth
+        ? await fetchUserData(normalizedQuery, auth)
+        : [];
       const categoryResults = await fetchCategoryData(normalizedQuery);
 
       if (!ignore) {

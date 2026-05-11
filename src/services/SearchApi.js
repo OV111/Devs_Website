@@ -52,29 +52,21 @@ export const fetchUserData = async (query, isAuthenticated = false) => {
 };
 
 export const fetchCategoryData = async (query) => {
-  const trimmedQuery = query?.trim() || "";
+  const trimmedQuery = query?.trim();
   if (!trimmedQuery) return [];
 
   try {
-    const request = await fetch(
+    const res = await fetch(
       `${API_BASE_URL}/search/categories?q=${encodeURIComponent(trimmedQuery)}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
     );
 
-    const response = await request.json();
-    if (!request.ok) {
-      console.log("Search API error:", response);
-      return filterLocalCategories(trimmedQuery);
-    }
+    const data = await res.json();
 
-    return response.results ?? [];
+    if (!res.ok) return [];
+
+    return data.results ?? [];
   } catch (err) {
     console.log("Search API error:", err);
-    return filterLocalCategories(trimmedQuery);
+    return [];
   }
 };

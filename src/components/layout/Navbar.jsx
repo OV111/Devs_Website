@@ -2,6 +2,7 @@ import React, { useState, useEffect, lazy, Suspense } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import useAuthStore from "../../stores/useAuthStore";
 import useThemeStore from "../../stores/useThemeStore";
+import SearchResults from "../search/SearchResults";
 import SearchBar from "../search/SearchBar";
 import { ChevronDown, LogOut, Sun, Moon, Menu, X } from "lucide-react";
 import { CATEGORY_OPTIONS } from "../../../constants/Categories";
@@ -11,7 +12,7 @@ import {
   LIBS_OPTIONS,
 } from "../../../constants/Navbar";
 import useProfileStore from "@/stores/useProfileStore";
-const SearchResults = lazy(() => import("../search/SearchResults"));
+// const SearchResults = lazy(() => import("../search/SearchResults"));
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -32,8 +33,8 @@ const Navbar = () => {
   const showSearch = pathname !== "/";
 
   useEffect(() => {
-  setOpenDropdown(null);
-}, [auth]);
+    setOpenDropdown(null);
+  }, [auth]);
 
   useEffect(() => {
     if (!auth) {
