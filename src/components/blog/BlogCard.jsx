@@ -50,10 +50,10 @@ const normalizePost = (post) => {
   const authorObj =
     post.author && typeof post.author === "object" ? post.author : {};
 
-  const firstName = authorObj.firstName ?? null;
-  const lastName = authorObj.lastName ?? null;
-  const userName = authorObj.userName ?? null;
-  const pictures = authorObj.pictures ?? null;
+  const firstName = authorObj.firstName ?? post.firstName ?? null;
+  const lastName = authorObj.lastName ?? post.lastName ?? null;
+  const userName = authorObj.userName ?? post.userName ?? post.username ?? null;
+  const pictures = authorObj.pictures ?? post.pictures ?? null;
   return {
     id: prefixedId,
     rawId,
