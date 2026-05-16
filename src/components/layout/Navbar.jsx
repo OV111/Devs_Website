@@ -111,13 +111,13 @@ const Navbar = () => {
   );
 
   const CategoryList = ({ onClose }) => (
-    <ul className="absolute  top-full mt-0 left-0 w-40 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 py-0 z-4">
+    <ul className="absolute top-full mt-0 left-0 w-40 overflow-hidden rounded-md bg-white shadow-lg shadow-black/5 dark:bg-gray-900 dark:shadow-black/30 py-0 z-4">
       {CATEGORY_OPTIONS.map(({ title, slug }) => (
         <li key={slug}>
           <NavLink
             to={`/categories/${slug}`}
             onClick={onClose}
-            className="flex items-center px-4 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition"
+            className="flex items-center px-4 py-2 text-sm lg:text-sm text-gray-700 dark:text-gray-200 hover:bg-purple-50 hover:text-purple-700 dark:hover:bg-purple-950/40 dark:hover:text-purple-300 transition"
           >
             {title}
           </NavLink>
@@ -127,13 +127,13 @@ const Navbar = () => {
   );
 
   const LibsList = ({ onClose }) => (
-    <ul className="absolute top-full left-0 w-30 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 py-0 z-4">
+    <ul className="absolute top-full left-0 w-30 overflow-hidden rounded-md bg-white shadow-lg shadow-black/5 dark:bg-gray-900 dark:shadow-black/30 py-0 z-4">
       {LIBS_OPTIONS.map(({ title, slug }) => (
         <li key={slug}>
           <NavLink
             to={`/coding-libs/${slug}`}
             onClick={onClose}
-            className="flex items-center px-4 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition"
+            className="flex items-center px-4 py-2 text-sm lg:text-sm text-gray-700 dark:text-gray-200 hover:bg-purple-50 hover:text-purple-700 dark:hover:bg-purple-950/40 dark:hover:text-purple-300 transition"
           >
             {title}
           </NavLink>
@@ -211,7 +211,7 @@ const Navbar = () => {
               </button>
 
               {openDropdown === "avatar" && (
-                <div className="absolute right-0 top-full mt-0 w-52 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 py-0 z-4">
+                <div className="absolute right-0 top-full mt-0 w-52 overflow-hidden rounded-md bg-white shadow-lg shadow-black/5 dark:bg-gray-900 dark:shadow-black/30 py-0 z-4">
                   <div className="flex items-center gap-3 px-4 py-2 border-b border-gray-100 dark:border-gray-700">
                     <AvatarImage inDropdown />
                     <div className="min-w-0">
@@ -231,7 +231,7 @@ const Navbar = () => {
                       key={to}
                       to={to}
                       onClick={closeMenu}
-                      className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition"
+                      className="flex items-center gap-3 px-4 py-2 text-sm lg:text-sm text-gray-700 dark:text-gray-200 hover:bg-purple-50 hover:text-purple-700 dark:hover:bg-purple-950/40 dark:hover:text-purple-300 transition"
                     >
                       <Icon size={15} />
                       {label}
@@ -258,7 +258,7 @@ const Navbar = () => {
 
                   <button
                     onClick={handleLogout}
-                    className="flex items-center gap-3 w-full px-4 py-2 text-sm rounded-b-lg text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-gray-700 transition cursor-pointer"
+                    className="flex items-center gap-3 w-full px-4 py-2 text-sm lg:text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition cursor-pointer"
                   >
                     <LogOut size={15} />
                     Logout

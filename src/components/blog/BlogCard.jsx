@@ -140,7 +140,7 @@ const BlogCard = ({ card }) => {
                 _displayPicture: auth ? (post.pictures ?? null) : null,
               },
             }}
-            className="shrink-0 rounded-full bg-violet-500/90 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-violet-400 dark:bg-violet-600 dark:hover:bg-violet-500"
+            className="shrink-0 rounded-full bg-purple-600 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-violet-400 dark:bg-purple-600 dark:hover:bg-violet-500"
           >
             Read More
           </Link>

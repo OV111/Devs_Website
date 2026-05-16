@@ -1,6 +1,7 @@
 // ! For now the posts default is not fixable with read-more but i will fix in db
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { DynamicIslandTOC } from "@/components/ui/dynamic-island-toc";
 import { FaRegHeart, FaRegComment } from "react-icons/fa6";
 import { FiShare } from "react-icons/fi";
 import useAuthStore from "../../stores/useAuthStore";
@@ -182,6 +183,7 @@ const ReadMore = () => {
   const likes = Array.isArray(post.likes) ? post.likes.length : post.likes || 0;
 
   return (
+    <DynamicIslandTOC>
     <main className="mx-auto max-w-5xl px-4 pb-20 pt-10">
       <button
         onClick={() => navigate(-1)}
@@ -346,6 +348,7 @@ const ReadMore = () => {
         </aside>
       </div>
     </main>
+    </DynamicIslandTOC>
   );
 };
 
