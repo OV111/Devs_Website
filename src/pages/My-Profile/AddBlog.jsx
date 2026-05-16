@@ -91,6 +91,7 @@ export default function AddBlog() {
     return Math.max(1, Math.ceil(words / 200));
   }, [fields.content]);
 
+
   const suggestedTags = useMemo(() => {
     const text =
       `${fields.title} ${fields.description} ${fields.content}`.toLowerCase();
