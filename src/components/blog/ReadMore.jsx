@@ -1,6 +1,7 @@
 // ! For now the posts default is not fixable with read-more but i will fix in db
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
 import { DynamicIslandTOC } from "@/components/ui/dynamic-island-toc";
 import { FaRegHeart, FaRegComment } from "react-icons/fa6";
 import { FiShare } from "react-icons/fi";
@@ -183,7 +184,7 @@ const ReadMore = () => {
   const likes = Array.isArray(post.likes) ? post.likes.length : post.likes || 0;
 
   return (
-    <DynamicIslandTOC>
+    <DynamicIslandTOC key={id}>
     <main className="mx-auto max-w-5xl px-4 pb-20 pt-10">
       <button
         onClick={() => navigate(-1)}
@@ -248,8 +249,8 @@ const ReadMore = () => {
           <p className="mb-8 border-l-4 border-violet-500 pl-5 font-serif text-lg italic leading-relaxed text-slate-500 dark:text-slate-400">
             {post.description}
           </p>
-          <div className="space-y-4 text-[15px] leading-[1.85] text-slate-700 dark:text-slate-300">
-            <p>{post.content}</p>
+          <div className="space-y-4 text-[15px] leading-[1.85] text-slate-700 dark:text-slate-300 prose prose-slate dark:prose-invert max-w-none prose-headings:font-serif prose-headings:text-slate-900 dark:prose-headings:text-white prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg prose-p:leading-relaxed prose-code:text-violet-600 dark:prose-code:text-violet-400 prose-pre:bg-slate-900 prose-pre:text-slate-100">
+            <ReactMarkdown>{post.content}</ReactMarkdown>
           </div>
 
           {tags.length > 0 && (
