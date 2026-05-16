@@ -1,61 +1,20 @@
 import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Search, X, ChevronDown, Check } from "lucide-react";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import useThemeStore from "@/stores/useThemeStore";
+import LoadingSuspense from "@/components/feedback/LoadingSuspense";
+import { BlogCardSkeletonGrid } from "@/components/blog/BlogCardSkeleton";
+import {
+  FILTER_TABS,
+  SORT_OPTIONS,
+  DIFFICULTIES,
+  READ_TIMES,
+} from "../../../constants/Blogs";
 
 const BlogCard = lazy(() => import("@/components/blog/BlogCard"));
 const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
-const FILTER_TABS = [
-  "All",
-  "Latest",
-  "Popular",
-  "Frontend",
-  "Backend",
-  "DevOps",
-  "AI / ML",
-];
-const SORT_OPTIONS = ["Newest", "Oldest", "Most Viewed"];
-const DIFFICULTIES = ["Beginner", "Intermediate", "Advanced"];
-const READ_TIMES = ["< 5 min", "5–10 min", "10+ min"];
-
-const BlogCardSkeleton = () => (
-  <div className="w-full overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
-    <Skeleton height={224} borderRadius={0} />
-    <div className="space-y-3 px-6 py-4">
-      <div className="flex justify-between">
-        <Skeleton width={80} height={12} />
-        <Skeleton width={60} height={12} />
-      </div>
-      <Skeleton height={20} width="85%" />
-      <Skeleton height={14} count={2} />
-    </div>
-    <div className="flex items-center justify-between border-t border-gray-100 px-6 py-3 dark:border-gray-800">
-      <div className="flex items-center gap-3">
-        <Skeleton circle width={40} height={40} />
-        <div>
-          <Skeleton width={90} height={13} />
-          <Skeleton width={60} height={11} style={{ marginTop: 4 }} />
-        </div>
-      </div>
-      <div className="flex gap-1">
-        <Skeleton circle width={28} height={28} />
-        <Skeleton circle width={28} height={28} />
-        <Skeleton circle width={28} height={28} />
-      </div>
-    </div>
-  </div>
-);
-
-const BlogCardSkeletonGrid = () => (
-  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-    {Array.from({ length: 6 }).map((_, i) => (
-      <BlogCardSkeleton key={i} />
-    ))}
-  </div>
-);
 
 const Blogs = () => {
   const { theme } = useThemeStore();
@@ -80,7 +39,6 @@ const Blogs = () => {
   const openMenu = (name) => setOpenDropdown(name);
   const closeMenu = () => setOpenDropdown(null);
 
-  // Auto-focus search input when it opens
   useEffect(() => {
     if (searchOpen) searchInputRef.current?.focus();
   }, [searchOpen]);
@@ -96,8 +54,7 @@ const Blogs = () => {
         setBlogs(data.data);
         setPagination(data.pagination);
       }
-    } catch (error) {
-      console.log(error);
+    } catch {
     } finally {
       setLoading(false);
     }
@@ -126,16 +83,13 @@ const Blogs = () => {
 
   return (
     <div className="mx-auto max-w-7xl px-4 pb-20 pt-8 sm:px-6 lg:px-6">
-      {/* ── Filter Toolbar ── */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35, ease: "easeOut" }}
         className="mb-3 flex flex-col gap-3"
       >
-        {/* Row 1: tabs + actions */}
         <div className="flex items-center justify-between gap-3">
-          {/* Category tabs */}
           <div className="overflow-x-auto pb-1 sm:pb-0">
             <ul className="flex w-max gap-1 sm:w-auto sm:flex-wrap sm:gap-2">
               {FILTER_TABS.map((tab) => (
@@ -156,9 +110,7 @@ const Blogs = () => {
             </ul>
           </div>
 
-          {/* Right actions: search expands left + search icon + sort dropdown */}
           <div className="flex shrink-0 items-center gap-2">
-            {/* Animated search input — expands to the left of the button */}
             <AnimatePresence>
               {searchOpen && (
                 <motion.div
@@ -192,7 +144,6 @@ const Blogs = () => {
               )}
             </AnimatePresence>
 
-            {/* Search icon button */}
             <button
               type="button"
               onClick={() => setSearchOpen((v) => !v)}
@@ -206,7 +157,6 @@ const Blogs = () => {
               <Search className="h-4 w-4" />
             </button>
 
-            {/* Level dropdown */}
             <div
               className="relative"
               onMouseEnter={() => openMenu("level")}
@@ -257,7 +207,6 @@ const Blogs = () => {
               </AnimatePresence>
             </div>
 
-            {/* Time dropdown */}
             <div
               className="relative"
               onMouseEnter={() => openMenu("time")}
@@ -307,7 +256,6 @@ const Blogs = () => {
               </AnimatePresence>
             </div>
 
-            {/* Sort dropdown */}
             <div
               className="relative"
               onMouseEnter={() => openMenu("sort")}
@@ -360,14 +308,15 @@ const Blogs = () => {
         </div>
       </motion.div>
 
-      {/* ── Blog Posts Grid ── */}
       <div className="mt-5">
         <SkeletonTheme
           baseColor={skeletonBaseColor}
           highlightColor={skeletonHighlightColor}
         >
           <Suspense fallback={<BlogCardSkeletonGrid />}>
-            {loading ? (
+            {loading && blogs.length === 0 ? (
+              <LoadingSuspense />
+            ) : loading ? (
               <BlogCardSkeletonGrid />
             ) : (
               <AnimatePresence mode="wait">
@@ -400,7 +349,6 @@ const Blogs = () => {
         </SkeletonTheme>
       </div>
 
-      {/* ── Pagination ── */}
       {totalPages > 1 && (
         <motion.div
           initial={{ opacity: 0 }}
