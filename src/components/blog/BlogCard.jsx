@@ -84,7 +84,6 @@ const BlogCard = ({ card }) => {
   const { auth } = useAuthStore();
 
   const post = normalizePost(card);
-  console.log(post);
 
   const fallbackSeed = String(post.rawId ?? post.title ?? "");
   const fallbackIndex =
