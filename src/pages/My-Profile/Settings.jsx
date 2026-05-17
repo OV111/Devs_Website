@@ -122,7 +122,7 @@ const Settings = () => {
 
         <button
             onClick={SaveChanges}
-            className="w-40 cursor-pointer rounded-lg bg-fuchsia-600 px-4 py-2 text-sm font-semibold text-white transition duration-300 hover:bg-fuchsia-700 dark:bg-fuchsia-500 dark:hover:bg-fuchsia-600"
+            className="flex items-center gap-1.5 rounded-lg bg-fuchsia-600 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-fuchsia-700 disabled:opacity-50"
             >
             Save Changes
           </button>

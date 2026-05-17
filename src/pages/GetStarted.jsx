@@ -138,7 +138,7 @@ const GetStarted = () => {
   return (
     <React.Fragment>
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="flex min-h-screen justify-end">
+      <div className="flex min-h-screen justify-center">
         <div className="flex min-h-screen w-full lg:w-1/2 items-center justify-center px-4 py-8 sm:px-6 sm:py-10 md:px-8">
           <div className="w-full max-w-xl rounded-2xl border border-violet-100 bg-white p-4 dark:border-zinc-800 dark:bg-gray-950 sm:p-6 md:p-8">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8 text-purple-700 dark:text-purple-600">

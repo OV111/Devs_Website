@@ -8,7 +8,7 @@ import {
 } from "../ui/card";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaRegBookmark, FaRegComment, FaRegHeart, FaHeart } from "react-icons/fa6";
+import { FaRegBookmark, FaBookmark, FaRegComment, FaRegHeart, FaHeart } from "react-icons/fa6";
 import { FiShare } from "react-icons/fi";
 import toast from "react-hot-toast";
 import useAuthStore from "../../stores/useAuthStore";
@@ -97,7 +97,7 @@ const normalizePost = (post) => {
   };
 };
 
-const BlogCard = ({ card }) => {
+const BlogCard = ({ card, initialSaved = false }) => {
   const { auth } = useAuthStore();
 
   const post = normalizePost(card);
@@ -112,6 +112,8 @@ const BlogCard = ({ card }) => {
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(initialLikes);
   const [likeLoading, setLikeLoading] = useState(false);
+  const [saved, setSaved] = useState(initialSaved);
+  const [saveLoading, setSaveLoading] = useState(false);
 
   const handleLike = async () => {
     if (!auth || post.isDefault) return;
@@ -139,6 +141,26 @@ const BlogCard = ({ card }) => {
     }
   };
 
+  const handleSave = async () => {
+    if (!auth || post.isDefault || saveLoading) return;
+    setSaved((prev) => !prev);
+    setSaveLoading(true);
+    try {
+      const res = await fetch(`${API_BASE_URL}/blogs/${post.rawId}/favourite`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${localStorage.getItem("JWT")}` },
+      });
+      const data = await res.json();
+      if (!data.success) throw new Error();
+      setSaved(data.saved);
+    } catch {
+      setSaved((prev) => !prev);
+      toast.error("Failed to save post");
+    } finally {
+      setSaveLoading(false);
+    }
+  };
+
   const tags = post.tags;
 
   return (
@@ -149,10 +171,13 @@ const BlogCard = ({ card }) => {
           alt={post.title}
           className="h-full w-full object-cover"
         />
-        <button className="absolute right-4 top-4 cursor-pointer rounded-full bg-white/95 p-2 font-medium text-slate-700 shadow-sm transition-colors duration-200 hover:bg-violet-600 hover:text-white dark:bg-slate-800/90 dark:text-slate-200">
-          <FaRegBookmark
-            className={`${auth ? "cursor-pointer" : "cursor-not-allowed"}`}
-          />
+        <button
+          type="button"
+          onClick={handleSave}
+          disabled={!auth || post.isDefault || saveLoading}
+          className={`absolute right-4 top-4 rounded-full bg-white/95 p-2 font-medium shadow-sm transition-colors duration-200 hover:bg-violet-600 hover:text-white dark:bg-slate-800/90 dark:text-slate-200 ${!auth || post.isDefault ? "cursor-not-allowed text-slate-400" : "cursor-pointer text-slate-700"} ${saved ? "text-violet-600" : ""}`}
+        >
+          {saved ? <FaBookmark /> : <FaRegBookmark />}
         </button>
         <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-3">
           <div className="flex max-w-[20rem] flex-wrap gap-1.5 overflow-hidden">

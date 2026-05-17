@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef, lazy, Suspense } from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "motion/react";
 import { Search, X, ChevronDown, Check } from "lucide-react";
 import { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import useThemeStore from "@/stores/useThemeStore";
+import useAuthStore from "@/stores/useAuthStore";
 import LoadingSuspense from "@/components/feedback/LoadingSuspense";
 import { BlogCardSkeletonGrid } from "@/components/blog/BlogCardSkeleton";
 import {
@@ -18,6 +20,8 @@ const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Blogs = () => {
   const { theme } = useThemeStore();
+  const { auth } = useAuthStore();
+  const [savedIds, setSavedIds] = useState(new Set());
   const isDarkMode = theme === "dark";
   const skeletonBaseColor = isDarkMode ? "#1f2937" : "#ebebeb";
   const skeletonHighlightColor = isDarkMode ? "#374151" : "#f5f5f5";
@@ -55,6 +59,7 @@ const Blogs = () => {
         setPagination(data.pagination);
       }
     } catch {
+      // network error - ignore
     } finally {
       setLoading(false);
     }
@@ -63,6 +68,16 @@ const Blogs = () => {
   useEffect(() => {
     fetchBlogs();
   }, [page]);
+
+  useEffect(() => {
+    if (!auth) return;
+    fetch(`${VITE_API_BASE_URL}/blogs/saved-ids`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("JWT")}` },
+    })
+      .then((r) => r.json())
+      .then((data) => { if (data.success) setSavedIds(new Set(data.ids)); })
+      .catch(() => {});
+  }, [auth]);
 
   const filteredBlogs = searchQuery
     ? blogs.filter((b) =>
@@ -344,7 +359,7 @@ const Blogs = () => {
                         ease: "easeOut",
                       }}
                     >
-                      <BlogCard card={blog} />
+                      <BlogCard card={blog} initialSaved={savedIds.has(String(blog._id))} />
                     </motion.div>
                   ))}
                 </motion.div>
