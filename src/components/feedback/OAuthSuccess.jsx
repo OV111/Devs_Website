@@ -9,12 +9,13 @@ const OAuthSuccess = () => {
 
   useEffect(() => {
     const token = searchParams.get("token");
+    const linked = searchParams.get("linked");
 
     if (token) {
-      login(token); 
-      navigate("/");
+      login(token);
+      navigate(linked ? "/my-profile/connected-accounts" : "/");
     } else {
-      navigate("/login"); 
+      navigate("/get-started");
     }
   }, []);
 

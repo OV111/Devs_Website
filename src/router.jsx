@@ -22,6 +22,7 @@ const AddBlog = lazy(() => import("./pages/My-Profile/AddBlog"));
 const Chats = lazy(() => import("./pages/My-Profile/chat/Chats"));
 const Notifications = lazy(() => import("./pages/My-Profile/Notifications"));
 const Settings = lazy(() => import("./pages/My-Profile/Settings"));
+const ConnectedAccounts = lazy(() => import("./pages/My-Profile/ConnectedAccounts"));
 
 const Blogs = lazy(() => import("./features/Blogs/Blogs"));
 const RoadmapPage = lazy(() => import("./features/Roadmap/RoadmapPage"));
@@ -103,6 +104,7 @@ const router = createBrowserRouter([
               { path: "chats", element: <Chats /> },
               { path: "notifications", element: <Notifications /> },
               { path: "favourites", element: <Favorites /> },
+              { path: "connected-accounts", element: <ConnectedAccounts /> },
             ],
           },
         ],

@@ -1,7 +1,8 @@
 import process from "node:process";
 import bcrypt from "bcrypt";
+import { ObjectId } from "mongodb";
 import connectDB from "../config/db.js";
-import { createToken } from "../utils/jwtToken.js";
+import { createToken, verifyToken } from "../utils/jwtToken.js";
 import { OAuth2Client } from "google-auth-library";
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
@@ -195,9 +196,34 @@ const githubRedirect = (req, res) => {
   res.redirect(url);
 };
 
+const githubLinkRedirect = (req, res) => {
+  const { token } = req.query;
+  const state = Buffer.from(token || "").toString("base64");
+  const url = `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&scope=user:email&state=${state}`;
+  res.redirect(url);
+};
+
+const githubDisconnect = async (req, res) => {
+  try {
+    const token = req.headers.authorization?.replace("Bearer ", "");
+    const verified = verifyToken(token);
+    if (!verified) return res.status(401).json({ message: "Unauthorized" });
+
+    const db = await connectDB();
+    const users = db.collection("users");
+    await users.updateOne(
+      { _id: new ObjectId(verified.id) },
+      { $unset: { githubId: "", githubLogin: "" } },
+    );
+    res.json({ message: "GitHub disconnected" });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
+
 const githubCallback = async (req, res) => {
   try {
-    const { code } = req.query;
+    const { code, state } = req.query;
     const tokenResponse = await fetch(
       "https://github.com/login/oauth/access_token",
       {
@@ -234,16 +260,37 @@ const githubCallback = async (req, res) => {
 
     const primaryEmail =
       emails.find((e) => e.primary && e.verified)?.email || null;
-    const { id: githubId, login } = userData;
+    const { id: githubId, login: githubLogin } = userData;
 
     const db = await connectDB();
     const users = db.collection("users");
     const usersStats = db.collection("usersStats");
+
+    // Link mode: state is a base64-encoded JWT from an already-logged-in user
+    if (state) {
+      try {
+        const existingToken = Buffer.from(state, "base64").toString();
+        const verified = verifyToken(existingToken);
+        if (verified) {
+          await users.updateOne(
+            { _id: new ObjectId(verified.id) },
+            { $set: { githubId, githubLogin } },
+          );
+          return res.redirect(
+            `${process.env.FRONTEND_URL}/oauth-success?token=${existingToken}&linked=github`,
+          );
+        }
+      } catch {
+        // fall through to sign-in mode
+      }
+    }
+
+    // Sign-in mode
     let user = await users.findOne({
       $or: [{ githubId }, { email: primaryEmail }],
     });
     if (!user) {
-      const baseUsername = sanitizeUsername(login) || "dev";
+      const baseUsername = sanitizeUsername(githubLogin) || "dev";
       let finalUsername = `${baseUsername}_${uniqueSuffix()}`;
       while (await users.findOne({ username: finalUsername })) {
         finalUsername = `${baseUsername}_${uniqueSuffix()}`;
@@ -252,6 +299,7 @@ const githubCallback = async (req, res) => {
         username: finalUsername,
         email: primaryEmail,
         githubId,
+        githubLogin,
         provider: "github",
         password: null,
       });
@@ -266,4 +314,4 @@ res.redirect(`${process.env.FRONTEND_URL}/oauth-failure`);
   }
 };
 
-export { signUp, login, googleAuth, githubRedirect, githubCallback };
+export { signUp, login, googleAuth, githubRedirect, githubLinkRedirect, githubDisconnect, githubCallback };

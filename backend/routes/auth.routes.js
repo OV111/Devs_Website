@@ -4,6 +4,8 @@ import {
   login,
   googleAuth,
   githubRedirect,
+  githubLinkRedirect,
+  githubDisconnect,
   githubCallback,
 } from "../controllers/authController.js";
 import { verifyToken } from "../utils/jwtToken.js";
@@ -110,6 +112,8 @@ router.post("/google/auth", async (req, res) => {
 });
 
 router.get("/auth/github", githubRedirect);
+router.get("/auth/github/link", githubLinkRedirect);
+router.delete("/auth/github/disconnect", githubDisconnect);
 router.get("/auth/github/callback", githubCallback);
 
 export default router;

@@ -66,7 +66,7 @@ export const sidebarArr = [
     section: "Privacy",
     items: [
       {
-        to: "/",
+        to: "/my-profile/connected-accounts",
         icon: <LinkIcon sx={{ fontSize: 22, color: "currentColor" }} />,
         label: "Connected Accounts",
       },
