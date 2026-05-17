@@ -225,6 +225,27 @@ export const getBlogBySlugService = async (db, slug) => {
   return blog;
 };
 
+export const toggleLikeService = async (db, blogId, userId) => {
+  const blogs = db.collection("blogs");
+  const id = new ObjectId(blogId);
+  const uid = new ObjectId(userId);
+
+  const blog = await blogs.findOne({ _id: id }, { projection: { likes: 1 } });
+  if (!blog) throw new Error("Blog not found");
+
+  const alreadyLiked = blog.likes.some((l) => l.toString() === uid.toString());
+
+  await blogs.updateOne(
+    { _id: id },
+    alreadyLiked ? { $pull: { likes: uid } } : { $addToSet: { likes: uid } },
+  );
+
+  return {
+    liked: !alreadyLiked,
+    likesCount: alreadyLiked ? blog.likes.length - 1 : blog.likes.length + 1,
+  };
+};
+
 export const getUserBlogsService = async (db, userId) => {
   const blogsCollection = db.collection("blogs");
   const blogs = await blogsCollection

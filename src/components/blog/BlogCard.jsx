@@ -6,10 +6,14 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaRegBookmark, FaRegComment, FaRegHeart } from "react-icons/fa6";
+import { FaRegBookmark, FaRegComment, FaRegHeart, FaHeart } from "react-icons/fa6";
 import { FiShare } from "react-icons/fi";
+import toast from "react-hot-toast";
 import useAuthStore from "../../stores/useAuthStore";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 import fs1React    from "../../assets/blog-pics/fs1React.jpg";
 import buildingApi from "../../assets/blog-pics/BuildingRestApi.png";
@@ -104,6 +108,37 @@ const BlogCard = ({ card }) => {
   const userName = post.userName || "@username";
   const authorInitial = authorName.charAt(0).toUpperCase();
 
+  const initialLikes = Array.isArray(card.likes) ? card.likes.length : 0;
+  const [liked, setLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(initialLikes);
+  const [likeLoading, setLikeLoading] = useState(false);
+
+  const handleLike = async () => {
+    if (!auth || post.isDefault) return;
+    if (likeLoading) return;
+
+    setLiked((prev) => !prev);
+    setLikesCount((prev) => (liked ? prev - 1 : prev + 1));
+    setLikeLoading(true);
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/blogs/${post.rawId}/like`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${localStorage.getItem("JWT")}` },
+      });
+      const data = await res.json();
+      if (!data.success) throw new Error();
+      setLiked(data.liked);
+      setLikesCount(data.likesCount);
+    } catch {
+      setLiked((prev) => !prev);
+      setLikesCount((prev) => (liked ? prev + 1 : prev - 1));
+      toast.error("Failed to like post");
+    } finally {
+      setLikeLoading(false);
+    }
+  };
+
   const tags = post.tags;
 
   return (
@@ -195,9 +230,18 @@ const BlogCard = ({ card }) => {
         <div className="flex items-center gap-0.5 sm:gap-1 text-slate-400 dark:text-slate-500 shrink-0">
           <button
             type="button"
-            className={`rounded-full p-1.5 sm:p-2 ${auth ? "cursor-pointer" : "cursor-not-allowed"} transition hover:text-rose-500`}
+            onClick={handleLike}
+            disabled={!auth || post.isDefault || likeLoading}
+            className={`flex items-center gap-1 rounded-full p-1.5 sm:p-2 transition
+              ${!auth || post.isDefault ? "cursor-not-allowed" : "cursor-pointer hover:text-rose-500"}
+              ${liked ? "text-rose-500" : ""}
+            `}
           >
-            <FaRegHeart className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            {liked
+              ? <FaHeart className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              : <FaRegHeart className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            }
+            {likesCount > 0 && <span className="text-xs">{likesCount}</span>}
           </button>
           <button
             type="button"

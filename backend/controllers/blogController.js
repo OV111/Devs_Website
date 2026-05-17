@@ -7,6 +7,7 @@ import {
   getBlogBySlugService,
   getBlogByIdService,
   getUserBlogsService,
+  toggleLikeService,
 } from "../services/blogService.js";
 
 export const createBlog = async (req, res) => {
@@ -94,6 +95,20 @@ export const getUserBlogs = async (req, res) => {
       success: false,
       message: err.message || "Failed to fetch user's blogs",
     });
+  }
+};
+
+export const toggleLike = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!ObjectId.isValid(id))
+      return res.status(400).json({ success: false, message: "Invalid blog id" });
+
+    const db = req.app.locals.db;
+    const result = await toggleLikeService(db, id, req.user._id);
+    res.json({ success: true, ...result });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
