@@ -116,9 +116,9 @@ export default function AddBlog() {
 
       <div className="flex-1 overflow-auto">
         {/* Header */}
-        <div className="sticky top-0 z-1 flex items-center justify-between border-b border-gray-100 bg-gray-50 px-6 py-2.5 dark:border-gray-800 dark:bg-gray-950">
+        <div className="sticky top-0 flex items-center justify-between border-b border-gray-100 bg-gray-50 px-6 py-[6px] dark:border-gray-800 dark:bg-gray-950">
           <div>
-            <h1 className="text-base font-semibold text-gray-900 dark:text-gray-100">
+            <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 lg:text-2xl">
               New Post
             </h1>
             <p className="text-xs text-gray-400">{readTime} min read</p>

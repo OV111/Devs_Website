@@ -48,6 +48,7 @@ export const updateSettingsService = async (db, userId, fields, files) => {
   if (fields.linkedinLink !== undefined) statsUpdate.linkedinLink = fields.linkedinLink;
   if (fields.twitterLink !== undefined) statsUpdate.twitterLink = fields.twitterLink;
   if (fields.location !== undefined) statsUpdate.location = fields.location;
+  if (fields.timezone !== undefined) statsUpdate.timezone = fields.timezone;
   if (files.profileImage) statsUpdate.profileImage = files.profileImage;
   if (files.bannerImage) statsUpdate.bannerImage = files.bannerImage;
 
