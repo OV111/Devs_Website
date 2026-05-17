@@ -21,6 +21,34 @@ const getClientIp = (req) =>
     .split(",")[0]
     .trim();
 
+/**
+ * @openapi
+ * tags:
+ *   - name: Auth
+ *     description: Authentication and session management
+ */
+
+/**
+ * @openapi
+ * /accept-cookies:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Accept cookies consent
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               accepted:
+ *                 type: boolean
+ *     responses:
+ *       200:
+ *         description: Cookies accepted
+ *       400:
+ *         description: Bad request
+ */
 router.post("/accept-cookies", (req, res) => {
   const { accepted } = req.body;
   if (accepted) {
@@ -34,6 +62,38 @@ router.post("/accept-cookies", (req, res) => {
   res.status(400).json({ message: "Bad Request" });
 });
 
+/**
+ * @openapi
+ * /get-started:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Register a new user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [firstName, lastName, email, password]
+ *             properties:
+ *               firstName:
+ *                 type: string
+ *               lastName:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               password:
+ *                 type: string
+ *                 format: password
+ *     responses:
+ *       201:
+ *         description: User created successfully
+ *       409:
+ *         description: Email already in use
+ *       500:
+ *         description: Server error
+ */
 router.post("/get-started", async (req, res) => {
   try {
     const result = await signUp(req.body);
@@ -45,6 +105,34 @@ router.post("/get-started", async (req, res) => {
   }
 });
 
+/**
+ * @openapi
+ * /login:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Login with email and password
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [email, password]
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               password:
+ *                 type: string
+ *                 format: password
+ *     responses:
+ *       200:
+ *         description: Login successful, returns JWT token
+ *       401:
+ *         description: Invalid credentials
+ *       429:
+ *         description: Too many failed attempts
+ */
 router.post("/login", async (req, res) => {
   try {
     const ip = getClientIp(req);
@@ -76,6 +164,16 @@ router.post("/login", async (req, res) => {
   }
 });
 
+/**
+ * @openapi
+ * /log-out:
+ *   delete:
+ *     tags: [Auth]
+ *     summary: Logout and clear session cookie
+ *     responses:
+ *       200:
+ *         description: Logged out successfully
+ */
 router.delete("/log-out", (req, res) => {
   try {
     res.clearCookie("session", {
@@ -92,12 +190,53 @@ router.delete("/log-out", (req, res) => {
   }
 });
 
+/**
+ * @openapi
+ * /verify-token:
+ *   get:
+ *     tags: [Auth]
+ *     summary: Verify if a JWT token is valid
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Returns valid true/false
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 valid:
+ *                   type: boolean
+ */
 router.get("/verify-token", (req, res) => {
   const token = req.headers.authorization?.replace("Bearer ", "");
   const isValid = verifyToken(token);
   res.status(200).json({ valid: !!isValid });
 });
 
+/**
+ * @openapi
+ * /google/auth:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Authenticate with Google OAuth
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               credential:
+ *                 type: string
+ *                 description: Google ID token
+ *     responses:
+ *       200:
+ *         description: Authentication successful
+ *       500:
+ *         description: Google auth error
+ */
 router.post("/google/auth", async (req, res) => {
   try {
     const result = await googleAuth(req.body);
@@ -111,6 +250,37 @@ router.post("/google/auth", async (req, res) => {
   }
 });
 
+/**
+ * @openapi
+ * /auth/github:
+ *   get:
+ *     tags: [Auth]
+ *     summary: Redirect to GitHub OAuth
+ *     responses:
+ *       302:
+ *         description: Redirects to GitHub
+ * /auth/github/link:
+ *   get:
+ *     tags: [Auth]
+ *     summary: Link GitHub account to existing user
+ *     responses:
+ *       302:
+ *         description: Redirects to GitHub
+ * /auth/github/disconnect:
+ *   delete:
+ *     tags: [Auth]
+ *     summary: Disconnect GitHub from account
+ *     responses:
+ *       200:
+ *         description: GitHub disconnected
+ * /auth/github/callback:
+ *   get:
+ *     tags: [Auth]
+ *     summary: GitHub OAuth callback
+ *     responses:
+ *       302:
+ *         description: Redirects to frontend
+ */
 router.get("/auth/github", githubRedirect);
 router.get("/auth/github/link", githubLinkRedirect);
 router.delete("/auth/github/disconnect", githubDisconnect);
