@@ -22,7 +22,7 @@ export default function Docs() {
           📖 Docs
         </GradientText>
         <p className="mt-3 text-sm sm:text-base max-w-2xl mx-auto text-neutral-500 dark:text-neutral-400">
-          Official and community documentation for frameworks, languages, and tools.
+          Official and community documentation for languages, frameworks and tools.
         </p>
       </motion.div>
 
