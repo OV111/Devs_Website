@@ -255,5 +255,70 @@ export const getUserBlogsService = async (db, userId) => {
       ...authorLookup,
     ])
     .toArray();
-    return blogs;
+  return blogs;
+};
+
+export const getSavedIdsService = async (db, userId) => {
+  const favourites = db.collection("favouriteBlogs");
+  const docs = await favourites
+    .find({ userId: new ObjectId(userId) }, { projection: { blogId: 1 } })
+    .toArray();
+  return docs.map((d) => d.blogId.toString());
+};
+
+export const toggleFavouriteService = async (db, blogId, userId) => {
+  const favourites = db.collection("favouriteBlogs");
+  const bid = new ObjectId(blogId);
+  const uid = new ObjectId(userId);
+
+  const existing = await favourites.findOne({ userId: uid, blogId: bid });
+
+  if (existing) {
+    await favourites.deleteOne({ _id: existing._id });
+    return { saved: false };
+  } else {
+    await favourites.insertOne({
+      userId: uid,
+      blogId: bid,
+      savedAt: new Date(),
+    });
+    return { saved: true };
+  }
+};
+
+export const getFavouritesService = async (db, userId) => {
+  const favourites = db.collection("favouriteBlogs");
+  const uid = new ObjectId(userId);
+
+  const saved = await favourites
+    .aggregate([
+      { $match: { userId: uid } },
+      { $sort: { savedAt: -1 } },
+      {
+        $lookup: {
+          from: "blogs",
+          localField: "blogId",
+          foreignField: "_id",
+          as: "blog",
+        },
+      },
+      { $unwind: "$blog" },
+      { $match: { "blog.status": "published" } },
+      {
+        $lookup: {
+          from: "users",
+          localField: "blog.author",
+          foreignField: "_id",
+          as: "blog.author",
+          pipeline: [
+            { $project: { _id: 1, firstName: 1, lastName: 1, username: 1 } },
+          ],
+        },
+      },
+      { $unwind: "$blog.author" },
+      { $replaceRoot: { newRoot: "$blog" } },
+    ])
+    .toArray();
+
+  return saved;
 };

@@ -8,6 +8,9 @@ import {
   getBlogByIdService,
   getUserBlogsService,
   toggleLikeService,
+  toggleFavouriteService,
+  getFavouritesService,
+  getSavedIdsService,
 } from "../services/blogService.js";
 
 export const createBlog = async (req, res) => {
@@ -102,7 +105,9 @@ export const toggleLike = async (req, res) => {
   try {
     const { id } = req.params;
     if (!ObjectId.isValid(id))
-      return res.status(400).json({ success: false, message: "Invalid blog id" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid blog id" });
 
     const db = req.app.locals.db;
     const result = await toggleLikeService(db, id, req.user._id);
@@ -122,5 +127,41 @@ export const getBlogBySlug = async (req, res) => {
       success: false,
       message: err.message || "Blog not found",
     });
+  }
+};
+
+export const getSavedIds = async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const ids = await getSavedIdsService(db, req.user._id);
+    res.json({ success: true, ids });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+export const toggleFavourite = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!ObjectId.isValid(id))
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid blog id" });
+
+    const db = req.app.locals.db;
+    const result = await toggleFavouriteService(db, id, req.user._id);
+    res.json({ success: true, ...result });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+export const getFavourites = async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const data = await getFavouritesService(db, req.user._id);
+    res.json({ success: true, data });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
   }
 };
