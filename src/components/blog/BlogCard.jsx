@@ -11,30 +11,43 @@ import { FaRegBookmark, FaRegComment, FaRegHeart } from "react-icons/fa6";
 import { FiShare } from "react-icons/fi";
 import useAuthStore from "../../stores/useAuthStore";
 
-import JohnDoe from "../../assets/postsProfiles/JohnDoe.png";
-import AdaByte from "../../assets/postsProfiles/AdaByte.png";
+import fs1React    from "../../assets/blog-pics/fs1React.jpg";
+import buildingApi from "../../assets/blog-pics/BuildingRestApi.png";
+import nodeMongo   from "../../assets/blog-pics/nodejsmongodb.png";
+import authStrat   from "../../assets/blog-pics/AuthStrategiesBack.png";
+import caching     from "../../assets/blog-pics/caching.png";
+import scalable    from "../../assets/blog-pics/scalabledesign.png";
+
+import JohnDoe     from "../../assets/postsProfiles/JohnDoe.png";
+import AdaByte     from "../../assets/postsProfiles/AdaByte.png";
 import DmitryPetrov from "../../assets/postsProfiles/DmitryPetrov.png";
-import AliceKeyes from "../../assets/postsProfiles/AliceKeyes.png";
+import AliceKeyes  from "../../assets/postsProfiles/AliceKeyes.png";
 import WilliamChen from "../../assets/postsProfiles/WilliamChen.png";
 import GraceHopper from "../../assets/postsProfiles/GraceHopper.png";
 
+const blogImgMap = {
+  "fs1React.jpg":          fs1React,
+  "BuildingRestApi.png":   buildingApi,
+  "nodejsmongodb.png":     nodeMongo,
+  "AuthStrategiesBack.png":authStrat,
+  "caching.png":           caching,
+  "scalabledesign.png":    scalable,
+};
+
 const pictureMap = {
-  "JohnDoe.png": JohnDoe,
-  "AdaByte.png": AdaByte,
-  "DmitryPetrov.png": DmitryPetrov,
-  "AliceKeyes.png": AliceKeyes,
+  "JohnDoe.png":     JohnDoe,
+  "AdaByte.png":     AdaByte,
+  "DmitryPetrov.png":DmitryPetrov,
+  "AliceKeyes.png":  AliceKeyes,
   "WilliamChen.png": WilliamChen,
   "GraceHopper.png": GraceHopper,
 };
 
-const FictionalUsers = [
-  { name: "John Doe", userName: "@johndoe", pictures: JohnDoe },
-  { name: "Ada Byte", userName: "@adabyte", pictures: AdaByte },
-  { name: "Dmitry Petrov", userName: "@dmit_petrov", pictures: DmitryPetrov },
-  { name: "Alice Keyes", userName: "@alice_keys", pictures: AliceKeyes },
-  { name: "William Chen", userName: "@will_chen", pictures: WilliamChen },
-  { name: "Grace Hopper", userName: "@gracehopper", pictures: GraceHopper },
-];
+const resolveAsset = (url, map) => {
+  if (!url) return null;
+  if (url.startsWith("http")) return url;
+  return map[url.split("/").pop()] ?? null;
+};
 
 const normalizePost = (post) => {
   const isDefault = post.isDefault === true;
@@ -85,31 +98,19 @@ const BlogCard = ({ card }) => {
 
   const post = normalizePost(card);
 
-  const fallbackSeed = String(post.rawId ?? post.title ?? "");
-  const fallbackIndex =
-    [...fallbackSeed].reduce((sum, char) => sum + char.charCodeAt(0), 0) %
-    FictionalUsers.length;
-  const fallbackUser = FictionalUsers[fallbackIndex];
-
-  // ✅ If it's a Cloudinary URL use directly, otherwise try pictureMap, otherwise fallback
-  const resolvedPicture = auth
-    ? post.pictures?.startsWith("http")
-      ? post.pictures
-      : (pictureMap[post.pictures?.split("/").pop()] ?? fallbackUser.pictures)
-    : fallbackUser.pictures;
-
-  const authorName = auth
-    ? `${post.firstName ?? ""} ${post.lastName ?? ""}`.trim() || "Unknown User"
-    : fallbackUser.name;
-  const userName = auth ? post.userName || "@userName" : fallbackUser.userName;
+  const resolvedPicture = resolveAsset(post.pictures, pictureMap);
+  const resolvedCover   = resolveAsset(post.image, blogImgMap);
+  const authorName = `${post.firstName ?? ""} ${post.lastName ?? ""}`.trim() || "Unknown";
+  const userName = post.userName || "@username";
+  const authorInitial = authorName.charAt(0).toUpperCase();
 
   const tags = post.tags;
 
   return (
-    <Card className="w-full max-w-[400px] overflow-hidden rounded-2xl border-none bg-violet-50/40 dark:bg-slate-900">
+    <Card className="flex flex-col w-full max-w-[400px] min-h-[478px] overflow-hidden rounded-2xl border-none bg-violet-50/40 dark:bg-slate-900">
       <div className="relative h-56 border-b border-violet-200 bg-violet-200/60 dark:border-slate-700 dark:bg-slate-800">
         <img
-          src={post.image || null}
+          src={resolvedCover || null}
           alt={post.title}
           className="h-full w-full object-cover"
         />
@@ -158,11 +159,11 @@ const BlogCard = ({ card }) => {
             {post.readTime} read
           </CardDescription>
         </div>
-        <CardTitle className="overflow-hidden pb-3 text-xl leading-tight text-slate-900 dark:text-slate-100">
+        <CardTitle className="h-[50px] overflow-hidden pb-3 text-xl leading-tight text-slate-900 dark:text-slate-100">
           {post.title}
         </CardTitle>
       </CardHeader>
-      <CardContent className="px-6 pb-2 pt-0">
+      <CardContent className="flex-1 px-6 pb-2 pt-0">
         <p className="h-[72px] overflow-hidden text-sm leading-6 text-slate-600 dark:text-slate-300">
           {post.description}
         </p>
@@ -170,11 +171,17 @@ const BlogCard = ({ card }) => {
 
       <CardFooter className="items-center justify-between border-t border-violet-100 px-4 py-3 dark:border-slate-700 sm:px-6">
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-          <img
-            src={resolvedPicture}
-            alt={auth ? authorName : fallbackUser.name}
-            className="h-8 w-8 sm:h-10 sm:w-10 rounded-full shrink-0"
-          />
+          {resolvedPicture ? (
+            <img
+              src={resolvedPicture}
+              alt={authorName}
+              className="h-8 w-8 sm:h-10 sm:w-10 rounded-full shrink-0 object-cover"
+            />
+          ) : (
+            <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full shrink-0 bg-purple-100 dark:bg-purple-950 flex items-center justify-center text-purple-600 dark:text-purple-300 text-xs sm:text-sm font-bold">
+              {authorInitial}
+            </div>
+          )}
           <div className="flex flex-col min-w-0">
             <span className="h-5 overflow-x-hidden text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200 truncate max-w-[100px] sm:max-w-40">
               {authorName}
@@ -188,19 +195,19 @@ const BlogCard = ({ card }) => {
         <div className="flex items-center gap-0.5 sm:gap-1 text-slate-400 dark:text-slate-500 shrink-0">
           <button
             type="button"
-            className={`rounded-full p-1.5 sm:p-2 ${auth ? "cursor-pointer" : "cursor-not-allowed"} transition hover:bg-rose-50 hover:text-rose-500`}
+            className={`rounded-full p-1.5 sm:p-2 ${auth ? "cursor-pointer" : "cursor-not-allowed"} transition hover:text-rose-500`}
           >
             <FaRegHeart className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           </button>
           <button
             type="button"
-            className={`rounded-full p-1.5 sm:p-2 ${auth ? "cursor-pointer" : "cursor-not-allowed"} transition hover:bg-rose-50 hover:text-blue-500`}
+            className={`rounded-full p-1.5 sm:p-2 ${auth ? "cursor-pointer" : "cursor-not-allowed"} transition hover:text-blue-500`}
           >
             <FaRegComment className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           </button>
           <button
             type="button"
-            className="cursor-pointer rounded-full p-1.5 sm:p-2 transition hover:bg-emerald-50 hover:text-emerald-500"
+            className="cursor-pointer rounded-full p-1.5 sm:p-2 transition hover:text-emerald-500"
           >
             <FiShare className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           </button>

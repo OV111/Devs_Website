@@ -111,51 +111,56 @@ const Blogs = () => {
           </div>
 
           <div className="flex shrink-0 items-center gap-2">
-            <AnimatePresence>
-              {searchOpen && (
-                <motion.div
-                  initial={{ opacity: 0, width: 0 }}
-                  animate={{ opacity: 1, width: 300 }}
-                  exit={{ opacity: 0, width: 0 }}
-                  transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="overflow-hidden"
-                >
-                  <div className="flex items-center gap-2 rounded-md bg-white px-3 py-1 dark:border-gray-700 dark:bg-gray-900">
-                    <Search className="h-3 w-3 shrink-0 text-gray-400 dark:text-gray-500" />
-                    <input
-                      ref={searchInputRef}
-                      type="text"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="Search blogs..."
-                      className="min-w-0 flex-1 bg-transparent text-sm text-gray-800 placeholder-gray-400 outline-none dark:text-gray-100 dark:placeholder-gray-500"
-                    />
-                    {searchQuery && (
-                      <button
-                        type="button"
-                        onClick={() => setSearchQuery("")}
-                        className="shrink-0 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                      >
-                        <X className="h-3.5 w-3.5" />
-                      </button>
-                    )}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            <button
-              type="button"
-              onClick={() => setSearchOpen((v) => !v)}
-              aria-label="Toggle search"
-              className={`flex cursor-pointer items-center justify-center rounded-md px-2 py-1.5 transition-all duration-200 ${
-                searchOpen
-                  ? " bg-purple-600 text-white dark:border-purple-500"
-                  : " bg-gray-100 text-gray-500  hover:bg-purple-50 hover:text-purple-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-purple-950/40 dark:hover:text-purple-300"
-              }`}
+            <div
+              className="flex items-center gap-2"
+              onMouseEnter={() => setSearchOpen(true)}
+              onMouseLeave={() => { if (!searchQuery) setSearchOpen(false); }}
             >
-              <Search className="h-4 w-4" />
-            </button>
+              <AnimatePresence>
+                {searchOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, width: 0 }}
+                    animate={{ opacity: 1, width: 300 }}
+                    exit={{ opacity: 0, width: 0 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="flex items-center gap-2 rounded-md bg-white px-3 py-1 dark:border-gray-700 dark:bg-gray-900">
+                      <Search className="h-3 w-3 shrink-0 text-gray-400 dark:text-gray-500" />
+                      <input
+                        ref={searchInputRef}
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        placeholder="Search blogs..."
+                        className="min-w-0 flex-1 bg-transparent text-sm text-gray-800 placeholder-gray-400 outline-none dark:text-gray-100 dark:placeholder-gray-500"
+                      />
+                      {searchQuery && (
+                        <button
+                          type="button"
+                          onClick={() => setSearchQuery("")}
+                          className="shrink-0 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                        >
+                          <X className="h-3.5 w-3.5" />
+                        </button>
+                      )}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <button
+                type="button"
+                aria-label="Toggle search"
+                className={`flex cursor-pointer items-center justify-center rounded-md px-2 py-1.5 transition-all duration-200 ${
+                  searchOpen
+                    ? "bg-purple-600 text-white dark:border-purple-500"
+                    : "bg-gray-100 text-gray-500 hover:bg-purple-50 hover:text-purple-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-purple-950/40 dark:hover:text-purple-300"
+                }`}
+              >
+                <Search className="h-4 w-4" />
+              </button>
+            </div>
 
             <div
               className="relative"
