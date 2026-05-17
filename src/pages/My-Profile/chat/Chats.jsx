@@ -254,11 +254,11 @@ const Chats = () => {
             <div className="px-3 pt-5">
               <label
                 htmlFor="chat-search"
-                className="flex items-center gap-2 rounded-2xl border border-gray-200 bg-linear-to-r from-white to-gray-50 px-4 py-2 transition focus-within:border-purple-400 dark:border-gray-700 dark:from-gray-900 dark:to-gray-950"
+                className="flex items-center gap-2 rounded-2xl border border-gray-200 bg-gray-100/80 px-3 py-[3px] backdrop-blur transition focus-within:border-purple-400 dark:border-gray-700 dark:bg-gray-800/60"
               >
                 <SearchIcon
                   className="text-gray-400"
-                  sx={{ fontSize: "18px" }}
+                  sx={{ fontSize: "20px" }}
                 />
                 <input
                   id="chat-search"
