@@ -23,7 +23,8 @@
     "test:websocket": "vitest run --config config/vitest.websocket.config.js",
     "test:queue": "vitest run --config config/vitest.queue.config.js",
     "test:performance": "vitest run --config config/vitest.performance.config.js",
-    "test:security": "vitest run --config config/vitest.security.config.js"
+    "test:security": "vitest run --config config/vitest.security.config.js",
+    "prepare": "husky"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -69,11 +70,16 @@
     "react-router-dom": "^7.7.1",
     "react-simplemde-editor": "^5.2.0",
     "redis": "^5.11.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "tailwind-merge": "^3.5.0",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.182.0",
     "ws": "^8.19.0",
     "zustand": "^5.0.8"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx}": "eslint --fix"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.1",
@@ -89,6 +95,8 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "mongodb-memory-server": "^11.0.1",
     "nodemon": "^3.1.11",
     "postcss": "^8.5.6",
