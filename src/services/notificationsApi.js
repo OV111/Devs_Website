@@ -1,12 +1,10 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+import { API_BASE_URL, authHeaders } from "../../constants/api";
+
 export const getNotifications = async () => {
     try {
         const request = await fetch(`${API_BASE_URL}/my-profile/notifications`, {
             method: "GET",
-            headers: {
-                authorization: `Bearer ${localStorage.getItem("JWT")}`,
-                "Content-Type": "application/json",
-            }
+            headers: authHeaders(),
         })
         if (!request.ok) return null
         const response = await request.json();

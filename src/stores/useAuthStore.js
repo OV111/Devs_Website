@@ -1,5 +1,6 @@
 import { create } from "zustand";
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { API_BASE_URL, JWT_KEY, authHeaders } from "../../constants/api";
+
 const useAuthStore = create((set) => ({
   auth: false,
   isLoading: false,
@@ -8,13 +9,11 @@ const useAuthStore = create((set) => ({
       set({ isLoading: true });
       const request = await fetch(`${API_BASE_URL}/verify-token`, {
         method: "GET",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("JWT")}`,
-        },
+        headers: authHeaders(),
       });
       const response = await request.json();
-      if(!response.valid) {
-        localStorage.removeItem("JWT");
+      if (!response.valid) {
+        localStorage.removeItem(JWT_KEY);
       }
       set({ auth: response.valid });
     } catch {
@@ -24,11 +23,11 @@ const useAuthStore = create((set) => ({
     }
   },
   login: (token) => {
-    localStorage.setItem("JWT", token);
+    localStorage.setItem(JWT_KEY, token);
     set({ auth: true });
   },
   logout: () => {
-    localStorage.removeItem("JWT");
+    localStorage.removeItem(JWT_KEY);
     set({ auth: false });
   },
 }));

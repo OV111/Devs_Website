@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { API_BASE_URL, authHeaders } from "../../constants/api";
 
 export const updateLastActive = async (userId) => {
   if (!userId) return;
@@ -18,7 +18,7 @@ export const updateLastActive = async (userId) => {
 export const saveSettings = async (formData) => {
   const res = await fetch(`${API_BASE_URL}/my-profile/settings`, {
     method: "PUT",
-    headers: { Authorization: `Bearer ${localStorage.getItem("JWT")}` },
+    headers: authHeaders(),
     body: formData,
   });
   const data = await res.json();

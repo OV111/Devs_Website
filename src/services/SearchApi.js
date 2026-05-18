@@ -1,27 +1,27 @@
 import { CATEGORY_OPTIONS } from "../../constants/Categories";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { API_BASE_URL } from "../../constants/api";
 
-const normalizeCategoryValue = (value = "") =>
-  value.toLowerCase().replace(/[\s&]+/g, "");
+// const normalizeCategoryValue = (value = "") =>
+//   value.toLowerCase().replace(/[\s&]+/g, "");
 
-const filterLocalCategories = (query = "") => {
-  const normalizedQuery = normalizeCategoryValue(query);
-  if (!normalizedQuery) return [];
+// export const filterLocalCategories = (query = "") => {
+//   const normalizedQuery = normalizeCategoryValue(query);
+//   if (!normalizedQuery) return [];
 
-  return CATEGORY_OPTIONS.filter((category) => {
-    const normalizedTitle = normalizeCategoryValue(category.title);
-    const normalizedSlug = normalizeCategoryValue(category.slug);
+//   return CATEGORY_OPTIONS.filter((category) => {
+//     const normalizedTitle = normalizeCategoryValue(category.title);
+//     const normalizedSlug = normalizeCategoryValue(category.slug);
 
-    return (
-      normalizedTitle.includes(normalizedQuery) ||
-      normalizedSlug.includes(normalizedQuery)
-    );
-  }).map((category) => ({
-    ...category,
-    type: "category",
-  }));
-};
+//     return (
+//       normalizedTitle.includes(normalizedQuery) ||
+//       normalizedSlug.includes(normalizedQuery)
+//     );
+//   }).map((category) => ({
+//     ...category,
+//     type: "category",
+//   }));
+// };
 
 export const fetchUserData = async (query, isAuthenticated = false) => {
   const trimmedQuery = query?.trim() || "";

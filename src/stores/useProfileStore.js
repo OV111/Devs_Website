@@ -1,5 +1,6 @@
 import { create } from "zustand";
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { API_BASE_URL, JWT_KEY, authHeaders } from "../../constants/api";
+
 const useProfileStore = create((set) => ({
   user: null,
   stats: null,
@@ -7,14 +8,14 @@ const useProfileStore = create((set) => ({
   isLoading: false,
   isBlogsLoading: false,
   fetchProfile: async () => {
-    const token = localStorage.getItem("JWT");
+    const token = localStorage.getItem(JWT_KEY);
     if (!token) return "unauthorized";
     set({ isLoading: true });
     try {
       const response = await fetch(`${API_BASE_URL}/my-profile`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          ...authHeaders(),
         },
       });
       if (response.status === 403) return "unauthorized";

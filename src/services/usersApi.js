@@ -1,9 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
-const authHeaders = () => ({
-  "Content-Type": "application/json",
-  Authorization: `Bearer ${localStorage.getItem("JWT")}`,
-});
+import { API_BASE_URL, authHeaders } from "../../constants/api";
 
 export const fetchUserProfile = async (username) => {
   const res = await fetch(`${API_BASE_URL}/users/${username}`, {

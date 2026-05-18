@@ -1,8 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
-const authHeaders = () => ({
-  Authorization: `Bearer ${localStorage.getItem("JWT")}`,
-});
+import { API_BASE_URL, authHeaders } from "../../constants/api";
 
 export const fetchBlogs = async (page = 1, limit = 10) => {
   const res = await fetch(`${API_BASE_URL}/blogs?page=${page}&limit=${limit}`);
@@ -33,6 +29,16 @@ export const fetchLikedIds = async () => {
   } catch {
     return new Set();
   }
+};
+
+export const fetchUserBlogs = async (userId, limit) => {
+  const url = limit
+    ? `${API_BASE_URL}/blogs/user/${userId}?limit=${limit}`
+    : `${API_BASE_URL}/blogs/user/${userId}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("Failed to fetch user blogs");
+  const data = await res.json();
+  return data.data ?? [];
 };
 
 export const fetchFavourites = async () => {
