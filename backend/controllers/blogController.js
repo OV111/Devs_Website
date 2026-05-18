@@ -11,6 +11,7 @@ import {
   toggleFavouriteService,
   getFavouritesService,
   getSavedIdsService,
+  getLikedIdsService,
 } from "../services/blogService.js";
 
 export const createBlog = async (req, res) => {
@@ -134,6 +135,16 @@ export const getSavedIds = async (req, res) => {
   try {
     const db = req.app.locals.db;
     const ids = await getSavedIdsService(db, req.user._id);
+    res.json({ success: true, ids });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+export const getLikedIds = async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const ids = await getLikedIdsService(db, req.user._id);
     res.json({ success: true, ids });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });

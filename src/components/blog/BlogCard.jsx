@@ -97,7 +97,7 @@ const normalizePost = (post) => {
   };
 };
 
-const BlogCard = ({ card, initialSaved = false }) => {
+const BlogCard = ({ card, initialSaved = false, initialLiked = false }) => {
   const { auth } = useAuthStore();
 
   const post = normalizePost(card);
@@ -109,7 +109,7 @@ const BlogCard = ({ card, initialSaved = false }) => {
   const authorInitial = authorName.charAt(0).toUpperCase();
 
   const initialLikes = Array.isArray(card.likes) ? card.likes.length : 0;
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(initialLiked);
   const [likesCount, setLikesCount] = useState(initialLikes);
   const [likeLoading, setLikeLoading] = useState(false);
   const [saved, setSaved] = useState(initialSaved);

@@ -266,6 +266,15 @@ export const getSavedIdsService = async (db, userId) => {
   return docs.map((d) => d.blogId.toString());
 };
 
+export const getLikedIdsService = async (db, userId) => {
+  const blogs = db.collection("blogs");
+  const uid = new ObjectId(userId);
+  const docs = await blogs
+    .find({ likes: uid }, { projection: { _id: 1 } })
+    .toArray();
+  return docs.map((d) => d._id.toString());
+};
+
 export const toggleFavouriteService = async (db, blogId, userId) => {
   const favourites = db.collection("favouriteBlogs");
   const bid = new ObjectId(blogId);
