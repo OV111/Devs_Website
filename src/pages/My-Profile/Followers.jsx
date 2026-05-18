@@ -3,8 +3,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { sortOptions, filterOptions } from "../../../constants/FollowersPage";
 import SideBar from "./components/SideBar";
 import FollowersCard from "./FollowersCard";
+import {
+  fetchFollowers as fetchFollowersApi,
+  fetchFollowing as fetchFollowingApi,
+  toggleFollow,
+} from "@/services/followersApi";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const PAGE_LIMIT = 2; // 20 for ui is normal
 
 const Followers = () => {
@@ -27,23 +31,7 @@ const Followers = () => {
 
   const fetchFollowers = useCallback(async () => {
     try {
-      const token = localStorage.getItem("JWT");
-      const request = await fetch(
-        `${API_BASE_URL}/my-profile/followers?page=${followersPage}&limit=${PAGE_LIMIT}`,
-        {
-          method: "GET",
-          headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-
-      if (!request.ok) {
-        console.error("followers request failed", request.status);
-      }
-
-      const response = await request.json();
+      const response = await fetchFollowersApi(followersPage, PAGE_LIMIT);
       if (followersPage === 1) {
         setFollowers(response.followers ?? []);
       } else {
@@ -62,23 +50,7 @@ const Followers = () => {
 
   const fetchFollowing = useCallback(async () => {
     try {
-      const token = localStorage.getItem("JWT");
-      const request = await fetch(
-        `${API_BASE_URL}/my-profile/following?page=${followingPage}&limit=${PAGE_LIMIT}`,
-        {
-          method: "GET",
-          headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-
-      if (!request.ok) {
-        console.error("following request failed", request.status);
-      }
-
-      const response = await request.json();
+      const response = await fetchFollowingApi(followingPage, PAGE_LIMIT);
       if (followingPage === 1) {
         setFollowings(response.following ?? []);
       } else {
@@ -118,17 +90,8 @@ const Followers = () => {
 
     try {
       setActionLoadingId(user._id ?? user.id ?? user.username);
-      const request = await fetch(
-        `${API_BASE_URL}/users/${user.username}/follow`,
-        {
-          method: isFollowing ? "DELETE" : "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("JWT")}`,
-          },
-        },
-      );
-      if (!request.ok) return;
+      const res = await toggleFollow(user.username, isFollowing);
+      if (!res.ok) return;
       if (isFollowing) {
         setFollowings((prev) =>
           prev.filter(
