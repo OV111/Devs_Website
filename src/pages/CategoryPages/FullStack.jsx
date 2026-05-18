@@ -1,23 +1,32 @@
 /* This code snippet is a React component named `FullStack` that represents a page for displaying full
 stack development content. Here's a breakdown of what the code is doing: */
-import React, { lazy, Suspense, useEffect, useState } from "react";
+import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import BlogCard from "@/components/blog/BlogCard";
 import { FloatingIcons } from "../../components/effects/FloatingIcons";
-import { ScrollLine } from "../../animations/ScrollingLine";
 import useAuthStore from "../../stores/useAuthStore";
 
-const LoadingSuspense = lazy(() => import("../../components/feedback/LoadingSuspense"));
+gsap.registerPlugin(ScrollTrigger);
+
+const LoadingSuspense = lazy(
+  () => import("../../components/feedback/LoadingSuspense"),
+);
 
 const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-const ReadMore = lazy(() => import("../../components/blog/ReadMore"));
-
 const FullStack = () => {
-  const [categoryPage, setCategoryPage] = useState("fullstack");
+  const categoryPage = "fullstack";
   const { auth } = useAuthStore();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const containerRef = useRef(null);
+  const cardsRef = useRef(null);
+  const seg1Ref = useRef(null);
+  const seg2Ref = useRef(null);
+  const seg3Ref = useRef(null);
 
   const fetchPosts = async () => {
     try {
@@ -33,9 +42,10 @@ const FullStack = () => {
 
       const response = await request.json();
       setData(response);
-      setLoading(false);
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -43,12 +53,127 @@ const FullStack = () => {
     fetchPosts();
   }, []);
 
+  useEffect(() => {
+    if (loading || !data.length) return;
+
+    const container = containerRef.current;
+    const cards = cardsRef.current;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const mid = vh / 2 - 260;
+    const totalWidth = cards.scrollWidth - vw;
+
+    // Set the three path segments dynamically based on viewport size
+    seg1Ref.current.setAttribute("d", `M 20 0 L 20 ${mid}`);
+    seg2Ref.current.setAttribute("d", `M 21 ${mid} L ${vw - 20} ${mid}`);
+    seg3Ref.current.setAttribute("d", `M ${vw - 20} ${mid} L ${vw - 20} ${vh}`);
+
+    // Hide all segments (will be revealed by scroll)
+    [seg1Ref, seg2Ref, seg3Ref].forEach((ref) => {
+      const len = ref.current.getTotalLength();
+      ref.current.style.strokeDasharray = len;
+      ref.current.style.strokeDashoffset = len;
+    });
+
+    // Distance from page top to where the card section starts
+    const containerTop = container.getBoundingClientRect().top + window.scrollY;
+    // Total scroll = header phase + pin phase
+    const totalScroll = containerTop + totalWidth;
+    // Proportions for each phase
+    const p1 = containerTop / totalScroll;
+    const p2 = totalWidth / totalScroll;
+
+    const seg3Len = seg3Ref.current.getTotalLength();
+
+    const ctx = gsap.context(() => {
+      // Cards horizontal scroll — needs its own ScrollTrigger for the pin
+      gsap.to(cards, {
+        x: -totalWidth,
+        ease: "none",
+        scrollTrigger: {
+          trigger: container,
+          pin: true,
+          start: "top top",
+          end: () => `+=${totalWidth}`,
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      // Master timeline: all three segments, one scrub, proportional durations
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: document.body,
+            start: "top top",
+            end: `+=${totalScroll}`,
+            scrub: 1,
+            onLeave: () =>
+              gsap.to(seg3Ref.current, {
+                strokeDashoffset: 0,
+                duration: 0.6,
+                ease: "power2.inOut",
+              }),
+            onEnterBack: () =>
+              gsap.to(seg3Ref.current, {
+                strokeDashoffset: seg3Len,
+                duration: 0.3,
+                ease: "power2.inOut",
+              }),
+          },
+        })
+        .to(seg1Ref.current, {
+          strokeDashoffset: 0,
+          ease: "none",
+          duration: p1,
+        })
+        .to(seg2Ref.current, {
+          strokeDashoffset: 0,
+          ease: "none",
+          duration: p2,
+        });
+    });
+
+    const onResize = () => ScrollTrigger.refresh();
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      ctx.revert();
+      window.removeEventListener("resize", onResize);
+    };
+  }, [loading, data]);
+
   return (
     <React.Fragment>
+      {/* Fixed SVG path: draws down left → right → down right as you scroll */}
+      <svg
+        className="fixed inset-0 w-full h-full pointer-events-none z-50"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          ref={seg1Ref}
+          stroke="#7c3aed"
+          strokeWidth="3"
+          fill="none"
+          strokeLinecap="round"
+        />
+        <path
+          ref={seg2Ref}
+          stroke="#7c3aed"
+          strokeWidth="3"
+          fill="none"
+          strokeLinecap="round"
+        />
+        <path
+          ref={seg3Ref}
+          stroke="#7c3aed"
+          strokeWidth="3"
+          fill="none"
+          strokeLinecap="round"
+        />
+      </svg>
+
       <header className="min-h-screen mt-40">
-        {/* <h1 className="flex justify-center items-center text-xl font-medium text-sky-800 py-6 sm:text-2xl md:text-4xl lg:text-5xl">
-          Full Stack Development
-        </h1> */}
         <FloatingIcons category={categoryPage} />
 
         <div className="flex justify-center items-center">
@@ -82,25 +207,30 @@ const FullStack = () => {
           </span>
         </motion.p>
       </header>
+
       <main>
-        <aside className="fixed left-0 top-0">
-          <ScrollLine />
-        </aside>
-        <div>
-          <Suspense fallback={<LoadingSuspense></LoadingSuspense>}>
-            {loading ? (
-              <LoadingSuspense></LoadingSuspense>
-            ) : (
-              <div className="flex flex-wrap justify-center gap-10 px-2 pb-10 lg:px-0">
-              {data.map((card) => (
-                <BlogCard key={card.id} card={card} />
-              ))}
+        <Suspense fallback={null}>
+          {loading ? (
+            <LoadingSuspense />
+          ) : (
+            <div ref={containerRef} className="overflow-hidden h-screen">
+              <div
+                ref={cardsRef}
+                className="flex items-center gap-10 px-16 h-full"
+                style={{ width: "max-content" }}
+              >
+                {data.map((card) => (
+                  <div key={card.id} className="w-[380px] shrink-0">
+                    <BlogCard card={card} />
+                  </div>
+                ))}
+              </div>
             </div>
-            )}
-          </Suspense>
-        </div>
+          )}
+        </Suspense>
       </main>
     </React.Fragment>
   );
 };
+
 export default FullStack;
