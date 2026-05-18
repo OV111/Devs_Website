@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import XIcon from "@mui/icons-material/X";
+import SOCIAL_LINKS from "../../constants/SocialLinks";
 import LoadingSuspense from "../components/feedback/LoadingSuspense";
 import SideBar from "./My-Profile/components/SideBar";
 import useProfileStore from "@/stores/useProfileStore";
@@ -148,24 +147,23 @@ const MyProfile = () => {
               </div>
 
               <div className="flex items-center gap-6 text-2xl text-gray-600 dark:text-gray-400">
-                <Link
-                  to={stats?.githubLink}
-                  className="hover:text-black dark:hover:text-gray-100"
-                >
-                  <FaGithub />
-                </Link>
-                <Link
-                  to={stats?.linkedinLink}
-                  className="hover:text-blue-600 dark:hover:text-blue-400"
-                >
-                  <FaLinkedin />
-                </Link>
-                <Link
-                  to={stats?.twitterLink}
-                  className="hover:text-gray-900 dark:hover:text-gray-100"
-                >
-                  <XIcon />
-                </Link>
+                {SOCIAL_LINKS.map((item) =>
+                  stats?.[item.key] ? (
+                    <a
+                      key={item.key}
+                      href={stats[item.key]}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`transition ${item.hover}`}
+                    >
+                      {item.icon}
+                    </a>
+                  ) : (
+                    <span key={item.key} className="opacity-25 cursor-not-allowed">
+                      {item.icon}
+                    </span>
+                  )
+                )}
               </div>
             </div>
           </div>

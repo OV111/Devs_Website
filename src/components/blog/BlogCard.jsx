@@ -12,8 +12,7 @@ import { FaRegBookmark, FaBookmark, FaRegComment, FaRegHeart, FaHeart } from "re
 import { FiShare } from "react-icons/fi";
 import toast from "react-hot-toast";
 import useAuthStore from "../../stores/useAuthStore";
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { API_BASE_URL, authHeaders } from "../../../constants/api";
 
 import fs1React    from "../../assets/blog-pics/fs1React.jpg";
 import buildingApi from "../../assets/blog-pics/BuildingRestApi.png";
@@ -126,7 +125,7 @@ const BlogCard = ({ card, initialSaved = false, initialLiked = false }) => {
     try {
       const res = await fetch(`${API_BASE_URL}/blogs/${post.rawId}/like`, {
         method: "POST",
-        headers: { Authorization: `Bearer ${localStorage.getItem("JWT")}` },
+        headers: authHeaders(),
       });
       const data = await res.json();
       if (!data.success) throw new Error();
@@ -148,7 +147,7 @@ const BlogCard = ({ card, initialSaved = false, initialLiked = false }) => {
     try {
       const res = await fetch(`${API_BASE_URL}/blogs/${post.rawId}/favourite`, {
         method: "POST",
-        headers: { Authorization: `Bearer ${localStorage.getItem("JWT")}` },
+        headers: authHeaders(),
       });
       const data = await res.json();
       if (!data.success) throw new Error();

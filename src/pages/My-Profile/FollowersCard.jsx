@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import SOCIAL_LINKS from "../../../constants/SocialLinks";
 import defaultAvatar from "../../assets/user_profile/User_Profile.jpg";
 
 const FollowersCard = ({
@@ -51,26 +51,17 @@ const FollowersCard = ({
 
         <div className="flex items-center gap-3 self-end sm:self-auto">
 
-          {user?.stats?.githubLink && (
+          {SOCIAL_LINKS.filter((item) => user?.stats?.[item.key]).map((item) => (
             <a
-              href={user.stats.githubLink}
+              key={item.key}
+              href={user.stats[item.key]}
               target="_blank"
               rel="noreferrer"
-              className="text-gray-400 dark:text-gray-500 transition-colors hover:text-gray-900 dark:hover:text-gray-100"
+              className={`text-gray-400 dark:text-gray-500 transition-colors text-lg ${item.hover}`}
             >
-              <FaGithub size={18} />
+              {item.icon}
             </a>
-          )}
-          {user?.stats?.linkedinLink && (
-            <a
-              href={user.stats.linkedinLink}
-              target="_blank"
-              rel="noreferrer"
-              className="text-gray-400 dark:text-gray-500 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
-            >
-              <FaLinkedin size={18} />
-            </a>
-          )}
+          ))}
           <button
             type="button"
             disabled={actionLoading}
