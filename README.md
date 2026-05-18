@@ -1,44 +1,60 @@
-# Devs Website
+# DevsFlow
 
-A full-stack blog platform for developers, built with React and Node.js.
+**The developer community platform built to evolve into the biggest AI-integrated learning experience for developers.**
 
-## Tech Stack
+A full-stack platform where developers read, write, connect, and learn — with a roadmap you have to *earn*, and an AI agent that knows where you are on your journey.
 
-**Frontend:** React 19, Vite, TailwindCSS, Zustand, Framer Motion, GSAP
-**Backend:** Node.js, Express 5, MongoDB/Mongoose, JWT, WebSockets, Redis, BullMQ
-**UI:** Chakra UI, Material-UI, Lucide React
+---
 
-## Features
+## Stack
 
-- User authentication (sign up / sign in)
-- Blog posts by category (Full Stack, Backend, Mobile, AI & ML, QA, DevOps, Game Dev)
-- User profiles with follow/followers
-- Real-time chat via WebSockets
-- Favorites & notifications
-- Dark/light theme
+| Layer | Technologies |
+|---|---|
+| **Frontend** | React 19, Vite 7, Tailwind v4, Zustand, Framer Motion, GSAP, Three.js |
+| **Backend** | Node.js, Express 5, MongoDB/Mongoose, WebSockets (ws) |
+| **Auth** | JWT, bcrypt, Google OAuth |
+| **Infra** | Redis, BullMQ (job queues), Cloudinary (media), Docker |
+| **Testing** | Vitest (unit, integration, security, performance, concurrency), Playwright (E2E) |
+| **DX** | Husky, lint-staged, ESLint, Swagger UI, nodemon |
+
+---
+
+## What's Built
+
+- **Blog platform** — posts organized by tech category (Backend, Frontend, Full Stack, AI/ML, DevOps, Mobile, QA, Game Dev)
+- **User profiles** — follow/follower system, favorites, avatar upload via Cloudinary
+- **Real-time chat** — WebSocket-powered DMs with live notifications
+- **Search** — cross-platform content and user search
+- **Notifications** — async delivery via BullMQ worker queue
+- **Learning Roadmap** — interactive visual roadmap with progress tracking per path
+- **Dev Library** — curated books, docs, and guides linked to roadmap layers
+- **AI Agent** — per-user agent with persistent context (Anthropic API)
+- **Coding Challenges** — category-specific problem arena tied to your roadmap layer
+- **Google OAuth** — one-click sign-in with account linking
+- **Dark/Light theme** — system-aware with Zustand persistence
+
+---
 
 ## Getting Started
 
 ### Prerequisites
 
 - Node.js 18+
-- MongoDB instance (local or Atlas)
+- MongoDB (local or Atlas)
+- Redis (local or Docker)
 
-### Installation
+### Install
 
 ```bash
-# Install dependencies
 npm install
-
-# Set up environment variables
-cp .env.example .env
-# Fill in your values in .env
+cp backend/.env.example backend/.env
+# Fill in your values
 ```
 
-### Running
+### Run
 
 ```bash
-# Run frontend + backend together
+# Frontend + backend + Redis together
 npm run dev:full
 
 # Frontend only
@@ -46,6 +62,9 @@ npm run dev
 
 # Backend only
 nodemon backend/server.js
+
+# Start Redis via Docker (if not running)
+npm run redis
 ```
 
 ### Build
@@ -54,21 +73,95 @@ nodemon backend/server.js
 npm run build
 ```
 
+---
+
+## Testing
+
+```bash
+npm run test:unit          # Unit tests
+npm run test:integration   # Integration tests (real MongoDB via memory server)
+npm run test:api           # API endpoint tests
+npm run test:websocket     # WebSocket tests
+npm run test:security      # Security tests
+npm run test:performance   # Performance benchmarks
+npm run test:concurrency   # Concurrency / race-condition tests
+npm run test:unit:coverage # Coverage report
+```
+
+---
+
 ## Project Structure
 
 ```
-├── backend/          # Express server, routes, controllers, websocket
+├── backend/
+│   ├── app.js              # Express app factory
+│   ├── server.js           # Entry point (HTTP + WebSocket + workers)
+│   ├── config/             # DB, Redis, Cloudinary config
+│   ├── routes/             # API route definitions
+│   ├── controllers/        # Route handlers
+│   ├── models/             # Mongoose schemas
+│   ├── middleware/         # Auth, rate limiting, validation
+│   ├── workers/            # BullMQ background workers
+│   └── websocket/          # WebSocket server logic
 ├── src/
-│   ├── pages/        # Route-level page components
-│   ├── components/   # Reusable UI components
-│   ├── context/      # Zustand state stores
-│   ├── routes/       # Protected route wrappers
-│   ├── layouts/      # Page layout wrappers
-│   └── service/      # API client
-├── constants/        # Shared constants (categories, sidebar)
-└── public/           # Static assets
+│   ├── pages/              # Route-level page components
+│   ├── components/         # Reusable UI components
+│   ├── features/           # Feature modules (Roadmap, AI Agent, Blogs, etc.)
+│   ├── stores/             # Zustand state stores
+│   ├── services/           # API client functions
+│   ├── layouts/            # Page layout wrappers
+│   └── routes/             # Protected route wrappers
+├── constants/              # Shared constants (categories, sidebar items)
+├── tests/                  # Playwright E2E tests
+├── config/                 # Vitest config variants
+└── public/                 # Static assets
 ```
+
+---
+
+## API Docs
+
+Swagger UI is available at `/api-docs` when the backend is running.
+
+---
 
 ## Environment Variables
 
-See `.env.example` for required variables.
+```env
+# Backend — backend/.env
+PORT=5000
+MONGO_URI=
+JWT_SECRET=
+REDIS_URL=
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+ANTHROPIC_API_KEY=
+```
+
+---
+
+## Roadmap
+
+The platform is being built in phases:
+
+- [x] Community platform — blogs, profiles, follow system, real-time chat
+- [x] Learning roadmap — interactive visual paths with progress tracking
+- [x] Dev library — curated resources linked to roadmap layers
+- [x] AI agent — per-user agent with persistent context
+- [ ] Exam engine — AI-generated layer exams (90/100 to pass and unlock next layer)
+- [ ] Problem solving arena — category-specific challenges tied to your roadmap layer
+- [ ] Admin panel — user management, post moderation, analytics
+- [ ] Certificates — verifiable completion badges per path
+
+---
+
+## Deployment
+
+Configured for Railway (`railway.json`, `nixpacks.toml`) and Vercel (`vercel.json`) out of the box.
+
+---
+
+*Built by Vahe — one laptop, one idea, every line of code.*
