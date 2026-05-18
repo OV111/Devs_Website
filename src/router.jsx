@@ -22,7 +22,9 @@ const AddBlog = lazy(() => import("./pages/My-Profile/AddBlog"));
 const Chats = lazy(() => import("./pages/My-Profile/chat/Chats"));
 const Notifications = lazy(() => import("./pages/My-Profile/Notifications"));
 const Settings = lazy(() => import("./pages/My-Profile/Settings"));
-const ConnectedAccounts = lazy(() => import("./pages/My-Profile/ConnectedAccounts"));
+const ConnectedAccounts = lazy(
+  () => import("./pages/My-Profile/ConnectedAccounts"),
+);
 
 const Blogs = lazy(() => import("./features/Blogs/Blogs"));
 const RoadmapPage = lazy(() => import("./features/Roadmap/RoadmapPage"));
@@ -32,6 +34,7 @@ const Docs = lazy(() => import("./features/CodingLibs/Docs"));
 const CodingChallenges = lazy(
   () => import("./features/CodingChallenges/CodingChallenges"),
 );
+const AiAgent = lazy(() => import("./features/AI-Agent/AiAgent"));
 
 const Fundamentals = lazy(() => import("./pages/CategoryPages/Fundamentals"));
 const FullStack = lazy(() => import("./pages/CategoryPages/FullStack"));
@@ -84,6 +87,7 @@ const router = createBrowserRouter([
           { path: "blogs", element: <Blogs /> },
           { path: "roadmaps", element: <RoadmapPage /> },
           { path: "coding-challenges", element: <CodingChallenges /> },
+          { path: "ai-agent", element: <AiAgent /> },
           { path: "users/:username", element: <UserProfile /> },
           {
             path: "coding-libs",

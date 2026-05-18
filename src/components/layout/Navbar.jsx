@@ -1,7 +1,6 @@
-import React, { useState, useEffect, lazy, Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import useAuthStore from "../../stores/useAuthStore";
-import useThemeStore from "../../stores/useThemeStore";
 import SearchResults from "../search/SearchResults";
 import SearchBar from "../search/SearchBar";
 import { ChevronDown, LogOut, Sun, Moon, Menu, X } from "lucide-react";
@@ -42,7 +41,7 @@ const Navbar = () => {
       return;
     }
     fetchProfile();
-  }, [auth]);
+  }, [auth, fetchProfile, clearProfile]);
 
   const closeDropdownMobile = () => {
     setShowDropdownMobile(false);
@@ -200,6 +199,9 @@ const Navbar = () => {
             <li className="hidden md:block font-medium text-sm lg:text-sm px-1 hover:text-purple-500 transition">
               <NavLink to="coding-challenges">Challenges</NavLink>
             </li>
+            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 hover:text-purple-500 transition">
+              <NavLink to="ai-agent">AI-Agent</NavLink>
+            </li>
 
             <li
               className="relative hidden md:block items-center px-1"
@@ -226,14 +228,14 @@ const Navbar = () => {
                     </div>
                   </div>
 
-                  {AVATAR_MENU_ITEMS.map(({ label, to, icon: Icon }) => (
+                  {AVATAR_MENU_ITEMS.map(({ label, to, icon }) => (
                     <NavLink
                       key={to}
                       to={to}
                       onClick={closeMenu}
                       className="flex items-center gap-3 px-4 py-2 text-sm lg:text-sm text-gray-700 dark:text-gray-200 hover:bg-purple-50 hover:text-purple-700 dark:hover:bg-purple-950/40 dark:hover:text-purple-300 transition"
                     >
-                      <Icon size={15} />
+                      {React.createElement(icon, { size: 15 })}
                       {label}
                     </NavLink>
                   ))}
@@ -363,13 +365,13 @@ const Navbar = () => {
                   </div>
                 </li>
 
-                {AVATAR_MENU_ITEMS.map(({ label, to, icon: Icon }) => (
+                {AVATAR_MENU_ITEMS.map(({ label, to, icon }) => (
                   <MobileNavLink
                     key={to}
                     to={to}
                     className="flex items-center gap-2"
                   >
-                    <Icon size={14} />
+                    {React.createElement(icon, { size: 14 })}
                     {label}
                   </MobileNavLink>
                 ))}
