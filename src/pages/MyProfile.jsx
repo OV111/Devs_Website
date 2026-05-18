@@ -6,8 +6,8 @@ import LoadingSuspense from "../components/feedback/LoadingSuspense";
 import SideBar from "./My-Profile/components/SideBar";
 import useProfileStore from "@/stores/useProfileStore";
 import BlogCard from "@/components/blog/BlogCard";
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { fetchSavedIds, fetchLikedIds } from "@/services/blogsApi";
+import { updateLastActive } from "@/services/profileApi";
 
 const MyProfile = () => {
   const navigate = useNavigate();
@@ -25,20 +25,12 @@ const MyProfile = () => {
   const [isSideBarOpened, setIsSideBarOpened] = useState(
     window.innerWidth >= 1024,
   );
+  const [savedIds, setSavedIds] = useState(new Set());
+  const [likedIds, setLikedIds] = useState(new Set());
 
   const isActive = async (userId) => {
-    if (!userId) return;
-    const now = new Date().toLocaleString();
-    try {
-      const request = await fetch(`${API_BASE_URL}/my-profile`, {
-        method: "PUT",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ id: userId, lastActive: now }),
-      });
-      if (request.ok) updateStats({ lastActive: now });
-    } catch (err) {
-      console.log(err);
-    }
+    const now = await updateLastActive(userId);
+    if (now) updateStats({ lastActive: now });
   };
 
   useEffect(() => {
@@ -50,6 +42,9 @@ const MyProfile = () => {
         }
       });
     }
+
+    fetchSavedIds().then(setSavedIds);
+    fetchLikedIds().then(setLikedIds);
   }, []);
 
   useEffect(() => {
@@ -198,7 +193,12 @@ const MyProfile = () => {
               </div>
             ) : (
               blogs.map((blog) => (
-                <BlogCard key={String(blog._id)} card={blog} />
+                <BlogCard
+                  key={String(blog._id)}
+                  card={blog}
+                  initialSaved={savedIds.has(String(blog._id))}
+                  initialLiked={likedIds.has(String(blog._id))}
+                />
               ))
             )}
           </div>

@@ -7,7 +7,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import useThemeStore from "@/stores/useThemeStore";
 import ImageDropZone from "./components/ImageDropZone";
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { saveSettings } from "@/services/profileApi";
 
 
 const Settings = () => {
@@ -59,7 +59,6 @@ const Settings = () => {
 
   const SaveChanges = async () => {
     try {
-      const token = localStorage.getItem("JWT");
       const formDataToSend = new FormData();
       Object.keys(formData).forEach((key) => {
         if (formData[key] !== originalData[key]) {
@@ -67,41 +66,29 @@ const Settings = () => {
         }
       });
       if (profileImage) formDataToSend.append("profileImage", profileImage);
-
       if (bannerImage) formDataToSend.append("bannerImage", bannerImage);
 
-      const request = await fetch(`${API_BASE_URL}/my-profile/settings`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formDataToSend,
-      });
-      const response = await request.json();
-      if (request.ok && response.stats && response.user) {
-        const updatedData = {
-          fname: response.user.firstName || "",
-          lname: response.user.lastName || "",
-          bio: response.stats.bio || "",
-          location: response.stats.location || "",
-          timezone: response.stats.timezone || "",
-          postsCount: response.stats.postsCount || 0,
-          githubLink: response.stats.githubLink || "",
-          linkedinLink: response.stats.linkedinLink || "",
-          twitterLink: response.stats.twitterLink || "",
-        };
-        setFormData(updatedData);
-        setOriginalData(updatedData);
-        updateStats(response.stats);
-        toast.success(response.message || "Changes saved successfully");
+      const response = await saveSettings(formDataToSend);
 
-        setProfileImage(null);
-        setBannerImage(null);
-      } else {
-        toast.error(response.message || "Failed to save changes");
-      }
+      const updatedData = {
+        fname: response.user.firstName || "",
+        lname: response.user.lastName || "",
+        bio: response.stats.bio || "",
+        location: response.stats.location || "",
+        timezone: response.stats.timezone || "",
+        postsCount: response.stats.postsCount || 0,
+        githubLink: response.stats.githubLink || "",
+        linkedinLink: response.stats.linkedinLink || "",
+        twitterLink: response.stats.twitterLink || "",
+      };
+      setFormData(updatedData);
+      setOriginalData(updatedData);
+      updateStats(response.stats);
+      toast.success(response.message || "Changes saved successfully");
+      setProfileImage(null);
+      setBannerImage(null);
     } catch (err) {
-      console.error("Error saving settings:", err);
+      toast.error(err.message || "Failed to save changes");
     }
   };
   const handleChange = (field, value) => {

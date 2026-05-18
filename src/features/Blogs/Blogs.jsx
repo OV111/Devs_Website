@@ -15,13 +15,15 @@ import {
   READ_TIMES,
 } from "../../../constants/Blogs";
 
+import { fetchBlogs as fetchBlogsApi, fetchSavedIds, fetchLikedIds } from "@/services/blogsApi";
+
 const BlogCard = lazy(() => import("@/components/blog/BlogCard"));
-const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Blogs = () => {
   const { theme } = useThemeStore();
   const { auth } = useAuthStore();
   const [savedIds, setSavedIds] = useState(new Set());
+  const [likedIds, setLikedIds] = useState(new Set());
   const isDarkMode = theme === "dark";
   const skeletonBaseColor = isDarkMode ? "#1f2937" : "#ebebeb";
   const skeletonHighlightColor = isDarkMode ? "#374151" : "#f5f5f5";
@@ -47,36 +49,21 @@ const Blogs = () => {
     if (searchOpen) searchInputRef.current?.focus();
   }, [searchOpen]);
 
-  const fetchBlogs = async () => {
-    try {
-      setLoading(true);
-      const request = await fetch(
-        `${VITE_API_BASE_URL}/blogs?page=${page}&limit=10`,
-      );
-      const data = await request.json();
-      if (data.success) {
-        setBlogs(data.data);
-        setPagination(data.pagination);
-      }
-    } catch {
-      // network error - ignore
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchBlogs();
+    setLoading(true);
+    fetchBlogsApi(page)
+      .then(({ blogs, pagination }) => {
+        setBlogs(blogs);
+        setPagination(pagination);
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, [page]);
 
   useEffect(() => {
     if (!auth) return;
-    fetch(`${VITE_API_BASE_URL}/blogs/saved-ids`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("JWT")}` },
-    })
-      .then((r) => r.json())
-      .then((data) => { if (data.success) setSavedIds(new Set(data.ids)); })
-      .catch(() => {});
+    fetchSavedIds().then(setSavedIds);
+    fetchLikedIds().then(setLikedIds);
   }, [auth]);
 
   const filteredBlogs = searchQuery
@@ -359,7 +346,7 @@ const Blogs = () => {
                         ease: "easeOut",
                       }}
                     >
-                      <BlogCard card={blog} initialSaved={savedIds.has(String(blog._id))} />
+                      <BlogCard card={blog} initialSaved={savedIds.has(String(blog._id))} initialLiked={likedIds.has(String(blog._id))} />
                     </motion.div>
                   ))}
                 </motion.div>
