@@ -3,11 +3,10 @@ import SideBar from "./components/SideBar";
 import BlogCard from "@/components/blog/BlogCard";
 import { Bookmark } from "lucide-react";
 import { Link } from "react-router-dom";
-import { fetchFavourites as fetchFavouritesApi, fetchLikedIds } from "@/services/blogsApi";
+import { fetchFavourites as fetchFavouritesApi } from "@/services/blogsApi";
 
 const Favourites = () => {
   const [blogs, setBlogs] = useState([]);
-  const [likedIds, setLikedIds] = useState(new Set());
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -15,8 +14,6 @@ const Favourites = () => {
       .then(setBlogs)
       .catch(() => {})
       .finally(() => setIsLoading(false));
-
-    fetchLikedIds().then(setLikedIds);
   }, []);
 
   return (
@@ -64,7 +61,7 @@ const Favourites = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {blogs.map((blog) => (
-              <BlogCard key={String(blog._id)} card={blog} initialSaved={true} initialLiked={likedIds.has(String(blog._id))} />
+              <BlogCard key={String(blog._id)} card={blog} />
             ))}
           </div>
         )}

@@ -5,11 +5,7 @@ import { FiMapPin, FiClock, FiMessageSquare } from "react-icons/fi";
 import { Ellipsis } from "lucide-react";
 import UserBanner from "../../assets/user_profile/User_Banner.png";
 import { fetchUserProfile, toggleFollow } from "@/services/usersApi";
-import {
-  fetchUserBlogs,
-  fetchSavedIds,
-  fetchLikedIds,
-} from "@/services/blogsApi";
+import { fetchUserBlogs } from "@/services/blogsApi";
 import BlogCard from "@/components/blog/BlogCard";
 import useProfileStore from "@/stores/useProfileStore";
 import ProfileSkeleton from "./ProfileSkeleton";
@@ -77,8 +73,6 @@ export default function UserProfile() {
   const [isFollower, setIsFollower] = useState(false);
   const [followLoading, setFollowLoading] = useState(false);
   const [blogs, setBlogs] = useState([]);
-  const [savedIds, setSavedIds] = useState(new Set());
-  const [likedIds, setLikedIds] = useState(new Set());
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -111,14 +105,8 @@ export default function UserProfile() {
         setIsFollower(Boolean(response.isFollower));
 
         if (fetchedStats.userId) {
-          const [blogsData, savedIdsData, likedIdsData] = await Promise.all([
-            fetchUserBlogs(fetchedStats.userId, 6),
-            fetchSavedIds(),
-            fetchLikedIds(),
-          ]);
+          const blogsData = await fetchUserBlogs(fetchedStats.userId, 6);
           setBlogs(blogsData);
-          setSavedIds(savedIdsData);
-          setLikedIds(likedIdsData);
         }
       } catch {
         setNotFound(true);
@@ -453,8 +441,6 @@ export default function UserProfile() {
                   <BlogCard
                     key={String(blog._id)}
                     card={blog}
-                    initialSaved={savedIds.has(String(blog._id))}
-                    initialLiked={likedIds.has(String(blog._id))}
                   />
                 ))}
               </div>

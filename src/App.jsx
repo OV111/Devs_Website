@@ -6,10 +6,12 @@ import router from "./router";
 import LoadingSuspense from "./components/feedback/LoadingSuspense";
 import useAuthStore from "./stores/useAuthStore";
 import useNotificationStore from "./stores/useNotificationStore";
+import useBlogInteractionsStore from "./stores/useBlogInteractionsStore";
 
 const App = () => {
   const { isLoading, init, auth } = useAuthStore();
   const { connectWs, disconnectWs } = useNotificationStore();
+  const { fetchInteractions, reset } = useBlogInteractionsStore();
 
   useEffect(() => {
     init();
@@ -18,8 +20,10 @@ const App = () => {
   useEffect(() => {
     if (auth) {
       connectWs();
+      fetchInteractions();
     } else {
       disconnectWs();
+      reset();
     }
   }, [auth]);
   if (isLoading) return <LoadingSuspense />;

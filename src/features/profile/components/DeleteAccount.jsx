@@ -3,8 +3,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import useAuthStore from "../../../stores/useAuthStore";
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { deleteAccount } from "../../../services/profileApi";
 
 const DeleteAccount = () => {
   const navigate = useNavigate();
@@ -31,31 +30,13 @@ const DeleteAccount = () => {
 
     try {
       setIsDeleting(true);
-      const request = await fetch(`${API_BASE_URL}/deleteAccount`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("JWT")}`,
-        },
-        body: JSON.stringify({
-          email: trimmedEmail,
-          password: trimmedPassword,
-        }),
-      });
-
-      const response = await request.json();
-      if (!request.ok) {
-        toast.error(response?.message || "Failed to delete account");
-        return;
-      }
-
+      const response = await deleteAccount(trimmedEmail, trimmedPassword);
       toast.success(response?.message || "Account deleted successfully");
       localStorage.removeItem("JWT");
       logout();
       navigate("/get-started");
     } catch (error) {
-      console.log(error);
-      toast.error("Server is unavailable. Please try again later.");
+      toast.error(error.message || "Server is unavailable. Please try again later.");
     } finally {
       setIsDeleting(false);
     }

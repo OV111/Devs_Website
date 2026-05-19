@@ -12,6 +12,7 @@ import { FaRegBookmark, FaBookmark, FaRegComment, FaRegHeart, FaHeart } from "re
 import { FiShare } from "react-icons/fi";
 import toast from "react-hot-toast";
 import useAuthStore from "../../stores/useAuthStore";
+import useBlogInteractionsStore from "../../stores/useBlogInteractionsStore";
 import { API_BASE_URL, authHeaders } from "../../../constants/api";
 
 import fs1React    from "../../assets/blog-pics/fs1React.jpg";
@@ -96,8 +97,9 @@ const normalizePost = (post) => {
   };
 };
 
-const BlogCard = ({ card, initialSaved = false, initialLiked = false }) => {
+const BlogCard = ({ card }) => {
   const { auth } = useAuthStore();
+  const { savedIds, likedIds, toggleSaved, toggleLiked } = useBlogInteractionsStore();
 
   const post = normalizePost(card);
 
@@ -107,21 +109,19 @@ const BlogCard = ({ card, initialSaved = false, initialLiked = false }) => {
   const userName = post.userName || "@username";
   const authorInitial = authorName.charAt(0).toUpperCase();
 
+  const liked = likedIds.has(post.rawId);
+  const saved = savedIds.has(post.rawId);
   const initialLikes = Array.isArray(card.likes) ? card.likes.length : 0;
-  const [liked, setLiked] = useState(initialLiked);
   const [likesCount, setLikesCount] = useState(initialLikes);
   const [likeLoading, setLikeLoading] = useState(false);
-  const [saved, setSaved] = useState(initialSaved);
   const [saveLoading, setSaveLoading] = useState(false);
 
   const handleLike = async () => {
-    if (!auth || post.isDefault) return;
-    if (likeLoading) return;
-
-    setLiked((prev) => !prev);
-    setLikesCount((prev) => (liked ? prev - 1 : prev + 1));
+    if (!auth || post.isDefault || likeLoading) return;
+    const wasLiked = liked;
+    toggleLiked(post.rawId);
+    setLikesCount((prev) => (wasLiked ? prev - 1 : prev + 1));
     setLikeLoading(true);
-
     try {
       const res = await fetch(`${API_BASE_URL}/blogs/${post.rawId}/like`, {
         method: "POST",
@@ -129,11 +129,10 @@ const BlogCard = ({ card, initialSaved = false, initialLiked = false }) => {
       });
       const data = await res.json();
       if (!data.success) throw new Error();
-      setLiked(data.liked);
       setLikesCount(data.likesCount);
     } catch {
-      setLiked((prev) => !prev);
-      setLikesCount((prev) => (liked ? prev + 1 : prev - 1));
+      toggleLiked(post.rawId);
+      setLikesCount((prev) => (wasLiked ? prev + 1 : prev - 1));
       toast.error("Failed to like post");
     } finally {
       setLikeLoading(false);
@@ -142,7 +141,7 @@ const BlogCard = ({ card, initialSaved = false, initialLiked = false }) => {
 
   const handleSave = async () => {
     if (!auth || post.isDefault || saveLoading) return;
-    setSaved((prev) => !prev);
+    toggleSaved(post.rawId);
     setSaveLoading(true);
     try {
       const res = await fetch(`${API_BASE_URL}/blogs/${post.rawId}/favourite`, {
@@ -151,9 +150,8 @@ const BlogCard = ({ card, initialSaved = false, initialLiked = false }) => {
       });
       const data = await res.json();
       if (!data.success) throw new Error();
-      setSaved(data.saved);
     } catch {
-      setSaved((prev) => !prev);
+      toggleSaved(post.rawId);
       toast.error("Failed to save post");
     } finally {
       setSaveLoading(false);
@@ -163,7 +161,7 @@ const BlogCard = ({ card, initialSaved = false, initialLiked = false }) => {
   const tags = post.tags;
 
   return (
-    <Card className="flex flex-col w-full max-w-[400px] min-h-[478px] overflow-hidden rounded-2xl border-none bg-violet-50/40 dark:bg-slate-900">
+    <Card className="flex flex-col w-full h-full min-h-[478px] overflow-hidden rounded-2xl border-none bg-violet-50/40 dark:bg-slate-900">
       <div className="relative h-56 border-b border-violet-200 bg-violet-200/60 dark:border-slate-700 dark:bg-slate-800">
         <img
           src={resolvedCover || null}

@@ -15,6 +15,17 @@ export const updateLastActive = async (userId) => {
   }
 };
 
+export const deleteAccount = async (email, password) => {
+  const res = await fetch(`${API_BASE_URL}/deleteAccount`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json", ...authHeaders() },
+    body: JSON.stringify({ email, password }),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || "Failed to delete account");
+  return data;
+};
+
 export const saveSettings = async (formData) => {
   const res = await fetch(`${API_BASE_URL}/my-profile/settings`, {
     method: "PUT",

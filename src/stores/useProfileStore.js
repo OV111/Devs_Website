@@ -24,7 +24,9 @@ const useProfileStore = create((set) => ({
       set({
         user: data.userWithoutPassword,
         stats: data.stats,
+        isBlogsLoading: true,
       });
+      return data.stats;
     } catch {
       console.log("Error");
     } finally {
@@ -36,12 +38,14 @@ const useProfileStore = create((set) => ({
     set({ isBlogsLoading: true });
     try {
       const response = await fetch(`${API_BASE_URL}/blogs/user/${userId}`);
-      if (!response.ok) return;
+      if (!response.ok) {
+        set({ isBlogsLoading: false });
+        return;
+      }
       const data = await response.json();
-      set({ blogs: data.data ?? [] });
+      set({ blogs: data.data ?? [], isBlogsLoading: false });
     } catch {
       console.log("Error");
-    } finally {
       set({ isBlogsLoading: false });
     }
   },

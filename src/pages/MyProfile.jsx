@@ -5,7 +5,6 @@ import LoadingSuspense from "../components/feedback/LoadingSuspense";
 import SideBar from "./My-Profile/components/SideBar";
 import useProfileStore from "@/stores/useProfileStore";
 import BlogCard from "@/components/blog/BlogCard";
-import { fetchSavedIds, fetchLikedIds } from "@/services/blogsApi";
 import { updateLastActive } from "@/services/profileApi";
 
 const MyProfile = () => {
@@ -24,8 +23,6 @@ const MyProfile = () => {
   const [isSideBarOpened, setIsSideBarOpened] = useState(
     window.innerWidth >= 1024,
   );
-  const [savedIds, setSavedIds] = useState(new Set());
-  const [likedIds, setLikedIds] = useState(new Set());
 
   const isActive = async (userId) => {
     const now = await updateLastActive(userId);
@@ -38,19 +35,21 @@ const MyProfile = () => {
         if (result === "unauthorized") {
           localStorage.removeItem("JWT");
           navigate("/get-started");
+          return;
+        }
+        if (result?.userId) {
+          isActive(result.userId);
+          fetchUserBlogs(result.userId);
         }
       });
+    } else {
+      if(stats?.userId) {
+        isActive(stats.userId);
+        fetchUserBlogs(stats.userId);
+      }
     }
-
-    fetchSavedIds().then(setSavedIds);
-    fetchLikedIds().then(setLikedIds);
   }, []);
 
-  useEffect(() => {
-    if (!stats?.userId) return;
-    isActive(stats.userId);
-    fetchUserBlogs(stats.userId);
-  }, [stats?.userId]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -68,7 +67,7 @@ const MyProfile = () => {
   }
 
   return (
-    <div className="flex  bg-gray-50 dark:bg-gray-950">
+    <div className="flex bg-gray-50 dark:bg-gray-950">
       <SideBar
         isOpen={isSideBarOpened}
         onClose={() => setIsSideBarOpened(false)}
@@ -108,7 +107,7 @@ const MyProfile = () => {
           </div>
         </div>
 
-        <div className="px-4 pt-16 sm:px-6 lg:px-10 lg:pt-20">
+        <div className="px-0 pt-16 sm:px-6 lg:px-10 lg:pt-20">
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
             <div className="space-y-1 max-w-2xl">
               <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
@@ -168,8 +167,8 @@ const MyProfile = () => {
             </div>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {isBlogsLoading ? (
+          <div className="w-full px-6 mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {isBlogsLoading || !stats?.userId? (
               <div className="col-span-3 flex items-center justify-center py-20">
                 <p className="text-sm text-gray-400">Loading posts...</p>
               </div>
@@ -194,8 +193,6 @@ const MyProfile = () => {
                 <BlogCard
                   key={String(blog._id)}
                   card={blog}
-                  initialSaved={savedIds.has(String(blog._id))}
-                  initialLiked={likedIds.has(String(blog._id))}
                 />
               ))
             )}
