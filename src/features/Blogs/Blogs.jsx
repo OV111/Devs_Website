@@ -313,7 +313,7 @@ const Blogs = () => {
           highlightColor={skeletonHighlightColor}
         >
           <Suspense fallback={<BlogCardSkeletonGrid />}>
-            {loading && blogs.length === 0 ? (
+            {loading ? (
               <LoadingSuspense />
             ) : loading ? (
               <BlogCardSkeletonGrid />
@@ -395,7 +395,7 @@ const Blogs = () => {
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={page === totalPages}
             aria-label="Next page"
-            className="flex h-8 w-8 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-500 transition hover:border-slate-300 hover:text-slate-700 disabled:cursor-not-allowed disabled:opacity-40 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400 sm:h-9 sm:w-9"
+            className="flex h-8 w-8 items-center justify-center rounded-md border border-slate-200 bg-purple-600 text-slate-500 transition hover:border-slate-300 hover:text-slate-700 disabled:cursor-not-allowed disabled:opacity-40 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400 sm:h-9 sm:w-9"
           >
             ›
           </button>

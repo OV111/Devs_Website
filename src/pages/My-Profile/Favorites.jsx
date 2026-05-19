@@ -4,8 +4,13 @@ import BlogCard from "@/components/blog/BlogCard";
 import { Bookmark } from "lucide-react";
 import { Link } from "react-router-dom";
 import { fetchFavourites as fetchFavouritesApi } from "@/services/blogsApi";
-
+import { BlogCardSkeletonGrid } from "@/components/blog/BlogCardSkeleton";
+import { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import useThemeStore from "@/stores/useThemeStore";
 const Favourites = () => {
+  const { theme } = useThemeStore();
+  const isDarkMode = theme === "dark";
   const [blogs, setBlogs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -31,15 +36,13 @@ const Favourites = () => {
         </div>
 
         {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(3)].map((_, i) => (
-              <div
-                key={i}
-                className="h-[478px] rounded-2xl bg-gray-200 dark:bg-gray-800 animate-pulse"
-              />
-            ))}
-          </div>
-        ) : blogs.length === 0 ? (
+          <SkeletonTheme
+            baseColor={isDarkMode ? "#1f2937" : "#ebebeb"}
+            highlightColor={isDarkMode ? "#374151" : "#f5f5f5"}
+          >
+            <BlogCardSkeletonGrid />
+          </SkeletonTheme>
+        ) :blogs.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-28 text-center">
             <Bookmark
               size={48}

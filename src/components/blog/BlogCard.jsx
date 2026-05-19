@@ -6,10 +6,11 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { FaRegBookmark, FaBookmark, FaRegComment, FaRegHeart, FaHeart } from "react-icons/fa6";
 import { FiShare } from "react-icons/fi";
+import SharePopover from "./SharePopover";
 import toast from "react-hot-toast";
 import useAuthStore from "../../stores/useAuthStore";
 import useBlogInteractionsStore from "../../stores/useBlogInteractionsStore";
@@ -115,6 +116,8 @@ const BlogCard = ({ card }) => {
   const [likesCount, setLikesCount] = useState(initialLikes);
   const [likeLoading, setLikeLoading] = useState(false);
   const [saveLoading, setSaveLoading] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
+  const closeShare = useCallback(() => setShareOpen(false), []);
 
   const handleLike = async () => {
     if (!auth || post.isDefault || likeLoading) return;
@@ -226,7 +229,7 @@ const BlogCard = ({ card }) => {
         </p>
       </CardContent>
 
-      <CardFooter className="items-center justify-between border-t border-violet-100 px-4 py-3 dark:border-slate-700 sm:px-6">
+      <CardFooter className="relative items-center justify-between border-t border-violet-100 px-4 py-3 dark:border-slate-700 sm:px-6">
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           {resolvedPicture ? (
             <img
@@ -271,12 +274,22 @@ const BlogCard = ({ card }) => {
           >
             <FaRegComment className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           </button>
-          <button
-            type="button"
-            className="cursor-pointer rounded-full p-1.5 sm:p-2 transition hover:text-emerald-500"
-          >
-            <FiShare className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-          </button>
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setShareOpen((prev) => !prev)}
+              className={`cursor-pointer rounded-full p-1.5 sm:p-2 transition hover:text-emerald-500 ${shareOpen ? "text-emerald-500" : ""}`}
+            >
+              <FiShare className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            </button>
+            {shareOpen && (
+              <SharePopover
+                url={`${window.location.origin}/posts/${post.id}`}
+                title={post.title}
+                onClose={closeShare}
+              />
+            )}
+          </div>
         </div>
       </CardFooter>
     </Card>
