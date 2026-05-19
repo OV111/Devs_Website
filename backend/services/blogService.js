@@ -26,6 +26,7 @@ export const buildBlogDocument = ({
     readTime: Math.max(1, Math.ceil(words / 200)),
     coverImage: coverImage ?? null,
     likes: [],
+    comments: [],
     views: 0,
     wordCount: words,
     createdAt: new Date(),
@@ -148,7 +149,7 @@ export const createBlogService = async (db, body, user, file) => {
         },
       },
     ),
-    statsCollection.findOne({ userId: authorId.toString() }),
+    statsCollection.findOne({ userId: authorId }),
   ]);
   return {
     ...doc,
@@ -166,26 +167,48 @@ export const createBlogService = async (db, body, user, file) => {
 };
 
 export const getBlogsService = async (db, query) => {
-  const { category, tag, page = 1, limit = 10 } = query;
+  const { category, tag, page = 1, limit = 10, difficulty, readTime, sort, filter } = query;
 
   const pageNumber = Math.max(1, +page);
   const limitNumber = Math.min(100, Math.max(1, +limit));
-  const filter = { status: "published" };
-  if (category) filter.category = category;
-  if (tag) filter.tags = { $in: Array.isArray(tag) ? tag : [tag] };
+  const matchFilter = { status: "published" };
+  if (category) matchFilter.category = category;
+  if (tag) matchFilter.tags = { $in: Array.isArray(tag) ? tag : [tag] };
+  if (difficulty) matchFilter.difficulty = difficulty;
+  if (readTime === "< 5 min") matchFilter.readTime = { $lt: 5 };
+  else if (readTime === "5–10 min") matchFilter.readTime = { $gte: 5, $lte: 10 };
+  else if (readTime === "10+ min") matchFilter.readTime = { $gt: 10 };
 
   const blogsCollection = db.collection("blogs");
-  const total = await blogsCollection.countDocuments(filter);
+  const total = await blogsCollection.countDocuments(matchFilter);
 
-  const blogs = await blogsCollection
-    .aggregate([
-      { $match: filter },
-      { $sort: { createdAt: -1 } },
+  const effectiveSort = sort || filter;
+  let pipeline;
+  if (effectiveSort === "Popular") {
+    pipeline = [
+      { $match: matchFilter },
+      { $addFields: { _likesCount: { $size: { $ifNull: ["$likes", []] } } } },
+      { $sort: { _likesCount: -1 } },
+      { $skip: (pageNumber - 1) * limitNumber },
+      { $limit: limitNumber },
+      { $project: { _likesCount: 0 } },
+      ...authorLookup,
+    ];
+  } else {
+    let sortStage;
+    if (effectiveSort === "Oldest") sortStage = { createdAt: 1 };
+    else if (effectiveSort === "Most Viewed" || effectiveSort === "Trending") sortStage = { views: -1 };
+    else sortStage = { createdAt: -1 };
+    pipeline = [
+      { $match: matchFilter },
+      { $sort: sortStage },
       { $skip: (pageNumber - 1) * limitNumber },
       { $limit: limitNumber },
       ...authorLookup,
-    ])
-    .toArray();
+    ];
+  }
+
+  const blogs = await blogsCollection.aggregate(pipeline).toArray();
   return {
     data: blogs,
     pagination: {

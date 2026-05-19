@@ -54,6 +54,10 @@ export const createBlog = async (req, res) => {
     }
   });
 
+  busboy.on("error", (err) => {
+    res.status(400).json({ success: false, message: err.message || "Invalid request body" });
+  });
+
   req.pipe(busboy);
 };
 
@@ -72,14 +76,15 @@ export const getBlogs = async (req, res) => {
 
 export const getBlogById = async (req, res) => {
   try {
+    if (!ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ success: false, message: "Invalid blog id" });
+    }
     const db = req.app.locals.db;
     const blog = await getBlogByIdService(db, req.params.id);
     res.json({ success: true, data: blog });
   } catch (err) {
-    res.status(404).json({
-      success: false,
-      message: err.message || "Blog not found",
-    });
+    const status = err.message === "Blog not found" ? 404 : 500;
+    res.status(status).json({ success: false, message: err.message || "Blog not found" });
   }
 };
 
@@ -124,10 +129,8 @@ export const getBlogBySlug = async (req, res) => {
     const blog = await getBlogBySlugService(db, req.params.slug);
     res.json({ success: true, data: blog });
   } catch (err) {
-    res.status(404).json({
-      success: false,
-      message: err.message || "Blog not found",
-    });
+    const status = err.message === "Blog not found" ? 404 : 500;
+    res.status(status).json({ success: false, message: err.message || "Blog not found" });
   }
 };
 

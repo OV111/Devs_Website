@@ -24,7 +24,6 @@ const useProfileStore = create((set) => ({
       set({
         user: data.userWithoutPassword,
         stats: data.stats,
-        isBlogsLoading: true,
       });
       return data.stats;
     } catch {
@@ -53,7 +52,7 @@ const useProfileStore = create((set) => ({
     set((state) => ({ stats: { ...state.stats, ...newStats } })),
 
   clearProfile: () => {
-    set({ user: null, stats: null });
+    set({ user: null, stats: null, blogs: [], isBlogsLoading: false });
   },
 }));
 

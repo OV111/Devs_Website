@@ -35,6 +35,7 @@ const Settings = () => {
   const [profileImage, setProfileImage] = useState(null);
   const [bannerImage, setBannerImage] = useState(null);
 
+   
   useEffect(() => {
     if (!user && !stats) fetchProfile();
   }, []);
@@ -80,6 +81,7 @@ const Settings = () => {
         githubLink: response.stats.githubLink || "",
         linkedinLink: response.stats.linkedinLink || "",
         twitterLink: response.stats.twitterLink || "",
+        mediumLink: response.stats.mediumLink || "",
       };
       setFormData(updatedData);
       setOriginalData(updatedData);

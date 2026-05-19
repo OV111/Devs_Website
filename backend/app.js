@@ -28,19 +28,19 @@ export function createApp(db) {
       credentials: true,
     }),
   );
-// Need to fix this later,
-  app.use("/blogs", blogRoutes);
 
   app.use(express.json());
   app.use(cookieParser());
 
   app.use((req, res, next) => {
-    const maintenance = false;
+    const maintenance = process.env.MAINTENANCE_MODE === "true";
     if (maintenance) {
       return res.status(503).json({ message: "Server is under Maintenance" });
     }
     next();
   });
+
+  app.use("/blogs", blogRoutes);
 
   app.use(authRoutes);
   app.use(postRoutes);

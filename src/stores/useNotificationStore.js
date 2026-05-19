@@ -1,15 +1,12 @@
-// also heer handle the websocket sended notifications for the notifications page
-// add message.data to notifications state
-// increment unread count
-
 import { create } from "zustand";
+import { JWT_KEY } from "../../constants/api";
 
 const useNotificationStore = create((set, get) => ({
     notifications: [],
     unreadCount: 0,
     ws: null,
     connectWs: () => {
-        const token = localStorage.getItem("JWT");
+        const token = localStorage.getItem(JWT_KEY);
         if (!token) return;
         const ws = new WebSocket(import.meta.env.VITE_WS_URL);
         ws.onopen = () => {
@@ -41,7 +38,7 @@ const useNotificationStore = create((set, get) => ({
         const unreadCount = notifications.filter((n) => !n.read).length;
         set({ notifications, unreadCount });
     },
-    // markRead, markAllRead, and deleteNotification 
+    clearNotifications: () => set({ notifications: [], unreadCount: 0 }),
 }));
 
 

@@ -6,7 +6,10 @@ export const getUserProfileService = async (db, userName, currentUserId) => {
   const userStats = db.collection("usersStats");
   const follows = db.collection("follows");
 
-  const targetUser = await users.findOne({ username: userName });
+  const targetUser = await users.findOne(
+    { username: userName },
+    { projection: { password: 0, googleId: 0, githubId: 0 } },
+  );
   if (!targetUser) throw { status: 404, message: "Not Found" };
 
   const [followDoc, reverseDoc, stats] = await Promise.all([
@@ -30,6 +33,9 @@ export const followUserService = async (db, userName, currentUserId) => {
 
   const targetUser = await users.findOne({ username: userName });
   if (!targetUser) throw { status: 404, message: "User Not Found!" };
+
+  const existing = await follows.findOne({ followerId: currentUserId, followingId: targetUser._id });
+  if (existing) return;
 
   await follows.insertOne({
     followerId: currentUserId,
@@ -65,24 +71,21 @@ export const unfollowUserService = async (db, userName, currentUserId) => {
   const targetUser = await users.findOne({ username: userName });
   if (!targetUser) throw { status: 404, message: "User Not Found!" };
 
-  const targetStats = await userStats.findOne({ userId: targetUser._id });
-  if ((targetStats?.followersCount ?? 0) <= 0) return;
-
-  await follows.deleteOne({
+  const deleted = await follows.deleteOne({
     followerId: currentUserId,
     followingId: targetUser._id,
   });
 
+  if (!deleted.deletedCount) return;
+
   await Promise.all([
     userStats.updateOne(
       { userId: targetUser._id },
-      { $inc: { followersCount: -1 } },
-      { upsert: true },
+      [{ $set: { followersCount: { $max: [0, { $subtract: ["$followersCount", 1] }] } } }],
     ),
     userStats.updateOne(
       { userId: currentUserId },
-      { $inc: { followingsCount: -1 } },
-      { upsert: true },
+      [{ $set: { followingsCount: { $max: [0, { $subtract: ["$followingsCount", 1] }] } } }],
     ),
   ]);
 };

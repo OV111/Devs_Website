@@ -27,7 +27,7 @@ const Navbar = () => {
   const { pathname } = useLocation();
   const { auth, logout } = useAuthStore();
   // const { theme, setTheme } = useThemeStore();
-  const { user, stats, fetchProfile, clearProfile } = useProfileStore();
+  const { user, stats } = useProfileStore();
 
   const showSearch = pathname !== "/";
 
@@ -35,13 +35,6 @@ const Navbar = () => {
     setOpenDropdown(null);
   }, [auth]);
 
-  useEffect(() => {
-    if (!auth) {
-      clearProfile();
-      return;
-    }
-    fetchProfile();
-  }, [auth, fetchProfile, clearProfile]);
 
   const closeDropdownMobile = () => {
     setShowDropdownMobile(false);
@@ -110,7 +103,7 @@ const Navbar = () => {
   );
 
   const CategoryList = ({ onClose }) => (
-    <ul className="absolute top-full mt-0 left-0 w-40 overflow-hidden rounded-md bg-white shadow-lg shadow-black/5 dark:bg-gray-900 dark:shadow-black/30 py-0 z-4">
+    <ul className="absolute top-full mt-0 left-0 w-40 overflow-hidden rounded-md bg-white shadow-lg shadow-black/5 dark:bg-gray-900 dark:shadow-black/30 py-0 z-40">
       {CATEGORY_OPTIONS.map(({ title, slug }) => (
         <li key={slug}>
           <NavLink
@@ -126,7 +119,7 @@ const Navbar = () => {
   );
 
   const LibsList = ({ onClose }) => (
-    <ul className="absolute top-full left-0 w-30 overflow-hidden rounded-md bg-white shadow-lg shadow-black/5 dark:bg-gray-900 dark:shadow-black/30 py-0 z-4">
+    <ul className="absolute top-full left-0 w-30 overflow-hidden rounded-md bg-white shadow-lg shadow-black/5 dark:bg-gray-900 dark:shadow-black/30 py-0 z-40">
       {LIBS_OPTIONS.map(({ title, slug }) => (
         <li key={slug}>
           <NavLink
@@ -213,7 +206,7 @@ const Navbar = () => {
               </button>
 
               {openDropdown === "avatar" && (
-                <div className="absolute right-0 top-full mt-0 w-52 overflow-hidden rounded-md bg-white shadow-lg shadow-black/5 dark:bg-gray-900 dark:shadow-black/30 py-0 z-4">
+                <div className="absolute right-0 top-full mt-0 w-52 overflow-hidden rounded-md bg-white shadow-lg shadow-black/5 dark:bg-gray-900 dark:shadow-black/30 py-0 z-40">
                   <div className="flex items-center gap-3 px-4 py-2 border-b border-gray-100 dark:border-gray-700">
                     <AvatarImage inDropdown />
                     <div className="min-w-0">
@@ -304,7 +297,7 @@ const Navbar = () => {
 
         {/* Mobile menu */}
         {isOpen && (
-          <ul className="flex flex-col gap-2 p-4 border-t-[0.1px] border-gray-100 absolute top-full left-0 w-full bg-linear-to-r from-purple-600 to-purple-800 dark:from-purple-700 dark:to-purple-800 md:hidden z-4">
+          <ul className="flex flex-col gap-2 p-4 border-t-[0.1px] border-gray-100 absolute top-full left-0 w-full bg-linear-to-r from-purple-600 to-purple-800 dark:from-purple-700 dark:to-purple-800 md:hidden z-40">
             {showSearch && (
               <li>
                 <div className="relative">

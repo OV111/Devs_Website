@@ -65,6 +65,7 @@ const GetStarted = () => {
       if (response.ok) {
         toast.success(`${result.message}`, { duration: 900 });
         login(result.token);
+        reset();
         navigate("/");
       } else if (response.status === 409) {
         setAuthUiMessage(result.message);
@@ -95,7 +96,6 @@ const GetStarted = () => {
     }
 
     setIsLoading(false);
-    reset();
   };
 
   const toggleLink = () => {

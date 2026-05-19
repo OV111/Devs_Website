@@ -7,25 +7,34 @@ import LoadingSuspense from "./components/feedback/LoadingSuspense";
 import useAuthStore from "./stores/useAuthStore";
 import useNotificationStore from "./stores/useNotificationStore";
 import useBlogInteractionsStore from "./stores/useBlogInteractionsStore";
+import useProfileStore from "./stores/useProfileStore";
+
 
 const App = () => {
-  const { isLoading, init, auth } = useAuthStore();
-  const { connectWs, disconnectWs } = useNotificationStore();
+  const { isLoading, init, auth, session } = useAuthStore();
+  const { connectWs, disconnectWs, clearNotifications } = useNotificationStore();
   const { fetchInteractions, reset } = useBlogInteractionsStore();
+  const { fetchProfile, clearProfile } = useProfileStore();
 
   useEffect(() => {
     init();
-  }, []);
+  }, [init]);
 
   useEffect(() => {
     if (auth) {
+      reset();
+      clearProfile();
+      clearNotifications();
       connectWs();
       fetchInteractions();
+      fetchProfile();
     } else {
       disconnectWs();
       reset();
+      clearProfile();
+      clearNotifications();
     }
-  }, [auth]);
+  }, [auth, session, clearNotifications, clearProfile, connectWs, disconnectWs, fetchInteractions, fetchProfile, reset]);
   if (isLoading) return <LoadingSuspense />;
 
   return (

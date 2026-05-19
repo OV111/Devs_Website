@@ -17,7 +17,7 @@ const OAuthSuccess = () => {
     } else {
       navigate("/get-started");
     }
-  }, []);
+  }, [searchParams, navigate, login]);
 
   return <p>Logging you in...</p>;
 };

@@ -9,6 +9,7 @@ import {
   DIFFICULTIES,
   RECOMMENDED_TAGS,
 } from "../../../constants/addBlog.js";
+import { authHeaders } from "../../../constants/api.js";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -81,7 +82,10 @@ export default function AddBlog() {
   };
 
   const handleSubmit = async (status) => {
-    const token = localStorage.getItem("JWT");
+    if (!fields.title.trim() || !fields.content.trim()) {
+      toast.error("Title and content are required");
+      return;
+    }
     try {
       setIsSubmitting(true);
       const formData = new FormData();
@@ -96,7 +100,7 @@ export default function AddBlog() {
 
       const res = await fetch(`${API_BASE_URL}/blogs`, {
         method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
+        headers: authHeaders(),
         body: formData,
       });
 

@@ -41,14 +41,16 @@ export const updateLastActive = async (req, res) => {
 
 export const updateSettings = (req, res) => {
   const token = req.headers.authorization?.replace("Bearer ", "");
-  if (!token) return res.status(401).json("Unauthorized: Invalid Token!");
+  if (!token) return res.status(401).json({ message: "Unauthorized: Invalid Token!" });
 
   const bb = busboy({ headers: req.headers, limits: { fileSize: 5 * 1024 * 1024 } });
   const fields = {};
   const fileUploads = {};
+  let fileTooLarge = false;
 
   bb.on("file", (fieldname, file) => {
     file.on("limit", () => {
+      fileTooLarge = true;
       res.status(400).json({ message: "File too large. Maximum size is 5 MB." });
       file.resume();
     });
@@ -60,6 +62,7 @@ export const updateSettings = (req, res) => {
   });
 
   bb.on("finish", async () => {
+    if (fileTooLarge) return;
     try {
       const resolved = {};
       for (const [key, promise] of Object.entries(fileUploads)) {
@@ -78,47 +81,63 @@ export const updateSettings = (req, res) => {
 };
 
 export const getNotifications = async (req, res) => {
-  const token = req.headers.authorization?.split(" ")[1];
-  const verified = verifyToken(token);
-  if (!verified) return res.status(401).json({ message: "Unauthorized" });
+  try {
+    const token = req.headers.authorization?.split(" ")[1];
+    const verified = verifyToken(token);
+    if (!verified) return res.status(401).json({ message: "Unauthorized" });
 
-  const userId = new ObjectId(verified.id);
-  const results = await getNotificationsService(req.app.locals.db, userId);
-  res.status(200).json(results);
+    const userId = new ObjectId(verified.id);
+    const results = await getNotificationsService(req.app.locals.db, userId);
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(500).json({ message: "Server Error", error: err.message });
+  }
 };
 
 export const getFollowing = async (req, res) => {
-  const auth = getAuthToken(req.headers.authorization);
-  if (!auth.ok) return res.status(auth.status).json({ message: auth.message });
+  try {
+    const auth = getAuthToken(req.headers.authorization);
+    if (!auth.ok) return res.status(auth.status).json({ message: auth.message });
 
-  const data = await getFollowingService(
-    req.app.locals.db,
-    auth.userObjectId,
-    Number(req.query.page) || 1,
-    Number(req.query.limit) || 25,
-  );
-  res.status(200).json(data);
+    const data = await getFollowingService(
+      req.app.locals.db,
+      auth.userObjectId,
+      Number(req.query.page) || 1,
+      Number(req.query.limit) || 25,
+    );
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(500).json({ message: "Server Error", error: err.message });
+  }
 };
 
 export const getFollowers = async (req, res) => {
-  const auth = getAuthToken(req.headers.authorization);
-  if (!auth.ok) return res.status(auth.status).json({ message: auth.message });
+  try {
+    const auth = getAuthToken(req.headers.authorization);
+    if (!auth.ok) return res.status(auth.status).json({ message: auth.message });
 
-  const data = await getFollowersService(
-    req.app.locals.db,
-    auth.userObjectId,
-    Number(req.query.page) || 1,
-    Number(req.query.limit) || 25,
-  );
-  res.status(200).json(data);
+    const data = await getFollowersService(
+      req.app.locals.db,
+      auth.userObjectId,
+      Number(req.query.page) || 1,
+      Number(req.query.limit) || 25,
+    );
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(500).json({ message: "Server Error", error: err.message });
+  }
 };
 
 export const getMutualFollowers = async (req, res) => {
-  const auth = getAuthToken(req.headers.authorization);
-  if (!auth.ok) return res.status(auth.status).json({ message: auth.message });
+  try {
+    const auth = getAuthToken(req.headers.authorization);
+    if (!auth.ok) return res.status(auth.status).json({ message: auth.message });
 
-  const mutualFollowers = await getMutualFollowersService(req.app.locals.db, auth.userObjectId);
-  res.status(200).json({ mutualFollowers });
+    const mutualFollowers = await getMutualFollowersService(req.app.locals.db, auth.userObjectId);
+    res.status(200).json({ mutualFollowers });
+  } catch (err) {
+    res.status(500).json({ message: "Server Error", error: err.message });
+  }
 };
 
 export const getChatReceiverStats = async (req, res) => {

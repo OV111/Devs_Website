@@ -5,8 +5,6 @@ import { Search, X, ChevronDown, Check } from "lucide-react";
 import { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import useThemeStore from "@/stores/useThemeStore";
-// import useAuthStore from "@/stores/useAuthStore";
-import LoadingSuspense from "@/components/feedback/LoadingSuspense";
 import { BlogCardSkeletonGrid } from "@/components/blog/BlogCardSkeleton";
 import {
   FILTER_TABS,
@@ -21,7 +19,6 @@ const BlogCard = lazy(() => import("@/components/blog/BlogCard"));
 
 const Blogs = () => {
   const { theme } = useThemeStore();
-  // const { auth } = useAuthStore();
   const isDarkMode = theme === "dark";
   const skeletonBaseColor = isDarkMode ? "#1f2937" : "#ebebeb";
   const skeletonHighlightColor = isDarkMode ? "#374151" : "#f5f5f5";
@@ -49,14 +46,14 @@ const Blogs = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetchBlogsApi(page)
+    fetchBlogsApi(page, 10, { filter: activeFilter, sort: sortBy, difficulty, readTime })
       .then(({ blogs, pagination }) => {
         setBlogs(blogs);
         setPagination(pagination);
       })
       .catch(() => {})
       .finally(() => setLoading(false));
-  }, [page]);
+  }, [page, activeFilter, sortBy, difficulty, readTime]);
 
   const filteredBlogs = searchQuery
     ? blogs.filter((b) =>
@@ -65,6 +62,29 @@ const Blogs = () => {
     : blogs;
 
   const totalPages = pagination?.totalPages ?? 1;
+
+  const handleFilterTab = (tab) => {
+    setActiveFilter(tab);
+    setPage(1);
+  };
+
+  const handleDifficulty = (d) => {
+    setDifficulty(d === "All" ? "" : d);
+    setPage(1);
+    closeMenu();
+  };
+
+  const handleReadTime = (t) => {
+    setReadTime(t === "All" ? "" : t);
+    setPage(1);
+    closeMenu();
+  };
+
+  const handleSort = (opt) => {
+    setSortBy(opt);
+    setPage(1);
+    closeMenu();
+  };
 
   const getPageNumbers = () => {
     if (totalPages <= 5)
@@ -90,7 +110,7 @@ const Blogs = () => {
                 <li key={tab}>
                   <button
                     type="button"
-                    onClick={() => setActiveFilter(tab)}
+                    onClick={() => handleFilterTab(tab)}
                     className={`cursor-pointer whitespace-nowrap rounded-md px-2.5 py-1.5 text-xs font-medium transition-all duration-200 sm:px-3 ${
                       activeFilter === tab
                         ? "bg-purple-600 text-white"
@@ -187,10 +207,7 @@ const Blogs = () => {
                       <li key={d}>
                         <button
                           type="button"
-                          onClick={() => {
-                            setDifficulty(d === "All" ? "" : d);
-                            closeMenu();
-                          }}
+                          onClick={() => handleDifficulty(d)}
                           className="flex w-full cursor-pointer items-center justify-between px-3 py-2 text-xs font-medium text-gray-700 transition-colors hover:bg-purple-50 hover:text-purple-700 dark:text-gray-300 dark:hover:bg-purple-950/40 dark:hover:text-purple-300"
                         >
                           {d}
@@ -237,10 +254,7 @@ const Blogs = () => {
                       <li key={t}>
                         <button
                           type="button"
-                          onClick={() => {
-                            setReadTime(t === "All" ? "" : t);
-                            closeMenu();
-                          }}
+                          onClick={() => handleReadTime(t)}
                           className="flex w-full cursor-pointer items-center justify-between px-3 py-2 text-xs font-medium text-gray-700 transition-colors hover:bg-purple-50 hover:text-purple-700 dark:text-gray-300 dark:hover:bg-purple-950/40 dark:hover:text-purple-300"
                         >
                           {t}
@@ -286,10 +300,7 @@ const Blogs = () => {
                       <li key={opt}>
                         <button
                           type="button"
-                          onClick={() => {
-                            setSortBy(opt);
-                            closeMenu();
-                          }}
+                          onClick={() => handleSort(opt)}
                           className="flex w-full cursor-pointer items-center justify-between px-3 py-2 text-xs font-medium text-gray-700 transition-colors hover:bg-purple-50 hover:text-purple-700 dark:text-gray-300 dark:hover:bg-purple-950/40 dark:hover:text-purple-300"
                         >
                           {opt}
@@ -314,9 +325,12 @@ const Blogs = () => {
         >
           <Suspense fallback={<BlogCardSkeletonGrid />}>
             {loading ? (
-              <LoadingSuspense />
-            ) : loading ? (
               <BlogCardSkeletonGrid />
+            ) : filteredBlogs.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-28 text-center">
+                <p className="text-lg font-semibold text-gray-600 dark:text-gray-400">No posts found</p>
+                <p className="mt-1 text-sm text-gray-400">Try adjusting your filters or search query.</p>
+              </div>
             ) : (
               <AnimatePresence mode="wait">
                 <motion.div

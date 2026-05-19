@@ -2,11 +2,11 @@ import { API_BASE_URL, authHeaders } from "../../constants/api";
 
 export const updateLastActive = async (userId) => {
   if (!userId) return;
-  const now = new Date().toLocaleString();
+  const now = new Date().toISOString();
   try {
     const res = await fetch(`${API_BASE_URL}/my-profile`, {
       method: "PUT",
-      headers: { "content-type": "application/json" },
+      headers: { "content-type": "application/json", ...authHeaders() },
       body: JSON.stringify({ id: userId, lastActive: now }),
     });
     return res.ok ? now : null;

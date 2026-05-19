@@ -1,16 +1,21 @@
 import { create } from "zustand";
 import { fetchSavedIds, fetchLikedIds } from "@/services/blogsApi";
 
-const useBlogInteractionsStore = create((set) => ({
+const useBlogInteractionsStore = create((set, get) => ({
   savedIds: new Set(),
   likedIds: new Set(),
+  _gen: 0,
 
   fetchInteractions: async () => {
+    const gen = get()._gen + 1;
+    set({ _gen: gen });
     const [savedIds, likedIds] = await Promise.all([
       fetchSavedIds(),
       fetchLikedIds(),
     ]);
-    set({ savedIds, likedIds });
+    if (get()._gen === gen) {
+      set({ savedIds, likedIds });
+    }
   },
 
   toggleSaved: (id) =>
@@ -27,7 +32,7 @@ const useBlogInteractionsStore = create((set) => ({
       return { likedIds: next };
     }),
 
-  reset: () => set({ savedIds: new Set(), likedIds: new Set() }),
+  reset: () => set((state) => ({ savedIds: new Set(), likedIds: new Set(), _gen: state._gen + 1 })),
 }));
 
 export default useBlogInteractionsStore;

@@ -4,11 +4,14 @@ import SOCIAL_LINKS from "../../constants/SocialLinks";
 import LoadingSuspense from "../components/feedback/LoadingSuspense";
 import SideBar from "./My-Profile/components/SideBar";
 import useProfileStore from "@/stores/useProfileStore";
+import useAuthStore from "@/stores/useAuthStore";
 import BlogCard from "@/components/blog/BlogCard";
 import { updateLastActive } from "@/services/profileApi";
+import UserBanner from "../assets/user_profile/User_Banner.png";
 
 const MyProfile = () => {
   const navigate = useNavigate();
+  const { logout } = useAuthStore();
   const {
     user,
     stats,
@@ -29,11 +32,12 @@ const MyProfile = () => {
     if (now) updateStats({ lastActive: now });
   };
 
+   
   useEffect(() => {
     if (!user) {
       fetchProfile().then((result) => {
         if (result === "unauthorized") {
-          localStorage.removeItem("JWT");
+          logout();
           navigate("/get-started");
           return;
         }
@@ -80,7 +84,7 @@ const MyProfile = () => {
               stats?.bannerImage?.replace(
                 "/upload/",
                 "/upload/w_1200,h_280,c_fill,f_auto,q_auto/",
-              ) || "src/assets/user_profile/User_Banner.png"
+              ) || UserBanner
             }
             alt="Banner"
             className="w-full h-40 sm:h-56 object-cover z-0"

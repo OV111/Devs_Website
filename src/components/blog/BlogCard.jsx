@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { FaRegBookmark, FaBookmark, FaRegComment, FaRegHeart, FaHeart } from "react-icons/fa6";
 import { FiShare } from "react-icons/fi";
 import SharePopover from "./SharePopover";
+import CommentPopover from "./CommentPopover";
 import toast from "react-hot-toast";
 import useAuthStore from "../../stores/useAuthStore";
 import useBlogInteractionsStore from "../../stores/useBlogInteractionsStore";
@@ -42,7 +43,7 @@ const blogImgMap = {
 const pictureMap = {
   "JohnDoe.png":     JohnDoe,
   "AdaByte.png":     AdaByte,
-  "DmitryPetrov.png":DmitryPetrov,
+  "DmitryPetrov.png": DmitryPetrov,
   "AliceKeyes.png":  AliceKeyes,
   "WilliamChen.png": WilliamChen,
   "GraceHopper.png": GraceHopper,
@@ -113,11 +114,15 @@ const BlogCard = ({ card }) => {
   const liked = likedIds.has(post.rawId);
   const saved = savedIds.has(post.rawId);
   const initialLikes = Array.isArray(card.likes) ? card.likes.length : 0;
+  const initialComments = Array.isArray(card.comments) ? card.comments.length : 0;
   const [likesCount, setLikesCount] = useState(initialLikes);
+  const [commentsCount, setCommentsCount] = useState(initialComments);
   const [likeLoading, setLikeLoading] = useState(false);
   const [saveLoading, setSaveLoading] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
+  const [commentOpen, setCommentOpen] = useState(false);
   const closeShare = useCallback(() => setShareOpen(false), []);
+  const closeComment = useCallback(() => setCommentOpen(false), []);
 
   const handleLike = async () => {
     if (!auth || post.isDefault || likeLoading) return;
@@ -166,11 +171,15 @@ const BlogCard = ({ card }) => {
   return (
     <Card className="flex flex-col w-full h-full min-h-[478px] overflow-hidden rounded-2xl border-none bg-violet-50/40 dark:bg-slate-900">
       <div className="relative h-56 border-b border-violet-200 bg-violet-200/60 dark:border-slate-700 dark:bg-slate-800">
-        <img
-          src={resolvedCover || null}
-          alt={post.title}
-          className="h-full w-full object-cover"
-        />
+        {resolvedCover ? (
+          <img
+            src={resolvedCover}
+            alt={post.title}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <div className="h-full w-full bg-violet-200/60 dark:bg-slate-800" />
+        )}
         <button
           type="button"
           onClick={handleSave}
@@ -268,16 +277,27 @@ const BlogCard = ({ card }) => {
             }
             {likesCount > 0 && <span className="text-xs">{likesCount}</span>}
           </button>
-          <button
-            type="button"
-            className={`rounded-full p-1.5 sm:p-2 ${auth ? "cursor-pointer" : "cursor-not-allowed"} transition hover:text-blue-500`}
-          >
-            <FaRegComment className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-          </button>
           <div className="relative">
             <button
               type="button"
-              onClick={() => setShareOpen((prev) => !prev)}
+              onClick={() => { setCommentOpen((prev) => !prev); setShareOpen(false); }}
+              className={`flex items-center gap-1 rounded-full p-1.5 sm:p-2 transition hover:text-blue-500 ${commentOpen ? "text-blue-500" : ""} ${auth ? "cursor-pointer" : "cursor-not-allowed"}`}
+            >
+              <FaRegComment className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              {commentsCount > 0 && <span className="text-xs">{commentsCount}</span>}
+            </button>
+            {commentOpen && !post.isDefault && (
+              <CommentPopover
+                blogId={post.rawId}
+                onClose={closeComment}
+                onCountChange={setCommentsCount}
+              />
+            )}
+          </div>
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => { setShareOpen((prev) => !prev); setCommentOpen(false); }}
               className={`cursor-pointer rounded-full p-1.5 sm:p-2 transition hover:text-emerald-500 ${shareOpen ? "text-emerald-500" : ""}`}
             >
               <FiShare className="h-3.5 w-3.5 sm:h-4 sm:w-4" />

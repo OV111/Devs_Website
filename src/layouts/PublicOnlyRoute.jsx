@@ -2,11 +2,10 @@ import { Navigate } from "react-router-dom";
 import useAuthStore from "../stores/useAuthStore.js";
 
 const PublicOnlyRoute = ({ children }) => {
-  const auth = useAuthStore((state) => state.auth);
+  const { auth, isLoading } = useAuthStore();
 
-  if (auth) {
-    return <Navigate to="/" replace />;
-  }
+  if (isLoading) return null;
+  if (auth) return <Navigate to="/" replace />;
 
   return children;
 };

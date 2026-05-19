@@ -3,7 +3,8 @@ import { API_BASE_URL, JWT_KEY, authHeaders } from "../../constants/api";
 
 const useAuthStore = create((set) => ({
   auth: false,
-  isLoading: false,
+  isLoading: true,
+  session: 0,
   init: async () => {
     try {
       set({ isLoading: true });
@@ -24,7 +25,7 @@ const useAuthStore = create((set) => ({
   },
   login: (token) => {
     localStorage.setItem(JWT_KEY, token);
-    set({ auth: true });
+    set((state) => ({ auth: true, session: state.session + 1 }));
   },
   logout: () => {
     localStorage.removeItem(JWT_KEY);

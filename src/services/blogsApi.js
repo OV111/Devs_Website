@@ -1,7 +1,16 @@
 import { API_BASE_URL, authHeaders } from "../../constants/api";
 
-export const fetchBlogs = async (page = 1, limit = 10) => {
-  const res = await fetch(`${API_BASE_URL}/blogs?page=${page}&limit=${limit}`);
+export const fetchBlogs = async (page = 1, limit = 10, params = {}) => {
+  const url = new URL(`${API_BASE_URL}/blogs`);
+  url.searchParams.set("page", String(page));
+  url.searchParams.set("limit", String(limit));
+  const { filter, sort, difficulty, readTime } = params;
+  if (filter && filter !== "All" && filter !== "Latest") url.searchParams.set("filter", filter);
+  if (sort && sort !== "Newest") url.searchParams.set("sort", sort);
+  if (difficulty) url.searchParams.set("difficulty", difficulty);
+  if (readTime) url.searchParams.set("readTime", readTime);
+  const res = await fetch(url.toString());
+  if (!res.ok) throw new Error("Failed to fetch blogs");
   const data = await res.json();
   if (!data.success) throw new Error("Failed to fetch blogs");
   return { blogs: data.data, pagination: data.pagination };

@@ -10,6 +10,11 @@ import {
   getSavedIds,
   getLikedIds,
 } from "../controllers/blogController.js";
+import {
+  getComments,
+  postComment,
+  deleteComment,
+} from "../controllers/commentController.js";
 import { Router } from "express";
 import { authenticate } from "../middleware/authenticate.js";
 
@@ -280,6 +285,9 @@ router.get("/liked-ids", authenticate, getLikedIds);
 router.get("/id/:id", getBlogById);
 router.get("/user/:userId", getUserBlogs);
 router.post("/:id/like", authenticate, toggleLike);
+router.get("/:id/comments", getComments);
+router.post("/:id/comments", authenticate, postComment);
+router.delete("/:id/comments/:commentId", authenticate, deleteComment);
 router.post("/:id/favourite", authenticate, toggleFavourite);
 router.get("/:slug", getBlogBySlug);
 

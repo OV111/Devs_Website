@@ -9,8 +9,8 @@ import useThemeStore from "../../../stores/useThemeStore.js";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import { LogOut } from "lucide-react";
 import useProfileStore from "@/stores/useProfileStore.js";
-export default function SideBar({ isOpen, onClose }) {
-  const { user, stats, isLoading, fetchProfile, updateStats } =
+export default function SideBar() {
+  const { user, stats, isLoading, fetchProfile } =
     useProfileStore();
 
   const { theme } = useThemeStore();
@@ -33,7 +33,6 @@ export default function SideBar({ isOpen, onClose }) {
       });
       let response = await request.json();
       if (request.ok) {
-        localStorage.removeItem("JWT");
         toast.success(response.message, { duration: 1500 });
         logout();
         navigate("/get-started");
@@ -47,9 +46,10 @@ export default function SideBar({ isOpen, onClose }) {
     }
   };
 
+   
   useEffect(() => {
     if (!user) fetchProfile();
-  }, []);
+  }, [fetchProfile]);
 
   return (
     <>
@@ -111,7 +111,7 @@ export default function SideBar({ isOpen, onClose }) {
         </div>
         {openImage && (
           <div
-            className="fixed inset-0 z-5 flex items-center justify-center bg-black/70 p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
             onClick={() => setOpenImage(false)}
           >
             <img

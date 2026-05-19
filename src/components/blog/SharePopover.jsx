@@ -67,7 +67,7 @@ const SharePopover = ({ url, title, onClose }) => {
   return (
     <div
       ref={ref}
-      className="absolute bottom-10 right-0 z-5 w-72 rounded-xl border border-gray-200 bg-white p-4 shadow-xl dark:border-gray-700 dark:bg-gray-900"
+      className="absolute bottom-10 right-0 z-50 w-72 rounded-xl border border-gray-200 bg-white p-4 shadow-xl dark:border-gray-700 dark:bg-gray-900"
     >
       <div className="mb-3 flex items-center justify-between">
         <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">Share</p>

@@ -12,8 +12,8 @@ const ProtectedMyProfile = ({ children }) => {
     }
   }, [auth, isLoading, navigate]);
 
-  // if (isLoading) return null;
-  // if (!auth) return null;
+  if (isLoading) return null;
+  if (!auth) return null;
 
   return children;
 };
