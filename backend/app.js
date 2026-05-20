@@ -12,6 +12,7 @@ import userRoutes from "./routes/user.routes.js";
 import searchRoutes from "./routes/search.routes.js";
 import accountRoutes from "./routes/account.routes.js";
 import blogRoutes from "./routes/blogs.routes.js";
+import { notFound } from "./middleware/notFound.js";
 
 export function createApp(db) {
   const app = express();
@@ -49,5 +50,7 @@ export function createApp(db) {
   app.use("/search", searchRoutes);
   app.use(accountRoutes);
 
+
+  app.use(notFound)
   return app;
 }
