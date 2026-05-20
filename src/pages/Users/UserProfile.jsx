@@ -154,8 +154,7 @@ export default function UserProfile() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <Toaster position="top-center" reverseOrder />
 
-      <div className="max-w-4xl mx-auto">
-        {/* Banner */}
+      <div className="max-w-6xl mx-auto">
         <div className="relative">
           <div className="overflow-hidden rounded-b-3xl">
             <img
@@ -171,7 +170,6 @@ export default function UserProfile() {
             <div className="absolute inset-0 bg-linear-to-t from-black/40 via-black/5 to-transparent rounded-b-3xl" />
           </div>
 
-          {/* Avatar */}
           <div className="absolute -bottom-12 sm:-bottom-14 left-5 sm:left-8">
             <div className="ring-4 ring-gray-50 dark:ring-gray-950 rounded-full shadow-lg">
               <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden">
@@ -194,10 +192,8 @@ export default function UserProfile() {
           </div>
         </div>
 
-        {/* Profile content */}
-        <div className="pt-18 sm:pt-22 px-5 sm:px-8 lg:px-10 pb-12">
+        <div className="pt-18 sm:pt-22 px-5 sm:px-8 pb-12">
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-10">
-            {/* Left — user info */}
             <div className="space-y-2 max-w-lg">
               <div className="flex items-center gap-2.5 flex-wrap">
                 <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
@@ -232,9 +228,7 @@ export default function UserProfile() {
               </div>
             </div>
 
-            {/* Right — actions + stats + social */}
             <div className="flex flex-col items-start lg:items-end gap-5 shrink-0">
-              {/* Follow / Message / More */}
               <div className="flex items-center gap-2.5">
                 <button
                   type="button"
@@ -286,7 +280,6 @@ export default function UserProfile() {
                   Message
                 </Link>
 
-                {/* 3-dot menu */}
                 <div className="relative" ref={menuRef}>
                   <button
                     type="button"
@@ -356,7 +349,6 @@ export default function UserProfile() {
                 </div>
               </div>
 
-              
               <div className="flex gap-8">
                 {[
                   { label: "Followers", value: stats?.followersCount ?? 0 },
@@ -387,16 +379,18 @@ export default function UserProfile() {
                       {item.icon}
                     </a>
                   ) : (
-                    <span key={item.key} className="opacity-25 cursor-not-allowed">
+                    <span
+                      key={item.key}
+                      className="opacity-25 cursor-not-allowed"
+                    >
                       {item.icon}
                     </span>
-                  )
+                  ),
                 )}
               </div>
             </div>
           </div>
 
-          {/* Section divider */}
           <div className="mt-10 flex items-center gap-4">
             <h2 className="text-sm font-semibold text-gray-900 dark:text-gray-100 uppercase tracking-wide shrink-0">
               Posts
@@ -409,7 +403,6 @@ export default function UserProfile() {
             )}
           </div>
 
-          {/* Posts */}
           <div className="mt-6 pb-4">
             {blogs.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-16 text-center rounded-2xl border border-dashed border-gray-200 dark:border-gray-800">
@@ -436,12 +429,9 @@ export default function UserProfile() {
                 </p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {blogs.slice(0, 6).map((blog) => (
-                  <BlogCard
-                    key={String(blog._id)}
-                    card={blog}
-                  />
+                  <BlogCard key={String(blog._id)} card={blog} />
                 ))}
               </div>
             )}

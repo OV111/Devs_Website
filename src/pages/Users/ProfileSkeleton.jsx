@@ -2,7 +2,7 @@ import React from "react";
 
 const ProfileSkeleton = () => (
   <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
-    <div className="max-w-4xl mx-auto animate-pulse">
+    <div className="max-w-6xl mx-auto animate-pulse">
       <div className="relative">
         <div className="w-full h-52 sm:h-64 bg-gray-200 dark:bg-gray-800 rounded-b-3xl" />
         <div className="absolute -bottom-12 sm:-bottom-14 left-5 sm:left-8">
@@ -10,7 +10,7 @@ const ProfileSkeleton = () => (
         </div>
       </div>
 
-      <div className="pt-18 sm:pt-22 px-5 sm:px-8 lg:px-10">
+      <div className="pt-18 sm:pt-22 px-5 sm:px-8">
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
           <div className="space-y-3">
             <div className="flex items-center gap-2">
