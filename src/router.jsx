@@ -7,6 +7,9 @@ import ProtectedLayout from "./layouts/ProtectedLayout";
 import Home from "./pages/Home";
 import OAuthSuccess from "./components/feedback/OAuthSuccess";
 import PublicOnlyRoute from "./layouts/PublicOnlyRoute";
+
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Privacy = lazy(() => import("./pages/Privacy"));
@@ -65,6 +68,8 @@ const router = createBrowserRouter([
           </PublicOnlyRoute>
         ),
       },
+      { path: "forgot-password", element: <ForgotPassword /> },
+      { path: "reset-password", element: <ResetPassword /> },
       { path: "posts/:id", element: <ReadMore /> },
       {
         path: "categories",

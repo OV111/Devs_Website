@@ -1,6 +1,9 @@
 import process from "node:process";
+import crypto from "node:crypto";
+import { Buffer } from "node:buffer";
 import bcrypt from "bcrypt";
 import { ObjectId } from "mongodb";
+import { sendPasswordResetEmail } from "../utils/emailService.js";
 import connectDB from "../config/db.js";
 import { createToken, verifyToken } from "../utils/jwtToken.js";
 import { OAuth2Client } from "google-auth-library";
@@ -310,8 +313,85 @@ const githubCallback = async (req, res) => {
     res.redirect(`${process.env.FRONTEND_URL}/oauth-success?token=${jwt}`);
   } catch (err) {
     console.log(err);
-res.redirect(`${process.env.FRONTEND_URL}/oauth-failure`);
+    res.redirect(`${process.env.FRONTEND_URL}/oauth-failure`);
   }
 };
 
-export { signUp, login, googleAuth, githubRedirect, githubLinkRedirect, githubDisconnect, githubCallback };
+const forgotPassword = async (data) => {
+  try {
+    const db = await connectDB();
+    const { email } = data;
+    const users = db.collection("users");
+    const passwordResets = db.collection("passwordResets");
+    const user = await users.findOne({ email });
+    if (!user)
+      return {
+        status: 200,
+        message: "If email exists,a reset link has been sent.",
+      };
+
+    await passwordResets.deleteMany({ userId: user._id });
+
+    const rawToken = crypto.randomBytes(32).toString("hex");
+    const tokenHash = crypto
+      .createHash("sha256")
+      .update(rawToken)
+      .digest("hex");
+    const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+
+    await passwordResets.insertOne({ userId: user._id, tokenHash, expiresAt });
+
+    const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${rawToken}`;
+    await sendPasswordResetEmail(email, resetUrl);
+    return {
+      status: 200,
+      message: "If email exists,a reset link has been sent.",
+    };
+  } catch (err) {
+    console.log(err);
+    return {
+      status: 500,
+      message: "Something went wrong.",
+      error: err.message,
+    };
+  }
+};
+
+const resetPassword = async (data) => {
+  try {
+    const db = await connectDB();
+    const users = db.collection("users");
+    const { token, newPassword } = data;
+    const passwordResets = db.collection("passwordResets");
+
+    const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
+    // check if token is valid
+    const record = await passwordResets.findOne({ tokenHash });
+
+    if (!record || record.expiresAt < new Date()) {
+      return { status: 400, message: "Reset link is invalid or has expired." };
+    }
+
+    await users.updateOne(
+      { _id: record.userId },
+      { $set: { password: await hashPassword(newPassword) } },
+    );
+    await passwordResets.deleteOne({ tokenHash });
+    return { status: 200, message: "Password updated successfully." };
+  } catch (err) {
+    console.log(err);
+    return { status: 500, message: "Server error", error: err.message };
+  }
+};
+
+export {
+  signUp,
+  login,
+  googleAuth,
+  githubRedirect,
+  githubLinkRedirect,
+  githubDisconnect,
+  githubCallback,
+  forgotPassword,
+  resetPassword,
+};

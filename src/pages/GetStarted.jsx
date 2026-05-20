@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Toaster, toast } from "react-hot-toast";
 import { Eye, EyeOff } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import useAuthStore from "../stores/useAuthStore";
 import { GoogleLogin } from "@react-oauth/google";
 import { sanitizeInput } from "../utils/sanitize";
@@ -140,9 +140,9 @@ const GetStarted = () => {
       <Toaster position="top-center" reverseOrder={false} />
       <div className="flex min-h-screen justify-center">
         <div className="flex min-h-screen w-full lg:w-1/2 items-center justify-center px-4 py-8 sm:px-6 sm:py-10 md:px-8">
-          <div className="w-full max-w-xl rounded-2xl border border-violet-100 bg-white p-4 dark:border-zinc-800 dark:bg-gray-950 sm:p-6 md:p-8">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 md:mb-8 text-purple-700 dark:text-purple-600">
-              {isSignedUp ? "Get Started" : "Welcome Back"}
+          <div className="w-full max-w-xl rounded-2xl  bg-white p-4 dark:border-zinc-800 dark:bg-gray-950 sm:p-6 md:p-8">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-start mb-4 sm:mb-6 md:mb-8 text-purple-700 dark:text-purple-600">
+              {isSignedUp ? "Create an account" : "Welcome Back"}
             </h2>
 
             {authUiMessage && (
@@ -262,6 +262,13 @@ const GetStarted = () => {
                 </button>
                 {errors.password && (
                   <p className={errorClass}>{errors.password.message}</p>
+                )}
+                {!isSignedUp && (
+                  <div className="text-right mt-1">
+                    <Link to="/forgot-password" className="text-xs text-violet-500 hover:underline dark:text-violet-400">
+                      Forgot password?
+                    </Link>
+                  </div>
                 )}
               </div>
 

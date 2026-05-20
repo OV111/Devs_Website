@@ -7,6 +7,8 @@ import {
   githubLinkRedirect,
   githubDisconnect,
   githubCallback,
+  forgotPassword,
+  resetPassword,
 } from "../controllers/authController.js";
 import { verifyToken } from "../utils/jwtToken.js";
 
@@ -285,5 +287,13 @@ router.get("/auth/github", githubRedirect);
 router.get("/auth/github/link", githubLinkRedirect);
 router.delete("/auth/github/disconnect", githubDisconnect);
 router.get("/auth/github/callback", githubCallback);
+router.post("/forgot-password", async (req, res) => {
+  const result = await forgotPassword(req.body);
+  res.status(result.status).json(result);
+});
+router.post("/reset-password", async (req, res) => {
+  const result = await resetPassword(req.body);
+  res.status(result.status).json(result);
+});
 
 export default router;
