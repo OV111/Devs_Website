@@ -17,7 +17,7 @@ const Home = () => {
       <section className="relative flex justify-between gap-0 lg:gap-48 min-h-[80vh] lg:min-h-[85vh] items-center mx-auto max-w-8xl px-6 sm:px-10 md:px-20 lg:px-28 py-12 lg:py-0">
         <div className="flex flex-col gap-5 lg:gap-8 w-full max-w-2xl">
           <div className="w-full h-16 sm:h-20 lg:h-36">
-            <h1 className="font-medium text-purple-800 dark:text-purple-400 text-3xl sm:text-5xl lg:text-7xl drop-shadow-[0_6px_24px_rgba(126,34,206,0.15)]">
+            <h1 className="font-medium text-purple-800 dark:text-purple-600 text-3xl sm:text-5xl lg:text-7xl drop-shadow-[0_6px_24px_rgba(126,34,206,0.15)]">
               <TextType
                 text={[
                   "Welcome to Developers Web",
@@ -39,7 +39,7 @@ const Home = () => {
             colors={["#8A2BE2", "#FF1493", "#FF00FF", "#9c40ff", "#00FF00"]}
             animationSpeed={8}
             showBorder={false}
-            className="px-1 py-1 w-full font-medium text-xl sm:text-2xl md:text-3xl lg:text-[36px] text-start"
+            className="px-1 py-1 w-full font-medium text-xl sm:text-2xl md:text-3xl lg:text-[34px] text-start"
           >
             Read, write, and grow guided by an AI that knows your journey.
           </GradientText>

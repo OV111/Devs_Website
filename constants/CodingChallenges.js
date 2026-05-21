@@ -1,5 +1,3 @@
-export const ACCENT = "#9333ea";
-
 export const TYPE_STYLE = {
   CODE:   { border: "#7c3aed", color: "#a78bfa" },
   DEBUG:  { border: "#b45309", color: "#fb923c" },

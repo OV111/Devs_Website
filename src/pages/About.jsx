@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import GradientText from "../components/effects/GradientText";
 import ShinyText from "../components/effects/ShinyText";
 import { CATEGORY_OPTIONS2 } from "../../constants/Categories";
+import { motion as Motion } from "framer-motion";
 
 // ── Animated counter ──────────────────────────────────────────────────────────
 function useCounter(target, duration = 2000, active = false) {
@@ -29,7 +30,7 @@ function StatCard({ value, label, suffix = "+", delay = 0 }) {
   const [started, setStarted] = useState(false);
   const count = useCounter(value, 2000, started);
   return (
-    <motion.div
+    <Motion.div
       className="flex flex-col items-center gap-2 p-6 rounded-2xl
         bg-white/60 dark:bg-white/5
         border border-fuchsia-100 dark:border-fuchsia-900/40
@@ -47,7 +48,7 @@ function StatCard({ value, label, suffix = "+", delay = 0 }) {
       <span className="text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium text-center">
         {label}
       </span>
-    </motion.div>
+    </Motion.div>
   );
 }
 
@@ -63,7 +64,8 @@ const features = [
     icon: "📖",
     title: "Read",
     desc: "Browse curated technical content organised by specialisation. From quick tips to deep-dives — find what you need, when you need it.",
-    gradient: "from-purple-500/10 to-fuchsia-500/10 dark:from-purple-900/20 dark:to-fuchsia-900/20",
+    gradient:
+      "from-purple-500/10 to-fuchsia-500/10 dark:from-purple-900/20 dark:to-fuchsia-900/20",
     border: "border-purple-200 dark:border-purple-800/40",
     badge: "Available now",
   },
@@ -71,7 +73,8 @@ const features = [
     icon: "✍️",
     title: "Write",
     desc: "Share your knowledge with thousands of developers. Publish articles, tutorials, and insights across 12 tech categories.",
-    gradient: "from-fuchsia-500/10 to-pink-500/10 dark:from-fuchsia-900/20 dark:to-pink-900/20",
+    gradient:
+      "from-fuchsia-500/10 to-pink-500/10 dark:from-fuchsia-900/20 dark:to-pink-900/20",
     border: "border-fuchsia-200 dark:border-fuchsia-800/40",
     badge: "Available now",
   },
@@ -79,7 +82,8 @@ const features = [
     icon: "🤝",
     title: "Connect",
     desc: "Follow developers you admire, get followed back, and chat in real-time with your network. Community is at the core.",
-    gradient: "from-violet-500/10 to-purple-500/10 dark:from-violet-900/20 dark:to-purple-900/20",
+    gradient:
+      "from-violet-500/10 to-purple-500/10 dark:from-violet-900/20 dark:to-purple-900/20",
     border: "border-violet-200 dark:border-violet-800/40",
     badge: "Available now",
   },
@@ -87,7 +91,8 @@ const features = [
     icon: "🗂️",
     title: "Create Projects",
     desc: "Showcase what you have built. Share repos, demos, and write-ups so the community can discover, learn from, and contribute to your work.",
-    gradient: "from-sky-500/10 to-cyan-500/10 dark:from-sky-900/20 dark:to-cyan-900/20",
+    gradient:
+      "from-sky-500/10 to-cyan-500/10 dark:from-sky-900/20 dark:to-cyan-900/20",
     border: "border-sky-200 dark:border-sky-800/40",
     badge: "Coming soon",
   },
@@ -95,7 +100,8 @@ const features = [
     icon: "📚",
     title: "Code Libraries",
     desc: "Publish and browse reusable snippets, hooks, utilities, and mini-libraries tagged by language and framework — copy, adapt, ship faster.",
-    gradient: "from-emerald-500/10 to-teal-500/10 dark:from-emerald-900/20 dark:to-teal-900/20",
+    gradient:
+      "from-emerald-500/10 to-teal-500/10 dark:from-emerald-900/20 dark:to-teal-900/20",
     border: "border-emerald-200 dark:border-emerald-800/40",
     badge: "Coming soon",
   },
@@ -103,7 +109,8 @@ const features = [
     icon: "🎬",
     title: "Video Explanations",
     desc: "Some concepts click better when you see them. Attach short video walkthroughs to your articles and library entries.",
-    gradient: "from-orange-500/10 to-amber-500/10 dark:from-orange-900/20 dark:to-amber-900/20",
+    gradient:
+      "from-orange-500/10 to-amber-500/10 dark:from-orange-900/20 dark:to-amber-900/20",
     border: "border-orange-200 dark:border-orange-800/40",
     badge: "Coming soon",
   },
@@ -111,7 +118,8 @@ const features = [
     icon: "📝",
     title: "Exams",
     desc: "Test your knowledge with topic-based exams curated by the community. Track your score, review mistakes, and level up your understanding across every specialisation.",
-    gradient: "from-rose-500/10 to-pink-500/10 dark:from-rose-900/20 dark:to-pink-900/20",
+    gradient:
+      "from-rose-500/10 to-pink-500/10 dark:from-rose-900/20 dark:to-pink-900/20",
     border: "border-rose-200 dark:border-rose-800/40",
     badge: "Coming soon",
   },
@@ -119,7 +127,8 @@ const features = [
     icon: "💻",
     title: "Coding Problems",
     desc: "Sharpen your skills with hand-picked coding challenges. Solve problems directly in the browser, compare solutions with other devs, and build real interview confidence.",
-    gradient: "from-cyan-500/10 to-sky-500/10 dark:from-cyan-900/20 dark:to-sky-900/20",
+    gradient:
+      "from-cyan-500/10 to-sky-500/10 dark:from-cyan-900/20 dark:to-sky-900/20",
     border: "border-cyan-200 dark:border-cyan-800/40",
     badge: "Coming soon",
   },
@@ -127,7 +136,8 @@ const features = [
     icon: "🗺️",
     title: "Roadmaps",
     desc: "Follow structured, community-built learning paths for every specialisation. Know exactly what to learn next and track your progress from beginner to expert.",
-    gradient: "from-lime-500/10 to-green-500/10 dark:from-lime-900/20 dark:to-green-900/20",
+    gradient:
+      "from-lime-500/10 to-green-500/10 dark:from-lime-900/20 dark:to-green-900/20",
     border: "border-lime-200 dark:border-lime-800/40",
     badge: "Coming soon",
   },
@@ -149,13 +159,41 @@ const categoryEmoji = {
 };
 
 const roadmap = [
-  { done: true,  label: "Platform Launch",          desc: "DevsWebs goes live with core blog features." },
-  { done: true,  label: "7 Tech Categories",         desc: "Organised content across Full Stack, Backend, Mobile, AI & ML, QA, DevOps and Game Dev." },
-  { done: true,  label: "User Profiles & Follows",   desc: "Build your dev identity and grow your network." },
-  { done: true,  label: "Real-time Chat",            desc: "Instant messaging with mutual connections via WebSocket." },
-  { done: false, label: "Code Playground",           desc: "Run and share code snippets directly inside articles." },
-  { done: false, label: "Open-Source Integration",   desc: "Link repositories, showcase contributions, and celebrate OSS work." },
-  { done: false, label: "Mobile App",                desc: "DevsWebs on iOS & Android — dev content in your pocket." },
+  {
+    done: true,
+    label: "Platform Launch",
+    desc: "DevsWebs goes live with core blog features.",
+  },
+  {
+    done: true,
+    label: "7 Tech Categories",
+    desc: "Organised content across Full Stack, Backend, Mobile, AI & ML, QA, DevOps and Game Dev.",
+  },
+  {
+    done: true,
+    label: "User Profiles & Follows",
+    desc: "Build your dev identity and grow your network.",
+  },
+  {
+    done: true,
+    label: "Real-time Chat",
+    desc: "Instant messaging with mutual connections via WebSocket.",
+  },
+  {
+    done: false,
+    label: "Code Playground",
+    desc: "Run and share code snippets directly inside articles.",
+  },
+  {
+    done: false,
+    label: "Open-Source Integration",
+    desc: "Link repositories, showcase contributions, and celebrate OSS work.",
+  },
+  {
+    done: false,
+    label: "Mobile App",
+    desc: "DevsWebs on iOS & Android — dev content in your pocket.",
+  },
 ];
 
 const socials = [
@@ -206,18 +244,17 @@ const About = () => {
       <div className="pointer-events-none absolute bottom-0 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-purple-100/60 blur-3xl dark:bg-purple-900/10" />
 
       <div className="mx-auto max-w-5xl px-6 sm:px-10 md:px-16 py-16 flex flex-col gap-28">
-
         {/* ── 1. Hero ────────────────────────────────────────────────────────── */}
         <section className="flex flex-col items-center text-center gap-6">
-          <motion.div {...fadeUp(0)}>
+          <Motion.div {...fadeUp(0)}>
             <ShinyText
               text="Developer Community Platform"
               speed={4}
               className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-purple-600"
             />
-          </motion.div>
+          </Motion.div>
 
-          <motion.div {...fadeUp(0.1)}>
+          <Motion.div {...fadeUp(0.1)}>
             <GradientText
               colors={["#8A2BE2", "#FF1493", "#FF00FF", "#9c40ff", "#8A2BE2"]}
               animationSpeed={7}
@@ -226,18 +263,21 @@ const About = () => {
             >
               Built by Devs, for Devs.
             </GradientText>
-          </motion.div>
+          </Motion.div>
 
-          <motion.p
+          <Motion.p
             className="max-w-2xl text-base sm:text-lg text-gray-600 dark:text-gray-400 leading-relaxed"
             {...fadeUp(0.2)}
           >
-            DevsWebs is a community-driven platform where developers read, write, and connect.
-            Whether you are sharing a deep-dive on system design or looking for your next mentor —
-            this is your place.
-          </motion.p>
+            DevsWebs is a community-driven platform where developers read,
+            write, and connect. Whether you are sharing a deep-dive on system
+            design or looking for your next mentor — this is your place.
+          </Motion.p>
 
-          <motion.div className="flex gap-4 flex-wrap justify-center mt-2" {...fadeUp(0.3)}>
+          <Motion.div
+            className="flex gap-4 flex-wrap justify-center mt-2"
+            {...fadeUp(0.3)}
+          >
             <Link
               to="/get-started"
               className="bg-fuchsia-700 hover:bg-fuchsia-600 dark:bg-fuchsia-800 dark:hover:bg-fuchsia-700
@@ -257,21 +297,21 @@ const About = () => {
             >
               Explore Content
             </Link>
-          </motion.div>
+          </Motion.div>
         </section>
 
         {/* ── 2. What We Offer ───────────────────────────────────────────────── */}
         <section className="flex flex-col gap-10">
-          <motion.h2
+          <Motion.h2
             className="text-2xl sm:text-3xl font-bold text-center text-purple-800 dark:text-purple-300"
             {...fadeUp(0)}
           >
             What We Offer
-          </motion.h2>
+          </Motion.h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((f, i) => (
-              <motion.div
+              <Motion.div
                 key={f.title}
                 className={`relative flex flex-col gap-4 p-7 rounded-2xl bg-gradient-to-br ${f.gradient} border ${f.border} shadow-sm`}
                 initial={{ opacity: 0, y: 28 }}
@@ -281,50 +321,61 @@ const About = () => {
                 whileHover={{ y: -5 }}
               >
                 {f.badge && (
-                  <span className={`absolute top-4 right-4 text-xs font-semibold px-2.5 py-0.5 rounded-full ${
-                    f.badge === "Coming soon"
-                      ? "bg-violet-100 dark:bg-violet-900/40 text-violet-600 dark:text-violet-400"
-                      : "bg-fuchsia-100 dark:bg-fuchsia-900/40 text-fuchsia-600 dark:text-fuchsia-400"
-                  }`}>
+                  <span
+                    className={`absolute top-4 right-4 text-xs font-semibold px-2.5 py-0.5 rounded-full ${
+                      f.badge === "Coming soon"
+                        ? "bg-violet-100 dark:bg-violet-900/40 text-violet-600 dark:text-violet-400"
+                        : "bg-fuchsia-100 dark:bg-fuchsia-900/40 text-fuchsia-600 dark:text-fuchsia-400"
+                    }`}
+                  >
                     {f.badge}
                   </span>
                 )}
                 <span className="text-4xl">{f.icon}</span>
-                <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100">{f.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{f.desc}</p>
-              </motion.div>
+                <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100">
+                  {f.title}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                  {f.desc}
+                </p>
+              </Motion.div>
             ))}
           </div>
         </section>
 
         {/* ── 3. Stats ───────────────────────────────────────────────────────── */}
         <section className="flex flex-col gap-10">
-          <motion.h2
+          <Motion.h2
             className="text-2xl sm:text-3xl font-bold text-center text-purple-800 dark:text-purple-300"
             {...fadeUp(0)}
           >
             Growing Every Day
-          </motion.h2>
+          </Motion.h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <StatCard value={120} label="Articles Published" delay={0} />
-            <StatCard value={500} label="Developers Joined"  delay={0.1} />
-            <StatCard value={12}  label="Tech Categories"    suffix="" delay={0.2} />
+            <StatCard value={500} label="Developers Joined" delay={0.1} />
+            <StatCard
+              value={12}
+              label="Tech Categories"
+              suffix=""
+              delay={0.2}
+            />
           </div>
         </section>
 
         {/* ── 4. Categories ──────────────────────────────────────────────────── */}
         <section className="flex flex-col gap-10">
-          <motion.h2
+          <Motion.h2
             className="text-2xl sm:text-3xl font-bold text-center text-purple-800 dark:text-purple-300"
             {...fadeUp(0)}
           >
             12 Specialisations, One Platform
-          </motion.h2>
+          </Motion.h2>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
             {CATEGORY_OPTIONS2.map((cat, i) => (
-              <motion.div
+              <Motion.div
                 key={cat.id}
                 initial={{ opacity: 0, scale: 0.85 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -341,31 +392,33 @@ const About = () => {
                     hover:border-fuchsia-400 dark:hover:border-fuchsia-600
                     transition-all duration-200 group"
                 >
-                  <span className="text-2xl">{categoryEmoji[cat.id] ?? "💻"}</span>
+                  <span className="text-2xl">
+                    {categoryEmoji[cat.id] ?? "💻"}
+                  </span>
                   <span className="text-xs font-medium text-center text-gray-700 dark:text-gray-300 group-hover:text-fuchsia-700 dark:group-hover:text-fuchsia-400 transition-colors">
                     {cat.title}
                   </span>
                 </Link>
-              </motion.div>
+              </Motion.div>
             ))}
           </div>
         </section>
 
         {/* ── 5. Roadmap ─────────────────────────────────────────────────────── */}
         <section className="flex flex-col gap-10">
-          <motion.h2
+          <Motion.h2
             className="text-2xl sm:text-3xl font-bold text-center text-purple-800 dark:text-purple-300"
             {...fadeUp(0)}
           >
             Our Roadmap
-          </motion.h2>
+          </Motion.h2>
 
           <div className="relative flex flex-col pl-8">
             {/* vertical line */}
             <div className="absolute left-3 top-2 bottom-2 w-0.5 rounded-full bg-gradient-to-b from-fuchsia-400 via-purple-400 to-violet-300 dark:from-fuchsia-700 dark:via-purple-700 dark:to-violet-600" />
 
             {roadmap.map((item, i) => (
-              <motion.div
+              <Motion.div
                 key={i}
                 className="relative flex gap-5 pb-8 last:pb-0"
                 initial={{ opacity: 0, x: -20 }}
@@ -382,7 +435,11 @@ const About = () => {
                   }`}
                 >
                   {item.done && (
-                    <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 12 12">
+                    <svg
+                      className="w-2.5 h-2.5 text-white"
+                      fill="none"
+                      viewBox="0 0 12 12"
+                    >
                       <path
                         d="M2 6l3 3 5-5"
                         stroke="currentColor"
@@ -411,9 +468,11 @@ const About = () => {
                       </span>
                     )}
                   </div>
-                  <p className="text-sm text-gray-500 dark:text-gray-500">{item.desc}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-500">
+                    {item.desc}
+                  </p>
                 </div>
-              </motion.div>
+              </Motion.div>
             ))}
           </div>
         </section>
@@ -422,10 +481,14 @@ const About = () => {
         <section className="flex flex-col gap-10">
           {/* Header */}
           <div className="flex flex-col items-center gap-3 text-center">
-            <motion.div {...fadeUp(0)}>
-              <ShinyText text="We build in public" speed={4} className="text-xs sm:text-sm font-semibold tracking-widest uppercase" />
-            </motion.div>
-            <motion.div {...fadeUp(0.1)}>
+            <Motion.div {...fadeUp(0)}>
+              <ShinyText
+                text="We build in public"
+                speed={4}
+                className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-purple-600"
+              />
+            </Motion.div>
+            <Motion.div {...fadeUp(0.1)}>
               <GradientText
                 colors={["#8A2BE2", "#FF1493", "#FF00FF", "#9c40ff", "#8A2BE2"]}
                 animationSpeed={7}
@@ -433,19 +496,20 @@ const About = () => {
               >
                 Stay Connected
               </GradientText>
-            </motion.div>
-            <motion.p
+            </Motion.div>
+            <Motion.p
               className="text-gray-500 dark:text-gray-400 max-w-lg text-sm sm:text-base"
               {...fadeUp(0.2)}
             >
-              Follow us across platforms for updates, articles, behind-the-scenes development, and community highlights.
-            </motion.p>
+              Follow us across platforms for updates, articles,
+              behind-the-scenes development, and community highlights.
+            </Motion.p>
           </div>
 
           {/* Social cards */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             {socials.map((s, i) => (
-              <motion.a
+              <Motion.a
                 key={s.label}
                 href={s.href}
                 target="_blank"
@@ -462,32 +526,52 @@ const About = () => {
                 whileHover={{ y: -6 }}
               >
                 {/* Gradient glow on hover */}
-                <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 bg-gradient-to-br ${s.color}`} />
+                <div
+                  className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 bg-gradient-to-br ${s.color}`}
+                />
 
                 {/* Icon circle */}
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white bg-gradient-to-br ${s.color} shadow-md`}>
+                <div
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center text-white bg-gradient-to-br ${s.color} shadow-md`}
+                >
                   {s.icon}
                 </div>
 
                 <div className="flex flex-col gap-1">
-                  <span className="font-bold text-gray-800 dark:text-gray-100 text-base">{s.label}</span>
-                  <span className="text-xs font-mono text-fuchsia-600 dark:text-fuchsia-400">{s.handle}</span>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">{s.desc}</p>
+                  <span className="font-bold text-gray-800 dark:text-gray-100 text-base">
+                    {s.label}
+                  </span>
+                  <span className="text-xs font-mono text-fuchsia-600 dark:text-fuchsia-400">
+                    {s.handle}
+                  </span>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">
+                    {s.desc}
+                  </p>
                 </div>
 
                 {/* Arrow */}
                 <div className="mt-auto flex items-center gap-1 text-xs font-semibold text-gray-400 dark:text-gray-500 group-hover:text-fuchsia-600 dark:group-hover:text-fuchsia-400 transition-colors">
                   Follow
-                  <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 16 16">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg
+                    className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
+                    fill="none"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M3 8h10M9 4l4 4-4 4"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
-              </motion.a>
+              </Motion.a>
             ))}
           </div>
 
           {/* Bottom CTA banner */}
-          <motion.div
+          <Motion.div
             className="relative overflow-hidden flex flex-col sm:flex-row items-center justify-between gap-6
               p-8 rounded-3xl
               bg-gradient-to-br from-fuchsia-600 to-violet-700 dark:from-fuchsia-700 dark:to-violet-800
@@ -499,8 +583,12 @@ const About = () => {
             <div className="pointer-events-none absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-white/10 blur-2xl" />
 
             <div className="flex flex-col gap-1 text-center sm:text-left z-2">
-              <span className="text-white font-bold text-xl sm:text-2xl">Ready to join the community?</span>
-              <span className="text-fuchsia-200 text-sm">Start reading, writing, and connecting with developers today.</span>
+              <span className="text-white font-bold text-xl sm:text-2xl">
+                Ready to join the community?
+              </span>
+              <span className="text-fuchsia-200 text-sm">
+                Start reading, writing, and connecting with developers today.
+              </span>
             </div>
             <Link
               to="/get-started"
@@ -510,9 +598,8 @@ const About = () => {
             >
               Get Started — it&apos;s free
             </Link>
-          </motion.div>
+          </Motion.div>
         </section>
-
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ArrowRight, DollarSign } from "lucide-react";
 import { motion as Motion } from "framer-motion";
 import GradientText from "@/components/effects/GradientText";
 import {
-  ACCENT,
   TYPE_STYLE,
   MOCK_STATS,
   DAILY,
@@ -17,16 +17,67 @@ const FadeUp = (delay = 0) => ({
   transition: { duration: 0.45, ease: "easeOut", delay },
 });
 
+function useCounter(target, duration = 1800, active = false) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!active) return;
+    let current = 0;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(current));
+      }
+    }, 16);
+    return () => clearInterval(timer);
+  }, [target, duration, active]);
+  return count;
+}
+
+function StatCell({ value, unit, label, sub, index }) {
+  const [started, setStarted] = useState(false);
+  const prefix = value.startsWith("#") ? "#" : "";
+  const numericTarget = parseInt(value.replace("#", ""), 10);
+  const count = useCounter(numericTarget, 1800, started);
+  return (
+    <Motion.div
+      className="px-4 py-4 flex flex-col gap-1"
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.5 }}
+      transition={{ duration: 0.45, ease: "easeOut", delay: index * 0.08 }}
+      onViewportEnter={() => setStarted(true)}
+    >
+      <p className="flex items-baseline gap-0 text-2xl font-bold leading-none text-[#e5e5e5]">
+        <span
+          className="tabular-nums inline-block"
+          style={{ minWidth: `${(prefix + String(numericTarget)).length}ch` }}
+        >
+          {prefix}
+          {count}
+        </span>
+        {unit && <span className="text-base">{unit}</span>}
+      </p>
+      <p className="text-[9px] font-bold tracking-widest uppercase mt-1 text-[#444]">
+        {label}
+      </p>
+      <p className="text-[11px] text-green-400">{sub}</p>
+    </Motion.div>
+  );
+}
+
 function Pill({ label, active, onClick }) {
   return (
     <button
       onClick={onClick}
-      className="text-[11px] px-2.5 py-0.5 rounded-sm transition-all cursor-pointer"
-      style={{
-        backgroundColor: active ? ACCENT : "transparent",
-        border: `1px solid ${active ? ACCENT : "#2a2a2a"}`,
-        color: active ? "#fff" : "#666",
-      }}
+      className={`cursor-pointer whitespace-nowrap rounded-md px-2.5 py-1.5 text-xs font-medium transition-all duration-200 ${
+        active
+          ? "bg-purple-600 text-white"
+          : "bg-gray-800 text-gray-300 hover:bg-purple-950/40 hover:text-purple-300"
+      }`}
     >
       {label}
     </button>
@@ -36,10 +87,7 @@ function Pill({ label, active, onClick }) {
 function FilterGroup({ label, options, active, onSelect }) {
   return (
     <div className="flex items-center gap-2">
-      <span
-        className="text-[10px] font-bold tracking-widest uppercase"
-        style={{ color: "#333" }}
-      >
+      <span className="text-sm font-bold tracking-widest uppercase">
         {label}
       </span>
       <div className="flex items-center gap-1">
@@ -60,31 +108,20 @@ function ChallengeCard({ c }) {
   const ts = TYPE_STYLE[c.type] || TYPE_STYLE.CODE;
   const diffLevel = c.xp >= 60 ? 3 : c.xp >= 50 ? 2 : 1;
   return (
-    <div
-      className="relative overflow-hidden rounded-sm p-4 flex flex-col gap-2.5"
-      style={{ border: "1px solid #1a1a1a", backgroundColor: "#0d0d0d" }}
-    >
+    <div className="relative overflow-hidden rounded-sm p-4 flex flex-col gap-2.5 border border-[#1a1a1a] bg-[#0d0d0d]">
       {c.hot && (
-        <div
-          className="absolute top-4 right-[-28px] rotate-45 text-[8px] font-bold px-10 py-0.5 tracking-widest z-10"
-          style={{ backgroundColor: ACCENT, color: "#fff" }}
-        >
+        <div className="absolute top-4 right-[-28px] rotate-45 text-[8px] font-bold px-10 py-0.5 tracking-widest z-10 bg-purple-600 text-white">
           HOT SPOT MATCH
         </div>
       )}
       {c.done && (
-        <div
-          className="absolute top-3 right-3 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold"
-          style={{ backgroundColor: ACCENT, color: "#fff" }}
-        >
+        <div className="absolute top-3 right-3 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold bg-purple-600 text-white">
           ✓
         </div>
       )}
 
       <div className="flex items-center gap-2">
-        <span className="text-[10px] font-mono" style={{ color: "#333" }}>
-          {c.id}
-        </span>
+        <span className="text-[10px] font-mono text-[#333]">{c.id}</span>
         <span
           className="text-[9px] font-bold px-1.5 py-0.5"
           style={{ border: `1px solid ${ts.border}`, color: ts.color }}
@@ -94,25 +131,19 @@ function ChallengeCard({ c }) {
       </div>
 
       {/* Title */}
-      <p
-        className="text-[14px] font-semibold leading-snug"
-        style={{ color: "#e5e5e5" }}
-      >
+      <p className="text-[14px] font-semibold leading-snug text-[#e5e5e5]">
         {c.title}
       </p>
 
       {/* Description */}
-      <p className="text-[12px] leading-relaxed" style={{ color: "#555" }}>
-        {c.desc}
-      </p>
+      <p className="text-[12px] leading-relaxed text-[#555]">{c.desc}</p>
 
       {/* Tags */}
       <div className="flex flex-wrap gap-1.5">
         {c.tags.map((t) => (
           <span
             key={t}
-            className="text-[10px] px-1.5 py-0.5"
-            style={{ border: "1px solid #1f1f1f", color: "#444" }}
+            className="text-[10px] px-1.5 py-0.5 border border-[#1f1f1f] text-[#444]"
           >
             {t}
           </span>
@@ -120,14 +151,8 @@ function ChallengeCard({ c }) {
       </div>
 
       {/* Footer */}
-      <div
-        className="flex items-center justify-between mt-1 pt-2"
-        style={{ borderTop: "1px solid #1a1a1a" }}
-      >
-        <div
-          className="flex items-center gap-3 text-[11px]"
-          style={{ color: "#444" }}
-        >
+      <div className="flex items-center justify-between mt-1 pt-2 border-t border-[#1a1a1a]">
+        <div className="flex items-center gap-3 text-[11px] text-[#444]">
           <span>{c.time}</span>
           <span>{c.solves} solves</span>
           {/* difficulty bars */}
@@ -135,20 +160,13 @@ function ChallengeCard({ c }) {
             {[1, 2, 3].map((level) => (
               <span
                 key={level}
-                className="w-[3px] rounded-sm"
-                style={{
-                  height: `${level * 4}px`,
-                  backgroundColor: level <= diffLevel ? "#f87171" : "#1f1f1f",
-                  display: "inline-block",
-                }}
+                className={`w-[3px] rounded-sm inline-block ${level <= diffLevel ? "bg-red-400" : "bg-[#1f1f1f]"}`}
+                style={{ height: `${level * 4}px` }}
               />
             ))}
           </span>
         </div>
-        <span
-          className="text-[11px] font-semibold px-2 py-0.5"
-          style={{ border: `1px solid ${ACCENT}`, color: ACCENT }}
-        >
+        <span className="text-[11px] font-semibold px-2 py-0.5 border border-purple-600 text-purple-600">
           +{c.xp} xp
         </span>
       </div>
@@ -169,45 +187,38 @@ export default function CodingChallenges() {
   return (
     <div className="min-h-screen bg-gray-950 text-[#e5e5e5] relative">
       <div
-        className="pointer-events-none fixed top-20 left-0 right-0 h-[400px] z-0"
+        className="pointer-events-none absolute top-0 left-0 right-0 h-[400px] z-0"
         style={{
           backgroundImage: `
             linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)
           `,
           backgroundSize: "48px 48px",
+          maskImage:
+            "linear-gradient(to bottom, transparent, black 25%, black 75%, transparent)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, transparent, black 25%, black 75%, transparent)",
         }}
       />
-      {/* ── HERO ── */}
+
       <div className="px-6 sm:px-10 lg:px-14 pt-10 pb-8">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 items-start">
-          {/* Left: badge + heading + stats */}
           <div className="flex-1 min-w-0">
-            {/* Badge */}
             <Motion.div
               {...FadeUp(0)}
-              className="inline-flex items-center gap-2 text-[11px] mb-6 p-2 px-3 rounded-2xl"
-              style={{
-                border: "1px solid #2d1b4e",
-                backgroundColor: "#0f0b1a",
-                color: "#888",
-              }}
+              className="inline-flex items-center gap-2 text-[11px] mb-6 px-2 py-1.5 rounded-2xl border border-[#2d1b4e] bg-[#0f0b1a] text-[#888]"
             >
-              <span
-                className="text-[10px] font-bold px-1.5 py-0.5 rounded-sm"
-                style={{ backgroundColor: ACCENT, color: "#fff" }}
-              >
+              <span className="text-[10px] font-bold justify-center items-center px-1.5 py-0.5 rounded-lg bg-purple-600 text-white">
                 v0.1
               </span>
-              <span>312 problems · path-specific · agent-guided</span>
+              <span>problems · path-specific · agent-guided</span>
             </Motion.div>
 
-            {/* Heading */}
             <Motion.div {...FadeUp(0.08)} className="mb-4">
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] text-white">
                 Coding
                 <br />
-                <span style={{ color: ACCENT }}>challenges</span> that
+                <span className="text-purple-600">challenges</span> that
                 <br />
                 actually teach.
               </h1>
@@ -215,83 +226,51 @@ export default function CodingChallenges() {
 
             <Motion.p
               {...FadeUp(0.16)}
-              className="text-[14px] max-w-lg mb-8"
-              style={{ color: "#666" }}
+              className="text-[14px] max-w-lg mb-8 text-[#666]"
             >
               Not random DSA grinding. Every challenge is tied to your current
               roadmap layer. Solve them to raise your exam readiness, and the AI
               agent steps in with progressive hints — never the answer.
             </Motion.p>
 
-            {/* Stats row */}
-            <Motion.div
-              {...FadeUp(0.24)}
-              style={{ border: "1px solid #1a1a1a" }}
-              className="grid grid-cols-2 sm:grid-cols-4"
-            >
+            <div className="grid grid-cols-2 sm:grid-cols-4">
               {MOCK_STATS.map(({ value, unit, label, sub }, i) => (
-                <div
+                <StatCell
                   key={label}
-                  className="px-4 py-4 flex flex-col gap-1"
-                  style={{ borderRight: i < 3 ? "1px solid #1a1a1a" : "none" }}
-                >
-                  <p
-                    className="text-2xl font-bold leading-none"
-                    style={{ color: "#e5e5e5" }}
-                  >
-                    {value}
-                    {unit && (
-                      <span
-                        className="text-base ml-0.5"
-                        style={{ color: ACCENT }}
-                      >
-                        {unit}
-                      </span>
-                    )}
-                  </p>
-                  <p
-                    className="text-[9px] font-bold tracking-widest uppercase mt-1"
-                    style={{ color: "#444" }}
-                  >
-                    {label}
-                  </p>
-                  <p className="text-[11px]" style={{ color: "#4ade80" }}>
-                    {sub}
-                  </p>
-                </div>
+                  value={value}
+                  unit={unit}
+                  label={label}
+                  sub={sub}
+                  index={i}
+                />
               ))}
-            </Motion.div>
+            </div>
           </div>
 
-          {/* Right: daily challenge card */}
           <Motion.div
             {...FadeUp(0.1)}
-            className="w-full lg:w-[340px] shrink-0 rounded-sm p-5 flex flex-col gap-4"
-            style={{ backgroundColor: ACCENT, border: `1px solid ${ACCENT}` }}
+            className="w-full lg:w-[340px] shrink-0 rounded-sm p-5 flex flex-col gap-4 bg-purple-600 border border-purple-600"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-white" />
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500 shadow-[0_0_6px_2px_rgba(74,222,128,0.6)]" />
+                </span>
                 <span className="text-[10px] font-bold tracking-widest uppercase text-white">
                   Daily Challenge
                 </span>
               </div>
-              <span
-                className="text-[11px]"
-                style={{ color: "rgba(255,255,255,0.6)" }}
-              >
+              {/* <span className="text-[11px] text-white/60">
                 {DAILY.id} · {DAILY.date}
-              </span>
+              </span> */}
             </div>
 
             <p className="text-[16px] font-bold text-white leading-snug">
               {DAILY.title}
             </p>
 
-            <p
-              className="text-[12px] leading-relaxed"
-              style={{ color: "rgba(255,255,255,0.72)" }}
-            >
+            <p className="text-[12px] leading-relaxed text-white/75">
               {DAILY.desc}
             </p>
 
@@ -299,8 +278,7 @@ export default function CodingChallenges() {
               {DAILY.tags.map((t) => (
                 <span
                   key={t}
-                  className="text-[10px] font-bold px-2 py-0.5"
-                  style={{ backgroundColor: "rgba(0,0,0,0.25)", color: "#fff" }}
+                  className="text-[9px] font-bold px-2 pt-1 bg-black/25 text-white rounded-xl"
                 >
                   {t}
                 </span>
@@ -308,21 +286,17 @@ export default function CodingChallenges() {
             </div>
 
             <div className="flex items-center gap-3 mt-1">
-              <button
-                className="flex-1 py-2 text-[13px] font-bold rounded-sm transition-opacity hover:opacity-90 cursor-pointer"
-                style={{ backgroundColor: "#fff", color: ACCENT }}
-              >
-                $ start solving →
+              <button className="flex justify-center items-center gap-1.5 flex-1 py-2 text-[13px] font-bold rounded-sm transition-opacity hover:opacity-90 cursor-pointer bg-white text-purple-600">
+                <p>$ start solving</p>
+                <ArrowRight size={14} />
               </button>
-              <div className="text-right shrink-0">
+
+              <div className="text-left shrink-0">
+                <p className="text-[9px] tracking-widest uppercase text-white/50">
+                  // RESETS IN
+                </p>
                 <p className="text-[15px] font-bold font-mono text-white">
                   {DAILY.countdown}
-                </p>
-                <p
-                  className="text-[9px] tracking-widest uppercase"
-                  style={{ color: "rgba(255,255,255,0.5)" }}
-                >
-                  // resets in
                 </p>
               </div>
             </div>
@@ -330,74 +304,48 @@ export default function CodingChallenges() {
         </div>
       </div>
 
-      {/* ── FILTER BAR ── */}
-      <div
-        className="px-6 sm:px-10 lg:px-14 py-3 flex flex-wrap items-center gap-3 lg:gap-4"
-        style={{
-          borderTop: "1px solid #1a1a1a",
-          borderBottom: "1px solid #1a1a1a",
-          backgroundColor: "#090909",
-        }}
-      >
+      <div className="px-6 sm:px-10 lg:px-14 py-3 flex flex-wrap items-center gap-3 lg:gap-4">
         <FilterGroup
           label="PATH"
           options={["backend", "frontend", "ai/ml", "devops", "all"]}
           active={activePath}
           onSelect={setActivePath}
         />
-        <div
-          className="hidden sm:block w-px h-4"
-          style={{ backgroundColor: "#1f1f1f" }}
-        />
+        <div className="hidden sm:block w-px h-4 bg-[#1f1f1f]" />
         <FilterGroup
           label="LAYER"
           options={["1", "2", "3", "4+"]}
           active={activeLayer}
           onSelect={setActiveLayer}
         />
-        <div
-          className="hidden sm:block w-px h-4"
-          style={{ backgroundColor: "#1f1f1f" }}
-        />
+        <div className="hidden sm:block w-px h-4 bg-[#1f1f1f]" />
         <FilterGroup
           label="TYPE"
           options={["all", "code", "debug", "build", "design"]}
           active={activeType}
           onSelect={setActiveType}
         />
-        <div
-          className="hidden sm:block w-px h-4"
-          style={{ backgroundColor: "#1f1f1f" }}
-        />
+        <div className="hidden sm:block w-px h-4 bg-[#1f1f1f]" />
         <FilterGroup
           label="LEVEL"
           options={["easy", "med", "hard"]}
           active={activeLevel}
           onSelect={setActiveLevel}
         />
-        <div
-          className="hidden sm:block w-px h-4"
-          style={{ backgroundColor: "#1f1f1f" }}
-        />
+        <div className="hidden sm:block w-px h-4 bg-[#1f1f1f]" />
         <button
           onClick={() => setRecommended(!recommended)}
-          className="text-[11px] px-3 py-0.5 rounded-sm transition-all cursor-pointer"
-          style={{
-            border: `1px solid ${recommended ? ACCENT : "#2a2a2a"}`,
-            color: recommended ? "#fff" : "#666",
-            backgroundColor: recommended
-              ? "rgba(147,51,234,0.15)"
-              : "transparent",
-          }}
+          className={`cursor-pointer whitespace-nowrap rounded-md px-2.5 py-1.5 text-xs font-medium transition-all duration-200 ${
+            recommended
+              ? "bg-purple-600 text-white"
+              : "bg-gray-800 text-gray-300 hover:bg-purple-950/40 hover:text-purple-300"
+          }`}
         >
           + recommended
         </button>
 
         {/* Search */}
-        <div
-          className="ml-auto flex items-center gap-2 px-3 py-1 rounded-sm"
-          style={{ border: "1px solid #1f1f1f", backgroundColor: "#111" }}
-        >
+        <div className="ml-auto flex items-center gap-2 px-3 py-1 rounded-sm border border-[#1f1f1f] bg-[#111]">
           <svg
             className="w-3 h-3 shrink-0"
             fill="none"
@@ -411,7 +359,7 @@ export default function CodingChallenges() {
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             />
           </svg>
-          <span className="text-[11px]" style={{ color: "#444" }}>
+          <span className="text-[11px] text-[#444]">
             search 312 challenges...
           </span>
         </div>
@@ -422,13 +370,10 @@ export default function CodingChallenges() {
         {/* Challenge grid */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-[11px] font-mono" style={{ color: "#444" }}>
+            <span className="text-[11px] font-mono text-[#444]">
               // 12 CHALLENGES · LAYER 3 · SORTED BY RECOMMENDED
             </span>
-            <button
-              className="text-[11px] flex items-center gap-1 cursor-pointer"
-              style={{ color: "#555" }}
-            >
+            <button className="text-[11px] flex items-center gap-1 cursor-pointer text-[#555]">
               recommended <span>↓</span>
             </button>
           </div>
@@ -443,16 +388,10 @@ export default function CodingChallenges() {
         <div className="w-52 shrink-0 hidden lg:flex flex-col gap-6">
           {/* EXAM READINESS */}
           <div>
-            <p className="text-[10px] font-mono mb-3" style={{ color: "#444" }}>
+            <p className="text-[10px] font-mono mb-3 text-[#444]">
               // EXAM READINESS · LAYER 3
             </p>
-            <div
-              className="flex flex-col items-center gap-3 py-5 px-4"
-              style={{
-                border: "1px solid #1a1a1a",
-                backgroundColor: "#0d0d0d",
-              }}
-            >
+            <div className="flex flex-col items-center gap-3 py-5 px-4 border border-[#1a1a1a] bg-[#0d0d0d]">
               {/* Circular progress */}
               <div className="relative w-24 h-24">
                 <svg viewBox="0 0 36 36" className="w-24 h-24 -rotate-90">
@@ -469,32 +408,22 @@ export default function CodingChallenges() {
                     cy="18"
                     r="15.9"
                     fill="none"
-                    stroke={ACCENT}
+                    stroke="#9333ea"
                     strokeWidth="2.5"
                     strokeDasharray="68 32"
                     strokeLinecap="round"
                   />
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span
-                    className="text-xl font-bold"
-                    style={{ color: "#e5e5e5" }}
-                  >
-                    68
-                  </span>
-                  <span className="text-[9px]" style={{ color: "#444" }}>
-                    22 TO GO
-                  </span>
+                  <span className="text-xl font-bold text-[#e5e5e5]">68</span>
+                  <span className="text-[9px] text-[#444]">22 TO GO</span>
                 </div>
               </div>
-              <p className="text-[11px] text-center" style={{ color: "#555" }}>
+              <p className="text-[11px] text-center text-[#555]">
                 Solve 3 more on async errors and you're exam-ready.
               </p>
-              <button
-                className="w-full py-2 text-[12px] font-bold transition-opacity hover:opacity-80 cursor-pointer"
-                style={{ backgroundColor: ACCENT, color: "#fff" }}
-              >
-                $ take_exam
+              <button className="w-full flex justify-center items-center gap-1.5 py-2 text-[12px] font-bold transition-opacity hover:opacity-80 cursor-pointer bg-purple-600 text-white">
+                <DollarSign size={12} /> take exam <ArrowRight size={13} />
               </button>
             </div>
           </div>
@@ -502,32 +431,25 @@ export default function CodingChallenges() {
           {/* TOPICS */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <p className="text-[10px] font-mono" style={{ color: "#444" }}>
-                // TOPICS
-              </p>
-              <span className="text-[10px]" style={{ color: "#2a2a2a" }}>
-                layer 3
-              </span>
+              <p className="text-[10px] font-mono text-[#444]">// TOPICS</p>
+              <span className="text-[10px] text-[#2a2a2a]">layer 3</span>
             </div>
             <div className="flex flex-col gap-0.5">
               {TOPICS.map(({ label, count }) => (
                 <button
                   key={label}
                   onClick={() => setActiveTopic(label)}
-                  className="flex items-center justify-between px-3 py-1.5 text-[12px] transition-all cursor-pointer rounded-sm"
-                  style={{
-                    backgroundColor:
-                      activeTopic === label ? "#1a0f2e" : "transparent",
-                    color: activeTopic === label ? "#fff" : "#555",
-                    border:
-                      activeTopic === label
-                        ? "1px solid #2d1b4e"
-                        : "1px solid transparent",
-                  }}
+                  className={`flex items-center justify-between px-3 py-1.5 text-[12px] transition-all cursor-pointer rounded-sm border ${
+                    activeTopic === label
+                      ? "bg-[#1a0f2e] text-white border-[#2d1b4e]"
+                      : "bg-transparent text-[#555] border-transparent"
+                  }`}
                 >
                   <span>{label}</span>
                   <span
-                    style={{ color: activeTopic === label ? ACCENT : "#333" }}
+                    className={
+                      activeTopic === label ? "text-purple-600" : "text-[#333]"
+                    }
                   >
                     {count}
                   </span>
@@ -539,47 +461,38 @@ export default function CodingChallenges() {
           {/* LEADERBOARD */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <p className="text-[10px] font-mono" style={{ color: "#444" }}>
+              <p className="text-[10px] font-mono text-[#444]">
                 // LEADERBOARD
               </p>
-              <span className="text-[10px]" style={{ color: "#2a2a2a" }}>
-                layer 3 · 7d
-              </span>
+              <span className="text-[10px] text-[#2a2a2a]">layer 3 · 7d</span>
             </div>
             <div className="flex flex-col gap-1">
               {LEADERBOARD.map(({ rank, initial, name, score, you }) => (
                 <div
                   key={name}
-                  className="flex items-center gap-2 px-2 py-1.5 rounded-sm"
-                  style={{
-                    backgroundColor: you ? "#0f0b1a" : "transparent",
-                    border: you ? "1px solid #2d1b4e" : "1px solid transparent",
-                  }}
+                  className={`flex items-center gap-2 px-2 py-1.5 rounded-sm border ${
+                    you
+                      ? "bg-[#0f0b1a] border-[#2d1b4e]"
+                      : "bg-transparent border-transparent"
+                  }`}
                 >
                   <span
-                    className="text-[10px] w-5 shrink-0 tabular-nums text-right"
-                    style={{ color: rank <= 3 ? ACCENT : "#333" }}
+                    className={`text-[10px] w-5 shrink-0 tabular-nums text-right ${rank <= 3 ? "text-purple-600" : "text-[#333]"}`}
                   >
                     {rank <= 3 ? `0${rank}` : `#${rank}`}
                   </span>
                   <div
-                    className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0"
-                    style={{
-                      backgroundColor: you ? ACCENT : "#1a1a1a",
-                      color: you ? "#fff" : "#666",
-                    }}
+                    className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 ${you ? "bg-purple-600 text-white" : "bg-[#1a1a1a] text-[#666]"}`}
                   >
                     {initial}
                   </div>
                   <span
-                    className="flex-1 text-[11px] truncate"
-                    style={{ color: you ? "#e5e5e5" : "#555" }}
+                    className={`flex-1 text-[11px] truncate ${you ? "text-[#e5e5e5]" : "text-[#555]"}`}
                   >
                     {name}
                   </span>
                   <span
-                    className="text-[11px] font-semibold tabular-nums shrink-0"
-                    style={{ color: you ? ACCENT : "#444" }}
+                    className={`text-[11px] font-semibold tabular-nums shrink-0 ${you ? "text-purple-600" : "text-[#444]"}`}
                   >
                     {score}
                   </span>
