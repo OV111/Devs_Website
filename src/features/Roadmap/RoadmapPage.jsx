@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion as Motion, AnimatePresence } from "framer-motion";
 import CategoryBar from "./components/CategotyBar";
 import TrackSelector from "./components/TrackSelector";
 import RoadmapTree from "./components/RoadmapTree";
@@ -13,7 +13,7 @@ export default function RoadmapPage() {
     <div className="min-h-screen px-6 sm:px-10 md:px-20 lg:px-28 py-12 bg-gradient-to-br from-violet-50/60 via-white to-fuchsia-50/40 dark:bg-none">
       <div className="pointer-events-none fixed -top-20 -left-20 h-72 w-72 rounded-full bg-violet-300/40 blur-3xl dark:bg-purple-900/20" />
       <div className="pointer-events-none fixed top-10 right-10 h-72 w-72 rounded-full bg-fuchsia-300/20 blur-3xl dark:bg-purple-900/6" />
-      <motion.div
+      <Motion.div
         className="mb-10 text-center"
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -23,7 +23,7 @@ export default function RoadmapPage() {
           colors={["#7c3aed", "#a855f7", "#6d28d9", "#c084fc", "#7c3aed"]}
           animationSpeed={7}
           showBorder={false}
-          className="text-4xl sm:text-6xl font-bold leading-tight tracking-wide"
+          className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight tracking-wide"
         >
           Roadmaps
         </GradientText>
@@ -34,7 +34,7 @@ export default function RoadmapPage() {
           your progress with exams, coding challenges, real projects layer by
           layer.
         </p>
-      </motion.div>
+      </Motion.div>
 
       {/* Zone 1 — CategoryBar */}
       <CategoryBar />
