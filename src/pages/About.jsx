@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import GradientText from "../components/effects/GradientText";
 import ShinyText from "../components/effects/ShinyText";
@@ -150,13 +149,13 @@ const categoryEmoji = {
 };
 
 const roadmap = [
-  { done: true,  label: "Platform Launch",          desc: "DevsFlow goes live with core blog features." },
+  { done: true,  label: "Platform Launch",          desc: "DevsWebs goes live with core blog features." },
   { done: true,  label: "7 Tech Categories",         desc: "Organised content across Full Stack, Backend, Mobile, AI & ML, QA, DevOps and Game Dev." },
   { done: true,  label: "User Profiles & Follows",   desc: "Build your dev identity and grow your network." },
   { done: true,  label: "Real-time Chat",            desc: "Instant messaging with mutual connections via WebSocket." },
   { done: false, label: "Code Playground",           desc: "Run and share code snippets directly inside articles." },
   { done: false, label: "Open-Source Integration",   desc: "Link repositories, showcase contributions, and celebrate OSS work." },
-  { done: false, label: "Mobile App",                desc: "DevsFlow on iOS & Android — dev content in your pocket." },
+  { done: false, label: "Mobile App",                desc: "DevsWebs on iOS & Android — dev content in your pocket." },
 ];
 
 const socials = [
@@ -186,7 +185,7 @@ const socials = [
   },
   {
     label: "LinkedIn",
-    handle: "DevsFlow",
+    handle: "DevsWebs",
     desc: "Professional updates and articles.",
     href: "#",
     color: "from-blue-600 to-blue-800 dark:from-blue-700 dark:to-blue-900",
@@ -233,7 +232,7 @@ const About = () => {
             className="max-w-2xl text-base sm:text-lg text-gray-600 dark:text-gray-400 leading-relaxed"
             {...fadeUp(0.2)}
           >
-            DevsFlow is a community-driven platform where developers read, write, and connect.
+            DevsWebs is a community-driven platform where developers read, write, and connect.
             Whether you are sharing a deep-dive on system design or looking for your next mentor —
             this is your place.
           </motion.p>

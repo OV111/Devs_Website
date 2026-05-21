@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import useAuthStore from "../../stores/useAuthStore";
 import SearchResults from "../search/SearchResults";
@@ -8,7 +8,6 @@ import { CATEGORY_OPTIONS } from "../../../constants/Categories";
 import {
   AVATAR_MENU_ITEMS,
   MOBILE_EXTRA_LINKS,
-  LIBS_OPTIONS,
 } from "../../../constants/Navbar";
 import useProfileStore from "@/stores/useProfileStore";
 // const SearchResults = lazy(() => import("../search/SearchResults"));
@@ -23,6 +22,7 @@ const Navbar = () => {
   const [searchValue, setSearchValue] = useState("");
   const [showDropdownMobile, setShowDropdownMobile] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const searchRef = useRef(null);
 
   const { pathname } = useLocation();
   const { auth, logout } = useAuthStore();
@@ -34,6 +34,10 @@ const Navbar = () => {
   useEffect(() => {
     setOpenDropdown(null);
   }, [auth]);
+
+  useEffect(() => {
+    setSearchValue("");
+  }, [pathname]);
 
 
   const closeDropdownMobile = () => {
@@ -118,22 +122,6 @@ const Navbar = () => {
     </ul>
   );
 
-  const LibsList = ({ onClose }) => (
-    <ul className="absolute top-full left-0 w-30 overflow-hidden rounded-md bg-white shadow-lg shadow-black/5 dark:bg-gray-900 dark:shadow-black/30 py-0 z-40">
-      {LIBS_OPTIONS.map(({ title, slug }) => (
-        <li key={slug}>
-          <NavLink
-            to={`/coding-libs/${slug}`}
-            onClick={onClose}
-            className="flex items-center px-4 py-2 text-sm lg:text-sm text-gray-700 dark:text-gray-200 hover:bg-purple-50 hover:text-purple-700 dark:hover:bg-purple-950/40 dark:hover:text-purple-300 transition"
-          >
-            {title}
-          </NavLink>
-        </li>
-      ))}
-    </ul>
-  );
-
   return (
     // bg-linear-to-r from-purple-600 to-purple-800 dark:from-purple-700 dark:to-purple-800
 
@@ -143,7 +131,7 @@ const Navbar = () => {
       </h2>
 
       {showSearch && (
-        <div className="relative hidden flex-1 justify-end text-purple-600 md:flex">
+        <div ref={searchRef} className="relative hidden flex-1 justify-end text-purple-600 md:flex">
           <SearchBar
             value={searchValue}
             onChange={setSearchValue}
@@ -151,7 +139,7 @@ const Navbar = () => {
             placeholder="Search"
           />
           <Suspense fallback={null}>
-            <SearchResults query={searchValue} onSelect={handleSearchSelect} />
+            <SearchResults query={searchValue} onSelect={handleSearchSelect} boundaryRef={searchRef} />
           </Suspense>
         </div>
       )}
@@ -181,13 +169,8 @@ const Navbar = () => {
             <li className="hidden md:block font-medium text-sm lg:text-sm px-1 hover:text-purple-500 transition">
               <NavLink to="roadmaps">Roadmaps</NavLink>
             </li>
-            <li
-              onMouseEnter={() => openMenu("libs")}
-              onMouseLeave={closeMenu}
-              className="relative hidden md:block text-sm lg:text-sm font-medium px-1 py-1 hover:text-purple-500 transition-all duration-200 ease-out"
-            >
-              <NavLink to="coding-libs">Coding Libs</NavLink>
-              {openDropdown === "libs" && <LibsList onClose={closeMenu} />}
+            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 hover:text-purple-500 transition">
+              <NavLink to="libs">Coding Libs</NavLink>
             </li>
             <li className="hidden md:block font-medium text-sm lg:text-sm px-1 hover:text-purple-500 transition">
               <NavLink to="coding-challenges">Challenges</NavLink>
@@ -335,7 +318,7 @@ const Navbar = () => {
             {auth && (
               <>
                 <MobileNavLink to="roadmaps">Roadmaps</MobileNavLink>
-                <MobileNavLink to="coding-libs">Coding Libs</MobileNavLink>
+                <MobileNavLink to="libs">Coding Libs</MobileNavLink>
                 <MobileNavLink to="coding-challenges">Challenges</MobileNavLink>
 
                 {MOBILE_EXTRA_LINKS.map(({ label, to }) => (

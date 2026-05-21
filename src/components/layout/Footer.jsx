@@ -13,7 +13,7 @@ const QuickLinks = [
 const AuthLinks = [
   { title: "My Profile", href: "/my-profile" },
   { title: "Roadmaps", href: "/roadmaps" },
-  { title: "Coding Libs", href: "/coding-libs" },
+  { title: "Coding Libs", href: "/libs" },
   { title: "Challenges", href: "/coding-challenges" },
   { title: "About", href: "/about" },
   { title: "Contact", href: "/contact" },
@@ -46,7 +46,7 @@ const Footer = () => {
               </h1>
             </Link>
             <p className="mb-6 text-sx leading-6 text-[#A1A0AB] ">
-              DevsFlow is where developers learn, build, and grow — community
+              DevsWebs is where developers learn, build, and grow — community
               content, structured roadmaps you have to earn, and a personal AI
               agent that knows exactly where you are in your journey.
             </p>
@@ -165,7 +165,7 @@ const Footer = () => {
         </div>
 
         <div className="mx-auto mt-6 max-w-7xl py-5 text-center text-sm text-[#A1A0AB] sm:text-base">
-          © {new Date().getFullYear()} Devs Webs. All rights reserved!
+          © {new Date().getFullYear()} DevsWebs. All rights reserved!
         </div>
       </footer>
     </React.Fragment>

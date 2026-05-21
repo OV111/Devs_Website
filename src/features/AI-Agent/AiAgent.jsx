@@ -1,117 +1,462 @@
-// ─────────────────────────────────────────────────────────────
-//  PAGE: AI-Agent  (/ai-agent)
-//  Auth-only page — only visible to logged-in users
-// ─────────────────────────────────────────────────────────────
+import React, { useState } from "react";
 
-// PAGE LAYOUT
-// ┌──────────────────────────────────────────────────────┐
-// │  Left sidebar  │       Main chat area                │
-// │  (conversation │  ┌──────────────────────────────┐   │
-// │   history)     │  │  message thread              │   │
-// │                │  │  (user + AI bubbles)         │   │
-// │  - list of     │  └──────────────────────────────┘   │
-// │    past chats  │  [ input box + send button ]        │
-// │  - "New Chat"  │                                     │
-// │    button      │                                     │
-// └──────────────────────────────────────────────────────┘
+const ACCENT = "#9333ea";
 
-// ── HEADER SECTION ───────────────────────────────────────────
-// - Page title: "AI Dev Assistant"
-// - Short subtitle: "Ask anything about code, get instant answers"
-// - Mode selector tabs (pill style):
-//     • General  •  Code Review  •  Debug  •  Explain Code
+const SESSIONS = {
+  TODAY: [
+    { id: 1, title: "async error handling in express", time: "12:04", msgs: 23, active: true },
+    { id: 2, title: "why my middleware order broke auth", time: "09:32", msgs: 8 },
+  ],
+  YESTERDAY: [
+    { id: 3, title: "walk me through the event loop", time: "18:14", msgs: 14 },
+    { id: 4, title: "layer 3 exam — explain my fails", time: "17:01", msgs: 31 },
+  ],
+  "THIS WEEK": [
+    { id: 5, title: "REST API design for a blog", time: "TUE", msgs: 19 },
+    { id: 6, title: "help me pick a problem to solve", time: "MON", msgs: 6 },
+    { id: 7, title: "why does node use libuv?", time: "MON", msgs: 11 },
+  ],
+  EARLIER: [
+    { id: 8, title: "layer 2 exam prep", time: "8 APR", msgs: 20 },
+    { id: 9, title: "callbacks → promises → async", time: "5 APR", msgs: 22 },
+  ],
+};
 
-// ── LEFT SIDEBAR ─────────────────────────────────────────────
-// - "New Chat" button at the top (creates a fresh session)
-// - Scrollable list of previous chat sessions
-//     each item shows: session title (auto-generated from first message)
-//                      + relative timestamp  e.g. "2h ago"
-// - Active session is highlighted in purple
-// - On small screens sidebar collapses into a slide-in drawer
+const TOPICS_MASTERED = ["EVENT_LOOP", "HTTP_BASICS", "MODULES", "NPM", "ROUTING", "REST", "CORS"];
+const WEAK_SPOTS = ["ASYNC_ERRORS", "STREAMS"];
+const TOOLS = [
+  { name: "get_user_progress", used: true },
+  { name: "get_layer_content", used: false },
+  { name: "search_platform_posts", used: true },
+  { name: "get_exam_history", used: false },
+  { name: "log_weak_spot", used: false },
+];
 
-// ── MAIN CHAT AREA ───────────────────────────────────────────
+function SectionHeader({ title }) {
+  return (
+    <div className="flex items-center gap-2 mb-2">
+      <span className="text-[10px] font-bold tracking-widest shrink-0 uppercase" style={{ color: ACCENT }}>
+        // {title}
+      </span>
+      <div className="flex-1 h-px rounded-full" style={{ backgroundColor: ACCENT, opacity: 0.2 }} />
+    </div>
+  );
+}
 
-// EMPTY STATE (no messages yet)
-// - Centered illustration or icon (robot / code icon)
-// - Headline: "What can I help you build?"
-// - 4 quick-start suggestion cards the user can click:
-//     • "Review my code snippet"
-//     • "Explain this error message"
-//     • "Suggest resources from DevsWebs"
-//     • "Help me pick a tech stack"
+function SessionItem({ session, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className="w-full text-left px-3 py-2 rounded-sm transition-colors cursor-pointer"
+      style={{
+        backgroundColor: session.active ? "#1a0f2e" : "transparent",
+        borderLeft: session.active ? `2px solid ${ACCENT}` : "2px solid transparent",
+      }}
+    >
+      <p
+        className="text-[13px] truncate"
+        style={{ color: session.active ? "#e5e5e5" : "#666" }}
+      >
+        {session.title}
+      </p>
+      <p className="text-[10px] mt-0.5" style={{ color: "#444" }}>
+        {session.time} · {session.msgs} MSGS
+      </p>
+    </button>
+  );
+}
 
-// MESSAGE THREAD
-// - User messages: right-aligned, purple bubble
-// - AI messages: left-aligned, dark-card bubble
-// - AI messages that contain code:
-//     rendered in a syntax-highlighted code block
-//     with a "Copy" button in the top-right corner
-// - AI messages can include:
-//     • inline links to blog posts on DevsWebs (from search)
-//     • inline links to relevant Roadmaps
-//     • inline links to Coding Libs
-// - Loading state: animated typing indicator (three dots) while AI responds
-// - Each AI message has a thumbs up / thumbs down feedback button
+function ToolUseBlock({ fn, args, result }) {
+  return (
+    <div className="rounded-sm overflow-hidden text-[12px] font-mono mb-2" style={{ backgroundColor: "#0d0d0d", border: "1px solid #1f1f1f" }}>
+      <div className="px-3 py-2" style={{ color: "#9333ea" }}>
+        {fn}
+      </div>
+      <div className="px-3 pb-2" style={{ color: "#555" }}>
+        {args}
+      </div>
+      {result && (
+        <div className="px-3 py-1.5 border-t" style={{ borderColor: "#1f1f1f", color: "#666" }}>
+          {result}
+        </div>
+      )}
+    </div>
+  );
+}
 
-// INPUT BAR (pinned to bottom)
-// - Textarea that auto-grows with content
-// - Paperclip icon → attach a code snippet or paste a file path
-// - Send button (disabled while AI is responding)
-// - Keyboard shortcut hint: "Enter to send · Shift+Enter for new line"
-// - Character / token counter showing remaining context limit
+function SocraticBox({ text }) {
+  return (
+    <div
+      className="px-4 py-3 my-3 rounded-sm text-sm"
+      style={{ borderLeft: `3px solid ${ACCENT}`, backgroundColor: "#0f0b1a" }}
+    >
+      <p className="text-[10px] font-bold tracking-widest mb-1.5" style={{ color: ACCENT }}>
+        SOCRATIC PROMPT
+      </p>
+      <p style={{ color: "#ccc" }}>{text}</p>
+    </div>
+  );
+}
 
-// ── MODES (selected via header tabs) ─────────────────────────
+function InlineCode({ children }) {
+  return (
+    <code
+      className="px-1.5 py-0.5 rounded text-[12px] font-mono"
+      style={{ backgroundColor: "#1a1a1a", color: "#a78bfa" }}
+    >
+      {children}
+    </code>
+  );
+}
 
-// GENERAL MODE (default)
-//   - Open-ended dev Q&A
-//   - AI has context of the current user's saved roadmap and favorite categories
-//     so answers are personalized (e.g. "based on your Backend roadmap...")
+export default function AiAgent() {
+  const [activeSession, setActiveSession] = useState(1);
 
-// CODE REVIEW MODE
-//   - User pastes code into a dedicated code editor panel (monaco / codemirror)
-//   - Language auto-detected, can be manually changed via dropdown
-//   - AI returns structured feedback:
-//       • Summary of what the code does
-//       • Issues found (with line references)
-//       • Suggested improvements
-//       • Refactored version (collapsible)
+  return (
+    <div className="flex bg-gray-950 text-[#e5e5e5]" style={{ height: "calc(100vh - 44px)" }}>
 
-// DEBUG MODE
-//   - Two input fields: "Code" + "Error message / stack trace"
-//   - AI pinpoints the likely cause and shows a fix
-//   - Option to copy the fixed snippet directly
+      {/* ── LEFT SIDEBAR: Sessions ── */}
+      <aside
+        className="w-56 shrink-0 flex-col hidden md:flex"
+        style={{ borderRight: "1px solid #1a1a1a" }}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: "1px solid #1a1a1a" }}>
+          <span className="text-[13px] font-semibold" style={{ color: "#e5e5e5" }}>sessions</span>
+          <button
+            className="text-[11px] font-bold px-2.5 py-1 rounded-sm transition-opacity hover:opacity-80"
+            style={{ backgroundColor: ACCENT, color: "#fff" }}
+          >
+            + new
+          </button>
+        </div>
 
-// EXPLAIN CODE MODE
-//   - User pastes any code snippet
-//   - AI returns a plain-English breakdown, line by line if needed
-//   - Complexity level slider: Beginner / Mid / Expert
-//     (controls how deep the explanation goes)
+        {/* Search */}
+        <div className="px-3 py-2" style={{ borderBottom: "1px solid #1a1a1a" }}>
+          <input
+            type="text"
+            placeholder="search sessions..."
+            className="w-full text-[12px] bg-transparent outline-none placeholder:text-[#333]"
+            style={{ color: "#888" }}
+          />
+        </div>
 
-// ── SIDEBAR EXTRAS ───────────────────────────────────────────
-// - "Suggested for you" section at the bottom of the sidebar:
-//     3 blog posts from DevsWebs relevant to recent chat topics
-//     pulled via the existing blogsApi search endpoint
-// - Small disclaimer: "AI can make mistakes. Always verify code."
+        {/* Session list */}
+        <div className="flex-1 overflow-y-auto px-2 py-3 space-y-4">
+          {Object.entries(SESSIONS).map(([group, sessions]) => (
+            <div key={group}>
+              <p className="text-[10px] font-bold tracking-widest px-1 mb-1.5" style={{ color: "#333" }}>
+                {group}
+              </p>
+              <div className="space-y-0.5">
+                {sessions.map((s) => (
+                  <SessionItem
+                    key={s.id}
+                    session={{ ...s, active: s.id === activeSession }}
+                    onClick={() => setActiveSession(s.id)}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </aside>
 
-// ── STATE MANAGEMENT ─────────────────────────────────────────
-// - useAiAgentStore (new Zustand store)
-//     sessions: []           — list of past conversations
-//     activeSessionId: null  — currently open session
-//     messages: []           — messages for the active session
-//     isLoading: false       — AI response in-flight
-//     mode: 'general'        — active mode tab
-// - Sessions persisted to localStorage so they survive page refresh
-// - On mount: restore last active session if one exists
+      {/* ── MAIN CHAT AREA ── */}
+      <div className="flex-1 flex flex-col min-w-0">
 
-// ── API / SERVICE LAYER ──────────────────────────────────────
-// - src/services/aiAgentApi.js  (new file, mirrors pattern of blogsApi.js)
-//     sendMessage(sessionId, mode, content) → POST /ai-agent/chat
-//     getSessions()                         → GET  /ai-agent/sessions
-//     deleteSession(sessionId)              → DELETE /ai-agent/sessions/:id
-//     submitFeedback(messageId, vote)       → POST /ai-agent/feedback
+        {/* Top bar */}
+        <div
+          className="flex items-center justify-between px-5 py-2.5 shrink-0"
+          style={{ borderBottom: "1px solid #1a1a1a" }}
+        >
+          <div className="flex items-center gap-2">
+            <div
+              className="w-7 h-7 rounded-sm flex items-center justify-center text-[11px] font-bold"
+              style={{ backgroundColor: "#1a0f2e", border: `1px solid ${ACCENT}`, color: ACCENT }}
+            >
+              ▣
+            </div>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-[13px] font-semibold">your agent</span>
+                <span className="text-[11px]" style={{ color: "#444" }}>· session_4f3a</span>
+              </div>
+              <p className="text-[10px]" style={{ color: "#444" }}>
+                claude-sonnet · socratic mode · 4 tools available
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: ACCENT }} />
+              <span className="text-[11px]" style={{ color: ACCENT }}>STREAMING</span>
+            </div>
+            <button
+              className="text-[11px] px-3 py-1 rounded-sm transition-opacity hover:opacity-80"
+              style={{ border: "1px solid #2a2a2a", color: "#888" }}
+            >
+              export
+            </button>
+            <button className="text-[#555] hover:text-[#888] transition-colors text-lg leading-none">—</button>
+          </div>
+        </div>
 
-// ── RESPONSIVE BEHAVIOR ──────────────────────────────────────
-// - Desktop (md+): sidebar always visible on the left
-// - Mobile: sidebar hidden, accessible via a hamburger/history icon
-//   Chat area takes full width on mobile
-//   Input bar stays pinned at the bottom of the viewport
+        {/* Messages */}
+        <div className="flex-1 overflow-y-auto px-8 py-6 space-y-6">
+
+          {/* YOU */}
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#555" }} />
+              <span className="text-[10px] font-bold tracking-widest" style={{ color: "#555" }}>YOU</span>
+            </div>
+            <p className="text-[14px] max-w-2xl" style={{ color: "#ccc" }}>
+              i keep getting tripped up on async error handling in express. when i throw inside an async route,
+              my error middleware never fires. why?
+            </p>
+          </div>
+
+          {/* AGENT · TOOL USE */}
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: ACCENT }} />
+              <span className="text-[10px] font-bold tracking-widest" style={{ color: ACCENT }}>AGENT</span>
+              <span
+                className="text-[9px] font-bold tracking-widest px-1.5 py-0.5"
+                style={{ color: "#555", border: "1px solid #222" }}
+              >
+                TOOL_USE
+              </span>
+            </div>
+            <div className="max-w-2xl space-y-2">
+              <ToolUseBlock
+                fn="get_user_progress()"
+                args="→ path=backend · layer=3 · weak_spots=[async_errors, streams]"
+              />
+              <ToolUseBlock
+                fn='search_platform_posts(query="async error express", layer=3)'
+                args='→ 3 results · top: "async error handling patterns" by @maria.s'
+              />
+            </div>
+          </div>
+
+          {/* AGENT response */}
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: ACCENT }} />
+              <span className="text-[10px] font-bold tracking-widest" style={{ color: ACCENT }}>AGENT</span>
+            </div>
+            <div className="max-w-2xl text-[14px] space-y-3" style={{ color: "#ccc" }}>
+              <p>
+                Good catch — this is one of the most common Express gotchas, and the framework's docs barely
+                flag it. Before I answer directly, let me see if you've got the building block. Quick question:
+              </p>
+              <SocraticBox text="When an async function throws, what does it actually return from the caller's perspective?" />
+              <p style={{ color: "#888" }}>
+                Take a guess. If you nail it, the express behaviour will click in 30 seconds. If you blank,
+                I'll walk you through it.
+              </p>
+            </div>
+          </div>
+
+          {/* YOU */}
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#555" }} />
+              <span className="text-[10px] font-bold tracking-widest" style={{ color: "#555" }}>YOU</span>
+            </div>
+            <p className="text-[14px]" style={{ color: "#ccc" }}>
+              a promise? a rejected one i guess.
+            </p>
+          </div>
+
+          {/* AGENT final */}
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: ACCENT }} />
+              <span className="text-[10px] font-bold tracking-widest" style={{ color: ACCENT }}>AGENT</span>
+            </div>
+            <div className="max-w-2xl text-[14px] space-y-3" style={{ color: "#ccc" }}>
+              <p>
+                Exactly. Now connect the dots: Express's default error pipeline only sees errors that are
+                passed to <InlineCode>next(err)</InlineCode> — synchronously, or that bubble up through
+                synchronous <InlineCode>throw</InlineCode>. Your <InlineCode>async</InlineCode> handler
+                returns a <em>rejected promise</em>, which Express (≤ v4) never inspects. So the rejection
+                vanishes into the void.
+              </p>
+              <p>Two fixes, in order of how much you should learn from each:</p>
+              <p>
+                1. <strong style={{ color: "#e5e5e5" }}>Wrap manually</strong> — call{" "}
+                <InlineCode>next(err)</InlineCode> in a <InlineCode>catch</InlineCode>. Painful but
+                you'll feel the mechanism.
+              </p>
+              <p>
+                2. <strong style={{ color: "#e5e5e5" }}>Use an asyncHandler wrapper</strong> — one helper,
+                applied to every route.
+              </p>
+              <p style={{ color: "#888" }}>
+                Try the manual version first. Want me to set up a sandbox problem so you can fail-and-fix
+                it live?{" "}
+                <span
+                  className="text-[11px] px-2 py-0.5 rounded-sm font-mono"
+                  style={{ backgroundColor: "#1a0f2e", color: ACCENT, border: `1px solid #2d1b4e` }}
+                >
+                  ✦ P_03_09
+                </span>
+              </p>
+            </div>
+          </div>
+
+          {/* Quick replies */}
+          <div className="flex flex-wrap gap-2 pt-2">
+            {[
+              "yes, drop me in the problem",
+              "show me the asyncHandler trick",
+              "how does express 5 fix this?",
+            ].map((r) => (
+              <button
+                key={r}
+                className="text-[12px] px-3 py-1.5 rounded-full transition-colors hover:opacity-80"
+                style={{ border: "1px solid #2a2a2a", color: "#888", backgroundColor: "transparent" }}
+              >
+                {r}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Input bar */}
+        <div className="px-6 py-4 shrink-0" style={{ borderTop: "1px solid #1a1a1a" }}>
+          <div
+            className="flex items-end gap-3 px-4 py-3 rounded-sm"
+            style={{ border: "1px solid #2a2a2a", backgroundColor: "#0d0d0d" }}
+          >
+            <textarea
+              rows={1}
+              placeholder="ask your agent..."
+              className="flex-1 bg-transparent outline-none resize-none text-[13px] placeholder:text-[#333]"
+              style={{ color: "#ccc" }}
+            />
+            <button
+              className="shrink-0 text-[12px] font-bold px-3 py-1.5 rounded-sm transition-opacity hover:opacity-80"
+              style={{ backgroundColor: ACCENT, color: "#fff" }}
+            >
+              send
+            </button>
+          </div>
+          <p className="text-[10px] mt-1.5 text-center" style={{ color: "#333" }}>
+            Enter to send · Shift+Enter for new line
+          </p>
+        </div>
+      </div>
+
+      {/* ── RIGHT SIDEBAR: Agent Context ── */}
+      <aside
+        className="w-56 shrink-0 px-4 py-5 overflow-y-auto hidden lg:block space-y-5"
+        style={{ borderLeft: "1px solid #1a1a1a" }}
+      >
+        <div>
+          <p className="text-[11px] font-bold tracking-widest mb-0.5" style={{ color: "#e5e5e5" }}>
+            // AGENT CONTEXT
+          </p>
+          <p className="text-[11px]" style={{ color: "#444" }}>
+            live — what the agent knows about you right now.
+          </p>
+        </div>
+
+        {/* YOU */}
+        <div>
+          <SectionHeader title="you" />
+          <div className="space-y-1.5">
+            {[
+              { label: "active path", value: "backend_dev" },
+              { label: "current layer", value: "layer_03" },
+              { label: "skill level", value: "intermediate" },
+              { label: "streak", value: "12 d" },
+              { label: "last exam", value: "84 / 100" },
+            ].map(({ label, value }) => (
+              <div key={label} className="flex items-center justify-between text-[11px]">
+                <span style={{ color: "#555" }}>{label}</span>
+                <span className="font-semibold" style={{ color: ACCENT }}>{value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Topics Mastered */}
+        <div>
+          <SectionHeader title={`topics mastered ${TOPICS_MASTERED.length}`} />
+          <div className="flex flex-wrap gap-1">
+            {TOPICS_MASTERED.map((t) => (
+              <span
+                key={t}
+                className="text-[9px] font-bold px-1.5 py-0.5"
+                style={{ border: `1px solid #2d1b4e`, color: ACCENT, backgroundColor: "#0f0b1a" }}
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Weak Spots */}
+        <div>
+          <SectionHeader title={`weak spots ${WEAK_SPOTS.length}`} />
+          <div className="flex flex-wrap gap-1 mb-2">
+            {WEAK_SPOTS.map((w) => (
+              <span
+                key={w}
+                className="text-[9px] font-bold px-1.5 py-0.5"
+                style={{ border: "1px solid #3d2a00", color: "#f59e0b", backgroundColor: "#0f0a00" }}
+              >
+                {w}
+              </span>
+            ))}
+          </div>
+          <p className="text-[10px]" style={{ color: "#444" }}>
+            surfaced from 3 failed problems · 1 exam miss
+          </p>
+        </div>
+
+        {/* Tools Available */}
+        <div>
+          <SectionHeader title="tools available" />
+          <div className="space-y-1.5">
+            {TOOLS.map((tool) => (
+              <div key={tool.name} className="flex items-center justify-between text-[11px]">
+                <span
+                  className="font-mono"
+                  style={{ color: tool.used ? "#ccc" : "#444" }}
+                >
+                  {tool.name}
+                </span>
+                {tool.used && (
+                  <span className="text-[9px]" style={{ color: "#444" }}>used 1×</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Session */}
+        <div>
+          <SectionHeader title="session" />
+          <div className="space-y-1.5">
+            {[
+              { label: "turns", value: "5 / 20" },
+              { label: "tokens", value: "2,184" },
+              { label: "cached", value: "87%" },
+              { label: "latency", value: "412 ms" },
+            ].map(({ label, value }) => (
+              <div key={label} className="flex items-center justify-between text-[11px]">
+                <span style={{ color: "#555" }}>{label}</span>
+                <span style={{ color: "#888" }}>{value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </aside>
+    </div>
+  );
+}
