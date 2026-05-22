@@ -215,7 +215,7 @@ const Navbar = () => {
                         {user?.firstName} {user?.lastName}
                       </p>
                       {user?.username && (
-                        <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                        <p className="text-xs text-gray-500 dark:text-gray-400 truncate" title={`@${user.username}`}>
                           @{user.username}
                         </p>
                       )}
@@ -352,7 +352,7 @@ const Navbar = () => {
                       {user?.firstName}
                     </p>
                     {user?.username && (
-                      <p className="text-xs text-purple-200 truncate">
+                      <p className="text-xs text-purple-200 truncate" title={`@${user.username}`}>
                         @{user.username}
                       </p>
                     )}

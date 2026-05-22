@@ -130,8 +130,8 @@ describe('signUp', () => {
     await signUp({ ...validPayload, username: '' })
 
     const insertedDoc = usersCollection.insertOne.mock.calls[0][0]
-    // username should start with firstnamelastname (sanitized)
-    expect(insertedDoc.username).toMatch(/^janedoe_/)
+    // username should be firstnamelastname (sanitized), no suffix when no collision
+    expect(insertedDoc.username).toMatch(/^janedoe/)
   })
 })
 

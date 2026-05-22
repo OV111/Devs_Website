@@ -16,10 +16,12 @@ const sanitizeUsername = (value = "") =>
     .replace(/[^a-z0-9]/g, "")
     .slice(0, 16);
 
-const uniqueSuffix = () =>
-  `${Date.now().toString().slice(-4)}${Math.floor(Math.random() * 100)
-    .toString()
-    .padStart(2, "0")}`;
+const findUniqueUsername = async (users, base) => {
+  if (!(await users.findOne({ username: base }))) return base;
+  let i = 1;
+  while (await users.findOne({ username: `${base}${i}` })) i++;
+  return `${base}${i}`;
+};
 
 const hashPassword = async (password) => {
   const saltRounds = 13;
@@ -70,12 +72,7 @@ const signUp = async (data) => {
       sanitizeUsername(username) ||
       sanitizeUsername(`${firstName}${lastName}`) ||
       "dev";
-    let finalUsername = `${baseUsername}_${uniqueSuffix()}`;
-
-    // Retry if there is a collision with an existing username.
-    while (await users.findOne({ username: finalUsername })) {
-      finalUsername = `${baseUsername}_${uniqueSuffix()}`;
-    }
+    const finalUsername = await findUniqueUsername(users, baseUsername);
 
     const result = await users.insertOne({
       firstName,
@@ -162,10 +159,7 @@ const googleAuth = async (data) => {
         sanitizeUsername(given_name) ||
         sanitizeUsername(`${given_name}${family_name}`) ||
         "dev";
-      let finalUsername = `${baseUsername}_${uniqueSuffix()}`;
-      while (await users.findOne({ username: finalUsername })) {
-        finalUsername = `${baseUsername}_${uniqueSuffix()}`;
-      }
+      const finalUsername = await findUniqueUsername(users, baseUsername);
       const result = await users.insertOne({
         firstName: given_name,
         lastName: family_name,
@@ -294,10 +288,7 @@ const githubCallback = async (req, res) => {
     });
     if (!user) {
       const baseUsername = sanitizeUsername(githubLogin) || "dev";
-      let finalUsername = `${baseUsername}_${uniqueSuffix()}`;
-      while (await users.findOne({ username: finalUsername })) {
-        finalUsername = `${baseUsername}_${uniqueSuffix()}`;
-      }
+      const finalUsername = await findUniqueUsername(users, baseUsername);
       const result = await users.insertOne({
         username: finalUsername,
         email: primaryEmail,

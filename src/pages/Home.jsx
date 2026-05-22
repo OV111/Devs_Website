@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import TextType from "../components/effects/TextType";
 import useAuthStore from "../stores/useAuthStore";
+import GradientText from "@/components/effects/GradientText";
 // import heroIllustration from "../assets/Code typing-bro (1).svg";
 
 const Home = () => {
@@ -16,10 +17,17 @@ const Home = () => {
       <section className="relative flex justify-between gap-0 lg:gap-48 min-h-[80vh] lg:min-h-[85vh] items-center mx-auto max-w-8xl px-6 sm:px-10 md:px-20 lg:px-28 py-12 lg:py-0">
         <div className="flex flex-col gap-5 lg:gap-8 w-full max-w-2xl">
           {/* fix: min-h instead of fixed h prevents clip; clamp() stops overflow on narrow viewports */}
-          <div className="w-full min-h-14 sm:min-h-16 lg:min-h-28" style={{ minWidth: 0 }}>
+          <div
+            className="w-full min-h-14 sm:min-h-16 lg:min-h-28"
+            style={{ minWidth: 0 }}
+          >
             <h1
               className="font-medium text-purple-800 dark:text-purple-600 drop-shadow-[0_6px_24px_rgba(126,34,206,0.15)]"
-              style={{ fontSize: "clamp(2.25rem, 8vw, 5.5rem)", overflowWrap: "anywhere", minWidth: 0 }}
+              style={{
+                fontSize: "clamp(2.25rem, 8vw, 5.5rem)",
+                overflowWrap: "anywhere",
+                minWidth: 0,
+              }}
             >
               <TextType
                 text={[
@@ -28,7 +36,7 @@ const Home = () => {
                   "Next generation of learning",
                   "Created by Devs for Devs!",
                   "Every expert was once a beginner.",
-                  "It is not ordinary platform"
+                  "It is not ordinary platform",
                 ]}
                 typingSpeed={109}
                 pauseDuration={1700}
@@ -38,10 +46,14 @@ const Home = () => {
             </h1>
           </div>
 
-          {/* fix: plain muted text instead of dark gradient — hits WCAG AA contrast on both modes */}
-          <p className="px-1 py-1 w-full font-medium text-xl sm:text-2xl md:text-3xl lg:text-[34px] text-start text-muted-foreground">
+          <GradientText
+            colors={["#8A2BE2", "#FF1493", "#FF00FF", "#9c40ff", "#00FF00"]}
+            animationSpeed={8}
+            showBorder={false}
+            className="px-1 py-1 w-full font-medium text-xl sm:text-2xl md:text-3xl lg:text-[34px] text-start"
+          >
             Read, write, and grow guided by an AI that knows your journey.
-          </p>
+          </GradientText>
 
           <div className="flex gap-4 items-center mt-2">
             <Link
@@ -70,7 +82,6 @@ const Home = () => {
               Explore Content
             </Link>
           </div>
-          
         </div>
 
         <div className="hidden lg:block shrink-0 ">
@@ -84,8 +95,6 @@ const Home = () => {
           /> */}
         </div>
       </section>
-
-
     </div>
   );
 };

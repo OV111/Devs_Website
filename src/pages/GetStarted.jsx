@@ -24,19 +24,13 @@ const GetStarted = () => {
     getValues,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onBlur" });
 
   const generateUsername = (firstName = "", lastName = "") => {
-    const base = `${firstName}${lastName}`
+    return `${firstName}${lastName}`
       .toLowerCase()
       .replace(/[^a-z0-9]/g, "")
-      .slice(0, 16);
-    const suffix = `${Date.now().toString().slice(-4)}${Math.floor(
-      Math.random() * 100,
-    )
-      .toString()
-      .padStart(2, "0")}`;
-    return `${base || "dev"}_${suffix}`;
+      .slice(0, 20) || "dev";
   };
 
   const onSubmit = async (data) => {
@@ -151,7 +145,7 @@ const GetStarted = () => {
               </div>
             )}
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-3" noValidate>
               {isSignedUp && (
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <div className="flex-1">
