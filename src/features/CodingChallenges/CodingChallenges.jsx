@@ -1,7 +1,15 @@
-import { useState, useEffect } from "react";
-import { ArrowRight, DollarSign } from "lucide-react";
-import { motion as Motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import {
+  ArrowRight,
+  DollarSign,
+  Search,
+  X,
+  ChevronDown,
+  Check,
+} from "lucide-react";
+import { motion as Motion, AnimatePresence } from "framer-motion";
 import GradientText from "@/components/effects/GradientText";
+import TextType from "@/components/effects/TextType";
 import {
   TYPE_STYLE,
   MOCK_STATS,
@@ -69,37 +77,56 @@ function StatCell({ value, unit, label, sub, index }) {
   );
 }
 
-function Pill({ label, active, onClick }) {
+function FilterGroup({
+  label,
+  options,
+  active,
+  onSelect,
+  isOpen,
+  onOpen,
+  onClose,
+}) {
   return (
-    <button
-      onClick={onClick}
-      className={`cursor-pointer whitespace-nowrap rounded-md px-2.5 py-1.5 text-xs font-medium transition-all duration-200 ${
-        active
-          ? "bg-purple-600 text-white"
-          : "bg-gray-800 text-gray-300 hover:bg-purple-950/40 hover:text-purple-300"
-      }`}
-    >
-      {label}
-    </button>
-  );
-}
+    <div className="relative" onMouseEnter={onOpen} onMouseLeave={onClose}>
+      <button
+        type="button"
+        className="flex cursor-pointer items-center gap-1.5 rounded-md bg-gray-100 px-2.5 py-1.5 text-xs font-medium text-gray-600 transition-all duration-200 hover:bg-purple-50 hover:text-purple-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-purple-950/40 dark:hover:text-purple-300 sm:px-3"
+      >
+        <span>{active === "all" ? label : active}</span>
+        <Motion.span
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <ChevronDown className="h-3.5 w-3.5" />
+        </Motion.span>
+      </button>
 
-function FilterGroup({ label, options, active, onSelect }) {
-  return (
-    <div className="flex items-center gap-2">
-      <span className="text-sm font-bold tracking-widest uppercase">
-        {label}
-      </span>
-      <div className="flex items-center gap-1">
-        {options.map((opt) => (
-          <Pill
-            key={opt}
-            label={opt}
-            active={active === opt}
-            onClick={() => onSelect(opt)}
-          />
-        ))}
-      </div>
+      <AnimatePresence>
+        {isOpen && (
+          <Motion.ul
+            initial={{ opacity: 0, y: -6, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -6, scale: 0.96 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            className="absolute left-0 z-50 mt-1.5 min-w-[120px] overflow-hidden rounded-md bg-white shadow-lg shadow-black/5 dark:bg-gray-900 dark:shadow-black/30"
+          >
+            {options.map((opt) => (
+              <li key={opt}>
+                <button
+                  type="button"
+                  onClick={() => onSelect(opt)}
+                  className="flex w-full cursor-pointer items-center justify-between px-3 py-2 text-xs font-medium text-gray-700 transition-colors hover:bg-purple-50 hover:text-purple-700 dark:text-gray-300 dark:hover:bg-purple-950/40 dark:hover:text-purple-300"
+                >
+                  {opt}
+                  {active === opt && (
+                    <Check className="h-3 w-3 text-purple-600 dark:text-purple-400" />
+                  )}
+                </button>
+              </li>
+            ))}
+          </Motion.ul>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -177,12 +204,39 @@ function ChallengeCard({ c }) {
 // ── Main component ─────────────────────────────────────────────
 
 export default function CodingChallenges() {
-  const [activePath, setActivePath] = useState("backend");
+  const [activePath, setActivePath] = useState("all");
   const [activeLayer, setActiveLayer] = useState("3");
   const [activeType, setActiveType] = useState("all");
-  const [activeLevel, setActiveLevel] = useState("med");
-  const [recommended, setRecommended] = useState(true);
+  const [activeLevel, setActiveLevel] = useState("all");
+  const [recommended, setRecommended] = useState(false);
   const [activeTopic, setActiveTopic] = useState("all topics");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const searchInputRef = useRef(null);
+
+  const openMenu = (name) => setOpenDropdown(name);
+  const closeMenu = () => setOpenDropdown(null);
+
+  const filteredChallenges = CHALLENGES.filter((c) => {
+    if (activePath !== "all" && c.path !== activePath) return false;
+    if (activeLayer === "4+") {
+      if (parseInt(c.layer) < 4) return false;
+    } else if (c.layer !== activeLayer) return false;
+    if (activeType !== "all" && c.type.toLowerCase() !== activeType)
+      return false;
+    if (activeLevel !== "all" && c.level !== activeLevel) return false;
+    if (recommended && !c.hot) return false;
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      if (
+        !c.title.toLowerCase().includes(q) &&
+        !c.desc.toLowerCase().includes(q) &&
+        !c.tags.some((t) => t.toLowerCase().includes(q))
+      )
+        return false;
+    }
+    return true;
+  });
 
   return (
     <div className="min-h-screen bg-gray-950 text-[#e5e5e5] relative">
@@ -217,10 +271,28 @@ export default function CodingChallenges() {
             <Motion.div {...FadeUp(0.08)} className="mb-4">
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] text-white">
                 Coding
+                {/* <br /> */}
+                <TextType
+                  as="span"
+                  text={[
+                    " challenges",
+                    " problems",
+                    " exercises",
+                    " algorithms",
+                    " puzzles",
+                  ]}
+                  typingSpeed={109}
+                  deletingSpeed={40}
+                  pauseDuration={1700}
+                  showCursor={true}
+                  cursorCharacter="|"
+                  className="text-purple-600"
+                  style={{ minWidth: "10ch" }}
+                />
                 <br />
-                <span className="text-purple-600">challenges</span> that
+                that actually
                 <br />
-                actually teach.
+                teach and grind.
               </h1>
             </Motion.div>
 
@@ -304,12 +376,15 @@ export default function CodingChallenges() {
         </div>
       </div>
 
-      <div className="px-6 sm:px-10 lg:px-14 py-3 flex flex-wrap items-center gap-3 lg:gap-4">
+      <div className="px-6 sm:px-10 lg:px-14 py-5 flex items-center gap-3">
         <FilterGroup
-          label="PATH"
+          label="Path"
           options={["backend", "frontend", "ai/ml", "devops", "all"]}
           active={activePath}
           onSelect={setActivePath}
+          isOpen={openDropdown === "path"}
+          onOpen={() => openMenu("path")}
+          onClose={closeMenu}
         />
         <div className="hidden sm:block w-px h-4 bg-[#1f1f1f]" />
         <FilterGroup
@@ -317,20 +392,29 @@ export default function CodingChallenges() {
           options={["1", "2", "3", "4+"]}
           active={activeLayer}
           onSelect={setActiveLayer}
+          isOpen={openDropdown === "layer"}
+          onOpen={() => openMenu("layer")}
+          onClose={closeMenu}
         />
         <div className="hidden sm:block w-px h-4 bg-[#1f1f1f]" />
         <FilterGroup
-          label="TYPE"
+          label="Type"
           options={["all", "code", "debug", "build", "design"]}
           active={activeType}
           onSelect={setActiveType}
+          isOpen={openDropdown === "type"}
+          onOpen={() => openMenu("type")}
+          onClose={closeMenu}
         />
         <div className="hidden sm:block w-px h-4 bg-[#1f1f1f]" />
         <FilterGroup
-          label="LEVEL"
-          options={["easy", "med", "hard"]}
+          label="Level"
+          options={["all", "easy", "med", "hard"]}
           active={activeLevel}
           onSelect={setActiveLevel}
+          isOpen={openDropdown === "level"}
+          onOpen={() => openMenu("level")}
+          onClose={closeMenu}
         />
         <div className="hidden sm:block w-px h-4 bg-[#1f1f1f]" />
         <button
@@ -338,97 +422,77 @@ export default function CodingChallenges() {
           className={`cursor-pointer whitespace-nowrap rounded-md px-2.5 py-1.5 text-xs font-medium transition-all duration-200 ${
             recommended
               ? "bg-purple-600 text-white"
-              : "bg-gray-800 text-gray-300 hover:bg-purple-950/40 hover:text-purple-300"
+              : "bg-gray-100 text-gray-600 hover:bg-purple-50 hover:text-purple-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-purple-950/40 dark:hover:text-purple-300"
           }`}
         >
           + recommended
         </button>
 
-        {/* Search */}
-        <div className="ml-auto flex items-center gap-2 px-3 py-1 rounded-sm border border-[#1f1f1f] bg-[#111]">
-          <svg
-            className="w-3 h-3 shrink-0"
-            fill="none"
-            stroke="#555"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-          <span className="text-[11px] text-[#444]">
-            search 312 challenges...
-          </span>
+        <div className="ml-auto flex items-center gap-2 rounded-md bg-white px-3 py-2 dark:bg-gray-900">
+          <Search className="h-3.5 w-3.5 shrink-0 text-gray-400 dark:text-gray-500" />
+          <input
+            ref={searchInputRef}
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search challenges..."
+            className="min-w-0 w-[220px] bg-transparent text-sm text-gray-800 placeholder-gray-400 outline-none dark:text-gray-100 dark:placeholder-gray-500"
+          />
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={() => setSearchQuery("")}
+              className="shrink-0 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+            >
+              <X className="h-3.5 w-3.5" />
+            </button>
+          )}
         </div>
       </div>
 
-      {/* ── MAIN CONTENT ── */}
       <div className="flex gap-6 px-6 sm:px-10 lg:px-14 py-6">
-        {/* Challenge grid */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-[11px] font-mono text-[#444]">
-              // 12 CHALLENGES · LAYER 3 · SORTED BY RECOMMENDED
-            </span>
-            <button className="text-[11px] flex items-center gap-1 cursor-pointer text-[#555]">
-              recommended <span>↓</span>
-            </button>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {CHALLENGES.map((c) => (
-              <ChallengeCard key={c.id} c={c} />
-            ))}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {filteredChallenges.map((c) => (
+            <ChallengeCard key={c.id} c={c} />
+          ))}
         </div>
 
-        {/* Right sidebar */}
         <div className="w-52 shrink-0 hidden lg:flex flex-col gap-6">
-          {/* EXAM READINESS */}
-          <div>
-            <p className="text-[10px] font-mono mb-3 text-[#444]">
-              // EXAM READINESS · LAYER 3
-            </p>
-            <div className="flex flex-col items-center gap-3 py-5 px-4 border border-[#1a1a1a] bg-[#0d0d0d]">
-              {/* Circular progress */}
-              <div className="relative w-24 h-24">
-                <svg viewBox="0 0 36 36" className="w-24 h-24 -rotate-90">
-                  <circle
-                    cx="18"
-                    cy="18"
-                    r="15.9"
-                    fill="none"
-                    stroke="#1a1a1a"
-                    strokeWidth="2.5"
-                  />
-                  <circle
-                    cx="18"
-                    cy="18"
-                    r="15.9"
-                    fill="none"
-                    stroke="#9333ea"
-                    strokeWidth="2.5"
-                    strokeDasharray="68 32"
-                    strokeLinecap="round"
-                  />
-                </svg>
-                <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="text-xl font-bold text-[#e5e5e5]">68</span>
-                  <span className="text-[9px] text-[#444]">22 TO GO</span>
-                </div>
+          <div className="flex flex-col items-center gap-3 py-5 px-4 border border-[#1a1a1a] bg-[#0d0d0d]">
+            <div className="relative w-24 h-24">
+              <svg viewBox="0 0 36 36" className="w-24 h-24 -rotate-90">
+                <circle
+                  cx="18"
+                  cy="18"
+                  r="15.9"
+                  fill="none"
+                  stroke="#1a1a1a"
+                  strokeWidth="2.5"
+                />
+                <circle
+                  cx="18"
+                  cy="18"
+                  r="15.9"
+                  fill="none"
+                  stroke="#9333ea"
+                  strokeWidth="2.5"
+                  strokeDasharray="68 32"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <span className="text-xl font-bold text-[#e5e5e5]">68</span>
+                <span className="text-[9px] text-[#444]">22 TO GO</span>
               </div>
-              <p className="text-[11px] text-center text-[#555]">
-                Solve 3 more on async errors and you're exam-ready.
-              </p>
-              <button className="w-full flex justify-center items-center gap-1.5 py-2 text-[12px] font-bold transition-opacity hover:opacity-80 cursor-pointer bg-purple-600 text-white">
-                <DollarSign size={12} /> take exam <ArrowRight size={13} />
-              </button>
             </div>
+            <p className="text-[11px] text-center text-[#555]">
+              Solve 3 more on async errors and you're exam-ready.
+            </p>
+            <button className="w-full flex justify-center items-center gap-1.5 py-2 text-[12px] font-bold transition-opacity hover:opacity-80 cursor-pointer bg-purple-600 text-white">
+              <DollarSign size={12} /> take exam <ArrowRight size={13} />
+            </button>
           </div>
 
-          {/* TOPICS */}
           <div>
             <div className="flex items-center justify-between mb-2">
               <p className="text-[10px] font-mono text-[#444]">// TOPICS</p>
@@ -458,7 +522,6 @@ export default function CodingChallenges() {
             </div>
           </div>
 
-          {/* LEADERBOARD */}
           <div>
             <div className="flex items-center justify-between mb-2">
               <p className="text-[10px] font-mono text-[#444]">

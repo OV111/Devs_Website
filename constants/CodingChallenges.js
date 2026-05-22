@@ -23,7 +23,7 @@ export const DAILY = {
 
 export const CHALLENGES = [
   {
-    id: "P_03_09",
+    id: "P_03_09", path: "backend", layer: "3", level: "easy",
     type: "CODE",
     title: "Implement an async error wrapper for Express",
     desc: "Build a helper that wraps async route handlers so rejections reach Express's error middleware. Five tests including arity preservation.",
@@ -31,7 +31,7 @@ export const CHALLENGES = [
     time: "24m", solves: "612", xp: 45, hot: true, done: false,
   },
   {
-    id: "P_03_07",
+    id: "P_03_07", path: "backend", layer: "3", level: "easy",
     type: "CODE",
     title: "Token-bucket rate-limit middleware",
     desc: "Implement an in-memory token bucket that allows N requests per minute per IP. Handle the refill arithmetic correctly under burst load.",
@@ -39,7 +39,7 @@ export const CHALLENGES = [
     time: "26m", solves: "2.4k", xp: 40, hot: false, done: true,
   },
   {
-    id: "P_03_08",
+    id: "P_03_08", path: "backend", layer: "3", level: "med",
     type: "DEBUG",
     title: "Why is my middleware order breaking auth?",
     desc: "A broken Express app crashes on protected routes. Find the off-by-one bug in middleware ordering. Subtle — don't trust the comments.",
@@ -47,7 +47,7 @@ export const CHALLENGES = [
     time: "33m", solves: "1.1k", xp: 50, hot: false, done: false,
   },
   {
-    id: "P_03_10",
+    id: "P_03_10", path: "backend", layer: "3", level: "hard",
     type: "DESIGN",
     title: "Design a versioned REST API for a blog",
     desc: "Write the resource model, URL scheme, and versioning strategy. AI-graded for clarity, consistency, and how you handle breaking changes.",
@@ -55,7 +55,7 @@ export const CHALLENGES = [
     time: "45m", solves: "612", xp: 60, hot: false, done: false,
   },
   {
-    id: "P_03_11",
+    id: "P_03_11", path: "backend", layer: "3", level: "med",
     type: "BUILD",
     title: "Streaming file-upload endpoint",
     desc: "Build a real upload endpoint that streams large files to disk without buffering them in memory. Handle disconnects and partial writes.",
@@ -63,7 +63,7 @@ export const CHALLENGES = [
     time: "30m", solves: "487", xp: 55, hot: false, done: false,
   },
   {
-    id: "P_03_12",
+    id: "P_03_12", path: "backend", layer: "3", level: "easy",
     type: "CODE",
     title: "LRU cache for Express responses",
     desc: "Implement a least-recently-used cache as middleware. Bound memory, expire on TTL, key on URL + query, invalidate cleanly.",
@@ -71,7 +71,7 @@ export const CHALLENGES = [
     time: "29m", solves: "891", xp: 45, hot: false, done: false,
   },
   {
-    id: "P_03_05",
+    id: "P_03_05", path: "backend", layer: "3", level: "hard",
     type: "DEBUG",
     title: "Fix a memory leak in a long-running service",
     desc: "A node service slowly bloats from 80MB to 2GB over 6 hours. You get heap snapshots. Find the closure-trap leak.",
@@ -79,7 +79,7 @@ export const CHALLENGES = [
     time: "38m", solves: "334", xp: 65, hot: false, done: false,
   },
   {
-    id: "P_03_03",
+    id: "P_03_03", path: "backend", layer: "3", level: "hard",
     type: "CODE",
     title: "Parse multipart form-data without a library",
     desc: "Read the boundary, parse headers and binary content. No busboy, no multipart.",

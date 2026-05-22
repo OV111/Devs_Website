@@ -1,14 +1,23 @@
 import { API_BASE_URL, authHeaders } from "../../constants/api";
 
+export const fetchDefaultPostsByCategory = async (categoryName) => {
+  const res = await fetch(`${API_BASE_URL}/categories/${categoryName}/default`);
+  if (!res.ok) throw new Error("Failed to fetch posts");
+  const data = await res.json();
+  return Array.isArray(data) ? data : [];
+};
+
 export const fetchBlogs = async (page = 1, limit = 10, params = {}) => {
   const url = new URL(`${API_BASE_URL}/blogs`);
   url.searchParams.set("page", String(page));
   url.searchParams.set("limit", String(limit));
-  const { filter, sort, difficulty, readTime } = params;
-  if (filter && filter !== "All" && filter !== "Latest") url.searchParams.set("filter", filter);
+  const { filter, sort, difficulty, readTime, category } = params;
+  if (filter && filter !== "All" && filter !== "Latest")
+    url.searchParams.set("filter", filter);
   if (sort && sort !== "Newest") url.searchParams.set("sort", sort);
   if (difficulty) url.searchParams.set("difficulty", difficulty);
   if (readTime) url.searchParams.set("readTime", readTime);
+  if (category) url.searchParams.set("category", category);
   const res = await fetch(url.toString());
   if (!res.ok) throw new Error("Failed to fetch blogs");
   const data = await res.json();
@@ -51,7 +60,9 @@ export const fetchUserBlogs = async (userId, limit) => {
 };
 
 export const fetchFavourites = async () => {
-  const res = await fetch(`${API_BASE_URL}/blogs/favourites`, { headers: authHeaders() });
+  const res = await fetch(`${API_BASE_URL}/blogs/favourites`, {
+    headers: authHeaders(),
+  });
   const data = await res.json();
   if (!data.success) throw new Error("Failed to fetch favourites");
   return data.data;

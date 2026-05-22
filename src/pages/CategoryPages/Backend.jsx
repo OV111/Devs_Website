@@ -1,13 +1,19 @@
-import React, { lazy, Suspense, useEffect, useState } from "react";
-import useAuthStore from "../../stores/useAuthStore";
+import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-
-import BlogCard from "../../components/blog/BlogCard";
-
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import BlogCard from "@/components/blog/BlogCard";
 import { FloatingIcons } from "../../components/effects/FloatingIcons";
-const LoadingSuspense = lazy(() => import("../../components/feedback/LoadingSuspense"));
+import { fetchBlogs, fetchDefaultPostsByCategory } from "@/services/blogsApi";
+import useAuthStore from "@/stores/useAuthStore";
 
-const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+gsap.registerPlugin(ScrollTrigger);
+
+const LoadingSuspense = lazy(
+  () => import("../../components/feedback/LoadingSuspense"),
+);
+
 const backendTags = [
   "Node.js",
   "Express",
@@ -20,26 +26,53 @@ const backendTags = [
 ];
 
 const Backend = () => {
-  const { auth } = useAuthStore();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { auth, isLoading: authLoading } = useAuthStore();
+  const containerRef = useRef(null);
+  const cardsRef = useRef(null);
 
-  const fetchingPosts = async () => {
-    const url = auth
-      ? `${VITE_API_BASE_URL}/categories/backend`
-      : `${VITE_API_BASE_URL}/categories/backend/default`;
-    const request = await fetch(url, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
+  useEffect(() => {
+    if (authLoading) return;
+    const load = auth
+      ? fetchBlogs(1, 8, { category: "Backend Development" }).then(({ blogs }) => blogs)
+      : fetchDefaultPostsByCategory("backend");
+    load
+      .then((items) => setData(items))
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [auth, authLoading]);
+
+  useEffect(() => {
+    if (loading || !data.length) return;
+
+    const container = containerRef.current;
+    const cards = cardsRef.current;
+    const totalWidth = cards.scrollWidth - window.innerWidth;
+
+    const ctx = gsap.context(() => {
+      gsap.to(cards, {
+        x: -totalWidth,
+        ease: "none",
+        scrollTrigger: {
+          trigger: container,
+          pin: true,
+          start: "top top",
+          end: () => `+=${totalWidth}`,
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+      });
     });
 
-    const response = await request.json();
-    setData(response);
-    setLoading(false);
-  };
-  useEffect(() => {
-    fetchingPosts();
-  }, []);
+    const onResize = () => ScrollTrigger.refresh();
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      ctx.revert();
+      window.removeEventListener("resize", onResize);
+    };
+  }, [loading, data]);
 
   return (
     <React.Fragment>
@@ -70,54 +103,61 @@ const Backend = () => {
           transition={{ duration: 0.9, delay: 0.4 }}
           className="mt-6 max-w-3xl text-lg font-semibold sm:text-xl text-muted-foreground mx-auto"
         >
-          <span className="bg-gradient-to-r from-slate-400 via-purple-600 to-indigo-400 text-center block max-w-3xl mx-auto bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-slate-400 via-purple-600 to-indigo-400 text-center block max-w-3xl mx-auto bg-clip-text text-transparent">
             Develop robust server-side applications—craft scalable APIs and web
             services, design efficient database schemas across relational and
             NoSQL systems, implement secure authentication and authorization
             mechanisms
           </span>
         </motion.p>
+
+        <section className="mx-auto py-20">
+          <div className="rounded-3xl px-6 py-8">
+            <p className="text-center text-2xl font-bold uppercase tracking-[4px] text-purple-700">
+              Browse by Technology
+            </p>
+            <p className="bg-linear-to-r from-slate-400 via-purple-600 to-indigo-400 text-transparent bg-clip-text mx-auto mt-3 lg:w-md lg:max-w-2xl text-center text-base font-medium sm:text-lg">
+              Discover content across the backend spectrum Click any tag to
+              explore related topics
+            </p>
+            <div className="mt-6 flex flex-wrap lg:mx-20 justify-center gap-3">
+              {backendTags.map((tag) => (
+                <button
+                  type="button"
+                  key={tag}
+                  className="rounded-full bg-purple-100 px-4 py-2 text-sm font-semibold text-purple-800 transition hover:bg-purple-700 hover:text-white dark:bg-purple-800 dark:text-white"
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
       </header>
 
-      <section className="mx-auto py-20">
-        <div className="rounded-3xl  px-6 py-8">
-          <p className="text-center text-2xl font-bold uppercase tracking-[4px] text-purple-700">
-            Browse by Technology
-          </p>
-          <p className="bg-gradient-to-r from-slate-400 via-purple-600 to-indigo-400 text-transparent bg-clip-text mx-auto mt-3 lg:w-md lg:max-w-2xl text-center text-base font-medium sm:text-lg">
-            Discover content across the backend spectrum Click any tag to
-            explore related topics
-          </p>
-
-          <div className="mt-6 flex flex-wrap lg:mx-20 justify-center gap-3">
-            {backendTags.map((tag) => (
-              <button
-                type="button"
-                key={tag}
-                className="rounded-full bg-purple-100 px-4 py-2 text-sm font-semibold text-purple-800 transition hover:bg-purple-700 hover:text-white dark:bg-purple-800 dark:text-white "
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Best Blogs of the month */}
-      <div>
-        <Suspense fallback={<LoadingSuspense></LoadingSuspense>}>
+      <main>
+        <Suspense fallback={null}>
           {loading ? (
-            <LoadingSuspense></LoadingSuspense>
+            <LoadingSuspense />
           ) : (
-            <div className="flex flex-wrap justify-center gap-10 px-2 pb-10 lg:px-0">
-              {data.map((card) => (
-                <BlogCard key={card.id} card={card} />
-              ))}
+            <div ref={containerRef} className="overflow-hidden h-screen">
+              <div
+                ref={cardsRef}
+                className="flex items-center gap-10 px-16 h-full"
+                style={{ width: "max-content" }}
+              >
+                {data.map((card) => (
+                  <div key={String(card._id)} className="w-[380px] shrink-0">
+                    <BlogCard card={card} />
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </Suspense>
-      </div>
+      </main>
     </React.Fragment>
   );
 };
+
 export default Backend;

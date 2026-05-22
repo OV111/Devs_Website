@@ -1,49 +1,70 @@
-import React, { lazy, Suspense, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-
-import BlogCard from "@/components/blog/BlogCard";
-
+import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import BlogCard from "@/components/blog/BlogCard";
 import { FloatingIcons } from "../../components/effects/FloatingIcons";
-import useAuthStore from "../../stores/useAuthStore";
+import { fetchBlogs, fetchDefaultPostsByCategory } from "@/services/blogsApi";
+import useAuthStore from "@/stores/useAuthStore";
 
-const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+gsap.registerPlugin(ScrollTrigger);
 
 const LoadingSuspense = lazy(() => import("../../components/feedback/LoadingSuspense"));
 
 const Mobile = () => {
-  const [categoryPage, setCategoryPage] = useState("mobile");
-  const { auth } = useAuthStore();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { auth, isLoading: authLoading } = useAuthStore();
+  const containerRef = useRef(null);
+  const cardsRef = useRef(null);
 
-  const fetchingPosts = async () => {
-    const url = auth
-      ? `${VITE_API_BASE_URL}/categories/mobile`
-      : `${VITE_API_BASE_URL}/categories/mobile/default`;
-    const request = await fetch(url, {
-      method: "GET",
-      headers: { "Content-Type": "Application/json" },
-    });
-    const response = await request.json();
-    setData(response);
-    setLoading(false);
-  };
   useEffect(() => {
-    fetchingPosts();
-  }, []);
+    if (authLoading) return;
+    const load = auth
+      ? fetchBlogs(1, 8, { category: "Mobile Development" }).then(({ blogs }) => blogs)
+      : fetchDefaultPostsByCategory("mobile");
+    load
+      .then((items) => setData(items))
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [auth, authLoading]);
+
+  useEffect(() => {
+    if (loading || !data.length) return;
+
+    const container = containerRef.current;
+    const cards = cardsRef.current;
+    const totalWidth = cards.scrollWidth - window.innerWidth;
+
+    const ctx = gsap.context(() => {
+      gsap.to(cards, {
+        x: -totalWidth,
+        ease: "none",
+        scrollTrigger: {
+          trigger: container,
+          pin: true,
+          start: "top top",
+          end: () => `+=${totalWidth}`,
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+    });
+
+    const onResize = () => ScrollTrigger.refresh();
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      ctx.revert();
+      window.removeEventListener("resize", onResize);
+    };
+  }, [loading, data]);
+
   return (
     <React.Fragment>
       <header className="min-h-screen mt-40">
-        <FloatingIcons category={categoryPage} />
+        <FloatingIcons category="mobile" />
 
         <div className="flex justify-center items-center">
           <motion.h1
@@ -69,7 +90,7 @@ const Mobile = () => {
           transition={{ duration: 0.9, delay: 0.4 }}
           className="mt-6 max-w-3xl text-lg font-semibold sm:text-xl text-muted-foreground mx-auto"
         >
-          <span className="bg-gradient-to-r from-slate-400 via-purple-600 to-indigo-400 text-center block max-w-3xl mx-auto bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-slate-400 via-purple-600 to-indigo-400 text-center block max-w-3xl mx-auto bg-clip-text text-transparent">
             Explore modern mobile development from end to end — craft
             responsive, user-friendly interfaces, handle data and APIs, and
             connect your apps to scalable, cloud-powered backends.
@@ -77,20 +98,29 @@ const Mobile = () => {
         </motion.p>
       </header>
 
-      <div>
-        <Suspense fallback={LoadingSuspense}>
+      <main>
+        <Suspense fallback={null}>
           {loading ? (
-            <LoadingSuspense></LoadingSuspense>
+            <LoadingSuspense />
           ) : (
-            <div className="flex flex-wrap justify-center gap-10 px-2 pb-10 lg:px-0">
-              {data.map((card) => (
-                <BlogCard key={card.id} card={card} />
-              ))}
+            <div ref={containerRef} className="overflow-hidden h-screen">
+              <div
+                ref={cardsRef}
+                className="flex items-center gap-10 px-16 h-full"
+                style={{ width: "max-content" }}
+              >
+                {data.map((card) => (
+                  <div key={String(card._id)} className="w-[380px] shrink-0">
+                    <BlogCard card={card} />
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </Suspense>
-      </div>
+      </main>
     </React.Fragment>
   );
 };
+
 export default Mobile;

@@ -1,5 +1,3 @@
-/* This code snippet is a React component named `FullStack` that represents a page for displaying full
-stack development content. Here's a breakdown of what the code is doing: */
 import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
@@ -7,7 +5,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import BlogCard from "@/components/blog/BlogCard";
 import { FloatingIcons } from "../../components/effects/FloatingIcons";
-import useAuthStore from "../../stores/useAuthStore";
+import { fetchBlogs, fetchDefaultPostsByCategory } from "@/services/blogsApi";
+import useAuthStore from "@/stores/useAuthStore";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,43 +14,26 @@ const LoadingSuspense = lazy(
   () => import("../../components/feedback/LoadingSuspense"),
 );
 
-const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
 const FullStack = () => {
-  const categoryPage = "fullstack";
-  const { auth } = useAuthStore();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { auth, isLoading: authLoading } = useAuthStore();
   const containerRef = useRef(null);
   const cardsRef = useRef(null);
   const seg1Ref = useRef(null);
   const seg2Ref = useRef(null);
   const seg3Ref = useRef(null);
 
-  const fetchPosts = async () => {
-    try {
-      let url = auth
-        ? `${VITE_API_BASE_URL}/categories/fullstack`
-        : `${VITE_API_BASE_URL}/categories/fullstack/default`;
-
-      const request = await fetch(url, {
-        method: "GET",
-        headers: { "content-type": "application/json" },
-        credentials: "include",
-      });
-
-      const response = await request.json();
-      setData(response);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchPosts();
-  }, []);
+    if (authLoading) return;
+    const load = auth
+      ? fetchBlogs(1, 8, { category: "Full Stack Development" }).then(({ blogs }) => blogs)
+      : fetchDefaultPostsByCategory("fullstack");
+    load
+      .then((items) => setData(items))
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [auth, authLoading]);
 
   useEffect(() => {
     if (loading || !data.length) return;
@@ -174,7 +156,7 @@ const FullStack = () => {
       </svg>
 
       <header className="min-h-screen mt-40">
-        <FloatingIcons category={categoryPage} />
+        <FloatingIcons category="fullstack" />
 
         <div className="flex justify-center items-center">
           <motion.h1
@@ -220,7 +202,7 @@ const FullStack = () => {
                 style={{ width: "max-content" }}
               >
                 {data.map((card) => (
-                  <div key={card.id} className="w-[380px] shrink-0">
+                  <div key={String(card._id)} className="w-[380px] shrink-0">
                     <BlogCard card={card} />
                   </div>
                 ))}
