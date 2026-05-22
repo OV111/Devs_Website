@@ -192,13 +192,18 @@ export default function AiAgent() {
               <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: ACCENT }} />
               <span className="text-[11px]" style={{ color: ACCENT }}>STREAMING</span>
             </div>
+            {/* fix: aria-labels on icon-only/ambiguous buttons for screen readers */}
             <button
-              className="text-[11px] px-3 py-1 rounded-sm transition-opacity hover:opacity-80"
+              aria-label="Export conversation"
+              className="text-[11px] px-3 py-1 rounded-sm transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-purple-500"
               style={{ border: "1px solid #2a2a2a", color: "#888" }}
             >
               export
             </button>
-            <button className="text-[#555] hover:text-[#888] transition-colors text-lg leading-none">—</button>
+            <button
+              aria-label="Minimize agent panel"
+              className="text-[#555] hover:text-[#888] transition-colors text-lg leading-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-purple-500"
+            >—</button>
           </div>
         </div>
 

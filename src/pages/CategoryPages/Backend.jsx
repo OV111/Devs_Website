@@ -76,7 +76,20 @@ const Backend = () => {
 
   return (
     <React.Fragment>
-      <header className="min-h-screen pt-40">
+      <header className="min-h-screen pt-40 relative">
+        {/* fix: skeleton crossfades out as real content animates in — no blank viewport */}
+        <motion.div
+          aria-hidden="true"
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 0 }}
+          transition={{ duration: 0.4, delay: 0.8 }}
+          className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-5"
+        >
+          <div className="h-16 w-44 rounded-2xl bg-purple-900/20 animate-pulse" />
+          <div className="h-16 w-56 rounded-2xl bg-purple-900/15 animate-pulse" />
+          <div className="mt-2 h-4 w-72 rounded-lg bg-purple-900/10 animate-pulse" />
+          <div className="h-4 w-60 rounded-lg bg-purple-900/10 animate-pulse" />
+        </motion.div>
         <FloatingIcons category={"backend"} />
 
         <div className="flex justify-center items-center">

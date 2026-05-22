@@ -39,6 +39,14 @@ const Navbar = () => {
     setSearchValue("");
   }, [pathname]);
 
+  // fix: close mobile menu on Escape key
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e) => { if (e.key === "Escape") setIsOpen(false); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [isOpen]);
+
 
   const closeDropdownMobile = () => {
     setShowDropdownMobile(false);
@@ -156,7 +164,12 @@ const Navbar = () => {
             openMenu("categories");
           }}
         >
-          <button className="flex lg:gap-1 justify-center items-center cursor-pointer transition-all duration-200">
+          {/* fix: accessible name + expanded state for screen readers */}
+          <button
+            aria-label="Toggle categories menu"
+            aria-expanded={openDropdown === "categories"}
+            className="flex lg:gap-1 justify-center items-center cursor-pointer transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded"
+          >
             Categories
           </button>
           {openDropdown === "categories" && (
@@ -184,7 +197,12 @@ const Navbar = () => {
               onMouseLeave={closeMenu}
               onMouseEnter={() => openMenu("avatar")}
             >
-              <button className="flex items-center cursor-pointer  transition-all duration-200 ease-out">
+              {/* fix: accessible name + expanded state for screen readers */}
+              <button
+                aria-label="Open profile menu"
+                aria-expanded={openDropdown === "avatar"}
+                className="flex items-center cursor-pointer transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded-full"
+              >
                 <AvatarImage />
               </button>
 

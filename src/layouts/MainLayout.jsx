@@ -1,18 +1,19 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
-import { Toaster } from "react-hot-toast";
+import LoadingSuspense from "../components/feedback/LoadingSuspense";
 const MainLayout = () => {
   return (
     <div className="bg-gray-950 min-h-screen">
       <Navbar />
+      {/* fix: suspense boundary here so lazy-route navigations show spinner instead of blank */}
       <main className="min-h-screen bg-gray-950">
-        <Outlet />
+        <Suspense fallback={<LoadingSuspense />}>
+          <Outlet />
+        </Suspense>
       </main>
       <Footer />
-      {/* Initial fix remove from individual pages the Toaster and leave it here */}
-      {/* <Toaster position="bottom-right" reverseOrder={false} /> */}
     </div>
   );
 };

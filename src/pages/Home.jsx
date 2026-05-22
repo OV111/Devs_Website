@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import TextType from "../components/effects/TextType";
-import GradientText from "../components/effects/GradientText";
 import useAuthStore from "../stores/useAuthStore";
 // import heroIllustration from "../assets/Code typing-bro (1).svg";
 
@@ -16,8 +15,12 @@ const Home = () => {
 
       <section className="relative flex justify-between gap-0 lg:gap-48 min-h-[80vh] lg:min-h-[85vh] items-center mx-auto max-w-8xl px-6 sm:px-10 md:px-20 lg:px-28 py-12 lg:py-0">
         <div className="flex flex-col gap-5 lg:gap-8 w-full max-w-2xl">
-          <div className="w-full h-16 sm:h-20 lg:h-36">
-            <h1 className="font-medium text-purple-800 dark:text-purple-600 text-3xl sm:text-5xl lg:text-7xl drop-shadow-[0_6px_24px_rgba(126,34,206,0.15)]">
+          {/* fix: min-h instead of fixed h prevents clip; clamp() stops overflow on narrow viewports */}
+          <div className="w-full min-h-14 sm:min-h-16 lg:min-h-28" style={{ minWidth: 0 }}>
+            <h1
+              className="font-medium text-purple-800 dark:text-purple-600 drop-shadow-[0_6px_24px_rgba(126,34,206,0.15)]"
+              style={{ fontSize: "clamp(2.25rem, 8vw, 5.5rem)", overflowWrap: "anywhere", minWidth: 0 }}
+            >
               <TextType
                 text={[
                   "Welcome to Developers Web",
@@ -35,14 +38,10 @@ const Home = () => {
             </h1>
           </div>
 
-          <GradientText
-            colors={["#8A2BE2", "#FF1493", "#FF00FF", "#9c40ff", "#00FF00"]}
-            animationSpeed={8}
-            showBorder={false}
-            className="px-1 py-1 w-full font-medium text-xl sm:text-2xl md:text-3xl lg:text-[34px] text-start"
-          >
+          {/* fix: plain muted text instead of dark gradient — hits WCAG AA contrast on both modes */}
+          <p className="px-1 py-1 w-full font-medium text-xl sm:text-2xl md:text-3xl lg:text-[34px] text-start text-muted-foreground">
             Read, write, and grow guided by an AI that knows your journey.
-          </GradientText>
+          </p>
 
           <div className="flex gap-4 items-center mt-2">
             <Link

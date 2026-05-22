@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { ChevronUp } from "lucide-react";
 const FloatingLoad = () => {
@@ -17,12 +18,13 @@ const FloatingLoad = () => {
       >
         <ChevronUp size={28} strokeWidth={1.8} />
       </motion.div>
+      {/* fix: text now matches ChevronUp direction — both point toward category pills above */}
       <motion.p
         className="text-sm mt-2 text-purple-600 dark:text-neutral-400 tracking-wide"
         animate={{ opacity: [0.6, 1, 0.6] }}
         transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
       >
-        Select a category to explore your learning path
+        Pick one above to begin
       </motion.p>
       <div className="flex gap-2 mt-4">
         {[0, 1, 2].map((i) => (
