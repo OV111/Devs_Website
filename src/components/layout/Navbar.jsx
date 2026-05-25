@@ -29,7 +29,8 @@ const Navbar = () => {
   // const { theme, setTheme } = useThemeStore();
   const { user, stats } = useProfileStore();
 
-  const showSearch = pathname !== "/";
+  const hideSearchRoutes = ["/", "/get-started", "/forgot-password", "/reset-password"];
+  const showSearch = !hideSearchRoutes.includes(pathname);
 
   useEffect(() => {
     setOpenDropdown(null);
