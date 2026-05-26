@@ -134,7 +134,7 @@ const Navbar = () => {
   return (
     // bg-linear-to-r from-purple-600 to-purple-800 dark:from-purple-700 dark:to-purple-800
 
-    <nav className="sticky space-x-1 flex items-center justify-between px-3 gap-10 py-1  z-3 w-full   lg:gap-10 lg:py-2">
+    <nav className="sticky space-x-1 flex items-center justify-between px-3 gap-10 py-1 z-50 w-full lg:gap-10 lg:py-2">
       <h2 className="text-base font-bold my-1 lg:my-0.5 cursor-pointer sm:text-xl text-gray-100 md:text-xl lg:text-xl lg:w-auto lg:ml-3">
         <NavLink to="/">DevsWebs</NavLink>
       </h2>
@@ -267,6 +267,9 @@ const Navbar = () => {
         ) : (
           <>
             <li className="hidden md:block font-medium text-sm lg:text-sm px-1 py-1 hover:text-purple-500 transition">
+              <NavLink to="roadmaps">Roadmaps</NavLink>
+            </li>
+            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 py-1 hover:text-purple-500 transition">
               <NavLink to="about">About</NavLink>
             </li>
             <li className="hidden md:block font-medium text-sm lg:text-sm px-1 py-1 hover:text-purple-500 transition">
@@ -297,11 +300,19 @@ const Navbar = () => {
           </button>
         </li>
 
+        {/* Mobile menu backdrop */}
+        {isOpen && (
+          <div
+            className="fixed inset-0 top-full bg-black/40 md:hidden z-40"
+            onClick={() => setIsOpen(false)}
+          />
+        )}
+
         {/* Mobile menu */}
         {isOpen && (
-          <ul className="flex flex-col gap-2 p-4 border-t-[0.1px] border-gray-100 absolute top-full left-0 w-full bg-linear-to-r from-purple-600 to-purple-800 dark:from-purple-700 dark:to-purple-800 md:hidden z-40">
+          <ul className="flex flex-col gap-1 p-4 border-t border-white/10 absolute top-full left-0 w-full bg-gray-950 md:hidden z-50 shadow-xl">
             {showSearch && (
-              <li>
+              <li className="mb-1">
                 <div className="relative">
                   <SearchBar
                     value={searchValue}
@@ -322,23 +333,42 @@ const Navbar = () => {
 
             <MobileNavLink to="/">Home</MobileNavLink>
 
-            <li className="relative text-base font-medium hover:text-purple-300 transition">
+            {/* Categories inline expand */}
+            <li className="text-base font-medium hover:text-purple-300 transition">
               <button
                 onClick={() => setShowDropdownMobile(!showDropdownMobile)}
-                className="flex items-center cursor-pointer"
+                className="flex items-center gap-1 cursor-pointer w-full py-0.5"
               >
-                Categories <ChevronDown size={16} className="inline" />
+                Categories
+                <ChevronDown
+                  size={15}
+                  className={`transition-transform duration-200 ${showDropdownMobile ? "rotate-180" : ""}`}
+                />
               </button>
               {showDropdownMobile && (
-                <CategoryList onClose={closeDropdownMobile} />
+                <ul className="mt-1 ml-3 flex flex-col border-l border-white/20 pl-3 gap-0.5">
+                  {CATEGORY_OPTIONS.map(({ title, slug }) => (
+                    <li key={slug}>
+                      <NavLink
+                        to={`/categories/${slug}`}
+                        onClick={closeDropdownMobile}
+                        className="block py-1 text-sm text-purple-100 hover:text-white transition"
+                      >
+                        {title}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
               )}
             </li>
 
+            <MobileNavLink to="roadmaps">Roadmaps</MobileNavLink>
+
             {auth && (
               <>
-                <MobileNavLink to="roadmaps">Roadmaps</MobileNavLink>
                 <MobileNavLink to="libs">Coding Libs</MobileNavLink>
                 <MobileNavLink to="coding-challenges">Challenges</MobileNavLink>
+                <MobileNavLink to="ai-agent">AI-Agent</MobileNavLink>
 
                 {MOBILE_EXTRA_LINKS.map(({ label, to }) => (
                   <MobileNavLink key={to} to={to}>
@@ -346,11 +376,11 @@ const Navbar = () => {
                   </MobileNavLink>
                 ))}
 
-                <li className="flex items-center gap-3 pt-2 mt-1 border-t border-white/20">
+                <li className="flex items-center gap-3 pt-3 mt-2 border-t border-white/20">
                   <AvatarImage />
                   <div className="min-w-0">
                     <p className="text-sm font-semibold text-white truncate">
-                      {user?.firstName}
+                      {user?.firstName} {user?.lastName}
                     </p>
                     {user?.username && (
                       <p className="text-xs text-purple-200 truncate" title={`@${user.username}`}>
@@ -361,17 +391,13 @@ const Navbar = () => {
                 </li>
 
                 {AVATAR_MENU_ITEMS.map(({ label, to, icon }) => (
-                  <MobileNavLink
-                    key={to}
-                    to={to}
-                    className="flex items-center gap-2"
-                  >
+                  <MobileNavLink key={to} to={to} className="flex items-center gap-2">
                     {React.createElement(icon, { size: 14 })}
                     {label}
                   </MobileNavLink>
                 ))}
 
-                <li className="border-t border-white/20 pt-2">
+                <li className="border-t border-white/20 pt-3 mt-1">
                   <button
                     onClick={handleLogout}
                     className="flex items-center gap-2 text-base font-medium text-red-300 hover:text-red-200 transition cursor-pointer"
@@ -389,21 +415,6 @@ const Navbar = () => {
                 <MobileNavLink to="get-started">Get Started</MobileNavLink>
               </>
             )}
-
-            {/* <li className="flex items-center gap-2 border-t border-white/20 pt-2 mt-1">
-              <button
-                onClick={setTheme}
-                aria-label={
-                  theme === "dark"
-                    ? "Switch to light mode"
-                    : "Switch to dark mode"
-                }
-                className="flex items-center gap-2 text-base font-medium cursor-pointer hover:text-purple-300 transition"
-              >
-                {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
-                {theme === "dark" ? "Dark mode" : "Light mode"}
-              </button>
-            </li> */}
           </ul>
         )}
       </ul>

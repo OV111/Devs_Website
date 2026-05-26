@@ -131,7 +131,7 @@ export default function AddBlog() {
             <button
               onClick={() => handleSubmit("draft")}
               disabled={isSubmitting}
-              className="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100 disabled:opacity-50 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+              className="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100 disabled:opacity-50 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 cursor-pointer"
             >
               <SaveAsOutlinedIcon sx={{ fontSize: 16 }} />
               Save draft
@@ -139,7 +139,7 @@ export default function AddBlog() {
             <button
               onClick={() => handleSubmit("published")}
               disabled={isSubmitting}
-              className="flex items-center gap-1.5 rounded-lg bg-fuchsia-600 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-fuchsia-700 disabled:opacity-50"
+              className="flex items-center gap-1.5 rounded-lg bg-fuchsia-600 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-fuchsia-700 disabled:opacity-50 cursor-pointer"
             >
               <Send className="h-3.5 w-3.5" />
               Publish
@@ -251,7 +251,7 @@ export default function AddBlog() {
                     key={d}
                     type="button"
                     onClick={() => set("difficulty", d)}
-                    className={`flex-1 rounded-lg border px-2 py-1.5 text-xs font-medium transition ${
+                    className={`flex-1 rounded-lg border px-2 py-1.5 text-xs font-medium transition cursor-pointer ${
                       fields.difficulty === d
                         ? "border-fuchsia-500 bg-fuchsia-50 text-fuchsia-600 dark:bg-fuchsia-950/40 dark:text-fuchsia-400"
                         : "border-gray-200 bg-white text-gray-600 hover:border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-400 dark:hover:border-gray-600"
@@ -291,7 +291,7 @@ export default function AddBlog() {
                         e.stopPropagation();
                         removeTag(tag);
                       }}
-                      className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+                      className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 cursor-pointer"
                     >
                       ×
                     </button>
@@ -321,7 +321,7 @@ export default function AddBlog() {
                         key={t}
                         type="button"
                         onClick={() => addTag(t)}
-                        className="rounded-md border border-gray-200 px-2 py-0.5 text-[11px] text-gray-500 transition hover:border-fuchsia-400 hover:text-fuchsia-600 dark:border-gray-700 dark:text-gray-400 dark:hover:border-fuchsia-500 dark:hover:text-fuchsia-400"
+                        className="rounded-md border border-gray-200 px-2 py-0.5 text-[11px] text-gray-500 transition hover:border-fuchsia-400 hover:text-fuchsia-600 dark:border-gray-700 dark:text-gray-400 dark:hover:border-fuchsia-500 dark:hover:text-fuchsia-400 cursor-pointer"
                       >
                         #{t}
                       </button>
