@@ -36,6 +36,7 @@ const CodingChallenges = lazy(
   () => import("./features/CodingChallenges/CodingChallenges"),
 );
 const AiAgent = lazy(() => import("./features/AI-Agent/AiAgent"));
+const AiAgentLanding = lazy(() => import("./features/AI-Agent/AiAgentLanding"));
 
 const Fundamentals = lazy(() => import("./pages/CategoryPages/Fundamentals"));
 const FullStack = lazy(() => import("./pages/CategoryPages/FullStack"));
@@ -91,7 +92,8 @@ const router = createBrowserRouter([
           { path: "roadmaps", element: <RoadmapPage /> },
           { path: "libs", element: <LibsPage /> },
           { path: "coding-challenges", element: <CodingChallenges /> },
-          { path: "ai-agent", element: <AiAgent /> },
+          { path: "ai-agent", element: <AiAgentLanding /> },
+          { path: "ai-agent/chat", element: <AiAgent /> },
           { path: "users/:username", element: <UserProfile /> },
           {
             path: "my-profile",
