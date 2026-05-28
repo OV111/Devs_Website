@@ -537,6 +537,14 @@ export const ROADMAPS = {
       ],
       challenge: "Build a fully responsive personal portfolio page using only HTML & CSS.",
       estimatedTime: "2–3 weeks",
+      status: "done",
+      sideLeft: [
+        { title: "HTML & Semantics", tags: ["tags", "forms", "a11y"] },
+        { title: "JS Basics", tags: ["types", "functions", "DOM"] },
+      ],
+      sideRight: [
+        { title: "CSS Layout", tags: ["flexbox", "grid", "responsive"] },
+      ],
     },
     {
       id: "mern-2",
@@ -561,6 +569,14 @@ export const ROADMAPS = {
       ],
       challenge: "Build a weather app that fetches live data from a public API and handles loading/error states.",
       estimatedTime: "2–3 weeks",
+      status: "done",
+      sideLeft: [
+        { title: "Async & Promises", tags: ["event loop", "await"] },
+      ],
+      sideRight: [
+        { title: "Closures & Scope", tags: ["lexical", "hoisting"] },
+        { title: "ES Modules", tags: ["import", "bundlers"] },
+      ],
     },
     {
       id: "mern-3",
@@ -585,6 +601,14 @@ export const ROADMAPS = {
       ],
       challenge: "Build a task manager app with add, delete, and filter functionality — no backend yet.",
       estimatedTime: "3–4 weeks",
+      status: "in-progress",
+      sideLeft: [
+        { title: "Components & JSX", tags: ["props", "composition"] },
+        { title: "Hooks", tags: ["useEffect", "custom"] },
+      ],
+      sideRight: [
+        { title: "State & Props", tags: ["useState", "flow"] },
+      ],
     },
     {
       id: "mern-4",
@@ -608,6 +632,14 @@ export const ROADMAPS = {
       ],
       challenge: "Extend your task manager with multi-page routing, a global theme toggle, and persisted state.",
       estimatedTime: "2–3 weeks",
+      status: "locked",
+      sideLeft: [
+        { title: "React Router", tags: ["nested", "loaders"] },
+      ],
+      sideRight: [
+        { title: "Context & Reducers", tags: ["global state"] },
+        { title: "Data Fetching", tags: ["React Query"] },
+      ],
     },
     {
       id: "mern-5",
@@ -632,6 +664,14 @@ export const ROADMAPS = {
       ],
       challenge: "Build a REST API for a blog — CRUD endpoints for posts, with input validation and error handling.",
       estimatedTime: "2–3 weeks",
+      status: "locked",
+      sideLeft: [
+        { title: "Node Runtime", tags: ["event loop", "modules"] },
+        { title: "Middleware", tags: ["logging", "errors"] },
+      ],
+      sideRight: [
+        { title: "REST Design", tags: ["routing", "CRUD"] },
+      ],
     },
     {
       id: "mern-6",
@@ -655,6 +695,14 @@ export const ROADMAPS = {
       ],
       challenge: "Add a MongoDB database to your blog API — store posts and authors with a proper schema and relationships.",
       estimatedTime: "2 weeks",
+      status: "locked",
+      sideLeft: [
+        { title: "MongoDB CRUD", tags: ["queries", "aggregation"] },
+      ],
+      sideRight: [
+        { title: "Mongoose Schemas", tags: ["models", "validation"] },
+        { title: "Data Relations", tags: ["embed", "reference"] },
+      ],
     },
     {
       id: "mern-7",
@@ -678,6 +726,14 @@ export const ROADMAPS = {
       ],
       challenge: "Add full auth to your blog API — register, login, JWT issuance, and protected post creation routes.",
       estimatedTime: "2 weeks",
+      status: "locked",
+      sideLeft: [
+        { title: "JWT & bcrypt", tags: ["tokens", "hashing"] },
+      ],
+      sideRight: [
+        { title: "Auth Middleware", tags: ["protected routes"] },
+        { title: "OWASP Basics", tags: ["CORS", "sanitize"] },
+      ],
     },
     {
       id: "mern-8",
@@ -701,6 +757,14 @@ export const ROADMAPS = {
       ],
       challenge: "Build a full MERN blog — React frontend that talks to your Express/MongoDB backend with auth, protected routes, and optimistic UI.",
       estimatedTime: "3–4 weeks",
+      status: "locked",
+      sideLeft: [
+        { title: "Axios & Fetch", tags: ["interceptors", "errors"] },
+        { title: "React Query", tags: ["cache", "mutations"] },
+      ],
+      sideRight: [
+        { title: "Zustand State", tags: ["stores", "persist"] },
+      ],
     },
     {
       id: "mern-9",
@@ -724,6 +788,14 @@ export const ROADMAPS = {
       ],
       challenge: "Write unit + integration tests for your blog app — cover components, API routes, and auth flow.",
       estimatedTime: "2 weeks",
+      status: "locked",
+      sideLeft: [
+        { title: "Jest & RTL", tags: ["unit", "render"] },
+      ],
+      sideRight: [
+        { title: "API Testing", tags: ["Supertest", "mocks"] },
+        { title: "CI Coverage", tags: ["reports", "thresholds"] },
+      ],
     },
     {
       id: "mern-10",
@@ -748,6 +820,14 @@ export const ROADMAPS = {
       ],
       challenge: "Deploy your full MERN blog app — frontend on Vercel, API on Railway, MongoDB on Atlas, with a GitHub Actions CI pipeline.",
       estimatedTime: "1–2 weeks",
+      status: "locked",
+      sideLeft: [
+        { title: "Docker", tags: ["images", "compose"] },
+        { title: "GitHub Actions", tags: ["CI/CD", "pipeline"] },
+      ],
+      sideRight: [
+        { title: "Cloud Deploy", tags: ["Vercel", "Railway"] },
+      ],
     },
   ],
 
