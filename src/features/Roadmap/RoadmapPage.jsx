@@ -1,12 +1,21 @@
+import { useState } from "react";
 import { motion as Motion, AnimatePresence } from "framer-motion";
 import CategoryBar from "./components/CategotyBar";
 import TrackSelector from "./components/TrackSelector";
 import RoadmapTree from "./components/RoadmapTree";
 import useRoadmapStore from "../../stores/useRoadmapStore";
 import FloatingLoad from "./components/FloatingLoad";
+import TrackOnboardingPanel from "./components/TrackOnboardingPanel";
 
 export default function RoadmapPage() {
   const { selectedCategory, selectedTrack } = useRoadmapStore();
+  const [panelOpen, setPanelOpen] = useState(false);
+
+  const handleStart = (answers) => {
+    console.log("User answers:", answers);
+    // TODO: call createUserProgress() API with answers
+    setPanelOpen(false);
+  };
 
   return (
     <div className="min-h-screen px-6 sm:px-10 md:px-20 lg:px-28 py-12 bg-linear-to-br from-violet-50/60 via-white to-fuchsia-50/40 dark:bg-none">
@@ -52,6 +61,28 @@ export default function RoadmapPage() {
       {/* Zone 3 — RoadmapTree */}
       <AnimatePresence mode="wait">
         {selectedTrack && <RoadmapTree key={selectedTrack.id} />}
+      </AnimatePresence>
+
+      {/* Floating trigger — right side */}
+      {selectedTrack && !panelOpen && (
+        <button
+          onClick={() => setPanelOpen(true)}
+          className="fixed right-0 top-1/2 -translate-y-1/2 z-40 flex items-center gap-2 px-3 py-2.5 rounded-l-xl text-[12px] font-semibold text-white cursor-pointer transition-all hover:px-4"
+          style={{ backgroundColor: "#9333ea", writingMode: "vertical-rl" }}
+        >
+          Start path
+        </button>
+      )}
+
+      {/* Onboarding panel */}
+      <AnimatePresence>
+        {panelOpen && (
+          <TrackOnboardingPanel
+            track={selectedTrack}
+            onClose={() => setPanelOpen(false)}
+            onStart={handleStart}
+          />
+        )}
       </AnimatePresence>
     </div>
   );

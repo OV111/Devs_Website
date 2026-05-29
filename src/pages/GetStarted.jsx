@@ -139,7 +139,7 @@ const GetStarted = () => {
       <div className="min-h-screen flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-[520px]">
           {/* Card */}
-          <div className="dark:bg-zinc-900 rounded-xl px-8 py-10">
+          <div className="bg-white dark:bg-neutral-800/60 dark:backdrop-blur-sm rounded-xl px-8 py-10">
             {/* Heading */}
             <h1 className="text-[22px] sm:text-[24px] font-semibold leading-tight text-[#1a1f36] dark:text-white mb-1">
               {isSignedUp ? "Create your account" : "Sign in to your account"}

@@ -9,7 +9,14 @@ const connection = {
   port: Number(process.env.REDIS_PORT) || 6379,
 };
 
-const NotificationWorker = new Worker(
+// REDIS_ENABLED=false disables the worker without removing code
+const REDIS_ENABLED = process.env.REDIS_ENABLED !== "false";
+
+if (!REDIS_ENABLED) {
+  console.log("Redis disabled — NotificationWorker not started.");
+}
+
+const NotificationWorker = REDIS_ENABLED ? new Worker(
   "notifications",
   async (job) => {
     const { type, actorId, targetUserId } = job.data;
@@ -49,10 +56,12 @@ const NotificationWorker = new Worker(
     }
   },
   { connection },
-);
+) : null;
 
-NotificationWorker.on("ready", () => {
-  console.log("Redis connected successfully!");
-});
+if (NotificationWorker) {
+  NotificationWorker.on("ready", () => {
+    console.log("Redis connected successfully!");
+  });
+}
 
 export default NotificationWorker;

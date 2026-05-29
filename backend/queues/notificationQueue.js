@@ -5,6 +5,11 @@ const connection = {
   port: Number(process.env.REDIS_PORT) || 6379,
 };
 
-const notificationQueue = new Queue("notifications", { connection });
+// REDIS_ENABLED=false disables the queue without removing code
+const REDIS_ENABLED = process.env.REDIS_ENABLED !== "false";
+
+const notificationQueue = REDIS_ENABLED
+  ? new Queue("notifications", { connection })
+  : { add: () => Promise.resolve() };
 
 export default notificationQueue;
