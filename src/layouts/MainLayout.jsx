@@ -5,6 +5,7 @@ import Footer from "../components/layout/Footer";
 import LoadingSuspense from "../components/feedback/LoadingSuspense";
 const MainLayout = () => {
   return (
+    // [#000000] Good option for bg color
     <div className="bg-gray-950 min-h-screen">
       <Navbar />
       {/* fix: suspense boundary here so lazy-route navigations show spinner instead of blank */}

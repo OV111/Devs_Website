@@ -42,6 +42,7 @@ const Fundamentals = lazy(() => import("./pages/CategoryPages/Fundamentals"));
 const FullStack = lazy(() => import("./pages/CategoryPages/FullStack"));
 const Backend = lazy(() => import("./pages/CategoryPages/Backend"));
 const Mobile = lazy(() => import("./pages/CategoryPages/Mobile"));
+const Languages = lazy(() => import("./pages/CategoryPages/Languages"));
 const AIandML = lazy(() => import("./pages/CategoryPages/AI&ML"));
 const QA = lazy(() => import("./pages/CategoryPages/QA"));
 const DataScience = lazy(() => import("./pages/CategoryPages/DataScience"));

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Plus, ArrowUp, Mic, ChevronRight } from "lucide-react";
+import { Plus, ArrowUp, Mic, ChevronRight, AudioLines } from "lucide-react";
 import useProfileStore from "@/stores/useProfileStore";
 import hexLogo from "@/assets/devswebs_mark_transparent.png";
 import TextType from "@/components/effects/TextType";
@@ -11,12 +11,6 @@ function getGreeting() {
   if (h < 12) return "Good morning";
   if (h < 18) return "Good afternoon";
   return "Good evening";
-}
-
-function HexLogo() {
-  return (
-    <img src={hexLogo} alt="DevsWeb" className="w-11 h-11 object-contain" />
-  );
 }
 
 export default function AiAgentLanding() {
@@ -30,7 +24,6 @@ export default function AiAgentLanding() {
   const firstName = user?.firstName || "there";
   const greeting = `${getGreeting()}, ${firstName}`;
 
-  // close on outside click
   useEffect(() => {
     if (!dropdownOpen) return;
     const handler = (e) => {
@@ -69,15 +62,19 @@ export default function AiAgentLanding() {
   };
 
   return (
-    <div className="grid mx-auto mt-40 w-full max-w-2xl space-y-8">
-      <div className="flex flex-col items-center gap-2">
-        <div className="flex items-center justify-center gap-3">
-          <HexLogo />
-          <h1 className="text-4xl font-semibold tracking-tight text-white">
-            {greeting}
+    <div className="flex flex-col mx-auto pt-24 sm:pt-40 w-full max-w-2xl px-4 space-y-6 sm:space-y-8">
+      <div className="flex flex-col items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-2 max-w-xl w-full lg:min-w-2xl lg:w-full sm:gap-3">
+          <img
+            src={hexLogo}
+            alt="DevsWeb"
+            className="w-9 h-9 sm:w-11 sm:h-11 object-contain"
+          />
+          <h1 className="text-xl sm:text-2xl lg:text-4xl font-semibold tracking-tight truncate min-w-0 text-white">
+            {greeting}djenjdnejjenfjnrjcnrjncjrnef.erwnjrknsj.fnjn
           </h1>
         </div>
-        <p className="text-lg text-white/40 tracking-tight">
+        <p className="text-base sm:text-lg text-white/40 tracking-tight text-center">
           Your Agent for{" "}
           <TextType
             as="span"
@@ -97,12 +94,12 @@ export default function AiAgentLanding() {
             showCursor
             cursorCharacter="|"
             cursorClassName="opacity-40"
-            className="font-medium text-purple-400"
+            className="font-medium text-purple-600"
           />
         </p>
       </div>
 
-      <div className="relative w-full rounded-2xl px-5 pt-4 pb-3 space-y-4 backdrop-blur border border-white/20 bg-white/5">
+      <div className="relative w-full rounded-2xl px-3 sm:px-5 pt-4 pb-3 space-y-4 backdrop-blur border border-white/20 bg-white/5">
         <textarea
           ref={textareaRef}
           rows={2}
@@ -117,28 +114,28 @@ export default function AiAgentLanding() {
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setDropdownOpen((v) => !v)}
-              className="w-8 h-8 rounded-full flex items-center justify-center text-[#555] transition-colors hover:bg-white/5 cursor-pointer"
+              className={`${dropdownOpen ? "bg-white/10" : ""} w-8 h-8 rounded-md flex items-center justify-center text-white transition-colors hover:bg-white/5 cursor-pointer`}
               title="More options"
             >
-              <Plus size={18} strokeWidth={1.5} />
+              <Plus size={20} strokeWidth={1.5} />
             </button>
 
             {dropdownOpen && (
-              <div className="absolute bottom-10 left-0 w-64 rounded-2xl overflow-hidden shadow-2xl z-50 border border-white/10 bg-[#1c1c1c]">
+              <div className="absolute bottom-11 left-0 w-60 rounded-xl overflow-hidden py-1 z-50 border border-white/15 bg-[#222] backdrop-blur-xl">
                 {DROPDOWN_ITEMS.map((group, gi) => (
-                  <div key={gi}>
-                    {gi > 0 && <div className="h-px bg-white/10 mx-3" />}
+                  <div key={gi} className="px-1">
+                    {gi > 0 && <div className="h-px bg-white/8 mx-2 my-1" />}
                     {group.items.map((item) => {
                       const ItemIcon = item.icon;
                       return (
                         <button
                           key={item.label}
-                          className="w-full flex items-center gap-3 px-4 py-3 text-[13px] text-white/80 hover:bg-white/5 transition-colors cursor-pointer"
+                          className="w-full flex items-center rounded-lg gap-3 px-3 py-2.5 text-[14px] text-white hover:bg-white/8 transition-colors cursor-pointer"
                         >
                           <ItemIcon
-                            size={16}
+                            size={17}
                             strokeWidth={1.5}
-                            className="shrink-0 text-white/50"
+                            className="shrink-0 text-white/60"
                           />
                           <span className="flex-1 text-left">{item.label}</span>
                           {item.arrow && (
@@ -155,18 +152,24 @@ export default function AiAgentLanding() {
 
           <div className="flex items-center gap-2">
             <button
-              className="w-8 h-8 rounded-full flex items-center justify-center text-[#555] hover:bg-white/5 transition-colors cursor-pointer"
+              className="w-8 h-8 rounded-md flex items-center justify-center text-white hover:bg-white/5 transition-colors cursor-pointer"
+              title="Speaker"
+            >
+              <AudioLines size={20} strokeWidth={1.5} />
+            </button>
+            <button
+              className="w-8 h-8 rounded-md flex items-center justify-center text-white hover:bg-white/5 transition-colors cursor-pointer"
               title="Microphone"
             >
-              <Mic size={16} strokeWidth={1.5} />
+              <Mic size={20} strokeWidth={1.5} />
             </button>
             <button
               onClick={handleSend}
               disabled={!message.trim()}
-              className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors
-                  ${message.trim() ? "bg-purple-600 text-white cursor-pointer" : "bg-[#222] text-[#444] cursor-default"}`}
+              className={`w-8 h-8 rounded-md flex items-center justify-center transition-colors
+                  ${message.trim() ? "bg-purple-600 text-white cursor-pointer" : "bg-[#222] text-white cursor-default"}`}
             >
-              <ArrowUp size={16} strokeWidth={2} />
+              <ArrowUp size={18} strokeWidth={1.5} />
             </button>
           </div>
         </div>

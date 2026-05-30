@@ -1,5 +1,6 @@
 export const CATEGORY_OPTIONS = [
   { id: "fundamentals", title: "Fundamentals", slug: "fundamentals" },
+  { id: "languages", title: "Languages", slug: "languages" },
   { id: "fullstack", title: "Full Stack", slug: "fullstack" },
   { id: "backend", title: "Backend", slug: "backend" },
   { id: "mobile", title: "Mobile", slug: "mobile" },

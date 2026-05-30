@@ -10,41 +10,120 @@ const ETA_MAP = {
   mern: "~6 months",
 };
 
-const SubTopicNode = ({ title, tags, side }) => (
-  <div
-    className={`
-      inline-flex flex-col gap-1.5 px-3 py-2.5 rounded-xl
-      bg-neutral-900 border border-neutral-800
-      min-w-[130px] max-w-[170px]
-      ${side === "left" ? "text-right items-end" : "text-left items-start"}
-    `}
-  >
-    <span className="text-[12px] font-medium text-neutral-200 leading-tight">{title}</span>
+const MAIN_W  = 100;
+const CHILD_W = 50;
+const NODE_H  = 56;
+const CHILD_H = 36;
+
+const getNodeH = (node) =>
+  node.children?.length ? Math.max(node.children.length * CHILD_H, NODE_H) : NODE_H;
+
+const ChildNode = ({ title, tags, side }) => (
+  <div className={`
+    inline-flex flex-col gap-1 px-2.5 py-1.5 rounded-lg
+    bg-neutral-950 border border-neutral-800/60
+    min-w-[100px] max-w-[130px]
+    ${side === "left" ? "text-right items-end" : "text-left items-start"}
+  `}>
+    <span className="text-[11px] font-medium text-neutral-400 leading-tight">{title}</span>
     <div className={`flex flex-wrap gap-1 ${side === "left" ? "justify-end" : "justify-start"}`}>
       {tags.map((tag) => (
-        <span
-          key={tag}
-          className="text-[10px] text-neutral-500 leading-none"
-        >
-          {tag}
-        </span>
+        <span key={tag} className="text-[9px] text-neutral-600">{tag}</span>
       ))}
     </div>
   </div>
 );
 
+const SubTopicNode = ({ title, tags, side, children = [], isDone }) => {
+  const hasChildren = children.length > 0;
+  const totalH = Math.max(children.length * CHILD_H, NODE_H);
+  const parentCenterY = totalH / 2;
+
+  const parentNode = (
+    <div className={`
+      inline-flex flex-col gap-1.5 px-3 py-2.5 rounded-xl
+      bg-neutral-900 border border-neutral-800
+      min-w-[130px] max-w-[170px] shrink-0
+      ${side === "left" ? "text-right items-end" : "text-left items-start"}
+    `}>
+      <span className="text-[12px] font-medium text-neutral-200 leading-tight">{title}</span>
+      <div className={`flex flex-wrap gap-1 ${side === "left" ? "justify-end" : "justify-start"}`}>
+        {tags.map((tag) => (
+          <span key={tag} className="text-[10px] text-neutral-500 leading-none">{tag}</span>
+        ))}
+      </div>
+    </div>
+  );
+
+  if (!hasChildren) return parentNode;
+
+  const childSvg = (
+    <svg width={CHILD_W} height={totalH} className="shrink-0 overflow-visible">
+      {children.map((_, i) => {
+        const childY = CHILD_H * i + CHILD_H / 2;
+        const x1 = side === "left" ? CHILD_W : 0;
+        const x2 = side === "left" ? 0 : CHILD_W;
+        return (
+          <path
+            key={i}
+            d={`M ${x1} ${parentCenterY} C ${CHILD_W * 0.5} ${parentCenterY}, ${CHILD_W * 0.5} ${childY}, ${x2} ${childY}`}
+            fill="none"
+            stroke={isDone ? "#5b21b6" : "#303030"}
+            strokeWidth="1"
+            strokeDasharray={isDone ? "none" : "3 3"}
+          />
+        );
+      })}
+    </svg>
+  );
+
+  const childrenCol = (
+    <div className={`flex flex-col ${side === "left" ? "items-end" : "items-start"}`}
+      style={{ gap: `${CHILD_H - 28}px` }}>
+      {children.map((c) => (
+        <ChildNode key={c.title} title={c.title} tags={c.tags} side={side} />
+      ))}
+    </div>
+  );
+
+  return (
+    <div className="flex items-center">
+      {side === "left"
+        ? <>{childrenCol}{childSvg}{parentNode}</>
+        : <>{parentNode}{childSvg}{childrenCol}</>
+      }
+    </div>
+  );
+};
+
 const SpineRow = ({ layer, index, isLast }) => {
-  // eslint-disable-next-line no-unused-vars
-  const { activeLayer, setActiveLayer, layerProgress } = useRoadmapStore();
-  const leftRef = useRef(null);
-  const rightRef = useRef(null);
+  const { layerProgress } = useRoadmapStore();
+  const leftRef   = useRef(null);
+  const rightRef  = useRef(null);
   const centerRef = useRef(null);
 
   const resolvedStatus = layerProgress[layer.id] ?? layer.status ?? "locked";
-  const leftNodes = layer.sideLeft ?? [];
+  const isDone = resolvedStatus === "done";
+  const leftNodes  = layer.sideLeft  ?? [];
   const rightNodes = layer.sideRight ?? [];
 
-  const CONNECTOR_W = 80;
+  // calculate cumulative Y centers for main SVG connections
+  const buildPositions = (nodes) => {
+    let offset = 0;
+    return nodes.map((n) => {
+      const h = getNodeH(n);
+      const y = offset + h / 2;
+      offset += h;
+      return y;
+    });
+  };
+
+  const leftPositions  = buildPositions(leftNodes);
+  const rightPositions = buildPositions(rightNodes);
+  const leftTotalH  = Math.max(leftNodes.reduce((s, n)  => s + getNodeH(n), 0), NODE_H);
+  const rightTotalH = Math.max(rightNodes.reduce((s, n) => s + getNodeH(n), 0), NODE_H);
+  const leftCenterY  = leftTotalH  / 2;
+  const rightCenterY = rightTotalH / 2;
 
   return (
     <motion.div
@@ -53,95 +132,78 @@ const SpineRow = ({ layer, index, isLast }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, delay: index * 0.07 }}
     >
-      {/* Left subtopic column */}
-      <div className="flex flex-col gap-3 items-end" style={{ width: 180 }} ref={leftRef}>
+      {/* Left nodes */}
+      <div className="flex flex-col items-end" ref={leftRef}
+        style={{ gap: 0 }}>
         {leftNodes.map((node) => (
-          <SubTopicNode key={node.title} title={node.title} tags={node.tags} side="left" />
+          <SubTopicNode
+            key={node.title}
+            title={node.title}
+            tags={node.tags}
+            side="left"
+            children={node.children ?? []}
+            isDone={isDone}
+          />
         ))}
       </div>
 
-      {/* Left SVG connector */}
-      <svg
-        width={CONNECTOR_W}
-        height={Math.max(leftNodes.length, 1) * 56}
-        className="shrink-0 overflow-visible"
-        style={{ minHeight: 56 }}
-      >
-        {leftNodes.map((_, i) => {
-          const totalH = Math.max(leftNodes.length, 1) * 56;
-          const spacing = totalH / leftNodes.length;
-          const nodeY = spacing * i + spacing / 2;
-          const centerY = totalH / 2;
-          const isDone = resolvedStatus === "done";
-          return (
-            <path
-              key={i}
-              d={`M ${CONNECTOR_W} ${centerY} C ${CONNECTOR_W * 0.4} ${centerY}, ${CONNECTOR_W * 0.6} ${nodeY}, 0 ${nodeY}`}
-              fill="none"
-              stroke={isDone ? "#7c3aed" : "#404040"}
-              strokeWidth="1.5"
-              strokeDasharray={isDone ? "none" : "5 4"}
-              opacity="0.7"
-            />
-          );
-        })}
-        {leftNodes.length === 0 && (
-          <line x1={CONNECTOR_W} y1="28" x2="0" y2="28" stroke="transparent" />
-        )}
+      {/* Main connector — left */}
+      <svg width={MAIN_W} height={leftTotalH} className="shrink-0 overflow-visible" style={{ minHeight: NODE_H }}>
+        {leftNodes.map((_, i) => (
+          <path
+            key={i}
+            d={`M ${MAIN_W} ${leftCenterY} C ${MAIN_W * 0.4} ${leftCenterY}, ${MAIN_W * 0.6} ${leftPositions[i]}, 0 ${leftPositions[i]}`}
+            fill="none"
+            stroke={isDone ? "#7c3aed" : "#404040"}
+            strokeWidth="1.5"
+            strokeDasharray={isDone ? "none" : "5 4"}
+            opacity="0.7"
+          />
+        ))}
+        {leftNodes.length === 0 && <line x1={MAIN_W} y1="28" x2="0" y2="28" stroke="transparent" />}
       </svg>
 
-      {/* Center layer node */}
+      {/* Center */}
       <div ref={centerRef} style={{ width: 280 }} className="shrink-0">
         <LayerNode layer={layer} index={index} />
-        {/* Spine segment below (except last) */}
         {!isLast && (
           <div className="flex justify-center">
-            <div
-              className="w-px mt-1"
-              style={{
-                height: 32,
-                background: resolvedStatus === "done" ? "#7c3aed" : undefined,
-                borderLeft: resolvedStatus !== "done" ? "1px dashed #404040" : undefined,
-              }}
-            />
+            <div className="w-px mt-1" style={{
+              height: 32,
+              background: isDone ? "#7c3aed" : undefined,
+              borderLeft: !isDone ? "1px dashed #404040" : undefined,
+            }} />
           </div>
         )}
       </div>
 
-      {/* Right SVG connector */}
-      <svg
-        width={CONNECTOR_W}
-        height={Math.max(rightNodes.length, 1) * 56}
-        className="shrink-0 overflow-visible"
-        style={{ minHeight: 56 }}
-      >
-        {rightNodes.map((_, i) => {
-          const totalH = Math.max(rightNodes.length, 1) * 56;
-          const spacing = totalH / rightNodes.length;
-          const nodeY = spacing * i + spacing / 2;
-          const centerY = totalH / 2;
-          const isDone = resolvedStatus === "done";
-          return (
-            <path
-              key={i}
-              d={`M 0 ${centerY} C ${CONNECTOR_W * 0.4} ${centerY}, ${CONNECTOR_W * 0.6} ${nodeY}, ${CONNECTOR_W} ${nodeY}`}
-              fill="none"
-              stroke={isDone ? "#7c3aed" : "#404040"}
-              strokeWidth="1.5"
-              strokeDasharray={isDone ? "none" : "5 4"}
-              opacity="0.7"
-            />
-          );
-        })}
-        {rightNodes.length === 0 && (
-          <line x1="0" y1="28" x2={CONNECTOR_W} y2="28" stroke="transparent" />
-        )}
+      {/* Main connector — right */}
+      <svg width={MAIN_W} height={rightTotalH} className="shrink-0 overflow-visible" style={{ minHeight: NODE_H }}>
+        {rightNodes.map((_, i) => (
+          <path
+            key={i}
+            d={`M 0 ${rightCenterY} C ${MAIN_W * 0.4} ${rightCenterY}, ${MAIN_W * 0.6} ${rightPositions[i]}, ${MAIN_W} ${rightPositions[i]}`}
+            fill="none"
+            stroke={isDone ? "#7c3aed" : "#404040"}
+            strokeWidth="1.5"
+            strokeDasharray={isDone ? "none" : "5 4"}
+            opacity="0.7"
+          />
+        ))}
+        {rightNodes.length === 0 && <line x1="0" y1="28" x2={MAIN_W} y2="28" stroke="transparent" />}
       </svg>
 
-      {/* Right subtopic column */}
-      <div className="flex flex-col gap-3 items-start" style={{ width: 180 }} ref={rightRef}>
+      {/* Right nodes */}
+      <div className="flex flex-col items-start" ref={rightRef} style={{ gap: 0 }}>
         {rightNodes.map((node) => (
-          <SubTopicNode key={node.title} title={node.title} tags={node.tags} side="right" />
+          <SubTopicNode
+            key={node.title}
+            title={node.title}
+            tags={node.tags}
+            side="right"
+            children={node.children ?? []}
+            isDone={isDone}
+          />
         ))}
       </div>
     </motion.div>
@@ -161,7 +223,9 @@ const RoadmapTree = () => {
         transition={{ delay: 0.2 }}
       >
         <div className="text-4xl opacity-40">🚧</div>
-        <p className="text-sm tracking-widest uppercase text-neutral-600">Roadmap being authored</p>
+        <p className="text-sm tracking-widest uppercase text-neutral-600">
+          Roadmap being authored
+        </p>
         <p className="text-xs text-neutral-700 max-w-xs text-center">
           This track is being carefully crafted. Check back soon.
         </p>
@@ -171,11 +235,11 @@ const RoadmapTree = () => {
 
   const totalLayers = layers.length;
   const doneCount = layers.filter(
-    (l) => (layerProgress[l.id] ?? l.status) === "done"
+    (l) => (layerProgress[l.id] ?? l.status) === "done",
   ).length;
   // eslint-disable-next-line no-unused-vars
   const inProgressCount = layers.filter(
-    (l) => (layerProgress[l.id] ?? l.status) === "in-progress"
+    (l) => (layerProgress[l.id] ?? l.status) === "in-progress",
   ).length;
   const eta = ETA_MAP[selectedTrack?.id] ?? `~${totalLayers * 2} weeks`;
 
@@ -195,7 +259,6 @@ const RoadmapTree = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
       >
-        {/* ── Track Header ── */}
         <div className="mb-8">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
             <div>
@@ -205,7 +268,7 @@ const RoadmapTree = () => {
               <h2 className="text-2xl sm:text-3xl font-bold text-neutral-100 leading-tight">
                 {selectedTrack.title}
               </h2>
-              <div className="flex flex-wrap gap-2 mt-3">
+              {/* <div className="flex flex-wrap gap-2 mt-3">
                 {selectedTrack.techs.map((t) => (
                   <span
                     key={t}
@@ -214,7 +277,7 @@ const RoadmapTree = () => {
                     {t}
                   </span>
                 ))}
-              </div>
+              </div> */}
             </div>
             <div className="shrink-0 text-right">
               <p className="text-sm text-neutral-400 font-mono">
@@ -223,7 +286,6 @@ const RoadmapTree = () => {
             </div>
           </div>
 
-          {/* Legend + Progress row */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div className="flex items-center gap-5 text-[12px] text-neutral-400">
               <span className="flex items-center gap-1.5">
@@ -256,7 +318,6 @@ const RoadmapTree = () => {
           <div className="mt-4 border-t border-neutral-800" />
         </div>
 
-        {/* ── Tree Canvas ── */}
         <div className="relative flex flex-col items-center gap-0 overflow-x-auto pb-10">
           {layers.map((layer, index) => (
             <SpineRow
@@ -269,7 +330,6 @@ const RoadmapTree = () => {
         </div>
       </motion.div>
 
-      {/* Detail drawer */}
       <AnimatePresence>{isPanelOpen && <LayerDetail />}</AnimatePresence>
     </>
   );

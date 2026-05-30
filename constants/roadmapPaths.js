@@ -572,10 +572,15 @@ export const ROADMAPS = {
       status: "done",
       sideLeft: [
         { title: "Async & Promises", tags: ["event loop", "await"] },
+        { title: "Array Methods", tags: ["map", "filter", "reduce"] },
+        { title: "Error Handling", tags: ["try/catch", "rejection", "finally"] },
+        { title: "Fetch API", tags: ["requests", "response", "JSON"] },
       ],
       sideRight: [
         { title: "Closures & Scope", tags: ["lexical", "hoisting"] },
         { title: "ES Modules", tags: ["import", "bundlers"] },
+        { title: "Prototype Chain", tags: ["inheritance", "proto", "class"] },
+        { title: "Event Loop", tags: ["call stack", "microtasks", "macrotasks"] },
       ],
     },
     {
@@ -605,9 +610,14 @@ export const ROADMAPS = {
       sideLeft: [
         { title: "Components & JSX", tags: ["props", "composition"] },
         { title: "Hooks", tags: ["useEffect", "custom"] },
+        { title: "Event Handling", tags: ["onClick", "onChange", "synthetic"] },
+        { title: "Lists & Keys", tags: ["map", "key prop", "reconciliation"] },
       ],
       sideRight: [
         { title: "State & Props", tags: ["useState", "flow"] },
+        { title: "Forms & Inputs", tags: ["controlled", "refs", "validation"] },
+        { title: "Conditional Rendering", tags: ["ternary", "&&", "switch"] },
+        { title: "Component Lifecycle", tags: ["mount", "update", "cleanup"] },
       ],
     },
     {
@@ -634,11 +644,16 @@ export const ROADMAPS = {
       estimatedTime: "2–3 weeks",
       status: "locked",
       sideLeft: [
-        { title: "React Router", tags: ["nested", "loaders"] },
+        { title: "React Router", tags: ["nested", "loaders", "params"] },
+        { title: "Custom Hooks", tags: ["reusability", "abstraction"] },
+        { title: "Code Splitting", tags: ["lazy", "Suspense", "chunks"] },
+        { title: "Error Boundaries", tags: ["fallback", "catch", "recovery"] },
       ],
       sideRight: [
-        { title: "Context & Reducers", tags: ["global state"] },
-        { title: "Data Fetching", tags: ["React Query"] },
+        { title: "Context & Reducers", tags: ["global state", "useReducer"] },
+        { title: "Data Fetching", tags: ["React Query", "SWR"] },
+        { title: "Performance", tags: ["memo", "profiler", "re-renders"] },
+        { title: "useMemo & useCallback", tags: ["memoize", "referential equality"] },
       ],
     },
     {
@@ -668,9 +683,14 @@ export const ROADMAPS = {
       sideLeft: [
         { title: "Node Runtime", tags: ["event loop", "modules"] },
         { title: "Middleware", tags: ["logging", "errors"] },
+        { title: "File System", tags: ["fs", "streams", "buffers"] },
+        { title: "Error Handling", tags: ["next(err)", "global handler"] },
       ],
       sideRight: [
         { title: "REST Design", tags: ["routing", "CRUD"] },
+        { title: "Route Controllers", tags: ["separation", "MVC"] },
+        { title: "Validation", tags: ["joi", "express-validator", "sanitize"] },
+        { title: "Environment Config", tags: ["dotenv", "process.env", "secrets"] },
       ],
     },
     {
@@ -698,10 +718,15 @@ export const ROADMAPS = {
       status: "locked",
       sideLeft: [
         { title: "MongoDB CRUD", tags: ["queries", "aggregation"] },
+        { title: "Atlas Setup", tags: ["cloud", "connect", "cluster"] },
+        { title: "Aggregation Pipeline", tags: ["$match", "$group", "$lookup"] },
+        { title: "Indexing", tags: ["compound", "text", "performance"] },
       ],
       sideRight: [
         { title: "Mongoose Schemas", tags: ["models", "validation"] },
         { title: "Data Relations", tags: ["embed", "reference"] },
+        { title: "Query Optimization", tags: ["explain", "projection", "lean"] },
+        { title: "Transactions", tags: ["session", "rollback", "atomicity"] },
       ],
     },
     {
@@ -729,10 +754,15 @@ export const ROADMAPS = {
       status: "locked",
       sideLeft: [
         { title: "JWT & bcrypt", tags: ["tokens", "hashing"] },
+        { title: "Session Management", tags: ["cookies", "expiry", "revoke"] },
+        { title: "Refresh Tokens", tags: ["rotation", "httpOnly", "storage"] },
+        { title: "Cookie Security", tags: ["sameSite", "secure", "httpOnly"] },
       ],
       sideRight: [
-        { title: "Auth Middleware", tags: ["protected routes"] },
+        { title: "Auth Middleware", tags: ["protected routes", "verify"] },
         { title: "OWASP Basics", tags: ["CORS", "sanitize"] },
+        { title: "Rate Limiting", tags: ["brute force", "express-rate-limit"] },
+        { title: "Input Sanitization", tags: ["xss", "injection", "escape"] },
       ],
     },
     {
@@ -761,9 +791,14 @@ export const ROADMAPS = {
       sideLeft: [
         { title: "Axios & Fetch", tags: ["interceptors", "errors"] },
         { title: "React Query", tags: ["cache", "mutations"] },
+        { title: "Auth on Client", tags: ["token storage", "interceptors", "logout"] },
+        { title: "Error Boundaries", tags: ["fallback UI", "catch", "retry"] },
       ],
       sideRight: [
         { title: "Zustand State", tags: ["stores", "persist"] },
+        { title: "Optimistic UI", tags: ["instant feedback", "rollback"] },
+        { title: "Proxy Config", tags: ["vite", "CORS dev", "rewrite"] },
+        { title: "Toast Notifications", tags: ["react-hot-toast", "feedback"] },
       ],
     },
     {
@@ -791,10 +826,15 @@ export const ROADMAPS = {
       status: "locked",
       sideLeft: [
         { title: "Jest & RTL", tags: ["unit", "render"] },
+        { title: "Component Testing", tags: ["queries", "user-event", "assertions"] },
+        { title: "Mock Functions", tags: ["jest.fn", "spy", "module mocks"] },
+        { title: "Async Testing", tags: ["waitFor", "findBy", "act"] },
       ],
       sideRight: [
         { title: "API Testing", tags: ["Supertest", "mocks"] },
         { title: "CI Coverage", tags: ["reports", "thresholds"] },
+        { title: "TDD Basics", tags: ["red-green-refactor", "test first"] },
+        { title: "Test Fixtures", tags: ["factories", "seeds", "cleanup"] },
       ],
     },
     {
@@ -822,11 +862,16 @@ export const ROADMAPS = {
       estimatedTime: "1–2 weeks",
       status: "locked",
       sideLeft: [
-        { title: "Docker", tags: ["images", "compose"] },
-        { title: "GitHub Actions", tags: ["CI/CD", "pipeline"] },
+        { title: "Docker", tags: ["images", "compose", "volumes"] },
+        { title: "GitHub Actions", tags: ["CI/CD", "pipeline", "workflows"] },
+        { title: "Environment Variables", tags: ["secrets", "production", ".env"] },
+        { title: "Monitoring", tags: ["logs", "uptime", "error tracking"] },
       ],
       sideRight: [
-        { title: "Cloud Deploy", tags: ["Vercel", "Railway"] },
+        { title: "Cloud Deploy", tags: ["Vercel", "Railway", "Render"] },
+        { title: "Domain & HTTPS", tags: ["DNS", "SSL", "certificates"] },
+        { title: "Atlas Production", tags: ["connection string", "IP whitelist"] },
+        { title: "Performance", tags: ["caching", "CDN", "compression"] },
       ],
     },
   ],

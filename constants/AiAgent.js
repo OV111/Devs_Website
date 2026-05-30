@@ -13,10 +13,10 @@ import {
 
 export const CHIPS = [
   { label: "Challenges", icon: Zap },
-  { label: "Exams",      icon: ClipboardList },
-  { label: "Roadmap",    icon: Map },
   { label: "Weak Spots", icon: Crosshair },
+  { label: "Exams",      icon: ClipboardList },
   { label: "Blogs",      icon: FileText },
+  { label: "Roadmap",    icon: Map },
 ];
 
 export const DROPDOWN_ITEMS = [
