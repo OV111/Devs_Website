@@ -12,6 +12,7 @@ import userRoutes from "./routes/user.routes.js";
 import searchRoutes from "./routes/search.routes.js";
 import accountRoutes from "./routes/account.routes.js";
 import blogRoutes from "./routes/blogs.routes.js";
+import libraryRoutes from "./routes/library.routes.js";
 import { notFound } from "./middleware/notFound.js";
 
 export function createApp(db) {
@@ -42,6 +43,7 @@ export function createApp(db) {
   });
 
   app.use("/blogs", blogRoutes);
+  app.use("/library", libraryRoutes);
 
   app.use(authRoutes);
   app.use(postRoutes);
