@@ -1,0 +1,3245 @@
+{
+  "quantum-developer": [
+    {
+      "id": "quantum-developer-1",
+      "title": "Foundations of Quantum Computing",
+      "order": 1,
+      "techs": [
+        "Python",
+        "Linear Algebra",
+        "Qiskit",
+        "Jupyter"
+      ],
+      "description": "Understand the mathematical and physical principles that underpin quantum computing. Learn how qubits, superposition, and entanglement differ from classical bits.",
+      "topics": [
+        "Qubit representation",
+        "Superposition principle",
+        "Entanglement basics",
+        "Bra-ket notation",
+        "Bloch sphere",
+        "Quantum vs classical computing"
+      ],
+      "resources": [
+        {
+          "label": "Qiskit Textbook - The Atoms of Computation",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Computing: An Applied Approach",
+          "platform": "Springer",
+          "type": "book"
+        },
+        {
+          "label": "Introduction to Quantum Computing",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "Quantum Computing for Computer Scientists",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement a Python script that represents a qubit state vector and manually applies a Hadamard transformation.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "quantum-developer-2",
+      "title": "Qiskit Setup and First Circuits",
+      "order": 2,
+      "techs": [
+        "Qiskit",
+        "Python",
+        "IBM Q",
+        "Jupyter"
+      ],
+      "description": "Install and configure Qiskit and connect to IBM Q simulators. Build and run your first quantum circuits using basic gates.",
+      "topics": [
+        "Qiskit installation",
+        "QuantumCircuit API",
+        "Single-qubit gates",
+        "Multi-qubit gates",
+        "Circuit visualization",
+        "Statevector simulator"
+      ],
+      "resources": [
+        {
+          "label": "Qiskit Getting Started Guide",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "IBM Quantum Learning",
+          "platform": "IBM",
+          "type": "course"
+        },
+        {
+          "label": "Qiskit Tutorial Series",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a 2-qubit circuit that creates a Bell state and verify the output probabilities using the statevector simulator.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "quantum-developer-3",
+      "title": "Quantum Gates and Unitary Operations",
+      "order": 3,
+      "techs": [
+        "Qiskit",
+        "NumPy",
+        "Quantum Gates",
+        "Python"
+      ],
+      "description": "Master single- and multi-qubit gate operations and understand their matrix representations. Learn how to compose gates to form arbitrary unitary transformations.",
+      "topics": [
+        "Pauli gates X Y Z",
+        "Phase and T gates",
+        "CNOT and CZ gates",
+        "Toffoli gate",
+        "Unitary matrix math",
+        "Gate decomposition",
+        "Custom unitary gates"
+      ],
+      "resources": [
+        {
+          "label": "Qiskit Circuit Library Docs",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Gates and Circuits",
+          "platform": "edX",
+          "type": "course"
+        },
+        {
+          "label": "Nielsen and Chuang - Quantum Computation and Quantum Information",
+          "platform": "Cambridge",
+          "type": "book"
+        }
+      ],
+      "challenge": "Decompose a given 2x2 unitary matrix into a sequence of standard Qiskit gates and verify correctness with unitary simulator.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "quantum-developer-4",
+      "title": "Quantum Measurement and Probability",
+      "order": 4,
+      "techs": [
+        "Qiskit",
+        "Python",
+        "IBM Q",
+        "Statistics"
+      ],
+      "description": "Understand the Born rule, projective measurement, and how measurement collapses quantum states. Learn to interpret shot-based results from real and simulated hardware.",
+      "topics": [
+        "Projective measurement",
+        "Born rule",
+        "Shot noise",
+        "Density matrices",
+        "Partial measurement",
+        "Classical register operations",
+        "Measurement error mitigation intro"
+      ],
+      "resources": [
+        {
+          "label": "Qiskit Measurement Docs",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Mechanics - The Theoretical Minimum",
+          "platform": "Basic Books",
+          "type": "book"
+        },
+        {
+          "label": "Measurement in Quantum Computing",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Run a GHZ-state circuit 1000 shots on QASM simulator and plot the resulting probability distribution, comparing to theoretical values.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "quantum-developer-5",
+      "title": "Quantum Algorithms Primer",
+      "order": 5,
+      "techs": [
+        "Qiskit",
+        "Python",
+        "Quantum Gates",
+        "Complexity"
+      ],
+      "description": "Survey the landscape of foundational quantum algorithms and their computational advantages. Implement Deutsch-Jozsa and Bernstein-Vazirani algorithms in Qiskit.",
+      "topics": [
+        "Deutsch-Jozsa algorithm",
+        "Bernstein-Vazirani algorithm",
+        "Simon's algorithm",
+        "Oracle construction",
+        "Quantum speedup intuition",
+        "Complexity classes BQP vs P"
+      ],
+      "resources": [
+        {
+          "label": "Qiskit Textbook Algorithms Chapter",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Algorithms via Linear Algebra",
+          "platform": "MIT Press",
+          "type": "book"
+        },
+        {
+          "label": "Quantum Algorithm Zoo",
+          "platform": "NIST",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Implement Bernstein-Vazirani for a hidden string of length 8 in Qiskit and confirm single-query recovery of the secret.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "quantum-developer-6",
+      "title": "Variational Quantum Circuits",
+      "order": 6,
+      "techs": [
+        "Qiskit",
+        "Python",
+        "Parameterized Circuits",
+        "SciPy"
+      ],
+      "description": "Learn how parameterized quantum circuits are used in variational algorithms for optimization and machine learning. Build ansatz circuits and optimize parameters using classical optimizers.",
+      "topics": [
+        "Parameterized circuits",
+        "Ansatz design",
+        "VQE overview",
+        "QAOA overview",
+        "Gradient estimation",
+        "Classical-quantum hybrid loop",
+        "Barren plateau problem"
+      ],
+      "resources": [
+        {
+          "label": "Qiskit VQE Tutorial",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Variational Quantum Eigensolver Explained",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Hybrid Quantum-Classical Computing",
+          "platform": "Coursera",
+          "type": "course"
+        }
+      ],
+      "challenge": "Implement a 4-qubit VQE to find the ground-state energy of the H2 molecule using Qiskit Nature and a UCCSD ansatz.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-developer-7",
+      "title": "Quantum Error and Noise",
+      "order": 7,
+      "techs": [
+        "Qiskit",
+        "Aer",
+        "Noise Models",
+        "Python"
+      ],
+      "description": "Understand the sources of noise in quantum hardware and how to model them in simulation. Apply basic error mitigation strategies to improve output fidelity.",
+      "topics": [
+        "Bit-flip and phase-flip errors",
+        "Depolarizing noise",
+        "T1 and T2 relaxation",
+        "Aer noise models",
+        "Zero-noise extrapolation",
+        "Measurement error mitigation",
+        "Readout calibration"
+      ],
+      "resources": [
+        {
+          "label": "Qiskit Aer Noise Simulator Docs",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Error Mitigation in Qiskit",
+          "platform": "IBM",
+          "type": "course"
+        },
+        {
+          "label": "Quantum Error Correction - Devitt et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Simulate a 3-qubit GHZ circuit under depolarizing noise and apply measurement error mitigation, reporting fidelity improvement.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "quantum-developer-8",
+      "title": "Running on IBM Quantum Hardware",
+      "order": 8,
+      "techs": [
+        "IBM Q",
+        "Qiskit Runtime",
+        "Python",
+        "Transpiler"
+      ],
+      "description": "Submit quantum jobs to real IBM Quantum devices using Qiskit Runtime. Understand transpilation, qubit mapping, and how device topology affects circuit performance.",
+      "topics": [
+        "IBM Quantum account setup",
+        "Qiskit Runtime primitives",
+        "Circuit transpilation",
+        "Qubit coupling maps",
+        "Backend properties",
+        "Job monitoring",
+        "Result post-processing"
+      ],
+      "resources": [
+        {
+          "label": "Qiskit Runtime Documentation",
+          "platform": "IBM",
+          "type": "docs"
+        },
+        {
+          "label": "Running on Real Quantum Computers",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "IBM Quantum Learning Platform",
+          "platform": "IBM",
+          "type": "course"
+        }
+      ],
+      "challenge": "Transpile and execute a 5-qubit circuit on a real IBM Quantum backend, then compare results with noise-model simulation.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "quantum-developer-9",
+      "title": "Quantum Software Engineering Patterns",
+      "order": 9,
+      "techs": [
+        "Qiskit",
+        "Python",
+        "Testing",
+        "CI/CD"
+      ],
+      "description": "Apply software engineering best practices to quantum programs including testing, modular design, and reproducibility. Build reusable quantum circuit libraries and integrate them into classical pipelines.",
+      "topics": [
+        "Unit testing quantum circuits",
+        "Mocking quantum backends",
+        "Circuit optimization passes",
+        "Quantum software design patterns",
+        "Versioning quantum experiments",
+        "Benchmarking fidelity",
+        "Reproducible quantum experiments"
+      ],
+      "resources": [
+        {
+          "label": "Qiskit Transpiler Passes Docs",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Software Engineering for Quantum",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Dev Best Practices",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a parameterized quantum circuit library with unit tests and a benchmarking harness that tracks fidelity across Qiskit versions.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-developer-10",
+      "title": "End-to-End Quantum Application Development",
+      "order": 10,
+      "techs": [
+        "Qiskit",
+        "IBM Q",
+        "Python",
+        "REST APIs"
+      ],
+      "description": "Design and deploy a full quantum-classical application that solves a real-world problem using IBM Quantum hardware. Integrate quantum subroutines into production-quality software architecture.",
+      "topics": [
+        "Problem formulation for quantum",
+        "Quantum-classical interface design",
+        "REST API for quantum jobs",
+        "Result interpretation and visualization",
+        "Scalability considerations",
+        "Quantum advantage benchmarking",
+        "Deployment and monitoring"
+      ],
+      "resources": [
+        {
+          "label": "Qiskit Application Modules",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Computing Experiment Design",
+          "platform": "Springer",
+          "type": "book"
+        },
+        {
+          "label": "IBM Quantum Network Use Cases",
+          "platform": "IBM",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build and deploy a quantum portfolio optimization application using QAOA on IBM Quantum hardware with a REST API front-end.",
+      "estimatedTime": "6 weeks"
+    }
+  ],
+  "quantum-algorithms": [
+    {
+      "id": "quantum-algorithms-1",
+      "title": "Mathematical Prerequisites for Quantum Algorithms",
+      "order": 1,
+      "techs": [
+        "Linear Algebra",
+        "Complexity",
+        "Python",
+        "NumPy"
+      ],
+      "description": "Establish the mathematical foundation required to understand and analyze quantum algorithms. Cover vector spaces, tensor products, and computational complexity basics.",
+      "topics": [
+        "Complex vector spaces",
+        "Tensor products",
+        "Inner products and norms",
+        "Unitary matrices",
+        "Big-O notation",
+        "P vs NP overview",
+        "Probability amplitudes"
+      ],
+      "resources": [
+        {
+          "label": "3Blue1Brown Linear Algebra Series",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Computational Complexity - Arora and Barak",
+          "platform": "Cambridge",
+          "type": "book"
+        },
+        {
+          "label": "Linear Algebra Done Right - Axler",
+          "platform": "Springer",
+          "type": "book"
+        }
+      ],
+      "challenge": "Implement matrix exponentiation and tensor product operations in NumPy, then verify that Hadamard tensor Hadamard equals H2.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "quantum-algorithms-2",
+      "title": "Query Complexity and Oracle Models",
+      "order": 2,
+      "techs": [
+        "Complexity",
+        "Python",
+        "Qiskit",
+        "Linear Algebra"
+      ],
+      "description": "Understand the oracle model of computation and how quantum algorithms achieve query complexity advantages. Implement simple oracle-based algorithms from scratch.",
+      "topics": [
+        "Oracle model definition",
+        "Decision vs function problems",
+        "Deutsch algorithm",
+        "Deutsch-Jozsa algorithm",
+        "Query complexity lower bounds",
+        "Quantum parallelism",
+        "Phase kickback"
+      ],
+      "resources": [
+        {
+          "label": "Quantum Complexity Theory - Watrous",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Qiskit Textbook Algorithms",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Intro to Query Complexity",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Prove the query complexity of Deutsch-Jozsa classically is O(2^n/2) worst case and implement both classical and quantum solvers for comparison.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "quantum-algorithms-3",
+      "title": "Quantum Fourier Transform",
+      "order": 3,
+      "techs": [
+        "Linear Algebra",
+        "Qiskit",
+        "Python",
+        "Complexity"
+      ],
+      "description": "Derive and implement the Quantum Fourier Transform and understand its role as a subroutine in major quantum algorithms. Analyze its exponential speedup over the classical FFT.",
+      "topics": [
+        "Classical DFT definition",
+        "QFT circuit construction",
+        "Phase estimation algorithm",
+        "QFT on n qubits",
+        "Inverse QFT",
+        "QFT complexity analysis",
+        "Applications in period finding"
+      ],
+      "resources": [
+        {
+          "label": "Nielsen and Chuang Chapter 5",
+          "platform": "Cambridge",
+          "type": "book"
+        },
+        {
+          "label": "QFT Implementation in Qiskit",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Phase Estimation Explained",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement QFT and inverse QFT for 4 qubits in Qiskit without using the built-in library, and verify by recovering input state.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "quantum-algorithms-4",
+      "title": "Shor's Factoring Algorithm",
+      "order": 4,
+      "techs": [
+        "Shor",
+        "Python",
+        "Qiskit",
+        "Number Theory"
+      ],
+      "description": "Understand the mathematical structure of Shor's algorithm and how order-finding via QFT enables integer factorization in polynomial time. Implement a small-scale version end to end.",
+      "topics": [
+        "RSA cryptography overview",
+        "Period finding reduction",
+        "Continued fractions algorithm",
+        "Quantum order finding",
+        "Modular exponentiation circuits",
+        "Classical post-processing",
+        "Complexity analysis O(log^3 N)"
+      ],
+      "resources": [
+        {
+          "label": "Shor Algorithm - Original Paper",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Qiskit Shor Tutorial",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Shors Algorithm Explained - Veritasium",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Nielsen and Chuang Chapter 5",
+          "platform": "Cambridge",
+          "type": "book"
+        }
+      ],
+      "challenge": "Implement Shor's algorithm from scratch to factor 15 in Qiskit, using full QFT and modular exponentiation, and explain each step.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "quantum-algorithms-5",
+      "title": "Grover's Search Algorithm",
+      "order": 5,
+      "techs": [
+        "Grover",
+        "Qiskit",
+        "Python",
+        "Linear Algebra"
+      ],
+      "description": "Derive Grover's amplitude amplification algorithm and analyze its quadratic speedup for unstructured search. Implement it for database search and satisfiability problems.",
+      "topics": [
+        "Amplitude amplification",
+        "Oracle inversion about mean",
+        "Geometric rotation picture",
+        "Optimal iteration count",
+        "Multi-target Grover",
+        "Grover for SAT",
+        "Lower bound proof"
+      ],
+      "resources": [
+        {
+          "label": "Grover Algorithm - Original Paper",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Qiskit Grover Tutorial",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Grover Search Visualization",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement Grover search on a 6-qubit space with a 2-solution oracle and verify quadratic speedup in query count versus brute force.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "quantum-algorithms-6",
+      "title": "Quantum Walk Algorithms",
+      "order": 6,
+      "techs": [
+        "Linear Algebra",
+        "Python",
+        "Complexity",
+        "Qiskit"
+      ],
+      "description": "Study discrete and continuous quantum walks and their algorithmic applications including element distinctness and triangle finding. Compare quantum walk speedups to classical random walks.",
+      "topics": [
+        "Classical random walks",
+        "Discrete quantum walks",
+        "Continuous-time quantum walks",
+        "Hitting time analysis",
+        "Element distinctness problem",
+        "Spatial search via quantum walk",
+        "MNRS framework"
+      ],
+      "resources": [
+        {
+          "label": "Quantum Walk Survey - Kempe",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Walks and Search Algorithms",
+          "platform": "Springer",
+          "type": "book"
+        },
+        {
+          "label": "Quantum Walk Lecture Series",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement a discrete quantum walk on a cycle graph in NumPy and compare the probability distribution spread to a classical random walk after 50 steps.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-algorithms-7",
+      "title": "HHL and Quantum Linear Systems",
+      "order": 7,
+      "techs": [
+        "Linear Algebra",
+        "Qiskit",
+        "Python",
+        "Complexity"
+      ],
+      "description": "Study the Harrow-Hassidim-Lloyd algorithm for solving linear systems exponentially faster than classical methods under specific conditions. Analyze its caveats and practical limitations.",
+      "topics": [
+        "Linear systems problem formulation",
+        "Phase estimation subroutine in HHL",
+        "Controlled rotations for inversion",
+        "Sparsity and condition number requirements",
+        "HHL complexity analysis",
+        "Quantum RAM caveats",
+        "Dequantization results"
+      ],
+      "resources": [
+        {
+          "label": "HHL Original Paper - Harrow et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Qiskit HHL Tutorial",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "HHL Algorithm Deep Dive",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement HHL for a 2x2 sparse matrix in Qiskit and compare the quantum solution vector with the classical NumPy linalg.solve output.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "quantum-algorithms-8",
+      "title": "Variational and Hybrid Algorithms",
+      "order": 8,
+      "techs": [
+        "Qiskit",
+        "Python",
+        "SciPy",
+        "Complexity"
+      ],
+      "description": "Study NISQ-era variational algorithms including VQE and QAOA and understand their optimization landscapes. Analyze when variational approaches can outperform classical heuristics.",
+      "topics": [
+        "VQE algorithm",
+        "QAOA algorithm",
+        "Ansatz expressibility",
+        "Barren plateaus in depth",
+        "Quantum natural gradient",
+        "COBYLA and SPSA optimizers",
+        "Benchmarking variational circuits"
+      ],
+      "resources": [
+        {
+          "label": "VQE Original Paper - Peruzzo et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "QAOA Original Paper - Farhi et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Variational Quantum Algorithms Review",
+          "platform": "Nature",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Compare VQE with RY ansatz vs UCCSD for H2 ground state energy and report convergence speed and final accuracy differences.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-algorithms-9",
+      "title": "Quantum Simulation Algorithms",
+      "order": 9,
+      "techs": [
+        "Qiskit",
+        "Linear Algebra",
+        "Python",
+        "Complexity"
+      ],
+      "description": "Study Hamiltonian simulation algorithms including Trotter-Suzuki decompositions and qubitization. Understand how quantum simulation enables exponential speedup for physics problems.",
+      "topics": [
+        "Hamiltonian simulation problem",
+        "Trotter-Suzuki decomposition",
+        "Product formula error bounds",
+        "LCU method",
+        "Qubitization and quantum signal processing",
+        "Resource estimation",
+        "Simulation vs optimization"
+      ],
+      "resources": [
+        {
+          "label": "Hamiltonian Simulation Survey - Childs",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Qiskit Hamiltonian Simulation Docs",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Simulation Lecture - Preskill",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement first and second-order Trotter simulation for a transverse-field Ising model on 4 qubits and measure error vs step size.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "quantum-algorithms-10",
+      "title": "Fault-Tolerant Algorithm Design and Resource Estimation",
+      "order": 10,
+      "techs": [
+        "Linear Algebra",
+        "Complexity",
+        "Python",
+        "Qiskit"
+      ],
+      "description": "Analyze quantum algorithms in the fault-tolerant setting and produce rigorous resource estimates for T-gate and qubit counts. Understand which algorithms are viable on future fault-tolerant hardware.",
+      "topics": [
+        "Clifford + T gate set",
+        "T-gate resource estimation",
+        "Magic state distillation overhead",
+        "Surface code requirements",
+        "Logical vs physical qubits",
+        "Algorithm benchmarking for FT hardware",
+        "Quantum advantage criteria"
+      ],
+      "resources": [
+        {
+          "label": "Resource Estimation Framework - Microsoft",
+          "platform": "Microsoft",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Resource Estimator",
+          "platform": "Azure Quantum",
+          "type": "docs"
+        },
+        {
+          "label": "Fault-Tolerant Quantum Computing Survey",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "T-gate Estimation for Shor and Grover",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Produce a full T-gate and logical qubit resource estimate for running Shor's algorithm to factor a 2048-bit RSA key using the Azure resource estimator.",
+      "estimatedTime": "6 weeks"
+    }
+  ],
+  "quantum-ml": [
+    {
+      "id": "quantum-ml-1",
+      "title": "Classical ML and Quantum Computing Basics",
+      "order": 1,
+      "techs": [
+        "Python",
+        "PyTorch",
+        "PennyLane",
+        "NumPy"
+      ],
+      "description": "Review classical machine learning fundamentals and understand how quantum computing concepts map onto ML workflows. Set up PennyLane and run your first quantum node.",
+      "topics": [
+        "Supervised learning recap",
+        "Loss functions and gradients",
+        "Quantum state encoding",
+        "PennyLane installation",
+        "QNode basics",
+        "Quantum vs classical neurons",
+        "Hybrid computation graphs"
+      ],
+      "resources": [
+        {
+          "label": "PennyLane Getting Started",
+          "platform": "PennyLane",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Machine Learning - Biamonte et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "PennyLane Tutorials",
+          "platform": "PennyLane",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a PennyLane QNode that takes a classical 2D input, encodes it as rotation angles, and outputs a single expectation value.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "quantum-ml-2",
+      "title": "Data Encoding Strategies",
+      "order": 2,
+      "techs": [
+        "PennyLane",
+        "Python",
+        "NumPy",
+        "Qiskit ML"
+      ],
+      "description": "Study the main methods for encoding classical data into quantum states, including amplitude, angle, and basis encodings. Understand the tradeoffs in expressiveness and circuit depth.",
+      "topics": [
+        "Basis encoding",
+        "Amplitude encoding",
+        "Angle encoding",
+        "IQP encoding",
+        "Quantum feature maps",
+        "Encoding circuit depth tradeoffs",
+        "Data re-uploading"
+      ],
+      "resources": [
+        {
+          "label": "PennyLane Data Encoding Docs",
+          "platform": "PennyLane",
+          "type": "docs"
+        },
+        {
+          "label": "Encoding Strategies for QML - Schuld",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Feature Maps Explained",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement all four encoding schemes for the Iris dataset in PennyLane and compare the resulting Hilbert space inner products.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "quantum-ml-3",
+      "title": "Variational Quantum Classifiers",
+      "order": 3,
+      "techs": [
+        "PennyLane",
+        "PyTorch",
+        "VQC",
+        "Python"
+      ],
+      "description": "Build variational quantum classifiers by combining parameterized quantum circuits with classical optimizers. Train a VQC on a binary classification task and evaluate accuracy.",
+      "topics": [
+        "VQC architecture",
+        "StronglyEntanglingLayers",
+        "Parameter shift rule",
+        "Binary and multiclass encoding",
+        "Overfitting in VQC",
+        "Circuit depth vs accuracy",
+        "Gradient-based optimization"
+      ],
+      "resources": [
+        {
+          "label": "PennyLane VQC Tutorial",
+          "platform": "PennyLane",
+          "type": "docs"
+        },
+        {
+          "label": "Variational Classifier - Schuld et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Qiskit ML Classification Tutorial",
+          "platform": "Qiskit",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Train a VQC on the moons dataset using PennyLane + PyTorch and achieve at least 90% test accuracy, logging loss per epoch.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "quantum-ml-4",
+      "title": "Quantum Kernels and Support Vector Machines",
+      "order": 4,
+      "techs": [
+        "PennyLane",
+        "Qiskit ML",
+        "Python",
+        "SciKit-Learn"
+      ],
+      "description": "Understand quantum kernel methods where quantum circuits compute inner products in exponentially large feature spaces. Train a quantum kernel SVM and compare to classical RBF kernels.",
+      "topics": [
+        "Kernel methods recap",
+        "Quantum feature map circuits",
+        "Fidelity kernel",
+        "Projected quantum kernel",
+        "Quantum advantage conditions for kernels",
+        "Kernel alignment training",
+        "Inductive bias in quantum kernels"
+      ],
+      "resources": [
+        {
+          "label": "Qiskit ML Quantum Kernel Docs",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Kernel Machine Learning - Havlicek et al.",
+          "platform": "Nature",
+          "type": "docs"
+        },
+        {
+          "label": "PennyLane Kernel Methods Tutorial",
+          "platform": "PennyLane",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Implement a quantum kernel SVM on the breast cancer dataset using Qiskit ML and report classification accuracy vs a classical RBF SVM.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "quantum-ml-5",
+      "title": "Quantum Neural Networks",
+      "order": 5,
+      "techs": [
+        "PennyLane",
+        "PyTorch",
+        "VQC",
+        "Python"
+      ],
+      "description": "Design quantum neural network architectures using alternating layers of encoding and variational circuits. Analyze expressibility and entangling power of different QNN designs.",
+      "topics": [
+        "QNN architecture design",
+        "Expressibility metric",
+        "Entangling power",
+        "Barren plateaus in QNNs",
+        "Equivariant QNNs",
+        "Quantum convolutional layers",
+        "Hybrid QNN-CNN models"
+      ],
+      "resources": [
+        {
+          "label": "PennyLane QNN Module Docs",
+          "platform": "PennyLane",
+          "type": "docs"
+        },
+        {
+          "label": "Expressibility of Quantum Circuits - Sim et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Convolutional Neural Networks",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Design and train a quantum convolutional neural network for MNIST binary classification and compare parameter count vs a classical CNN.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-ml-6",
+      "title": "Quantum Generative Models",
+      "order": 6,
+      "techs": [
+        "PennyLane",
+        "PyTorch",
+        "Python",
+        "Qiskit ML"
+      ],
+      "description": "Study quantum generative adversarial networks and quantum Boltzmann machines for data generation tasks. Implement a QGAN to generate synthetic data distributions.",
+      "topics": [
+        "Classical GAN recap",
+        "Quantum GAN architecture",
+        "Quantum Boltzmann machines",
+        "Born machine training",
+        "Quantum circuit Born sampling",
+        "Training instability in QGANs",
+        "Fidelity metrics for generative models"
+      ],
+      "resources": [
+        {
+          "label": "Quantum GAN - Dallaire-Demers et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "PennyLane QGAN Tutorial",
+          "platform": "PennyLane",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Generative Models Overview",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Train a QGAN to reproduce a bimodal 1D Gaussian mixture and evaluate using KL divergence between generated and target distributions.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-ml-7",
+      "title": "Quantum Natural Language Processing",
+      "order": 7,
+      "techs": [
+        "PennyLane",
+        "Python",
+        "Qiskit ML",
+        "PyTorch"
+      ],
+      "description": "Explore quantum approaches to NLP including DisCoCat compositional models and quantum sentence classification. Implement a small quantum text classifier.",
+      "topics": [
+        "DisCoCat framework",
+        "Pregroup grammars",
+        "lambeq library",
+        "Quantum sentence circuits",
+        "Word meaning as quantum state",
+        "Compositional semantics",
+        "Quantum NLP benchmarks"
+      ],
+      "resources": [
+        {
+          "label": "lambeq Documentation",
+          "platform": "Cambridge Quantum",
+          "type": "docs"
+        },
+        {
+          "label": "Mathematical Foundations of QNLP - Coecke",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "QNLP Tutorial Series",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Use lambeq to classify 50 sentences into two categories using a quantum circuit model and report F1 score.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-ml-8",
+      "title": "Quantum Transfer Learning",
+      "order": 8,
+      "techs": [
+        "PennyLane",
+        "PyTorch",
+        "VQC",
+        "Python"
+      ],
+      "description": "Apply transfer learning techniques to quantum ML by combining pretrained classical networks with trainable quantum layers. Fine-tune hybrid models on small datasets.",
+      "topics": [
+        "Transfer learning fundamentals",
+        "Hybrid classical-quantum architectures",
+        "Quantum layer as fine-tuning head",
+        "Dress and undress techniques",
+        "Feature extraction with CNNs",
+        "Few-shot learning with QML",
+        "Benchmarking hybrid vs classical transfer"
+      ],
+      "resources": [
+        {
+          "label": "PennyLane Transfer Learning Tutorial",
+          "platform": "PennyLane",
+          "type": "docs"
+        },
+        {
+          "label": "Transfer Learning in QML - Mari et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Hybrid QML Models",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Attach a 4-qubit PennyLane layer to a pretrained ResNet-18 and fine-tune on 200 images from a 4-class subset of CIFAR-10.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-ml-9",
+      "title": "Quantum ML on Real Hardware",
+      "order": 9,
+      "techs": [
+        "PennyLane",
+        "IBM Q",
+        "Qiskit ML",
+        "Python"
+      ],
+      "description": "Deploy quantum ML models onto real quantum hardware and analyze the effect of noise on model performance. Apply noise-aware training and error mitigation techniques.",
+      "topics": [
+        "Running PennyLane on IBM Q",
+        "Noise impact on QML models",
+        "Noise-aware training strategies",
+        "Zero-noise extrapolation for QML",
+        "Probabilistic error cancellation",
+        "Hardware-efficient ansatz design",
+        "Calibration drift effects"
+      ],
+      "resources": [
+        {
+          "label": "PennyLane IBM Q Plugin Docs",
+          "platform": "PennyLane",
+          "type": "docs"
+        },
+        {
+          "label": "Noise in QML - Wang et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Running QML on Real Devices",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Train a VQC classifier on a simulator then run inference on IBM Quantum hardware, and quantify accuracy degradation due to hardware noise.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "quantum-ml-10",
+      "title": "Quantum Advantage in ML and Research Frontiers",
+      "order": 10,
+      "techs": [
+        "PennyLane",
+        "Python",
+        "Qiskit ML",
+        "PyTorch"
+      ],
+      "description": "Critically evaluate claimed quantum advantages in ML, study dequantization results, and explore open research problems. Reproduce a recent QML paper and propose an improvement.",
+      "topics": [
+        "Quantum advantage criteria in ML",
+        "Dequantization theorems",
+        "Classical simulation limits",
+        "QML on non-Euclidean data",
+        "Quantum graph neural networks",
+        "Fault-tolerant QML prospects",
+        "Open problems in QML theory"
+      ],
+      "resources": [
+        {
+          "label": "Dequantization of QML - Tang",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "QML in the NISQ Era - Cerezo et al.",
+          "platform": "Nature",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Graph Neural Networks",
+          "platform": "arXiv",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Reproduce the main classification experiment from a 2023 QML paper using PennyLane, then propose and test one architectural modification.",
+      "estimatedTime": "6 weeks"
+    }
+  ],
+  "quantum-crypto": [
+    {
+      "id": "quantum-crypto-1",
+      "title": "Classical Cryptography and Quantum Threats",
+      "order": 1,
+      "techs": [
+        "Python",
+        "Post-Quantum",
+        "Lattices",
+        "Math"
+      ],
+      "description": "Review the classical cryptographic primitives that quantum computers will break and understand why they are vulnerable. Survey the landscape of post-quantum cryptographic approaches.",
+      "topics": [
+        "RSA and ECC overview",
+        "Shor's threat to public key crypto",
+        "Grover's threat to symmetric crypto",
+        "Harvest-now-decrypt-later attacks",
+        "NIST PQC competition overview",
+        "Migration timeline",
+        "Crypto agility concept"
+      ],
+      "resources": [
+        {
+          "label": "NIST Post-Quantum Cryptography Standards",
+          "platform": "NIST",
+          "type": "docs"
+        },
+        {
+          "label": "Introduction to Modern Cryptography - Katz and Lindell",
+          "platform": "CRC Press",
+          "type": "book"
+        },
+        {
+          "label": "Quantum Computing Threats to Cryptography",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a report mapping each NIST PQC finalist algorithm to the hardness assumption it relies on, with a one-paragraph explanation of each.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "quantum-crypto-2",
+      "title": "BB84 Quantum Key Distribution",
+      "order": 2,
+      "techs": [
+        "QKD",
+        "BB84",
+        "Python",
+        "Qiskit"
+      ],
+      "description": "Understand the BB84 protocol and the physical principles that make quantum key distribution unconditionally secure. Implement a simulation of BB84 including eavesdropper detection.",
+      "topics": [
+        "BB84 protocol steps",
+        "Conjugate bases",
+        "Sifting and reconciliation",
+        "Eavesdropper detection rate",
+        "Quantum bit error rate",
+        "Privacy amplification overview",
+        "No-cloning theorem proof"
+      ],
+      "resources": [
+        {
+          "label": "BB84 Original Paper - Bennett and Brassard",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Qiskit QKD Tutorial",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "BB84 Protocol Explained",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement a full BB84 simulation in Python including an eavesdropper inserting herself on 50% of qubits and computing the resulting QBER.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "quantum-crypto-3",
+      "title": "Advanced QKD Protocols",
+      "order": 3,
+      "techs": [
+        "QKD",
+        "Python",
+        "Qiskit",
+        "BB84"
+      ],
+      "description": "Study E91, B92, and continuous-variable QKD protocols and compare their practical advantages. Implement E91 using entangled pairs and Bell inequality verification.",
+      "topics": [
+        "E91 Ekert protocol",
+        "B92 two-state protocol",
+        "Six-state QKD",
+        "Continuous-variable QKD",
+        "Measurement-device-independent QKD",
+        "Twin-field QKD",
+        "QKD network architectures"
+      ],
+      "resources": [
+        {
+          "label": "E91 Original Paper - Ekert",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "QKD Protocols Survey",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Cryptography Lecture Series",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement the E91 protocol in Qiskit, verify Bell inequality violation to confirm entanglement, and show how eavesdropping reduces CHSH score.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "quantum-crypto-4",
+      "title": "Lattice-Based Cryptography",
+      "order": 4,
+      "techs": [
+        "Lattices",
+        "Post-Quantum",
+        "Python",
+        "Math"
+      ],
+      "description": "Study the hardness of lattice problems SVP and LWE and how they underpin post-quantum cryptographic schemes. Implement basic lattice operations and understand CRYSTALS-Kyber.",
+      "topics": [
+        "Lattice definition and properties",
+        "Shortest vector problem SVP",
+        "Learning with errors LWE",
+        "Ring-LWE variant",
+        "CRYSTALS-Kyber KEM",
+        "CRYSTALS-Dilithium signatures",
+        "LWE security reductions"
+      ],
+      "resources": [
+        {
+          "label": "CRYSTALS-Kyber Specification",
+          "platform": "NIST",
+          "type": "docs"
+        },
+        {
+          "label": "A Decade of Lattice Cryptography - Peikert",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Lattice Cryptography Course",
+          "platform": "Coursera",
+          "type": "course"
+        }
+      ],
+      "challenge": "Implement the LWE key encapsulation mechanism from scratch in Python for small parameters and verify encrypt-decrypt roundtrip correctness.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-crypto-5",
+      "title": "Hash-Based and Code-Based Signatures",
+      "order": 5,
+      "techs": [
+        "Post-Quantum",
+        "Python",
+        "Lattices",
+        "Math"
+      ],
+      "description": "Study hash-based signature schemes SPHINCS+ and XMSS and code-based cryptography including Classic McEliece. Implement a Merkle tree authentication scheme.",
+      "topics": [
+        "Merkle tree signatures",
+        "XMSS stateful hash signatures",
+        "SPHINCS+ stateless signatures",
+        "McEliece code-based KEM",
+        "Error-correcting codes",
+        "Syndrome decoding hardness",
+        "NIST PQC round 4 selections"
+      ],
+      "resources": [
+        {
+          "label": "SPHINCS+ Specification",
+          "platform": "NIST",
+          "type": "docs"
+        },
+        {
+          "label": "Hash-Based Signatures Overview",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Post-Quantum Cryptography - Bernstein et al.",
+          "platform": "Springer",
+          "type": "book"
+        }
+      ],
+      "challenge": "Implement a Merkle tree one-time signature scheme in Python, sign 16 messages, and verify that signature reuse is detectable.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "quantum-crypto-6",
+      "title": "Quantum Random Number Generation",
+      "order": 6,
+      "techs": [
+        "QKD",
+        "Python",
+        "Qiskit",
+        "BB84"
+      ],
+      "description": "Understand how quantum mechanics provides true randomness and how QRNGs differ from pseudo-random generators. Implement a simple QRNG using measurement outcomes.",
+      "topics": [
+        "Randomness sources in quantum mechanics",
+        "QRNG vs PRNG",
+        "Certified randomness expansion",
+        "Device-independent QRNG",
+        "Randomness extraction",
+        "Statistical tests for randomness",
+        "QRNG hardware implementations"
+      ],
+      "resources": [
+        {
+          "label": "QRNG Review - Herrero-Collantes",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Qiskit QRNG Tutorial",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Certified Randomness Expansion",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a QRNG using Qiskit on IBM hardware, collect 10000 bits, and apply NIST randomness test suite to verify statistical quality.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "quantum-crypto-7",
+      "title": "Quantum Authentication and Secret Sharing",
+      "order": 7,
+      "techs": [
+        "QKD",
+        "Python",
+        "Post-Quantum",
+        "Qiskit"
+      ],
+      "description": "Study quantum authentication protocols and quantum secret sharing schemes that use entanglement for information-theoretic security. Implement a (2,3) quantum threshold secret sharing scheme.",
+      "topics": [
+        "Quantum message authentication",
+        "Quantum one-time pad",
+        "Quantum secret sharing",
+        "Threshold schemes",
+        "Quantum teleportation for crypto",
+        "Quantum digital signatures",
+        "Composability in quantum crypto"
+      ],
+      "resources": [
+        {
+          "label": "Quantum Secret Sharing - Hillery et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Cryptography Protocols Survey",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Authentication Schemes",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement a (2,3) quantum secret sharing protocol in Qiskit using GHZ states and verify that any 2 of 3 parties can reconstruct the secret.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "quantum-crypto-8",
+      "title": "Post-Quantum TLS and Protocol Migration",
+      "order": 8,
+      "techs": [
+        "Post-Quantum",
+        "Python",
+        "Lattices",
+        "QKD"
+      ],
+      "description": "Study how TLS and other internet protocols are being updated to use post-quantum algorithms. Implement a hybrid classical/post-quantum handshake using liboqs.",
+      "topics": [
+        "TLS 1.3 overview",
+        "PQ hybrid key exchange",
+        "liboqs and OQS-OpenSSL",
+        "Kyber in TLS",
+        "Hybrid signature schemes",
+        "Certificate migration challenges",
+        "IETF PQC working groups"
+      ],
+      "resources": [
+        {
+          "label": "Open Quantum Safe liboqs Docs",
+          "platform": "OQS",
+          "type": "docs"
+        },
+        {
+          "label": "PQC in TLS - IETF Drafts",
+          "platform": "IETF",
+          "type": "docs"
+        },
+        {
+          "label": "Post-Quantum TLS Migration Guide",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Set up an OQS-enabled TLS server using liboqs with Kyber key exchange, capture the handshake, and verify the PQ algorithm was negotiated.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-crypto-9",
+      "title": "Security Proofs in Quantum Settings",
+      "order": 9,
+      "techs": [
+        "Post-Quantum",
+        "Math",
+        "Lattices",
+        "Python"
+      ],
+      "description": "Study formal security models for quantum adversaries including the quantum random oracle model and post-quantum security reductions. Understand how QROM proofs differ from classical ROM proofs.",
+      "topics": [
+        "Classical random oracle model",
+        "Quantum random oracle model QROM",
+        "Quantum adversary model",
+        "Reduction-based security proofs",
+        "One-way to hiding lemma",
+        "Post-quantum CCA security",
+        "Tight security bounds"
+      ],
+      "resources": [
+        {
+          "label": "QROM Survey - Don et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Introduction to Modern Cryptography",
+          "platform": "CRC Press",
+          "type": "book"
+        },
+        {
+          "label": "Quantum Security Proofs Lecture",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write out the QROM security proof for OAEP-Kyber in pseudocode, identifying where classical and quantum adversary steps differ.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "quantum-crypto-10",
+      "title": "Quantum Cryptography Research and Deployment",
+      "order": 10,
+      "techs": [
+        "QKD",
+        "Post-Quantum",
+        "Lattices",
+        "BB84"
+      ],
+      "description": "Survey deployed QKD networks and the current state of post-quantum cryptography rollout in industry. Design a cryptographic migration plan for a hypothetical enterprise system.",
+      "topics": [
+        "Global QKD network deployments",
+        "Satellite QKD - Micius experiments",
+        "NIST PQC standard finalists analysis",
+        "Enterprise crypto migration strategy",
+        "Quantum-safe PKI design",
+        "Side-channel attacks on PQC",
+        "Long-term security planning"
+      ],
+      "resources": [
+        {
+          "label": "NIST PQC Final Standards",
+          "platform": "NIST",
+          "type": "docs"
+        },
+        {
+          "label": "Micius Satellite QKD Paper",
+          "platform": "Nature",
+          "type": "docs"
+        },
+        {
+          "label": "Enterprise PQC Migration Guide",
+          "platform": "CISA",
+          "type": "docs"
+        },
+        {
+          "label": "Real-World QKD Deployments",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Design a complete post-quantum cryptographic migration roadmap for a 500-person company, including certificate rotation, protocol upgrades, and 5-year timeline.",
+      "estimatedTime": "6 weeks"
+    }
+  ],
+  "quantum-researcher": [
+    {
+      "id": "quantum-researcher-1",
+      "title": "Quantum Mechanics for Quantum Computing Research",
+      "order": 1,
+      "techs": [
+        "Q#",
+        "Math",
+        "Python",
+        "Cirq"
+      ],
+      "description": "Build a rigorous mathematical foundation in quantum mechanics as it applies to quantum information science. Study Hilbert spaces, operators, and the postulates of quantum mechanics at a graduate level.",
+      "topics": [
+        "Hilbert space formalism",
+        "Hermitian operators and observables",
+        "Spectral theorem",
+        "Density operator formalism",
+        "Open quantum systems intro",
+        "POVM measurements",
+        "Quantum channels and Kraus operators"
+      ],
+      "resources": [
+        {
+          "label": "Quantum Theory for Mathematicians - Hall",
+          "platform": "Springer",
+          "type": "book"
+        },
+        {
+          "label": "Nielsen and Chuang - Chapter 2",
+          "platform": "Cambridge",
+          "type": "book"
+        },
+        {
+          "label": "Quantum Information Theory Lectures - Preskill",
+          "platform": "Caltech",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Derive the Kraus operator representation for a depolarizing channel and verify trace preservation and complete positivity properties numerically.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-researcher-2",
+      "title": "Quantum Information Theory",
+      "order": 2,
+      "techs": [
+        "Math",
+        "Python",
+        "Q#",
+        "Cirq"
+      ],
+      "description": "Study the theory of quantum information including entropy measures, quantum channel capacity, and entanglement measures. Implement von Neumann entropy and mutual information calculations.",
+      "topics": [
+        "Von Neumann entropy",
+        "Quantum mutual information",
+        "Entanglement entropy",
+        "Holevo bound",
+        "Quantum channel capacity",
+        "Quantum discord",
+        "Entanglement measures - concurrence and negativity"
+      ],
+      "resources": [
+        {
+          "label": "Quantum Information Theory - Wilde",
+          "platform": "Cambridge",
+          "type": "book"
+        },
+        {
+          "label": "Quantum Shannon Theory - Preskill Notes",
+          "platform": "Caltech",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Entanglement Measures",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a Python function that computes the entanglement of formation for an arbitrary 2-qubit mixed state using the Wootters formula.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-researcher-3",
+      "title": "Quantum Error Correction Theory",
+      "order": 3,
+      "techs": [
+        "Cirq",
+        "Q#",
+        "Python",
+        "Error Correction"
+      ],
+      "description": "Study the theory of quantum error correcting codes including stabilizer formalism and the threshold theorem. Implement the 3-qubit bit-flip and Shor codes from scratch.",
+      "topics": [
+        "Classical error correction recap",
+        "3-qubit bit-flip code",
+        "9-qubit Shor code",
+        "Stabilizer formalism",
+        "Pauli group and stabilizers",
+        "CSS codes",
+        "Fault-tolerance threshold theorem"
+      ],
+      "resources": [
+        {
+          "label": "Quantum Error Correction - Gottesman Thesis",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Nielsen and Chuang Chapter 10",
+          "platform": "Cambridge",
+          "type": "book"
+        },
+        {
+          "label": "Stabilizer Codes Lecture Series",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement the 5-qubit perfect code in Cirq, inject a single-qubit error on each qubit position, and verify syndrome detection and correction.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "quantum-researcher-4",
+      "title": "Hamiltonian Engineering and Quantum Control",
+      "order": 4,
+      "techs": [
+        "Q#",
+        "Python",
+        "Hamiltonians",
+        "Cirq"
+      ],
+      "description": "Study Hamiltonian engineering techniques for quantum computing including pulse-level control and the Magnus expansion. Simulate time-dependent quantum systems.",
+      "topics": [
+        "Schrodinger equation for quantum gates",
+        "Magnus expansion",
+        "Rotating wave approximation",
+        "Pulse-level control basics",
+        "Optimal control theory GRAPE",
+        "Floquet engineering",
+        "Dynamical decoupling"
+      ],
+      "resources": [
+        {
+          "label": "Quantum Control Theory - D Alessandro",
+          "platform": "CRC Press",
+          "type": "book"
+        },
+        {
+          "label": "QuTiP Documentation",
+          "platform": "QuTiP",
+          "type": "docs"
+        },
+        {
+          "label": "Optimal Control for Quantum Gates",
+          "platform": "arXiv",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Use QuTiP and GRAPE to design a pulse sequence implementing a CNOT gate on a two-qubit system and compare fidelity to the Rabi-frequency baseline.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "quantum-researcher-5",
+      "title": "Surface Codes and Topological Error Correction",
+      "order": 5,
+      "techs": [
+        "Cirq",
+        "Python",
+        "Error Correction",
+        "Q#"
+      ],
+      "description": "Study the surface code and toric code in depth, including syndrome extraction, minimum-weight perfect matching decoding, and logical qubit operations. Simulate surface code cycles.",
+      "topics": [
+        "Toric code construction",
+        "Surface code boundaries",
+        "Syndrome measurement circuits",
+        "MWPM decoding algorithm",
+        "Logical X and Z operators",
+        "Code distance and threshold",
+        "Lattice surgery"
+      ],
+      "resources": [
+        {
+          "label": "Surface Codes - Fowler et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Stim Stabilizer Simulator Docs",
+          "platform": "Google",
+          "type": "docs"
+        },
+        {
+          "label": "Surface Code Threshold Calculation",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Simulate a distance-3 surface code using Stim, introduce random Pauli errors at various rates, and plot the logical error rate vs physical error rate curve.",
+      "estimatedTime": "6 weeks"
+    },
+    {
+      "id": "quantum-researcher-6",
+      "title": "Q# and Quantum Program Verification",
+      "order": 6,
+      "techs": [
+        "Q#",
+        "Cirq",
+        "Python",
+        "Error Correction"
+      ],
+      "description": "Write quantum programs in Q# and use the Microsoft Quantum Development Kit for resource estimation and verification. Develop formally verified quantum subroutines.",
+      "topics": [
+        "Q# language syntax",
+        "Quantum development kit setup",
+        "Qubit allocation and operations",
+        "Adjoint and controlled functors",
+        "Resource estimator in Q#",
+        "Formal verification approaches",
+        "Quantum program testing"
+      ],
+      "resources": [
+        {
+          "label": "Q# Documentation - Microsoft",
+          "platform": "Microsoft",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Quantum Resource Estimator",
+          "platform": "Azure",
+          "type": "docs"
+        },
+        {
+          "label": "Q# Quantum Programming Course",
+          "platform": "edX",
+          "type": "course"
+        }
+      ],
+      "challenge": "Implement Shor's algorithm in Q# using native library subroutines and run the Azure Resource Estimator to get T-gate and qubit counts for N=2048.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "quantum-researcher-7",
+      "title": "Quantum Complexity and Computational Models",
+      "order": 7,
+      "techs": [
+        "Math",
+        "Q#",
+        "Python",
+        "Cirq"
+      ],
+      "description": "Study the quantum computational complexity hierarchy including BQP, QMA, and QCMA. Understand the limits of quantum speedup and the role of quantum proofs.",
+      "topics": [
+        "BQP complexity class",
+        "QMA and quantum witnesses",
+        "QCMA class",
+        "Quantum PCP conjecture",
+        "Local Hamiltonian problem",
+        "Complexity of quantum simulation",
+        "Oracle separations"
+      ],
+      "resources": [
+        {
+          "label": "Quantum Complexity Zoo",
+          "platform": "Complexity Zoo",
+          "type": "docs"
+        },
+        {
+          "label": "Complexity Theory Lectures - Aaronson",
+          "platform": "UT Austin",
+          "type": "docs"
+        },
+        {
+          "label": "QMA-hardness of Local Hamiltonian",
+          "platform": "arXiv",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Formally prove that the local Hamiltonian problem is QMA-complete by sketching both the QMA membership and QMA-hardness reductions.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "quantum-researcher-8",
+      "title": "Quantum Communication and Nonlocality",
+      "order": 8,
+      "techs": [
+        "Python",
+        "Q#",
+        "Math",
+        "Cirq"
+      ],
+      "description": "Study quantum communication protocols, Bell inequalities, and the role of entanglement in distributed quantum information processing. Implement CHSH and other Bell tests.",
+      "topics": [
+        "Bell inequalities",
+        "CHSH game",
+        "Tsirelson bound",
+        "Quantum teleportation",
+        "Superdense coding",
+        "Entanglement distillation",
+        "Quantum network protocols"
+      ],
+      "resources": [
+        {
+          "label": "Bell Nonlocality Review - Brunner et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Information and Quantum Computation - Bennett",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Teleportation Explained",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement the CHSH game in Cirq, simulate both classical and quantum strategies, and verify that the quantum strategy achieves a winning probability above the classical bound.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "quantum-researcher-9",
+      "title": "Open Quantum Systems and Decoherence",
+      "order": 9,
+      "techs": [
+        "Python",
+        "QuTiP",
+        "Hamiltonians",
+        "Math"
+      ],
+      "description": "Study the Lindblad master equation, Markovian dynamics, and decoherence mechanisms in real quantum hardware. Simulate open quantum system dynamics using QuTiP.",
+      "topics": [
+        "Lindblad master equation",
+        "Markovian approximation",
+        "Lindblad operators",
+        "T1 and T2 processes in Lindblad form",
+        "Non-Markovian dynamics",
+        "Quantum process tomography",
+        "Decoherence-free subspaces"
+      ],
+      "resources": [
+        {
+          "label": "QuTiP Documentation",
+          "platform": "QuTiP",
+          "type": "docs"
+        },
+        {
+          "label": "Open Quantum Systems - Breuer and Petruccione",
+          "platform": "Oxford",
+          "type": "book"
+        },
+        {
+          "label": "Lindblad Dynamics Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Simulate amplitude damping and dephasing on a single qubit using QuTiP Lindblad solver and plot T1 and T2 decay curves, fitting to exponentials.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "quantum-researcher-10",
+      "title": "Research Frontiers and Original Contribution",
+      "order": 10,
+      "techs": [
+        "Q#",
+        "Cirq",
+        "Hamiltonians",
+        "Error Correction"
+      ],
+      "description": "Engage with the current research literature, identify an open problem, and produce an original research contribution. Learn to write and review quantum computing research papers.",
+      "topics": [
+        "Reading quantum research papers",
+        "Identifying open problems",
+        "Proof techniques in QC research",
+        "arXiv preprint workflow",
+        "Research paper writing structure",
+        "Peer review process",
+        "Quantum advantage verification methods"
+      ],
+      "resources": [
+        {
+          "label": "arXiv quant-ph Section",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "How to Write a Quantum Computing Paper",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Quantum Information Processing Journal",
+          "platform": "Springer",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Identify an open problem from a 2024 quant-ph paper, formulate a conjecture, and write a 4-page research proposal with preliminary numerical evidence.",
+      "estimatedTime": "8 weeks"
+    }
+  ],
+  "quantum-hardware": [
+    {
+      "id": "quantum-hardware-1",
+      "title": "Physics of Quantum Hardware Platforms",
+      "order": 1,
+      "techs": [
+        "Superconducting",
+        "Ion Traps",
+        "Python",
+        "Math"
+      ],
+      "description": "Survey the major physical platforms for quantum computing including superconducting qubits and trapped ions. Understand the key figures of merit for each platform.",
+      "topics": [
+        "Superconducting qubit types",
+        "Transmon qubit physics",
+        "Ion trap fundamentals",
+        "Photonic quantum computing",
+        "Neutral atom arrays",
+        "Coherence time T1 T2",
+        "Gate fidelity benchmarks"
+      ],
+      "resources": [
+        {
+          "label": "Quantum Computing Hardware Review - Krantz et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Introduction to Superconducting Qubits",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Trapped Ion Quantum Computing Survey",
+          "platform": "arXiv",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Create a comparison table of superconducting vs trapped ion platforms across 8 metrics including coherence time, gate fidelity, and scalability.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "quantum-hardware-2",
+      "title": "Superconducting Qubit Circuit Theory",
+      "order": 2,
+      "techs": [
+        "Superconducting",
+        "Python",
+        "Pulse",
+        "Math"
+      ],
+      "description": "Study the circuit quantum electrodynamics framework for superconducting qubits. Understand Josephson junctions, LC oscillators, and the transmon qubit Hamiltonian.",
+      "topics": [
+        "LC oscillator quantization",
+        "Josephson junction physics",
+        "Cooper pair box qubit",
+        "Transmon regime",
+        "Circuit QED framework",
+        "Qubit-resonator coupling",
+        "Dispersive readout"
+      ],
+      "resources": [
+        {
+          "label": "Circuit QED - Blais et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Superconducting Qubits - Koch et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Circuit QED Lecture Series",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Derive the transmon Hamiltonian from the Cooper pair box model using the Josephson and charging energy ratio EJ/EC and plot the energy levels as EJ/EC increases.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-hardware-3",
+      "title": "Quantum Gate Implementation and Pulse Design",
+      "order": 3,
+      "techs": [
+        "Pulse",
+        "Superconducting",
+        "Python",
+        "Calibration"
+      ],
+      "description": "Learn how quantum gates are physically implemented as microwave pulses on superconducting hardware. Design and simulate gate pulses using Qiskit Pulse.",
+      "topics": [
+        "Rabi oscillations",
+        "Microwave pulse shaping",
+        "DRAG pulses for leakage reduction",
+        "Cross-resonance gate",
+        "Qiskit Pulse framework",
+        "Pulse calibration basics",
+        "IQ mixer and signal generation"
+      ],
+      "resources": [
+        {
+          "label": "Qiskit Pulse Documentation",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "DRAG Pulse Technique Paper",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Gate Pulse Design Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Design a DRAG-shaped pi pulse in Qiskit Pulse for a transmon qubit, simulate it with noise, and compare leakage to a simple Gaussian pulse.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-hardware-4",
+      "title": "Qubit Readout and State Discrimination",
+      "order": 4,
+      "techs": [
+        "Superconducting",
+        "Calibration",
+        "Python",
+        "Pulse"
+      ],
+      "description": "Study dispersive readout of superconducting qubits and the signal processing chain for state discrimination. Implement IQ plane classification and calibration.",
+      "topics": [
+        "Dispersive readout mechanism",
+        "Cavity-qubit coupling for readout",
+        "IQ plane measurement",
+        "State discrimination algorithms",
+        "Readout fidelity optimization",
+        "Parametric amplification",
+        "Readout error mitigation"
+      ],
+      "resources": [
+        {
+          "label": "Dispersive Readout Review",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Qiskit Pulse Readout Calibration",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "IQ Plane State Discrimination",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Acquire IQ readout data from IBM Quantum backend, fit Gaussian clusters per state, and implement a linear discriminant classifier to maximize readout fidelity.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-hardware-5",
+      "title": "Quantum Characterization and Benchmarking",
+      "order": 5,
+      "techs": [
+        "Calibration",
+        "Qiskit",
+        "Python",
+        "Superconducting"
+      ],
+      "description": "Master standard characterization protocols for quantum hardware including process tomography and randomized benchmarking. Quantify gate fidelities and coherence times.",
+      "topics": [
+        "Rabi experiment",
+        "T1 measurement",
+        "T2 Ramsey and echo",
+        "Quantum process tomography",
+        "Randomized benchmarking",
+        "Simultaneous RB",
+        "Gate set tomography intro"
+      ],
+      "resources": [
+        {
+          "label": "Qiskit Experiments Library Docs",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Randomized Benchmarking - Magesan et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Hardware Benchmarking Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Run T1, T2, and randomized benchmarking experiments on an IBM Quantum backend using Qiskit Experiments and produce a hardware characterization report.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-hardware-6",
+      "title": "Crosstalk and Hardware Error Characterization",
+      "order": 6,
+      "techs": [
+        "Calibration",
+        "Superconducting",
+        "Python",
+        "Pulse"
+      ],
+      "description": "Study crosstalk between qubits on multi-qubit chips and methods for characterizing and mitigating it. Understand leakage to non-computational states and its effects.",
+      "topics": [
+        "ZZ crosstalk coupling",
+        "Simultaneous gate errors",
+        "Leakage to higher levels",
+        "Crosstalk characterization protocols",
+        "Dynamical decoupling for crosstalk",
+        "Echo sequences",
+        "Hardware-aware circuit compilation"
+      ],
+      "resources": [
+        {
+          "label": "Crosstalk in Superconducting Qubits",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Leakage Detection Protocols",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Hardware Noise Characterization",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Design a Hamiltonian tomography experiment for two coupled qubits to extract the ZZ coupling strength and verify by comparing to independent T2 measurements.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "quantum-hardware-7",
+      "title": "Trapped Ion Hardware Engineering",
+      "order": 7,
+      "techs": [
+        "Ion Traps",
+        "Python",
+        "Math",
+        "Calibration"
+      ],
+      "description": "Study the engineering of trapped ion quantum computers including Paul traps, laser interactions, and motional mode gates. Compare engineering challenges to superconducting platforms.",
+      "topics": [
+        "Paul trap mechanics",
+        "Laser cooling methods",
+        "Raman transitions",
+        "Molmer-Sorensen gate",
+        "Cirac-Zoller gate",
+        "Ion chain motional modes",
+        "Shuttling for scaling"
+      ],
+      "resources": [
+        {
+          "label": "Trapped Ion Quantum Computing - Bruzewicz et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Ion Trap Gate Implementations",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Quantum Computing with Ions - Leibfried et al.",
+          "platform": "Nature",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Simulate a Molmer-Sorensen gate on two ions in a harmonic trap using QuTiP, sweeping the Lamb-Dicke parameter and plotting entanglement fidelity.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "quantum-hardware-8",
+      "title": "Quantum Hardware Calibration Pipelines",
+      "order": 8,
+      "techs": [
+        "Calibration",
+        "Python",
+        "Pulse",
+        "Superconducting"
+      ],
+      "description": "Design automated calibration pipelines for quantum hardware including drift tracking and closed-loop optimization. Understand the workflow used in production quantum systems.",
+      "topics": [
+        "Calibration pipeline architecture",
+        "Frequency drift tracking",
+        "Automated gate recalibration",
+        "Bayesian optimization for calibration",
+        "Hardware abstraction layers",
+        "Calibration scheduling",
+        "Cross-calibration between qubits"
+      ],
+      "resources": [
+        {
+          "label": "Automated Calibration Survey",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Qiskit Calibrations Module",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Calibration in Production Quantum Systems",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement an automated calibration pipeline in Python that runs T1, T2, and Rabi experiments sequentially, updates gate parameters, and logs results.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "quantum-hardware-9",
+      "title": "Cryogenic Engineering and Hardware Integration",
+      "order": 9,
+      "techs": [
+        "Superconducting",
+        "Ion Traps",
+        "Calibration",
+        "Python"
+      ],
+      "description": "Study the cryogenic infrastructure required for superconducting quantum computers and the full signal chain from room-temperature electronics to the quantum chip. Understand thermalization and shielding.",
+      "topics": [
+        "Dilution refrigerator operation",
+        "Cryogenic wiring and filtering",
+        "Microwave engineering at millikelvin",
+        "Thermal anchoring stages",
+        "Josephson parametric amplifiers",
+        "Magnetic shielding",
+        "Vibration isolation"
+      ],
+      "resources": [
+        {
+          "label": "Cryogenic Engineering for Superconducting Qubits",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Dilution Refrigerator Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Quantum Hardware Systems Engineering",
+          "platform": "arXiv",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Design a complete wiring schematic for a 5-qubit superconducting processor including attenuation, filtering, and amplification at each cryostat stage.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "quantum-hardware-10",
+      "title": "Scaling Quantum Hardware and Next-Generation Architectures",
+      "order": 10,
+      "techs": [
+        "Superconducting",
+        "Ion Traps",
+        "Pulse",
+        "Calibration"
+      ],
+      "description": "Study the engineering challenges and proposed solutions for scaling quantum hardware to fault-tolerant regimes. Analyze modular architectures, 3D integration, and photonic interconnects.",
+      "topics": [
+        "Modular quantum computing architectures",
+        "3D integration for superconducting qubits",
+        "Quantum interconnects via photons",
+        "Neutral atom reconfigurable arrays",
+        "Topological qubits overview",
+        "Crossbar architectures",
+        "Roadmap to fault tolerance"
+      ],
+      "resources": [
+        {
+          "label": "Quantum Computing Scalability Review",
+          "platform": "Nature",
+          "type": "docs"
+        },
+        {
+          "label": "IBM Quantum Roadmap",
+          "platform": "IBM",
+          "type": "docs"
+        },
+        {
+          "label": "Modular Quantum Computer Architectures",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Scaling Quantum Hardware",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Design a modular 1000-qubit architecture proposal including inter-module connectivity, error correction overhead, and estimated clock cycle performance.",
+      "estimatedTime": "6 weeks"
+    }
+  ],
+  "quantum-optimization": [
+    {
+      "id": "quantum-optimization-1",
+      "title": "Classical Optimization Foundations",
+      "order": 1,
+      "techs": [
+        "Python",
+        "QAOA",
+        "SciPy",
+        "NumPy"
+      ],
+      "description": "Review classical combinatorial and continuous optimization to understand the problems that quantum approaches target. Study NP-hard problems and heuristic methods.",
+      "topics": [
+        "Combinatorial optimization landscape",
+        "NP-hard problem taxonomy",
+        "Traveling salesman problem",
+        "Max-Cut problem",
+        "Classical heuristics - SA and GA",
+        "Convex vs non-convex optimization",
+        "Branch and bound"
+      ],
+      "resources": [
+        {
+          "label": "Combinatorial Optimization - Papadimitriou",
+          "platform": "Dover",
+          "type": "book"
+        },
+        {
+          "label": "Introduction to Algorithms - CLRS",
+          "platform": "MIT Press",
+          "type": "book"
+        },
+        {
+          "label": "Optimization Landscape for NP-Hard Problems",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement simulated annealing for Max-Cut on a 20-node random 3-regular graph and record solution quality vs runtime for 5 different cooling schedules.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "quantum-optimization-2",
+      "title": "Ising Model and QUBO Formulations",
+      "order": 2,
+      "techs": [
+        "Ising",
+        "Python",
+        "D-Wave",
+        "QAOA"
+      ],
+      "description": "Learn to formulate combinatorial optimization problems as Ising models and Quadratic Unconstrained Binary Optimization problems. Convert real-world problems to QUBO form.",
+      "topics": [
+        "Ising model definition",
+        "QUBO formulation",
+        "Penalty terms for constraints",
+        "Max-Cut as Ising",
+        "Graph coloring to QUBO",
+        "Portfolio optimization as QUBO",
+        "Logical to physical variable mapping"
+      ],
+      "resources": [
+        {
+          "label": "QUBO Formulations Survey - Glover et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "D-Wave QUBO Formulation Guide",
+          "platform": "D-Wave",
+          "type": "docs"
+        },
+        {
+          "label": "Ising Formulation of NP Problems",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Formulate a 10-city TSP as a QUBO matrix in Python, print the full penalty and objective terms, and verify the QUBO minimum corresponds to a valid tour.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "quantum-optimization-3",
+      "title": "Quantum Annealing and D-Wave Systems",
+      "order": 3,
+      "techs": [
+        "D-Wave",
+        "Annealing",
+        "Python",
+        "Ising"
+      ],
+      "description": "Understand quantum annealing theory and how D-Wave machines implement it using transverse-field Ising Hamiltonians. Submit real jobs to D-Wave Leap.",
+      "topics": [
+        "Adiabatic quantum computation",
+        "Transverse-field Ising Hamiltonian",
+        "Annealing schedule design",
+        "D-Wave QPU topology - Pegasus",
+        "Minor embedding",
+        "Chain strength tuning",
+        "D-Wave Ocean SDK"
+      ],
+      "resources": [
+        {
+          "label": "D-Wave Ocean SDK Documentation",
+          "platform": "D-Wave",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Annealing Overview - Johnson et al.",
+          "platform": "Nature",
+          "type": "docs"
+        },
+        {
+          "label": "D-Wave Leap Tutorial",
+          "platform": "D-Wave",
+          "type": "course"
+        }
+      ],
+      "challenge": "Submit a Max-Cut problem on a 64-node graph to D-Wave Leap using Ocean SDK and compare the best annealing solution to the simulated annealing baseline.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "quantum-optimization-4",
+      "title": "QAOA Theory and Implementation",
+      "order": 4,
+      "techs": [
+        "QAOA",
+        "Qiskit",
+        "Python",
+        "Ising"
+      ],
+      "description": "Derive the Quantum Approximate Optimization Algorithm from first principles and implement it for Max-Cut. Analyze the role of circuit depth p and the approximation ratio.",
+      "topics": [
+        "QAOA ansatz construction",
+        "Cost and mixer Hamiltonians",
+        "QAOA p=1 analysis",
+        "Parameter optimization landscape",
+        "Approximation ratio theory",
+        "Comparison to classical algorithms",
+        "Warm-starting QAOA"
+      ],
+      "resources": [
+        {
+          "label": "QAOA Original Paper - Farhi et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Qiskit QAOA Tutorial",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "QAOA Explained and Implemented",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement QAOA at depths p=1, 2, and 3 for Max-Cut on a 6-node graph and plot the approximation ratio improvement vs number of CNOT gates used.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-optimization-5",
+      "title": "QAOA Variants and Mixer Designs",
+      "order": 5,
+      "techs": [
+        "QAOA",
+        "Qiskit",
+        "Python",
+        "Ising"
+      ],
+      "description": "Study advanced QAOA variants including QAOA with Grover mixers, constrained QAOA, and recursive QAOA. Implement a constraint-preserving mixer for a knapsack problem.",
+      "topics": [
+        "Grover mixer for constrained problems",
+        "X-mixer vs XY-mixer",
+        "Recursive QAOA RQAOA",
+        "Constraint-preserving mixers",
+        "QAOA for Maximum Independent Set",
+        "Multi-angle QAOA",
+        "Fermionic QAOA"
+      ],
+      "resources": [
+        {
+          "label": "Constrained QAOA - Hadfield et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Recursive QAOA Paper",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "QAOA Variants Survey",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement QAOA with an XY mixer for the maximum independent set problem on a 8-node graph and verify feasibility of all returned solutions.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-optimization-6",
+      "title": "Variational Quantum Optimization Beyond QAOA",
+      "order": 6,
+      "techs": [
+        "Qiskit",
+        "Python",
+        "QAOA",
+        "Annealing"
+      ],
+      "description": "Explore non-QAOA variational optimization strategies including QITE, FALQON, and counterdiabatic driving. Compare convergence and hardware requirements.",
+      "topics": [
+        "Quantum imaginary time evolution QITE",
+        "FALQON algorithm",
+        "Counterdiabatic driving",
+        "Variational fast forwarding",
+        "Local cost function design",
+        "Trainability of variational optimizers",
+        "Benchmarking variational optimization"
+      ],
+      "resources": [
+        {
+          "label": "FALQON Paper",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Counterdiabatic Quantum Optimization",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Beyond QAOA - Optimization Survey",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement FALQON for Max-Cut on a 6-node graph in Qiskit and compare convergence speed and final cut value to QAOA at equivalent circuit depth.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-optimization-7",
+      "title": "Quantum Optimization for Finance",
+      "order": 7,
+      "techs": [
+        "QAOA",
+        "D-Wave",
+        "Python",
+        "Qiskit"
+      ],
+      "description": "Apply quantum optimization algorithms to financial problems including portfolio selection, risk management, and options pricing. Formulate and solve a portfolio optimization with constraints.",
+      "topics": [
+        "Markowitz portfolio optimization",
+        "Mean-variance to QUBO",
+        "Cardinality constraints",
+        "Risk measures CVaR",
+        "Quantum Monte Carlo for pricing",
+        "Asset allocation with D-Wave",
+        "Backtesting quantum portfolios"
+      ],
+      "resources": [
+        {
+          "label": "Quantum Finance - Orus et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Qiskit Finance Module Docs",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "D-Wave Finance Applications",
+          "platform": "D-Wave",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Use QAOA via Qiskit Finance to find the minimum-variance portfolio for 6 assets with a budget constraint and compare to the classical efficient frontier.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-optimization-8",
+      "title": "Quantum Optimization for Logistics",
+      "order": 8,
+      "techs": [
+        "D-Wave",
+        "QAOA",
+        "Python",
+        "Ising"
+      ],
+      "description": "Solve logistics optimization problems including vehicle routing, scheduling, and supply chain using quantum annealing and gate-based methods. Formulate VRP as a QUBO.",
+      "topics": [
+        "Vehicle routing problem",
+        "VRP to QUBO conversion",
+        "Job shop scheduling",
+        "Bin packing QUBO",
+        "Flight gate assignment",
+        "Traffic flow optimization",
+        "Benchmark comparison to classical solvers"
+      ],
+      "resources": [
+        {
+          "label": "Quantum Optimization for Logistics - Feld et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "D-Wave Vehicle Routing Demo",
+          "platform": "D-Wave",
+          "type": "docs"
+        },
+        {
+          "label": "Logistics Optimization with Quantum Computing",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Formulate a 5-vehicle 20-customer VRP as a QUBO, submit to D-Wave with minor embedding, and compare route quality to Google OR-Tools classical solution.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "quantum-optimization-9",
+      "title": "Quantum Optimization Benchmarking and Limits",
+      "order": 9,
+      "techs": [
+        "QAOA",
+        "D-Wave",
+        "Python",
+        "Ising"
+      ],
+      "description": "Critically evaluate claims of quantum optimization advantage using rigorous benchmarking methodology. Understand when quantum optimization may or may not outperform classical methods.",
+      "topics": [
+        "Benchmarking methodology design",
+        "Instance hardness metrics",
+        "Comparison to Gurobi and CPLEX",
+        "QA vs QAOA performance",
+        "Time-to-solution metric",
+        "Quantum advantage criteria for optimization",
+        "Classical simulation of QAOA"
+      ],
+      "resources": [
+        {
+          "label": "Quantum Optimization Benchmarking Survey",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "No Quantum Speedup for D-Wave - Ronnow et al.",
+          "platform": "Science",
+          "type": "docs"
+        },
+        {
+          "label": "QAOA Overhead Analysis",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Design and execute a benchmarking study comparing QAOA, D-Wave annealing, and Gurobi on 50 Max-Cut instances of varying size, plotting time-to-solution vs instance size.",
+      "estimatedTime": "6 weeks"
+    },
+    {
+      "id": "quantum-optimization-10",
+      "title": "Quantum Optimization Research and Applications",
+      "order": 10,
+      "techs": [
+        "QAOA",
+        "D-Wave",
+        "Annealing",
+        "Ising"
+      ],
+      "description": "Engage with cutting-edge quantum optimization research and design a novel application for a real-world optimization problem. Produce an end-to-end demonstration with rigorous evaluation.",
+      "topics": [
+        "Open problems in quantum optimization",
+        "Quantum advantage thresholds",
+        "Overcoming barren plateaus in optimization",
+        "Quantum-inspired classical algorithms",
+        "Tensor network optimization",
+        "QAOA on fault-tolerant hardware prospects",
+        "Research publication workflow"
+      ],
+      "resources": [
+        {
+          "label": "Quantum Optimization - Recent Advances arXiv",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Approximate Optimization - Review 2024",
+          "platform": "Nature",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum-Inspired Optimization Survey",
+          "platform": "arXiv",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Identify a real industry optimization problem, formulate it as a QUBO, run QAOA and D-Wave solutions, and submit a 6-page technical report with reproducible benchmarks.",
+      "estimatedTime": "8 weeks"
+    }
+  ],
+  "quantum-simulation": [
+    {
+      "id": "quantum-simulation-1",
+      "title": "Quantum Simulation Fundamentals",
+      "order": 1,
+      "techs": [
+        "Python",
+        "Qiskit",
+        "NumPy",
+        "Hamiltonians"
+      ],
+      "description": "Understand why quantum computers are naturally suited for simulating quantum systems and what computational advantage this provides. Survey simulation targets from chemistry to condensed matter.",
+      "topics": [
+        "Feynman's simulation proposal",
+        "Exponential classical simulation cost",
+        "First vs second quantization",
+        "Quantum simulation use cases",
+        "Chemistry simulation targets",
+        "Condensed matter simulation targets",
+        "Types of quantum simulation - digital vs analog"
+      ],
+      "resources": [
+        {
+          "label": "Quantum Simulation Review - Georgescu et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Feynman Simulating Physics with Computers",
+          "platform": "Springer",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Chemistry on Quantum Computers",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Compute the eigenspectrum of the 4x4 Heisenberg Hamiltonian classically in NumPy and estimate how computational cost scales with system size.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "quantum-simulation-2",
+      "title": "Second Quantization and Fermionic Systems",
+      "order": 2,
+      "techs": [
+        "Qiskit",
+        "Python",
+        "Chemistry",
+        "Hamiltonians"
+      ],
+      "description": "Learn the second quantization formalism for fermionic and bosonic systems and how to represent molecular Hamiltonians computationally. Map fermionic operators to qubit operators.",
+      "topics": [
+        "Creation and annihilation operators",
+        "Fock space construction",
+        "Molecular Hamiltonian",
+        "Jordan-Wigner transformation",
+        "Bravyi-Kitaev transformation",
+        "Parity mapping",
+        "Fermion-to-qubit mapping comparison"
+      ],
+      "resources": [
+        {
+          "label": "Qiskit Nature Documentation",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "OpenFermion Documentation",
+          "platform": "Google",
+          "type": "docs"
+        },
+        {
+          "label": "Second Quantization for Quantum Computing",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Use OpenFermion to construct the Jordan-Wigner qubit Hamiltonian for LiH at bond length 1.5 Angstrom and compare qubit operator term counts.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "quantum-simulation-3",
+      "title": "Variational Quantum Eigensolver",
+      "order": 3,
+      "techs": [
+        "VQE",
+        "Qiskit",
+        "Python",
+        "Chemistry"
+      ],
+      "description": "Implement the Variational Quantum Eigensolver algorithm to find molecular ground state energies. Study ansatz choices including hardware-efficient and chemically motivated UCC forms.",
+      "topics": [
+        "VQE algorithm derivation",
+        "Expectation value estimation",
+        "UCCSD ansatz",
+        "Hardware-efficient ansatz",
+        "Gradient computation",
+        "Classical optimizer choices",
+        "Shot noise and measurement overhead"
+      ],
+      "resources": [
+        {
+          "label": "VQE Original Paper - Peruzzo et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Qiskit Nature VQE Tutorial",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "VQE for Chemistry",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Run VQE for H2 and LiH ground state energies in Qiskit Nature using both UCCSD and hardware-efficient ansatz, and plot energy vs optimizer iteration for each.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-simulation-4",
+      "title": "Hamiltonian Simulation Methods",
+      "order": 4,
+      "techs": [
+        "Hamiltonians",
+        "Qiskit",
+        "Python",
+        "VQE"
+      ],
+      "description": "Study digital Hamiltonian simulation methods including Trotter decomposition, LCU, and quantum signal processing. Implement and compare error bounds.",
+      "topics": [
+        "Product formula Trotter methods",
+        "First vs second order Trotter",
+        "Suzuki-Trotter higher orders",
+        "Linear combination of unitaries LCU",
+        "Quantum signal processing for simulation",
+        "Simulation error analysis",
+        "Resource comparison of methods"
+      ],
+      "resources": [
+        {
+          "label": "Hamiltonian Simulation Methods - Childs et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Qiskit Trotter Simulation Docs",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Digital Quantum Simulation Methods",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement 1st and 2nd order Trotter for the transverse-field Ising model and plot simulation error versus Trotter step size on a log-log scale.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-simulation-5",
+      "title": "Quantum Phase Estimation for Simulation",
+      "order": 5,
+      "techs": [
+        "Qiskit",
+        "Hamiltonians",
+        "Python",
+        "VQE"
+      ],
+      "description": "Study quantum phase estimation as a method for extracting energy eigenvalues of molecular Hamiltonians with exponential precision. Implement QPE for a simple system.",
+      "topics": [
+        "QPE algorithm for eigenvalues",
+        "Controlled unitary evolution",
+        "QPE precision and qubit count",
+        "Iterative phase estimation",
+        "QPE vs VQE tradeoffs",
+        "Quantum advantage regime for QPE",
+        "Resource estimation for molecular simulation"
+      ],
+      "resources": [
+        {
+          "label": "QPE for Chemistry - Babbush et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Qiskit QPE Tutorial",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Phase Estimation Explained",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement QPE in Qiskit to compute the ground state energy of H2 using a 6-qubit ancilla register and compare precision to VQE on the same backend.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-simulation-6",
+      "title": "Excited States and Quantum Subspace Expansion",
+      "order": 6,
+      "techs": [
+        "VQE",
+        "Qiskit",
+        "Chemistry",
+        "Python"
+      ],
+      "description": "Extend VQE and quantum simulation to excited states using quantum subspace expansion, QEOM, and multistate methods. Simulate absorption spectra for small molecules.",
+      "topics": [
+        "Excited state simulation challenges",
+        "Quantum equation of motion QEOM",
+        "Quantum subspace expansion QSE",
+        "Folded spectrum method",
+        "Multistate contracted VQE",
+        "Quantum defect theory",
+        "Simulating photochemistry"
+      ],
+      "resources": [
+        {
+          "label": "Quantum Subspace Expansion - McClean et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "QEOM Algorithm Paper",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Excited States on Quantum Computers",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Use QSE in Qiskit Nature to compute the first 3 excited state energies of H2 and compare to the exact FCI spectrum.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "quantum-simulation-7",
+      "title": "Quantum Dynamics and Real-Time Simulation",
+      "order": 7,
+      "techs": [
+        "Qiskit",
+        "Hamiltonians",
+        "Python",
+        "VQE"
+      ],
+      "description": "Simulate real-time quantum dynamics of many-body systems including spin chains and molecular dynamics. Study McLachlan variational principle for time-dependent VQE.",
+      "topics": [
+        "Real-time vs imaginary time evolution",
+        "Variational real-time dynamics",
+        "McLachlan variational principle",
+        "Time-dependent VQE TDVQE",
+        "Quantum chaos signatures",
+        "Loschmidt echo simulation",
+        "Many-body localization dynamics"
+      ],
+      "resources": [
+        {
+          "label": "Variational Quantum Simulation - Yuan et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Real-Time Quantum Dynamics in Qiskit",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Dynamics Simulation Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Simulate the real-time dynamics of a 6-site transverse Ising chain after a quench using TDVQE and compare magnetization dynamics to exact Trotter simulation.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "quantum-simulation-8",
+      "title": "Condensed Matter Quantum Simulation",
+      "order": 8,
+      "techs": [
+        "Qiskit",
+        "Hamiltonians",
+        "Python",
+        "VQE"
+      ],
+      "description": "Apply quantum simulation to condensed matter systems including Hubbard models and topological phases. Study signatures of quantum phase transitions on quantum hardware.",
+      "topics": [
+        "Hubbard model simulation",
+        "Fermi-Hubbard mapping to qubits",
+        "Heisenberg spin chain",
+        "Quantum phase transitions",
+        "Order parameters on quantum hardware",
+        "Topological invariants",
+        "Symmetry-protected phases simulation"
+      ],
+      "resources": [
+        {
+          "label": "Simulating the Fermi-Hubbard Model",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Qiskit Condensed Matter Tutorial",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Simulation of Condensed Matter",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Simulate the 4-site Fermi-Hubbard chain as a function of U/t ratio using VQE and plot the double occupancy versus U/t to locate the Mott transition.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "quantum-simulation-9",
+      "title": "Noise-Aware Quantum Simulation",
+      "order": 9,
+      "techs": [
+        "Qiskit",
+        "VQE",
+        "Python",
+        "Hamiltonians"
+      ],
+      "description": "Develop strategies for quantum simulation in the presence of hardware noise, including error mitigation tailored to simulation workflows. Compare simulated and hardware results.",
+      "topics": [
+        "Noise impact on energy estimates",
+        "Zero-noise extrapolation for simulation",
+        "Probabilistic error cancellation",
+        "Symmetry verification post-processing",
+        "Purification-based error mitigation",
+        "Virtual distillation",
+        "Benchmark noise mitigation for chemistry"
+      ],
+      "resources": [
+        {
+          "label": "Error Mitigation for Quantum Chemistry - Endo et al.",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "Qiskit Error Mitigation Docs",
+          "platform": "Qiskit",
+          "type": "docs"
+        },
+        {
+          "label": "Virtual Distillation Paper",
+          "platform": "arXiv",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Run VQE for H2 on a real IBM Quantum backend with and without ZNE error mitigation and compare energy accuracy and variance to noiseless simulator.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "quantum-simulation-10",
+      "title": "Towards Quantum Advantage in Simulation",
+      "order": 10,
+      "techs": [
+        "VQE",
+        "Hamiltonians",
+        "Chemistry",
+        "Qiskit"
+      ],
+      "description": "Survey the current state of quantum advantage in simulation, identify the near-term and fault-tolerant milestones, and propose a simulation experiment at the quantum advantage frontier.",
+      "topics": [
+        "Quantum advantage criteria for simulation",
+        "Current simulation records on hardware",
+        "Catalysis and strongly correlated systems",
+        "Active space approximations",
+        "Fault-tolerant simulation resources",
+        "Quantum chemistry accuracy goals",
+        "Roadmap to utility-scale simulation"
+      ],
+      "resources": [
+        {
+          "label": "Quantum Simulation Advantage Survey 2024",
+          "platform": "Nature",
+          "type": "docs"
+        },
+        {
+          "label": "Towards Quantum Advantage in Chemistry",
+          "platform": "arXiv",
+          "type": "docs"
+        },
+        {
+          "label": "IBM Quantum Utility Paper",
+          "platform": "Nature",
+          "type": "docs"
+        },
+        {
+          "label": "Quantum Simulation Roadmap",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Design a quantum simulation experiment targeting a classically intractable active space, estimate qubit and gate requirements, and identify the nearest IBM Quantum device capable of running it.",
+      "estimatedTime": "8 weeks"
+    }
+  ]
+}

@@ -1,0 +1,3822 @@
+{
+  "smart-contract": [
+    {
+      "id": "smart-contract-1",
+      "title": "Blockchain and Solidity Foundations",
+      "order": 1,
+      "techs": [
+        "Solidity",
+        "EVM",
+        "Remix"
+      ],
+      "description": "This layer introduces how smart contracts run on the Ethereum Virtual Machine and the basic syntax of Solidity. Understanding these fundamentals is essential before writing any production logic.",
+      "topics": [
+        "What a smart contract is",
+        "EVM execution model and gas",
+        "Solidity value and reference types",
+        "State variables and functions",
+        "Visibility and modifiers",
+        "Using the Remix IDE"
+      ],
+      "resources": [
+        {
+          "label": "Solidity Documentation",
+          "platform": "soliditylang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Ethereum Developer Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "Solidity Smart Contract Course",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write and deploy a simple storage contract in Remix that stores and returns a number.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "smart-contract-2",
+      "title": "Contract Structure and Data Patterns",
+      "order": 2,
+      "techs": [
+        "Solidity",
+        "Mappings",
+        "Structs"
+      ],
+      "description": "This layer covers how to organize contract state using structs, arrays, and mappings. Proper data modeling keeps contracts readable and gas efficient.",
+      "topics": [
+        "Structs and enums",
+        "Arrays and dynamic storage",
+        "Mappings and nested mappings",
+        "Constructor patterns",
+        "Events and logging",
+        "Error handling with require and revert"
+      ],
+      "resources": [
+        {
+          "label": "Solidity by Example",
+          "platform": "solidity-by-example.org",
+          "type": "docs"
+        },
+        {
+          "label": "Solidity Documentation",
+          "platform": "soliditylang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Solidity Smart Contract Course",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        }
+      ],
+      "challenge": "Extend the storage contract into a simple registry that maps addresses to user profile structs.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "smart-contract-3",
+      "title": "Local Development with Foundry",
+      "order": 3,
+      "techs": [
+        "Foundry",
+        "Forge",
+        "Solidity"
+      ],
+      "description": "This layer sets up a professional development workflow using Foundry and the Forge toolchain. A fast local environment is critical for iterating on contracts confidently.",
+      "topics": [
+        "Installing and configuring Foundry",
+        "Project layout and remappings",
+        "Compiling with forge build",
+        "Running a local Anvil node",
+        "Scripting deployments",
+        "Managing dependencies"
+      ],
+      "resources": [
+        {
+          "label": "Foundry Book",
+          "platform": "book.getfoundry.sh",
+          "type": "docs"
+        },
+        {
+          "label": "Foundry Fundamentals",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        },
+        {
+          "label": "Solidity Documentation",
+          "platform": "soliditylang.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Port the registry contract into a Foundry project and deploy it to a local Anvil node with a script.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "smart-contract-4",
+      "title": "Token Standards with OpenZeppelin",
+      "order": 4,
+      "techs": [
+        "OpenZeppelin",
+        "ERC20",
+        "ERC721"
+      ],
+      "description": "This layer teaches the standard token interfaces and how to build on audited OpenZeppelin contracts. Reusing battle-tested code reduces bugs and speeds delivery.",
+      "topics": [
+        "ERC20 fungible tokens",
+        "ERC721 non-fungible tokens",
+        "ERC1155 multi-token standard",
+        "Inheritance and overrides",
+        "Access control with Ownable",
+        "Using the OpenZeppelin Wizard"
+      ],
+      "resources": [
+        {
+          "label": "OpenZeppelin Contracts Docs",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        },
+        {
+          "label": "Solidity Documentation",
+          "platform": "soliditylang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Advanced Foundry",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        }
+      ],
+      "challenge": "Create an ERC20 token that inherits from OpenZeppelin and add a capped supply.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "smart-contract-5",
+      "title": "Testing and Coverage with Forge",
+      "order": 5,
+      "techs": [
+        "Foundry",
+        "Forge",
+        "Solidity"
+      ],
+      "description": "This layer focuses on writing thorough unit tests in Solidity using Forge. Strong test coverage is the foundation of safe contract development.",
+      "topics": [
+        "Writing test contracts",
+        "Assertions and cheatcodes",
+        "Setup and fixtures",
+        "Testing reverts and events",
+        "Measuring coverage",
+        "Gas snapshots"
+      ],
+      "resources": [
+        {
+          "label": "Foundry Book Testing Guide",
+          "platform": "book.getfoundry.sh",
+          "type": "docs"
+        },
+        {
+          "label": "Foundry Fundamentals",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        },
+        {
+          "label": "Solidity Documentation",
+          "platform": "soliditylang.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write a full Forge test suite for your ERC20 token covering minting, transfers, and the supply cap.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "smart-contract-6",
+      "title": "Hardhat and JavaScript Tooling",
+      "order": 6,
+      "techs": [
+        "Hardhat",
+        "ethers.js",
+        "TypeScript"
+      ],
+      "description": "This layer introduces the Hardhat framework and its JavaScript ecosystem for scripting and testing. Many teams use Hardhat for its plugin richness and frontend integration.",
+      "topics": [
+        "Hardhat project setup",
+        "Tasks and the console",
+        "Testing with ethers.js",
+        "Network configuration",
+        "Plugins and the Hardhat ecosystem",
+        "Comparing Hardhat and Foundry"
+      ],
+      "resources": [
+        {
+          "label": "Hardhat Documentation",
+          "platform": "hardhat.org",
+          "type": "docs"
+        },
+        {
+          "label": "ethers.js Documentation",
+          "platform": "docs.ethers.org",
+          "type": "docs"
+        },
+        {
+          "label": "Ethereum Developer Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Recreate the token tests in a Hardhat project using ethers.js and run them against a local network.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "smart-contract-7",
+      "title": "Advanced Solidity Patterns",
+      "order": 7,
+      "techs": [
+        "Solidity",
+        "Proxies",
+        "OpenZeppelin"
+      ],
+      "description": "This layer explores advanced design patterns including upgradeable proxies and reusable libraries. These patterns enable maintainable and modular protocols.",
+      "topics": [
+        "Library contracts and using for",
+        "Upgradeable proxy patterns",
+        "Storage layout and slots",
+        "Reentrancy guards",
+        "Factory and clone patterns",
+        "Function selectors and ABI encoding"
+      ],
+      "resources": [
+        {
+          "label": "OpenZeppelin Upgrades Docs",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        },
+        {
+          "label": "Solidity Documentation",
+          "platform": "soliditylang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Advanced Foundry",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        }
+      ],
+      "challenge": "Convert your token into an upgradeable proxy and ship a second implementation that adds a burn function.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "smart-contract-8",
+      "title": "Gas Optimization and EVM Internals",
+      "order": 8,
+      "techs": [
+        "Solidity",
+        "Foundry",
+        "Yul"
+      ],
+      "description": "This layer teaches how to measure and reduce gas costs by understanding EVM storage and opcodes. Optimized contracts save users money and improve scalability.",
+      "topics": [
+        "Storage versus memory costs",
+        "Packing variables into slots",
+        "Custom errors over strings",
+        "Loop and calldata optimization",
+        "Inline assembly with Yul",
+        "Profiling with gas reports"
+      ],
+      "resources": [
+        {
+          "label": "EVM Opcodes Reference",
+          "platform": "evm.codes",
+          "type": "docs"
+        },
+        {
+          "label": "Solidity Documentation",
+          "platform": "soliditylang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Advanced Foundry",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        }
+      ],
+      "challenge": "Refactor your token contract to pack storage and use custom errors, then prove the gas savings with snapshots.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "smart-contract-9",
+      "title": "Building a DeFi Protocol",
+      "order": 9,
+      "techs": [
+        "Solidity",
+        "Foundry",
+        "Chainlink"
+      ],
+      "description": "This layer applies prior skills to build a small decentralized finance protocol with oracles and incentives. Integrating external data and economic logic mirrors real production systems.",
+      "topics": [
+        "Staking and reward math",
+        "Price oracles with Chainlink",
+        "Collateral and liquidations",
+        "Fee mechanisms",
+        "Fork testing against mainnet",
+        "Invariant and fuzz testing"
+      ],
+      "resources": [
+        {
+          "label": "Chainlink Documentation",
+          "platform": "docs.chain.link",
+          "type": "docs"
+        },
+        {
+          "label": "Advanced Foundry",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        },
+        {
+          "label": "Solidity Documentation",
+          "platform": "soliditylang.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a staking vault where users deposit your token and earn rewards based on a Chainlink price feed.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "smart-contract-10",
+      "title": "Auditing and Mainnet Deployment",
+      "order": 10,
+      "techs": [
+        "Foundry",
+        "Slither",
+        "Etherscan"
+      ],
+      "description": "This final layer covers security review, verification, and shipping contracts to mainnet. Careful deployment and monitoring protect real user funds.",
+      "topics": [
+        "Self-audit checklists",
+        "Static analysis with Slither",
+        "Verifying source on Etherscan",
+        "Deployment scripts and secrets",
+        "Multisig ownership transfer",
+        "Post-deploy monitoring"
+      ],
+      "resources": [
+        {
+          "label": "Slither Documentation",
+          "platform": "github.com/crytic/slither",
+          "type": "docs"
+        },
+        {
+          "label": "Smart Contract Security",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        },
+        {
+          "label": "Ethereum Developer Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Run Slither on your staking vault, fix findings, and deploy a verified version to a public testnet.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "ethereum-dev": [
+    {
+      "id": "ethereum-dev-1",
+      "title": "Ethereum and the EVM",
+      "order": 1,
+      "techs": [
+        "Ethereum",
+        "EVM",
+        "Solidity"
+      ],
+      "description": "This layer explains how Ethereum works as a world computer and how the EVM processes transactions. A clear mental model of accounts and state is the basis for all later work.",
+      "topics": [
+        "Accounts and balances",
+        "Transactions and gas",
+        "Blocks and finality",
+        "The EVM state machine",
+        "Wei, gwei, and ether units",
+        "Reading data on Etherscan"
+      ],
+      "resources": [
+        {
+          "label": "Ethereum Developer Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "Mastering Ethereum",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Blockchain Basics",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        }
+      ],
+      "challenge": "Use a block explorer to trace a real transaction and document every field it contains.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "ethereum-dev-2",
+      "title": "Writing Smart Contracts in Solidity",
+      "order": 2,
+      "techs": [
+        "Solidity",
+        "Remix",
+        "EVM"
+      ],
+      "description": "This layer builds core Solidity skills for writing functional contracts. Knowing the language well lets you express on-chain logic safely.",
+      "topics": [
+        "Types and storage",
+        "Functions and visibility",
+        "Events and modifiers",
+        "Inheritance basics",
+        "Error handling",
+        "Contract deployment lifecycle"
+      ],
+      "resources": [
+        {
+          "label": "Solidity Documentation",
+          "platform": "soliditylang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Solidity by Example",
+          "platform": "solidity-by-example.org",
+          "type": "docs"
+        },
+        {
+          "label": "Solidity Smart Contract Course",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write a crowdfunding contract that accepts ether and tracks each contributor.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "ethereum-dev-3",
+      "title": "Connecting Apps with ethers.js",
+      "order": 3,
+      "techs": [
+        "ethers.js",
+        "JavaScript",
+        "JSON-RPC"
+      ],
+      "description": "This layer connects browser and Node applications to Ethereum using ethers.js. Frontend integration turns contracts into usable products.",
+      "topics": [
+        "Providers and signers",
+        "Reading contract state",
+        "Sending transactions",
+        "Listening to events",
+        "Wallet connection flows",
+        "Handling JSON-RPC errors"
+      ],
+      "resources": [
+        {
+          "label": "ethers.js Documentation",
+          "platform": "docs.ethers.org",
+          "type": "docs"
+        },
+        {
+          "label": "Ethereum Developer Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "Full Stack Web3",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a web page that connects a wallet and lets users donate to your crowdfunding contract.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "ethereum-dev-4",
+      "title": "Running Nodes with Geth",
+      "order": 4,
+      "techs": [
+        "Geth",
+        "JSON-RPC",
+        "Ethereum"
+      ],
+      "description": "This layer covers running an Ethereum execution client using Geth and querying it directly. Operating a node deepens understanding of the network and removes reliance on third parties.",
+      "topics": [
+        "Execution versus consensus clients",
+        "Syncing modes",
+        "The JSON-RPC API",
+        "Managing accounts and keystores",
+        "Running on a testnet",
+        "Monitoring node health"
+      ],
+      "resources": [
+        {
+          "label": "Geth Documentation",
+          "platform": "geth.ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "Ethereum Developer Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "Mastering Ethereum",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Sync a Geth node on a testnet and query your crowdfunding contract through its JSON-RPC endpoint.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "ethereum-dev-5",
+      "title": "Token Standards and Contract Composition",
+      "order": 5,
+      "techs": [
+        "Solidity",
+        "OpenZeppelin",
+        "ERC20"
+      ],
+      "description": "This layer teaches the major token standards and how contracts call one another. Composability is what makes Ethereum a rich application platform.",
+      "topics": [
+        "ERC20 and ERC721 interfaces",
+        "Approvals and allowances",
+        "Cross-contract calls",
+        "Interfaces and abstract contracts",
+        "Reentrancy awareness",
+        "Using OpenZeppelin base contracts"
+      ],
+      "resources": [
+        {
+          "label": "OpenZeppelin Contracts Docs",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        },
+        {
+          "label": "Solidity Documentation",
+          "platform": "soliditylang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Solidity Smart Contract Course",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        }
+      ],
+      "challenge": "Add an ERC20 reward token that your crowdfunding contract mints to contributors.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "ethereum-dev-6",
+      "title": "EVM Deep Dive",
+      "order": 6,
+      "techs": [
+        "EVM",
+        "Yul",
+        "Solidity"
+      ],
+      "description": "This layer dissects how Solidity compiles to bytecode and how the EVM executes opcodes. Low-level knowledge unlocks optimization and debugging skills.",
+      "topics": [
+        "Stack, memory, and storage",
+        "Common opcodes",
+        "Calldata and ABI encoding",
+        "Function selectors",
+        "Delegatecall semantics",
+        "Reading bytecode"
+      ],
+      "resources": [
+        {
+          "label": "EVM Opcodes Reference",
+          "platform": "evm.codes",
+          "type": "docs"
+        },
+        {
+          "label": "Ethereum Developer Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "Mastering Ethereum",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Manually decode the function selector and calldata for a call to your reward token.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "ethereum-dev-7",
+      "title": "Indexing and Off-Chain Data",
+      "order": 7,
+      "techs": [
+        "The Graph",
+        "ethers.js",
+        "GraphQL"
+      ],
+      "description": "This layer shows how to index on-chain events for fast querying using The Graph. Efficient data access is essential for responsive dApps.",
+      "topics": [
+        "Event-driven indexing",
+        "Subgraph manifests",
+        "Mapping handlers",
+        "GraphQL queries",
+        "Pagination and filtering",
+        "Caching strategies"
+      ],
+      "resources": [
+        {
+          "label": "The Graph Documentation",
+          "platform": "thegraph.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "ethers.js Documentation",
+          "platform": "docs.ethers.org",
+          "type": "docs"
+        },
+        {
+          "label": "Ethereum Developer Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a subgraph that indexes contributions and display a live leaderboard in your dApp.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "ethereum-dev-8",
+      "title": "Wallets, Signatures, and Security",
+      "order": 8,
+      "techs": [
+        "ethers.js",
+        "EIP-712",
+        "Solidity"
+      ],
+      "description": "This layer covers cryptographic signatures and secure user interactions. Signature handling enables gasless approvals and meta transactions while avoiding phishing risks.",
+      "topics": [
+        "ECDSA signatures",
+        "EIP-191 and EIP-712 signing",
+        "Permit and gasless approvals",
+        "Nonce management",
+        "Replay protection",
+        "Common wallet attack vectors"
+      ],
+      "resources": [
+        {
+          "label": "EIP-712 Specification",
+          "platform": "eips.ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "ethers.js Documentation",
+          "platform": "docs.ethers.org",
+          "type": "docs"
+        },
+        {
+          "label": "Ethereum Developer Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Implement EIP-712 typed signatures so users can approve reward claims without an on-chain approval transaction.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "ethereum-dev-9",
+      "title": "Testing and CI for dApps",
+      "order": 9,
+      "techs": [
+        "Hardhat",
+        "ethers.js",
+        "Foundry"
+      ],
+      "description": "This layer establishes automated testing and continuous integration for full stack dApps. Reliable pipelines catch regressions before they reach users.",
+      "topics": [
+        "Unit and integration tests",
+        "Mainnet forking",
+        "Mocking providers",
+        "Fuzz and property testing",
+        "Continuous integration setup",
+        "Coverage reporting"
+      ],
+      "resources": [
+        {
+          "label": "Hardhat Documentation",
+          "platform": "hardhat.org",
+          "type": "docs"
+        },
+        {
+          "label": "Foundry Book",
+          "platform": "book.getfoundry.sh",
+          "type": "docs"
+        },
+        {
+          "label": "Full Stack Web3",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        }
+      ],
+      "challenge": "Add a full test suite and a CI workflow that runs on every push for your crowdfunding dApp.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "ethereum-dev-10",
+      "title": "Mainnet Deployment and Operations",
+      "order": 10,
+      "techs": [
+        "Geth",
+        "Etherscan",
+        "ethers.js"
+      ],
+      "description": "This final layer deploys the full dApp to mainnet and keeps it running safely. Operating in production requires monitoring, verification, and incident readiness.",
+      "topics": [
+        "Deployment scripts and secrets",
+        "Contract verification",
+        "Gas and nonce management in production",
+        "Monitoring and alerting",
+        "Upgrade and pause strategies",
+        "Incident response"
+      ],
+      "resources": [
+        {
+          "label": "Etherscan Verification Docs",
+          "platform": "docs.etherscan.io",
+          "type": "docs"
+        },
+        {
+          "label": "Ethereum Developer Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "Full Stack Web3",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        }
+      ],
+      "challenge": "Deploy and verify your complete crowdfunding dApp on a public network and wire up basic monitoring.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "solana-dev": [
+    {
+      "id": "solana-dev-1",
+      "title": "Solana Architecture and Accounts",
+      "order": 1,
+      "techs": [
+        "Solana",
+        "Rust",
+        "CLI"
+      ],
+      "description": "This layer introduces Solana's high-throughput design and its account-based programming model. Grasping accounts and rent is fundamental to everything on Solana.",
+      "topics": [
+        "Accounts and ownership",
+        "Programs versus data",
+        "Rent and lamports",
+        "Transactions and instructions",
+        "Proof of History overview",
+        "Using the Solana CLI"
+      ],
+      "resources": [
+        {
+          "label": "Solana Documentation",
+          "platform": "solana.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Solana Developer Course",
+          "platform": "Solana Foundation",
+          "type": "course"
+        },
+        {
+          "label": "Anchor Documentation",
+          "platform": "anchor-lang.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Use the Solana CLI to create a keypair, airdrop test SOL, and inspect an account on devnet.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "solana-dev-2",
+      "title": "Rust for Solana",
+      "order": 2,
+      "techs": [
+        "Rust",
+        "Cargo",
+        "Solana"
+      ],
+      "description": "This layer builds the Rust foundations needed to write Solana programs. Comfort with ownership and borrowing is required to write safe on-chain code.",
+      "topics": [
+        "Ownership and borrowing",
+        "Structs and enums",
+        "Traits and generics",
+        "Result and error handling",
+        "Cargo and crates",
+        "Serialization with Borsh"
+      ],
+      "resources": [
+        {
+          "label": "The Rust Book",
+          "platform": "doc.rust-lang.org",
+          "type": "book"
+        },
+        {
+          "label": "Solana Documentation",
+          "platform": "solana.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Rustlings Exercises",
+          "platform": "github.com/rust-lang/rustlings",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write a small Rust program that serializes and deserializes an account struct with Borsh.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "solana-dev-3",
+      "title": "Native Solana Programs",
+      "order": 3,
+      "techs": [
+        "Rust",
+        "Solana",
+        "BPF"
+      ],
+      "description": "This layer writes a Solana program without frameworks to understand the raw runtime. Knowing the native model demystifies what Anchor does for you.",
+      "topics": [
+        "Program entrypoints",
+        "Processing instructions",
+        "Account validation",
+        "Cross-program invocation",
+        "Program derived addresses",
+        "Building and deploying with the CLI"
+      ],
+      "resources": [
+        {
+          "label": "Solana Program Docs",
+          "platform": "solana.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Solana Cookbook",
+          "platform": "solanacookbook.com",
+          "type": "docs"
+        },
+        {
+          "label": "Solana Developer Course",
+          "platform": "Solana Foundation",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write a native counter program that increments a value stored in a program owned account.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "solana-dev-4",
+      "title": "Building with Anchor",
+      "order": 4,
+      "techs": [
+        "Anchor",
+        "Rust",
+        "Solana"
+      ],
+      "description": "This layer adopts the Anchor framework to remove boilerplate and add safety. Anchor is the standard way most teams build Solana programs.",
+      "topics": [
+        "Anchor program structure",
+        "Account contexts and constraints",
+        "Instruction handlers",
+        "PDAs in Anchor",
+        "The IDL",
+        "Errors and validation"
+      ],
+      "resources": [
+        {
+          "label": "Anchor Documentation",
+          "platform": "anchor-lang.com",
+          "type": "docs"
+        },
+        {
+          "label": "Solana Documentation",
+          "platform": "solana.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Solana Developer Course",
+          "platform": "Solana Foundation",
+          "type": "course"
+        }
+      ],
+      "challenge": "Rebuild the counter as an Anchor program using account constraints and a PDA.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "solana-dev-5",
+      "title": "SPL Tokens",
+      "order": 5,
+      "techs": [
+        "SPL",
+        "Anchor",
+        "Solana"
+      ],
+      "description": "This layer covers the SPL token standard and how to mint and transfer tokens. Tokens are central to most Solana applications.",
+      "topics": [
+        "Mint and token accounts",
+        "Associated token accounts",
+        "Minting and burning",
+        "Transfers and delegates",
+        "Token metadata",
+        "CPI to the token program"
+      ],
+      "resources": [
+        {
+          "label": "SPL Token Docs",
+          "platform": "spl.solana.com",
+          "type": "docs"
+        },
+        {
+          "label": "Anchor Documentation",
+          "platform": "anchor-lang.com",
+          "type": "docs"
+        },
+        {
+          "label": "Solana Cookbook",
+          "platform": "solanacookbook.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add an Anchor instruction that mints an SPL reward token to a user each time the counter increments.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "solana-dev-6",
+      "title": "Client Integration with web3.js",
+      "order": 6,
+      "techs": [
+        "Solana",
+        "web3.js",
+        "Anchor"
+      ],
+      "description": "This layer connects frontends to Solana programs using the JavaScript SDK and Anchor client. Client integration turns programs into real applications.",
+      "topics": [
+        "Connection and RPC",
+        "Building and sending transactions",
+        "Wallet adapter integration",
+        "Using the Anchor TypeScript client",
+        "Fetching account data",
+        "Handling confirmations"
+      ],
+      "resources": [
+        {
+          "label": "Solana web3.js Docs",
+          "platform": "solana.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Anchor Documentation",
+          "platform": "anchor-lang.com",
+          "type": "docs"
+        },
+        {
+          "label": "Solana Developer Course",
+          "platform": "Solana Foundation",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a web page that connects a wallet and calls your counter program with the Anchor client.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "solana-dev-7",
+      "title": "Testing Solana Programs",
+      "order": 7,
+      "techs": [
+        "Anchor",
+        "Mocha",
+        "Rust"
+      ],
+      "description": "This layer establishes testing practices for Anchor programs locally. Thorough tests catch account and constraint bugs before deployment.",
+      "topics": [
+        "Anchor test framework",
+        "Local validator testing",
+        "TypeScript integration tests",
+        "Rust unit tests",
+        "Simulating failures",
+        "Logging and debugging"
+      ],
+      "resources": [
+        {
+          "label": "Anchor Testing Docs",
+          "platform": "anchor-lang.com",
+          "type": "docs"
+        },
+        {
+          "label": "Solana Documentation",
+          "platform": "solana.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Solana Cookbook",
+          "platform": "solanacookbook.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write an Anchor test suite that covers counter increments and reward minting including failure cases.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "solana-dev-8",
+      "title": "Advanced Program Design",
+      "order": 8,
+      "techs": [
+        "Anchor",
+        "Rust",
+        "Solana"
+      ],
+      "description": "This layer covers advanced patterns such as composability, account resizing, and compute budgets. These techniques are needed for complex production programs.",
+      "topics": [
+        "Cross-program invocation patterns",
+        "PDA signing",
+        "Account reallocation",
+        "Compute unit budgeting",
+        "Versioned transactions and lookup tables",
+        "Program upgrades"
+      ],
+      "resources": [
+        {
+          "label": "Solana Documentation",
+          "platform": "solana.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Anchor Documentation",
+          "platform": "anchor-lang.com",
+          "type": "docs"
+        },
+        {
+          "label": "Solana Cookbook",
+          "platform": "solanacookbook.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Extend your program with a second program that it invokes via CPI to record reward history.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "solana-dev-9",
+      "title": "Security and Auditing on Solana",
+      "order": 9,
+      "techs": [
+        "Anchor",
+        "Rust",
+        "Solana"
+      ],
+      "description": "This layer focuses on common Solana vulnerabilities and how to defend against them. Account confusion attacks are a frequent source of exploits.",
+      "topics": [
+        "Account validation pitfalls",
+        "Signer and owner checks",
+        "Arithmetic overflow",
+        "PDA seed collisions",
+        "Reinitialization attacks",
+        "Audit checklists"
+      ],
+      "resources": [
+        {
+          "label": "Solana Program Security Docs",
+          "platform": "solana.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Anchor Documentation",
+          "platform": "anchor-lang.com",
+          "type": "docs"
+        },
+        {
+          "label": "Solana Developer Course",
+          "platform": "Solana Foundation",
+          "type": "course"
+        }
+      ],
+      "challenge": "Audit your program for missing signer and owner checks and add constraints to close the gaps.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "solana-dev-10",
+      "title": "Mainnet Deployment and Operations",
+      "order": 10,
+      "techs": [
+        "Solana",
+        "Anchor",
+        "CLI"
+      ],
+      "description": "This final layer ships an Anchor program to mainnet and manages it over time. Production deployment requires careful upgrade authority and monitoring.",
+      "topics": [
+        "Program deployment and buffers",
+        "Upgrade authority management",
+        "Priority fees in production",
+        "RPC provider selection",
+        "Monitoring program logs",
+        "Verifiable builds"
+      ],
+      "resources": [
+        {
+          "label": "Solana Deployment Docs",
+          "platform": "solana.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Anchor Documentation",
+          "platform": "anchor-lang.com",
+          "type": "docs"
+        },
+        {
+          "label": "Solana Developer Course",
+          "platform": "Solana Foundation",
+          "type": "course"
+        }
+      ],
+      "challenge": "Deploy your full program and client to devnet and rehearse a safe program upgrade.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "blockchain-core": [
+    {
+      "id": "blockchain-core-1",
+      "title": "Distributed Systems Foundations",
+      "order": 1,
+      "techs": [
+        "Go",
+        "Networking",
+        "Cryptography"
+      ],
+      "description": "This layer establishes the distributed systems and cryptography concepts underlying every blockchain. These fundamentals explain why blockchains are structured the way they are.",
+      "topics": [
+        "Hash functions and Merkle trees",
+        "Public key cryptography",
+        "Distributed system models",
+        "Failure and partition tolerance",
+        "Clocks and ordering",
+        "Determinism requirements"
+      ],
+      "resources": [
+        {
+          "label": "Designing Data-Intensive Applications",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "The Go Programming Language",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Bitcoin Whitepaper",
+          "platform": "bitcoin.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Implement a Merkle tree in Go and verify inclusion proofs for a set of transactions.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "blockchain-core-2",
+      "title": "Building a Minimal Blockchain",
+      "order": 2,
+      "techs": [
+        "Go",
+        "Cryptography",
+        "Hashing"
+      ],
+      "description": "This layer builds a simple blockchain data structure from scratch. Constructing blocks and chains by hand clarifies how state is linked and validated.",
+      "topics": [
+        "Block structure and headers",
+        "Chaining by hash",
+        "Transaction encoding",
+        "Genesis blocks",
+        "Validation rules",
+        "Simple proof of work"
+      ],
+      "resources": [
+        {
+          "label": "The Go Programming Language",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Mastering Bitcoin",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Go Documentation",
+          "platform": "go.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write a Go program that mines blocks with a simple proof of work and validates the chain.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "blockchain-core-3",
+      "title": "Rust for Systems Programming",
+      "order": 3,
+      "techs": [
+        "Rust",
+        "Cargo",
+        "Tokio"
+      ],
+      "description": "This layer introduces Rust as a second core language for safe, performant node software. Many modern chains are written in Rust for its memory safety guarantees.",
+      "topics": [
+        "Ownership and lifetimes",
+        "Traits and generics",
+        "Error handling",
+        "Async with Tokio",
+        "Concurrency primitives",
+        "Crate ecosystem"
+      ],
+      "resources": [
+        {
+          "label": "The Rust Book",
+          "platform": "doc.rust-lang.org",
+          "type": "book"
+        },
+        {
+          "label": "Tokio Documentation",
+          "platform": "tokio.rs",
+          "type": "docs"
+        },
+        {
+          "label": "Rustlings Exercises",
+          "platform": "github.com/rust-lang/rustlings",
+          "type": "course"
+        }
+      ],
+      "challenge": "Reimplement your block validator in Rust using async tasks for parallel verification.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "blockchain-core-4",
+      "title": "Peer-to-Peer Networking",
+      "order": 4,
+      "techs": [
+        "P2P",
+        "libp2p",
+        "Rust"
+      ],
+      "description": "This layer covers how nodes discover and communicate over a peer-to-peer network. Networking is the backbone that propagates blocks and transactions.",
+      "topics": [
+        "Peer discovery",
+        "Gossip protocols",
+        "Message serialization",
+        "Connection management",
+        "NAT traversal",
+        "Using libp2p"
+      ],
+      "resources": [
+        {
+          "label": "libp2p Documentation",
+          "platform": "docs.libp2p.io",
+          "type": "docs"
+        },
+        {
+          "label": "The Rust Book",
+          "platform": "doc.rust-lang.org",
+          "type": "book"
+        },
+        {
+          "label": "Go Documentation",
+          "platform": "go.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a small libp2p network that gossips new blocks between several local nodes.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "blockchain-core-5",
+      "title": "Consensus Fundamentals",
+      "order": 5,
+      "techs": [
+        "Consensus",
+        "Rust",
+        "Go"
+      ],
+      "description": "This layer explains the consensus problem and classic algorithms for agreement. Consensus is what lets distrusting nodes agree on one history.",
+      "topics": [
+        "Safety and liveness",
+        "Byzantine fault tolerance",
+        "Proof of work",
+        "Proof of stake basics",
+        "Fork choice rules",
+        "Finality concepts"
+      ],
+      "resources": [
+        {
+          "label": "Designing Data-Intensive Applications",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Ethereum Consensus Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "Bitcoin Whitepaper",
+          "platform": "bitcoin.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add a longest-chain fork choice rule to your network so nodes converge on one chain.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "blockchain-core-6",
+      "title": "Byzantine Fault Tolerant Consensus",
+      "order": 6,
+      "techs": [
+        "Consensus",
+        "Tendermint",
+        "Rust"
+      ],
+      "description": "This layer studies BFT consensus protocols that deliver instant finality. BFT algorithms power many proof of stake chains today.",
+      "topics": [
+        "PBFT and its phases",
+        "Tendermint consensus",
+        "Validator sets and voting power",
+        "View changes",
+        "Quorum certificates",
+        "Slashing conditions"
+      ],
+      "resources": [
+        {
+          "label": "Tendermint Documentation",
+          "platform": "docs.tendermint.com",
+          "type": "docs"
+        },
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Designing Data-Intensive Applications",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Implement a simplified two-phase BFT round among your nodes that finalizes a block on a quorum.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "blockchain-core-7",
+      "title": "State and Storage Engines",
+      "order": 7,
+      "techs": [
+        "Rust",
+        "Go",
+        "Databases"
+      ],
+      "description": "This layer covers how chains persist state efficiently using tries and key-value stores. Storage design directly affects sync speed and node hardware needs.",
+      "topics": [
+        "Account versus UTXO state",
+        "Merkle Patricia tries",
+        "Key-value databases",
+        "State pruning",
+        "Snapshots",
+        "Write-ahead logging"
+      ],
+      "resources": [
+        {
+          "label": "Designing Data-Intensive Applications",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Go Documentation",
+          "platform": "go.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Ethereum Developer Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Back your node's state with an embedded key-value store and add a state snapshot feature.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "blockchain-core-8",
+      "title": "Transaction Pool and Execution",
+      "order": 8,
+      "techs": [
+        "Rust",
+        "Go",
+        "Consensus"
+      ],
+      "description": "This layer builds the mempool and the execution pipeline that applies transactions to state. Correct ordering and execution are vital for deterministic results.",
+      "topics": [
+        "Mempool design",
+        "Fee prioritization",
+        "Nonce and replay handling",
+        "Deterministic execution",
+        "Block production",
+        "Gas metering"
+      ],
+      "resources": [
+        {
+          "label": "Ethereum Developer Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "The Rust Book",
+          "platform": "doc.rust-lang.org",
+          "type": "book"
+        },
+        {
+          "label": "Go Documentation",
+          "platform": "go.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add a fee-prioritized mempool and a block producer that executes transactions deterministically.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "blockchain-core-9",
+      "title": "Security and Resilience",
+      "order": 9,
+      "techs": [
+        "Consensus",
+        "P2P",
+        "Cryptography"
+      ],
+      "description": "This layer hardens the node against attacks on consensus and networking. Resilience is what keeps a live network safe under adversarial conditions.",
+      "topics": [
+        "Eclipse and Sybil attacks",
+        "Long-range attacks",
+        "Denial of service mitigation",
+        "Equivocation detection",
+        "Rate limiting peers",
+        "Fuzzing and stress testing"
+      ],
+      "resources": [
+        {
+          "label": "Ethereum Consensus Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "Designing Data-Intensive Applications",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "libp2p Documentation",
+          "platform": "docs.libp2p.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add peer rate limiting and equivocation detection, then stress test your network against a misbehaving node.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "blockchain-core-10",
+      "title": "Testnet Launch and Operations",
+      "order": 10,
+      "techs": [
+        "Go",
+        "Rust",
+        "Consensus"
+      ],
+      "description": "This final layer launches a multi-node testnet and operates it like a real network. Running a live testnet validates the entire stack end to end.",
+      "topics": [
+        "Genesis configuration",
+        "Validator onboarding",
+        "Telemetry and metrics",
+        "Upgrade coordination",
+        "Chain monitoring",
+        "Incident response"
+      ],
+      "resources": [
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Go Documentation",
+          "platform": "go.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Designing Data-Intensive Applications",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Launch a multi-validator testnet of your node, monitor it with metrics, and perform a coordinated upgrade.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "blockchain-security": [
+    {
+      "id": "blockchain-security-1",
+      "title": "Smart Contract Security Mindset",
+      "order": 1,
+      "techs": [
+        "Solidity",
+        "EVM",
+        "Auditing"
+      ],
+      "description": "This layer introduces the adversarial mindset needed to review smart contracts. Thinking like an attacker is the core skill of every auditor.",
+      "topics": [
+        "Threat modeling basics",
+        "Trust assumptions",
+        "Common vulnerability classes",
+        "Reading code critically",
+        "Severity classification",
+        "The audit lifecycle"
+      ],
+      "resources": [
+        {
+          "label": "Smart Contract Security",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        },
+        {
+          "label": "Solidity Documentation",
+          "platform": "soliditylang.org",
+          "type": "docs"
+        },
+        {
+          "label": "SWC Registry",
+          "platform": "swcregistry.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Review a small intentionally vulnerable contract and write up every issue you can find.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "blockchain-security-2",
+      "title": "Solidity Internals for Auditors",
+      "order": 2,
+      "techs": [
+        "Solidity",
+        "EVM",
+        "Yul"
+      ],
+      "description": "This layer deepens Solidity and EVM knowledge from a security angle. Many bugs hide in low-level behavior that auditors must understand.",
+      "topics": [
+        "Storage layout",
+        "Function selectors and calldata",
+        "Delegatecall and context",
+        "Integer behavior",
+        "Visibility pitfalls",
+        "Low-level calls"
+      ],
+      "resources": [
+        {
+          "label": "EVM Opcodes Reference",
+          "platform": "evm.codes",
+          "type": "docs"
+        },
+        {
+          "label": "Solidity Documentation",
+          "platform": "soliditylang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Smart Contract Security",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        }
+      ],
+      "challenge": "Trace how a delegatecall changes storage context in a proxy and document the risk.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "blockchain-security-3",
+      "title": "Common Vulnerability Patterns",
+      "order": 3,
+      "techs": [
+        "Solidity",
+        "Auditing",
+        "EVM"
+      ],
+      "description": "This layer catalogs the most frequent exploit patterns with concrete examples. Recognizing these patterns quickly is what makes reviews efficient.",
+      "topics": [
+        "Reentrancy",
+        "Access control flaws",
+        "Oracle manipulation",
+        "Unchecked external calls",
+        "Front-running",
+        "Denial of service"
+      ],
+      "resources": [
+        {
+          "label": "SWC Registry",
+          "platform": "swcregistry.io",
+          "type": "docs"
+        },
+        {
+          "label": "OpenZeppelin Security Docs",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        },
+        {
+          "label": "Smart Contract Security",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        }
+      ],
+      "challenge": "Exploit a reentrancy bug in a sample vault on a local fork and then patch it.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "blockchain-security-4",
+      "title": "Static Analysis with Slither",
+      "order": 4,
+      "techs": [
+        "Slither",
+        "Solidity",
+        "Python"
+      ],
+      "description": "This layer automates vulnerability detection using the Slither static analyzer. Tooling lets auditors cover more ground and catch obvious issues fast.",
+      "topics": [
+        "Running Slither",
+        "Interpreting detectors",
+        "Filtering false positives",
+        "Inheritance and call graphs",
+        "Writing custom detectors",
+        "Integrating into CI"
+      ],
+      "resources": [
+        {
+          "label": "Slither Documentation",
+          "platform": "github.com/crytic/slither",
+          "type": "docs"
+        },
+        {
+          "label": "Trail of Bits Resources",
+          "platform": "secure-contracts.com",
+          "type": "docs"
+        },
+        {
+          "label": "Smart Contract Security",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        }
+      ],
+      "challenge": "Run Slither on a mid-sized protocol and triage every finding into real or false positive.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "blockchain-security-5",
+      "title": "Fuzzing with Echidna",
+      "order": 5,
+      "techs": [
+        "Echidna",
+        "Solidity",
+        "Foundry"
+      ],
+      "description": "This layer uses property-based fuzzing to find edge cases automatically. Fuzzers discover bugs that manual review and unit tests miss.",
+      "topics": [
+        "Property-based testing",
+        "Writing invariants",
+        "Configuring Echidna",
+        "Foundry invariant tests",
+        "Corpus and coverage",
+        "Interpreting failures"
+      ],
+      "resources": [
+        {
+          "label": "Echidna Documentation",
+          "platform": "github.com/crytic/echidna",
+          "type": "docs"
+        },
+        {
+          "label": "Foundry Book",
+          "platform": "book.getfoundry.sh",
+          "type": "docs"
+        },
+        {
+          "label": "Smart Contract Security",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write invariants for the sample vault and run Echidna until it breaks an assumption.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "blockchain-security-6",
+      "title": "Manual Review Methodology",
+      "order": 6,
+      "techs": [
+        "Auditing",
+        "Solidity",
+        "Foundry"
+      ],
+      "description": "This layer formalizes a repeatable manual review process. A systematic methodology produces consistent and defensible audit results.",
+      "topics": [
+        "Scoping an engagement",
+        "Reading specs and invariants",
+        "Note taking and tracking",
+        "Cross-function analysis",
+        "Proof of concept writing",
+        "Severity and likelihood"
+      ],
+      "resources": [
+        {
+          "label": "Trail of Bits Resources",
+          "platform": "secure-contracts.com",
+          "type": "docs"
+        },
+        {
+          "label": "Smart Contract Security",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        },
+        {
+          "label": "Solidity Documentation",
+          "platform": "soliditylang.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Perform a structured manual review of a DeFi contract and produce findings with proofs of concept.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "blockchain-security-7",
+      "title": "DeFi-Specific Attack Vectors",
+      "order": 7,
+      "techs": [
+        "Solidity",
+        "DeFi",
+        "Auditing"
+      ],
+      "description": "This layer focuses on attacks unique to decentralized finance protocols. DeFi handles large value and presents complex economic risks.",
+      "topics": [
+        "Flash loan attacks",
+        "Price oracle manipulation",
+        "Liquidity and slippage abuse",
+        "Reward accounting bugs",
+        "Liquidation edge cases",
+        "Governance attacks"
+      ],
+      "resources": [
+        {
+          "label": "Smart Contract Security",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        },
+        {
+          "label": "OpenZeppelin Security Docs",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        },
+        {
+          "label": "Chainlink Documentation",
+          "platform": "docs.chain.link",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a flash loan proof of concept that manipulates a vulnerable price source and drains a pool.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "blockchain-security-8",
+      "title": "Formal Verification and Symbolic Execution",
+      "order": 8,
+      "techs": [
+        "Solidity",
+        "Halmos",
+        "Echidna"
+      ],
+      "description": "This layer applies symbolic execution and formal methods to prove properties. These techniques give the strongest assurances about contract correctness.",
+      "topics": [
+        "Symbolic execution basics",
+        "Writing formal specifications",
+        "Using Halmos",
+        "Bounded model checking",
+        "Comparing fuzzing and proofs",
+        "Limits of verification"
+      ],
+      "resources": [
+        {
+          "label": "Halmos Documentation",
+          "platform": "github.com/a16z/halmos",
+          "type": "docs"
+        },
+        {
+          "label": "Trail of Bits Resources",
+          "platform": "secure-contracts.com",
+          "type": "docs"
+        },
+        {
+          "label": "Smart Contract Security",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        }
+      ],
+      "challenge": "Use a symbolic tool to formally prove a key invariant of the sample vault holds for all inputs.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "blockchain-security-9",
+      "title": "Reporting and Disclosure",
+      "order": 9,
+      "techs": [
+        "Auditing",
+        "Documentation",
+        "Solidity"
+      ],
+      "description": "This layer covers writing clear audit reports and handling responsible disclosure. Communication is as important as finding the bug itself.",
+      "topics": [
+        "Report structure",
+        "Writing clear findings",
+        "Risk ratings",
+        "Recommended fixes",
+        "Responsible disclosure",
+        "Bug bounty workflows"
+      ],
+      "resources": [
+        {
+          "label": "Smart Contract Security",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        },
+        {
+          "label": "Trail of Bits Resources",
+          "platform": "secure-contracts.com",
+          "type": "docs"
+        },
+        {
+          "label": "OpenZeppelin Security Docs",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Compile your vault findings into a professional audit report with severities and remediation advice.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "blockchain-security-10",
+      "title": "Competitive Auditing and Continuous Monitoring",
+      "order": 10,
+      "techs": [
+        "Auditing",
+        "Slither",
+        "Echidna"
+      ],
+      "description": "This final layer prepares you for real engagements through competitive audits and on-chain monitoring. Ongoing vigilance protects protocols after launch.",
+      "topics": [
+        "Competitive audit platforms",
+        "Triage under time pressure",
+        "Post-deployment monitoring",
+        "On-chain alerting",
+        "Incident response playbooks",
+        "Building an audit portfolio"
+      ],
+      "resources": [
+        {
+          "label": "Smart Contract Security",
+          "platform": "Cyfrin Updraft",
+          "type": "course"
+        },
+        {
+          "label": "Slither Documentation",
+          "platform": "github.com/crytic/slither",
+          "type": "docs"
+        },
+        {
+          "label": "Trail of Bits Resources",
+          "platform": "secure-contracts.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Enter a public competitive audit, submit at least one finding, and set up on-chain monitoring for a deployed contract.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "chain-architect": [
+    {
+      "id": "chain-architect-1",
+      "title": "Application-Specific Blockchain Concepts",
+      "order": 1,
+      "techs": [
+        "Cosmos SDK",
+        "Substrate",
+        "Consensus"
+      ],
+      "description": "This layer introduces the idea of purpose-built blockchains and the major frameworks for building them. Understanding the design space guides every architectural decision.",
+      "topics": [
+        "Monolithic versus modular chains",
+        "Application-specific chains",
+        "Framework comparison",
+        "Sovereignty and shared security",
+        "State machine replication",
+        "Token and governance design"
+      ],
+      "resources": [
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Substrate Documentation",
+          "platform": "docs.substrate.io",
+          "type": "docs"
+        },
+        {
+          "label": "Tendermint Documentation",
+          "platform": "docs.tendermint.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write a design brief comparing Cosmos SDK and Substrate for a hypothetical application chain.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "chain-architect-2",
+      "title": "Consensus and Tendermint",
+      "order": 2,
+      "techs": [
+        "Tendermint",
+        "Consensus",
+        "BFT"
+      ],
+      "description": "This layer studies the Tendermint BFT engine that drives many app chains. Consensus choice determines finality, throughput, and security properties.",
+      "topics": [
+        "BFT consensus phases",
+        "Validators and voting power",
+        "Block finality",
+        "The ABCI interface",
+        "Fork accountability",
+        "Slashing and incentives"
+      ],
+      "resources": [
+        {
+          "label": "Tendermint Documentation",
+          "platform": "docs.tendermint.com",
+          "type": "docs"
+        },
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Designing Data-Intensive Applications",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Run a local Tendermint network and observe how validators reach finality on each block.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "chain-architect-3",
+      "title": "Building Modules with Cosmos SDK",
+      "order": 3,
+      "techs": [
+        "Cosmos SDK",
+        "Go",
+        "Tendermint"
+      ],
+      "description": "This layer builds custom state machine modules using the Cosmos SDK. Modules are where application logic lives in a Cosmos chain.",
+      "topics": [
+        "SDK module structure",
+        "Keepers and state",
+        "Messages and handlers",
+        "Queries and gRPC",
+        "Genesis and parameters",
+        "Wiring an app"
+      ],
+      "resources": [
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Go Documentation",
+          "platform": "go.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Tendermint Documentation",
+          "platform": "docs.tendermint.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Scaffold a Cosmos chain and add a custom module that stores and retrieves a simple record.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "chain-architect-4",
+      "title": "Building Pallets with Substrate",
+      "order": 4,
+      "techs": [
+        "Substrate",
+        "Rust",
+        "FRAME"
+      ],
+      "description": "This layer builds runtime logic using Substrate and the FRAME framework in Rust. Substrate offers a different, upgrade-friendly approach to chain design.",
+      "topics": [
+        "FRAME runtime model",
+        "Writing a pallet",
+        "Storage items and extrinsics",
+        "Events and errors",
+        "Runtime composition",
+        "Forkless upgrades"
+      ],
+      "resources": [
+        {
+          "label": "Substrate Documentation",
+          "platform": "docs.substrate.io",
+          "type": "docs"
+        },
+        {
+          "label": "The Rust Book",
+          "platform": "doc.rust-lang.org",
+          "type": "book"
+        },
+        {
+          "label": "Polkadot Wiki",
+          "platform": "wiki.polkadot.network",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a Substrate pallet that mirrors your record module and trigger a forkless runtime upgrade.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "chain-architect-5",
+      "title": "Tokenomics and Governance Design",
+      "order": 5,
+      "techs": [
+        "Cosmos SDK",
+        "Consensus",
+        "Governance"
+      ],
+      "description": "This layer designs the economic and governance systems of a chain. Incentives and on-chain governance shape long-term security and decentralization.",
+      "topics": [
+        "Staking and inflation",
+        "Validator economics",
+        "On-chain governance",
+        "Parameter changes",
+        "Treasury and funding",
+        "Delegation and rewards"
+      ],
+      "resources": [
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Polkadot Wiki",
+          "platform": "wiki.polkadot.network",
+          "type": "docs"
+        },
+        {
+          "label": "Tendermint Documentation",
+          "platform": "docs.tendermint.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Design and configure staking and governance parameters for your Cosmos chain and submit a test proposal.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "chain-architect-6",
+      "title": "Cross-Chain Communication",
+      "order": 6,
+      "techs": [
+        "IBC",
+        "Cosmos SDK",
+        "Substrate"
+      ],
+      "description": "This layer enables chains to talk to each other through interoperability protocols. Cross-chain messaging unlocks shared liquidity and composability across ecosystems.",
+      "topics": [
+        "The IBC protocol",
+        "Light clients and proofs",
+        "Channels and packets",
+        "Token transfers across chains",
+        "Cross-consensus messaging",
+        "Relayers"
+      ],
+      "resources": [
+        {
+          "label": "IBC Protocol Docs",
+          "platform": "ibc.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Polkadot Wiki",
+          "platform": "wiki.polkadot.network",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Connect two local Cosmos chains over IBC and transfer a token between them with a relayer.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "chain-architect-7",
+      "title": "Modular Architecture and Data Availability",
+      "order": 7,
+      "techs": [
+        "Consensus",
+        "Cosmos SDK",
+        "Rollups"
+      ],
+      "description": "This layer explores separating execution, settlement, and data availability into distinct layers. Modular designs improve scalability and let teams specialize.",
+      "topics": [
+        "Execution and settlement separation",
+        "Data availability layers",
+        "Sovereign rollups",
+        "Shared security models",
+        "Sequencing",
+        "Trade-offs of modularity"
+      ],
+      "resources": [
+        {
+          "label": "Celestia Documentation",
+          "platform": "docs.celestia.org",
+          "type": "docs"
+        },
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Substrate Documentation",
+          "platform": "docs.substrate.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Diagram a modular architecture for your chain that uses a separate data availability layer.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "chain-architect-8",
+      "title": "Performance and Scalability",
+      "order": 8,
+      "techs": [
+        "Consensus",
+        "Go",
+        "Rust"
+      ],
+      "description": "This layer tunes the chain for higher throughput and lower latency. Performance engineering is essential for chains expecting real usage.",
+      "topics": [
+        "Block size and time tuning",
+        "Mempool optimization",
+        "Parallel execution",
+        "State growth management",
+        "Benchmarking",
+        "Validator hardware requirements"
+      ],
+      "resources": [
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Substrate Documentation",
+          "platform": "docs.substrate.io",
+          "type": "docs"
+        },
+        {
+          "label": "Designing Data-Intensive Applications",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Benchmark your chain under load and tune block parameters to improve throughput.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "chain-architect-9",
+      "title": "Security and Validator Operations",
+      "order": 9,
+      "techs": [
+        "Consensus",
+        "Tendermint",
+        "Cosmos SDK"
+      ],
+      "description": "This layer secures the chain and defines safe validator operations. Operational security protects the network from downtime and slashing.",
+      "topics": [
+        "Key management and sentries",
+        "Double-sign protection",
+        "Slashing parameters",
+        "DDoS mitigation",
+        "Monitoring validators",
+        "Disaster recovery"
+      ],
+      "resources": [
+        {
+          "label": "Tendermint Documentation",
+          "platform": "docs.tendermint.com",
+          "type": "docs"
+        },
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Polkadot Wiki",
+          "platform": "wiki.polkadot.network",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Set up a sentry node architecture with double-sign protection for a validator on your testnet.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "chain-architect-10",
+      "title": "Mainnet Launch and Upgrades",
+      "order": 10,
+      "techs": [
+        "Cosmos SDK",
+        "Tendermint",
+        "Governance"
+      ],
+      "description": "This final layer coordinates a mainnet launch and ongoing chain upgrades. Launching a sovereign chain demands careful planning and community coordination.",
+      "topics": [
+        "Genesis ceremony",
+        "Validator onboarding",
+        "Coordinated upgrades",
+        "Governance-driven changes",
+        "Network monitoring",
+        "Incident response"
+      ],
+      "resources": [
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Tendermint Documentation",
+          "platform": "docs.tendermint.com",
+          "type": "docs"
+        },
+        {
+          "label": "Polkadot Wiki",
+          "platform": "wiki.polkadot.network",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Run a genesis ceremony for a multi-validator testnet and execute a governance-approved upgrade.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "bitcoin-dev": [
+    {
+      "id": "bitcoin-dev-1",
+      "title": "Bitcoin Fundamentals",
+      "order": 1,
+      "techs": [
+        "Bitcoin",
+        "Cryptography",
+        "UTXO"
+      ],
+      "description": "This layer explains how Bitcoin works as a peer-to-peer electronic cash system. The UTXO model and proof of work underpin everything built on Bitcoin.",
+      "topics": [
+        "The UTXO model",
+        "Transactions and inputs",
+        "Proof of work and mining",
+        "Keys and addresses",
+        "The mempool",
+        "Confirmations and finality"
+      ],
+      "resources": [
+        {
+          "label": "Mastering Bitcoin",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Bitcoin Developer Docs",
+          "platform": "developer.bitcoin.org",
+          "type": "docs"
+        },
+        {
+          "label": "Bitcoin Whitepaper",
+          "platform": "bitcoin.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Use a testnet wallet to send a transaction and trace its inputs and outputs on an explorer.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "bitcoin-dev-2",
+      "title": "Keys, Addresses, and Wallets",
+      "order": 2,
+      "techs": [
+        "Bitcoin",
+        "Cryptography",
+        "HD Wallets"
+      ],
+      "description": "This layer covers Bitcoin's cryptography and hierarchical deterministic wallets. Correct key handling is the foundation of custody and security.",
+      "topics": [
+        "Elliptic curve keys",
+        "Address formats",
+        "BIP32 hierarchical wallets",
+        "BIP39 mnemonics",
+        "BIP44 derivation paths",
+        "SegWit and Taproot addresses"
+      ],
+      "resources": [
+        {
+          "label": "Mastering Bitcoin",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Bitcoin Developer Docs",
+          "platform": "developer.bitcoin.org",
+          "type": "docs"
+        },
+        {
+          "label": "Bitcoin Optech",
+          "platform": "bitcoinops.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Generate an HD wallet from a mnemonic and derive several addresses across derivation paths.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "bitcoin-dev-3",
+      "title": "Bitcoin Script",
+      "order": 3,
+      "techs": [
+        "Script",
+        "Bitcoin",
+        "Cryptography"
+      ],
+      "description": "This layer teaches Bitcoin's stack-based scripting language for locking and unlocking coins. Script defines the conditions under which bitcoin can be spent.",
+      "topics": [
+        "Stack-based execution",
+        "Opcodes",
+        "Pay to public key hash",
+        "Pay to script hash",
+        "Multisignature scripts",
+        "Timelocks"
+      ],
+      "resources": [
+        {
+          "label": "Bitcoin Developer Docs",
+          "platform": "developer.bitcoin.org",
+          "type": "docs"
+        },
+        {
+          "label": "Mastering Bitcoin",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Bitcoin Optech",
+          "platform": "bitcoinops.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Construct and spend a multisignature script on testnet that requires two of three keys.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "bitcoin-dev-4",
+      "title": "Transactions and PSBT",
+      "order": 4,
+      "techs": [
+        "Bitcoin",
+        "PSBT",
+        "Script"
+      ],
+      "description": "This layer builds raw transactions and works with partially signed Bitcoin transactions. PSBT is the standard for collaborative and hardware wallet signing.",
+      "topics": [
+        "Transaction serialization",
+        "Signature hashing",
+        "Fee estimation",
+        "Building PSBTs",
+        "Collaborative signing",
+        "Replace by fee"
+      ],
+      "resources": [
+        {
+          "label": "Bitcoin Developer Docs",
+          "platform": "developer.bitcoin.org",
+          "type": "docs"
+        },
+        {
+          "label": "Bitcoin Optech",
+          "platform": "bitcoinops.org",
+          "type": "docs"
+        },
+        {
+          "label": "Mastering Bitcoin",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Create a PSBT, sign it with two parties, and broadcast the finalized transaction on testnet.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "bitcoin-dev-5",
+      "title": "Running Bitcoin Core",
+      "order": 5,
+      "techs": [
+        "Bitcoin",
+        "C++",
+        "RPC"
+      ],
+      "description": "This layer runs and queries a full Bitcoin Core node. Operating a node gives trustless access to the chain and its RPC interface.",
+      "topics": [
+        "Installing Bitcoin Core",
+        "Initial block download",
+        "The RPC interface",
+        "Wallet RPCs",
+        "Pruning and indexing",
+        "Configuration options"
+      ],
+      "resources": [
+        {
+          "label": "Bitcoin Core Documentation",
+          "platform": "bitcoincore.org",
+          "type": "docs"
+        },
+        {
+          "label": "Bitcoin Developer Docs",
+          "platform": "developer.bitcoin.org",
+          "type": "docs"
+        },
+        {
+          "label": "Mastering Bitcoin",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Run Bitcoin Core on signet and script a wallet workflow entirely through its RPC interface.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "bitcoin-dev-6",
+      "title": "Bitcoin Core Internals in C++",
+      "order": 6,
+      "techs": [
+        "C++",
+        "Bitcoin",
+        "Consensus"
+      ],
+      "description": "This layer explores the Bitcoin Core codebase and its consensus rules in C++. Reading the reference implementation reveals how the protocol is truly enforced.",
+      "topics": [
+        "Codebase structure",
+        "Validation and consensus code",
+        "The mempool implementation",
+        "Networking layer",
+        "Building from source",
+        "Writing functional tests"
+      ],
+      "resources": [
+        {
+          "label": "Bitcoin Core Documentation",
+          "platform": "bitcoincore.org",
+          "type": "docs"
+        },
+        {
+          "label": "Bitcoin Core on GitHub",
+          "platform": "github.com/bitcoin/bitcoin",
+          "type": "docs"
+        },
+        {
+          "label": "Mastering Bitcoin",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build Bitcoin Core from source and add a small functional test that exercises a wallet RPC.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "bitcoin-dev-7",
+      "title": "Taproot and Advanced Scripting",
+      "order": 7,
+      "techs": [
+        "Taproot",
+        "Script",
+        "Bitcoin"
+      ],
+      "description": "This layer covers Taproot, Schnorr signatures, and modern scripting capabilities. These upgrades improve privacy and flexibility for complex spending conditions.",
+      "topics": [
+        "Schnorr signatures",
+        "Taproot outputs",
+        "Tapscript",
+        "Key path and script path spends",
+        "MuSig key aggregation",
+        "Privacy benefits"
+      ],
+      "resources": [
+        {
+          "label": "Bitcoin Optech",
+          "platform": "bitcoinops.org",
+          "type": "docs"
+        },
+        {
+          "label": "Bitcoin Developer Docs",
+          "platform": "developer.bitcoin.org",
+          "type": "docs"
+        },
+        {
+          "label": "Mastering Bitcoin",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Create a Taproot output with both a key path and a script path spend and test both on signet.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "bitcoin-dev-8",
+      "title": "Lightning Network Fundamentals",
+      "order": 8,
+      "techs": [
+        "Lightning",
+        "Bitcoin",
+        "Script"
+      ],
+      "description": "This layer introduces the Lightning Network for fast off-chain payments. Lightning scales Bitcoin payments to high volume and low fees.",
+      "topics": [
+        "Payment channels",
+        "HTLCs",
+        "Commitment transactions",
+        "Routing and gossip",
+        "Channel opening and closing",
+        "Watchtowers"
+      ],
+      "resources": [
+        {
+          "label": "Mastering the Lightning Network",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Lightning Network Docs",
+          "platform": "docs.lightning.engineering",
+          "type": "docs"
+        },
+        {
+          "label": "Bitcoin Optech",
+          "platform": "bitcoinops.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Open a Lightning channel on testnet, route a payment, and then cooperatively close the channel.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "bitcoin-dev-9",
+      "title": "Building Lightning Applications",
+      "order": 9,
+      "techs": [
+        "Lightning",
+        "Bitcoin",
+        "C++"
+      ],
+      "description": "This layer builds applications on top of a Lightning node using its API. Integrating Lightning enables instant payments inside real products.",
+      "topics": [
+        "Lightning node APIs",
+        "Invoices and BOLT11",
+        "Sending and receiving",
+        "Channel management",
+        "Liquidity and fees",
+        "Keysend and custom records"
+      ],
+      "resources": [
+        {
+          "label": "Lightning Network Docs",
+          "platform": "docs.lightning.engineering",
+          "type": "docs"
+        },
+        {
+          "label": "Mastering the Lightning Network",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Bitcoin Developer Docs",
+          "platform": "developer.bitcoin.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a small app that generates invoices and accepts Lightning payments through a node API.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "bitcoin-dev-10",
+      "title": "Production Deployment and Security",
+      "order": 10,
+      "techs": [
+        "Bitcoin",
+        "Lightning",
+        "C++"
+      ],
+      "description": "This final layer deploys Bitcoin and Lightning infrastructure securely for production. Custody and uptime demand rigorous operational security.",
+      "topics": [
+        "Hardened node deployment",
+        "Cold and hot wallet design",
+        "Backups and recovery",
+        "Lightning channel backups",
+        "Monitoring and alerting",
+        "Key management policies"
+      ],
+      "resources": [
+        {
+          "label": "Bitcoin Core Documentation",
+          "platform": "bitcoincore.org",
+          "type": "docs"
+        },
+        {
+          "label": "Lightning Network Docs",
+          "platform": "docs.lightning.engineering",
+          "type": "docs"
+        },
+        {
+          "label": "Mastering Bitcoin",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deploy a hardened Bitcoin and Lightning node setup with secure backups and uptime monitoring.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "cosmos-dev": [
+    {
+      "id": "cosmos-dev-1",
+      "title": "Cosmos Ecosystem Fundamentals",
+      "order": 1,
+      "techs": [
+        "Cosmos SDK",
+        "Tendermint",
+        "Go"
+      ],
+      "description": "This layer introduces the Cosmos vision of an internet of blockchains and its core stack. Understanding the ecosystem clarifies why app chains and IBC matter.",
+      "topics": [
+        "The Cosmos vision",
+        "App chains versus shared chains",
+        "The Cosmos SDK and Tendermint",
+        "The ABCI interface",
+        "Accounts and keys",
+        "The Cosmos Hub"
+      ],
+      "resources": [
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Tendermint Documentation",
+          "platform": "docs.tendermint.com",
+          "type": "docs"
+        },
+        {
+          "label": "Cosmos Developer Portal",
+          "platform": "tutorials.cosmos.network",
+          "type": "course"
+        }
+      ],
+      "challenge": "Install the toolchain and spin up a single-node Cosmos chain locally to send a test transaction.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "cosmos-dev-2",
+      "title": "Go for Cosmos Development",
+      "order": 2,
+      "techs": [
+        "Go",
+        "Cosmos SDK",
+        "Protobuf"
+      ],
+      "description": "This layer builds the Go skills required to work effectively in the Cosmos SDK. Comfort with Go and protobuf is essential for module development.",
+      "topics": [
+        "Go modules and packages",
+        "Interfaces and structs",
+        "Error handling",
+        "Protocol buffers",
+        "Code generation",
+        "Testing in Go"
+      ],
+      "resources": [
+        {
+          "label": "The Go Programming Language",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Go Documentation",
+          "platform": "go.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write a Go package with protobuf-defined types and generate the corresponding Go code.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "cosmos-dev-3",
+      "title": "Cosmos SDK Architecture",
+      "order": 3,
+      "techs": [
+        "Cosmos SDK",
+        "Tendermint",
+        "Go"
+      ],
+      "description": "This layer dissects how a Cosmos application is structured around modules and the baseapp. Knowing the architecture lets you place logic in the right component.",
+      "topics": [
+        "BaseApp and the runtime",
+        "Modules and keepers",
+        "Stores and the state tree",
+        "AnteHandlers",
+        "Begin and end block hooks",
+        "Dependency wiring"
+      ],
+      "resources": [
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Cosmos Developer Portal",
+          "platform": "tutorials.cosmos.network",
+          "type": "course"
+        },
+        {
+          "label": "Go Documentation",
+          "platform": "go.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Scaffold a chain and trace a transaction from the ante handler through to state changes.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "cosmos-dev-4",
+      "title": "Building Custom Modules",
+      "order": 4,
+      "techs": [
+        "Cosmos SDK",
+        "Go",
+        "Protobuf"
+      ],
+      "description": "This layer builds a custom SDK module with messages, state, and queries. Custom modules are where your application's unique logic lives.",
+      "topics": [
+        "Defining messages",
+        "Keeper logic and state",
+        "Message handlers",
+        "Query services",
+        "Genesis import and export",
+        "Module parameters"
+      ],
+      "resources": [
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Cosmos Developer Portal",
+          "platform": "tutorials.cosmos.network",
+          "type": "course"
+        },
+        {
+          "label": "Go Documentation",
+          "platform": "go.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a custom module that lets users create and query named items on your chain.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "cosmos-dev-5",
+      "title": "Tokens, Staking, and Governance",
+      "order": 5,
+      "techs": [
+        "Cosmos SDK",
+        "Tendermint",
+        "Go"
+      ],
+      "description": "This layer integrates the standard bank, staking, and governance modules. These modules provide the economic backbone of any Cosmos chain.",
+      "topics": [
+        "The bank module",
+        "Staking and delegation",
+        "Distribution and rewards",
+        "On-chain governance",
+        "Slashing",
+        "Module account permissions"
+      ],
+      "resources": [
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Cosmos Developer Portal",
+          "platform": "tutorials.cosmos.network",
+          "type": "course"
+        },
+        {
+          "label": "Tendermint Documentation",
+          "platform": "docs.tendermint.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Wire staking and governance into your chain and pass a parameter change proposal by vote.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "cosmos-dev-6",
+      "title": "Inter-Blockchain Communication",
+      "order": 6,
+      "techs": [
+        "IBC",
+        "Cosmos SDK",
+        "Go"
+      ],
+      "description": "This layer connects your chain to others using the IBC protocol. IBC is the defining feature that lets Cosmos chains exchange value and data.",
+      "topics": [
+        "IBC architecture",
+        "Light clients",
+        "Connections and channels",
+        "Packet lifecycle",
+        "Fungible token transfers",
+        "Running a relayer"
+      ],
+      "resources": [
+        {
+          "label": "IBC Protocol Docs",
+          "platform": "ibc.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Cosmos Developer Portal",
+          "platform": "tutorials.cosmos.network",
+          "type": "course"
+        }
+      ],
+      "challenge": "Establish an IBC channel between two local chains and transfer tokens across it with a relayer.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "cosmos-dev-7",
+      "title": "CosmWasm Smart Contracts",
+      "order": 7,
+      "techs": [
+        "CosmWasm",
+        "Rust",
+        "Cosmos SDK"
+      ],
+      "description": "This layer adds WebAssembly smart contracts to a Cosmos chain using CosmWasm. CosmWasm enables flexible contract logic without forking the chain.",
+      "topics": [
+        "The CosmWasm module",
+        "Contract structure in Rust",
+        "Instantiate, execute, and query",
+        "Contract storage",
+        "Inter-contract calls",
+        "Uploading and instantiating"
+      ],
+      "resources": [
+        {
+          "label": "CosmWasm Documentation",
+          "platform": "docs.cosmwasm.com",
+          "type": "docs"
+        },
+        {
+          "label": "The Rust Book",
+          "platform": "doc.rust-lang.org",
+          "type": "book"
+        },
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write and deploy a CosmWasm contract that stores a counter and exposes execute and query messages.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "cosmos-dev-8",
+      "title": "Clients, Tooling, and Frontends",
+      "order": 8,
+      "techs": [
+        "CosmJS",
+        "Cosmos SDK",
+        "TypeScript"
+      ],
+      "description": "This layer connects frontends and services to a Cosmos chain using CosmJS. Client tooling turns your chain into a usable application.",
+      "topics": [
+        "Connecting with CosmJS",
+        "Signing and broadcasting",
+        "Wallet integration with Keplr",
+        "Querying state",
+        "Building a frontend",
+        "Indexing events"
+      ],
+      "resources": [
+        {
+          "label": "CosmJS Documentation",
+          "platform": "cosmos.github.io/cosmjs",
+          "type": "docs"
+        },
+        {
+          "label": "Cosmos Developer Portal",
+          "platform": "tutorials.cosmos.network",
+          "type": "course"
+        },
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a web frontend with Keplr that creates and lists items from your custom module.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "cosmos-dev-9",
+      "title": "Testing and Upgrades",
+      "order": 9,
+      "techs": [
+        "Cosmos SDK",
+        "Go",
+        "Tendermint"
+      ],
+      "description": "This layer establishes testing and in-place upgrade workflows for a chain. Reliable upgrades let a live chain evolve without halting.",
+      "topics": [
+        "Unit and integration tests",
+        "Simulation testing",
+        "Upgrade modules",
+        "Migration handlers",
+        "Coordinated upgrade governance",
+        "Testnet rehearsals"
+      ],
+      "resources": [
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Cosmos Developer Portal",
+          "platform": "tutorials.cosmos.network",
+          "type": "course"
+        },
+        {
+          "label": "Go Documentation",
+          "platform": "go.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write tests for your module and perform a governance-gated upgrade with a state migration on a testnet.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "cosmos-dev-10",
+      "title": "Mainnet Launch and Operations",
+      "order": 10,
+      "techs": [
+        "Cosmos SDK",
+        "Tendermint",
+        "Go"
+      ],
+      "description": "This final layer launches a Cosmos chain to production and operates it reliably. A successful launch requires validator coordination and strong monitoring.",
+      "topics": [
+        "Genesis ceremony",
+        "Validator onboarding",
+        "Relayer operations",
+        "Monitoring and telemetry",
+        "Coordinated upgrades",
+        "Incident response"
+      ],
+      "resources": [
+        {
+          "label": "Cosmos SDK Documentation",
+          "platform": "docs.cosmos.network",
+          "type": "docs"
+        },
+        {
+          "label": "Tendermint Documentation",
+          "platform": "docs.tendermint.com",
+          "type": "docs"
+        },
+        {
+          "label": "Cosmos Developer Portal",
+          "platform": "tutorials.cosmos.network",
+          "type": "course"
+        }
+      ],
+      "challenge": "Launch a multi-validator testnet of your chain with IBC relaying and full monitoring in place.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "move-developer": [
+    {
+      "id": "move-developer-1",
+      "title": "Move Language Foundations",
+      "order": 1,
+      "techs": [
+        "Move",
+        "Aptos",
+        "Sui"
+      ],
+      "description": "This layer introduces Move, a resource-oriented language built for safe asset handling. Move's design prevents whole classes of bugs common in other smart contract languages.",
+      "topics": [
+        "Resource-oriented programming",
+        "Modules and scripts",
+        "Primitive types",
+        "Functions and visibility",
+        "The Move model",
+        "Aptos and Sui overview"
+      ],
+      "resources": [
+        {
+          "label": "The Move Book",
+          "platform": "move-language.github.io",
+          "type": "book"
+        },
+        {
+          "label": "Aptos Documentation",
+          "platform": "aptos.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Sui Documentation",
+          "platform": "docs.sui.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write and run a simple Move module that defines a basic struct and a function that returns it.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "move-developer-2",
+      "title": "Resources and Abilities",
+      "order": 2,
+      "techs": [
+        "Move",
+        "Aptos",
+        "Rust"
+      ],
+      "description": "This layer explores Move's core innovation of resources and the ability system. Abilities control how values can be copied, dropped, and stored, enforcing asset safety.",
+      "topics": [
+        "The four abilities",
+        "Resources versus copyable types",
+        "Ownership and moves",
+        "References and borrowing",
+        "Structs with abilities",
+        "Preventing duplication"
+      ],
+      "resources": [
+        {
+          "label": "The Move Book",
+          "platform": "move-language.github.io",
+          "type": "book"
+        },
+        {
+          "label": "Aptos Documentation",
+          "platform": "aptos.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Sui Documentation",
+          "platform": "docs.sui.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Define a coin-like resource with the right abilities so it cannot be copied or silently dropped.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "move-developer-3",
+      "title": "Building on Aptos",
+      "order": 3,
+      "techs": [
+        "Aptos",
+        "Move",
+        "CLI"
+      ],
+      "description": "This layer builds and deploys Move modules on the Aptos blockchain. Aptos uses a global storage model that shapes how state is organized.",
+      "topics": [
+        "The Aptos account model",
+        "Global storage operations",
+        "Publishing modules",
+        "Entry functions",
+        "The Aptos CLI",
+        "Using the framework"
+      ],
+      "resources": [
+        {
+          "label": "Aptos Documentation",
+          "platform": "aptos.dev",
+          "type": "docs"
+        },
+        {
+          "label": "The Move Book",
+          "platform": "move-language.github.io",
+          "type": "book"
+        },
+        {
+          "label": "Aptos Move Examples",
+          "platform": "github.com/aptos-labs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Publish a Move module to Aptos testnet that stores a resource under a user account.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "move-developer-4",
+      "title": "Building on Sui",
+      "order": 4,
+      "techs": [
+        "Sui",
+        "Move",
+        "CLI"
+      ],
+      "description": "This layer builds Move modules on Sui, which uses an object-centric model. Sui's objects and parallel execution differ significantly from account-based chains.",
+      "topics": [
+        "The Sui object model",
+        "Owned versus shared objects",
+        "Object ownership transfer",
+        "Entry functions on Sui",
+        "The Sui CLI",
+        "Programmable transaction blocks"
+      ],
+      "resources": [
+        {
+          "label": "Sui Documentation",
+          "platform": "docs.sui.io",
+          "type": "docs"
+        },
+        {
+          "label": "The Move Book",
+          "platform": "move-language.github.io",
+          "type": "book"
+        },
+        {
+          "label": "Sui Move Examples",
+          "platform": "examples.sui.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a Sui module that mints an object and transfers ownership to another address on testnet.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "move-developer-5",
+      "title": "Tokens and Digital Assets",
+      "order": 5,
+      "techs": [
+        "Move",
+        "Aptos",
+        "Sui"
+      ],
+      "description": "This layer implements fungible and non-fungible assets using Move standards. Tokens are the most common building block of Move applications.",
+      "topics": [
+        "Fungible asset standards",
+        "Non-fungible tokens",
+        "Minting and burning",
+        "Asset metadata",
+        "Transfers and custody",
+        "Collections"
+      ],
+      "resources": [
+        {
+          "label": "Aptos Documentation",
+          "platform": "aptos.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Sui Documentation",
+          "platform": "docs.sui.io",
+          "type": "docs"
+        },
+        {
+          "label": "The Move Book",
+          "platform": "move-language.github.io",
+          "type": "book"
+        }
+      ],
+      "challenge": "Create a fungible token and a simple NFT collection on your chosen chain and mint examples.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "move-developer-6",
+      "title": "Testing and the Move Prover",
+      "order": 6,
+      "techs": [
+        "Move",
+        "Aptos",
+        "Prover"
+      ],
+      "description": "This layer covers unit testing and formal verification with the Move Prover. The prover can mathematically guarantee key properties of your modules.",
+      "topics": [
+        "Writing unit tests",
+        "Test-only code",
+        "Move specification language",
+        "Writing specifications",
+        "Running the prover",
+        "Invariants and aborts"
+      ],
+      "resources": [
+        {
+          "label": "The Move Book",
+          "platform": "move-language.github.io",
+          "type": "book"
+        },
+        {
+          "label": "Aptos Documentation",
+          "platform": "aptos.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Move Prover Docs",
+          "platform": "aptos.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write unit tests and a Move Prover specification proving your token cannot be minted beyond a cap.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "move-developer-7",
+      "title": "Composability and Generics",
+      "order": 7,
+      "techs": [
+        "Move",
+        "Aptos",
+        "Sui"
+      ],
+      "description": "This layer builds reusable, composable modules using generics and capabilities. Composability lets protocols build on each other safely.",
+      "topics": [
+        "Generic types and functions",
+        "Phantom type parameters",
+        "Capability patterns",
+        "Witness patterns",
+        "Cross-module calls",
+        "Dynamic fields on Sui"
+      ],
+      "resources": [
+        {
+          "label": "The Move Book",
+          "platform": "move-language.github.io",
+          "type": "book"
+        },
+        {
+          "label": "Sui Documentation",
+          "platform": "docs.sui.io",
+          "type": "docs"
+        },
+        {
+          "label": "Aptos Documentation",
+          "platform": "aptos.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Refactor your token into a generic module and add a capability that gates the mint function.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "move-developer-8",
+      "title": "Frontend and SDK Integration",
+      "order": 8,
+      "techs": [
+        "Aptos",
+        "Sui",
+        "TypeScript"
+      ],
+      "description": "This layer connects applications to Move modules using the TypeScript SDKs. Client integration turns modules into real user-facing products.",
+      "topics": [
+        "TypeScript SDK setup",
+        "Building transactions",
+        "Wallet connection",
+        "Reading on-chain state",
+        "Handling events",
+        "Submitting and confirming"
+      ],
+      "resources": [
+        {
+          "label": "Aptos TypeScript SDK",
+          "platform": "aptos.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Sui TypeScript SDK",
+          "platform": "docs.sui.io",
+          "type": "docs"
+        },
+        {
+          "label": "The Move Book",
+          "platform": "move-language.github.io",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a web page with wallet connection that mints and displays your token via the TypeScript SDK.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "move-developer-9",
+      "title": "Security and Auditing in Move",
+      "order": 9,
+      "techs": [
+        "Move",
+        "Prover",
+        "Aptos"
+      ],
+      "description": "This layer examines Move-specific security concerns and review techniques. Even with strong safety guarantees, logic and access bugs remain possible.",
+      "topics": [
+        "Access control patterns",
+        "Capability leakage",
+        "Arithmetic and abort handling",
+        "Reentrancy considerations",
+        "Upgrade safety",
+        "Audit checklists"
+      ],
+      "resources": [
+        {
+          "label": "Aptos Documentation",
+          "platform": "aptos.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Sui Documentation",
+          "platform": "docs.sui.io",
+          "type": "docs"
+        },
+        {
+          "label": "The Move Book",
+          "platform": "move-language.github.io",
+          "type": "book"
+        }
+      ],
+      "challenge": "Audit your token module for capability leakage and access flaws, then close any gaps you find.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "move-developer-10",
+      "title": "Mainnet Deployment and Upgrades",
+      "order": 10,
+      "techs": [
+        "Aptos",
+        "Sui",
+        "Move"
+      ],
+      "description": "This final layer deploys Move modules to mainnet and manages upgrades safely. Production deployment requires careful upgrade policy and monitoring.",
+      "topics": [
+        "Module publishing to mainnet",
+        "Upgrade policies",
+        "Compatibility checks",
+        "Managing upgrade authority",
+        "Monitoring on-chain activity",
+        "Incident response"
+      ],
+      "resources": [
+        {
+          "label": "Aptos Documentation",
+          "platform": "aptos.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Sui Documentation",
+          "platform": "docs.sui.io",
+          "type": "docs"
+        },
+        {
+          "label": "The Move Book",
+          "platform": "move-language.github.io",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deploy your full token application to testnet and rehearse a compatible module upgrade.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "layer2-dev": [
+    {
+      "id": "layer2-dev-1",
+      "title": "Scaling and Layer 2 Foundations",
+      "order": 1,
+      "techs": [
+        "Rollups",
+        "Ethereum",
+        "Solidity"
+      ],
+      "description": "This layer explains why Ethereum needs scaling and how layer 2 solutions work. Understanding the scaling landscape frames every later design decision.",
+      "topics": [
+        "The blockchain scaling trilemma",
+        "Layer 1 versus layer 2",
+        "Rollups overview",
+        "Optimistic versus zk rollups",
+        "Data availability",
+        "Sequencers and provers"
+      ],
+      "resources": [
+        {
+          "label": "Ethereum Scaling Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "L2BEAT Knowledge Base",
+          "platform": "l2beat.com",
+          "type": "docs"
+        },
+        {
+          "label": "Optimism Documentation",
+          "platform": "docs.optimism.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write a comparison of optimistic and zk rollups covering their trust and cost trade-offs.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "layer2-dev-2",
+      "title": "Deploying to Layer 2 Networks",
+      "order": 2,
+      "techs": [
+        "Optimism",
+        "Solidity",
+        "Foundry"
+      ],
+      "description": "This layer deploys existing Solidity contracts to layer 2 networks. EVM-equivalent rollups let you reuse familiar tooling with lower fees.",
+      "topics": [
+        "EVM equivalence",
+        "Connecting to L2 testnets",
+        "Deploying with Foundry",
+        "Bridging test funds",
+        "Reading L2 explorers",
+        "Gas differences on L2"
+      ],
+      "resources": [
+        {
+          "label": "Optimism Documentation",
+          "platform": "docs.optimism.io",
+          "type": "docs"
+        },
+        {
+          "label": "Foundry Book",
+          "platform": "book.getfoundry.sh",
+          "type": "docs"
+        },
+        {
+          "label": "Ethereum Developer Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy a sample ERC20 contract to an Optimism testnet and interact with it through an explorer.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "layer2-dev-3",
+      "title": "Optimistic Rollups in Depth",
+      "order": 3,
+      "techs": [
+        "Optimism",
+        "Rollups",
+        "Solidity"
+      ],
+      "description": "This layer dives into how optimistic rollups achieve security through fraud proofs. The optimistic model trades a challenge window for low compute cost.",
+      "topics": [
+        "Transaction batching",
+        "State commitments",
+        "Fraud proofs",
+        "The challenge window",
+        "Withdrawal delays",
+        "Sequencer responsibilities"
+      ],
+      "resources": [
+        {
+          "label": "Optimism Documentation",
+          "platform": "docs.optimism.io",
+          "type": "docs"
+        },
+        {
+          "label": "Arbitrum Documentation",
+          "platform": "docs.arbitrum.io",
+          "type": "docs"
+        },
+        {
+          "label": "L2BEAT Knowledge Base",
+          "platform": "l2beat.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Trace a withdrawal from an optimistic rollup to L1 and document each step of the challenge period.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "layer2-dev-4",
+      "title": "Zero-Knowledge Rollups",
+      "order": 4,
+      "techs": [
+        "zkSync",
+        "Rollups",
+        "Solidity"
+      ],
+      "description": "This layer explores zk rollups and the validity proofs that secure them. Validity proofs offer fast finality and strong cryptographic guarantees.",
+      "topics": [
+        "Validity proofs",
+        "SNARKs and STARKs at a high level",
+        "Proof generation and verification",
+        "zkEVM concepts",
+        "Finality versus optimistic delays",
+        "Prover infrastructure"
+      ],
+      "resources": [
+        {
+          "label": "zkSync Documentation",
+          "platform": "docs.zksync.io",
+          "type": "docs"
+        },
+        {
+          "label": "L2BEAT Knowledge Base",
+          "platform": "l2beat.com",
+          "type": "docs"
+        },
+        {
+          "label": "Ethereum Scaling Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy a contract to a zkSync testnet and compare its finality behavior to the optimistic deployment.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "layer2-dev-5",
+      "title": "Bridges and Cross-Layer Messaging",
+      "order": 5,
+      "techs": [
+        "Optimism",
+        "Solidity",
+        "Bridges"
+      ],
+      "description": "This layer covers how assets and messages move between L1 and L2. Bridges are critical infrastructure and a frequent source of risk.",
+      "topics": [
+        "Native bridge architecture",
+        "Deposits and withdrawals",
+        "Cross-domain messaging",
+        "Message passing contracts",
+        "Bridge security risks",
+        "Third-party bridges"
+      ],
+      "resources": [
+        {
+          "label": "Optimism Documentation",
+          "platform": "docs.optimism.io",
+          "type": "docs"
+        },
+        {
+          "label": "Arbitrum Documentation",
+          "platform": "docs.arbitrum.io",
+          "type": "docs"
+        },
+        {
+          "label": "L2BEAT Knowledge Base",
+          "platform": "l2beat.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a contract that sends a cross-domain message from L2 to an L1 contract on testnet.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "layer2-dev-6",
+      "title": "L2-Aware Contract Development",
+      "order": 6,
+      "techs": [
+        "Solidity",
+        "zkSync",
+        "Optimism"
+      ],
+      "description": "This layer teaches how to write contracts that account for layer 2 specifics. Subtle differences in gas, fees, and opcodes affect correctness and cost.",
+      "topics": [
+        "L1 versus L2 gas accounting",
+        "Calldata cost optimization",
+        "Block and time assumptions",
+        "Account abstraction on L2",
+        "Address aliasing",
+        "Chain-specific precompiles"
+      ],
+      "resources": [
+        {
+          "label": "zkSync Documentation",
+          "platform": "docs.zksync.io",
+          "type": "docs"
+        },
+        {
+          "label": "Optimism Documentation",
+          "platform": "docs.optimism.io",
+          "type": "docs"
+        },
+        {
+          "label": "Solidity Documentation",
+          "platform": "soliditylang.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Optimize a contract for L2 by minimizing calldata and verify the fee reduction on a testnet.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "layer2-dev-7",
+      "title": "Building a dApp Across Layers",
+      "order": 7,
+      "techs": [
+        "Optimism",
+        "ethers.js",
+        "Solidity"
+      ],
+      "description": "This layer builds a full application that spans L1 and L2 with a frontend. Cross-layer apps must coordinate state and user experience across networks.",
+      "topics": [
+        "Multi-network frontends",
+        "Switching chains in the wallet",
+        "Tracking bridge transactions",
+        "Handling withdrawal delays",
+        "Showing L2 confirmations",
+        "Cross-layer state sync"
+      ],
+      "resources": [
+        {
+          "label": "ethers.js Documentation",
+          "platform": "docs.ethers.org",
+          "type": "docs"
+        },
+        {
+          "label": "Optimism Documentation",
+          "platform": "docs.optimism.io",
+          "type": "docs"
+        },
+        {
+          "label": "Ethereum Developer Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a dApp that lets users deposit from L1, act on L2, and track their bridge transactions.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "layer2-dev-8",
+      "title": "Running and Customizing a Rollup",
+      "order": 8,
+      "techs": [
+        "Optimism",
+        "Rollups",
+        "Solidity"
+      ],
+      "description": "This layer uses rollup frameworks to spin up a custom L2. Rollup-as-a-service stacks let teams launch their own chains quickly.",
+      "topics": [
+        "Rollup stack overview",
+        "Configuring a chain",
+        "Running a sequencer",
+        "Setting up a batcher and proposer",
+        "Custom gas tokens",
+        "Connecting to L1"
+      ],
+      "resources": [
+        {
+          "label": "OP Stack Documentation",
+          "platform": "docs.optimism.io",
+          "type": "docs"
+        },
+        {
+          "label": "L2BEAT Knowledge Base",
+          "platform": "l2beat.com",
+          "type": "docs"
+        },
+        {
+          "label": "Ethereum Scaling Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Launch a local rollup using a stack framework and deploy your cross-layer dApp to it.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "layer2-dev-9",
+      "title": "Layer 2 Security and Decentralization",
+      "order": 9,
+      "techs": [
+        "Rollups",
+        "Optimism",
+        "zkSync"
+      ],
+      "description": "This layer examines the security assumptions and decentralization roadmap of rollups. Sequencer centralization and upgrade keys are key risks to evaluate.",
+      "topics": [
+        "Sequencer centralization risks",
+        "Escape hatches and forced inclusion",
+        "Upgrade keys and timelocks",
+        "Data availability assurances",
+        "Proof system trust",
+        "L2BEAT risk framework"
+      ],
+      "resources": [
+        {
+          "label": "L2BEAT Knowledge Base",
+          "platform": "l2beat.com",
+          "type": "docs"
+        },
+        {
+          "label": "Optimism Documentation",
+          "platform": "docs.optimism.io",
+          "type": "docs"
+        },
+        {
+          "label": "zkSync Documentation",
+          "platform": "docs.zksync.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Evaluate your custom rollup against the L2BEAT risk framework and document its weak points.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "layer2-dev-10",
+      "title": "Production Deployment and Operations",
+      "order": 10,
+      "techs": [
+        "Optimism",
+        "Rollups",
+        "Foundry"
+      ],
+      "description": "This final layer ships a layer 2 application to a production network and operates it. Running cross-layer systems in production demands monitoring and safe upgrades.",
+      "topics": [
+        "Mainnet L2 deployment",
+        "Contract verification on L2",
+        "Bridge monitoring",
+        "Sequencer and prover monitoring",
+        "Upgrade governance",
+        "Incident response"
+      ],
+      "resources": [
+        {
+          "label": "Optimism Documentation",
+          "platform": "docs.optimism.io",
+          "type": "docs"
+        },
+        {
+          "label": "Foundry Book",
+          "platform": "book.getfoundry.sh",
+          "type": "docs"
+        },
+        {
+          "label": "L2BEAT Knowledge Base",
+          "platform": "l2beat.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy and verify your cross-layer dApp on a public L2 network and set up bridge and chain monitoring.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ]
+}

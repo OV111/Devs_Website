@@ -1,0 +1,3860 @@
+{
+  "cloud": [
+    {
+      "id": "cloud-1",
+      "title": "Linux & Networking Foundations",
+      "order": 1,
+      "techs": [
+        "Linux",
+        "Bash",
+        "TCP/IP",
+        "SSH"
+      ],
+      "description": "Cloud engineering starts with Linux and networking fluency. Everything you deploy runs on Linux. You need to navigate servers, understand networking primitives, and automate with shell scripts.",
+      "topics": [
+        "Linux file system, permissions, users & groups",
+        "Shell scripting — variables, loops, functions, cron",
+        "Networking — IP addressing, subnets, CIDR, routing",
+        "DNS, load balancers, reverse proxies",
+        "SSH — key-based auth, tunneling, bastion hosts",
+        "systemd — services, journalctl, timers"
+      ],
+      "resources": [
+        {
+          "label": "The Linux Command Line (book)",
+          "platform": "linuxcommand.org",
+          "type": "book"
+        },
+        {
+          "label": "Missing Semester — MIT",
+          "platform": "missing.csail.mit.edu",
+          "type": "course"
+        },
+        {
+          "label": "NetworkChuck — Networking Full Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "roadmap.sh — DevOps Roadmap",
+          "platform": "roadmap.sh",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Provision an Ubuntu VPS (AWS free tier, DigitalOcean, or similar), set up a non-root user with SSH key auth, configure ufw firewall, and deploy a simple Node.js app as a systemd service.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-2",
+      "title": "AWS Core Services",
+      "order": 2,
+      "techs": [
+        "EC2",
+        "S3",
+        "IAM",
+        "VPC",
+        "RDS"
+      ],
+      "description": "AWS is the dominant cloud platform. Learn the foundational services — compute, storage, networking, and databases — that underpin almost every production architecture.",
+      "topics": [
+        "IAM — users, roles, policies, least-privilege principle",
+        "VPC — subnets, security groups, NACLs, internet gateways",
+        "EC2 — instance types, AMIs, key pairs, user data scripts",
+        "S3 — buckets, objects, policies, versioning, lifecycle rules",
+        "RDS — managed PostgreSQL, backups, Multi-AZ",
+        "CloudWatch — metrics, logs, alarms"
+      ],
+      "resources": [
+        {
+          "label": "AWS Documentation",
+          "platform": "docs.aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Skill Builder — Cloud Practitioner",
+          "platform": "skillbuilder.aws",
+          "type": "course"
+        },
+        {
+          "label": "TechWorld with Nana — AWS Full Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "A Cloud Guru — AWS Solutions Architect",
+          "platform": "acloudguru.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Deploy a full-stack app on AWS — EC2 with Nginx, RDS PostgreSQL, S3 for static assets, proper IAM roles (no root credentials), and a VPC with public/private subnets.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "cloud-3",
+      "title": "Infrastructure as Code — Terraform",
+      "order": 3,
+      "techs": [
+        "Terraform",
+        "HCL",
+        "AWS Provider",
+        "State"
+      ],
+      "description": "Stop clicking around in the console. Define your infrastructure in code, version it with Git, and deploy reproducible environments with Terraform.",
+      "topics": [
+        "Terraform architecture — providers, resources, state",
+        "HCL syntax — blocks, arguments, expressions, locals",
+        "Core workflow — init, plan, apply, destroy",
+        "Variables, outputs & modules",
+        "Remote state with S3 + DynamoDB locking",
+        "Workspaces for multi-environment management"
+      ],
+      "resources": [
+        {
+          "label": "Terraform Official Docs",
+          "platform": "developer.hashicorp.com",
+          "type": "docs"
+        },
+        {
+          "label": "HashiCorp Learn — Terraform Get Started",
+          "platform": "developer.hashicorp.com",
+          "type": "course"
+        },
+        {
+          "label": "TechWorld with Nana — Terraform Full Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Rewrite your AWS infrastructure from the previous challenge in Terraform — VPC, EC2, RDS, S3, IAM, remote state — all reproducible from a single terraform apply.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-4",
+      "title": "Containers with Docker",
+      "order": 4,
+      "techs": [
+        "Docker",
+        "Dockerfile",
+        "Docker Compose",
+        "ECR"
+      ],
+      "description": "Containers are the fundamental unit of modern cloud deployment. Master Docker — from writing efficient Dockerfiles to orchestrating multi-service applications.",
+      "topics": [
+        "Container concepts — images, layers, registry, runtime",
+        "Dockerfile best practices — multi-stage builds, layer caching",
+        "Docker Compose for local multi-service development",
+        "Networking between containers",
+        "AWS ECR — push and pull private images",
+        "Container security — rootless, read-only FS, secrets"
+      ],
+      "resources": [
+        {
+          "label": "Docker Official Docs",
+          "platform": "docs.docker.com",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana — Docker Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Play with Docker — Interactive Labs",
+          "platform": "labs.play-with-docker.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Containerize a multi-service app (frontend + API + database), push to ECR, and update your Terraform to deploy the container on EC2 pulling from ECR.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-5",
+      "title": "Kubernetes",
+      "order": 5,
+      "techs": [
+        "Kubernetes",
+        "kubectl",
+        "Helm",
+        "EKS"
+      ],
+      "description": "Kubernetes is the industry standard for container orchestration at scale. Learn to deploy, scale, and manage containerized workloads on managed clusters.",
+      "topics": [
+        "K8s architecture — control plane, nodes, pods, services",
+        "Deployments, ReplicaSets, rolling updates",
+        "Services — ClusterIP, NodePort, LoadBalancer",
+        "ConfigMaps & Secrets",
+        "Helm — charts, values, releases",
+        "AWS EKS — managed cluster setup, IAM integration"
+      ],
+      "resources": [
+        {
+          "label": "Kubernetes Official Docs",
+          "platform": "kubernetes.io",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana — Kubernetes Full Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Helm Docs",
+          "platform": "helm.sh",
+          "type": "docs"
+        },
+        {
+          "label": "KodeKloud — CKA Course",
+          "platform": "kodekloud.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Deploy your containerized app to EKS — write Kubernetes manifests (Deployment, Service, Ingress), package with Helm, and configure autoscaling based on CPU.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "cloud-6",
+      "title": "CI/CD Pipelines",
+      "order": 6,
+      "techs": [
+        "GitHub Actions",
+        "ArgoCD",
+        "Docker",
+        "Terraform"
+      ],
+      "description": "Automate your path from code commit to production deployment. Build pipelines that test, build, scan, and deploy automatically, with GitOps principles for Kubernetes.",
+      "topics": [
+        "GitHub Actions — workflows, jobs, steps, secrets, matrix builds",
+        "CI pipeline — lint, test, build Docker image, push to ECR",
+        "CD with ArgoCD — GitOps, app sync, health checks",
+        "Terraform in CI — plan on PR, apply on merge",
+        "Blue/green & canary deployment strategies",
+        "Secrets management — GitHub Secrets, AWS Secrets Manager"
+      ],
+      "resources": [
+        {
+          "label": "GitHub Actions Docs",
+          "platform": "docs.github.com",
+          "type": "docs"
+        },
+        {
+          "label": "ArgoCD Docs",
+          "platform": "argo-cd.readthedocs.io",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana — CI/CD Full Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build an end-to-end GitOps pipeline — on push: run tests, build and push Docker image to ECR, update Helm values, and let ArgoCD auto-deploy to EKS.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-7",
+      "title": "Monitoring & Observability",
+      "order": 7,
+      "techs": [
+        "Prometheus",
+        "Grafana",
+        "Loki",
+        "CloudWatch"
+      ],
+      "description": "You can't fix what you can't see. Build observability into your stack with metrics, logs, and traces. Know when something breaks before your users tell you.",
+      "topics": [
+        "Three pillars of observability — metrics, logs, traces",
+        "Prometheus — scraping, PromQL, alerting rules",
+        "Grafana — dashboards, data sources, alerting",
+        "Loki + Promtail — log aggregation",
+        "Distributed tracing — OpenTelemetry, Jaeger",
+        "SLOs, SLAs, SLIs — error budgets"
+      ],
+      "resources": [
+        {
+          "label": "Prometheus Docs",
+          "platform": "prometheus.io",
+          "type": "docs"
+        },
+        {
+          "label": "Grafana Docs",
+          "platform": "grafana.com",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana — Prometheus & Grafana",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Instrument your Kubernetes workload with Prometheus metrics, build a Grafana dashboard showing request rate, error rate, and latency, and set up an alert for high error rates.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-8",
+      "title": "Security & Cost Optimization",
+      "order": 8,
+      "techs": [
+        "IAM",
+        "Vault",
+        "AWS Cost Explorer",
+        "Spot Instances"
+      ],
+      "description": "Security and cost are the two areas that separate good cloud engineers from great ones. Apply defense-in-depth and understand the cloud billing model to avoid expensive surprises.",
+      "topics": [
+        "IAM — least privilege, permission boundaries, service accounts",
+        "HashiCorp Vault — secrets engine, dynamic credentials",
+        "Network security — private subnets, VPN, WAF",
+        "Image scanning — Trivy, ECR native scanning",
+        "AWS Cost Explorer — reserved instances, savings plans",
+        "Spot/preemptible instances for non-critical workloads"
+      ],
+      "resources": [
+        {
+          "label": "AWS Well-Architected Framework",
+          "platform": "aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "HashiCorp Vault Docs",
+          "platform": "developer.hashicorp.com",
+          "type": "docs"
+        },
+        {
+          "label": "Infra Cost Docs",
+          "platform": "infracost.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Audit your AWS setup against the Well-Architected Framework — fix IAM over-permissions, add Vault for DB credentials, set up billing alerts, and migrate non-critical workloads to Spot.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-9",
+      "title": "Multi-Region Architecture and Disaster Recovery",
+      "order": 9,
+      "techs": [
+        "AWS",
+        "Terraform",
+        "Route 53",
+        "Aurora Global"
+      ],
+      "description": "Design globally distributed systems on AWS that survive regional failures using active-active and active-passive topologies backed by automated failover. Apply Terraform to codify multi-region infrastructure and implement RTO/RPO targets through tested DR runbooks.",
+      "topics": [
+        "Active-active vs active-passive multi-region topologies",
+        "Route 53 latency and failover routing policies",
+        "Aurora Global Database and cross-region read replicas",
+        "S3 Cross-Region Replication and object consistency",
+        "Global Accelerator for anycast traffic routing",
+        "Chaos and DR drills with AWS Fault Injection Simulator",
+        "RTO and RPO target definition and measurement"
+      ],
+      "resources": [
+        {
+          "label": "AWS Multi-Region Architecture Guide",
+          "platform": "docs.aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "Disaster Recovery on AWS Whitepaper",
+          "platform": "aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "Multi-Region Terraform Patterns",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Cloud Architecture Patterns by Bill Wilder",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deploy a stateless API behind Global Accelerator across two AWS regions with Aurora Global Database, automate regional failover with Route 53 health checks, and run a simulated regional outage to validate your RTO target.",
+      "estimatedTime": "5-6 weeks"
+    },
+    {
+      "id": "cloud-10",
+      "title": "FinOps, Platform Engineering and SRE Practices",
+      "order": 10,
+      "techs": [
+        "Backstage",
+        "Terraform",
+        "AWS Cost Explorer",
+        "PagerDuty"
+      ],
+      "description": "Shift from infrastructure provisioning to building internal developer platforms that give teams self-service access to golden-path templates, cost visibility, and reliability tooling. Apply SRE principles including toil reduction, capacity planning, and error budget policies.",
+      "topics": [
+        "FinOps framework and cloud cost allocation tagging strategies",
+        "AWS Cost Explorer, Budgets, and Savings Plans optimization",
+        "Internal developer platforms and Backstage scaffolding",
+        "Golden-path templates and platform-team operating models",
+        "Toil measurement and automation priority frameworks",
+        "Capacity planning and predictive auto-scaling",
+        "Error budget policies and SRE team topologies"
+      ],
+      "resources": [
+        {
+          "label": "FinOps Foundation Framework",
+          "platform": "finops.org",
+          "type": "docs"
+        },
+        {
+          "label": "Backstage Getting Started",
+          "platform": "backstage.io",
+          "type": "docs"
+        },
+        {
+          "label": "Site Reliability Engineering Book",
+          "platform": "Google",
+          "type": "book"
+        },
+        {
+          "label": "Platform Engineering on AWS",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Set up a Backstage instance with one software template that provisions a Terraform-managed S3-backed microservice, tag all resources for cost allocation, and create a monthly budget alert tied to the project team.",
+      "estimatedTime": "4-5 weeks"
+    }
+  ],
+  "cicd": [
+    {
+      "id": "cicd-1",
+      "title": "CI/CD Foundations",
+      "order": 1,
+      "techs": [
+        "Git",
+        "GitHub Actions",
+        "YAML"
+      ],
+      "description": "This layer introduces the core ideas behind continuous integration and continuous delivery. It matters because every modern delivery pipeline builds on these foundational concepts and version control habits.",
+      "topics": [
+        "What CI and CD mean and how they differ",
+        "Version control workflows and branching",
+        "Pipeline stages and triggers",
+        "Build artifacts and caching basics",
+        "Reading and writing YAML",
+        "Fast feedback loops for developers"
+      ],
+      "resources": [
+        {
+          "label": "GitHub Actions Documentation",
+          "platform": "docs.github.com",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana CI/CD Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Continuous Delivery",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Create a repository with a single GitHub Actions workflow that runs a linter on every push.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cicd-2",
+      "title": "Build and Test Automation",
+      "order": 2,
+      "techs": [
+        "GitHub Actions",
+        "Docker",
+        "Make"
+      ],
+      "description": "This layer focuses on automating builds and running test suites inside pipelines. It matters because reliable automated testing is what makes continuous integration trustworthy.",
+      "topics": [
+        "Defining build steps and matrices",
+        "Running unit and integration tests",
+        "Dependency caching for speed",
+        "Building container images in CI",
+        "Test reporting and coverage",
+        "Failing fast on broken builds"
+      ],
+      "resources": [
+        {
+          "label": "GitHub Actions Workflow Syntax",
+          "platform": "docs.github.com",
+          "type": "docs"
+        },
+        {
+          "label": "Docker Documentation",
+          "platform": "docs.docker.com",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana GitHub Actions Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Extend the workflow to build a Docker image and run a test matrix across multiple language versions.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "cicd-3",
+      "title": "Pipeline as Code with Jenkins",
+      "order": 3,
+      "techs": [
+        "Jenkins",
+        "Groovy",
+        "Docker"
+      ],
+      "description": "This layer covers declarative and scripted pipelines using Jenkins. It matters because many enterprises run Jenkins and pipeline as code keeps delivery reproducible.",
+      "topics": [
+        "Jenkins architecture and agents",
+        "Declarative versus scripted pipelines",
+        "Writing a Jenkinsfile",
+        "Stages, steps, and post actions",
+        "Credentials and secrets handling",
+        "Plugins and shared libraries"
+      ],
+      "resources": [
+        {
+          "label": "Jenkins User Documentation",
+          "platform": "jenkins.io",
+          "type": "docs"
+        },
+        {
+          "label": "Jenkins Pipeline Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Jenkins: The Definitive Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Recreate your build and test pipeline as a Jenkinsfile running on a containerized agent.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "cicd-4",
+      "title": "Artifact Management and Versioning",
+      "order": 4,
+      "techs": [
+        "GitHub Actions",
+        "Docker Registry",
+        "Semantic Versioning"
+      ],
+      "description": "This layer teaches how to publish, version, and store build outputs. It matters because traceable artifacts are essential for reliable releases and rollbacks.",
+      "topics": [
+        "Semantic versioning strategies",
+        "Tagging container images",
+        "Publishing to artifact registries",
+        "Immutable artifacts and provenance",
+        "Release notes automation",
+        "Retention and cleanup policies"
+      ],
+      "resources": [
+        {
+          "label": "GitHub Packages Documentation",
+          "platform": "docs.github.com",
+          "type": "docs"
+        },
+        {
+          "label": "Semantic Versioning Specification",
+          "platform": "semver.org",
+          "type": "docs"
+        },
+        {
+          "label": "Docker Registry Documentation",
+          "platform": "docs.docker.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add a job that builds, versions with semantic tags, and pushes the image to a registry on merges to main.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cicd-5",
+      "title": "Deployment Strategies",
+      "order": 5,
+      "techs": [
+        "GitHub Actions",
+        "CircleCI",
+        "Kubernetes"
+      ],
+      "description": "This layer explores how to ship code safely to environments. It matters because the deployment strategy directly controls user-facing risk during releases.",
+      "topics": [
+        "Environment promotion flows",
+        "Blue-green deployments",
+        "Canary releases",
+        "Rolling updates",
+        "Manual approvals and gates",
+        "Rollback automation"
+      ],
+      "resources": [
+        {
+          "label": "CircleCI Documentation",
+          "platform": "circleci.com",
+          "type": "docs"
+        },
+        {
+          "label": "GitHub Actions Environments Guide",
+          "platform": "docs.github.com",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana Deployment Strategies",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement a canary deployment job that promotes to production only after a manual approval gate.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "cicd-6",
+      "title": "GitOps with ArgoCD",
+      "order": 6,
+      "techs": [
+        "ArgoCD",
+        "Kubernetes",
+        "Git"
+      ],
+      "description": "This layer introduces declarative continuous delivery driven by Git as the source of truth. It matters because GitOps makes deployments auditable, reversible, and self-healing.",
+      "topics": [
+        "GitOps principles and workflow",
+        "ArgoCD applications and sync",
+        "Declarative manifests in Git",
+        "Automated drift detection",
+        "Sync waves and hooks",
+        "Rollbacks through Git history"
+      ],
+      "resources": [
+        {
+          "label": "Argo CD Documentation",
+          "platform": "argo-cd.readthedocs.io",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana GitOps with ArgoCD",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "GitOps and Kubernetes",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Set up ArgoCD to continuously sync your application from a Git repository to a cluster.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "cicd-7",
+      "title": "Secrets and Security in Pipelines",
+      "order": 7,
+      "techs": [
+        "GitHub Actions",
+        "HashiCorp Vault",
+        "OIDC"
+      ],
+      "description": "This layer covers securely handling credentials and signing artifacts in delivery pipelines. It matters because pipelines are a prime target for supply chain attacks.",
+      "topics": [
+        "Storing and rotating secrets",
+        "OIDC federation for cloud access",
+        "Least privilege for runners",
+        "Dependency and image scanning",
+        "Signing artifacts and provenance",
+        "Auditing pipeline access"
+      ],
+      "resources": [
+        {
+          "label": "GitHub Actions Security Hardening",
+          "platform": "docs.github.com",
+          "type": "docs"
+        },
+        {
+          "label": "HashiCorp Vault Documentation",
+          "platform": "developer.hashicorp.com",
+          "type": "docs"
+        },
+        {
+          "label": "SLSA Supply Chain Framework",
+          "platform": "slsa.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Replace static cloud credentials with OIDC federation and add an image scan gate to the pipeline.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cicd-8",
+      "title": "Pipeline Observability and Metrics",
+      "order": 8,
+      "techs": [
+        "GitHub Actions",
+        "Prometheus",
+        "Grafana"
+      ],
+      "description": "This layer teaches how to measure and visualize pipeline health and delivery performance. It matters because you cannot improve delivery speed without measuring it.",
+      "topics": [
+        "DORA metrics and lead time",
+        "Pipeline duration tracking",
+        "Failure rate dashboards",
+        "Flaky test detection",
+        "Notifications and alerting",
+        "Bottleneck analysis"
+      ],
+      "resources": [
+        {
+          "label": "DORA Metrics Guide",
+          "platform": "dora.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Grafana Documentation",
+          "platform": "grafana.com",
+          "type": "docs"
+        },
+        {
+          "label": "Accelerate",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Export pipeline run metrics and build a Grafana dashboard showing deployment frequency and lead time.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cicd-9",
+      "title": "Scaling and Reusable Pipelines",
+      "order": 9,
+      "techs": [
+        "GitHub Actions",
+        "Jenkins",
+        "Reusable Workflows"
+      ],
+      "description": "This layer focuses on sharing and standardizing pipelines across many repositories. It matters because consistency at scale reduces maintenance and enforces best practices.",
+      "topics": [
+        "Reusable workflows and composite actions",
+        "Shared Jenkins libraries",
+        "Self-hosted runner scaling",
+        "Templating and policy enforcement",
+        "Monorepo and matrix pipelines",
+        "Cost and concurrency management"
+      ],
+      "resources": [
+        {
+          "label": "GitHub Reusable Workflows Docs",
+          "platform": "docs.github.com",
+          "type": "docs"
+        },
+        {
+          "label": "Jenkins Shared Libraries Guide",
+          "platform": "jenkins.io",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana CI/CD at Scale",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Refactor your pipeline into a reusable workflow consumed by two separate service repositories.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "cicd-10",
+      "title": "Production Delivery Operations",
+      "order": 10,
+      "techs": [
+        "ArgoCD",
+        "GitHub Actions",
+        "Kubernetes"
+      ],
+      "description": "This layer covers operating delivery systems reliably in production at organizational scale. It matters because a delivery platform must stay available, secure, and fast under real load.",
+      "topics": [
+        "Multi-environment release governance",
+        "Progressive delivery automation",
+        "Incident handling for failed deploys",
+        "Disaster recovery for pipelines",
+        "Compliance and audit trails",
+        "Continuous improvement of delivery"
+      ],
+      "resources": [
+        {
+          "label": "Argo Rollouts Documentation",
+          "platform": "argoproj.github.io",
+          "type": "docs"
+        },
+        {
+          "label": "Google SRE Workbook",
+          "platform": "sre.google",
+          "type": "book"
+        },
+        {
+          "label": "GitHub Actions Larger Runners Docs",
+          "platform": "docs.github.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Operate an end-to-end GitOps delivery platform with progressive rollouts and automated rollback on failure.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "sre": [
+    {
+      "id": "sre-1",
+      "title": "SRE Fundamentals",
+      "order": 1,
+      "techs": [
+        "Linux",
+        "Go",
+        "Git"
+      ],
+      "description": "This layer introduces the principles and mindset of site reliability engineering. It matters because reliability work is grounded in shared definitions of risk, toil, and service objectives.",
+      "topics": [
+        "What SRE is and how it relates to DevOps",
+        "Error budgets and risk tolerance",
+        "Toil and automation",
+        "Service level indicators and objectives",
+        "Reliability versus feature velocity",
+        "Blameless culture basics"
+      ],
+      "resources": [
+        {
+          "label": "Google SRE Book",
+          "platform": "sre.google",
+          "type": "book"
+        },
+        {
+          "label": "Linux Documentation Project",
+          "platform": "tldp.org",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana SRE Explained",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a one-page reliability charter defining SLIs and an error budget for a sample service.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "sre-2",
+      "title": "Metrics and Monitoring with Prometheus",
+      "order": 2,
+      "techs": [
+        "Prometheus",
+        "PromQL",
+        "Linux"
+      ],
+      "description": "This layer teaches how to collect and query time series metrics. It matters because metrics are the foundation of understanding system behavior and health.",
+      "topics": [
+        "Metric types and exposition format",
+        "Scraping and service discovery",
+        "PromQL querying basics",
+        "Instrumenting applications",
+        "Recording rules",
+        "Cardinality and label design"
+      ],
+      "resources": [
+        {
+          "label": "Prometheus Documentation",
+          "platform": "prometheus.io",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana Prometheus Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Prometheus: Up and Running",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Instrument a Go service with custom metrics and scrape them with a local Prometheus instance.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "sre-3",
+      "title": "Dashboards and Visualization with Grafana",
+      "order": 3,
+      "techs": [
+        "Grafana",
+        "Prometheus",
+        "PromQL"
+      ],
+      "description": "This layer covers turning metrics into actionable dashboards. It matters because clear visualization is how teams spot trends and diagnose problems quickly.",
+      "topics": [
+        "Building panels and dashboards",
+        "Templating and variables",
+        "Visualizing SLIs and SLOs",
+        "Annotations and time ranges",
+        "Dashboard provisioning as code",
+        "Sharing and access control"
+      ],
+      "resources": [
+        {
+          "label": "Grafana Documentation",
+          "platform": "grafana.com",
+          "type": "docs"
+        },
+        {
+          "label": "Grafana Getting Started Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Prometheus and Grafana Guide",
+          "platform": "grafana.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a Grafana dashboard that tracks the latency and error rate of your Go service.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "sre-4",
+      "title": "Service Level Objectives",
+      "order": 4,
+      "techs": [
+        "Prometheus",
+        "Grafana",
+        "PromQL"
+      ],
+      "description": "This layer focuses on defining and measuring SLOs and error budgets. It matters because SLOs translate reliability goals into concrete, enforceable targets.",
+      "topics": [
+        "Choosing meaningful SLIs",
+        "Setting realistic SLO targets",
+        "Error budget calculation",
+        "Burn rate alerting",
+        "Multi-window multi-burn-rate alerts",
+        "SLO reporting to stakeholders"
+      ],
+      "resources": [
+        {
+          "label": "Google SRE Workbook SLO Chapter",
+          "platform": "sre.google",
+          "type": "book"
+        },
+        {
+          "label": "Prometheus Alerting Documentation",
+          "platform": "prometheus.io",
+          "type": "docs"
+        },
+        {
+          "label": "Implementing SLOs Talk",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Define an SLO for your service and create burn-rate alerts that fire when the error budget depletes too fast.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "sre-5",
+      "title": "Alerting and On-Call with PagerDuty",
+      "order": 5,
+      "techs": [
+        "PagerDuty",
+        "Prometheus",
+        "Alertmanager"
+      ],
+      "description": "This layer teaches how to route alerts and run sustainable on-call rotations. It matters because well-designed alerting protects both systems and the humans who operate them.",
+      "topics": [
+        "Alertmanager routing and grouping",
+        "Integrating PagerDuty",
+        "Escalation policies and schedules",
+        "Actionable versus noisy alerts",
+        "On-call hygiene and handoffs",
+        "Silences and maintenance windows"
+      ],
+      "resources": [
+        {
+          "label": "PagerDuty Documentation",
+          "platform": "support.pagerduty.com",
+          "type": "docs"
+        },
+        {
+          "label": "Alertmanager Documentation",
+          "platform": "prometheus.io",
+          "type": "docs"
+        },
+        {
+          "label": "PagerDuty Incident Response Guide",
+          "platform": "response.pagerduty.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Wire Alertmanager to PagerDuty so your burn-rate alerts page an on-call schedule with escalation.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "sre-6",
+      "title": "Logging and Distributed Tracing",
+      "order": 6,
+      "techs": [
+        "Loki",
+        "OpenTelemetry",
+        "Go"
+      ],
+      "description": "This layer covers collecting logs and traces to understand request flows. It matters because metrics alone cannot explain why a specific request failed.",
+      "topics": [
+        "Structured logging practices",
+        "Log aggregation and querying",
+        "Distributed tracing concepts",
+        "Instrumenting with OpenTelemetry",
+        "Correlating logs, metrics, and traces",
+        "Sampling strategies"
+      ],
+      "resources": [
+        {
+          "label": "OpenTelemetry Documentation",
+          "platform": "opentelemetry.io",
+          "type": "docs"
+        },
+        {
+          "label": "Grafana Loki Documentation",
+          "platform": "grafana.com",
+          "type": "docs"
+        },
+        {
+          "label": "Distributed Tracing in Practice",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Add OpenTelemetry tracing to your Go service and correlate a slow trace with its logs and metrics.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "sre-7",
+      "title": "Incident Management",
+      "order": 7,
+      "techs": [
+        "PagerDuty",
+        "Grafana",
+        "Runbooks"
+      ],
+      "description": "This layer focuses on responding to and learning from production incidents. It matters because how an organization handles incidents shapes its long-term reliability.",
+      "topics": [
+        "Incident command roles",
+        "Severity classification",
+        "Communication during incidents",
+        "Writing and using runbooks",
+        "Blameless postmortems",
+        "Tracking action items"
+      ],
+      "resources": [
+        {
+          "label": "PagerDuty Postmortem Guide",
+          "platform": "postmortems.pagerduty.com",
+          "type": "docs"
+        },
+        {
+          "label": "Google SRE Book Incident Chapter",
+          "platform": "sre.google",
+          "type": "book"
+        },
+        {
+          "label": "Incident Response Best Practices",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Run a simulated incident using a runbook and write a blameless postmortem with action items.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "sre-8",
+      "title": "Reliability Engineering in Go",
+      "order": 8,
+      "techs": [
+        "Go",
+        "Prometheus",
+        "gRPC"
+      ],
+      "description": "This layer teaches building resilient services and tooling in Go. It matters because SREs often write automation and reliability features directly into services.",
+      "topics": [
+        "Timeouts, retries, and backoff",
+        "Circuit breakers and bulkheads",
+        "Graceful shutdown and health checks",
+        "Rate limiting and load shedding",
+        "Writing operational tooling in Go",
+        "Profiling and performance tuning"
+      ],
+      "resources": [
+        {
+          "label": "Go Documentation",
+          "platform": "go.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Go Reliability Patterns Talk",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Cloud Native Go",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Add timeouts, retries with backoff, and a circuit breaker to your Go service and expose their metrics.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "sre-9",
+      "title": "Capacity Planning and Chaos Engineering",
+      "order": 9,
+      "techs": [
+        "Prometheus",
+        "Grafana",
+        "Chaos Mesh"
+      ],
+      "description": "This layer covers forecasting demand and proactively testing failure modes. It matters because resilient systems are validated under stress rather than assumed.",
+      "topics": [
+        "Load testing and benchmarking",
+        "Capacity forecasting from metrics",
+        "Autoscaling strategies",
+        "Chaos experiments and hypotheses",
+        "Failure injection",
+        "Game days"
+      ],
+      "resources": [
+        {
+          "label": "Chaos Mesh Documentation",
+          "platform": "chaos-mesh.org",
+          "type": "docs"
+        },
+        {
+          "label": "Principles of Chaos Engineering",
+          "platform": "principlesofchaos.org",
+          "type": "docs"
+        },
+        {
+          "label": "Chaos Engineering",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Run a chaos experiment that injects latency and verify your SLOs and alerts behave as expected.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "sre-10",
+      "title": "Operating Reliability at Scale",
+      "order": 10,
+      "techs": [
+        "Prometheus",
+        "Grafana",
+        "Thanos"
+      ],
+      "description": "This layer covers running observability and reliability practices across a large production fleet. It matters because reliability programs must scale with the organization without collapsing under toil.",
+      "topics": [
+        "Long-term metrics storage with Thanos",
+        "Federated and multi-cluster monitoring",
+        "Reducing toil through automation",
+        "Reliability reviews and scorecards",
+        "Cost-aware observability",
+        "Continuous improvement programs"
+      ],
+      "resources": [
+        {
+          "label": "Thanos Documentation",
+          "platform": "thanos.io",
+          "type": "docs"
+        },
+        {
+          "label": "Google SRE Workbook",
+          "platform": "sre.google",
+          "type": "book"
+        },
+        {
+          "label": "Scaling Prometheus Talk",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Stand up a federated, long-term observability stack and produce a reliability scorecard for multiple services.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "infra": [
+    {
+      "id": "infra-1",
+      "title": "Linux and Infrastructure Basics",
+      "order": 1,
+      "techs": [
+        "Linux",
+        "Bash",
+        "SSH"
+      ],
+      "description": "This layer builds the operating system and networking foundation every infrastructure engineer needs. It matters because infrastructure tooling ultimately manages Linux hosts, networks, and processes.",
+      "topics": [
+        "Linux filesystem and permissions",
+        "Process and service management",
+        "Shell scripting with Bash",
+        "Networking fundamentals",
+        "SSH and remote access",
+        "Package management"
+      ],
+      "resources": [
+        {
+          "label": "Linux Documentation Project",
+          "platform": "tldp.org",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana Linux Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "The Linux Command Line",
+          "platform": "No Starch Press",
+          "type": "book"
+        }
+      ],
+      "challenge": "Write a Bash script that provisions and configures a service on a fresh Linux virtual machine.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "infra-2",
+      "title": "Infrastructure as Code Concepts",
+      "order": 2,
+      "techs": [
+        "Terraform",
+        "Linux",
+        "Git"
+      ],
+      "description": "This layer introduces the principles of declaring infrastructure in version-controlled code. It matters because manual infrastructure changes are error-prone and impossible to reproduce reliably.",
+      "topics": [
+        "Declarative versus imperative IaC",
+        "Idempotency and desired state",
+        "State and drift concepts",
+        "Provider and resource model",
+        "Storing infrastructure in Git",
+        "Plan and apply workflow"
+      ],
+      "resources": [
+        {
+          "label": "Terraform Documentation",
+          "platform": "developer.hashicorp.com",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana Terraform Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Terraform: Up and Running",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Use Terraform to declare and create a basic virtual network and compute instance from code.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "infra-3",
+      "title": "Provisioning with Terraform",
+      "order": 3,
+      "techs": [
+        "Terraform",
+        "HCL",
+        "Cloud Provider"
+      ],
+      "description": "This layer deepens Terraform usage for real provisioning workflows. It matters because Terraform is the dominant tool for cloud infrastructure provisioning.",
+      "topics": [
+        "HCL syntax and expressions",
+        "Variables, outputs, and locals",
+        "Resource dependencies",
+        "Data sources",
+        "Provisioners and lifecycle rules",
+        "Workspaces"
+      ],
+      "resources": [
+        {
+          "label": "Terraform Language Documentation",
+          "platform": "developer.hashicorp.com",
+          "type": "docs"
+        },
+        {
+          "label": "HashiCorp Learn Terraform",
+          "platform": "developer.hashicorp.com",
+          "type": "course"
+        },
+        {
+          "label": "Terraform: Up and Running",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Parameterize your Terraform configuration with variables and outputs to deploy to two environments.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "infra-4",
+      "title": "Configuration Management with Ansible",
+      "order": 4,
+      "techs": [
+        "Ansible",
+        "YAML",
+        "Linux"
+      ],
+      "description": "This layer covers automating server configuration after provisioning. It matters because consistent configuration prevents snowflake servers and configuration drift.",
+      "topics": [
+        "Inventories and hosts",
+        "Playbooks and tasks",
+        "Modules and idempotency",
+        "Variables and templates",
+        "Handlers and notifications",
+        "Ad hoc commands"
+      ],
+      "resources": [
+        {
+          "label": "Ansible Documentation",
+          "platform": "docs.ansible.com",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana Ansible Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Ansible for DevOps",
+          "platform": "Leanpub",
+          "type": "book"
+        }
+      ],
+      "challenge": "Write an Ansible playbook that configures and hardens the servers Terraform provisioned.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "infra-5",
+      "title": "Reusable Modules and Roles",
+      "order": 5,
+      "techs": [
+        "Terraform",
+        "Ansible",
+        "Git"
+      ],
+      "description": "This layer teaches structuring infrastructure code for reuse and maintainability. It matters because modular code scales across teams and reduces duplication.",
+      "topics": [
+        "Terraform modules and composition",
+        "Ansible roles and galaxy",
+        "Input validation and defaults",
+        "Versioning shared modules",
+        "Module registries",
+        "DRY infrastructure patterns"
+      ],
+      "resources": [
+        {
+          "label": "Terraform Modules Documentation",
+          "platform": "developer.hashicorp.com",
+          "type": "docs"
+        },
+        {
+          "label": "Ansible Roles Documentation",
+          "platform": "docs.ansible.com",
+          "type": "docs"
+        },
+        {
+          "label": "Terraform: Up and Running",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Refactor your Terraform and Ansible code into reusable modules and roles consumed by multiple stacks.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "infra-6",
+      "title": "Programmatic IaC with Pulumi",
+      "order": 6,
+      "techs": [
+        "Pulumi",
+        "TypeScript",
+        "Python"
+      ],
+      "description": "This layer introduces defining infrastructure using general-purpose programming languages. It matters because programmatic IaC unlocks loops, conditionals, and richer abstractions.",
+      "topics": [
+        "Pulumi programming model",
+        "Languages and SDKs",
+        "Stacks and configuration",
+        "Resource graph and dependencies",
+        "Reusable component resources",
+        "Comparing Pulumi and Terraform"
+      ],
+      "resources": [
+        {
+          "label": "Pulumi Documentation",
+          "platform": "pulumi.com",
+          "type": "docs"
+        },
+        {
+          "label": "Pulumi Getting Started Guide",
+          "platform": "pulumi.com",
+          "type": "course"
+        },
+        {
+          "label": "Pulumi Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Reimplement one of your Terraform stacks in Pulumi using a real programming language.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "infra-7",
+      "title": "State, Secrets, and Remote Backends",
+      "order": 7,
+      "techs": [
+        "Terraform",
+        "HashiCorp Vault",
+        "S3"
+      ],
+      "description": "This layer covers managing infrastructure state and sensitive values safely. It matters because corrupted state or leaked secrets can cause outages and breaches.",
+      "topics": [
+        "Remote state backends",
+        "State locking and consistency",
+        "Importing existing resources",
+        "Managing secrets with Vault",
+        "Encrypting sensitive variables",
+        "State recovery and backups"
+      ],
+      "resources": [
+        {
+          "label": "Terraform State Documentation",
+          "platform": "developer.hashicorp.com",
+          "type": "docs"
+        },
+        {
+          "label": "HashiCorp Vault Documentation",
+          "platform": "developer.hashicorp.com",
+          "type": "docs"
+        },
+        {
+          "label": "Terraform Remote State Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Migrate Terraform state to a remote locking backend and inject secrets from Vault at apply time.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "infra-8",
+      "title": "Infrastructure CI/CD and Testing",
+      "order": 8,
+      "techs": [
+        "Terraform",
+        "GitHub Actions",
+        "Terratest"
+      ],
+      "description": "This layer teaches automating and validating infrastructure changes in pipelines. It matters because applying infrastructure by hand at scale is slow and risky.",
+      "topics": [
+        "Plan and apply in pipelines",
+        "Policy as code and validation",
+        "Linting and formatting checks",
+        "Automated infrastructure tests",
+        "Approval workflows for changes",
+        "Preview environments"
+      ],
+      "resources": [
+        {
+          "label": "Terratest Documentation",
+          "platform": "terratest.gruntwork.io",
+          "type": "docs"
+        },
+        {
+          "label": "GitHub Actions Documentation",
+          "platform": "docs.github.com",
+          "type": "docs"
+        },
+        {
+          "label": "Infrastructure Testing Talk",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a pipeline that lints, plans, tests, and applies your Terraform with a manual approval gate.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "infra-9",
+      "title": "Multi-Environment and Multi-Cloud",
+      "order": 9,
+      "techs": [
+        "Terraform",
+        "Pulumi",
+        "Ansible"
+      ],
+      "description": "This layer covers structuring infrastructure across environments and providers. It matters because real organizations run separate environments and sometimes multiple clouds.",
+      "topics": [
+        "Environment isolation strategies",
+        "Workspaces and directory layouts",
+        "Promoting changes across stages",
+        "Provider abstractions",
+        "Cost and tagging governance",
+        "Cross-cloud networking basics"
+      ],
+      "resources": [
+        {
+          "label": "Terraform Workspaces Documentation",
+          "platform": "developer.hashicorp.com",
+          "type": "docs"
+        },
+        {
+          "label": "Pulumi Stacks Documentation",
+          "platform": "pulumi.com",
+          "type": "docs"
+        },
+        {
+          "label": "Multi-Environment IaC Patterns",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Lay out dev, staging, and prod environments from shared modules with isolated state per environment.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "infra-10",
+      "title": "Operating Infrastructure in Production",
+      "order": 10,
+      "techs": [
+        "Terraform",
+        "Ansible",
+        "Linux"
+      ],
+      "description": "This layer covers running, scaling, and recovering infrastructure reliably in production. It matters because infrastructure must remain stable, recoverable, and compliant under real workloads.",
+      "topics": [
+        "Drift detection and remediation",
+        "Disaster recovery and backups",
+        "Scaling and capacity changes",
+        "Patching and maintenance windows",
+        "Compliance and audit",
+        "Cost optimization at scale"
+      ],
+      "resources": [
+        {
+          "label": "Terraform Best Practices Guide",
+          "platform": "developer.hashicorp.com",
+          "type": "docs"
+        },
+        {
+          "label": "Ansible at Scale Documentation",
+          "platform": "docs.ansible.com",
+          "type": "docs"
+        },
+        {
+          "label": "Google SRE Workbook",
+          "platform": "sre.google",
+          "type": "book"
+        }
+      ],
+      "challenge": "Operate your full IaC stack with automated drift detection, backups, and a documented recovery runbook.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "kubernetes": [
+    {
+      "id": "kubernetes-1",
+      "title": "Containers and Docker Fundamentals",
+      "order": 1,
+      "techs": [
+        "Docker",
+        "Linux",
+        "OCI"
+      ],
+      "description": "This layer establishes the container fundamentals that Kubernetes builds upon. It matters because you cannot operate Kubernetes well without understanding images, containers, and isolation.",
+      "topics": [
+        "Container versus virtual machine",
+        "Images, layers, and registries",
+        "Writing Dockerfiles",
+        "Container networking and volumes",
+        "Namespaces and cgroups",
+        "Running multi-container apps"
+      ],
+      "resources": [
+        {
+          "label": "Docker Documentation",
+          "platform": "docs.docker.com",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana Docker Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Docker Deep Dive",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Containerize a small web application and run it with a database using Docker Compose.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "kubernetes-2",
+      "title": "Kubernetes Core Concepts",
+      "order": 2,
+      "techs": [
+        "Kubernetes",
+        "kubectl",
+        "YAML"
+      ],
+      "description": "This layer introduces the Kubernetes architecture and core objects. It matters because pods, services, and the control plane are the vocabulary of all later work.",
+      "topics": [
+        "Cluster architecture and components",
+        "Pods and containers",
+        "ReplicaSets and Deployments",
+        "Services and basic networking",
+        "Namespaces and labels",
+        "kubectl basics"
+      ],
+      "resources": [
+        {
+          "label": "Kubernetes Documentation",
+          "platform": "kubernetes.io",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana Kubernetes Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Kubernetes Up and Running",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deploy your containerized app to a local cluster using Deployments and expose it with a Service.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "kubernetes-3",
+      "title": "Configuration and Storage",
+      "order": 3,
+      "techs": [
+        "Kubernetes",
+        "ConfigMaps",
+        "PersistentVolumes"
+      ],
+      "description": "This layer covers managing application configuration and persistent data. It matters because real applications need configuration, secrets, and durable storage.",
+      "topics": [
+        "ConfigMaps and Secrets",
+        "Environment and volume injection",
+        "PersistentVolumes and claims",
+        "Storage classes",
+        "StatefulSets",
+        "Init containers"
+      ],
+      "resources": [
+        {
+          "label": "Kubernetes Configuration Docs",
+          "platform": "kubernetes.io",
+          "type": "docs"
+        },
+        {
+          "label": "Kubernetes Storage Documentation",
+          "platform": "kubernetes.io",
+          "type": "docs"
+        },
+        {
+          "label": "Kubernetes Storage Explained",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Run a stateful database in the cluster using a StatefulSet with persistent storage and Secrets.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "kubernetes-4",
+      "title": "Packaging with Helm",
+      "order": 4,
+      "techs": [
+        "Helm",
+        "Kubernetes",
+        "YAML"
+      ],
+      "description": "This layer teaches templating and packaging Kubernetes applications with Helm. It matters because Helm makes complex deployments repeatable and configurable.",
+      "topics": [
+        "Charts and templates",
+        "Values and overrides",
+        "Releases and upgrades",
+        "Template functions and helpers",
+        "Dependencies and subcharts",
+        "Chart repositories"
+      ],
+      "resources": [
+        {
+          "label": "Helm Documentation",
+          "platform": "helm.sh",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana Helm Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Learning Helm",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Package your application as a Helm chart with configurable values for multiple environments.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "kubernetes-5",
+      "title": "Networking and Ingress",
+      "order": 5,
+      "techs": [
+        "Kubernetes",
+        "Ingress",
+        "CoreDNS"
+      ],
+      "description": "This layer explores how traffic flows in and across a cluster. It matters because exposing and securing services correctly is central to running real workloads.",
+      "topics": [
+        "Cluster networking model",
+        "Service types in depth",
+        "Ingress controllers and rules",
+        "DNS and service discovery",
+        "Network policies",
+        "TLS termination"
+      ],
+      "resources": [
+        {
+          "label": "Kubernetes Networking Docs",
+          "platform": "kubernetes.io",
+          "type": "docs"
+        },
+        {
+          "label": "Ingress NGINX Documentation",
+          "platform": "kubernetes.github.io",
+          "type": "docs"
+        },
+        {
+          "label": "Kubernetes Networking Explained",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Expose multiple services through an Ingress controller with TLS and path-based routing.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "kubernetes-6",
+      "title": "Service Mesh with Istio",
+      "order": 6,
+      "techs": [
+        "Istio",
+        "Kubernetes",
+        "Envoy"
+      ],
+      "description": "This layer introduces advanced traffic management and security with a service mesh. It matters because meshes provide observability, mTLS, and traffic control without code changes.",
+      "topics": [
+        "Service mesh architecture",
+        "Sidecar proxies and Envoy",
+        "Traffic routing and splitting",
+        "Mutual TLS and security",
+        "Observability and telemetry",
+        "Resilience features"
+      ],
+      "resources": [
+        {
+          "label": "Istio Documentation",
+          "platform": "istio.io",
+          "type": "docs"
+        },
+        {
+          "label": "Istio Service Mesh Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Istio in Action",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Install Istio and use traffic splitting to roll out a canary version of one of your services.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "kubernetes-7",
+      "title": "Security and RBAC",
+      "order": 7,
+      "techs": [
+        "Kubernetes",
+        "RBAC",
+        "OPA"
+      ],
+      "description": "This layer covers securing clusters and workloads. It matters because misconfigured permissions and pods are a leading cause of cluster breaches.",
+      "topics": [
+        "Authentication and authorization",
+        "Role-based access control",
+        "Service accounts",
+        "Pod security standards",
+        "Admission control and policies",
+        "Secrets management"
+      ],
+      "resources": [
+        {
+          "label": "Kubernetes Security Documentation",
+          "platform": "kubernetes.io",
+          "type": "docs"
+        },
+        {
+          "label": "Open Policy Agent Documentation",
+          "platform": "openpolicyagent.org",
+          "type": "docs"
+        },
+        {
+          "label": "Kubernetes Security Best Practices",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Lock down a namespace with RBAC, pod security standards, and an admission policy that blocks risky pods.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "kubernetes-8",
+      "title": "Observability and Autoscaling",
+      "order": 8,
+      "techs": [
+        "Kubernetes",
+        "Prometheus",
+        "HPA"
+      ],
+      "description": "This layer teaches monitoring clusters and scaling workloads automatically. It matters because clusters must adapt to load while remaining observable and cost-efficient.",
+      "topics": [
+        "Metrics server and resource metrics",
+        "Horizontal pod autoscaling",
+        "Vertical and cluster autoscaling",
+        "Monitoring with Prometheus",
+        "Logging in clusters",
+        "Resource requests and limits"
+      ],
+      "resources": [
+        {
+          "label": "Kubernetes Autoscaling Docs",
+          "platform": "kubernetes.io",
+          "type": "docs"
+        },
+        {
+          "label": "Prometheus Documentation",
+          "platform": "prometheus.io",
+          "type": "docs"
+        },
+        {
+          "label": "Kubernetes Monitoring Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add resource limits, a Horizontal Pod Autoscaler, and Prometheus monitoring to your workloads.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "kubernetes-9",
+      "title": "GitOps and Cluster Delivery",
+      "order": 9,
+      "techs": [
+        "ArgoCD",
+        "Helm",
+        "Kubernetes"
+      ],
+      "description": "This layer covers deploying to clusters declaratively from Git. It matters because GitOps makes cluster changes auditable, repeatable, and self-healing.",
+      "topics": [
+        "GitOps workflow for clusters",
+        "Declarative app delivery",
+        "Helm with GitOps tools",
+        "Progressive delivery",
+        "Multi-cluster delivery",
+        "Drift detection and sync"
+      ],
+      "resources": [
+        {
+          "label": "Argo CD Documentation",
+          "platform": "argo-cd.readthedocs.io",
+          "type": "docs"
+        },
+        {
+          "label": "Helm Documentation",
+          "platform": "helm.sh",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana GitOps with ArgoCD",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deliver your Helm-packaged application to the cluster through ArgoCD synced from Git.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "kubernetes-10",
+      "title": "Production Cluster Operations",
+      "order": 10,
+      "techs": [
+        "Kubernetes",
+        "Istio",
+        "etcd"
+      ],
+      "description": "This layer covers operating clusters reliably at production scale. It matters because production clusters must stay available, upgradeable, and recoverable under real traffic.",
+      "topics": [
+        "Cluster upgrades and versioning",
+        "etcd backup and restore",
+        "Disaster recovery",
+        "Multi-tenancy and quotas",
+        "Capacity and cost management",
+        "Incident response for clusters"
+      ],
+      "resources": [
+        {
+          "label": "Kubernetes Cluster Administration Docs",
+          "platform": "kubernetes.io",
+          "type": "docs"
+        },
+        {
+          "label": "etcd Documentation",
+          "platform": "etcd.io",
+          "type": "docs"
+        },
+        {
+          "label": "Production Kubernetes",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Operate a production-grade cluster with backups, an upgrade plan, quotas, and a documented recovery runbook.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "aws-dev": [
+    {
+      "id": "aws-dev-1",
+      "title": "AWS Cloud Fundamentals",
+      "order": 1,
+      "techs": [
+        "IAM",
+        "VPC",
+        "Region"
+      ],
+      "description": "This layer introduces the AWS global infrastructure and core account concepts. It matters because regions, identity, and networking underpin every service you will use.",
+      "topics": [
+        "Regions and availability zones",
+        "IAM users, roles, and policies",
+        "Shared responsibility model",
+        "VPC basics",
+        "Billing and free tier",
+        "AWS CLI and console"
+      ],
+      "resources": [
+        {
+          "label": "AWS Documentation",
+          "platform": "docs.aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Cloud Practitioner Essentials",
+          "platform": "AWS Skill Builder",
+          "type": "course"
+        },
+        {
+          "label": "AWS Fundamentals",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create an IAM user with least-privilege policies and access AWS through both the console and CLI.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "aws-dev-2",
+      "title": "Compute with EC2",
+      "order": 2,
+      "techs": [
+        "EC2",
+        "EBS",
+        "Auto Scaling"
+      ],
+      "description": "This layer covers provisioning and managing virtual servers on AWS. It matters because EC2 remains a core compute primitive and teaches fundamental cloud operations.",
+      "topics": [
+        "Instance types and pricing",
+        "AMIs and user data",
+        "Security groups and key pairs",
+        "EBS volumes and snapshots",
+        "Auto Scaling groups",
+        "Elastic Load Balancing"
+      ],
+      "resources": [
+        {
+          "label": "Amazon EC2 Documentation",
+          "platform": "docs.aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "AWS EC2 Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "AWS Certified Solutions Architect Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Launch an EC2 instance behind a load balancer in an Auto Scaling group serving a simple web app.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "aws-dev-3",
+      "title": "Storage with S3",
+      "order": 3,
+      "techs": [
+        "S3",
+        "Glacier",
+        "CloudFront"
+      ],
+      "description": "This layer teaches object storage and content delivery on AWS. It matters because S3 is the backbone of storage, backups, and static hosting in the AWS ecosystem.",
+      "topics": [
+        "Buckets and objects",
+        "Storage classes and lifecycle",
+        "Bucket policies and access",
+        "Versioning and encryption",
+        "Static website hosting",
+        "CloudFront distribution"
+      ],
+      "resources": [
+        {
+          "label": "Amazon S3 Documentation",
+          "platform": "docs.aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "AWS S3 Deep Dive",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "AWS Certified Developer Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Host a static site on S3 with versioning, lifecycle rules, and a CloudFront distribution in front.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "aws-dev-4",
+      "title": "Serverless with Lambda",
+      "order": 4,
+      "techs": [
+        "Lambda",
+        "API Gateway",
+        "DynamoDB"
+      ],
+      "description": "This layer covers building event-driven serverless applications. It matters because serverless reduces operational overhead and is a key modern AWS pattern.",
+      "topics": [
+        "Lambda functions and runtimes",
+        "Event sources and triggers",
+        "API Gateway integration",
+        "DynamoDB basics",
+        "Permissions and execution roles",
+        "Cold starts and limits"
+      ],
+      "resources": [
+        {
+          "label": "AWS Lambda Documentation",
+          "platform": "docs.aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Serverless Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "AWS Lambda in Action",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a serverless REST API using Lambda, API Gateway, and DynamoDB for a small data service.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "aws-dev-5",
+      "title": "Networking and Security",
+      "order": 5,
+      "techs": [
+        "VPC",
+        "IAM",
+        "Security Groups"
+      ],
+      "description": "This layer deepens VPC networking and access control. It matters because secure, well-segmented networks are required for any production AWS workload.",
+      "topics": [
+        "Subnets and route tables",
+        "Internet and NAT gateways",
+        "Security groups versus NACLs",
+        "VPC peering and endpoints",
+        "IAM policy evaluation",
+        "Secrets and parameter storage"
+      ],
+      "resources": [
+        {
+          "label": "Amazon VPC Documentation",
+          "platform": "docs.aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "AWS IAM Documentation",
+          "platform": "docs.aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Networking Fundamentals",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Design a VPC with public and private subnets and place your app and database in the correct tiers.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "aws-dev-6",
+      "title": "Infrastructure as Code with CloudFormation",
+      "order": 6,
+      "techs": [
+        "CloudFormation",
+        "YAML",
+        "CDK"
+      ],
+      "description": "This layer teaches declaring AWS infrastructure as templates. It matters because reproducible, version-controlled infrastructure is essential for reliable AWS environments.",
+      "topics": [
+        "Template structure and resources",
+        "Parameters, mappings, and outputs",
+        "Stacks and change sets",
+        "Nested and cross-stack references",
+        "Drift detection",
+        "Intro to AWS CDK"
+      ],
+      "resources": [
+        {
+          "label": "AWS CloudFormation Documentation",
+          "platform": "docs.aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "AWS CDK Documentation",
+          "platform": "docs.aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "CloudFormation Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Reprovision your EC2, S3, and networking resources entirely through a CloudFormation template.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "aws-dev-7",
+      "title": "Databases and Messaging",
+      "order": 7,
+      "techs": [
+        "RDS",
+        "DynamoDB",
+        "SQS"
+      ],
+      "description": "This layer covers managed databases and asynchronous messaging on AWS. It matters because durable data and decoupled communication are core to scalable architectures.",
+      "topics": [
+        "RDS engines and Multi-AZ",
+        "DynamoDB data modeling",
+        "Read replicas and backups",
+        "SQS and SNS messaging",
+        "Event-driven decoupling",
+        "Caching with ElastiCache"
+      ],
+      "resources": [
+        {
+          "label": "Amazon RDS Documentation",
+          "platform": "docs.aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "Amazon SQS Documentation",
+          "platform": "docs.aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Databases Overview",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add an RDS database and an SQS queue to decouple a background worker in your serverless API.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "aws-dev-8",
+      "title": "Observability and Operations",
+      "order": 8,
+      "techs": [
+        "CloudWatch",
+        "X-Ray",
+        "CloudTrail"
+      ],
+      "description": "This layer teaches monitoring, logging, and tracing AWS workloads. It matters because visibility into systems is required to operate them reliably.",
+      "topics": [
+        "CloudWatch metrics and alarms",
+        "Logs and log insights",
+        "Distributed tracing with X-Ray",
+        "Auditing with CloudTrail",
+        "Dashboards and notifications",
+        "Cost monitoring"
+      ],
+      "resources": [
+        {
+          "label": "Amazon CloudWatch Documentation",
+          "platform": "docs.aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "AWS X-Ray Documentation",
+          "platform": "docs.aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Observability Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add CloudWatch alarms, dashboards, and X-Ray tracing to your application and route alerts to email.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "aws-dev-9",
+      "title": "CI/CD on AWS",
+      "order": 9,
+      "techs": [
+        "CodePipeline",
+        "CodeBuild",
+        "CloudFormation"
+      ],
+      "description": "This layer covers automating builds and deployments using AWS native tooling. It matters because automated delivery is what makes cloud iteration fast and safe.",
+      "topics": [
+        "CodePipeline stages",
+        "CodeBuild build specs",
+        "CodeDeploy strategies",
+        "Deploying via CloudFormation",
+        "Approvals and rollbacks",
+        "Pipeline security"
+      ],
+      "resources": [
+        {
+          "label": "AWS CodePipeline Documentation",
+          "platform": "docs.aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "AWS CodeBuild Documentation",
+          "platform": "docs.aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "AWS CI/CD Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a CodePipeline that tests and deploys your CloudFormation stack on every commit.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "aws-dev-10",
+      "title": "Production Architecture and Scaling",
+      "order": 10,
+      "techs": [
+        "EC2",
+        "Lambda",
+        "CloudFormation"
+      ],
+      "description": "This layer covers running well-architected, scalable workloads in production. It matters because production AWS systems must balance reliability, cost, and security under real demand.",
+      "topics": [
+        "Well-Architected Framework",
+        "High availability across zones",
+        "Disaster recovery strategies",
+        "Cost optimization",
+        "Multi-account organization",
+        "Security and compliance at scale"
+      ],
+      "resources": [
+        {
+          "label": "AWS Well-Architected Framework",
+          "platform": "docs.aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Disaster Recovery Whitepaper",
+          "platform": "docs.aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Certified Solutions Architect Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Architect and deploy a highly available, multi-AZ version of your application reviewed against the Well-Architected pillars.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "gcp-dev": [
+    {
+      "id": "gcp-dev-1",
+      "title": "GCP Cloud Fundamentals",
+      "order": 1,
+      "techs": [
+        "IAM",
+        "VPC",
+        "gcloud"
+      ],
+      "description": "This layer introduces the Google Cloud platform structure and identity model. It matters because projects, IAM, and networking are the foundation of every GCP service.",
+      "topics": [
+        "Projects and resource hierarchy",
+        "IAM roles and members",
+        "Regions and zones",
+        "VPC basics",
+        "Billing and quotas",
+        "gcloud CLI and console"
+      ],
+      "resources": [
+        {
+          "label": "Google Cloud Documentation",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "Google Cloud Fundamentals Course",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "GCP for Beginners",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Set up a GCP project with IAM roles and access resources through the gcloud CLI.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "gcp-dev-2",
+      "title": "Compute and Cloud Run",
+      "order": 2,
+      "techs": [
+        "Cloud Run",
+        "Compute Engine",
+        "Docker"
+      ],
+      "description": "This layer covers running workloads from virtual machines to serverless containers. It matters because choosing the right compute option shapes cost and operational effort.",
+      "topics": [
+        "Compute Engine basics",
+        "Containers on Cloud Run",
+        "Serverless request handling",
+        "Scaling to zero",
+        "Service configuration",
+        "Compute option tradeoffs"
+      ],
+      "resources": [
+        {
+          "label": "Cloud Run Documentation",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "Compute Engine Documentation",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud Run Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Containerize a service and deploy it to Cloud Run with autoscaling enabled.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "gcp-dev-3",
+      "title": "Storage and Databases",
+      "order": 3,
+      "techs": [
+        "Cloud Storage",
+        "Firestore",
+        "Cloud SQL"
+      ],
+      "description": "This layer teaches storing objects and structured data on GCP. It matters because durable storage and the right database choice are central to most applications.",
+      "topics": [
+        "Cloud Storage buckets",
+        "Storage classes and lifecycle",
+        "Cloud SQL managed databases",
+        "Firestore document model",
+        "Access control and signed URLs",
+        "Backups and durability"
+      ],
+      "resources": [
+        {
+          "label": "Cloud Storage Documentation",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud SQL Documentation",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "GCP Storage Options Explained",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Store uploaded files in Cloud Storage and persist application data in Cloud SQL or Firestore.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "gcp-dev-4",
+      "title": "Messaging with Pub/Sub",
+      "order": 4,
+      "techs": [
+        "Pub/Sub",
+        "Cloud Run",
+        "Eventarc"
+      ],
+      "description": "This layer covers asynchronous, event-driven communication on GCP. It matters because decoupling services with messaging is essential for scalable systems.",
+      "topics": [
+        "Topics and subscriptions",
+        "Push and pull delivery",
+        "Ordering and deduplication",
+        "Dead-letter topics",
+        "Eventarc triggers",
+        "Backpressure and retries"
+      ],
+      "resources": [
+        {
+          "label": "Pub/Sub Documentation",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "Eventarc Documentation",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "Pub/Sub Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Wire a Pub/Sub topic that triggers a Cloud Run service to process events asynchronously.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "gcp-dev-5",
+      "title": "Networking and Security",
+      "order": 5,
+      "techs": [
+        "VPC",
+        "Cloud Load Balancing",
+        "IAM"
+      ],
+      "description": "This layer deepens VPC networking and access control on GCP. It matters because secure, well-structured networks are required for production workloads.",
+      "topics": [
+        "Subnets and firewall rules",
+        "Cloud Load Balancing",
+        "Private Google Access",
+        "VPC peering and Shared VPC",
+        "Service accounts and IAM",
+        "Secret Manager"
+      ],
+      "resources": [
+        {
+          "label": "VPC Documentation",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud Load Balancing Documentation",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "GCP Networking Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Place your services behind a global load balancer in a VPC with restrictive firewall rules.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "gcp-dev-6",
+      "title": "Data Analytics with BigQuery",
+      "order": 6,
+      "techs": [
+        "BigQuery",
+        "Pub/Sub",
+        "Dataflow"
+      ],
+      "description": "This layer introduces large-scale analytics and data warehousing. It matters because BigQuery enables fast analysis over huge datasets without managing infrastructure.",
+      "topics": [
+        "Datasets and tables",
+        "SQL queries at scale",
+        "Streaming inserts",
+        "Partitioning and clustering",
+        "Cost control and slots",
+        "Loading and exporting data"
+      ],
+      "resources": [
+        {
+          "label": "BigQuery Documentation",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "BigQuery Fundamentals Course",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "BigQuery Explained",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Stream events from Pub/Sub into BigQuery and run analytical queries over the collected data.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "gcp-dev-7",
+      "title": "Kubernetes with GKE",
+      "order": 7,
+      "techs": [
+        "GKE",
+        "Kubernetes",
+        "Helm"
+      ],
+      "description": "This layer covers running containerized workloads on managed Kubernetes. It matters because GKE is the standard way to run complex, scalable container platforms on GCP.",
+      "topics": [
+        "GKE cluster types",
+        "Node pools and autoscaling",
+        "Deploying workloads",
+        "Workload Identity",
+        "Ingress and services",
+        "Cluster upgrades"
+      ],
+      "resources": [
+        {
+          "label": "GKE Documentation",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "Kubernetes Documentation",
+          "platform": "kubernetes.io",
+          "type": "docs"
+        },
+        {
+          "label": "GKE Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy a multi-service application to a GKE cluster with autoscaling node pools and Ingress.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "gcp-dev-8",
+      "title": "Observability and Operations",
+      "order": 8,
+      "techs": [
+        "Cloud Monitoring",
+        "Cloud Logging",
+        "Cloud Trace"
+      ],
+      "description": "This layer teaches monitoring, logging, and tracing GCP workloads. It matters because operating services reliably requires deep visibility into their behavior.",
+      "topics": [
+        "Cloud Monitoring metrics and alerts",
+        "Cloud Logging and log-based metrics",
+        "Distributed tracing",
+        "Uptime checks",
+        "Dashboards and SLOs",
+        "Error reporting"
+      ],
+      "resources": [
+        {
+          "label": "Cloud Monitoring Documentation",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud Logging Documentation",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "GCP Operations Suite Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add monitoring dashboards, alerting policies, and tracing to your Cloud Run and GKE services.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "gcp-dev-9",
+      "title": "Infrastructure as Code and CI/CD",
+      "order": 9,
+      "techs": [
+        "Terraform",
+        "Cloud Build",
+        "Artifact Registry"
+      ],
+      "description": "This layer covers automating GCP infrastructure and deployments. It matters because reproducible infrastructure and pipelines are required for safe, fast delivery.",
+      "topics": [
+        "Provisioning GCP with Terraform",
+        "Cloud Build pipelines",
+        "Artifact Registry",
+        "Deploying to Cloud Run and GKE",
+        "Approvals and triggers",
+        "Pipeline security"
+      ],
+      "resources": [
+        {
+          "label": "Cloud Build Documentation",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "Terraform Google Provider Docs",
+          "platform": "registry.terraform.io",
+          "type": "docs"
+        },
+        {
+          "label": "GCP CI/CD Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Provision your GCP resources with Terraform and deploy them via a Cloud Build pipeline on each commit.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "gcp-dev-10",
+      "title": "Production Architecture and Scaling",
+      "order": 10,
+      "techs": [
+        "GKE",
+        "Cloud Run",
+        "BigQuery"
+      ],
+      "description": "This layer covers running well-architected, scalable systems in production on GCP. It matters because production systems must balance reliability, cost, and security under real load.",
+      "topics": [
+        "Google Cloud Architecture Framework",
+        "Multi-region high availability",
+        "Disaster recovery",
+        "Cost optimization",
+        "Organization policies",
+        "Security and compliance at scale"
+      ],
+      "resources": [
+        {
+          "label": "Google Cloud Architecture Framework",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "GCP Disaster Recovery Guide",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "Google SRE Workbook",
+          "platform": "sre.google",
+          "type": "book"
+        }
+      ],
+      "challenge": "Architect and deploy a multi-region, highly available version of your application reviewed against the architecture framework.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "azure-dev": [
+    {
+      "id": "azure-dev-1",
+      "title": "Azure Cloud Fundamentals",
+      "order": 1,
+      "techs": [
+        "Azure AD",
+        "Resource Groups",
+        "Azure CLI"
+      ],
+      "description": "This layer introduces the Azure account structure and identity model. It matters because subscriptions, resource groups, and identity govern everything you build on Azure.",
+      "topics": [
+        "Subscriptions and resource groups",
+        "Azure Active Directory basics",
+        "Regions and availability zones",
+        "Role-based access control",
+        "Billing and cost management",
+        "Azure CLI and portal"
+      ],
+      "resources": [
+        {
+          "label": "Microsoft Azure Documentation",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Fundamentals Learning Path",
+          "platform": "Microsoft Learn",
+          "type": "course"
+        },
+        {
+          "label": "Azure for Beginners",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create a resource group and assign RBAC roles, then manage resources through the Azure CLI.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "azure-dev-2",
+      "title": "Compute and App Services",
+      "order": 2,
+      "techs": [
+        "Virtual Machines",
+        "App Service",
+        "Azure Functions"
+      ],
+      "description": "This layer covers Azure compute options from virtual machines to serverless. It matters because selecting the right hosting model shapes scalability and operational cost.",
+      "topics": [
+        "Virtual machines and scale sets",
+        "App Service web apps",
+        "Azure Functions basics",
+        "Deployment slots",
+        "Scaling options",
+        "Compute tradeoffs"
+      ],
+      "resources": [
+        {
+          "label": "Azure App Service Documentation",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Functions Documentation",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Compute Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy a web application to App Service and add an Azure Function triggered by an HTTP request.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "azure-dev-3",
+      "title": "Storage and Databases",
+      "order": 3,
+      "techs": [
+        "Blob Storage",
+        "Azure SQL",
+        "Cosmos DB"
+      ],
+      "description": "This layer teaches storing files and structured data on Azure. It matters because durable storage and appropriate database choices are central to most applications.",
+      "topics": [
+        "Blob storage and containers",
+        "Storage tiers and lifecycle",
+        "Azure SQL Database",
+        "Cosmos DB models",
+        "Access keys and SAS tokens",
+        "Backups and replication"
+      ],
+      "resources": [
+        {
+          "label": "Azure Storage Documentation",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Azure SQL Documentation",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Storage Explained",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Store uploads in Blob Storage and persist application data in Azure SQL or Cosmos DB.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "azure-dev-4",
+      "title": "Serverless with Azure Functions",
+      "order": 4,
+      "techs": [
+        "Azure Functions",
+        "Event Grid",
+        "Service Bus"
+      ],
+      "description": "This layer covers building event-driven serverless solutions on Azure. It matters because serverless lowers operational overhead and is a core modern Azure pattern.",
+      "topics": [
+        "Triggers and bindings",
+        "Durable Functions",
+        "Event Grid events",
+        "Service Bus messaging",
+        "Scaling and consumption plans",
+        "Function security"
+      ],
+      "resources": [
+        {
+          "label": "Azure Functions Documentation",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Service Bus Documentation",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Serverless Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build an event-driven workflow where a Service Bus message triggers an Azure Function to process data.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "azure-dev-5",
+      "title": "Networking and Security",
+      "order": 5,
+      "techs": [
+        "Virtual Network",
+        "Key Vault",
+        "Azure AD"
+      ],
+      "description": "This layer deepens Azure networking and access control. It matters because secure, segmented networks and managed secrets are required for production workloads.",
+      "topics": [
+        "Virtual networks and subnets",
+        "Network security groups",
+        "Load Balancer and Application Gateway",
+        "Private endpoints",
+        "Managed identities",
+        "Key Vault for secrets"
+      ],
+      "resources": [
+        {
+          "label": "Azure Virtual Network Documentation",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Key Vault Documentation",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Networking Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Place your app behind an Application Gateway in a virtual network and load its secrets from Key Vault.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "azure-dev-6",
+      "title": "Infrastructure as Code with Bicep",
+      "order": 6,
+      "techs": [
+        "Bicep",
+        "ARM Templates",
+        "Azure CLI"
+      ],
+      "description": "This layer teaches declaring Azure infrastructure with Bicep. It matters because reproducible, version-controlled infrastructure is essential for reliable Azure environments.",
+      "topics": [
+        "Bicep syntax and resources",
+        "Parameters and variables",
+        "Modules and reuse",
+        "Deployment scopes",
+        "What-if and validation",
+        "Bicep versus ARM templates"
+      ],
+      "resources": [
+        {
+          "label": "Azure Bicep Documentation",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Bicep Learning Path",
+          "platform": "Microsoft Learn",
+          "type": "course"
+        },
+        {
+          "label": "Azure Bicep Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Reprovision your compute, storage, and networking resources entirely through a Bicep template.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "azure-dev-7",
+      "title": "Kubernetes with AKS",
+      "order": 7,
+      "techs": [
+        "AKS",
+        "Kubernetes",
+        "Helm"
+      ],
+      "description": "This layer covers running containerized workloads on managed Kubernetes. It matters because AKS is the standard way to run scalable container platforms on Azure.",
+      "topics": [
+        "AKS cluster provisioning",
+        "Node pools and autoscaling",
+        "Deploying workloads",
+        "Azure AD integration",
+        "Ingress and networking",
+        "Cluster upgrades"
+      ],
+      "resources": [
+        {
+          "label": "Azure Kubernetes Service Documentation",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Kubernetes Documentation",
+          "platform": "kubernetes.io",
+          "type": "docs"
+        },
+        {
+          "label": "AKS Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy a multi-service application to an AKS cluster with autoscaling node pools and Ingress.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "azure-dev-8",
+      "title": "Observability and Operations",
+      "order": 8,
+      "techs": [
+        "Azure Monitor",
+        "Application Insights",
+        "Log Analytics"
+      ],
+      "description": "This layer teaches monitoring, logging, and tracing Azure workloads. It matters because visibility into systems is required to operate them reliably.",
+      "topics": [
+        "Azure Monitor metrics and alerts",
+        "Application Insights tracing",
+        "Log Analytics queries",
+        "Dashboards and workbooks",
+        "Availability tests",
+        "Cost monitoring"
+      ],
+      "resources": [
+        {
+          "label": "Azure Monitor Documentation",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Application Insights Documentation",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Monitoring Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add Application Insights and Azure Monitor alerts to your services with a Log Analytics dashboard.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "azure-dev-9",
+      "title": "CI/CD with Azure DevOps",
+      "order": 9,
+      "techs": [
+        "Azure DevOps",
+        "Bicep",
+        "Azure Pipelines"
+      ],
+      "description": "This layer covers automating builds and deployments with Azure DevOps. It matters because automated delivery is what makes cloud iteration fast and reliable.",
+      "topics": [
+        "Repos and boards",
+        "Azure Pipelines YAML",
+        "Build and release stages",
+        "Deploying Bicep templates",
+        "Environments and approvals",
+        "Artifacts and feeds"
+      ],
+      "resources": [
+        {
+          "label": "Azure DevOps Documentation",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Pipelines Documentation",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Azure DevOps Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build an Azure Pipeline that tests and deploys your Bicep-defined infrastructure on every commit.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "azure-dev-10",
+      "title": "Production Architecture and Scaling",
+      "order": 10,
+      "techs": [
+        "AKS",
+        "Azure Functions",
+        "Bicep"
+      ],
+      "description": "This layer covers running well-architected, scalable systems in production on Azure. It matters because production systems must balance reliability, cost, and security under real load.",
+      "topics": [
+        "Azure Well-Architected Framework",
+        "Multi-region high availability",
+        "Disaster recovery",
+        "Cost optimization",
+        "Governance and policy",
+        "Security and compliance at scale"
+      ],
+      "resources": [
+        {
+          "label": "Azure Well-Architected Framework",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Disaster Recovery Guide",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Google SRE Workbook",
+          "platform": "sre.google",
+          "type": "book"
+        }
+      ],
+      "challenge": "Architect and deploy a multi-region, highly available version of your application reviewed against the Well-Architected pillars.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "devsecops": [
+    {
+      "id": "devsecops-1",
+      "title": "Security Fundamentals for DevOps",
+      "order": 1,
+      "techs": [
+        "Linux",
+        "Git",
+        "OWASP"
+      ],
+      "description": "This layer introduces core security concepts within a DevOps workflow. It matters because shifting security left starts with understanding threats, risk, and the secure development lifecycle.",
+      "topics": [
+        "CIA triad and threat modeling",
+        "Common vulnerability classes",
+        "OWASP Top Ten",
+        "Shift-left security mindset",
+        "Secure development lifecycle",
+        "Least privilege principles"
+      ],
+      "resources": [
+        {
+          "label": "OWASP Top Ten",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "DevSecOps Explained",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Securing DevOps",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a threat model for a sample web application and document its top risks and mitigations.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "devsecops-2",
+      "title": "Dependency and SCA Scanning with Snyk",
+      "order": 2,
+      "techs": [
+        "Snyk",
+        "npm",
+        "Git"
+      ],
+      "description": "This layer covers finding vulnerabilities in third-party dependencies. It matters because most modern applications inherit risk from open-source libraries.",
+      "topics": [
+        "Software composition analysis",
+        "Scanning dependencies with Snyk",
+        "Understanding CVEs and severity",
+        "License compliance",
+        "Fixing and upgrading packages",
+        "Ignoring and triaging findings"
+      ],
+      "resources": [
+        {
+          "label": "Snyk Documentation",
+          "platform": "docs.snyk.io",
+          "type": "docs"
+        },
+        {
+          "label": "Snyk Getting Started Guide",
+          "platform": "snyk.io",
+          "type": "course"
+        },
+        {
+          "label": "Dependency Scanning Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Scan a project with Snyk and remediate the highest severity dependency vulnerabilities it reports.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "devsecops-3",
+      "title": "Static Analysis with SonarQube",
+      "order": 3,
+      "techs": [
+        "SonarQube",
+        "Git",
+        "GitHub Actions"
+      ],
+      "description": "This layer teaches scanning source code for bugs and security flaws. It matters because static analysis catches insecure code before it ever runs.",
+      "topics": [
+        "Static application security testing",
+        "Quality gates and rules",
+        "Detecting security hotspots",
+        "Code smells and coverage",
+        "Integrating scans in pipelines",
+        "Triaging and tracking issues"
+      ],
+      "resources": [
+        {
+          "label": "SonarQube Documentation",
+          "platform": "docs.sonarsource.com",
+          "type": "docs"
+        },
+        {
+          "label": "SonarQube Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Secure Coding Practices Guide",
+          "platform": "owasp.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add a SonarQube quality gate to a pipeline that fails the build on new security hotspots.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "devsecops-4",
+      "title": "Container and Image Security with Trivy",
+      "order": 4,
+      "techs": [
+        "Trivy",
+        "Docker",
+        "Kubernetes"
+      ],
+      "description": "This layer covers scanning container images and configurations for vulnerabilities. It matters because containers can ship known vulnerabilities and misconfigurations into production.",
+      "topics": [
+        "Image vulnerability scanning",
+        "Base image hardening",
+        "Scanning IaC with Trivy",
+        "Misconfiguration detection",
+        "SBOM generation",
+        "Failing builds on findings"
+      ],
+      "resources": [
+        {
+          "label": "Trivy Documentation",
+          "platform": "trivy.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Trivy Container Scanning Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Container Security",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Scan your container images and IaC with Trivy and harden the base image to remove critical findings.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "devsecops-5",
+      "title": "Secrets Management with Vault",
+      "order": 5,
+      "techs": [
+        "HashiCorp Vault",
+        "Kubernetes",
+        "OIDC"
+      ],
+      "description": "This layer teaches storing and distributing secrets securely. It matters because hardcoded credentials are a frequent and dangerous source of breaches.",
+      "topics": [
+        "Vault architecture and auth methods",
+        "Static and dynamic secrets",
+        "Encryption as a service",
+        "Secret rotation",
+        "Injecting secrets into workloads",
+        "Audit logging"
+      ],
+      "resources": [
+        {
+          "label": "HashiCorp Vault Documentation",
+          "platform": "developer.hashicorp.com",
+          "type": "docs"
+        },
+        {
+          "label": "Vault Getting Started Tutorial",
+          "platform": "developer.hashicorp.com",
+          "type": "course"
+        },
+        {
+          "label": "Vault Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Use Vault to issue dynamic database credentials and inject them into a running application.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "devsecops-6",
+      "title": "Secure CI/CD Pipelines",
+      "order": 6,
+      "techs": [
+        "GitHub Actions",
+        "Snyk",
+        "Trivy"
+      ],
+      "description": "This layer covers hardening the delivery pipeline itself. It matters because pipelines are a high-value target and a single weak step can compromise everything.",
+      "topics": [
+        "Pipeline threat modeling",
+        "Least privilege for runners",
+        "OIDC for cloud access",
+        "Integrating security scans",
+        "Signing artifacts",
+        "Protecting pipeline secrets"
+      ],
+      "resources": [
+        {
+          "label": "GitHub Actions Security Hardening",
+          "platform": "docs.github.com",
+          "type": "docs"
+        },
+        {
+          "label": "SLSA Framework",
+          "platform": "slsa.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Secure CI/CD Pipelines Talk",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add SCA, SAST, and image scanning gates to a pipeline and replace static credentials with OIDC.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "devsecops-7",
+      "title": "Dynamic Testing and Runtime Security",
+      "order": 7,
+      "techs": [
+        "OWASP ZAP",
+        "Falco",
+        "Kubernetes"
+      ],
+      "description": "This layer covers testing running applications and detecting threats at runtime. It matters because some vulnerabilities only appear when systems are actually executing.",
+      "topics": [
+        "Dynamic application security testing",
+        "Scanning APIs with ZAP",
+        "Runtime threat detection",
+        "Behavioral monitoring with Falco",
+        "Intrusion detection",
+        "Incident triage"
+      ],
+      "resources": [
+        {
+          "label": "OWASP ZAP Documentation",
+          "platform": "zaproxy.org",
+          "type": "docs"
+        },
+        {
+          "label": "Falco Documentation",
+          "platform": "falco.org",
+          "type": "docs"
+        },
+        {
+          "label": "Runtime Security Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Run a ZAP scan against your deployed app and configure Falco to alert on suspicious runtime behavior.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "devsecops-8",
+      "title": "Policy as Code and Compliance",
+      "order": 8,
+      "techs": [
+        "OPA",
+        "Kubernetes",
+        "Terraform"
+      ],
+      "description": "This layer teaches enforcing security and compliance rules automatically. It matters because manual policy enforcement does not scale and is easily bypassed.",
+      "topics": [
+        "Policy as code concepts",
+        "Open Policy Agent and Rego",
+        "Admission control policies",
+        "IaC policy scanning",
+        "Compliance frameworks",
+        "Continuous compliance"
+      ],
+      "resources": [
+        {
+          "label": "Open Policy Agent Documentation",
+          "platform": "openpolicyagent.org",
+          "type": "docs"
+        },
+        {
+          "label": "OPA Gatekeeper Documentation",
+          "platform": "open-policy-agent.github.io",
+          "type": "docs"
+        },
+        {
+          "label": "Policy as Code Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write OPA policies that block non-compliant Terraform plans and insecure Kubernetes manifests.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "devsecops-9",
+      "title": "Supply Chain Security",
+      "order": 9,
+      "techs": [
+        "Sigstore",
+        "Trivy",
+        "SLSA"
+      ],
+      "description": "This layer covers securing the software supply chain end to end. It matters because attackers increasingly target build systems and dependencies rather than running apps.",
+      "topics": [
+        "Supply chain attack vectors",
+        "Software bill of materials",
+        "Artifact signing with Sigstore",
+        "Provenance and attestation",
+        "SLSA levels",
+        "Verifying signatures in deployment"
+      ],
+      "resources": [
+        {
+          "label": "Sigstore Documentation",
+          "platform": "docs.sigstore.dev",
+          "type": "docs"
+        },
+        {
+          "label": "SLSA Framework",
+          "platform": "slsa.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Supply Chain Security Talk",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Sign your container images with Sigstore and enforce signature verification before deployment.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "devsecops-10",
+      "title": "Security Operations at Scale",
+      "order": 10,
+      "techs": [
+        "Vault",
+        "Falco",
+        "SIEM"
+      ],
+      "description": "This layer covers running security operations across a production organization. It matters because security must be continuous, measurable, and integrated into daily operations at scale.",
+      "topics": [
+        "Centralized logging and SIEM",
+        "Vulnerability management programs",
+        "Incident response playbooks",
+        "Security metrics and reporting",
+        "Continuous compliance auditing",
+        "Security culture and training"
+      ],
+      "resources": [
+        {
+          "label": "NIST Cybersecurity Framework",
+          "platform": "nist.gov",
+          "type": "docs"
+        },
+        {
+          "label": "Falco Documentation",
+          "platform": "falco.org",
+          "type": "docs"
+        },
+        {
+          "label": "Securing DevOps",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Integrate scanning, runtime alerts, and signing into a unified security dashboard with an incident playbook.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "platform-engineer": [
+    {
+      "id": "platform-engineer-1",
+      "title": "Platform Engineering Foundations",
+      "order": 1,
+      "techs": [
+        "Kubernetes",
+        "Git",
+        "Linux"
+      ],
+      "description": "This layer introduces the goals and mindset of internal developer platforms. It matters because platform engineering aims to reduce cognitive load and accelerate every developer in the organization.",
+      "topics": [
+        "What an internal developer platform is",
+        "Cognitive load and golden paths",
+        "Platform as a product",
+        "Self-service principles",
+        "Developer experience metrics",
+        "Platform team operating model"
+      ],
+      "resources": [
+        {
+          "label": "Platform Engineering Resources",
+          "platform": "platformengineering.org",
+          "type": "docs"
+        },
+        {
+          "label": "Team Topologies",
+          "platform": "IT Revolution",
+          "type": "book"
+        },
+        {
+          "label": "What is Platform Engineering",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a one-page vision for an internal platform defining its first golden path for developers.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "platform-engineer-2",
+      "title": "Kubernetes as a Platform Base",
+      "order": 2,
+      "techs": [
+        "Kubernetes",
+        "Helm",
+        "Docker"
+      ],
+      "description": "This layer establishes Kubernetes as the runtime substrate for the platform. It matters because most internal platforms build their abstractions on top of Kubernetes.",
+      "topics": [
+        "Cluster architecture for platforms",
+        "Workloads and namespaces",
+        "Multi-tenancy basics",
+        "Packaging with Helm",
+        "Resource quotas",
+        "Platform versus application concerns"
+      ],
+      "resources": [
+        {
+          "label": "Kubernetes Documentation",
+          "platform": "kubernetes.io",
+          "type": "docs"
+        },
+        {
+          "label": "Helm Documentation",
+          "platform": "helm.sh",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana Kubernetes Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Provision a shared cluster with isolated namespaces and quotas for two sample tenant teams.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "platform-engineer-3",
+      "title": "Infrastructure as Code for Platforms",
+      "order": 3,
+      "techs": [
+        "Terraform",
+        "Kubernetes",
+        "Git"
+      ],
+      "description": "This layer covers provisioning platform infrastructure declaratively. It matters because the platform itself must be reproducible, versioned, and reviewable.",
+      "topics": [
+        "Terraform for platform infrastructure",
+        "Reusable infrastructure modules",
+        "Environment provisioning",
+        "State and backends",
+        "Infrastructure review workflows",
+        "Standardizing cloud resources"
+      ],
+      "resources": [
+        {
+          "label": "Terraform Documentation",
+          "platform": "developer.hashicorp.com",
+          "type": "docs"
+        },
+        {
+          "label": "Terraform Modules Documentation",
+          "platform": "developer.hashicorp.com",
+          "type": "docs"
+        },
+        {
+          "label": "Terraform: Up and Running",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build reusable Terraform modules that provision a standard environment for a new tenant team.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "platform-engineer-4",
+      "title": "Developer Portals with Backstage",
+      "order": 4,
+      "techs": [
+        "Backstage",
+        "React",
+        "Node.js"
+      ],
+      "description": "This layer introduces building a developer portal as the platform front door. It matters because a portal centralizes discovery, documentation, and self-service for developers.",
+      "topics": [
+        "Backstage architecture",
+        "Software catalog",
+        "Component and entity model",
+        "TechDocs documentation",
+        "Plugins and integrations",
+        "Authentication and access"
+      ],
+      "resources": [
+        {
+          "label": "Backstage Documentation",
+          "platform": "backstage.io",
+          "type": "docs"
+        },
+        {
+          "label": "Backstage Getting Started Guide",
+          "platform": "backstage.io",
+          "type": "course"
+        },
+        {
+          "label": "Backstage Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Stand up a Backstage instance and register your sample services in the software catalog.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "platform-engineer-5",
+      "title": "Golden Paths and Templates",
+      "order": 5,
+      "techs": [
+        "Backstage",
+        "Cookiecutter",
+        "GitHub Actions"
+      ],
+      "description": "This layer covers building paved roads that let developers create services quickly. It matters because templated golden paths encode best practices and reduce setup friction.",
+      "topics": [
+        "Software templates and scaffolding",
+        "Backstage software templates",
+        "Standardized repository setup",
+        "Embedding CI/CD in templates",
+        "Opinionated defaults",
+        "Maintaining templates over time"
+      ],
+      "resources": [
+        {
+          "label": "Backstage Software Templates Docs",
+          "platform": "backstage.io",
+          "type": "docs"
+        },
+        {
+          "label": "Golden Paths Explained",
+          "platform": "platformengineering.org",
+          "type": "docs"
+        },
+        {
+          "label": "Backstage Templates Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create a Backstage template that scaffolds a new service with CI/CD and catalog registration built in.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "platform-engineer-6",
+      "title": "GitOps Delivery with ArgoCD",
+      "order": 6,
+      "techs": [
+        "ArgoCD",
+        "Kubernetes",
+        "Helm"
+      ],
+      "description": "This layer covers delivering platform and tenant workloads through GitOps. It matters because GitOps gives the platform auditable, self-healing, declarative deployments.",
+      "topics": [
+        "GitOps for platform delivery",
+        "ArgoCD applications and projects",
+        "App of apps pattern",
+        "Multi-cluster delivery",
+        "Self-service deployments",
+        "Drift detection and sync"
+      ],
+      "resources": [
+        {
+          "label": "Argo CD Documentation",
+          "platform": "argo-cd.readthedocs.io",
+          "type": "docs"
+        },
+        {
+          "label": "Helm Documentation",
+          "platform": "helm.sh",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana GitOps with ArgoCD",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deliver tenant applications through ArgoCD using an app of apps pattern driven from Git.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "platform-engineer-7",
+      "title": "Self-Service APIs and Operators",
+      "order": 7,
+      "techs": [
+        "Kubernetes",
+        "Crossplane",
+        "CRDs"
+      ],
+      "description": "This layer teaches exposing infrastructure as self-service Kubernetes APIs. It matters because custom abstractions let developers request resources without learning the underlying tools.",
+      "topics": [
+        "Custom resource definitions",
+        "Operators and controllers",
+        "Provisioning with Crossplane",
+        "Platform abstractions and claims",
+        "Composition of resources",
+        "Guardrails and defaults"
+      ],
+      "resources": [
+        {
+          "label": "Crossplane Documentation",
+          "platform": "docs.crossplane.io",
+          "type": "docs"
+        },
+        {
+          "label": "Kubernetes Operator Pattern Docs",
+          "platform": "kubernetes.io",
+          "type": "docs"
+        },
+        {
+          "label": "Crossplane Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Use Crossplane to expose a self-service API that lets developers provision a database with one manifest.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "platform-engineer-8",
+      "title": "Observability and Golden Signals",
+      "order": 8,
+      "techs": [
+        "Prometheus",
+        "Grafana",
+        "OpenTelemetry"
+      ],
+      "description": "This layer covers building observability into the platform for all tenants. It matters because a platform must give every team consistent visibility without each reinventing it.",
+      "topics": [
+        "Platform-wide metrics and logs",
+        "Golden signals dashboards",
+        "Tracing across services",
+        "Self-service alerting",
+        "Multi-tenant observability",
+        "SLOs as a platform feature"
+      ],
+      "resources": [
+        {
+          "label": "Prometheus Documentation",
+          "platform": "prometheus.io",
+          "type": "docs"
+        },
+        {
+          "label": "OpenTelemetry Documentation",
+          "platform": "opentelemetry.io",
+          "type": "docs"
+        },
+        {
+          "label": "Grafana Documentation",
+          "platform": "grafana.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Provide a default observability stack so any service onboarded to the platform gets dashboards automatically.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "platform-engineer-9",
+      "title": "Policy, Security, and Governance",
+      "order": 9,
+      "techs": [
+        "OPA",
+        "Kubernetes",
+        "Vault"
+      ],
+      "description": "This layer covers enforcing standards and security across the platform. It matters because platforms must keep all tenants compliant and secure without slowing them down.",
+      "topics": [
+        "Policy as code for platforms",
+        "Admission control guardrails",
+        "Secrets management for tenants",
+        "Role-based access control",
+        "Cost and resource governance",
+        "Audit and compliance"
+      ],
+      "resources": [
+        {
+          "label": "Open Policy Agent Documentation",
+          "platform": "openpolicyagent.org",
+          "type": "docs"
+        },
+        {
+          "label": "HashiCorp Vault Documentation",
+          "platform": "developer.hashicorp.com",
+          "type": "docs"
+        },
+        {
+          "label": "Policy as Code Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add platform guardrails with OPA policies and per-tenant secrets so teams stay secure by default.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "platform-engineer-10",
+      "title": "Operating the Platform at Scale",
+      "order": 10,
+      "techs": [
+        "Backstage",
+        "ArgoCD",
+        "Kubernetes"
+      ],
+      "description": "This layer covers running and evolving the platform as a product in production. It matters because a platform must scale to many teams while staying reliable, adopted, and continuously improved.",
+      "topics": [
+        "Platform reliability and SLOs",
+        "Onboarding many teams",
+        "Versioning platform capabilities",
+        "Measuring adoption and DX",
+        "Feedback loops and roadmaps",
+        "Cost and capacity at scale"
+      ],
+      "resources": [
+        {
+          "label": "Platform Engineering Maturity Model",
+          "platform": "platformengineering.org",
+          "type": "docs"
+        },
+        {
+          "label": "Team Topologies",
+          "platform": "IT Revolution",
+          "type": "book"
+        },
+        {
+          "label": "Google SRE Workbook",
+          "platform": "sre.google",
+          "type": "book"
+        }
+      ],
+      "challenge": "Operate the full platform end to end, onboard multiple teams through golden paths, and measure adoption.",
+      "estimatedTime": "3 weeks"
+    }
+  ]
+}

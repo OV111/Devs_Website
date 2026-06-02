@@ -1,0 +1,4665 @@
+{
+  "api-dev": [
+    {
+      "id": "api-dev-1",
+      "title": "Internet & How the Web Works",
+      "order": 1,
+      "techs": [
+        "HTTP",
+        "DNS",
+        "TCP/IP",
+        "REST"
+      ],
+      "description": "Before writing a single line of backend code, understand the infrastructure you're building on. Learn how data travels across the internet, what happens when you hit an API endpoint, and the protocols that power the web.",
+      "topics": [
+        "How the internet works — packets, routers, ISPs",
+        "DNS — domain resolution, A records, TTL",
+        "HTTP/HTTPS — methods, status codes, headers",
+        "TCP vs UDP — connections, handshakes, reliability",
+        "REST architecture — resources, statelessness, uniform interface",
+        "Browsers vs API clients — curl, Postman, Insomnia"
+      ],
+      "resources": [
+        {
+          "label": "MDN — HTTP Overview",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "roadmap.sh — Backend Roadmap",
+          "platform": "roadmap.sh",
+          "type": "docs"
+        },
+        {
+          "label": "Hussein Nasser — How HTTPS Works",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "CS50 — Week 8 Web Intro",
+          "platform": "edX",
+          "type": "course"
+        }
+      ],
+      "challenge": "Use curl to make GET, POST, and DELETE requests against a public API (e.g. JSONPlaceholder). Inspect headers and status codes for each.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "api-dev-2",
+      "title": "OS, Terminal & Linux Basics",
+      "order": 2,
+      "techs": [
+        "Linux",
+        "Bash",
+        "SSH",
+        "Process Management"
+      ],
+      "description": "APIs run on servers. You need to be comfortable with the command line, file system navigation, process management, and basic Linux administration to work effectively on any backend.",
+      "topics": [
+        "File system navigation — ls, cd, mkdir, rm, chmod",
+        "Text processing — grep, awk, sed, cat, pipe",
+        "Process management — ps, kill, top, background jobs",
+        "SSH — key generation, remote login, scp",
+        "Shell scripting basics — variables, loops, conditionals",
+        "Environment variables & .env patterns"
+      ],
+      "resources": [
+        {
+          "label": "The Linux Command Line (book)",
+          "platform": "linuxcommand.org",
+          "type": "book"
+        },
+        {
+          "label": "OverTheWire: Bandit (wargame)",
+          "platform": "overthewire.org",
+          "type": "course"
+        },
+        {
+          "label": "Missing Semester of CS Education — MIT",
+          "platform": "missing.csail.mit.edu",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write a bash script that reads a log file, extracts all lines with ERROR, counts them, and outputs a summary with a timestamp.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "api-dev-3",
+      "title": "Node.js Fundamentals",
+      "order": 3,
+      "techs": [
+        "Node.js",
+        "npm",
+        "ESM",
+        "Events"
+      ],
+      "description": "Node.js is the runtime your API will live in. Learn how it works under the hood — the event loop, async I/O, module systems — and build confidence writing server-side JavaScript.",
+      "topics": [
+        "Node.js architecture — event loop, libuv, non-blocking I/O",
+        "ESM vs CommonJS — import/require, module resolution",
+        "npm — packages, package.json, semantic versioning",
+        "Built-in modules — fs, path, http, events, stream",
+        "Error handling patterns — try/catch, Promise rejection",
+        "Debugging Node.js — inspector, VS Code debugger"
+      ],
+      "resources": [
+        {
+          "label": "Node.js Official Docs",
+          "platform": "nodejs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Node.js Design Patterns (book)",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Fireship — Node.js Explained",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "The Odin Project — NodeJS Path",
+          "platform": "The Odin Project",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a raw HTTP server (no Express) that serves a JSON API with two endpoints — one that reads a file asynchronously and one that returns server stats.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "api-dev-4",
+      "title": "Express & REST API Design",
+      "order": 4,
+      "techs": [
+        "Express.js",
+        "Router",
+        "Middleware",
+        "Validation"
+      ],
+      "description": "Build well-structured, maintainable REST APIs with Express. Learn routing patterns, middleware chains, request validation, and how to structure a production-grade API codebase.",
+      "topics": [
+        "Express routing — router.get/post/put/delete, params, query strings",
+        "Middleware — logging (morgan), body parsing, error handling",
+        "Controller pattern — separating route logic from business logic",
+        "Input validation with Zod or Joi",
+        "REST conventions — resource naming, status codes, HATEOAS basics",
+        "API versioning strategies"
+      ],
+      "resources": [
+        {
+          "label": "Express.js Official Docs",
+          "platform": "expressjs.com",
+          "type": "docs"
+        },
+        {
+          "label": "Traversy Media — Express Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "REST API Design Best Practices",
+          "platform": "restfulapi.net",
+          "type": "docs"
+        },
+        {
+          "label": "Zod Docs",
+          "platform": "zod.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a Books REST API — CRUD endpoints, input validation with Zod, a custom error-handling middleware, and a request logger.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "api-dev-5",
+      "title": "Databases — SQL & NoSQL",
+      "order": 5,
+      "techs": [
+        "PostgreSQL",
+        "MongoDB",
+        "SQL",
+        "Indexing"
+      ],
+      "description": "Choose the right database for the job. Understand relational vs document models, write efficient queries, design schemas, and connect databases to your Node.js API.",
+      "topics": [
+        "Relational model — tables, primary/foreign keys, normalization",
+        "SQL — SELECT, JOIN, GROUP BY, transactions, EXPLAIN",
+        "PostgreSQL with node-postgres (pg) driver",
+        "MongoDB — collections, BSON, aggregation pipeline",
+        "MongoDB with the native driver or Mongoose",
+        "Indexing strategies — B-tree, compound, partial indexes",
+        "Database design patterns — 1-N, N-M, embedding vs referencing"
+      ],
+      "resources": [
+        {
+          "label": "PostgreSQL Official Docs",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "SQLZoo — Interactive SQL",
+          "platform": "sqlzoo.net",
+          "type": "course"
+        },
+        {
+          "label": "MongoDB University",
+          "platform": "learn.mongodb.com",
+          "type": "course"
+        },
+        {
+          "label": "Hussain Nasser — Database Engineering",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add PostgreSQL to your Books API — design a normalized schema with authors and books, write raw SQL queries, and add indexes for frequently-filtered columns.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "api-dev-6",
+      "title": "Authentication & Security",
+      "order": 6,
+      "techs": [
+        "JWT",
+        "bcrypt",
+        "OAuth 2.0",
+        "HTTPS"
+      ],
+      "description": "Secure your API against real-world threats. Implement auth flows, hash passwords properly, understand OAuth, and apply OWASP principles to harden your endpoints.",
+      "topics": [
+        "Password hashing — bcrypt, argon2, why salts matter",
+        "JWT — structure, signing algorithms (HS256 / RS256), expiry",
+        "Refresh token pattern & token rotation",
+        "OAuth 2.0 flows — authorization code, client credentials",
+        "OWASP API Top 10 — injection, broken auth, rate limiting",
+        "CORS, HTTPS, helmet.js, input sanitization"
+      ],
+      "resources": [
+        {
+          "label": "OWASP API Security Top 10",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "JWT.io — Debugger & Intro",
+          "platform": "jwt.io",
+          "type": "docs"
+        },
+        {
+          "label": "Auth0 — OAuth 2.0 Simplified",
+          "platform": "auth0.com",
+          "type": "docs"
+        },
+        {
+          "label": "Web Dev Simplified — JWT Auth Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add full auth to your Books API — register/login with hashed passwords, JWT access + refresh tokens, protected routes, and rate limiting on the login endpoint.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "api-dev-7",
+      "title": "Caching & Performance",
+      "order": 7,
+      "techs": [
+        "Redis",
+        "HTTP Caching",
+        "Rate Limiting",
+        "Compression"
+      ],
+      "description": "Make your API fast and resilient. Learn caching at the application and HTTP layers, use Redis for session storage and rate limiting, and optimize response times.",
+      "topics": [
+        "Redis data structures — strings, hashes, sorted sets, TTL",
+        "Application-level caching with Redis",
+        "HTTP cache headers — Cache-Control, ETag, Last-Modified",
+        "Rate limiting strategies — fixed window, sliding window, token bucket",
+        "Compression — gzip/brotli with compression middleware",
+        "N+1 query problem & DataLoader pattern"
+      ],
+      "resources": [
+        {
+          "label": "Redis Official Docs",
+          "platform": "redis.io",
+          "type": "docs"
+        },
+        {
+          "label": "Redis University — RU101",
+          "platform": "university.redis.com",
+          "type": "course"
+        },
+        {
+          "label": "Fireship — Redis in 100 Seconds",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add Redis caching to your Books API — cache expensive queries with a 5-minute TTL, invalidate on mutations, and implement rate limiting per IP.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "api-dev-8",
+      "title": "Testing & API Documentation",
+      "order": 8,
+      "techs": [
+        "Jest",
+        "Supertest",
+        "OpenAPI",
+        "Swagger"
+      ],
+      "description": "Ensure your API works correctly and is understandable to consumers. Write integration tests, automate test runs, and generate interactive documentation with OpenAPI/Swagger.",
+      "topics": [
+        "Unit testing with Jest — describe, it, expect",
+        "Integration testing with Supertest — test real HTTP endpoints",
+        "Test database setup — in-memory SQLite or test MongoDB",
+        "Mocking external services with Jest spies",
+        "OpenAPI 3.0 specification — paths, schemas, components",
+        "Swagger UI integration with swagger-jsdoc"
+      ],
+      "resources": [
+        {
+          "label": "Jest Official Docs",
+          "platform": "jestjs.io",
+          "type": "docs"
+        },
+        {
+          "label": "Supertest on GitHub",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "OpenAPI Specification",
+          "platform": "spec.openapis.org",
+          "type": "docs"
+        },
+        {
+          "label": "swagger-jsdoc on npm",
+          "platform": "npm",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write full integration tests for your Books API — cover all CRUD endpoints, auth flows, and edge cases. Add Swagger UI with documented schemas.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "api-dev-9",
+      "title": "Message Queues & Background Jobs",
+      "order": 9,
+      "techs": [
+        "BullMQ",
+        "Redis",
+        "Workers",
+        "Webhooks"
+      ],
+      "description": "Not every operation needs to be synchronous. Learn how to offload heavy tasks to background workers, use message queues, and implement webhooks for event-driven integrations.",
+      "topics": [
+        "Why queues — decoupling, retries, backpressure",
+        "BullMQ — queues, workers, jobs, events",
+        "Delayed jobs & scheduled tasks (cron-like)",
+        "Dead-letter queues & error handling",
+        "Webhooks — sending & receiving with signature verification",
+        "Event-driven architecture basics"
+      ],
+      "resources": [
+        {
+          "label": "BullMQ Docs",
+          "platform": "bullmq.io",
+          "type": "docs"
+        },
+        {
+          "label": "Fireship — BullMQ in 100s",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Webhook.site — Testing webhooks",
+          "platform": "webhook.site",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add an email welcome queue to your Books API — when a user registers, enqueue a job that sends a welcome email with retry logic and a dead-letter fallback.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "api-dev-10",
+      "title": "Deployment & Production Readiness",
+      "order": 10,
+      "techs": [
+        "Docker",
+        "Railway",
+        "GitHub Actions",
+        "Monitoring"
+      ],
+      "description": "Ship your API to production with confidence. Containerize with Docker, automate deployments with CI/CD, and set up logging and monitoring so you can observe your running service.",
+      "topics": [
+        "Docker — Dockerfile, multi-stage builds, .dockerignore",
+        "Docker Compose — local multi-service dev (app + db + redis)",
+        "Railway / Render / Fly.io — zero-config cloud deployment",
+        "GitHub Actions CI — lint, test, build on every push",
+        "Structured logging with Pino or Winston",
+        "Health check endpoints & graceful shutdown",
+        "APM basics — error tracking with Sentry"
+      ],
+      "resources": [
+        {
+          "label": "Docker Official Docs — Get Started",
+          "platform": "docker.com",
+          "type": "docs"
+        },
+        {
+          "label": "Railway Docs",
+          "platform": "railway.app",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana — Docker for Beginners",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Sentry Docs — Node.js",
+          "platform": "sentry.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Dockerize your Books API with a multi-stage Dockerfile, write a docker-compose.yml for local dev (app + postgres + redis), and deploy to Railway with a GitHub Actions CI pipeline.",
+      "estimatedTime": "1–2 weeks"
+    }
+  ],
+  "db-engineer": [
+    {
+      "id": "db-engineer-1",
+      "title": "Database Fundamentals",
+      "order": 1,
+      "techs": [
+        "RDBMS",
+        "Data Types",
+        "ACID"
+      ],
+      "description": "Start with what a database is and why it matters. Learn the core concepts shared by every relational system before diving into a specific engine.",
+      "topics": [
+        "Relational model — tables, rows, columns",
+        "Data types & schemas",
+        "Primary & foreign keys",
+        "ACID properties",
+        "Client/server architecture",
+        "SQL vs NoSQL overview"
+      ],
+      "resources": [
+        {
+          "label": "Use The Index, Luke",
+          "platform": "use-the-index-luke.com",
+          "type": "docs"
+        },
+        {
+          "label": "PostgreSQL Tutorial",
+          "platform": "postgresqltutorial.com",
+          "type": "docs"
+        },
+        {
+          "label": "CMU Intro to Database Systems",
+          "platform": "YouTube",
+          "type": "course"
+        }
+      ],
+      "challenge": "Design a normalized schema for a small e-commerce store on paper, then create the tables.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "db-engineer-2",
+      "title": "SQL Mastery",
+      "order": 2,
+      "techs": [
+        "SQL",
+        "Joins",
+        "Aggregations"
+      ],
+      "description": "Become fluent in SQL — the language you'll use every day. Move from basic selects to complex analytical queries.",
+      "topics": [
+        "SELECT, WHERE, ORDER BY, LIMIT",
+        "All JOIN types",
+        "GROUP BY & aggregate functions",
+        "Subqueries & CTEs",
+        "Window functions",
+        "Set operations & CASE"
+      ],
+      "resources": [
+        {
+          "label": "SQLBolt",
+          "platform": "sqlbolt.com",
+          "type": "course"
+        },
+        {
+          "label": "Mode SQL Tutorial",
+          "platform": "mode.com",
+          "type": "docs"
+        },
+        {
+          "label": "PostgreSQL Exercises",
+          "platform": "pgexercises.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Answer 10 analytical business questions about your store using window functions and CTEs.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "db-engineer-3",
+      "title": "Relational Modeling & Normalization",
+      "order": 3,
+      "techs": [
+        "Normalization",
+        "ER Diagrams",
+        "Constraints"
+      ],
+      "description": "Design schemas that scale and stay consistent. Master normalization, relationships and constraints.",
+      "topics": [
+        "Entity-relationship modeling",
+        "1NF through BCNF",
+        "When to denormalize",
+        "Constraints — unique, check, not null",
+        "Cascading actions",
+        "Surrogate vs natural keys"
+      ],
+      "resources": [
+        {
+          "label": "Database Design — freeCodeCamp",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Use The Index, Luke",
+          "platform": "use-the-index-luke.com",
+          "type": "docs"
+        },
+        {
+          "label": "PostgreSQL Docs — DDL",
+          "platform": "postgresql.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Normalize a messy spreadsheet of orders into a clean relational schema with proper constraints.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "db-engineer-4",
+      "title": "PostgreSQL Deep Dive",
+      "order": 4,
+      "techs": [
+        "PostgreSQL",
+        "JSONB",
+        "Extensions"
+      ],
+      "description": "Master the world's most advanced open-source database. Explore the features that make PostgreSQL a power tool.",
+      "topics": [
+        "psql & administration basics",
+        "JSONB & array types",
+        "Views, materialized views & CTEs",
+        "Triggers & stored procedures (PL/pgSQL)",
+        "Extensions — PostGIS, pg_trgm",
+        "Full-text search"
+      ],
+      "resources": [
+        {
+          "label": "PostgreSQL Official Docs",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "PostgreSQL Tutorial",
+          "platform": "postgresqltutorial.com",
+          "type": "docs"
+        },
+        {
+          "label": "Postgres Weekly",
+          "platform": "postgresweekly.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a search feature over your store's products using full-text search and JSONB attributes.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "db-engineer-5",
+      "title": "MySQL & Operational Databases",
+      "order": 5,
+      "techs": [
+        "MySQL",
+        "InnoDB",
+        "Transactions"
+      ],
+      "description": "Learn MySQL, the backbone of countless production apps. Understand its storage engines and operational behavior.",
+      "topics": [
+        "MySQL vs PostgreSQL differences",
+        "InnoDB storage engine",
+        "Transactions & isolation levels",
+        "Locking & deadlocks",
+        "Stored procedures & events",
+        "Common configuration & tuning"
+      ],
+      "resources": [
+        {
+          "label": "MySQL Official Docs",
+          "platform": "dev.mysql.com",
+          "type": "docs"
+        },
+        {
+          "label": "MySQL Tutorial",
+          "platform": "mysqltutorial.org",
+          "type": "docs"
+        },
+        {
+          "label": "High Performance MySQL",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Migrate a schema to MySQL and demonstrate transaction isolation behavior with concurrent sessions.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "db-engineer-6",
+      "title": "NoSQL with MongoDB",
+      "order": 6,
+      "techs": [
+        "MongoDB",
+        "Documents",
+        "Aggregation"
+      ],
+      "description": "Add document databases to your toolkit. Learn when NoSQL fits and how to model data in MongoDB.",
+      "topics": [
+        "Document model & BSON",
+        "CRUD & the query language",
+        "Embedding vs referencing",
+        "The aggregation pipeline",
+        "Indexes in MongoDB",
+        "Schema design patterns"
+      ],
+      "resources": [
+        {
+          "label": "MongoDB Manual",
+          "platform": "mongodb.com",
+          "type": "docs"
+        },
+        {
+          "label": "MongoDB University",
+          "platform": "learn.mongodb.com",
+          "type": "course"
+        },
+        {
+          "label": "MongoDB Data Modeling",
+          "platform": "mongodb.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Model a content platform in MongoDB and write an aggregation pipeline for a trending feed.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "db-engineer-7",
+      "title": "Caching & Redis",
+      "order": 7,
+      "techs": [
+        "Redis",
+        "Caching",
+        "Pub/Sub"
+      ],
+      "description": "Speed up systems with in-memory data. Use Redis for caching, sessions, queues and real-time features.",
+      "topics": [
+        "Redis data structures",
+        "Caching patterns & TTLs",
+        "Cache invalidation strategies",
+        "Pub/Sub & streams",
+        "Rate limiting & leaderboards",
+        "Persistence & eviction policies"
+      ],
+      "resources": [
+        {
+          "label": "Redis Docs",
+          "platform": "redis.io",
+          "type": "docs"
+        },
+        {
+          "label": "Redis University",
+          "platform": "redis.io",
+          "type": "course"
+        },
+        {
+          "label": "Redis Data Types",
+          "platform": "redis.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add a Redis cache-aside layer and a leaderboard to your app, with sensible TTLs and invalidation.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "db-engineer-8",
+      "title": "Indexing & Query Optimization",
+      "order": 8,
+      "techs": [
+        "Indexes",
+        "EXPLAIN",
+        "Performance"
+      ],
+      "description": "Make databases fast. Understand indexes deeply and learn to diagnose and fix slow queries.",
+      "topics": [
+        "B-tree, hash, GIN & BRIN indexes",
+        "Composite & partial indexes",
+        "Reading EXPLAIN ANALYZE",
+        "Query planning & statistics",
+        "Avoiding N+1 & full scans",
+        "Connection pooling"
+      ],
+      "resources": [
+        {
+          "label": "Use The Index, Luke",
+          "platform": "use-the-index-luke.com",
+          "type": "docs"
+        },
+        {
+          "label": "PostgreSQL — Performance Tips",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "Hussein Nasser — Database Engineering",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Profile a slow query, add the right index, and cut its execution time using EXPLAIN ANALYZE.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "db-engineer-9",
+      "title": "Replication, Sharding & HA",
+      "order": 9,
+      "techs": [
+        "Replication",
+        "Sharding",
+        "Partitioning"
+      ],
+      "description": "Scale databases beyond one machine. Learn replication, partitioning and high-availability patterns.",
+      "topics": [
+        "Primary/replica replication",
+        "Read replicas & load balancing",
+        "Partitioning & sharding",
+        "Failover & high availability",
+        "CAP theorem & consistency models",
+        "Distributed transaction trade-offs"
+      ],
+      "resources": [
+        {
+          "label": "PostgreSQL — Replication",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "Designing Data-Intensive Applications",
+          "platform": "Martin Kleppmann",
+          "type": "book"
+        },
+        {
+          "label": "MongoDB — Sharding",
+          "platform": "mongodb.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Set up streaming replication with a read replica and route read queries to it.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "db-engineer-10",
+      "title": "Backup, Security & Administration",
+      "order": 10,
+      "techs": [
+        "Backups",
+        "Security",
+        "Monitoring"
+      ],
+      "description": "Operate databases responsibly. Master backups, security hardening and monitoring for production.",
+      "topics": [
+        "Backup & point-in-time recovery",
+        "Roles, privileges & row-level security",
+        "Encryption at rest & in transit",
+        "Monitoring & slow query logs",
+        "Migrations in production",
+        "Disaster recovery planning"
+      ],
+      "resources": [
+        {
+          "label": "PostgreSQL — Backup and Restore",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "OWASP — Database Security",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "PostgreSQL — Roles",
+          "platform": "postgresql.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a backup + restore runbook and apply least-privilege roles to your production schema.",
+      "estimatedTime": "1–2 weeks"
+    }
+  ],
+  "systems-dev": [
+    {
+      "id": "systems-dev-1",
+      "title": "Systems Programming Foundations",
+      "order": 1,
+      "techs": [
+        "C",
+        "Compilation",
+        "Binary"
+      ],
+      "description": "Systems programming starts close to the metal. Understand how programs are built, how memory is laid out, and how code becomes machine instructions.",
+      "topics": [
+        "The compilation pipeline",
+        "Stack vs heap memory",
+        "Binary, hex & bitwise operations",
+        "Pointers & addresses",
+        "How the CPU executes code",
+        "Linkers, loaders & executables"
+      ],
+      "resources": [
+        {
+          "label": "Computer Systems: A Programmer's Perspective",
+          "platform": "CMU",
+          "type": "book"
+        },
+        {
+          "label": "Crafting Interpreters",
+          "platform": "craftinginterpreters.com",
+          "type": "book"
+        },
+        {
+          "label": "Ben Eater — How a CPU works",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a C program that manipulates raw bytes and explain its memory layout with a diagram.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "systems-dev-2",
+      "title": "C & the Memory Model",
+      "order": 2,
+      "techs": [
+        "C",
+        "Pointers",
+        "Memory"
+      ],
+      "description": "C is the lingua franca of systems. Master manual memory management, pointers and the tools that keep them safe.",
+      "topics": [
+        "Pointers & pointer arithmetic",
+        "malloc, free & the heap",
+        "Arrays, strings & structs",
+        "Undefined behavior",
+        "Debugging with gdb & valgrind",
+        "The C standard library"
+      ],
+      "resources": [
+        {
+          "label": "The C Programming Language",
+          "platform": "K&R",
+          "type": "book"
+        },
+        {
+          "label": "Beej's Guide to C",
+          "platform": "beej.us",
+          "type": "docs"
+        },
+        {
+          "label": "Valgrind Docs",
+          "platform": "valgrind.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Implement a dynamic array and a linked list in C with zero memory leaks (verified by valgrind).",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "systems-dev-3",
+      "title": "Modern C++",
+      "order": 3,
+      "techs": [
+        "C++",
+        "RAII",
+        "STL"
+      ],
+      "description": "Build on C with modern C++. Use RAII, smart pointers and the STL to write fast, safer systems code.",
+      "topics": [
+        "References, const & RAII",
+        "Smart pointers & ownership",
+        "The STL — containers & algorithms",
+        "Templates & generic programming",
+        "Move semantics",
+        "Modern C++ (C++17/20) features"
+      ],
+      "resources": [
+        {
+          "label": "cppreference",
+          "platform": "cppreference.com",
+          "type": "docs"
+        },
+        {
+          "label": "learncpp.com",
+          "platform": "learncpp.com",
+          "type": "course"
+        },
+        {
+          "label": "Effective Modern C++",
+          "platform": "Scott Meyers",
+          "type": "book"
+        }
+      ],
+      "challenge": "Rewrite your C data structures in modern C++ using RAII and smart pointers.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "systems-dev-4",
+      "title": "Rust for Systems",
+      "order": 4,
+      "techs": [
+        "Rust",
+        "Ownership",
+        "Cargo"
+      ],
+      "description": "Get memory safety without a garbage collector. Learn how Rust's ownership model prevents whole classes of bugs.",
+      "topics": [
+        "Ownership, borrowing & lifetimes",
+        "Traits & generics",
+        "Error handling with Result",
+        "Cargo & the crate ecosystem",
+        "Zero-cost abstractions",
+        "Interop with C (FFI)"
+      ],
+      "resources": [
+        {
+          "label": "The Rust Book",
+          "platform": "doc.rust-lang.org",
+          "type": "book"
+        },
+        {
+          "label": "Rustlings",
+          "platform": "GitHub",
+          "type": "course"
+        },
+        {
+          "label": "Jon Gjengset — Crust of Rust",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Port one of your C++ data structures to Rust and call it from C via FFI.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "systems-dev-5",
+      "title": "Linux & the OS Interface",
+      "order": 5,
+      "techs": [
+        "Linux",
+        "Syscalls",
+        "Processes"
+      ],
+      "description": "Systems software talks to the kernel. Learn the Linux process model, system calls and the file system interface.",
+      "topics": [
+        "Processes, threads & scheduling",
+        "System calls & the kernel boundary",
+        "File descriptors & I/O",
+        "Signals & inter-process communication",
+        "Virtual memory & paging",
+        "The shell & process control"
+      ],
+      "resources": [
+        {
+          "label": "The Linux Programming Interface",
+          "platform": "Michael Kerrisk",
+          "type": "book"
+        },
+        {
+          "label": "Linux man pages",
+          "platform": "man7.org",
+          "type": "docs"
+        },
+        {
+          "label": "MIT 6.S081 — OS Engineering",
+          "platform": "pdos.csail.mit.edu",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write a mini-shell in C that forks processes, handles pipes and reaps children.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "systems-dev-6",
+      "title": "Concurrency & Parallelism",
+      "order": 6,
+      "techs": [
+        "Threads",
+        "Atomics",
+        "Async"
+      ],
+      "description": "Make systems use all the cores. Master threads, synchronization and lock-free techniques.",
+      "topics": [
+        "Threads & shared memory",
+        "Mutexes, condition variables & deadlock",
+        "Atomics & memory ordering",
+        "Lock-free data structures",
+        "Data races & how to avoid them",
+        "Async runtimes (Tokio / coroutines)"
+      ],
+      "resources": [
+        {
+          "label": "Rust Atomics and Locks",
+          "platform": "marabos.nl",
+          "type": "book"
+        },
+        {
+          "label": "C++ Concurrency in Action",
+          "platform": "Manning",
+          "type": "book"
+        },
+        {
+          "label": "The Linux Programming Interface",
+          "platform": "Michael Kerrisk",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a thread-safe work-stealing task queue and benchmark it against a mutex-guarded queue.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "systems-dev-7",
+      "title": "Networking & Sockets",
+      "order": 7,
+      "techs": [
+        "TCP/IP",
+        "Sockets",
+        "epoll"
+      ],
+      "description": "Connect systems over the network. Learn the socket API and how to build high-throughput servers.",
+      "topics": [
+        "TCP/IP & UDP fundamentals",
+        "The Berkeley socket API",
+        "Blocking vs non-blocking I/O",
+        "I/O multiplexing — select, poll, epoll",
+        "Event-driven server design",
+        "Protocol parsing & framing"
+      ],
+      "resources": [
+        {
+          "label": "Beej's Guide to Network Programming",
+          "platform": "beej.us",
+          "type": "docs"
+        },
+        {
+          "label": "The Linux Programming Interface",
+          "platform": "Michael Kerrisk",
+          "type": "book"
+        },
+        {
+          "label": "High Performance Browser Networking",
+          "platform": "hpbn.co",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a non-blocking TCP echo server with epoll that handles thousands of connections.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "systems-dev-8",
+      "title": "Performance & Profiling",
+      "order": 8,
+      "techs": [
+        "perf",
+        "Cache",
+        "Benchmarks"
+      ],
+      "description": "Make code fast and prove it. Understand the memory hierarchy and use profilers to find real bottlenecks.",
+      "topics": [
+        "CPU caches & data locality",
+        "Branch prediction & pipelines",
+        "Profiling with perf & flamegraphs",
+        "Benchmarking methodology",
+        "Allocation & memory bandwidth",
+        "SIMD & vectorization basics"
+      ],
+      "resources": [
+        {
+          "label": "Brendan Gregg — Systems Performance",
+          "platform": "brendangregg.com",
+          "type": "book"
+        },
+        {
+          "label": "Agner Fog — Optimization Guides",
+          "platform": "agner.org",
+          "type": "docs"
+        },
+        {
+          "label": "perf Wiki",
+          "platform": "perfwiki.github.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Profile a hot loop, improve data locality, and document the speedup with flamegraphs.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "systems-dev-9",
+      "title": "Building Systems Tools in Go",
+      "order": 9,
+      "techs": [
+        "Go",
+        "CLI",
+        "Concurrency"
+      ],
+      "description": "Go is ideal for fast, portable systems tooling. Build CLIs and network tools that ship as a single binary.",
+      "topics": [
+        "Go for systems tooling",
+        "Goroutines & channels for I/O",
+        "Building CLIs with cobra",
+        "Working with the filesystem & processes",
+        "Cross-compilation",
+        "Static single-binary distribution"
+      ],
+      "resources": [
+        {
+          "label": "A Tour of Go",
+          "platform": "go.dev",
+          "type": "docs"
+        },
+        {
+          "label": "cobra",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Go by Example",
+          "platform": "gobyexample.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a concurrent port scanner CLI in Go that cross-compiles to Linux, macOS and Windows.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "systems-dev-10",
+      "title": "Debugging, Testing & Deployment",
+      "order": 10,
+      "techs": [
+        "gdb",
+        "Sanitizers",
+        "CI"
+      ],
+      "description": "Ship reliable systems software. Master debuggers, sanitizers and build pipelines for native code.",
+      "topics": [
+        "Advanced gdb & lldb",
+        "Sanitizers — ASan, TSan, UBSan",
+        "Fuzzing",
+        "Build systems — CMake, Cargo",
+        "CI for native code",
+        "Packaging & distribution"
+      ],
+      "resources": [
+        {
+          "label": "GDB Documentation",
+          "platform": "sourceware.org",
+          "type": "docs"
+        },
+        {
+          "label": "Google Sanitizers",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "CMake Docs",
+          "platform": "cmake.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add a CI pipeline that builds your project with sanitizers and runs a fuzz target.",
+      "estimatedTime": "2 weeks"
+    }
+  ],
+  "security-dev": [
+    {
+      "id": "security-dev-1",
+      "title": "Security Foundations",
+      "order": 1,
+      "techs": [
+        "CIA Triad",
+        "Threats",
+        "Networking"
+      ],
+      "description": "Build a mental model of security. Learn the core principles and the threat landscape every developer must understand.",
+      "topics": [
+        "Confidentiality, integrity & availability",
+        "Threats, vulnerabilities & risk",
+        "Defense in depth & least privilege",
+        "Networking & HTTP basics for security",
+        "Encoding vs encryption vs hashing",
+        "The attacker mindset"
+      ],
+      "resources": [
+        {
+          "label": "OWASP Foundation",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "PortSwigger Web Security Academy",
+          "platform": "portswigger.net",
+          "type": "course"
+        },
+        {
+          "label": "OWASP Cheat Sheet Series",
+          "platform": "cheatsheetseries.owasp.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Threat-model a simple login form and list its assets, threats and mitigations.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "security-dev-2",
+      "title": "Web Security & OWASP Top 10",
+      "order": 2,
+      "techs": [
+        "OWASP",
+        "XSS",
+        "SQLi"
+      ],
+      "description": "Learn the most common web vulnerabilities by exploiting and then fixing them. The OWASP Top 10 is your map.",
+      "topics": [
+        "Injection — SQLi & command injection",
+        "Cross-site scripting (XSS)",
+        "Cross-site request forgery (CSRF)",
+        "Broken access control",
+        "Security misconfiguration",
+        "SSRF & insecure deserialization"
+      ],
+      "resources": [
+        {
+          "label": "OWASP Top 10",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "PortSwigger Web Security Academy",
+          "platform": "portswigger.net",
+          "type": "course"
+        },
+        {
+          "label": "OWASP Juice Shop",
+          "platform": "owasp.org",
+          "type": "course"
+        }
+      ],
+      "challenge": "Find and fix an XSS and a SQL injection vulnerability in OWASP Juice Shop.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "security-dev-3",
+      "title": "Authentication",
+      "order": 3,
+      "techs": [
+        "OAuth2",
+        "OIDC",
+        "JWT"
+      ],
+      "description": "Get authentication right. Implement secure login flows with OAuth2, OpenID Connect and JSON Web Tokens.",
+      "topics": [
+        "Password storage — bcrypt, argon2",
+        "Sessions vs tokens",
+        "JWT structure, signing & pitfalls",
+        "OAuth2 grant types",
+        "OpenID Connect",
+        "Multi-factor authentication"
+      ],
+      "resources": [
+        {
+          "label": "OAuth 2.0 — oauth.net",
+          "platform": "oauth.net",
+          "type": "docs"
+        },
+        {
+          "label": "OWASP — Authentication Cheat Sheet",
+          "platform": "cheatsheetseries.owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "JWT.io",
+          "platform": "jwt.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Implement an OAuth2 + OIDC login with secure JWT handling and refresh-token rotation.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "security-dev-4",
+      "title": "Authorization & Access Control",
+      "order": 4,
+      "techs": [
+        "RBAC",
+        "ABAC",
+        "Policies"
+      ],
+      "description": "Control who can do what. Design robust authorization models and avoid the #1 web risk: broken access control.",
+      "topics": [
+        "RBAC vs ABAC vs ReBAC",
+        "Principle of least privilege",
+        "Object-level authorization",
+        "Policy engines (OPA / Cedar)",
+        "Multi-tenancy isolation",
+        "Common access-control bugs"
+      ],
+      "resources": [
+        {
+          "label": "OWASP — Access Control Cheat Sheet",
+          "platform": "cheatsheetseries.owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "Open Policy Agent Docs",
+          "platform": "openpolicyagent.org",
+          "type": "docs"
+        },
+        {
+          "label": "PortSwigger — Access Control",
+          "platform": "portswigger.net",
+          "type": "course"
+        }
+      ],
+      "challenge": "Add object-level RBAC to an API and write tests proving users can't access others' resources.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "security-dev-5",
+      "title": "Cryptography Essentials",
+      "order": 5,
+      "techs": [
+        "Hashing",
+        "AES",
+        "TLS"
+      ],
+      "description": "Use cryptography correctly. Learn the primitives, when to use each, and the dangers of rolling your own.",
+      "topics": [
+        "Hashing & HMAC",
+        "Symmetric encryption (AES-GCM)",
+        "Asymmetric encryption & key exchange",
+        "Digital signatures & certificates",
+        "TLS & the handshake",
+        "Key management & secrets"
+      ],
+      "resources": [
+        {
+          "label": "Crypto 101",
+          "platform": "crypto101.io",
+          "type": "book"
+        },
+        {
+          "label": "OWASP — Cryptographic Storage",
+          "platform": "cheatsheetseries.owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "Cryptographic Right Answers",
+          "platform": "latacora.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Encrypt sensitive fields at rest with AES-GCM and verify integrity with HMAC.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "security-dev-6",
+      "title": "Secure Coding Practices",
+      "order": 6,
+      "techs": [
+        "Validation",
+        "Sanitization",
+        "Secrets"
+      ],
+      "description": "Write code that resists attack. Apply input validation, output encoding and safe defaults throughout your app.",
+      "topics": [
+        "Input validation & allow-lists",
+        "Output encoding & escaping",
+        "Parameterized queries",
+        "Secrets management",
+        "Secure defaults & error handling",
+        "Dependency & supply-chain hygiene"
+      ],
+      "resources": [
+        {
+          "label": "OWASP — Secure Coding Practices",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "OWASP Cheat Sheet Series",
+          "platform": "cheatsheetseries.owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "Snyk Learn",
+          "platform": "learn.snyk.io",
+          "type": "course"
+        }
+      ],
+      "challenge": "Harden a vulnerable API endpoint with validation, parameterized queries and proper secret handling.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "security-dev-7",
+      "title": "API & Network Security",
+      "order": 7,
+      "techs": [
+        "TLS",
+        "CORS",
+        "Rate Limiting"
+      ],
+      "description": "Protect data in transit and APIs at the edge. Configure TLS, CORS and defenses against abuse.",
+      "topics": [
+        "HTTPS & certificate management",
+        "CORS done right",
+        "Security headers & CSP",
+        "Rate limiting & throttling",
+        "API authentication & keys",
+        "OWASP API Security Top 10"
+      ],
+      "resources": [
+        {
+          "label": "OWASP API Security Top 10",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "Mozilla Observatory",
+          "platform": "developer.mozilla.org",
+          "type": "docs"
+        },
+        {
+          "label": "OWASP — HTTP Headers Cheat Sheet",
+          "platform": "cheatsheetseries.owasp.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Configure TLS, strict CORS, a CSP and rate limiting on an API, then verify with a header scanner.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "security-dev-8",
+      "title": "Threat Modeling & Pen Testing",
+      "order": 8,
+      "techs": [
+        "STRIDE",
+        "Burp Suite",
+        "Recon"
+      ],
+      "description": "Think like an attacker. Model threats systematically and learn the basics of ethical penetration testing.",
+      "topics": [
+        "Threat modeling with STRIDE",
+        "Attack surface mapping",
+        "Recon & enumeration",
+        "Using Burp Suite & proxies",
+        "Exploiting then reporting findings",
+        "Responsible disclosure"
+      ],
+      "resources": [
+        {
+          "label": "OWASP Threat Modeling",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "PortSwigger Web Security Academy",
+          "platform": "portswigger.net",
+          "type": "course"
+        },
+        {
+          "label": "OWASP Testing Guide",
+          "platform": "owasp.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Produce a STRIDE threat model and a short pen-test report for a demo web app.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "security-dev-9",
+      "title": "Security Testing & DevSecOps",
+      "order": 9,
+      "techs": [
+        "SAST",
+        "DAST",
+        "Dependency Scanning"
+      ],
+      "description": "Automate security in the pipeline. Add static, dynamic and dependency scanning so issues are caught early.",
+      "topics": [
+        "SAST & DAST tools",
+        "Dependency & SCA scanning",
+        "Secret scanning",
+        "Container image scanning",
+        "Security gates in CI/CD",
+        "Shifting security left"
+      ],
+      "resources": [
+        {
+          "label": "OWASP DevSecOps Guideline",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "Snyk Learn",
+          "platform": "learn.snyk.io",
+          "type": "course"
+        },
+        {
+          "label": "OWASP ZAP Docs",
+          "platform": "zaproxy.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add SAST, dependency scanning and secret scanning as blocking checks to a CI pipeline.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "security-dev-10",
+      "title": "Incident Response & Compliance",
+      "order": 10,
+      "techs": [
+        "Logging",
+        "IR",
+        "Compliance"
+      ],
+      "description": "Prepare for when things go wrong. Build logging, an incident response plan, and awareness of compliance regimes.",
+      "topics": [
+        "Security logging & monitoring",
+        "Detection & alerting",
+        "The incident response lifecycle",
+        "Post-mortems & root-cause analysis",
+        "GDPR, SOC 2 & PCI basics",
+        "Security policies & training"
+      ],
+      "resources": [
+        {
+          "label": "OWASP — Logging Cheat Sheet",
+          "platform": "cheatsheetseries.owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "NIST Incident Handling Guide",
+          "platform": "nist.gov",
+          "type": "docs"
+        },
+        {
+          "label": "SOC 2 Overview",
+          "platform": "vanta.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add security logging to an app and write an incident response runbook for a credential leak.",
+      "estimatedTime": "1–2 weeks"
+    }
+  ],
+  "graphql-dev": [
+    {
+      "id": "graphql-dev-1",
+      "title": "Backend & API Foundations",
+      "order": 1,
+      "techs": [
+        "Node.js",
+        "HTTP",
+        "REST"
+      ],
+      "description": "Before GraphQL, you need a solid backend base. Understand HTTP, build a basic Node service, and know what REST does well so you can see what GraphQL improves.",
+      "topics": [
+        "HTTP methods, status codes & headers",
+        "Node.js runtime & npm",
+        "Building a basic REST endpoint",
+        "JSON & request/response cycles",
+        "Environment config & project structure",
+        "Why GraphQL — over-fetching & under-fetching"
+      ],
+      "resources": [
+        {
+          "label": "MDN — HTTP",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "Node.js Docs",
+          "platform": "nodejs.org",
+          "type": "docs"
+        },
+        {
+          "label": "How to GraphQL",
+          "platform": "howtographql.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a tiny REST API, then list every place it over-fetches or needs multiple round trips.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "graphql-dev-2",
+      "title": "GraphQL Fundamentals",
+      "order": 2,
+      "techs": [
+        "GraphQL",
+        "SDL",
+        "Queries"
+      ],
+      "description": "Learn the GraphQL query language and type system from the client's perspective before building a server.",
+      "topics": [
+        "Queries, fields & arguments",
+        "The type system & scalars",
+        "Variables & aliases",
+        "Fragments & directives",
+        "Introspection & the GraphQL Playground",
+        "Mutations vs queries"
+      ],
+      "resources": [
+        {
+          "label": "GraphQL Official Docs",
+          "platform": "graphql.org",
+          "type": "docs"
+        },
+        {
+          "label": "How to GraphQL",
+          "platform": "howtographql.com",
+          "type": "course"
+        },
+        {
+          "label": "Apollo — Learn GraphQL",
+          "platform": "apollographql.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Use a public GraphQL API to write queries with variables, fragments and nested fields.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "graphql-dev-3",
+      "title": "Schema Design with SDL",
+      "order": 3,
+      "techs": [
+        "SDL",
+        "Types",
+        "Interfaces"
+      ],
+      "description": "A GraphQL API is only as good as its schema. Design expressive, evolvable schemas with the Schema Definition Language.",
+      "topics": [
+        "Object types, fields & nullability",
+        "Enums, interfaces & unions",
+        "Input types & arguments",
+        "Pagination patterns — cursors & connections",
+        "Schema-first vs code-first",
+        "Versionless evolution & deprecation"
+      ],
+      "resources": [
+        {
+          "label": "GraphQL — Schemas and Types",
+          "platform": "graphql.org",
+          "type": "docs"
+        },
+        {
+          "label": "Production Ready GraphQL",
+          "platform": "Marc-André Giroux",
+          "type": "book"
+        },
+        {
+          "label": "Apollo Schema Design",
+          "platform": "apollographql.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Design the schema for a blog with users, posts, comments and cursor-based pagination.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "graphql-dev-4",
+      "title": "Resolvers & Context",
+      "order": 4,
+      "techs": [
+        "Resolvers",
+        "Context",
+        "Node.js"
+      ],
+      "description": "Resolvers are where a schema meets your data. Learn the resolver chain, context, and how arguments flow through.",
+      "topics": [
+        "Resolver signature — parent, args, context, info",
+        "The resolver execution chain",
+        "Building & sharing context",
+        "Default resolvers & trivial fields",
+        "Error handling in resolvers",
+        "Resolving nested & related data"
+      ],
+      "resources": [
+        {
+          "label": "GraphQL — Execution",
+          "platform": "graphql.org",
+          "type": "docs"
+        },
+        {
+          "label": "Apollo — Resolvers",
+          "platform": "apollographql.com",
+          "type": "docs"
+        },
+        {
+          "label": "How to GraphQL — Server",
+          "platform": "howtographql.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Implement resolvers for your blog schema against in-memory data, including nested post→author resolution.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "graphql-dev-5",
+      "title": "Apollo Server",
+      "order": 5,
+      "techs": [
+        "Apollo Server",
+        "Express",
+        "TypeScript"
+      ],
+      "description": "Stand up a real GraphQL server with Apollo Server, wire it to Express, and add typed schema and resolvers.",
+      "topics": [
+        "Apollo Server setup & integrations",
+        "Wiring schema + resolvers",
+        "TypeScript types from schema (codegen)",
+        "Plugins & request lifecycle",
+        "Error formatting & logging",
+        "Apollo Sandbox & schema registry"
+      ],
+      "resources": [
+        {
+          "label": "Apollo Server Docs",
+          "platform": "apollographql.com",
+          "type": "docs"
+        },
+        {
+          "label": "GraphQL Code Generator",
+          "platform": "the-guild.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Apollo Odyssey",
+          "platform": "apollographql.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Serve your blog schema with Apollo Server + TypeScript and generate types with GraphQL Code Generator.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "graphql-dev-6",
+      "title": "Data Layer with Prisma & DataLoader",
+      "order": 6,
+      "techs": [
+        "Prisma",
+        "DataLoader",
+        "PostgreSQL"
+      ],
+      "description": "Back your API with a real database and solve the infamous N+1 problem with batching and caching.",
+      "topics": [
+        "Prisma schema, client & relations",
+        "Connecting resolvers to the database",
+        "The N+1 problem in GraphQL",
+        "Batching & caching with DataLoader",
+        "Migrations & seeding",
+        "Transactions across resolvers"
+      ],
+      "resources": [
+        {
+          "label": "Prisma Docs",
+          "platform": "prisma.io",
+          "type": "docs"
+        },
+        {
+          "label": "DataLoader",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Apollo — Fetching from a database",
+          "platform": "apollographql.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Move your blog to PostgreSQL with Prisma and eliminate N+1 queries on post→author with DataLoader.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "graphql-dev-7",
+      "title": "Mutations, Subscriptions & Real-time",
+      "order": 7,
+      "techs": [
+        "Mutations",
+        "Subscriptions",
+        "WebSockets"
+      ],
+      "description": "Make your API write data and push live updates. Implement mutations and real-time subscriptions over WebSockets.",
+      "topics": [
+        "Designing mutations & input types",
+        "Optimistic responses & error states",
+        "Subscriptions over WebSockets (graphql-ws)",
+        "PubSub & event-driven updates",
+        "File uploads",
+        "Idempotency & validation"
+      ],
+      "resources": [
+        {
+          "label": "Apollo — Mutations",
+          "platform": "apollographql.com",
+          "type": "docs"
+        },
+        {
+          "label": "Apollo — Subscriptions",
+          "platform": "apollographql.com",
+          "type": "docs"
+        },
+        {
+          "label": "graphql-ws",
+          "platform": "GitHub",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add create/update/delete mutations and a live 'new comment' subscription to your blog API.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "graphql-dev-8",
+      "title": "Authentication & Authorization",
+      "order": 8,
+      "techs": [
+        "JWT",
+        "Auth",
+        "Directives"
+      ],
+      "description": "Secure a GraphQL API where a single endpoint exposes everything. Authenticate users and authorize at the field level.",
+      "topics": [
+        "Authentication via context",
+        "JWT & sessions",
+        "Field- & type-level authorization",
+        "Auth directives & shields",
+        "Role-based access control",
+        "Protecting mutations & sensitive fields"
+      ],
+      "resources": [
+        {
+          "label": "Apollo — Authentication",
+          "platform": "apollographql.com",
+          "type": "docs"
+        },
+        {
+          "label": "GraphQL Shield",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "OWASP — Authorization",
+          "platform": "owasp.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add JWT auth to your API and restrict post editing to authors with field-level authorization rules.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "graphql-dev-9",
+      "title": "Performance, Caching & Security",
+      "order": 9,
+      "techs": [
+        "Caching",
+        "Query Cost",
+        "Security"
+      ],
+      "description": "Production GraphQL needs guards. Add caching, limit expensive queries, and defend against malicious operations.",
+      "topics": [
+        "Response & field-level caching",
+        "Persisted queries & APQ",
+        "Query depth & complexity limiting",
+        "Rate limiting & timeouts",
+        "Disabling introspection in production",
+        "Monitoring & tracing"
+      ],
+      "resources": [
+        {
+          "label": "Apollo — Performance",
+          "platform": "apollographql.com",
+          "type": "docs"
+        },
+        {
+          "label": "graphql-armor",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Production Ready GraphQL",
+          "platform": "Marc-André Giroux",
+          "type": "book"
+        }
+      ],
+      "challenge": "Add query complexity limits, response caching and persisted queries, then load-test the result.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "graphql-dev-10",
+      "title": "Testing, Federation & Deployment",
+      "order": 10,
+      "techs": [
+        "Testing",
+        "Federation",
+        "Docker"
+      ],
+      "description": "Ship and scale your GraphQL API. Test operations, split a monolith with federation, and deploy.",
+      "topics": [
+        "Integration testing GraphQL operations",
+        "Mocking & schema testing",
+        "Apollo Federation & subgraphs",
+        "Schema checks in CI",
+        "Dockerizing the server",
+        "Deploying & observability"
+      ],
+      "resources": [
+        {
+          "label": "Apollo Federation Docs",
+          "platform": "apollographql.com",
+          "type": "docs"
+        },
+        {
+          "label": "Apollo — Testing",
+          "platform": "apollographql.com",
+          "type": "docs"
+        },
+        {
+          "label": "Docker Docs",
+          "platform": "docs.docker.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add an integration test suite, split one type into a federated subgraph, and deploy the gateway.",
+      "estimatedTime": "2 weeks"
+    }
+  ],
+  "microservices": [
+    {
+      "id": "microservices-1",
+      "title": "Microservices Foundations",
+      "order": 1,
+      "techs": [
+        "Architecture",
+        "Monolith",
+        "SOA"
+      ],
+      "description": "Understand what microservices are and when they help. Compare them with monoliths and learn the trade-offs before building.",
+      "topics": [
+        "Monolith vs microservices vs SOA",
+        "Bounded contexts & service boundaries",
+        "Benefits, costs & fallacies of distributed systems",
+        "The twelve-factor app",
+        "Synchronous vs asynchronous communication",
+        "When NOT to use microservices"
+      ],
+      "resources": [
+        {
+          "label": "microservices.io",
+          "platform": "microservices.io",
+          "type": "docs"
+        },
+        {
+          "label": "The Twelve-Factor App",
+          "platform": "12factor.net",
+          "type": "docs"
+        },
+        {
+          "label": "Building Microservices",
+          "platform": "Sam Newman",
+          "type": "book"
+        }
+      ],
+      "challenge": "Take a sample monolith and map out how you'd decompose it into 3–4 bounded-context services.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "microservices-2",
+      "title": "Service Design & DDD",
+      "order": 2,
+      "techs": [
+        "DDD",
+        "Bounded Contexts",
+        "APIs"
+      ],
+      "description": "Design services that own their domain. Apply domain-driven design to find boundaries and define clean contracts.",
+      "topics": [
+        "Domain-driven design essentials",
+        "Aggregates & bounded contexts",
+        "Defining service contracts",
+        "API versioning & backward compatibility",
+        "Database-per-service",
+        "Decomposition strategies"
+      ],
+      "resources": [
+        {
+          "label": "microservices.io — Patterns",
+          "platform": "microservices.io",
+          "type": "docs"
+        },
+        {
+          "label": "Domain-Driven Design",
+          "platform": "Eric Evans",
+          "type": "book"
+        },
+        {
+          "label": "Building Microservices",
+          "platform": "Sam Newman",
+          "type": "book"
+        }
+      ],
+      "challenge": "Define the API contract and data ownership for two of your decomposed services.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "microservices-3",
+      "title": "Inter-Service Communication",
+      "order": 3,
+      "techs": [
+        "REST",
+        "gRPC",
+        "Protobuf"
+      ],
+      "description": "Connect services reliably. Choose between REST and gRPC and design robust synchronous communication.",
+      "topics": [
+        "REST vs gRPC trade-offs",
+        "Protocol Buffers & schemas",
+        "Client libraries & service discovery",
+        "Timeouts, retries & idempotency",
+        "Contract testing",
+        "Backward-compatible evolution"
+      ],
+      "resources": [
+        {
+          "label": "gRPC Docs",
+          "platform": "grpc.io",
+          "type": "docs"
+        },
+        {
+          "label": "microservices.io — Communication",
+          "platform": "microservices.io",
+          "type": "docs"
+        },
+        {
+          "label": "Protocol Buffers Docs",
+          "platform": "protobuf.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Implement a gRPC contract between two services with timeouts, retries and a contract test.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "microservices-4",
+      "title": "Messaging & Event-Driven",
+      "order": 4,
+      "techs": [
+        "RabbitMQ",
+        "Kafka",
+        "Events"
+      ],
+      "description": "Decouple services with asynchronous messaging. Use RabbitMQ or Kafka to build event-driven architectures.",
+      "topics": [
+        "Message brokers — RabbitMQ vs Kafka",
+        "Pub/sub & work queues",
+        "Event-driven architecture",
+        "Event sourcing & CQRS basics",
+        "Delivery guarantees & ordering",
+        "Dead-letter queues & retries"
+      ],
+      "resources": [
+        {
+          "label": "RabbitMQ Tutorials",
+          "platform": "rabbitmq.com",
+          "type": "course"
+        },
+        {
+          "label": "Apache Kafka Docs",
+          "platform": "kafka.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "microservices.io — Messaging",
+          "platform": "microservices.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Wire your services together with an event bus so one publishes events the other consumes.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "microservices-5",
+      "title": "Containerization with Docker",
+      "order": 5,
+      "techs": [
+        "Docker",
+        "Compose",
+        "Images"
+      ],
+      "description": "Package each service as a container. Build images, run multi-service stacks locally, and standardize environments.",
+      "topics": [
+        "Dockerfiles & multi-stage builds",
+        "Images, layers & registries",
+        "Docker Compose for local stacks",
+        "Networking between containers",
+        "Volumes & persistence",
+        "Image security & size optimization"
+      ],
+      "resources": [
+        {
+          "label": "Docker Docs",
+          "platform": "docs.docker.com",
+          "type": "docs"
+        },
+        {
+          "label": "Docker Compose Docs",
+          "platform": "docs.docker.com",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana — Docker",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Containerize all your services and run the whole system locally with Docker Compose.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "microservices-6",
+      "title": "Orchestration with Kubernetes",
+      "order": 6,
+      "techs": [
+        "Kubernetes",
+        "Helm",
+        "Deployments"
+      ],
+      "description": "Run services at scale. Deploy, scale and self-heal your containers with Kubernetes.",
+      "topics": [
+        "Pods, deployments & services",
+        "ConfigMaps & secrets",
+        "Scaling & rolling updates",
+        "Ingress & networking",
+        "Health probes & resource limits",
+        "Packaging with Helm"
+      ],
+      "resources": [
+        {
+          "label": "Kubernetes Docs",
+          "platform": "kubernetes.io",
+          "type": "docs"
+        },
+        {
+          "label": "Helm Docs",
+          "platform": "helm.sh",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana — Kubernetes",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy your service stack to Kubernetes with deployments, services, config and a Helm chart.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "microservices-7",
+      "title": "API Gateway & Service Mesh",
+      "order": 7,
+      "techs": [
+        "API Gateway",
+        "Istio",
+        "Envoy"
+      ],
+      "description": "Manage cross-cutting concerns at the edge and between services with gateways and a service mesh.",
+      "topics": [
+        "API gateway responsibilities",
+        "Routing, auth & rate limiting at the edge",
+        "Service mesh concepts (Istio/Linkerd)",
+        "mTLS & traffic management",
+        "Observability via the mesh",
+        "Canary & blue-green routing"
+      ],
+      "resources": [
+        {
+          "label": "Istio Docs",
+          "platform": "istio.io",
+          "type": "docs"
+        },
+        {
+          "label": "Kong Gateway Docs",
+          "platform": "docs.konghq.com",
+          "type": "docs"
+        },
+        {
+          "label": "microservices.io — API Gateway",
+          "platform": "microservices.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Put an API gateway in front of your services with centralized auth and rate limiting.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "microservices-8",
+      "title": "Data Management & Saga",
+      "order": 8,
+      "techs": [
+        "Saga",
+        "CQRS",
+        "Outbox"
+      ],
+      "description": "Handle data consistency across services. Implement distributed transactions with the saga pattern.",
+      "topics": [
+        "Database-per-service consequences",
+        "Distributed transactions & the saga pattern",
+        "Choreography vs orchestration",
+        "The transactional outbox pattern",
+        "Eventual consistency",
+        "Idempotency & deduplication"
+      ],
+      "resources": [
+        {
+          "label": "microservices.io — Saga",
+          "platform": "microservices.io",
+          "type": "docs"
+        },
+        {
+          "label": "microservices.io — Outbox",
+          "platform": "microservices.io",
+          "type": "docs"
+        },
+        {
+          "label": "Building Microservices",
+          "platform": "Sam Newman",
+          "type": "book"
+        }
+      ],
+      "challenge": "Implement an order/payment saga across two services with compensating transactions.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "microservices-9",
+      "title": "Observability & Resilience",
+      "order": 9,
+      "techs": [
+        "Prometheus",
+        "Grafana",
+        "OpenTelemetry"
+      ],
+      "description": "Operate distributed systems with confidence. Add metrics, logs and traces, and build in resilience.",
+      "topics": [
+        "Centralized logging",
+        "Metrics with Prometheus & Grafana",
+        "Distributed tracing with OpenTelemetry",
+        "Circuit breakers, retries & bulkheads",
+        "Health checks & graceful degradation",
+        "SLOs & alerting"
+      ],
+      "resources": [
+        {
+          "label": "OpenTelemetry Docs",
+          "platform": "opentelemetry.io",
+          "type": "docs"
+        },
+        {
+          "label": "Prometheus Docs",
+          "platform": "prometheus.io",
+          "type": "docs"
+        },
+        {
+          "label": "Grafana Docs",
+          "platform": "grafana.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Instrument every service with tracing and metrics, then add circuit breakers to remote calls.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "microservices-10",
+      "title": "CI/CD & Deployment",
+      "order": 10,
+      "techs": [
+        "GitHub Actions",
+        "ArgoCD",
+        "GitOps"
+      ],
+      "description": "Automate delivery of many services. Build pipelines, adopt GitOps, and deploy safely and often.",
+      "topics": [
+        "Per-service CI pipelines",
+        "Container registries & versioning",
+        "GitOps with ArgoCD",
+        "Progressive delivery — canary & blue-green",
+        "Secrets & environment promotion",
+        "Rollbacks & release strategies"
+      ],
+      "resources": [
+        {
+          "label": "GitHub Actions Docs",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Argo CD Docs",
+          "platform": "argo-cd.readthedocs.io",
+          "type": "docs"
+        },
+        {
+          "label": "GitOps Guide",
+          "platform": "gitops.tech",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build CI/CD for each service and deploy the whole system to Kubernetes via GitOps with ArgoCD.",
+      "estimatedTime": "2 weeks"
+    }
+  ],
+  "go-dev": [
+    {
+      "id": "go-dev-1",
+      "title": "Go Fundamentals",
+      "order": 1,
+      "techs": [
+        "Go",
+        "Variables",
+        "Functions"
+      ],
+      "description": "Start with Go's clean, minimal syntax. Learn the type system, control flow, and how Go's simplicity is its superpower.",
+      "topics": [
+        "Variables, constants & basic types",
+        "Functions, multiple returns & defer",
+        "Control flow — if, for, switch",
+        "Arrays, slices & maps",
+        "Pointers & value vs reference semantics",
+        "Packages & the go command"
+      ],
+      "resources": [
+        {
+          "label": "A Tour of Go",
+          "platform": "go.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Go by Example",
+          "platform": "gobyexample.com",
+          "type": "docs"
+        },
+        {
+          "label": "Learn Go with Tests",
+          "platform": "quii.gitbook.io",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a CLI tool that reads a text file and prints word, line and character counts.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "go-dev-2",
+      "title": "Tooling & Project Structure",
+      "order": 2,
+      "techs": [
+        "Go Modules",
+        "gofmt",
+        "go test"
+      ],
+      "description": "Learn the toolchain that makes Go productive — modules, formatting, linting and the standard project layout.",
+      "topics": [
+        "Go modules & dependency management",
+        "Standard project layout",
+        "gofmt, go vet & golangci-lint",
+        "Error handling idioms & wrapping",
+        "Reading the standard library",
+        "Documentation with godoc"
+      ],
+      "resources": [
+        {
+          "label": "Go Modules Reference",
+          "platform": "go.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Effective Go",
+          "platform": "go.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Standard Go Project Layout",
+          "platform": "GitHub",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Restructure your CLI tool into a proper module with packages, formatted code, and a passing go vet.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "go-dev-3",
+      "title": "Structs, Interfaces & Generics",
+      "order": 3,
+      "techs": [
+        "Structs",
+        "Interfaces",
+        "Generics"
+      ],
+      "description": "Model your domain the Go way. Compose behavior with interfaces and write reusable code with generics.",
+      "topics": [
+        "Structs, methods & embedding",
+        "Interfaces & implicit satisfaction",
+        "Composition over inheritance",
+        "Generics — type parameters & constraints",
+        "The empty interface & type assertions",
+        "Designing small, focused interfaces"
+      ],
+      "resources": [
+        {
+          "label": "Effective Go — Interfaces",
+          "platform": "go.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Go Generics Tutorial",
+          "platform": "go.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Ardan Labs — Go Blog",
+          "platform": "ardanlabs.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a generic in-memory store with a Repository interface and two concrete implementations.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "go-dev-4",
+      "title": "Concurrency — Goroutines & Channels",
+      "order": 4,
+      "techs": [
+        "Goroutines",
+        "Channels",
+        "sync"
+      ],
+      "description": "Concurrency is Go's headline feature. Master goroutines, channels and the patterns for safe concurrent code.",
+      "topics": [
+        "Goroutines & the scheduler",
+        "Channels — buffered & unbuffered",
+        "select statements & timeouts",
+        "sync.WaitGroup, Mutex & once",
+        "context for cancellation & deadlines",
+        "Common concurrency patterns & pitfalls"
+      ],
+      "resources": [
+        {
+          "label": "Go Concurrency Patterns",
+          "platform": "go.dev",
+          "type": "video"
+        },
+        {
+          "label": "Go by Example — Goroutines",
+          "platform": "gobyexample.com",
+          "type": "docs"
+        },
+        {
+          "label": "Concurrency in Go",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a concurrent URL checker that fetches a list of sites in parallel with a worker pool and a timeout.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "go-dev-5",
+      "title": "Building HTTP Services",
+      "order": 5,
+      "techs": [
+        "net/http",
+        "Gin",
+        "Chi"
+      ],
+      "description": "Build web services with Go's standard library, then add a router like Gin or Chi for ergonomics.",
+      "topics": [
+        "net/http server & handlers",
+        "Routing with Gin or Chi",
+        "Request parsing & JSON encoding",
+        "Middleware & handler composition",
+        "Graceful shutdown",
+        "Structuring a service codebase"
+      ],
+      "resources": [
+        {
+          "label": "net/http Docs",
+          "platform": "go.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Gin Docs",
+          "platform": "gin-gonic.com",
+          "type": "docs"
+        },
+        {
+          "label": "Chi Router",
+          "platform": "GitHub",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a JSON REST API for a bookmarks service with routing, middleware and graceful shutdown.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "go-dev-6",
+      "title": "Working with Databases",
+      "order": 6,
+      "techs": [
+        "database/sql",
+        "pgx",
+        "sqlc"
+      ],
+      "description": "Persist data from Go. Use database/sql and pgx for PostgreSQL, and generate type-safe queries with sqlc.",
+      "topics": [
+        "database/sql & connection pooling",
+        "pgx driver for PostgreSQL",
+        "Type-safe queries with sqlc",
+        "Migrations with golang-migrate",
+        "Transactions & error handling",
+        "Repository pattern in Go"
+      ],
+      "resources": [
+        {
+          "label": "pgx Docs",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "sqlc Docs",
+          "platform": "sqlc.dev",
+          "type": "docs"
+        },
+        {
+          "label": "database/sql Tutorial",
+          "platform": "go.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Back your bookmarks API with PostgreSQL using sqlc-generated queries and migration files.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "go-dev-7",
+      "title": "API Design, Middleware & Auth",
+      "order": 7,
+      "techs": [
+        "REST",
+        "JWT",
+        "Validation"
+      ],
+      "description": "Turn a working service into a robust API with consistent design, authentication and request validation.",
+      "topics": [
+        "RESTful design & versioning",
+        "JWT authentication middleware",
+        "Request validation",
+        "Structured error responses",
+        "Rate limiting & CORS",
+        "Configuration & secrets management"
+      ],
+      "resources": [
+        {
+          "label": "JWT.io Introduction",
+          "platform": "jwt.io",
+          "type": "docs"
+        },
+        {
+          "label": "Go Web Examples",
+          "platform": "gowebexamples.com",
+          "type": "docs"
+        },
+        {
+          "label": "Let's Go Further",
+          "platform": "Alex Edwards",
+          "type": "book"
+        }
+      ],
+      "challenge": "Add JWT auth, input validation and rate limiting to the bookmarks API with consistent JSON errors.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "go-dev-8",
+      "title": "Testing & Benchmarking",
+      "order": 8,
+      "techs": [
+        "go test",
+        "testify",
+        "Benchmarks"
+      ],
+      "description": "Write tests the idiomatic Go way — table-driven tests, mocks, benchmarks and coverage.",
+      "topics": [
+        "Table-driven tests",
+        "httptest for handler testing",
+        "Mocks & interfaces for test seams",
+        "Benchmarks & profiling",
+        "Test coverage & race detector",
+        "Integration tests with a real database"
+      ],
+      "resources": [
+        {
+          "label": "Go Testing Docs",
+          "platform": "go.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Learn Go with Tests",
+          "platform": "quii.gitbook.io",
+          "type": "book"
+        },
+        {
+          "label": "testify",
+          "platform": "GitHub",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add table-driven unit tests, httptest handler tests, and a benchmark to your API, running with -race.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "go-dev-9",
+      "title": "Observability & Performance",
+      "order": 9,
+      "techs": [
+        "pprof",
+        "slog",
+        "Prometheus"
+      ],
+      "description": "Make your service observable and fast. Add structured logging, metrics and tracing, and profile hot paths.",
+      "topics": [
+        "Structured logging with slog",
+        "Metrics with Prometheus",
+        "Distributed tracing with OpenTelemetry",
+        "Profiling with pprof",
+        "Memory & allocation optimization",
+        "Load testing your API"
+      ],
+      "resources": [
+        {
+          "label": "pprof Docs",
+          "platform": "go.dev",
+          "type": "docs"
+        },
+        {
+          "label": "OpenTelemetry Go",
+          "platform": "opentelemetry.io",
+          "type": "docs"
+        },
+        {
+          "label": "Prometheus Go Client",
+          "platform": "prometheus.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Instrument the bookmarks API with slog, expose Prometheus metrics, and profile one endpoint with pprof.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "go-dev-10",
+      "title": "Containers, gRPC & Deployment",
+      "order": 10,
+      "techs": [
+        "Docker",
+        "gRPC",
+        "GitHub Actions"
+      ],
+      "description": "Ship your Go service. Build tiny container images, expose a gRPC interface, and automate deployment.",
+      "topics": [
+        "Multi-stage Docker builds for tiny images",
+        "gRPC & protocol buffers",
+        "Service-to-service communication",
+        "GitHub Actions CI/CD for Go",
+        "Deploying to a container platform",
+        "Health checks & zero-downtime deploys"
+      ],
+      "resources": [
+        {
+          "label": "gRPC Go Quickstart",
+          "platform": "grpc.io",
+          "type": "docs"
+        },
+        {
+          "label": "Docker Docs",
+          "platform": "docs.docker.com",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana — Docker",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Containerize the API with a multi-stage build, add a gRPC endpoint, and deploy via a GitHub Actions pipeline.",
+      "estimatedTime": "1–2 weeks"
+    }
+  ],
+  "rust-dev": [
+    {
+      "id": "rust-dev-1",
+      "title": "Rust Fundamentals",
+      "order": 1,
+      "techs": [
+        "Rust",
+        "Cargo",
+        "rustc"
+      ],
+      "description": "Begin with Rust's syntax and the toolchain. Learn variables, types and control flow while getting comfortable with the compiler.",
+      "topics": [
+        "Variables, mutability & shadowing",
+        "Scalar & compound types",
+        "Functions & expressions",
+        "Control flow — if, loop, while, for",
+        "Cargo, crates & rustc basics",
+        "Reading compiler errors"
+      ],
+      "resources": [
+        {
+          "label": "The Rust Book",
+          "platform": "doc.rust-lang.org",
+          "type": "book"
+        },
+        {
+          "label": "Rustlings Exercises",
+          "platform": "GitHub",
+          "type": "course"
+        },
+        {
+          "label": "Rust by Example",
+          "platform": "doc.rust-lang.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a CLI temperature converter that parses arguments and handles invalid input gracefully.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "rust-dev-2",
+      "title": "Ownership, Borrowing & Lifetimes",
+      "order": 2,
+      "techs": [
+        "Ownership",
+        "Borrowing",
+        "Lifetimes"
+      ],
+      "description": "The heart of Rust. Understand ownership, references and lifetimes — the rules that give Rust memory safety without a garbage collector.",
+      "topics": [
+        "Ownership & move semantics",
+        "Borrowing & references",
+        "Mutable vs immutable borrows",
+        "Slices & string handling",
+        "Lifetimes & the borrow checker",
+        "The stack, the heap & Box"
+      ],
+      "resources": [
+        {
+          "label": "The Rust Book — Ownership",
+          "platform": "doc.rust-lang.org",
+          "type": "book"
+        },
+        {
+          "label": "Rust by Example — Scoping",
+          "platform": "doc.rust-lang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Let's Get Rusty — Ownership",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a function library that manipulates strings and vectors using only borrows — no unnecessary clones.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "rust-dev-3",
+      "title": "Traits, Generics & Error Handling",
+      "order": 3,
+      "techs": [
+        "Traits",
+        "Generics",
+        "Result"
+      ],
+      "description": "Write reusable, expressive Rust. Abstract behavior with traits and generics, and handle failure with Result and the ? operator.",
+      "topics": [
+        "Traits & trait bounds",
+        "Generics & monomorphization",
+        "Trait objects & dynamic dispatch",
+        "Result, Option & the ? operator",
+        "Custom error types & thiserror",
+        "Pattern matching & enums"
+      ],
+      "resources": [
+        {
+          "label": "The Rust Book — Traits",
+          "platform": "doc.rust-lang.org",
+          "type": "book"
+        },
+        {
+          "label": "Rust Error Handling",
+          "platform": "doc.rust-lang.org",
+          "type": "docs"
+        },
+        {
+          "label": "thiserror & anyhow",
+          "platform": "docs.rs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a config parser that returns a custom error enum and propagates failures with the ? operator.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "rust-dev-4",
+      "title": "Collections, Iterators & Closures",
+      "order": 4,
+      "techs": [
+        "Iterators",
+        "Closures",
+        "Collections"
+      ],
+      "description": "Use Rust's powerful standard library. Chain iterators, capture environment with closures, and pick the right collection.",
+      "topics": [
+        "Vec, HashMap & HashSet",
+        "Iterator trait & adapters",
+        "map, filter, fold & collect",
+        "Closures & capture modes",
+        "Rc, RefCell & interior mutability",
+        "Smart pointers overview"
+      ],
+      "resources": [
+        {
+          "label": "The Rust Book — Iterators",
+          "platform": "doc.rust-lang.org",
+          "type": "book"
+        },
+        {
+          "label": "Rust by Example — Collections",
+          "platform": "doc.rust-lang.org",
+          "type": "docs"
+        },
+        {
+          "label": "std Collections Docs",
+          "platform": "doc.rust-lang.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a word-frequency counter that reads a file and prints the top 10 words using iterator chains.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "rust-dev-5",
+      "title": "Cargo, Crates & Modules",
+      "order": 5,
+      "techs": [
+        "Cargo",
+        "Modules",
+        "crates.io"
+      ],
+      "description": "Organize and share real Rust projects. Master the module system, workspaces and the crate ecosystem.",
+      "topics": [
+        "Module system — mod, pub, use",
+        "Workspaces & multi-crate projects",
+        "Dependencies & features",
+        "Publishing to crates.io",
+        "Documentation tests & rustdoc",
+        "Common crates — serde, clap, tracing"
+      ],
+      "resources": [
+        {
+          "label": "The Cargo Book",
+          "platform": "doc.rust-lang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Rust API Guidelines",
+          "platform": "rust-lang.github.io",
+          "type": "docs"
+        },
+        {
+          "label": "serde Docs",
+          "platform": "serde.rs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Split your word-counter into a library + binary crate, add serde and clap, and document the public API.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "rust-dev-6",
+      "title": "Async Rust with Tokio",
+      "order": 6,
+      "techs": [
+        "async/await",
+        "Tokio",
+        "Futures"
+      ],
+      "description": "Write high-performance async Rust. Understand futures, the async/await model, and the Tokio runtime.",
+      "topics": [
+        "Futures & the async/await model",
+        "The Tokio runtime & tasks",
+        "Async I/O & channels",
+        "Concurrency with join & select",
+        "Shared state with Arc & Mutex",
+        "Streams & backpressure"
+      ],
+      "resources": [
+        {
+          "label": "Tokio Tutorial",
+          "platform": "tokio.rs",
+          "type": "docs"
+        },
+        {
+          "label": "Async Book",
+          "platform": "rust-lang.github.io",
+          "type": "book"
+        },
+        {
+          "label": "Jon Gjengset — Crust of Rust",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build an async TCP echo server with Tokio that handles many concurrent connections.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "rust-dev-7",
+      "title": "Web Services with Axum & Actix",
+      "order": 7,
+      "techs": [
+        "Axum",
+        "Actix Web",
+        "Tower"
+      ],
+      "description": "Build production web services in Rust. Create routes, extractors and middleware with Axum or Actix Web.",
+      "topics": [
+        "Routing & handlers",
+        "Extractors & typed requests",
+        "JSON with serde",
+        "Middleware with Tower",
+        "Application state & dependency injection",
+        "Error handling & responses"
+      ],
+      "resources": [
+        {
+          "label": "Axum Docs",
+          "platform": "docs.rs",
+          "type": "docs"
+        },
+        {
+          "label": "Actix Web Docs",
+          "platform": "actix.rs",
+          "type": "docs"
+        },
+        {
+          "label": "Zero To Production In Rust",
+          "platform": "Luca Palmieri",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a JSON REST API for a link shortener with Axum, including extractors and typed error responses.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "rust-dev-8",
+      "title": "Databases with SQLx & Diesel",
+      "order": 8,
+      "techs": [
+        "SQLx",
+        "Diesel",
+        "PostgreSQL"
+      ],
+      "description": "Persist data safely. Use SQLx for compile-time-checked queries or Diesel's ORM against PostgreSQL.",
+      "topics": [
+        "SQLx — async, compile-time checked queries",
+        "Diesel ORM & schema",
+        "Migrations",
+        "Connection pooling",
+        "Transactions",
+        "Mapping rows to structs"
+      ],
+      "resources": [
+        {
+          "label": "SQLx Docs",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Diesel Guides",
+          "platform": "diesel.rs",
+          "type": "docs"
+        },
+        {
+          "label": "Zero To Production In Rust",
+          "platform": "Luca Palmieri",
+          "type": "book"
+        }
+      ],
+      "challenge": "Back your link shortener with PostgreSQL using SQLx, with migrations and a connection pool.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "rust-dev-9",
+      "title": "Testing, Benchmarking & Unsafe",
+      "order": 9,
+      "techs": [
+        "cargo test",
+        "criterion",
+        "unsafe"
+      ],
+      "description": "Ensure correctness and speed. Write tests and benchmarks, and learn when (and when not) to reach for unsafe.",
+      "topics": [
+        "Unit & integration tests",
+        "Documentation tests",
+        "Benchmarking with criterion",
+        "Property-based testing",
+        "Unsafe Rust & raw pointers",
+        "FFI basics"
+      ],
+      "resources": [
+        {
+          "label": "The Rust Book — Testing",
+          "platform": "doc.rust-lang.org",
+          "type": "book"
+        },
+        {
+          "label": "criterion.rs",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "The Rustonomicon",
+          "platform": "doc.rust-lang.org",
+          "type": "book"
+        }
+      ],
+      "challenge": "Add an integration test suite and a criterion benchmark to your API, then profile the hot path.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "rust-dev-10",
+      "title": "WebAssembly & Production Deployment",
+      "order": 10,
+      "techs": [
+        "WebAssembly",
+        "wasm-bindgen",
+        "Docker"
+      ],
+      "description": "Take Rust to the browser and to production. Compile to WebAssembly and deploy a lean, fast Rust service.",
+      "topics": [
+        "Compiling Rust to WebAssembly",
+        "wasm-bindgen & JS interop",
+        "wasm-pack & bundling",
+        "Multi-stage Docker builds",
+        "Cross-compilation & static binaries",
+        "CI/CD & deployment"
+      ],
+      "resources": [
+        {
+          "label": "Rust and WebAssembly Book",
+          "platform": "rustwasm.github.io",
+          "type": "book"
+        },
+        {
+          "label": "wasm-bindgen Guide",
+          "platform": "rustwasm.github.io",
+          "type": "docs"
+        },
+        {
+          "label": "Docker Docs",
+          "platform": "docs.docker.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Compile a Rust module to WebAssembly and call it from a web page, then containerize your API for deployment.",
+      "estimatedTime": "2 weeks"
+    }
+  ],
+  "java-spring": [
+    {
+      "id": "java-spring-1",
+      "title": "Java Fundamentals",
+      "order": 1,
+      "techs": [
+        "Java",
+        "JVM",
+        "JDK"
+      ],
+      "description": "Start with the Java language and the JVM. Learn syntax, types and the compile-run cycle that underpins Spring.",
+      "topics": [
+        "Variables, types & operators",
+        "Control flow & loops",
+        "Methods & parameters",
+        "Arrays & strings",
+        "The JVM, JDK & JRE",
+        "Compiling & running with javac/java"
+      ],
+      "resources": [
+        {
+          "label": "Java Tutorials (Oracle)",
+          "platform": "dev.java",
+          "type": "docs"
+        },
+        {
+          "label": "Java Programming — MOOC",
+          "platform": "mooc.fi",
+          "type": "course"
+        },
+        {
+          "label": "Baeldung",
+          "platform": "baeldung.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a CLI bank account simulator with deposits, withdrawals and validation.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "java-spring-2",
+      "title": "OOP & Core Java",
+      "order": 2,
+      "techs": [
+        "OOP",
+        "Interfaces",
+        "Exceptions"
+      ],
+      "description": "Model your domain with object-oriented Java. Master classes, inheritance, interfaces and exception handling.",
+      "topics": [
+        "Classes, objects & encapsulation",
+        "Inheritance & polymorphism",
+        "Interfaces & abstract classes",
+        "Records, enums & sealed classes",
+        "Exception handling",
+        "equals, hashCode & toString"
+      ],
+      "resources": [
+        {
+          "label": "Java Tutorials — OOP",
+          "platform": "dev.java",
+          "type": "docs"
+        },
+        {
+          "label": "Baeldung — Java",
+          "platform": "baeldung.com",
+          "type": "docs"
+        },
+        {
+          "label": "Effective Java",
+          "platform": "Joshua Bloch",
+          "type": "book"
+        }
+      ],
+      "challenge": "Refactor your bank simulator into a clean OOP model with interfaces and custom exceptions.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "java-spring-3",
+      "title": "Collections, Generics & Streams",
+      "order": 3,
+      "techs": [
+        "Collections",
+        "Generics",
+        "Streams"
+      ],
+      "description": "Use Java's powerful standard library. Work with collections, write generic code, and process data with the Stream API.",
+      "topics": [
+        "List, Set, Map & their implementations",
+        "Generics & bounded types",
+        "The Stream API — map, filter, collect",
+        "Optional & null handling",
+        "Lambdas & functional interfaces",
+        "Comparators & sorting"
+      ],
+      "resources": [
+        {
+          "label": "Java Collections Tutorial",
+          "platform": "dev.java",
+          "type": "docs"
+        },
+        {
+          "label": "Baeldung — Streams",
+          "platform": "baeldung.com",
+          "type": "docs"
+        },
+        {
+          "label": "Modern Java in Action",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Process a list of transactions with streams to produce per-category totals and summaries.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "java-spring-4",
+      "title": "Build Tools & Spring Basics",
+      "order": 4,
+      "techs": [
+        "Maven",
+        "Spring",
+        "DI"
+      ],
+      "description": "Enter the Spring ecosystem. Manage builds with Maven and understand dependency injection — Spring's core idea.",
+      "topics": [
+        "Maven project structure & lifecycle",
+        "Dependencies & the POM",
+        "Inversion of Control & DI",
+        "Spring beans & the application context",
+        "Configuration & profiles",
+        "Spring Boot starters & auto-configuration"
+      ],
+      "resources": [
+        {
+          "label": "Spring Framework Docs",
+          "platform": "spring.io",
+          "type": "docs"
+        },
+        {
+          "label": "Maven Getting Started",
+          "platform": "maven.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "Spring Boot Guides",
+          "platform": "spring.io",
+          "type": "course"
+        }
+      ],
+      "challenge": "Create a Spring Boot project with Maven and wire two beans together via constructor injection.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "java-spring-5",
+      "title": "Spring Boot & REST APIs",
+      "order": 5,
+      "techs": [
+        "Spring Boot",
+        "REST",
+        "Validation"
+      ],
+      "description": "Build production REST APIs with Spring Boot. Create controllers, handle requests, and validate input.",
+      "topics": [
+        "REST controllers & request mapping",
+        "Request/response bodies & DTOs",
+        "Bean validation",
+        "Exception handling with @ControllerAdvice",
+        "Configuration properties",
+        "API documentation with OpenAPI"
+      ],
+      "resources": [
+        {
+          "label": "Spring Boot Docs",
+          "platform": "spring.io",
+          "type": "docs"
+        },
+        {
+          "label": "Building a RESTful Service",
+          "platform": "spring.io",
+          "type": "course"
+        },
+        {
+          "label": "Baeldung — Spring Boot",
+          "platform": "baeldung.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a REST API for a library service with controllers, DTOs, validation and global error handling.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "java-spring-6",
+      "title": "Spring Data & JPA/Hibernate",
+      "order": 6,
+      "techs": [
+        "Spring Data",
+        "JPA",
+        "Hibernate"
+      ],
+      "description": "Persist data the Spring way. Map entities with JPA/Hibernate and query effortlessly with Spring Data repositories.",
+      "topics": [
+        "JPA entities & relationships",
+        "Hibernate & the persistence context",
+        "Spring Data repositories",
+        "Derived & custom queries (JPQL)",
+        "Transactions with @Transactional",
+        "Migrations with Flyway"
+      ],
+      "resources": [
+        {
+          "label": "Spring Data JPA Docs",
+          "platform": "spring.io",
+          "type": "docs"
+        },
+        {
+          "label": "Hibernate ORM Docs",
+          "platform": "hibernate.org",
+          "type": "docs"
+        },
+        {
+          "label": "Baeldung — Spring Data JPA",
+          "platform": "baeldung.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Back your library API with PostgreSQL using JPA entities, repositories and Flyway migrations.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "java-spring-7",
+      "title": "Spring Security",
+      "order": 7,
+      "techs": [
+        "Spring Security",
+        "JWT",
+        "OAuth2"
+      ],
+      "description": "Secure your Spring application. Configure authentication and authorization with Spring Security and JWT.",
+      "topics": [
+        "Spring Security architecture",
+        "Authentication & user details",
+        "JWT-based stateless auth",
+        "Method & URL authorization",
+        "OAuth2 & resource servers",
+        "Password encoding & CSRF"
+      ],
+      "resources": [
+        {
+          "label": "Spring Security Docs",
+          "platform": "spring.io",
+          "type": "docs"
+        },
+        {
+          "label": "Baeldung — Spring Security",
+          "platform": "baeldung.com",
+          "type": "docs"
+        },
+        {
+          "label": "Spring Security OAuth2",
+          "platform": "spring.io",
+          "type": "course"
+        }
+      ],
+      "challenge": "Add JWT authentication and role-based authorization to your library API.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "java-spring-8",
+      "title": "Testing",
+      "order": 8,
+      "techs": [
+        "JUnit5",
+        "Mockito",
+        "Testcontainers"
+      ],
+      "description": "Test Spring applications thoroughly with JUnit, Mockito and Testcontainers for realistic integration tests.",
+      "topics": [
+        "JUnit 5 fundamentals",
+        "Mocking with Mockito",
+        "@SpringBootTest & slices",
+        "MockMvc for controller tests",
+        "Integration tests with Testcontainers",
+        "Test coverage & CI"
+      ],
+      "resources": [
+        {
+          "label": "Spring Testing Docs",
+          "platform": "spring.io",
+          "type": "docs"
+        },
+        {
+          "label": "Testcontainers Docs",
+          "platform": "testcontainers.com",
+          "type": "docs"
+        },
+        {
+          "label": "Baeldung — Testing",
+          "platform": "baeldung.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write unit tests with Mockito and an integration test with Testcontainers against real PostgreSQL.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "java-spring-9",
+      "title": "Messaging & Microservices",
+      "order": 9,
+      "techs": [
+        "Spring Cloud",
+        "Kafka",
+        "Resilience4j"
+      ],
+      "description": "Scale Spring into distributed systems. Communicate via messaging and adopt microservice patterns with Spring Cloud.",
+      "topics": [
+        "Event-driven design with Kafka/RabbitMQ",
+        "Spring Cloud config & discovery",
+        "API gateway & load balancing",
+        "Resilience with Resilience4j",
+        "Distributed tracing",
+        "Service-to-service communication"
+      ],
+      "resources": [
+        {
+          "label": "Spring Cloud Docs",
+          "platform": "spring.io",
+          "type": "docs"
+        },
+        {
+          "label": "Spring for Apache Kafka",
+          "platform": "spring.io",
+          "type": "docs"
+        },
+        {
+          "label": "Baeldung — Spring Cloud",
+          "platform": "baeldung.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Split one feature into a second service communicating over Kafka with circuit-breaker protection.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "java-spring-10",
+      "title": "Packaging & Deployment",
+      "order": 10,
+      "techs": [
+        "Docker",
+        "Actuator",
+        "CI/CD"
+      ],
+      "description": "Ship your Spring app. Build container images, expose health and metrics, and automate deployment.",
+      "topics": [
+        "Building fat jars & layered images",
+        "Spring Boot Actuator — health & metrics",
+        "Dockerizing a Spring Boot app",
+        "Externalized configuration & secrets",
+        "GitHub Actions CI/CD",
+        "Deploying to the cloud"
+      ],
+      "resources": [
+        {
+          "label": "Spring Boot Actuator Docs",
+          "platform": "spring.io",
+          "type": "docs"
+        },
+        {
+          "label": "Spring Boot Docker Guide",
+          "platform": "spring.io",
+          "type": "course"
+        },
+        {
+          "label": "Docker Docs",
+          "platform": "docs.docker.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Containerize your service with a layered image, expose Actuator metrics, and deploy via CI.",
+      "estimatedTime": "1–2 weeks"
+    }
+  ],
+  "python-backend": [
+    {
+      "id": "py-1",
+      "title": "Python Fundamentals",
+      "order": 1,
+      "techs": [
+        "Python",
+        "pip",
+        "venv",
+        "Data Types"
+      ],
+      "description": "Python is the most readable language in backend development. Master its syntax, type system, built-in data structures, and the packaging ecosystem before diving into frameworks.",
+      "topics": [
+        "Variables, types, strings, numbers, booleans",
+        "Lists, tuples, sets, dicts — operations and comprehensions",
+        "Control flow — if/else, for/while, break/continue",
+        "Functions — args, kwargs, default values, return",
+        "Modules & packages — import, __init__, pip, venv",
+        "File I/O — open, read, write, with statement"
+      ],
+      "resources": [
+        {
+          "label": "Python Official Tutorial",
+          "platform": "docs.python.org",
+          "type": "docs"
+        },
+        {
+          "label": "Automate the Boring Stuff with Python",
+          "platform": "automatetheboringstuff.com",
+          "type": "book"
+        },
+        {
+          "label": "CS50P — Python Course",
+          "platform": "edX",
+          "type": "course"
+        },
+        {
+          "label": "Corey Schafer — Python Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a CLI task manager in Python — add, list, mark complete, and delete tasks, persisted to a JSON file.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "py-2",
+      "title": "Python Advanced",
+      "order": 2,
+      "techs": [
+        "OOP",
+        "Decorators",
+        "Generators",
+        "Type Hints"
+      ],
+      "description": "Go deeper into Python's powerful features. Writing idiomatic Python — with clean OOP, decorators, generators, and type hints — is what separates junior from senior Python developers.",
+      "topics": [
+        "OOP — classes, inheritance, dunder methods, dataclasses",
+        "Decorators — function decorators, wraps, parameterized decorators",
+        "Generators & iterators — yield, send, StopIteration",
+        "Context managers — __enter__/__exit__, contextlib",
+        "Type hints — annotations, Optional, Union, TypedDict, mypy",
+        "Error handling — custom exceptions, exception chaining"
+      ],
+      "resources": [
+        {
+          "label": "Fluent Python (book)",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Real Python — Advanced Python",
+          "platform": "realpython.com",
+          "type": "docs"
+        },
+        {
+          "label": "mypy Docs",
+          "platform": "mypy-lang.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Refactor your CLI task manager using a proper class-based architecture with decorators for logging and a custom TaskNotFound exception.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "py-3",
+      "title": "FastAPI & API Design",
+      "order": 3,
+      "techs": [
+        "FastAPI",
+        "Pydantic",
+        "Uvicorn",
+        "OpenAPI"
+      ],
+      "description": "FastAPI is the modern Python web framework — it's fast, typed, async-first, and auto-generates OpenAPI documentation. Learn to build clean, validated REST APIs.",
+      "topics": [
+        "FastAPI project structure — routers, dependencies, lifespan",
+        "Pydantic models — BaseModel, validators, field types",
+        "Path parameters, query params, request body",
+        "Dependency injection — Depends(), shared resources",
+        "HTTPException & custom exception handlers",
+        "Automatic OpenAPI & Swagger UI"
+      ],
+      "resources": [
+        {
+          "label": "FastAPI Official Docs",
+          "platform": "fastapi.tiangolo.com",
+          "type": "docs"
+        },
+        {
+          "label": "Pydantic Docs v2",
+          "platform": "docs.pydantic.dev",
+          "type": "docs"
+        },
+        {
+          "label": "ArjanCodes — FastAPI Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "TestDriven.io — FastAPI Course",
+          "platform": "testdriven.io",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a Products REST API with FastAPI — CRUD endpoints, Pydantic schemas for validation, and structured error responses.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "py-4",
+      "title": "Databases & SQLAlchemy",
+      "order": 4,
+      "techs": [
+        "PostgreSQL",
+        "SQLAlchemy",
+        "Alembic",
+        "psycopg2"
+      ],
+      "description": "Persist your data reliably. Learn PostgreSQL, the most powerful open-source relational database, and SQLAlchemy's async ORM to model your data with migrations.",
+      "topics": [
+        "PostgreSQL basics — schemas, tables, constraints, indexes",
+        "SQLAlchemy Core vs ORM — declarative models",
+        "Async SQLAlchemy with asyncpg",
+        "Alembic migrations — creating, applying, rolling back",
+        "Relationships — one-to-many, many-to-many, eager/lazy loading",
+        "Query optimization — EXPLAIN ANALYZE, N+1 avoidance"
+      ],
+      "resources": [
+        {
+          "label": "SQLAlchemy 2.0 Docs",
+          "platform": "docs.sqlalchemy.org",
+          "type": "docs"
+        },
+        {
+          "label": "Alembic Docs",
+          "platform": "alembic.sqlalchemy.org",
+          "type": "docs"
+        },
+        {
+          "label": "Corey Schafer — SQLAlchemy Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Connect your Products API to PostgreSQL using async SQLAlchemy — define ORM models, write Alembic migrations, and add relationships to a categories table.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "py-5",
+      "title": "Authentication & Security",
+      "order": 5,
+      "techs": [
+        "JWT",
+        "passlib",
+        "python-jose",
+        "OAuth2"
+      ],
+      "description": "Secure your FastAPI backend. Implement OAuth2 password flow, hash passwords with bcrypt, issue JWTs, and protect routes with dependency-based authentication.",
+      "topics": [
+        "Password hashing — passlib with bcrypt",
+        "JWT creation & verification — python-jose",
+        "FastAPI OAuth2PasswordBearer dependency",
+        "Role-based access control (RBAC)",
+        "CORS middleware configuration",
+        "Rate limiting with slowapi"
+      ],
+      "resources": [
+        {
+          "label": "FastAPI Security Docs",
+          "platform": "fastapi.tiangolo.com",
+          "type": "docs"
+        },
+        {
+          "label": "OWASP API Security Top 10",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "TestDriven.io — FastAPI JWT Auth",
+          "platform": "testdriven.io",
+          "type": "course"
+        }
+      ],
+      "challenge": "Add auth to your Products API — register/login with hashed passwords, JWT tokens, an /me endpoint, and role-based access (admin can delete products).",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "py-6",
+      "title": "Async Python & Celery",
+      "order": 6,
+      "techs": [
+        "asyncio",
+        "Celery",
+        "Redis",
+        "Background Tasks"
+      ],
+      "description": "Python's async capabilities are powerful for I/O-heavy backends. Learn asyncio deeply, then use Celery and Redis to offload background processing.",
+      "topics": [
+        "asyncio — event loop, coroutines, async/await, gather",
+        "async context managers & iterators",
+        "FastAPI background tasks vs Celery",
+        "Celery setup — broker (Redis), worker, beat",
+        "Celery tasks — delay, apply_async, retry, ETA",
+        "Task monitoring with Flower"
+      ],
+      "resources": [
+        {
+          "label": "asyncio Docs",
+          "platform": "docs.python.org",
+          "type": "docs"
+        },
+        {
+          "label": "Celery Docs",
+          "platform": "docs.celeryq.dev",
+          "type": "docs"
+        },
+        {
+          "label": "ArjanCodes — asyncio Deep Dive",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a Celery task that sends a confirmation email after product creation, with Redis as the broker and Flower for task monitoring.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "py-7",
+      "title": "Testing with pytest",
+      "order": 7,
+      "techs": [
+        "pytest",
+        "pytest-asyncio",
+        "httpx",
+        "Coverage"
+      ],
+      "description": "pytest is the gold standard for Python testing. Write clean, readable tests for your FastAPI endpoints, database operations, and background tasks.",
+      "topics": [
+        "pytest basics — fixtures, parametrize, markers",
+        "Testing FastAPI with TestClient (httpx)",
+        "Async test support with pytest-asyncio",
+        "Test database — SQLite in-memory or test PostgreSQL",
+        "Mocking with unittest.mock & pytest-mock",
+        "Coverage reporting with pytest-cov"
+      ],
+      "resources": [
+        {
+          "label": "pytest Docs",
+          "platform": "docs.pytest.org",
+          "type": "docs"
+        },
+        {
+          "label": "FastAPI Testing Docs",
+          "platform": "fastapi.tiangolo.com",
+          "type": "docs"
+        },
+        {
+          "label": "Real Python — pytest Tutorial",
+          "platform": "realpython.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write a full test suite for your Products API — cover all endpoints, auth flows, and edge cases with fixtures for test users and a test database.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "py-8",
+      "title": "Docker & Deployment",
+      "order": 8,
+      "techs": [
+        "Docker",
+        "Gunicorn",
+        "Fly.io",
+        "GitHub Actions"
+      ],
+      "description": "Ship your Python backend to production. Containerize with Docker, configure Gunicorn/Uvicorn for production serving, and automate deployment with CI/CD.",
+      "topics": [
+        "Dockerfile for Python — slim base image, multi-stage build",
+        "docker-compose — app + postgres + redis + worker",
+        "Gunicorn + Uvicorn workers configuration",
+        "Environment management in production",
+        "Fly.io / Railway / Render — Python deployment",
+        "GitHub Actions — run pytest, build Docker image, deploy"
+      ],
+      "resources": [
+        {
+          "label": "Docker Python Best Practices",
+          "platform": "docker.com",
+          "type": "docs"
+        },
+        {
+          "label": "Fly.io — Python Deployment",
+          "platform": "fly.io",
+          "type": "docs"
+        },
+        {
+          "label": "TestDriven.io — FastAPI Docker",
+          "platform": "testdriven.io",
+          "type": "course"
+        }
+      ],
+      "challenge": "Dockerize your Products API, write a docker-compose.yml with all services, and deploy to Fly.io via a GitHub Actions pipeline that runs tests before deploying.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "python-backend-9",
+      "title": "Microservices and Advanced Architecture",
+      "order": 9,
+      "techs": [
+        "Python",
+        "gRPC",
+        "RabbitMQ",
+        "FastAPI"
+      ],
+      "description": "Design and implement production-grade microservice systems using Python with event-driven communication and CQRS patterns. Learn how gRPC enables efficient inter-service contracts and how to decompose monoliths into bounded contexts.",
+      "topics": [
+        "Microservice decomposition and bounded contexts",
+        "Event-driven architecture with message brokers",
+        "gRPC service definitions and protobuf schemas",
+        "CQRS and event sourcing patterns",
+        "Service mesh basics and sidecar proxies",
+        "Saga pattern for distributed transactions",
+        "API gateway patterns and BFF design"
+      ],
+      "resources": [
+        {
+          "label": "gRPC Python Quickstart",
+          "platform": "grpc.io",
+          "type": "docs"
+        },
+        {
+          "label": "Designing Microservices with Python",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Building Event-Driven Microservices",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Microservices Patterns by Chris Richardson",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a two-service order and inventory system connected via RabbitMQ events, exposing a gRPC API between services and implementing a saga for rollback on failure.",
+      "estimatedTime": "5-6 weeks"
+    },
+    {
+      "id": "python-backend-10",
+      "title": "Scaling, Observability and Production Operations",
+      "order": 10,
+      "techs": [
+        "OpenTelemetry",
+        "Prometheus",
+        "Grafana",
+        "Nginx"
+      ],
+      "description": "Operate Python services at scale by implementing distributed tracing, structured logging, and SLO-driven alerting pipelines. Understand load balancing strategies, incident management, and on-call processes that keep production healthy.",
+      "topics": [
+        "Distributed tracing with OpenTelemetry and Jaeger",
+        "Structured logging and log aggregation pipelines",
+        "Prometheus metrics instrumentation and alerting rules",
+        "Defining and measuring SLOs and error budgets",
+        "Horizontal scaling and load balancer configuration",
+        "Chaos engineering and failure injection basics",
+        "On-call runbooks and incident post-mortems"
+      ],
+      "resources": [
+        {
+          "label": "OpenTelemetry Python Docs",
+          "platform": "opentelemetry.io",
+          "type": "docs"
+        },
+        {
+          "label": "Production Kubernetes and Observability",
+          "platform": "Linux Foundation",
+          "type": "course"
+        },
+        {
+          "label": "SRE Book - Google",
+          "platform": "Google",
+          "type": "book"
+        },
+        {
+          "label": "Grafana Dashboard Fundamentals",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Instrument a FastAPI service with OpenTelemetry traces and Prometheus metrics, define two SLOs with burn-rate alerts in Grafana, and write a runbook for the most likely alert scenario.",
+      "estimatedTime": "4-5 weeks"
+    }
+  ],
+  "grpc-dev": [
+    {
+      "id": "grpc-dev-1",
+      "title": "RPC & Protocol Buffers Foundations",
+      "order": 1,
+      "techs": [
+        "RPC",
+        "Protobuf",
+        "Serialization"
+      ],
+      "description": "Understand remote procedure calls and the binary format that powers gRPC. Learn why Protobuf beats JSON for service-to-service traffic.",
+      "topics": [
+        "What RPC is & how it differs from REST",
+        "Protocol Buffers vs JSON",
+        "Binary serialization basics",
+        "Installing protoc & plugins",
+        "HTTP/2 fundamentals",
+        "The gRPC ecosystem overview"
+      ],
+      "resources": [
+        {
+          "label": "gRPC — Introduction",
+          "platform": "grpc.io",
+          "type": "docs"
+        },
+        {
+          "label": "Protocol Buffers Docs",
+          "platform": "protobuf.dev",
+          "type": "docs"
+        },
+        {
+          "label": "gRPC Up & Running",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Write your first .proto file describing a simple service and compile it with protoc.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "grpc-dev-2",
+      "title": "Defining Services with Protobuf",
+      "order": 2,
+      "techs": [
+        "Protobuf",
+        "proto3",
+        "Schemas"
+      ],
+      "description": "Design clean, evolvable APIs with Protocol Buffers. Master messages, services and the proto3 syntax.",
+      "topics": [
+        "Messages, fields & scalar types",
+        "Enums, nested & repeated fields",
+        "Service & RPC definitions",
+        "Field numbers & wire compatibility",
+        "Well-known types & timestamps",
+        "Packages & imports"
+      ],
+      "resources": [
+        {
+          "label": "Protobuf — proto3 Guide",
+          "platform": "protobuf.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Protobuf Style Guide",
+          "platform": "protobuf.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Buf Schema Best Practices",
+          "platform": "buf.build",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Model a complete order service schema with messages, enums and four RPC methods.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "grpc-dev-3",
+      "title": "gRPC Fundamentals",
+      "order": 3,
+      "techs": [
+        "gRPC",
+        "Unary",
+        "Stubs"
+      ],
+      "description": "Build your first working gRPC service and client. Understand stubs, channels and the unary call lifecycle.",
+      "topics": [
+        "Generating stubs from proto",
+        "Servers & service implementations",
+        "Channels & clients",
+        "Unary RPC end to end",
+        "Status codes & basic errors",
+        "Reflection & grpcurl"
+      ],
+      "resources": [
+        {
+          "label": "gRPC — Core Concepts",
+          "platform": "grpc.io",
+          "type": "docs"
+        },
+        {
+          "label": "grpcurl",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "gRPC Quickstart",
+          "platform": "grpc.io",
+          "type": "course"
+        }
+      ],
+      "challenge": "Implement a unary gRPC service and call it from a client and from grpcurl.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "grpc-dev-4",
+      "title": "Streaming RPCs",
+      "order": 4,
+      "techs": [
+        "Streaming",
+        "Flow Control",
+        "HTTP/2"
+      ],
+      "description": "Go beyond request/response. Implement server, client and bidirectional streaming over HTTP/2.",
+      "topics": [
+        "Server-side streaming",
+        "Client-side streaming",
+        "Bidirectional streaming",
+        "Flow control & backpressure",
+        "Streaming error handling",
+        "When to stream vs unary"
+      ],
+      "resources": [
+        {
+          "label": "gRPC — Streaming",
+          "platform": "grpc.io",
+          "type": "docs"
+        },
+        {
+          "label": "gRPC Up & Running",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "HTTP/2 Explained",
+          "platform": "http2-explained",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a live metrics service using server-side streaming and a chat using bidirectional streaming.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "grpc-dev-5",
+      "title": "gRPC in Go",
+      "order": 5,
+      "techs": [
+        "Go",
+        "grpc-go",
+        "protoc-gen-go"
+      ],
+      "description": "Implement high-performance gRPC services in Go, the language gRPC feels most at home in.",
+      "topics": [
+        "protoc-gen-go & grpc plugins",
+        "Implementing servers in Go",
+        "Go clients & connection management",
+        "Context, deadlines & cancellation",
+        "Concurrency with goroutines",
+        "Project structure for Go services"
+      ],
+      "resources": [
+        {
+          "label": "gRPC Go Quickstart",
+          "platform": "grpc.io",
+          "type": "docs"
+        },
+        {
+          "label": "grpc-go",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Go gRPC Basics Tutorial",
+          "platform": "grpc.io",
+          "type": "course"
+        }
+      ],
+      "challenge": "Implement your order service in Go with unary and streaming methods and a Go client.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "grpc-dev-6",
+      "title": "gRPC in Node.js",
+      "order": 6,
+      "techs": [
+        "Node.js",
+        "grpc-js",
+        "TypeScript"
+      ],
+      "description": "Bring gRPC to the Node ecosystem. Generate types and build services and clients in TypeScript.",
+      "topics": [
+        "@grpc/grpc-js & proto loading",
+        "Static vs dynamic codegen",
+        "TypeScript types from proto",
+        "Implementing Node servers",
+        "Node clients & promisified calls",
+        "Interop with the Go service"
+      ],
+      "resources": [
+        {
+          "label": "grpc-js",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "ts-proto",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "gRPC Node Quickstart",
+          "platform": "grpc.io",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a Node.js gRPC client in TypeScript that talks to your Go order service.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "grpc-dev-7",
+      "title": "Interceptors, Auth & Metadata",
+      "order": 7,
+      "techs": [
+        "Interceptors",
+        "Metadata",
+        "TLS"
+      ],
+      "description": "Add cross-cutting concerns to gRPC. Use interceptors and metadata for auth, logging and tracing, secured with TLS.",
+      "topics": [
+        "Metadata & headers",
+        "Unary & streaming interceptors",
+        "Authentication with tokens",
+        "TLS & mutual TLS",
+        "Logging & tracing interceptors",
+        "Per-RPC credentials"
+      ],
+      "resources": [
+        {
+          "label": "gRPC — Authentication",
+          "platform": "grpc.io",
+          "type": "docs"
+        },
+        {
+          "label": "gRPC — Interceptors",
+          "platform": "grpc.io",
+          "type": "docs"
+        },
+        {
+          "label": "gRPC Up & Running",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Add a JWT-checking interceptor and enable mutual TLS between your services.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "grpc-dev-8",
+      "title": "Error Handling & Deadlines",
+      "order": 8,
+      "techs": [
+        "Status",
+        "Deadlines",
+        "Retries"
+      ],
+      "description": "Make gRPC robust. Use rich error models, propagate deadlines, and add retries for reliability.",
+      "topics": [
+        "Status codes & error details",
+        "The richer error model (google.rpc)",
+        "Deadlines & cancellation propagation",
+        "Retry policies & backoff",
+        "Health checking protocol",
+        "Graceful shutdown"
+      ],
+      "resources": [
+        {
+          "label": "gRPC — Error Handling",
+          "platform": "grpc.io",
+          "type": "docs"
+        },
+        {
+          "label": "gRPC — Deadlines",
+          "platform": "grpc.io",
+          "type": "docs"
+        },
+        {
+          "label": "gRPC Health Checking",
+          "platform": "grpc.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add structured error details, deadlines and a retry policy to your order client.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "grpc-dev-9",
+      "title": "gRPC-Web, Gateways & Testing",
+      "order": 9,
+      "techs": [
+        "gRPC-Web",
+        "grpc-gateway",
+        "Testing"
+      ],
+      "description": "Bridge gRPC to browsers and REST clients, and test your services thoroughly.",
+      "topics": [
+        "gRPC-Web for browsers",
+        "grpc-gateway — REST from proto",
+        "Envoy as a gRPC proxy",
+        "Unit testing services",
+        "Integration & load testing (ghz)",
+        "Mocking clients"
+      ],
+      "resources": [
+        {
+          "label": "gRPC-Web",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "grpc-gateway",
+          "platform": "grpc-ecosystem.github.io",
+          "type": "docs"
+        },
+        {
+          "label": "ghz — gRPC load testing",
+          "platform": "ghz.sh",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Expose your service as REST via grpc-gateway and load-test the gRPC endpoint with ghz.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "grpc-dev-10",
+      "title": "Performance & Deployment",
+      "order": 10,
+      "techs": [
+        "Docker",
+        "Load Balancing",
+        "Buf"
+      ],
+      "description": "Ship and scale gRPC in production. Manage schemas, load balance, and deploy on Kubernetes.",
+      "topics": [
+        "Schema management with Buf",
+        "Channel pooling & keepalive",
+        "Load balancing gRPC (proxy & client-side)",
+        "Deploying gRPC on Kubernetes",
+        "Observability with OpenTelemetry",
+        "Versioning & backward compatibility"
+      ],
+      "resources": [
+        {
+          "label": "Buf Docs",
+          "platform": "buf.build",
+          "type": "docs"
+        },
+        {
+          "label": "gRPC — Load Balancing",
+          "platform": "grpc.io",
+          "type": "docs"
+        },
+        {
+          "label": "Kubernetes Docs",
+          "platform": "kubernetes.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Manage your protos with Buf, containerize the services, and deploy them load-balanced on Kubernetes.",
+      "estimatedTime": "2 weeks"
+    }
+  ],
+  "node-dev": [
+    {
+      "id": "node-dev-1",
+      "title": "JavaScript & TypeScript Foundations",
+      "order": 1,
+      "techs": [
+        "JavaScript",
+        "TypeScript",
+        "ES2022+"
+      ],
+      "description": "A Node developer lives in JavaScript and, increasingly, TypeScript. Solidify the language features the backend relies on every day.",
+      "topics": [
+        "ES modules, closures & scope",
+        "Promises, async/await & the event loop",
+        "Array & object methods",
+        "TypeScript types, interfaces & generics",
+        "Type narrowing & utility types",
+        "tsconfig & compiling for Node"
+      ],
+      "resources": [
+        {
+          "label": "TypeScript Handbook",
+          "platform": "typescriptlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "JavaScript.info",
+          "platform": "javascript.info",
+          "type": "docs"
+        },
+        {
+          "label": "Total TypeScript",
+          "platform": "Total TypeScript",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a typed CLI tool that reads JSON, transforms it, and writes results with zero 'any'.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "node-dev-2",
+      "title": "Node.js Runtime Internals",
+      "order": 2,
+      "techs": [
+        "Node.js",
+        "libuv",
+        "Modules"
+      ],
+      "description": "Understand what makes Node tick — the event loop, the module system, and the core APIs you build everything on.",
+      "topics": [
+        "The event loop & libuv",
+        "CommonJS vs ES modules in Node",
+        "Core modules — fs, path, os, events",
+        "Buffers & the global process object",
+        "Environment variables & config",
+        "npm, package.json & scripts"
+      ],
+      "resources": [
+        {
+          "label": "Node.js Official Docs",
+          "platform": "nodejs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Node.js Event Loop Guide",
+          "platform": "nodejs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Fireship — Node in 100s",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a small file-watcher using core modules and the EventEmitter pattern.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "node-dev-3",
+      "title": "Async Patterns & Streams",
+      "order": 3,
+      "techs": [
+        "Streams",
+        "EventEmitter",
+        "Async"
+      ],
+      "description": "Master Node's asynchronous nature. Work with streams for efficient I/O and avoid the common async pitfalls.",
+      "topics": [
+        "Callbacks, promises & async/await interplay",
+        "Readable, writable & transform streams",
+        "Piping & backpressure",
+        "EventEmitter patterns",
+        "Error handling in async code",
+        "Worker threads & the cluster module"
+      ],
+      "resources": [
+        {
+          "label": "Node.js Streams Docs",
+          "platform": "nodejs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Stream Handbook",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Node.js Design Patterns",
+          "platform": "nodejsdesignpatterns.com",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a streaming CSV-to-JSON converter that processes a large file without loading it into memory.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "node-dev-4",
+      "title": "Building APIs with Fastify",
+      "order": 4,
+      "techs": [
+        "Fastify",
+        "REST",
+        "Plugins"
+      ],
+      "description": "Build fast, well-structured HTTP APIs with Fastify — a high-performance, schema-first Node framework.",
+      "topics": [
+        "Fastify routing & lifecycle hooks",
+        "Schema-based validation & serialization",
+        "Plugins & encapsulation",
+        "Decorators & dependency injection",
+        "RESTful API design",
+        "Structuring a scalable project"
+      ],
+      "resources": [
+        {
+          "label": "Fastify Docs",
+          "platform": "fastify.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Fastify — Getting Started",
+          "platform": "fastify.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Node.js Design Patterns",
+          "platform": "nodejsdesignpatterns.com",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a REST API for an inventory service with Fastify, JSON schema validation and plugins.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "node-dev-5",
+      "title": "Data with Prisma & PostgreSQL",
+      "order": 5,
+      "techs": [
+        "Prisma",
+        "PostgreSQL",
+        "Migrations"
+      ],
+      "description": "Persist data with a typed ORM. Model relations, run migrations, and query safely with Prisma against PostgreSQL.",
+      "topics": [
+        "Prisma schema & client",
+        "Modeling relations",
+        "Migrations & seeding",
+        "Transactions & nested writes",
+        "Query optimization & indexes",
+        "Connection pooling"
+      ],
+      "resources": [
+        {
+          "label": "Prisma Docs",
+          "platform": "prisma.io",
+          "type": "docs"
+        },
+        {
+          "label": "PostgreSQL Docs",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "Prisma Data Guide",
+          "platform": "prisma.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Back your inventory API with PostgreSQL via Prisma, including relations and a transactional stock update.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "node-dev-6",
+      "title": "Authentication & Security",
+      "order": 6,
+      "techs": [
+        "JWT",
+        "OAuth",
+        "Helmet"
+      ],
+      "description": "Secure your Node API. Implement authentication, protect routes, and apply standard hardening practices.",
+      "topics": [
+        "Password hashing & sessions",
+        "JWT & refresh tokens",
+        "OAuth2 & social login",
+        "RBAC & route protection",
+        "CORS, helmet & rate limiting",
+        "OWASP Top 10 for Node"
+      ],
+      "resources": [
+        {
+          "label": "OWASP Node.js Cheat Sheet",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "JWT.io Introduction",
+          "platform": "jwt.io",
+          "type": "docs"
+        },
+        {
+          "label": "Fastify — Authentication",
+          "platform": "fastify.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add JWT auth with refresh tokens, role-based route guards, and rate limiting to your API.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "node-dev-7",
+      "title": "Validation, Errors & Architecture",
+      "order": 7,
+      "techs": [
+        "Zod",
+        "Error Handling",
+        "Layers"
+      ],
+      "description": "Make your codebase robust and maintainable. Validate inputs, handle errors consistently, and structure layers cleanly.",
+      "topics": [
+        "Input validation with Zod",
+        "Centralized error handling",
+        "Layered architecture — routes, services, repos",
+        "Dependency injection patterns",
+        "Configuration & environment management",
+        "Logging strategy"
+      ],
+      "resources": [
+        {
+          "label": "Zod Docs",
+          "platform": "zod.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Node.js Best Practices",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Node.js Design Patterns",
+          "platform": "nodejsdesignpatterns.com",
+          "type": "book"
+        }
+      ],
+      "challenge": "Refactor your API into route/service/repository layers with Zod validation and a global error handler.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "node-dev-8",
+      "title": "Testing",
+      "order": 8,
+      "techs": [
+        "Vitest",
+        "Supertest",
+        "Mocks"
+      ],
+      "description": "Test your Node services with confidence. Cover units, integration, and full API flows.",
+      "topics": [
+        "Unit testing with Vitest/Jest",
+        "API testing with Supertest",
+        "Mocking modules & dependencies",
+        "Test databases & fixtures",
+        "Coverage & CI integration",
+        "Contract & integration tests"
+      ],
+      "resources": [
+        {
+          "label": "Vitest Docs",
+          "platform": "vitest.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Supertest",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Testing Node.js",
+          "platform": "nodejs.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write unit tests for services and Supertest integration tests covering auth and CRUD flows.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "node-dev-9",
+      "title": "Performance, Caching & Queues",
+      "order": 9,
+      "techs": [
+        "Redis",
+        "BullMQ",
+        "Caching"
+      ],
+      "description": "Scale your Node app. Cache hot data, offload heavy work to background jobs, and tune performance.",
+      "topics": [
+        "Caching strategies with Redis",
+        "Background jobs with BullMQ",
+        "Rate limiting & throttling",
+        "Clustering & load balancing",
+        "Profiling & memory leaks",
+        "Connection & resource pooling"
+      ],
+      "resources": [
+        {
+          "label": "Redis Docs",
+          "platform": "redis.io",
+          "type": "docs"
+        },
+        {
+          "label": "BullMQ Docs",
+          "platform": "docs.bullmq.io",
+          "type": "docs"
+        },
+        {
+          "label": "Node.js Performance",
+          "platform": "nodejs.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add Redis caching to hot endpoints and move report generation to a BullMQ background queue.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "node-dev-10",
+      "title": "Observability & Deployment",
+      "order": 10,
+      "techs": [
+        "Docker",
+        "OpenTelemetry",
+        "CI/CD"
+      ],
+      "description": "Ship and operate your Node service. Add logging, metrics and tracing, containerize, and automate deployment.",
+      "topics": [
+        "Structured logging with Pino",
+        "Metrics & tracing with OpenTelemetry",
+        "Health checks & graceful shutdown",
+        "Dockerizing a Node app",
+        "GitHub Actions CI/CD",
+        "Deploying to a cloud platform"
+      ],
+      "resources": [
+        {
+          "label": "Pino Docs",
+          "platform": "getpino.io",
+          "type": "docs"
+        },
+        {
+          "label": "OpenTelemetry JS",
+          "platform": "opentelemetry.io",
+          "type": "docs"
+        },
+        {
+          "label": "Docker Docs",
+          "platform": "docs.docker.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add structured logging and tracing, containerize the API, and deploy it via a CI pipeline.",
+      "estimatedTime": "1–2 weeks"
+    }
+  ]
+}

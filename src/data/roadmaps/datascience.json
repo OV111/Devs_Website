@@ -1,0 +1,3143 @@
+{
+  "data-analyst": [
+    {
+      "id": "data-analyst-1",
+      "title": "Spreadsheet and Data Fundamentals",
+      "order": 1,
+      "techs": [
+        "Excel",
+        "Google Sheets",
+        "CSV",
+        "Basic Statistics"
+      ],
+      "description": "Learn to organize, clean, and summarize data using spreadsheets. Understand core statistical concepts like mean, median, variance, and distributions.",
+      "topics": [
+        "Cell formulas and functions",
+        "Pivot tables",
+        "Data types and formats",
+        "Descriptive statistics",
+        "Sorting and filtering",
+        "Basic charting"
+      ],
+      "resources": [
+        {
+          "label": "Excel for Beginners",
+          "platform": "Microsoft Learn",
+          "type": "docs"
+        },
+        {
+          "label": "Data Analysis with Excel",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "Statistics Fundamentals",
+          "platform": "YouTube - StatQuest",
+          "type": "video"
+        },
+        {
+          "label": "Naked Statistics",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Load a CSV of sales data into Excel, create a pivot table summarizing revenue by region, and produce a bar chart.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-analyst-2",
+      "title": "SQL for Data Analysis",
+      "order": 2,
+      "techs": [
+        "SQL",
+        "PostgreSQL",
+        "SQLite"
+      ],
+      "description": "Write queries to extract, filter, and aggregate data from relational databases. Learn JOINs, subqueries, and window functions for analytical tasks.",
+      "topics": [
+        "SELECT, WHERE, GROUP BY",
+        "JOINs (INNER, LEFT, RIGHT)",
+        "Aggregate functions",
+        "Subqueries and CTEs",
+        "Window functions",
+        "NULL handling"
+      ],
+      "resources": [
+        {
+          "label": "SQL Tutorial",
+          "platform": "Mode Analytics",
+          "type": "docs"
+        },
+        {
+          "label": "SQL for Data Analysis",
+          "platform": "Udacity",
+          "type": "course"
+        },
+        {
+          "label": "SQL Window Functions",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Using a sample e-commerce database, write a query that ranks the top 10 customers by lifetime value using a window function.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "data-analyst-3",
+      "title": "Python for Data Analysis",
+      "order": 3,
+      "techs": [
+        "Python",
+        "Pandas",
+        "NumPy",
+        "Jupyter"
+      ],
+      "description": "Use Python and Pandas to manipulate and explore datasets beyond what spreadsheets can handle. Set up a Jupyter notebook workflow for reproducible analysis.",
+      "topics": [
+        "DataFrames and Series",
+        "Reading CSV, JSON, Excel",
+        "Filtering and indexing",
+        "GroupBy and aggregation",
+        "Handling missing data",
+        "Merging datasets"
+      ],
+      "resources": [
+        {
+          "label": "Pandas Documentation",
+          "platform": "pandas.pydata.org",
+          "type": "docs"
+        },
+        {
+          "label": "Python for Data Analysis",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Data Analysis with Python",
+          "platform": "freeCodeCamp",
+          "type": "course"
+        }
+      ],
+      "challenge": "Load two CSV datasets, merge them on a common key, handle missing values, and compute a grouped summary with Pandas.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "data-analyst-4",
+      "title": "Data Cleaning and Wrangling",
+      "order": 4,
+      "techs": [
+        "Python",
+        "Pandas",
+        "OpenRefine",
+        "Regex"
+      ],
+      "description": "Apply systematic techniques to detect and fix data quality issues such as duplicates, outliers, and inconsistent formats. Use regular expressions to parse and transform text fields.",
+      "topics": [
+        "Duplicate detection and removal",
+        "Outlier identification",
+        "String normalization",
+        "Date parsing and formatting",
+        "Type casting",
+        "Data validation checks"
+      ],
+      "resources": [
+        {
+          "label": "Data Cleaning with Pandas",
+          "platform": "Towards Data Science",
+          "type": "docs"
+        },
+        {
+          "label": "OpenRefine Tutorial",
+          "platform": "OpenRefine.org",
+          "type": "docs"
+        },
+        {
+          "label": "Data Wrangling with Python",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Take a raw dataset with mixed date formats, duplicated rows, and missing fields; produce a fully cleaned version with a documented cleaning log.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-analyst-5",
+      "title": "Data Visualization with Python",
+      "order": 5,
+      "techs": [
+        "Matplotlib",
+        "Seaborn",
+        "Plotly",
+        "Python"
+      ],
+      "description": "Create clear and informative charts that communicate findings to both technical and non-technical audiences. Learn to choose the right chart type for each data relationship.",
+      "topics": [
+        "Line, bar, and scatter charts",
+        "Histograms and box plots",
+        "Heatmaps and correlation plots",
+        "Interactive charts with Plotly",
+        "Chart formatting and annotations",
+        "Color and accessibility"
+      ],
+      "resources": [
+        {
+          "label": "Matplotlib Documentation",
+          "platform": "matplotlib.org",
+          "type": "docs"
+        },
+        {
+          "label": "Seaborn Tutorial",
+          "platform": "seaborn.pydata.org",
+          "type": "docs"
+        },
+        {
+          "label": "Storytelling with Data",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a multi-panel dashboard in a Jupyter notebook showing sales trends, regional breakdown, and a correlation heatmap for a sample dataset.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-analyst-6",
+      "title": "Tableau for Business Dashboards",
+      "order": 6,
+      "techs": [
+        "Tableau",
+        "Tableau Public",
+        "CSV",
+        "SQL"
+      ],
+      "description": "Connect Tableau to data sources and build interactive dashboards that allow stakeholders to explore data without writing code. Learn to design for clarity and usability.",
+      "topics": [
+        "Connecting data sources",
+        "Calculated fields and parameters",
+        "Filters and actions",
+        "Dashboard layout and design",
+        "Maps and geographic data",
+        "Publishing to Tableau Public"
+      ],
+      "resources": [
+        {
+          "label": "Tableau Training Videos",
+          "platform": "Tableau.com",
+          "type": "video"
+        },
+        {
+          "label": "Tableau Desktop Specialist",
+          "platform": "Tableau eLearning",
+          "type": "course"
+        },
+        {
+          "label": "Tableau Documentation",
+          "platform": "Tableau Help",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a Tableau dashboard with at least 3 interactive views connected to a SQL or CSV source and publish it to Tableau Public.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "data-analyst-7",
+      "title": "Statistical Analysis and Hypothesis Testing",
+      "order": 7,
+      "techs": [
+        "Python",
+        "SciPy",
+        "Pandas",
+        "Statsmodels"
+      ],
+      "description": "Apply inferential statistics to draw conclusions from samples and validate business hypotheses. Understand p-values, confidence intervals, and common statistical tests.",
+      "topics": [
+        "Probability distributions",
+        "t-tests and chi-square tests",
+        "ANOVA",
+        "Correlation and regression basics",
+        "p-values and significance",
+        "A/B test analysis"
+      ],
+      "resources": [
+        {
+          "label": "SciPy Stats Documentation",
+          "platform": "scipy.org",
+          "type": "docs"
+        },
+        {
+          "label": "Statistics with Python",
+          "platform": "Coursera - University of Michigan",
+          "type": "course"
+        },
+        {
+          "label": "Think Stats",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Run an A/B test analysis on a provided experiment dataset: check assumptions, run the appropriate statistical test, and write a plain-English conclusion.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "data-analyst-8",
+      "title": "Business Metrics and KPI Reporting",
+      "order": 8,
+      "techs": [
+        "Python",
+        "Pandas",
+        "Excel",
+        "Tableau"
+      ],
+      "description": "Translate business questions into measurable KPIs and build automated reporting pipelines. Learn to communicate findings through structured reports and executive summaries.",
+      "topics": [
+        "KPI definition frameworks",
+        "Funnel and cohort analysis",
+        "Churn and retention metrics",
+        "Revenue and growth metrics",
+        "Automated report generation",
+        "Executive summary writing"
+      ],
+      "resources": [
+        {
+          "label": "Lean Analytics",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Product Metrics Course",
+          "platform": "Reforge",
+          "type": "course"
+        },
+        {
+          "label": "Pandas Report Automation",
+          "platform": "Towards Data Science",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a Python script that reads monthly sales data, computes MoM growth, churn rate, and LTV, then outputs a formatted Excel report automatically.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-analyst-9",
+      "title": "Advanced SQL and Data Modeling",
+      "order": 9,
+      "techs": [
+        "SQL",
+        "PostgreSQL",
+        "dbt",
+        "Data Warehouse"
+      ],
+      "description": "Design dimensional data models and write advanced analytical queries against a data warehouse. Learn star schemas and how dbt is used to manage transformation logic.",
+      "topics": [
+        "Star and snowflake schemas",
+        "Fact and dimension tables",
+        "Advanced window functions",
+        "dbt models and tests",
+        "Query optimization basics",
+        "Data warehouse concepts"
+      ],
+      "resources": [
+        {
+          "label": "dbt Documentation",
+          "platform": "docs.getdbt.com",
+          "type": "docs"
+        },
+        {
+          "label": "The Data Warehouse Toolkit",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Advanced SQL for Analytics",
+          "platform": "Mode Analytics",
+          "type": "course"
+        }
+      ],
+      "challenge": "Model a sample raw dataset into a star schema using dbt, write at least 3 fact-table queries using window functions, and add dbt tests for key columns.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "data-analyst-10",
+      "title": "End-to-End Analytics Project",
+      "order": 10,
+      "techs": [
+        "Python",
+        "Pandas",
+        "SQL",
+        "Tableau"
+      ],
+      "description": "Deliver a complete analytics project from raw data ingestion through cleaning, analysis, and a stakeholder-facing Tableau dashboard. Document methodology and present findings clearly.",
+      "topics": [
+        "Project scoping and requirements",
+        "Data pipeline design",
+        "EDA and hypothesis formulation",
+        "Dashboard production",
+        "Insight storytelling",
+        "Presentation and documentation"
+      ],
+      "resources": [
+        {
+          "label": "Kaggle Datasets",
+          "platform": "Kaggle",
+          "type": "docs"
+        },
+        {
+          "label": "Google Data Analytics Certificate",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "Communicating with Data",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Complete a full analytics project on a real dataset: ingest, clean, analyze in Python, model in SQL, and publish a Tableau dashboard with a written narrative of your findings.",
+      "estimatedTime": "4 weeks"
+    }
+  ],
+  "ds-data-scientist": [
+    {
+      "id": "ds-data-scientist-1",
+      "title": "Python and Data Science Environment",
+      "order": 1,
+      "techs": [
+        "Python",
+        "Jupyter",
+        "NumPy",
+        "Anaconda"
+      ],
+      "description": "Set up a professional data science environment and gain fluency in Python and NumPy for numerical computing. Understand how Jupyter notebooks support exploratory, reproducible analysis workflows.",
+      "topics": [
+        "Anaconda and virtual environments",
+        "Jupyter notebook workflow",
+        "NumPy arrays and operations",
+        "Broadcasting and vectorization",
+        "Slicing and indexing",
+        "Random number generation"
+      ],
+      "resources": [
+        {
+          "label": "NumPy Documentation",
+          "platform": "numpy.org",
+          "type": "docs"
+        },
+        {
+          "label": "Python for Data Science Handbook",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Jupyter Notebooks for Beginners",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create a Jupyter notebook that uses NumPy to generate a synthetic dataset, compute descriptive statistics, and plot a histogram.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ds-data-scientist-2",
+      "title": "Exploratory Data Analysis",
+      "order": 2,
+      "techs": [
+        "Python",
+        "Pandas",
+        "Seaborn",
+        "Matplotlib"
+      ],
+      "description": "Perform systematic EDA to understand distributions, relationships, and anomalies in data before modeling. Use visualization to surface patterns and guide analytical decisions.",
+      "topics": [
+        "Summary statistics",
+        "Distribution analysis",
+        "Correlation matrices",
+        "Pair plots",
+        "Missing value analysis",
+        "Outlier detection",
+        "Feature relationships"
+      ],
+      "resources": [
+        {
+          "label": "Pandas Documentation",
+          "platform": "pandas.pydata.org",
+          "type": "docs"
+        },
+        {
+          "label": "EDA with Python",
+          "platform": "Kaggle Learn",
+          "type": "course"
+        },
+        {
+          "label": "Python Data Science Handbook",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Perform a full EDA on a public dataset: document at least 5 findings with supporting charts and a written interpretation for each.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ds-data-scientist-3",
+      "title": "Statistics for Data Science",
+      "order": 3,
+      "techs": [
+        "Python",
+        "SciPy",
+        "Statsmodels",
+        "NumPy"
+      ],
+      "description": "Apply probability theory and statistical inference to make data-driven conclusions. Understand sampling, distributions, and hypothesis testing in an analytics context.",
+      "topics": [
+        "Probability and Bayes theorem",
+        "Common distributions",
+        "Central limit theorem",
+        "Confidence intervals",
+        "Hypothesis tests",
+        "p-values and effect sizes"
+      ],
+      "resources": [
+        {
+          "label": "Think Stats",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Statistics for Data Science",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "SciPy Stats Docs",
+          "platform": "scipy.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Given two product variants and conversion data, determine whether the difference in conversion rate is statistically significant using a z-test or chi-square test.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "ds-data-scientist-4",
+      "title": "Data Cleaning and Feature Engineering",
+      "order": 4,
+      "techs": [
+        "Python",
+        "Pandas",
+        "Scikit-learn",
+        "NumPy"
+      ],
+      "description": "Transform raw data into analysis-ready features by applying cleaning, encoding, and scaling techniques. Understand how feature quality directly impacts analytical and reporting accuracy.",
+      "topics": [
+        "Imputation strategies",
+        "Encoding categorical variables",
+        "Feature scaling",
+        "Date feature extraction",
+        "Binning and discretization",
+        "Interaction features"
+      ],
+      "resources": [
+        {
+          "label": "Scikit-learn Preprocessing Docs",
+          "platform": "scikit-learn.org",
+          "type": "docs"
+        },
+        {
+          "label": "Feature Engineering for ML",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Python Feature Engineering Cookbook",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Take a raw tabular dataset with mixed types, encode categorical columns, impute missing values, and scale numeric features using Scikit-learn pipelines.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ds-data-scientist-5",
+      "title": "Descriptive Modeling and Segmentation",
+      "order": 5,
+      "techs": [
+        "Python",
+        "Scikit-learn",
+        "Pandas",
+        "Matplotlib"
+      ],
+      "description": "Use clustering and dimensionality reduction to segment data and find natural groupings for reporting and targeting. Interpret cluster outputs in business terms for non-technical audiences.",
+      "topics": [
+        "K-Means clustering",
+        "Hierarchical clustering",
+        "Silhouette scores",
+        "PCA for visualization",
+        "Customer segmentation",
+        "Cluster profiling"
+      ],
+      "resources": [
+        {
+          "label": "Scikit-learn Clustering Docs",
+          "platform": "scikit-learn.org",
+          "type": "docs"
+        },
+        {
+          "label": "Unsupervised Learning in Python",
+          "platform": "DataCamp",
+          "type": "course"
+        },
+        {
+          "label": "Hands-On ML with Scikit-Learn",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Cluster a customer dataset into 4 segments using K-Means, profile each cluster with summary statistics, and produce a labeled PCA scatter plot.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ds-data-scientist-6",
+      "title": "Regression Analysis for Forecasting",
+      "order": 6,
+      "techs": [
+        "Python",
+        "Scikit-learn",
+        "Statsmodels",
+        "Pandas"
+      ],
+      "description": "Build linear and polynomial regression models to quantify relationships and produce forecasts for business reporting. Diagnose model fit and communicate coefficients as business insights.",
+      "topics": [
+        "Linear regression",
+        "Multiple regression",
+        "Polynomial features",
+        "Residual analysis",
+        "R-squared and MAE",
+        "Confidence intervals for predictions"
+      ],
+      "resources": [
+        {
+          "label": "Statsmodels Documentation",
+          "platform": "statsmodels.org",
+          "type": "docs"
+        },
+        {
+          "label": "Applied Regression Analysis",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Regression with Python",
+          "platform": "Coursera",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a multiple regression model predicting monthly revenue, interpret each coefficient, check residual assumptions, and present a 3-month forecast with confidence intervals.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "ds-data-scientist-7",
+      "title": "Classification for Analytical Reporting",
+      "order": 7,
+      "techs": [
+        "Python",
+        "Scikit-learn",
+        "Pandas",
+        "Matplotlib"
+      ],
+      "description": "Train classification models to support analytical use cases like churn prediction and lead scoring for reporting dashboards. Evaluate models with appropriate metrics for imbalanced datasets.",
+      "topics": [
+        "Logistic regression",
+        "Decision trees",
+        "Random forests",
+        "Precision, recall, F1",
+        "ROC and AUC",
+        "Confusion matrix interpretation",
+        "Class imbalance handling"
+      ],
+      "resources": [
+        {
+          "label": "Scikit-learn Classification Docs",
+          "platform": "scikit-learn.org",
+          "type": "docs"
+        },
+        {
+          "label": "Applied Predictive Modeling",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "ML for Analytics",
+          "platform": "DataCamp",
+          "type": "course"
+        }
+      ],
+      "challenge": "Train a churn prediction classifier, evaluate with precision/recall and ROC-AUC, and produce a ranked list of at-risk customers for a simulated marketing team.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "ds-data-scientist-8",
+      "title": "Time Series Analysis",
+      "order": 8,
+      "techs": [
+        "Python",
+        "Pandas",
+        "Statsmodels",
+        "Prophet"
+      ],
+      "description": "Analyze time-indexed data to identify trends, seasonality, and anomalies for business reporting. Build forecasting models and visualize projections with uncertainty bands.",
+      "topics": [
+        "Resampling and rolling windows",
+        "Trend and seasonality decomposition",
+        "Autocorrelation",
+        "ARIMA modeling",
+        "Prophet forecasting",
+        "Anomaly detection in time series"
+      ],
+      "resources": [
+        {
+          "label": "Prophet Documentation",
+          "platform": "facebook.github.io/prophet",
+          "type": "docs"
+        },
+        {
+          "label": "Time Series Analysis in Python",
+          "platform": "DataCamp",
+          "type": "course"
+        },
+        {
+          "label": "Forecasting Principles and Practice",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Decompose a monthly sales time series, fit an ARIMA model, forecast 6 months ahead, and overlay actuals vs forecast on a Matplotlib chart.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "ds-data-scientist-9",
+      "title": "Reporting Pipelines and Automation",
+      "order": 9,
+      "techs": [
+        "Python",
+        "Pandas",
+        "Jupyter",
+        "Jinja2"
+      ],
+      "description": "Automate recurring analysis and report generation so stakeholders receive fresh insights without manual effort. Use parameterized notebooks and templated HTML or PDF outputs.",
+      "topics": [
+        "Parameterized Jupyter notebooks",
+        "Scheduled script execution",
+        "Jinja2 report templates",
+        "HTML and PDF report output",
+        "Email delivery of reports",
+        "Data refresh patterns"
+      ],
+      "resources": [
+        {
+          "label": "Papermill Documentation",
+          "platform": "papermill.readthedocs.io",
+          "type": "docs"
+        },
+        {
+          "label": "Automating Reports with Python",
+          "platform": "Towards Data Science",
+          "type": "docs"
+        },
+        {
+          "label": "Python Automation Cookbook",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Create a parameterized notebook that accepts a date range, computes KPIs, and renders a styled HTML report; schedule it to run daily using a task scheduler.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ds-data-scientist-10",
+      "title": "Capstone - Analytics Reporting Project",
+      "order": 10,
+      "techs": [
+        "Python",
+        "Scikit-learn",
+        "Pandas",
+        "Jupyter"
+      ],
+      "description": "Deliver a complete data science project scoped to a business analytics use case: from EDA and modeling through automated reporting and stakeholder presentation. Demonstrate the full analytics lifecycle.",
+      "topics": [
+        "Problem scoping",
+        "End-to-end EDA",
+        "Model selection and evaluation",
+        "Insight narrative writing",
+        "Automated report delivery",
+        "Stakeholder presentation"
+      ],
+      "resources": [
+        {
+          "label": "Kaggle Competitions",
+          "platform": "Kaggle",
+          "type": "docs"
+        },
+        {
+          "label": "Applied Data Science with Python",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "Storytelling with Data",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Complete an end-to-end analytics project: collect data, run EDA, build a predictive or segmentation model, automate a report, and present findings in a 10-slide stakeholder deck.",
+      "estimatedTime": "4 weeks"
+    }
+  ],
+  "ds-data-engineer": [
+    {
+      "id": "ds-data-engineer-1",
+      "title": "Data Engineering Fundamentals",
+      "order": 1,
+      "techs": [
+        "SQL",
+        "Python",
+        "CSV",
+        "Data Warehousing Concepts"
+      ],
+      "description": "Understand the data engineering role and how data flows from source systems into a data warehouse. Learn the distinction between OLTP and OLAP systems and the layers of a modern data stack.",
+      "topics": [
+        "OLTP vs OLAP",
+        "ETL vs ELT patterns",
+        "Data warehouse concepts",
+        "Batch vs streaming",
+        "Data lake vs data warehouse",
+        "Modern data stack overview"
+      ],
+      "resources": [
+        {
+          "label": "Fundamentals of Data Engineering",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Data Engineering Zoomcamp",
+          "platform": "DataTalks.Club",
+          "type": "course"
+        },
+        {
+          "label": "Modern Data Stack Overview",
+          "platform": "Towards Data Science",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Draw a diagram of a data warehouse pipeline for a retail business, labeling source systems, ingestion layer, staging, and reporting layer.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ds-data-engineer-2",
+      "title": "SQL and Dimensional Modeling",
+      "order": 2,
+      "techs": [
+        "SQL",
+        "PostgreSQL",
+        "Data Vault",
+        "Star Schema"
+      ],
+      "description": "Design dimensional models and write the advanced SQL needed to populate fact and dimension tables in a warehouse. Master slowly changing dimensions and surrogate key patterns.",
+      "topics": [
+        "Star and snowflake schemas",
+        "Fact and dimension tables",
+        "Slowly changing dimensions",
+        "Surrogate keys",
+        "Bridge tables",
+        "Window functions for ETL"
+      ],
+      "resources": [
+        {
+          "label": "The Data Warehouse Toolkit",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Advanced SQL for Data Engineers",
+          "platform": "Mode Analytics",
+          "type": "docs"
+        },
+        {
+          "label": "PostgreSQL Documentation",
+          "platform": "postgresql.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Model a retail transaction dataset into a star schema with at least one SCD Type 2 dimension table and populate it from raw source data using SQL.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "ds-data-engineer-3",
+      "title": "Python for Data Pipelines",
+      "order": 3,
+      "techs": [
+        "Python",
+        "Pandas",
+        "SQLAlchemy",
+        "Psycopg2"
+      ],
+      "description": "Write Python scripts that extract data from files and APIs, transform it, and load it into a relational database. Apply software engineering practices like logging, error handling, and modular design.",
+      "topics": [
+        "Reading flat files and APIs",
+        "Pandas transformations",
+        "SQLAlchemy ORM basics",
+        "Bulk inserts and upserts",
+        "Logging and error handling",
+        "Configuration management"
+      ],
+      "resources": [
+        {
+          "label": "SQLAlchemy Documentation",
+          "platform": "sqlalchemy.org",
+          "type": "docs"
+        },
+        {
+          "label": "Python for Data Engineering",
+          "platform": "DataCamp",
+          "type": "course"
+        },
+        {
+          "label": "Data Pipelines with Python",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a Python ETL script that reads from a public API, transforms the response with Pandas, and upserts records into a PostgreSQL table with logging.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "ds-data-engineer-4",
+      "title": "Cloud Data Warehouses",
+      "order": 4,
+      "techs": [
+        "BigQuery",
+        "Snowflake",
+        "Redshift",
+        "SQL"
+      ],
+      "description": "Provision and query cloud data warehouse platforms and understand their cost and performance models. Learn to load data efficiently and manage users and schemas.",
+      "topics": [
+        "BigQuery architecture and pricing",
+        "Snowflake virtual warehouses",
+        "Loading data from cloud storage",
+        "Partitioning and clustering",
+        "User and role management",
+        "Query cost optimization"
+      ],
+      "resources": [
+        {
+          "label": "BigQuery Documentation",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "Snowflake Documentation",
+          "platform": "docs.snowflake.com",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud Data Warehousing on Coursera",
+          "platform": "Coursera",
+          "type": "course"
+        }
+      ],
+      "challenge": "Load a multi-GB CSV dataset into BigQuery, partition the table by date, and compare query cost between a partitioned and non-partitioned scan.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ds-data-engineer-5",
+      "title": "dbt for Data Transformation",
+      "order": 5,
+      "techs": [
+        "dbt",
+        "SQL",
+        "Jinja",
+        "YAML"
+      ],
+      "description": "Use dbt to build modular, tested, and documented SQL transformation pipelines inside a data warehouse. Understand dbt project structure, ref() patterns, and lineage graphs.",
+      "topics": [
+        "dbt project structure",
+        "Models and ref()",
+        "Sources and staging",
+        "Tests and documentation",
+        "Materializations",
+        "Incremental models"
+      ],
+      "resources": [
+        {
+          "label": "dbt Documentation",
+          "platform": "docs.getdbt.com",
+          "type": "docs"
+        },
+        {
+          "label": "dbt Fundamentals Course",
+          "platform": "courses.getdbt.com",
+          "type": "course"
+        },
+        {
+          "label": "Analytics Engineering with dbt",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a dbt project with staging, intermediate, and mart layers for an e-commerce dataset; add schema tests for nulls and uniqueness on key columns.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "ds-data-engineer-6",
+      "title": "Workflow Orchestration with Airflow",
+      "order": 6,
+      "techs": [
+        "Airflow",
+        "Python",
+        "DAGs",
+        "Cron"
+      ],
+      "description": "Orchestrate multi-step data warehouse pipelines with Apache Airflow DAGs. Schedule, monitor, and retry tasks to ensure reliable nightly and intraday loads.",
+      "topics": [
+        "DAG definition and structure",
+        "Operators (Python, Bash, SQL)",
+        "Task dependencies",
+        "Scheduling with cron",
+        "XComs and task communication",
+        "Monitoring and alerting"
+      ],
+      "resources": [
+        {
+          "label": "Apache Airflow Documentation",
+          "platform": "airflow.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "The Complete Hands-On Intro to Airflow",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Data Pipelines with Apache Airflow",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build an Airflow DAG that extracts data from an API, transforms it with Python, loads it into a warehouse table, and triggers a dbt run - scheduled nightly.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "ds-data-engineer-7",
+      "title": "Spark for Batch Processing",
+      "order": 7,
+      "techs": [
+        "Spark",
+        "PySpark",
+        "HDFS",
+        "Parquet"
+      ],
+      "description": "Use Apache Spark to process large datasets in batch for data warehouse loading at scale. Understand the Spark execution model, DataFrames API, and columnar file formats.",
+      "topics": [
+        "Spark architecture",
+        "PySpark DataFrames",
+        "Transformations and actions",
+        "Reading and writing Parquet",
+        "Partitioning strategies",
+        "Spark on cloud (Dataproc, EMR)"
+      ],
+      "resources": [
+        {
+          "label": "Spark Documentation",
+          "platform": "spark.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "Learning Spark",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "PySpark Tutorial",
+          "platform": "DataCamp",
+          "type": "course"
+        }
+      ],
+      "challenge": "Use PySpark to read a multi-file dataset from cloud storage, apply transformations, and write the output as partitioned Parquet files ready for warehouse ingestion.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "ds-data-engineer-8",
+      "title": "Data Quality and Testing",
+      "order": 8,
+      "techs": [
+        "dbt",
+        "Great Expectations",
+        "SQL",
+        "Python"
+      ],
+      "description": "Implement automated data quality checks at each layer of the pipeline to catch issues before they affect reports. Use Great Expectations and dbt tests to enforce contracts on data.",
+      "topics": [
+        "dbt schema tests",
+        "dbt singular tests",
+        "Great Expectations suites",
+        "Row count and freshness checks",
+        "Data contracts",
+        "Alerting on failures"
+      ],
+      "resources": [
+        {
+          "label": "Great Expectations Documentation",
+          "platform": "greatexpectations.io",
+          "type": "docs"
+        },
+        {
+          "label": "dbt Testing Docs",
+          "platform": "docs.getdbt.com",
+          "type": "docs"
+        },
+        {
+          "label": "Data Quality Engineering",
+          "platform": "Towards Data Science",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add a Great Expectations suite to a staging pipeline that validates row counts, null rates, and value ranges; configure it to block the load on failure.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ds-data-engineer-9",
+      "title": "Incremental Loads and CDC",
+      "order": 9,
+      "techs": [
+        "dbt",
+        "SQL",
+        "Fivetran",
+        "Debezium"
+      ],
+      "description": "Design efficient incremental loading patterns to keep warehouse tables fresh without reprocessing entire datasets. Understand change data capture as a source of warehouse updates.",
+      "topics": [
+        "Incremental dbt models",
+        "High-watermark patterns",
+        "Change data capture concepts",
+        "Fivetran and data loaders",
+        "Merge and upsert strategies",
+        "Backfill patterns"
+      ],
+      "resources": [
+        {
+          "label": "dbt Incremental Models Docs",
+          "platform": "docs.getdbt.com",
+          "type": "docs"
+        },
+        {
+          "label": "Fivetran Documentation",
+          "platform": "fivetran.com",
+          "type": "docs"
+        },
+        {
+          "label": "Designing Data-Intensive Applications",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Convert a full-refresh dbt model to an incremental model using a high-watermark timestamp, and write a test that verifies no duplicate keys exist after multiple runs.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ds-data-engineer-10",
+      "title": "Capstone - Data Warehouse Pipeline",
+      "order": 10,
+      "techs": [
+        "Spark",
+        "Airflow",
+        "dbt",
+        "BigQuery"
+      ],
+      "description": "Deliver a production-grade data warehouse pipeline that ingests raw data, applies transformations through dbt layers, enforces data quality, and serves a reporting-ready mart. Document the design and deploy with orchestration.",
+      "topics": [
+        "End-to-end pipeline design",
+        "Ingestion with Spark or Python",
+        "dbt staging and mart layers",
+        "Data quality gates",
+        "Airflow orchestration",
+        "Deployment documentation"
+      ],
+      "resources": [
+        {
+          "label": "Data Engineering Zoomcamp Project",
+          "platform": "DataTalks.Club",
+          "type": "course"
+        },
+        {
+          "label": "Fundamentals of Data Engineering",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "dbt Best Practices",
+          "platform": "docs.getdbt.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build and deploy a full warehouse pipeline: ingest raw data with Spark, transform through dbt staging and mart models, enforce quality tests, and orchestrate daily runs with Airflow.",
+      "estimatedTime": "5 weeks"
+    }
+  ],
+  "bi-developer": [
+    {
+      "id": "bi-developer-1",
+      "title": "BI Fundamentals and Data Concepts",
+      "order": 1,
+      "techs": [
+        "SQL",
+        "Excel",
+        "CSV",
+        "Data Warehouse Concepts"
+      ],
+      "description": "Understand the role of BI in organizations and how data flows from operational systems to reporting tools. Learn the vocabulary of data warehousing and dimensional modeling.",
+      "topics": [
+        "OLAP vs OLTP",
+        "Dimensional modeling basics",
+        "Star schema overview",
+        "Measures vs dimensions",
+        "KPI definition",
+        "BI tool landscape"
+      ],
+      "resources": [
+        {
+          "label": "The Data Warehouse Toolkit",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "BI Foundations",
+          "platform": "LinkedIn Learning",
+          "type": "course"
+        },
+        {
+          "label": "Excel for Data Analysis",
+          "platform": "Microsoft Learn",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Design a star schema on paper for a sales reporting use case with at least 3 dimensions and 2 fact metrics.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "bi-developer-2",
+      "title": "SQL for BI Reporting",
+      "order": 2,
+      "techs": [
+        "SQL",
+        "PostgreSQL",
+        "Redshift",
+        "BigQuery"
+      ],
+      "description": "Write the complex SQL queries needed to extract, aggregate, and prepare data for BI tool consumption. Master window functions, CTEs, and analytical functions.",
+      "topics": [
+        "Aggregate functions",
+        "Window functions",
+        "CTEs and subqueries",
+        "Date functions",
+        "CASE expressions",
+        "Query optimization"
+      ],
+      "resources": [
+        {
+          "label": "Mode SQL Tutorial",
+          "platform": "Mode Analytics",
+          "type": "docs"
+        },
+        {
+          "label": "SQL for BI",
+          "platform": "DataCamp",
+          "type": "course"
+        },
+        {
+          "label": "Learning SQL",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Write a SQL query using window functions to produce a rolling 3-month average revenue by product category from a transactional table.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "bi-developer-3",
+      "title": "Power BI Desktop Essentials",
+      "order": 3,
+      "techs": [
+        "Power BI",
+        "Power Query",
+        "DAX",
+        "CSV"
+      ],
+      "description": "Connect Power BI Desktop to data sources, shape data with Power Query, and build your first reports. Understand the Power BI data model and relationship engine.",
+      "topics": [
+        "Connecting data sources",
+        "Power Query transformations",
+        "Data model and relationships",
+        "Building visuals",
+        "Filters and slicers",
+        "Report formatting"
+      ],
+      "resources": [
+        {
+          "label": "Power BI Documentation",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Power BI A-Z",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Microsoft Power BI Data Analyst",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a Power BI report with 4 visuals connected to a CSV data source, applying cross-filter interactions and a date slicer.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "bi-developer-4",
+      "title": "DAX Fundamentals",
+      "order": 4,
+      "techs": [
+        "DAX",
+        "Power BI",
+        "Power Pivot"
+      ],
+      "description": "Write DAX measures and calculated columns to create business metrics that go beyond what raw data provides. Understand filter context and row context - the core concepts behind DAX.",
+      "topics": [
+        "Measures vs calculated columns",
+        "SUM, AVERAGE, COUNT",
+        "Filter context",
+        "CALCULATE and filters",
+        "Time intelligence basics",
+        "RELATED and RELATEDTABLE"
+      ],
+      "resources": [
+        {
+          "label": "DAX Guide",
+          "platform": "dax.guide",
+          "type": "docs"
+        },
+        {
+          "label": "DAX Patterns",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Power BI DAX Tutorial",
+          "platform": "YouTube - SQLBI",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write DAX measures for YTD sales, MoM growth percentage, and a running total, and add them to a Power BI report page.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "bi-developer-5",
+      "title": "Advanced DAX and Data Modeling",
+      "order": 5,
+      "techs": [
+        "DAX",
+        "Power BI",
+        "Tabular Model",
+        "SSAS"
+      ],
+      "description": "Apply advanced DAX patterns for complex business scenarios like dynamic segmentation, pareto analysis, and many-to-many relationships. Optimize data models for large datasets.",
+      "topics": [
+        "ALLSELECTED and context transition",
+        "Many-to-many relationships",
+        "Dynamic segmentation",
+        "Pareto and ABC analysis",
+        "Role-playing dimensions",
+        "Model optimization"
+      ],
+      "resources": [
+        {
+          "label": "The Definitive Guide to DAX",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "SQLBI DAX Patterns",
+          "platform": "sqlbi.com",
+          "type": "docs"
+        },
+        {
+          "label": "Advanced Power BI",
+          "platform": "LinkedIn Learning",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a dynamic customer segmentation (A/B/C by revenue contribution) using advanced DAX that updates with every slicer selection.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "bi-developer-6",
+      "title": "Tableau for BI Dashboards",
+      "order": 6,
+      "techs": [
+        "Tableau",
+        "Tableau Server",
+        "SQL",
+        "Extracts"
+      ],
+      "description": "Build production Tableau dashboards connected to live or extracted data sources and design for self-service analytics. Learn calculated fields, LOD expressions, and set actions.",
+      "topics": [
+        "Live vs extract connections",
+        "LOD expressions",
+        "Table calculations",
+        "Set actions and parameter actions",
+        "Dashboard design patterns",
+        "Performance optimization"
+      ],
+      "resources": [
+        {
+          "label": "Tableau Documentation",
+          "platform": "help.tableau.com",
+          "type": "docs"
+        },
+        {
+          "label": "Tableau Desktop Specialist Prep",
+          "platform": "Tableau eLearning",
+          "type": "course"
+        },
+        {
+          "label": "Practical Tableau",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a Tableau dashboard using LOD expressions to show customer cohort retention rates, with a set action that drills into individual cohorts.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "bi-developer-7",
+      "title": "BI Publishing and Governance",
+      "order": 7,
+      "techs": [
+        "Power BI Service",
+        "Tableau Server",
+        "Row-Level Security",
+        "Workspaces"
+      ],
+      "description": "Publish reports to cloud BI platforms, configure row-level security, and manage workspaces for governed self-service analytics. Understand refresh schedules and capacity management.",
+      "topics": [
+        "Power BI Service workspaces",
+        "Dataset refresh scheduling",
+        "Row-level security",
+        "Apps and distribution",
+        "Endorsement and certification",
+        "Audit logs"
+      ],
+      "resources": [
+        {
+          "label": "Power BI Service Docs",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Power BI Governance",
+          "platform": "LinkedIn Learning",
+          "type": "course"
+        },
+        {
+          "label": "Microsoft Power BI Performance Best Practices",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Publish a Power BI report with row-level security filtering data by user department, and configure a daily scheduled refresh.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "bi-developer-8",
+      "title": "Data Storytelling and Dashboard Design",
+      "order": 8,
+      "techs": [
+        "Power BI",
+        "Tableau",
+        "Figma",
+        "Color Theory"
+      ],
+      "description": "Apply data visualization best practices and design principles to produce dashboards that communicate clearly and drive action. Learn layout, typography, color, and narrative flow.",
+      "topics": [
+        "Pre-attentive attributes",
+        "Chart selection guide",
+        "Color accessibility",
+        "Dashboard layout patterns",
+        "Annotation and callouts",
+        "Narrative and executive summary design"
+      ],
+      "resources": [
+        {
+          "label": "Storytelling with Data",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "The Big Picture",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Data Visualization Best Practices",
+          "platform": "Tableau Blog",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Redesign an existing cluttered dashboard using Gestalt principles and storytelling techniques; document before/after design decisions.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "bi-developer-9",
+      "title": "Performance Tuning and Large Data",
+      "order": 9,
+      "techs": [
+        "Power BI",
+        "DAX Studio",
+        "VertiPaq Analyzer",
+        "SQL"
+      ],
+      "description": "Diagnose and fix slow Power BI reports and Tableau dashboards using profiling tools. Understand columnar storage, aggregations, and query folding to optimize at scale.",
+      "topics": [
+        "DAX Studio query analysis",
+        "VertiPaq model inspection",
+        "Query folding in Power Query",
+        "Aggregation tables",
+        "Tableau performance recorder",
+        "Index optimization"
+      ],
+      "resources": [
+        {
+          "label": "DAX Studio Documentation",
+          "platform": "daxstudio.org",
+          "type": "docs"
+        },
+        {
+          "label": "Optimizing Power BI",
+          "platform": "SQLBI",
+          "type": "course"
+        },
+        {
+          "label": "Tabular Modeling in SSAS",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Profile a slow Power BI report using DAX Studio, identify the top 3 performance bottlenecks, and apply fixes that reduce query time by at least 40%.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "bi-developer-10",
+      "title": "Capstone - Enterprise BI Solution",
+      "order": 10,
+      "techs": [
+        "Power BI",
+        "Tableau",
+        "SQL",
+        "DAX"
+      ],
+      "description": "Deliver a full enterprise BI solution: model the data, build semantic layer measures, design multi-page dashboards, configure security, and present to a mock stakeholder group.",
+      "topics": [
+        "Requirements gathering",
+        "Data model design",
+        "Semantic layer build",
+        "Multi-page dashboard development",
+        "Security configuration",
+        "Stakeholder presentation"
+      ],
+      "resources": [
+        {
+          "label": "Power BI End-to-End Project",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Microsoft PL-300 Exam Prep",
+          "platform": "Microsoft Learn",
+          "type": "docs"
+        },
+        {
+          "label": "Tableau Desktop Certified Associate",
+          "platform": "Tableau eLearning",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a complete BI solution for a chosen business domain: design the data model, write DAX measures, create a 5-page Power BI report with RLS, and present it live.",
+      "estimatedTime": "5 weeks"
+    }
+  ],
+  "ml-analyst": [
+    {
+      "id": "ml-analyst-1",
+      "title": "Python and Analytics Environment Setup",
+      "order": 1,
+      "techs": [
+        "Python",
+        "Jupyter",
+        "Anaconda",
+        "pip"
+      ],
+      "description": "Configure a Python analytics environment and learn the foundational Python skills needed for machine learning analysis. Understand package management and notebook-based workflows.",
+      "topics": [
+        "Virtual environments",
+        "Jupyter notebooks",
+        "Python data types and control flow",
+        "Functions and modules",
+        "List comprehensions",
+        "File I/O"
+      ],
+      "resources": [
+        {
+          "label": "Python Documentation",
+          "platform": "docs.python.org",
+          "type": "docs"
+        },
+        {
+          "label": "Python for Everybody",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "Automate the Boring Stuff",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Write a Python script that reads a CSV, filters rows based on a condition, computes summary stats, and writes a cleaned output file.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ml-analyst-2",
+      "title": "Data Manipulation with Pandas",
+      "order": 2,
+      "techs": [
+        "Pandas",
+        "NumPy",
+        "Python",
+        "CSV"
+      ],
+      "description": "Manipulate structured datasets using Pandas DataFrames for the kinds of data preparation tasks ML analysis requires. Understand vectorized operations and efficient data handling.",
+      "topics": [
+        "DataFrame operations",
+        "Merging and reshaping",
+        "GroupBy and aggregation",
+        "Apply and map",
+        "Handling missing values",
+        "Time series indexing"
+      ],
+      "resources": [
+        {
+          "label": "Pandas Documentation",
+          "platform": "pandas.pydata.org",
+          "type": "docs"
+        },
+        {
+          "label": "Data Analysis with Python",
+          "platform": "freeCodeCamp",
+          "type": "course"
+        },
+        {
+          "label": "Python for Data Analysis",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Given a raw multi-file dataset, merge the files, reshape from wide to long format, handle missing values, and output a summary grouped by category and month.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ml-analyst-3",
+      "title": "Exploratory Data Analysis and Visualization",
+      "order": 3,
+      "techs": [
+        "Pandas",
+        "Matplotlib",
+        "Seaborn",
+        "Python"
+      ],
+      "description": "Systematically explore datasets to uncover distributions, correlations, and anomalies that guide feature selection and model design. Build publication-quality charts for analysis reports.",
+      "topics": [
+        "Univariate and bivariate analysis",
+        "Correlation analysis",
+        "Pair plots",
+        "Box plots and outliers",
+        "Feature importance intuition",
+        "EDA reporting"
+      ],
+      "resources": [
+        {
+          "label": "Seaborn Documentation",
+          "platform": "seaborn.pydata.org",
+          "type": "docs"
+        },
+        {
+          "label": "EDA Course on Kaggle",
+          "platform": "Kaggle Learn",
+          "type": "course"
+        },
+        {
+          "label": "Python Data Science Handbook",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Conduct a full EDA on a classification dataset: identify the top predictors visually, flag multicollinearity concerns, and document findings in a Jupyter notebook.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ml-analyst-4",
+      "title": "Feature Engineering and Preprocessing",
+      "order": 4,
+      "techs": [
+        "Scikit-learn",
+        "Pandas",
+        "Python",
+        "NumPy"
+      ],
+      "description": "Transform raw features into representations that improve ML model performance. Build reusable Scikit-learn pipelines that handle encoding, scaling, and imputation consistently.",
+      "topics": [
+        "Label and one-hot encoding",
+        "StandardScaler and MinMaxScaler",
+        "Imputation strategies",
+        "Feature selection with variance and correlation",
+        "Pipelines with ColumnTransformer",
+        "Train-test split"
+      ],
+      "resources": [
+        {
+          "label": "Scikit-learn Preprocessing Docs",
+          "platform": "scikit-learn.org",
+          "type": "docs"
+        },
+        {
+          "label": "Feature Engineering for ML",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Feature Engineering for Machine Learning",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a Scikit-learn ColumnTransformer pipeline that encodes categoricals, imputes nulls, and scales numerics; apply it consistently to train and test splits.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ml-analyst-5",
+      "title": "Supervised Learning Fundamentals",
+      "order": 5,
+      "techs": [
+        "Scikit-learn",
+        "Python",
+        "Pandas",
+        "NumPy"
+      ],
+      "description": "Train and evaluate core supervised learning models for both regression and classification analysis tasks. Understand the bias-variance tradeoff and cross-validation as evaluation strategy.",
+      "topics": [
+        "Linear and logistic regression",
+        "Decision trees",
+        "Cross-validation",
+        "Bias-variance tradeoff",
+        "Evaluation metrics (MSE, accuracy, F1)",
+        "Overfitting and regularization"
+      ],
+      "resources": [
+        {
+          "label": "Scikit-learn User Guide",
+          "platform": "scikit-learn.org",
+          "type": "docs"
+        },
+        {
+          "label": "Hands-On ML with Scikit-Learn",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "ML with Python",
+          "platform": "Coursera",
+          "type": "course"
+        }
+      ],
+      "challenge": "Train a logistic regression and a decision tree on a classification dataset, evaluate both with 5-fold cross-validation, and produce a comparison table of metrics.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "ml-analyst-6",
+      "title": "Ensemble Methods and Model Selection",
+      "order": 6,
+      "techs": [
+        "Scikit-learn",
+        "Python",
+        "XGBoost",
+        "Matplotlib"
+      ],
+      "description": "Apply ensemble learning techniques to improve predictive performance and use systematic hyperparameter tuning to optimize models. Compare models using robust evaluation frameworks.",
+      "topics": [
+        "Random forests",
+        "Gradient boosting and XGBoost",
+        "GridSearchCV and RandomizedSearchCV",
+        "Learning curves",
+        "Feature importance",
+        "Model comparison"
+      ],
+      "resources": [
+        {
+          "label": "XGBoost Documentation",
+          "platform": "xgboost.readthedocs.io",
+          "type": "docs"
+        },
+        {
+          "label": "Ensemble Methods Course",
+          "platform": "DataCamp",
+          "type": "course"
+        },
+        {
+          "label": "Hands-On ML with Scikit-Learn",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Train Random Forest and XGBoost classifiers on the same dataset, tune both with RandomizedSearchCV, and produce a feature importance comparison chart.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "ml-analyst-7",
+      "title": "Model Interpretability and Explainability",
+      "order": 7,
+      "techs": [
+        "Scikit-learn",
+        "SHAP",
+        "LIME",
+        "Matplotlib"
+      ],
+      "description": "Explain model predictions to business stakeholders using SHAP values, partial dependence plots, and feature importance. Translate technical ML outputs into actionable business language.",
+      "topics": [
+        "SHAP values and summary plots",
+        "LIME explanations",
+        "Partial dependence plots",
+        "Feature importance comparison",
+        "Individual prediction explanations",
+        "Communicating model insights"
+      ],
+      "resources": [
+        {
+          "label": "SHAP Documentation",
+          "platform": "shap.readthedocs.io",
+          "type": "docs"
+        },
+        {
+          "label": "Interpretable ML Book",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "ML Explainability on Kaggle",
+          "platform": "Kaggle Learn",
+          "type": "course"
+        }
+      ],
+      "challenge": "Apply SHAP to explain a trained model, produce a global feature importance summary plot and 3 individual force plots, and write a plain-language explanation for each.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ml-analyst-8",
+      "title": "Unsupervised Analysis and Clustering",
+      "order": 8,
+      "techs": [
+        "Scikit-learn",
+        "Python",
+        "Pandas",
+        "Matplotlib"
+      ],
+      "description": "Use clustering and dimensionality reduction to find hidden structure in unlabeled data for analytical purposes. Profile clusters in business terms and visualize high-dimensional data.",
+      "topics": [
+        "K-Means and DBSCAN",
+        "Hierarchical clustering",
+        "Silhouette and elbow analysis",
+        "PCA for visualization",
+        "t-SNE for exploration",
+        "Cluster profiling and naming"
+      ],
+      "resources": [
+        {
+          "label": "Scikit-learn Clustering Docs",
+          "platform": "scikit-learn.org",
+          "type": "docs"
+        },
+        {
+          "label": "Unsupervised Learning in Python",
+          "platform": "DataCamp",
+          "type": "course"
+        },
+        {
+          "label": "Python Machine Learning",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Perform clustering on a behavioral dataset, determine optimal K using silhouette analysis, visualize clusters with PCA, and profile each cluster with business-relevant statistics.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ml-analyst-9",
+      "title": "Regression Analysis and Forecasting",
+      "order": 9,
+      "techs": [
+        "Scikit-learn",
+        "Statsmodels",
+        "Python",
+        "Pandas"
+      ],
+      "description": "Apply regression models and time series methods for business forecasting and trend analysis. Validate forecast accuracy and communicate uncertainty with confidence intervals.",
+      "topics": [
+        "Polynomial and regularized regression",
+        "ARIMA time series",
+        "Prophet forecasting",
+        "Forecast evaluation (MAPE, RMSE)",
+        "Residual diagnostics",
+        "Scenario forecasting"
+      ],
+      "resources": [
+        {
+          "label": "Prophet Documentation",
+          "platform": "facebook.github.io/prophet",
+          "type": "docs"
+        },
+        {
+          "label": "Time Series Analysis",
+          "platform": "DataCamp",
+          "type": "course"
+        },
+        {
+          "label": "Forecasting Principles and Practice",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a 12-month sales forecast using both ARIMA and Prophet, compare their MAPE scores on a held-out period, and visualize forecasts with confidence bands.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "ml-analyst-10",
+      "title": "Capstone - ML Analysis Project",
+      "order": 10,
+      "techs": [
+        "Scikit-learn",
+        "Pandas",
+        "Matplotlib",
+        "Python"
+      ],
+      "description": "Deliver a complete ML analysis project from problem definition through model building, interpretation, and stakeholder reporting. Document methodology, findings, and business recommendations.",
+      "topics": [
+        "Problem framing",
+        "Full ML pipeline",
+        "Model selection and tuning",
+        "SHAP explanations",
+        "Business recommendation writing",
+        "Presentation and documentation"
+      ],
+      "resources": [
+        {
+          "label": "Kaggle ML Projects",
+          "platform": "Kaggle",
+          "type": "docs"
+        },
+        {
+          "label": "Applied Machine Learning",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "Storytelling with Data",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Complete an end-to-end ML analysis: frame a business problem, build and tune a model, explain predictions with SHAP, and deliver a written report with actionable recommendations.",
+      "estimatedTime": "4 weeks"
+    }
+  ],
+  "data-architect": [
+    {
+      "id": "data-architect-1",
+      "title": "Data Architecture Foundations",
+      "order": 1,
+      "techs": [
+        "SQL",
+        "Data Modeling",
+        "ERD",
+        "Architecture Diagrams"
+      ],
+      "description": "Understand the scope of the data architect role and the layers of a modern enterprise data platform. Learn to diagram systems, evaluate patterns, and speak the language of data infrastructure.",
+      "topics": [
+        "Data architecture patterns",
+        "Operational vs analytical systems",
+        "Data platform layers",
+        "Architecture diagrams with draw.io",
+        "Data governance overview",
+        "Stakeholder communication"
+      ],
+      "resources": [
+        {
+          "label": "Fundamentals of Data Engineering",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Data Architecture Patterns",
+          "platform": "AWS Well-Architected Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Designing Data-Intensive Applications",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Draw a current-state and future-state architecture diagram for a fictional company migrating from on-prem databases to a cloud data platform.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-architect-2",
+      "title": "Relational Database Design and SQL",
+      "order": 2,
+      "techs": [
+        "SQL",
+        "PostgreSQL",
+        "ERD",
+        "Normalization"
+      ],
+      "description": "Design normalized relational schemas and write the advanced SQL needed to query and transform data across complex table structures. Master indexing and query performance fundamentals.",
+      "topics": [
+        "3NF normalization",
+        "Primary and foreign keys",
+        "Index types and usage",
+        "Advanced joins",
+        "Partitioning",
+        "Query plan analysis"
+      ],
+      "resources": [
+        {
+          "label": "PostgreSQL Documentation",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "Database Design for Mere Mortals",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "SQL Performance Explained",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Design and implement a 3NF schema for an e-commerce system, add appropriate indexes, and write a EXPLAIN ANALYZE query demonstrating index usage.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "data-architect-3",
+      "title": "Dimensional Modeling and Data Warehousing",
+      "order": 3,
+      "techs": [
+        "SQL",
+        "Star Schema",
+        "Snowflake",
+        "BigQuery"
+      ],
+      "description": "Design dimensional models that balance query performance with maintainability for analytical workloads. Apply Kimball methodology to real business domains.",
+      "topics": [
+        "Star schema design",
+        "Slowly changing dimensions",
+        "Conformed dimensions",
+        "Factless fact tables",
+        "Aggregate tables",
+        "Data mart vs enterprise warehouse"
+      ],
+      "resources": [
+        {
+          "label": "The Data Warehouse Toolkit",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Kimball Group Reader",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "BigQuery Data Warehouse Docs",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Design a full dimensional model for a telecom company including subscriber, service, and billing dimensions with appropriate SCD types documented.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "data-architect-4",
+      "title": "Cloud Data Platforms - Snowflake and BigQuery",
+      "order": 4,
+      "techs": [
+        "Snowflake",
+        "BigQuery",
+        "SQL",
+        "Cloud Storage"
+      ],
+      "description": "Configure and administer cloud data warehouses including compute scaling, storage organization, and cost controls. Understand the architectural differences between Snowflake and BigQuery.",
+      "topics": [
+        "Snowflake architecture (VW, storage)",
+        "BigQuery slots and reservations",
+        "Data loading patterns",
+        "Partitioning and clustering",
+        "Cost monitoring",
+        "Security and access control"
+      ],
+      "resources": [
+        {
+          "label": "Snowflake Documentation",
+          "platform": "docs.snowflake.com",
+          "type": "docs"
+        },
+        {
+          "label": "BigQuery Documentation",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "Snowflake: The Definitive Guide",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Load a 10GB dataset into both Snowflake and BigQuery, configure appropriate clustering/partitioning on each, and document the cost and performance differences.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "data-architect-5",
+      "title": "Data Transformation with dbt",
+      "order": 5,
+      "techs": [
+        "dbt",
+        "SQL",
+        "Jinja",
+        "YAML"
+      ],
+      "description": "Design dbt project structures that reflect a well-governed transformation layer, with clear staging, intermediate, and mart conventions. Apply dbt patterns for large, multi-domain projects.",
+      "topics": [
+        "Multi-project dbt design",
+        "Package management",
+        "Materializations at scale",
+        "dbt docs and lineage",
+        "Cross-database dbt",
+        "Testing strategy at each layer"
+      ],
+      "resources": [
+        {
+          "label": "dbt Documentation",
+          "platform": "docs.getdbt.com",
+          "type": "docs"
+        },
+        {
+          "label": "Analytics Engineering with dbt",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "dbt Discourse",
+          "platform": "discourse.getdbt.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Design a multi-domain dbt project structure for a company with sales, finance, and operations data; implement the staging layer for one domain with full tests and docs.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "data-architect-6",
+      "title": "Data Governance and Metadata Management",
+      "order": 6,
+      "techs": [
+        "Collibra",
+        "Apache Atlas",
+        "dbt docs",
+        "Data Catalog"
+      ],
+      "description": "Implement data governance frameworks including data cataloging, lineage tracking, ownership assignment, and data classification. Ensure regulatory and compliance requirements are met.",
+      "topics": [
+        "Data catalog design",
+        "Business glossary",
+        "Data lineage tracking",
+        "Data classification (PII, etc.)",
+        "Ownership and stewardship",
+        "Data quality SLAs"
+      ],
+      "resources": [
+        {
+          "label": "DAMA DMBOK",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Data Governance: The Definitive Guide",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Apache Atlas Documentation",
+          "platform": "atlas.apache.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Implement a data catalog for a sample warehouse using dbt docs plus a metadata layer; classify all columns by sensitivity level and assign business owners.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-architect-7",
+      "title": "Data Security and Compliance",
+      "order": 7,
+      "techs": [
+        "Snowflake",
+        "BigQuery",
+        "SQL",
+        "IAM"
+      ],
+      "description": "Design and enforce data security controls including column-level masking, row-level access policies, and audit logging for compliance with GDPR and SOC 2. Apply least-privilege access models.",
+      "topics": [
+        "Column masking policies",
+        "Row access policies",
+        "Role-based access control",
+        "Dynamic data masking",
+        "Audit logs and monitoring",
+        "GDPR and CCPA compliance patterns"
+      ],
+      "resources": [
+        {
+          "label": "Snowflake Security Docs",
+          "platform": "docs.snowflake.com",
+          "type": "docs"
+        },
+        {
+          "label": "BigQuery IAM and Security Docs",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "Data Security Guide",
+          "platform": "NIST",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Implement dynamic data masking on PII columns in Snowflake, configure row-level access by department, and demonstrate with a multi-role query test.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-architect-8",
+      "title": "Data Mesh and Modern Architecture Patterns",
+      "order": 8,
+      "techs": [
+        "Snowflake",
+        "dbt",
+        "Terraform",
+        "Cloud IAM"
+      ],
+      "description": "Evaluate and design data mesh architectures that decentralize data ownership to domain teams while maintaining interoperability. Compare with centralized warehouse and data lakehouse patterns.",
+      "topics": [
+        "Data mesh principles",
+        "Data products",
+        "Federated governance",
+        "Data lakehouse architecture",
+        "Data sharing across domains",
+        "Infrastructure as code for data"
+      ],
+      "resources": [
+        {
+          "label": "Data Mesh",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Snowflake Data Sharing Docs",
+          "platform": "docs.snowflake.com",
+          "type": "docs"
+        },
+        {
+          "label": "Data Lakehouse Architecture",
+          "platform": "Databricks Blog",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Design a data mesh architecture for a 3-domain organization, document the data product contracts for one domain, and implement cross-domain sharing in Snowflake.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "data-architect-9",
+      "title": "Performance, Scalability, and Cost Optimization",
+      "order": 9,
+      "techs": [
+        "Snowflake",
+        "BigQuery",
+        "dbt",
+        "Query Profiling"
+      ],
+      "description": "Diagnose and resolve performance bottlenecks in cloud data platforms using query profiling, materialization strategies, and storage optimization. Design for cost-efficient scale.",
+      "topics": [
+        "Query profiling and execution plans",
+        "Materialized views and caching",
+        "Clustering optimization",
+        "Snowflake query acceleration",
+        "BigQuery BI Engine",
+        "Cost allocation and chargebacks"
+      ],
+      "resources": [
+        {
+          "label": "Snowflake Performance Tuning Docs",
+          "platform": "docs.snowflake.com",
+          "type": "docs"
+        },
+        {
+          "label": "BigQuery Best Practices Docs",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "High Performance Spark",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Profile a slow reporting query, apply clustering, materialized views, and query rewrite techniques to reduce runtime by 60%, and document cost savings.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "data-architect-10",
+      "title": "Capstone - Enterprise Data Platform Design",
+      "order": 10,
+      "techs": [
+        "Snowflake",
+        "BigQuery",
+        "dbt",
+        "SQL"
+      ],
+      "description": "Deliver a full enterprise data platform design including architecture diagrams, dimensional models, transformation layer, governance framework, and security controls. Present to a simulated leadership team.",
+      "topics": [
+        "Architecture decision records",
+        "Platform design documentation",
+        "End-to-end data flow design",
+        "Governance and security plan",
+        "Cost estimate and trade-offs",
+        "Executive presentation"
+      ],
+      "resources": [
+        {
+          "label": "Designing Data-Intensive Applications",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Snowflake Architecture Guide",
+          "platform": "docs.snowflake.com",
+          "type": "docs"
+        },
+        {
+          "label": "dbt Project Structure Best Practices",
+          "platform": "docs.getdbt.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Design and partially implement an enterprise data platform: produce architecture diagrams, a dimensional model, a dbt project with 2 marts, a governance catalog, and a 15-slide executive presentation.",
+      "estimatedTime": "6 weeks"
+    }
+  ],
+  "analytics-engineer": [
+    {
+      "id": "analytics-engineer-1",
+      "title": "Analytics Engineering Role and SQL Foundations",
+      "order": 1,
+      "techs": [
+        "SQL",
+        "PostgreSQL",
+        "CSV",
+        "Data Warehouse Concepts"
+      ],
+      "description": "Understand where analytics engineering sits between data engineering and data analysis, and the responsibilities it owns. Build the SQL foundation required for robust data transformation work.",
+      "topics": [
+        "Analytics engineering role overview",
+        "Modern data stack context",
+        "SQL SELECT and filtering",
+        "Aggregations and GROUP BY",
+        "JOINs and relationships",
+        "CTEs and subqueries"
+      ],
+      "resources": [
+        {
+          "label": "What is Analytics Engineering",
+          "platform": "dbt Blog",
+          "type": "docs"
+        },
+        {
+          "label": "Mode SQL Tutorial",
+          "platform": "Mode Analytics",
+          "type": "docs"
+        },
+        {
+          "label": "Learning SQL",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Write a SQL query using CTEs that joins 3 tables, computes customer lifetime value, and ranks customers into deciles.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "analytics-engineer-2",
+      "title": "dbt Core Fundamentals",
+      "order": 2,
+      "techs": [
+        "dbt",
+        "SQL",
+        "YAML",
+        "Jinja"
+      ],
+      "description": "Set up a dbt project connected to a cloud warehouse and build your first staging and mart models. Understand dbt's compile and run cycle and how ref() creates the lineage graph.",
+      "topics": [
+        "dbt project structure",
+        "Sources and staging models",
+        "ref() and lineage",
+        "Materializations (table, view, incremental)",
+        "dbt run and dbt test",
+        "Schema YAML files"
+      ],
+      "resources": [
+        {
+          "label": "dbt Documentation",
+          "platform": "docs.getdbt.com",
+          "type": "docs"
+        },
+        {
+          "label": "dbt Fundamentals Course",
+          "platform": "courses.getdbt.com",
+          "type": "course"
+        },
+        {
+          "label": "The dbt Viewpoint",
+          "platform": "dbt Blog",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Create a dbt project with a staging layer and one mart model that joins 2 staging models; add not-null and unique tests to the mart primary key.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "analytics-engineer-3",
+      "title": "Advanced SQL for Analytics",
+      "order": 3,
+      "techs": [
+        "SQL",
+        "dbt",
+        "BigQuery",
+        "Snowflake"
+      ],
+      "description": "Write the advanced SQL patterns used in production analytics engineering: window functions, pivoting, date spines, and complex aggregations. Apply these inside dbt models.",
+      "topics": [
+        "Window functions (LAG, LEAD, RANK)",
+        "Date spines and series generation",
+        "Pivoting and unpivoting",
+        "Sessionization logic",
+        "Funnel queries",
+        "Recursive CTEs"
+      ],
+      "resources": [
+        {
+          "label": "Advanced SQL for Analytics - Mode",
+          "platform": "Mode Analytics",
+          "type": "docs"
+        },
+        {
+          "label": "dbt SQL Style Guide",
+          "platform": "dbt Blog",
+          "type": "docs"
+        },
+        {
+          "label": "SQL Antipatterns",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a dbt model that generates a date spine and joins it with event data to compute a daily active user metric with a 7-day rolling average.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "analytics-engineer-4",
+      "title": "dbt Testing, Documentation, and Data Contracts",
+      "order": 4,
+      "techs": [
+        "dbt",
+        "YAML",
+        "Great Expectations",
+        "SQL"
+      ],
+      "description": "Implement a comprehensive testing strategy across dbt model layers to enforce data quality guarantees for downstream consumers. Write dbt documentation that serves as a living data dictionary.",
+      "topics": [
+        "Schema tests (unique, not-null, accepted-values)",
+        "Singular SQL tests",
+        "Custom generic tests",
+        "dbt docs generate",
+        "Data freshness tests",
+        "Source freshness"
+      ],
+      "resources": [
+        {
+          "label": "dbt Testing Docs",
+          "platform": "docs.getdbt.com",
+          "type": "docs"
+        },
+        {
+          "label": "dbt Documentation Docs",
+          "platform": "docs.getdbt.com",
+          "type": "docs"
+        },
+        {
+          "label": "Analytics Engineering with dbt",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Add a full test suite to an existing dbt project: schema tests on all primary keys, a singular test checking a business rule, and freshness assertions on all sources.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "analytics-engineer-5",
+      "title": "Looker and LookML Fundamentals",
+      "order": 5,
+      "techs": [
+        "Looker",
+        "LookML",
+        "SQL",
+        "JSON"
+      ],
+      "description": "Define a semantic layer in Looker using LookML views, dimensions, and measures that enable self-service analytics for business users. Understand Explores and the Looker data modeling philosophy.",
+      "topics": [
+        "LookML views and fields",
+        "Dimensions and measures",
+        "Explores and joins",
+        "Derived tables in LookML",
+        "Filters and parameters",
+        "Dashboards in Looker"
+      ],
+      "resources": [
+        {
+          "label": "Looker Documentation",
+          "platform": "cloud.google.com/looker",
+          "type": "docs"
+        },
+        {
+          "label": "LookML Tutorial",
+          "platform": "Looker Training",
+          "type": "course"
+        },
+        {
+          "label": "Looker and LookML Guide",
+          "platform": "Towards Data Science",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a LookML view with at least 8 dimensions and 4 measures, join two views in an Explore, and create a 3-tile Looker dashboard.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "analytics-engineer-6",
+      "title": "Incremental Models and Performance",
+      "order": 6,
+      "techs": [
+        "dbt",
+        "SQL",
+        "Snowflake",
+        "BigQuery"
+      ],
+      "description": "Design and implement incremental dbt models that process only new or changed data to keep warehouse costs low and tables fresh. Understand merge strategies and idempotency.",
+      "topics": [
+        "Incremental model strategies (append, merge, delete-insert)",
+        "Unique keys and merge logic",
+        "Backfill patterns",
+        "Partition pruning alignment",
+        "Testing incremental models",
+        "Cost impact"
+      ],
+      "resources": [
+        {
+          "label": "dbt Incremental Models Docs",
+          "platform": "docs.getdbt.com",
+          "type": "docs"
+        },
+        {
+          "label": "Incremental Patterns Blog",
+          "platform": "dbt Blog",
+          "type": "docs"
+        },
+        {
+          "label": "Snowflake Merge Documentation",
+          "platform": "docs.snowflake.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Convert 3 full-refresh dbt models to incremental using merge strategy; write tests proving no duplicate keys after 5 simulated daily runs.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "analytics-engineer-7",
+      "title": "Airflow for Analytics Orchestration",
+      "order": 7,
+      "techs": [
+        "Airflow",
+        "dbt",
+        "Python",
+        "DAGs"
+      ],
+      "description": "Orchestrate dbt project runs and surrounding data tasks with Apache Airflow DAGs. Manage dependencies between ingestion jobs, dbt runs, and downstream exports reliably.",
+      "topics": [
+        "Airflow DAG structure",
+        "DbtRunOperator patterns",
+        "Task dependencies",
+        "Retry and alerting",
+        "Parameterized DAGs",
+        "dbt Cloud API integration"
+      ],
+      "resources": [
+        {
+          "label": "dbt and Airflow Integration Docs",
+          "platform": "docs.getdbt.com",
+          "type": "docs"
+        },
+        {
+          "label": "Apache Airflow Documentation",
+          "platform": "airflow.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "Data Pipelines with Apache Airflow",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build an Airflow DAG that runs a data load task, then triggers a dbt run with model selection, sends a Slack alert on failure, and is scheduled daily.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "analytics-engineer-8",
+      "title": "Semantic Layer and Metric Definitions",
+      "order": 8,
+      "techs": [
+        "dbt",
+        "dbt Semantic Layer",
+        "MetricFlow",
+        "SQL"
+      ],
+      "description": "Define business metrics centrally in the dbt semantic layer using MetricFlow so that every tool in the stack computes them consistently. Understand dimension and measure grain.",
+      "topics": [
+        "dbt metrics and MetricFlow",
+        "Measure and dimension grain",
+        "Time grain configurations",
+        "Metric filtering",
+        "Semantic layer querying",
+        "Governance of metric definitions"
+      ],
+      "resources": [
+        {
+          "label": "dbt Semantic Layer Docs",
+          "platform": "docs.getdbt.com",
+          "type": "docs"
+        },
+        {
+          "label": "MetricFlow Documentation",
+          "platform": "docs.getdbt.com",
+          "type": "docs"
+        },
+        {
+          "label": "The Analytics Engineering Guide",
+          "platform": "dbt Blog",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Define 5 company-wide metrics (revenue, CAC, LTV, churn rate, NPS proxy) using MetricFlow in a dbt project with correct grain and dimension configurations.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "analytics-engineer-9",
+      "title": "CI/CD and Analytics Engineering Best Practices",
+      "order": 9,
+      "techs": [
+        "dbt",
+        "GitHub Actions",
+        "dbt Cloud",
+        "YAML"
+      ],
+      "description": "Apply software engineering practices to analytics code: version control, code review, automated testing in CI, and deployment pipelines. Ensure production dbt changes are safe and auditable.",
+      "topics": [
+        "Git branching for analytics",
+        "dbt Cloud CI jobs",
+        "GitHub Actions for dbt",
+        "Slim CI with state comparison",
+        "Code review for SQL",
+        "Deployment environments"
+      ],
+      "resources": [
+        {
+          "label": "dbt Cloud CI Docs",
+          "platform": "docs.getdbt.com",
+          "type": "docs"
+        },
+        {
+          "label": "Analytics Engineering CI/CD Guide",
+          "platform": "dbt Blog",
+          "type": "docs"
+        },
+        {
+          "label": "GitHub Actions Documentation",
+          "platform": "docs.github.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Set up a GitHub Actions workflow that runs dbt test on modified models only (slim CI) on every pull request and blocks merge on test failure.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "analytics-engineer-10",
+      "title": "Capstone - Production Analytics Platform",
+      "order": 10,
+      "techs": [
+        "dbt",
+        "SQL",
+        "Looker",
+        "Airflow"
+      ],
+      "description": "Build and deploy a production analytics engineering stack: dbt project with staging and mart layers, semantic layer metrics, Looker explores and dashboard, and Airflow orchestration. Document for team handoff.",
+      "topics": [
+        "End-to-end dbt project",
+        "Semantic layer metrics",
+        "Looker dashboard delivery",
+        "Orchestration setup",
+        "CI/CD pipeline",
+        "Documentation and handoff"
+      ],
+      "resources": [
+        {
+          "label": "dbt Project Checklist",
+          "platform": "docs.getdbt.com",
+          "type": "docs"
+        },
+        {
+          "label": "Analytics Engineering Bootcamp",
+          "platform": "courses.getdbt.com",
+          "type": "course"
+        },
+        {
+          "label": "Analytics Engineering with dbt",
+          "platform": "Book",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deliver a production-ready analytics project: dbt staging and 3 mart models with tests, 5 MetricFlow metrics, a Looker dashboard, an Airflow DAG, and a CI/CD pipeline on GitHub Actions.",
+      "estimatedTime": "5 weeks"
+    }
+  ],
+  "statistician": [
+    {
+      "id": "statistician-1",
+      "title": "Statistical Foundations and R Environment",
+      "order": 1,
+      "techs": [
+        "R",
+        "RStudio",
+        "base R",
+        "R Markdown"
+      ],
+      "description": "Set up an R development environment and learn the foundational statistical concepts that underpin all quantitative analysis. Understand data types, probability, and the R language syntax.",
+      "topics": [
+        "R syntax and data types",
+        "Vectors, lists, and data frames",
+        "Probability fundamentals",
+        "Descriptive statistics",
+        "Frequency distributions",
+        "R Markdown for reports"
+      ],
+      "resources": [
+        {
+          "label": "R for Data Science",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Introduction to R",
+          "platform": "DataCamp",
+          "type": "course"
+        },
+        {
+          "label": "R Documentation",
+          "platform": "r-project.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Using base R, load a dataset, compute all descriptive statistics, produce a frequency table, and render a summary report with R Markdown.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "statistician-2",
+      "title": "Probability Distributions and Sampling",
+      "order": 2,
+      "techs": [
+        "R",
+        "Python",
+        "SciPy",
+        "stats package"
+      ],
+      "description": "Master the probability distributions most commonly encountered in statistical practice and understand the central limit theorem. Simulate sampling distributions to build intuition.",
+      "topics": [
+        "Normal, binomial, Poisson distributions",
+        "Sampling distributions",
+        "Central limit theorem",
+        "Law of large numbers",
+        "Quantiles and percentiles",
+        "Monte Carlo simulation"
+      ],
+      "resources": [
+        {
+          "label": "OpenIntro Statistics",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Probability and Statistics for DS",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "SciPy Stats Documentation",
+          "platform": "scipy.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Simulate the central limit theorem in R for 3 different population distributions, plotting sample mean distributions at n=5, 30, and 100.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "statistician-3",
+      "title": "Inferential Statistics and Hypothesis Testing",
+      "order": 3,
+      "techs": [
+        "R",
+        "Python",
+        "SciPy",
+        "Statsmodels"
+      ],
+      "description": "Apply inferential statistics to draw conclusions from sample data and test business and scientific hypotheses rigorously. Control Type I and Type II errors with appropriate test selection.",
+      "topics": [
+        "Null and alternative hypotheses",
+        "t-tests (one-sample, two-sample, paired)",
+        "Chi-square tests",
+        "ANOVA",
+        "p-values and significance levels",
+        "Effect sizes and power"
+      ],
+      "resources": [
+        {
+          "label": "Statistics in Plain English",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Inferential Statistics",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "R stats package docs",
+          "platform": "r-project.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Given a clinical trial dataset, select the appropriate test, verify assumptions, run the test in R, compute effect size (Cohen d), and write a formal conclusion.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "statistician-4",
+      "title": "Regression Analysis",
+      "order": 4,
+      "techs": [
+        "R",
+        "Python",
+        "Statsmodels",
+        "ggplot2"
+      ],
+      "description": "Build and interpret simple and multiple regression models, checking all assumptions rigorously. Apply transformations and diagnostics to handle violations.",
+      "topics": [
+        "Simple linear regression",
+        "Multiple regression",
+        "Assumption checking (LINE)",
+        "Residual diagnostics",
+        "Influential observations",
+        "Polynomial and interaction terms"
+      ],
+      "resources": [
+        {
+          "label": "Applied Linear Statistical Models",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Regression in R",
+          "platform": "DataCamp",
+          "type": "course"
+        },
+        {
+          "label": "Statsmodels OLS Docs",
+          "platform": "statsmodels.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Fit a multiple regression model in R, run all 4 LINE assumption checks with plots, identify and handle two influential observations, and interpret coefficients with 95% CIs.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "statistician-5",
+      "title": "Experimental Design and A/B Testing",
+      "order": 5,
+      "techs": [
+        "R",
+        "Python",
+        "SciPy",
+        "Power Analysis"
+      ],
+      "description": "Design statistically valid experiments and analyze results with appropriate tests. Compute required sample sizes and manage multiple comparison problems.",
+      "topics": [
+        "Randomization and control",
+        "Sample size and power calculation",
+        "Factorial designs",
+        "A/B and A/A tests",
+        "Multiple comparisons (Bonferroni, FDR)",
+        "Sequential testing"
+      ],
+      "resources": [
+        {
+          "label": "Design and Analysis of Experiments",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "A/B Testing by Google",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "pwr package documentation",
+          "platform": "CRAN",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Design an A/B test for a website conversion experiment: compute required sample size for 80% power at alpha=0.05, describe the randomization strategy, and simulate the analysis.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "statistician-6",
+      "title": "Bayesian Statistics",
+      "order": 6,
+      "techs": [
+        "R",
+        "Python",
+        "PyMC",
+        "Stan"
+      ],
+      "description": "Apply Bayesian reasoning to statistical inference, expressing uncertainty through posterior distributions rather than binary reject/fail-to-reject decisions. Use MCMC sampling for complex models.",
+      "topics": [
+        "Bayes theorem",
+        "Prior, likelihood, and posterior",
+        "Conjugate priors",
+        "MCMC fundamentals",
+        "Credible intervals",
+        "Bayesian A/B testing"
+      ],
+      "resources": [
+        {
+          "label": "Statistical Rethinking",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Bayesian Methods for Hackers",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "PyMC Documentation",
+          "platform": "docs.pymc.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Implement a Bayesian A/B test in PyMC comparing two conversion rates, plot the posterior distributions, and compute the probability that variant B is better than A.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "statistician-7",
+      "title": "Multivariate Statistics",
+      "order": 7,
+      "techs": [
+        "R",
+        "Python",
+        "Scikit-learn",
+        "FactoMineR"
+      ],
+      "description": "Apply multivariate methods to datasets with many variables, reducing dimensionality and uncovering latent structure. Use PCA, factor analysis, and MANOVA for statistical analysis.",
+      "topics": [
+        "Principal component analysis",
+        "Factor analysis",
+        "Cluster analysis",
+        "MANOVA",
+        "Discriminant analysis",
+        "Canonical correlation"
+      ],
+      "resources": [
+        {
+          "label": "Applied Multivariate Statistics with R",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "FactoMineR Documentation",
+          "platform": "CRAN",
+          "type": "docs"
+        },
+        {
+          "label": "Multivariate Analysis",
+          "platform": "DataCamp",
+          "type": "course"
+        }
+      ],
+      "challenge": "Apply PCA to a high-dimensional dataset in R, determine the number of components to retain using a scree plot and Kaiser rule, and interpret the first 3 principal components.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "statistician-8",
+      "title": "Time Series and Forecasting",
+      "order": 8,
+      "techs": [
+        "R",
+        "Python",
+        "forecast package",
+        "Prophet"
+      ],
+      "description": "Analyze time-indexed data using classical and modern methods, accounting for trend, seasonality, and autocorrelation. Produce forecasts with formal uncertainty quantification.",
+      "topics": [
+        "Decomposition (STL, classical)",
+        "Stationarity and differencing",
+        "ACF and PACF",
+        "ARIMA identification and fitting",
+        "Exponential smoothing (ETS)",
+        "Model evaluation (AIC, MASE)"
+      ],
+      "resources": [
+        {
+          "label": "Forecasting Principles and Practice",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "Time Series Analysis in R",
+          "platform": "DataCamp",
+          "type": "course"
+        },
+        {
+          "label": "R forecast package docs",
+          "platform": "CRAN",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Fit competing ARIMA and ETS models to a quarterly economic time series in R, compare AIC and out-of-sample MASE, and produce a 4-quarter forecast with 80% and 95% prediction intervals.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "statistician-9",
+      "title": "Survival Analysis and Specialized Methods",
+      "order": 9,
+      "techs": [
+        "R",
+        "Python",
+        "survival package",
+        "lifelines"
+      ],
+      "description": "Apply survival analysis to time-to-event data and extend statistical skills to generalized linear models for non-normal outcomes. Handle censored data correctly.",
+      "topics": [
+        "Kaplan-Meier estimator",
+        "Log-rank test",
+        "Cox proportional hazards",
+        "GLMs (logistic, Poisson, negative binomial)",
+        "Censoring mechanisms",
+        "Survival curve interpretation"
+      ],
+      "resources": [
+        {
+          "label": "Applied Survival Analysis Using R",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "lifelines Documentation",
+          "platform": "lifelines.readthedocs.io",
+          "type": "docs"
+        },
+        {
+          "label": "Survival Analysis in R",
+          "platform": "DataCamp",
+          "type": "course"
+        }
+      ],
+      "challenge": "Analyze a customer churn dataset as a survival problem: fit Kaplan-Meier curves by segment, test for differences with a log-rank test, and fit a Cox model with 3 covariates.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "statistician-10",
+      "title": "Capstone - Statistical Consulting Project",
+      "order": 10,
+      "techs": [
+        "R",
+        "Python",
+        "SPSS",
+        "SAS"
+      ],
+      "description": "Deliver a complete statistical analysis project mimicking a consulting engagement: define the research question, select methods, conduct analysis, validate assumptions, and present findings in a formal statistical report.",
+      "topics": [
+        "Research question formulation",
+        "Study design review",
+        "Full statistical analysis",
+        "Assumption validation",
+        "Results interpretation",
+        "Formal statistical report writing"
+      ],
+      "resources": [
+        {
+          "label": "Statistical Consulting by Derr",
+          "platform": "Book",
+          "type": "book"
+        },
+        {
+          "label": "R for Statistical Computing",
+          "platform": "r-project.org",
+          "type": "docs"
+        },
+        {
+          "label": "SAS Statistical Procedures",
+          "platform": "SAS Documentation",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Complete a statistical consulting-style project: analyze a real dataset, apply at least 3 statistical methods, validate all assumptions, produce a 10-page formal statistical report, and present findings to a non-technical audience.",
+      "estimatedTime": "5 weeks"
+    }
+  ]
+}

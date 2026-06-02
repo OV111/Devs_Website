@@ -1,0 +1,3982 @@
+{
+  "aws-architect": [
+    {
+      "id": "aws-architect-1",
+      "title": "Cloud and AWS Fundamentals",
+      "order": 1,
+      "techs": [
+        "AWS",
+        "EC2",
+        "S3",
+        "IAM"
+      ],
+      "description": "Learn the core concepts of cloud computing and the AWS global infrastructure. Understand regions, availability zones, and the shared responsibility model.",
+      "topics": [
+        "Cloud computing models IaaS PaaS SaaS",
+        "AWS global infrastructure",
+        "IAM users groups roles policies",
+        "EC2 instance types and pricing",
+        "S3 buckets and storage classes",
+        "AWS CLI and console basics"
+      ],
+      "resources": [
+        {
+          "label": "AWS Cloud Practitioner Essentials",
+          "platform": "AWS Training",
+          "type": "course"
+        },
+        {
+          "label": "AWS Documentation - Getting Started",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Certified Cloud Practitioner Full Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "AWS Well-Architected Framework",
+          "platform": "AWS Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Create an EC2 instance, attach an IAM role with S3 read access, and upload a file to S3 from the instance using the CLI.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "aws-architect-2",
+      "title": "Networking in AWS",
+      "order": 2,
+      "techs": [
+        "VPC",
+        "Subnets",
+        "Route Tables",
+        "Security Groups"
+      ],
+      "description": "Design and build virtual private clouds with public and private subnets. Configure routing, security groups, and network ACLs to control traffic flow.",
+      "topics": [
+        "VPC design and CIDR blocks",
+        "Public and private subnets",
+        "Internet gateways and NAT gateways",
+        "Route tables and routing rules",
+        "Security groups vs network ACLs",
+        "VPC peering and endpoints"
+      ],
+      "resources": [
+        {
+          "label": "Amazon VPC Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Networking Fundamentals",
+          "platform": "AWS Training",
+          "type": "course"
+        },
+        {
+          "label": "VPC Deep Dive",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a 3-tier VPC with public subnets for load balancers, private subnets for app servers, and isolated subnets for databases with correct routing.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "aws-architect-3",
+      "title": "Compute and Auto Scaling",
+      "order": 3,
+      "techs": [
+        "EC2",
+        "Auto Scaling",
+        "ELB",
+        "Launch Templates"
+      ],
+      "description": "Architect scalable and highly available compute layers using EC2 auto scaling groups and elastic load balancers. Understand horizontal scaling patterns and health checks.",
+      "topics": [
+        "EC2 launch templates and AMIs",
+        "Auto Scaling groups and policies",
+        "Application Load Balancer vs Network Load Balancer",
+        "Target groups and health checks",
+        "Spot instances and savings plans",
+        "Placement groups"
+      ],
+      "resources": [
+        {
+          "label": "EC2 Auto Scaling Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Solutions Architect Associate Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Elastic Load Balancing Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy a web application across two availability zones using an ALB, auto scaling group, and a custom scaling policy that triggers at 60 percent CPU.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "aws-architect-4",
+      "title": "Storage and Database Services",
+      "order": 4,
+      "techs": [
+        "RDS",
+        "DynamoDB",
+        "EBS",
+        "EFS"
+      ],
+      "description": "Select appropriate storage and database solutions for different workload requirements. Understand consistency models, replication, and backup strategies.",
+      "topics": [
+        "RDS multi-AZ and read replicas",
+        "Aurora serverless and global databases",
+        "DynamoDB tables keys and indexes",
+        "EBS volume types and snapshots",
+        "EFS shared file systems",
+        "S3 lifecycle policies and versioning"
+      ],
+      "resources": [
+        {
+          "label": "AWS Database Migration Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Storage Services Overview",
+          "platform": "AWS Training",
+          "type": "course"
+        },
+        {
+          "label": "DynamoDB Developer Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Database Specialty Study Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Design a data tier with RDS Aurora in multi-AZ mode plus a DynamoDB table for session storage, with automated backups and a read replica for reporting.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "aws-architect-5",
+      "title": "Security and Identity",
+      "order": 5,
+      "techs": [
+        "IAM",
+        "KMS",
+        "Secrets Manager",
+        "GuardDuty"
+      ],
+      "description": "Implement defense-in-depth security using AWS native security services. Apply the principle of least privilege and encrypt data at rest and in transit.",
+      "topics": [
+        "IAM policies and permission boundaries",
+        "KMS key management and rotation",
+        "Secrets Manager and Parameter Store",
+        "AWS Organizations and SCPs",
+        "GuardDuty and Security Hub",
+        "CloudTrail and Config rules"
+      ],
+      "resources": [
+        {
+          "label": "AWS Security Best Practices",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Security Specialty Course",
+          "platform": "A Cloud Guru",
+          "type": "course"
+        },
+        {
+          "label": "AWS Security Fundamentals",
+          "platform": "AWS Training",
+          "type": "course"
+        }
+      ],
+      "challenge": "Set up a security baseline with CloudTrail enabled in all regions, a Config rule that alerts on public S3 buckets, and GuardDuty findings forwarded to a security SNS topic.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "aws-architect-6",
+      "title": "Infrastructure as Code with CloudFormation",
+      "order": 6,
+      "techs": [
+        "CloudFormation",
+        "CDK",
+        "StackSets",
+        "Drift Detection"
+      ],
+      "description": "Define and manage AWS infrastructure declaratively using CloudFormation templates and the AWS CDK. Implement change sets, nested stacks, and multi-account deployments.",
+      "topics": [
+        "CloudFormation template anatomy",
+        "Parameters mappings outputs",
+        "Nested stacks and stack sets",
+        "Change sets and rollback triggers",
+        "AWS CDK constructs and apps",
+        "Drift detection and remediation"
+      ],
+      "resources": [
+        {
+          "label": "AWS CloudFormation User Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AWS CDK Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Infrastructure as Code on AWS",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Create a CloudFormation stack set that deploys a VPC, bastion host, and S3 logging bucket across three AWS accounts with a single command.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "aws-architect-7",
+      "title": "Serverless and Managed Services",
+      "order": 7,
+      "techs": [
+        "Lambda",
+        "API Gateway",
+        "SQS",
+        "SNS"
+      ],
+      "description": "Integrate serverless compute with managed messaging and API services to build event-driven architectures. Understand throttling, dead-letter queues, and fan-out patterns.",
+      "topics": [
+        "Lambda functions triggers and layers",
+        "API Gateway REST and HTTP APIs",
+        "SQS standard and FIFO queues",
+        "SNS topics and subscriptions",
+        "EventBridge rules and buses",
+        "Step Functions state machines"
+      ],
+      "resources": [
+        {
+          "label": "AWS Lambda Developer Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Serverless Architectures on AWS",
+          "platform": "Manning",
+          "type": "book"
+        },
+        {
+          "label": "AWS Serverless Application Model Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build an order processing pipeline using API Gateway, Lambda, SQS, and a Step Functions workflow that handles failures and sends status notifications via SNS.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "aws-architect-8",
+      "title": "High Availability and Disaster Recovery",
+      "order": 8,
+      "techs": [
+        "Route 53",
+        "CloudFront",
+        "Backup",
+        "Global Accelerator"
+      ],
+      "description": "Design systems that meet RTO and RPO targets using AWS global services and cross-region replication strategies. Implement failover routing and content distribution.",
+      "topics": [
+        "Route 53 routing policies and health checks",
+        "CloudFront distributions and origins",
+        "Multi-region active-active vs active-passive",
+        "AWS Backup policies and vaults",
+        "RTO and RPO targets",
+        "Chaos engineering and fault injection"
+      ],
+      "resources": [
+        {
+          "label": "AWS Disaster Recovery Whitepaper",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Route 53 Developer Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Solutions Architect Professional Course",
+          "platform": "A Cloud Guru",
+          "type": "course"
+        }
+      ],
+      "challenge": "Implement a multi-region active-passive setup with Route 53 health-check-based failover, cross-region RDS read replica promotion, and CloudFront for static assets.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "aws-architect-9",
+      "title": "Cost Optimization and Performance",
+      "order": 9,
+      "techs": [
+        "Cost Explorer",
+        "Trusted Advisor",
+        "Compute Optimizer",
+        "Savings Plans"
+      ],
+      "description": "Apply the AWS Well-Architected cost optimization pillar to identify waste and right-size resources. Use savings plans, reserved instances, and spot strategically.",
+      "topics": [
+        "AWS Cost Explorer and budgets",
+        "Reserved instances vs savings plans",
+        "Spot instance strategies and interruption handling",
+        "Compute Optimizer recommendations",
+        "S3 intelligent tiering",
+        "Tagging strategies for cost allocation"
+      ],
+      "resources": [
+        {
+          "label": "AWS Cost Optimization Pillar Whitepaper",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud FinOps Book",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "AWS Cost Management Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Audit a simulated AWS account, identify the top three cost drivers, implement savings plan purchases, set up cost allocation tags, and create budget alerts for each team.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "aws-architect-10",
+      "title": "Advanced Architecture and AWS Professional",
+      "order": 10,
+      "techs": [
+        "AWS Organizations",
+        "Control Tower",
+        "Service Catalog",
+        "Well-Architected Tool"
+      ],
+      "description": "Design enterprise-grade multi-account AWS landing zones with governance, compliance, and self-service capabilities. Apply all five Well-Architected pillars at scale.",
+      "topics": [
+        "AWS Landing Zone and Control Tower",
+        "Service Control Policies and guardrails",
+        "AWS Service Catalog products and portfolios",
+        "Well-Architected reviews and remediation",
+        "Transit Gateway and network hub-and-spoke",
+        "AWS Outposts and hybrid architectures"
+      ],
+      "resources": [
+        {
+          "label": "AWS Solutions Architect Professional Exam Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Well-Architected Framework Whitepaper",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Solutions Architect Professional Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "AWS Certified Solutions Architect Study Guide",
+          "platform": "Sybex",
+          "type": "book"
+        }
+      ],
+      "challenge": "Design a full enterprise landing zone with Control Tower, three organizational units, a shared services VPC connected via Transit Gateway, and a Service Catalog portfolio for developer self-service.",
+      "estimatedTime": "4 weeks"
+    }
+  ],
+  "azure-architect": [
+    {
+      "id": "azure-architect-1",
+      "title": "Azure Fundamentals",
+      "order": 1,
+      "techs": [
+        "Azure",
+        "Resource Groups",
+        "ARM",
+        "Azure Portal"
+      ],
+      "description": "Understand Azure global infrastructure, core services, and the Azure Resource Manager model. Navigate the portal, CLI, and PowerShell to provision and manage resources.",
+      "topics": [
+        "Azure regions and availability zones",
+        "Resource groups and subscriptions",
+        "Azure Resource Manager model",
+        "Azure CLI and PowerShell basics",
+        "Azure Free Tier and pricing calculator",
+        "Management groups and hierarchy"
+      ],
+      "resources": [
+        {
+          "label": "Microsoft Azure Fundamentals AZ-900",
+          "platform": "Microsoft Learn",
+          "type": "course"
+        },
+        {
+          "label": "Azure Documentation",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Fundamentals Full Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create a resource group, deploy a Linux VM, attach a managed disk, and configure a network security group to allow SSH only from your IP.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "azure-architect-2",
+      "title": "Azure Networking",
+      "order": 2,
+      "techs": [
+        "Virtual Network",
+        "NSG",
+        "Azure DNS",
+        "ExpressRoute"
+      ],
+      "description": "Design Azure virtual networks with proper segmentation, routing, and connectivity. Understand hybrid connectivity options including VPN Gateway and ExpressRoute.",
+      "topics": [
+        "Virtual networks and subnets",
+        "Network security groups and application security groups",
+        "Azure Load Balancer and Application Gateway",
+        "VPN Gateway site-to-site and point-to-site",
+        "ExpressRoute circuits and peering",
+        "Azure DNS public and private zones"
+      ],
+      "resources": [
+        {
+          "label": "Azure Networking Documentation",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AZ-700 Networking Study Guide",
+          "platform": "Microsoft Learn",
+          "type": "course"
+        },
+        {
+          "label": "Azure Networking Deep Dive",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a hub-and-spoke network topology with a shared services hub VNet, two spoke VNets connected via peering, and an Application Gateway in the hub for inbound traffic.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "azure-architect-3",
+      "title": "Identity and Access with Entra ID",
+      "order": 3,
+      "techs": [
+        "Entra ID",
+        "RBAC",
+        "Conditional Access",
+        "PIM"
+      ],
+      "description": "Implement enterprise identity management using Microsoft Entra ID including conditional access policies and privileged identity management. Federate external identity providers and manage app registrations.",
+      "topics": [
+        "Entra ID tenants users and groups",
+        "Role-based access control and custom roles",
+        "Conditional access policies and MFA",
+        "Privileged Identity Management just-in-time",
+        "App registrations and service principals",
+        "Managed identities for Azure resources"
+      ],
+      "resources": [
+        {
+          "label": "Microsoft Entra Documentation",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AZ-500 Security Technologies Course",
+          "platform": "Microsoft Learn",
+          "type": "course"
+        },
+        {
+          "label": "Azure Active Directory Best Practices",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Configure a conditional access policy requiring MFA for admins, enable PIM for the Contributor role in a subscription, and set up a managed identity for a VM to access Key Vault.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "azure-architect-4",
+      "title": "Compute and Containers",
+      "order": 4,
+      "techs": [
+        "VM Scale Sets",
+        "AKS",
+        "Container Instances",
+        "App Service"
+      ],
+      "description": "Deploy and scale workloads across Azure virtual machine scale sets, App Service plans, and Azure Kubernetes Service. Choose the right compute abstraction for each workload pattern.",
+      "topics": [
+        "VM scale sets and autoscaling",
+        "Azure App Service tiers and deployment slots",
+        "Azure Container Instances for batch",
+        "AKS cluster creation and node pools",
+        "Azure Container Registry",
+        "Azure Functions consumption vs premium plans"
+      ],
+      "resources": [
+        {
+          "label": "AKS Documentation",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Compute Overview",
+          "platform": "Microsoft Learn",
+          "type": "course"
+        },
+        {
+          "label": "Kubernetes on Azure Guide",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy a containerized API to AKS with horizontal pod autoscaling, a private container registry with managed identity pull access, and an ingress controller with TLS.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "azure-architect-5",
+      "title": "Storage and Databases",
+      "order": 5,
+      "techs": [
+        "Azure Storage",
+        "Azure SQL",
+        "Cosmos DB",
+        "Azure Cache"
+      ],
+      "description": "Select and configure Azure storage and database services for performance, consistency, and cost. Design geo-redundant and zone-redundant data tiers.",
+      "topics": [
+        "Azure Blob, File, Queue, and Table storage",
+        "Storage tiers and lifecycle management",
+        "Azure SQL Database elastic pools",
+        "Cosmos DB APIs and consistency levels",
+        "Azure Database for PostgreSQL and MySQL",
+        "Azure Cache for Redis patterns"
+      ],
+      "resources": [
+        {
+          "label": "Azure Storage Documentation",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Cosmos DB Developer Guide",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Data Fundamentals DP-900",
+          "platform": "Microsoft Learn",
+          "type": "course"
+        }
+      ],
+      "challenge": "Design a data layer with Azure SQL in zone-redundant configuration, Cosmos DB for multi-region writes, and Azure Cache for Redis as a session store with failover configured.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "azure-architect-6",
+      "title": "Infrastructure as Code with Bicep",
+      "order": 6,
+      "techs": [
+        "Bicep",
+        "ARM Templates",
+        "Azure DevOps",
+        "GitHub Actions"
+      ],
+      "description": "Author and deploy Azure infrastructure using Bicep templates with modules and parameter files. Integrate IaC into CI/CD pipelines for automated deployments.",
+      "topics": [
+        "Bicep syntax resources modules and outputs",
+        "Bicep vs ARM templates comparison",
+        "Parameter files and environment configs",
+        "Deployment scopes subscription and tenant",
+        "Azure DevOps pipelines for Bicep",
+        "GitHub Actions OIDC authentication to Azure"
+      ],
+      "resources": [
+        {
+          "label": "Bicep Documentation",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Learn Bicep on Microsoft Learn",
+          "platform": "Microsoft Learn",
+          "type": "course"
+        },
+        {
+          "label": "Infrastructure as Code with Azure Bicep",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Write a Bicep module library for a standard Azure landing zone, deploy it across dev and prod subscriptions via GitHub Actions using OIDC federated credentials.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "azure-architect-7",
+      "title": "Monitoring and Security",
+      "order": 7,
+      "techs": [
+        "Azure Monitor",
+        "Defender for Cloud",
+        "Sentinel",
+        "Log Analytics"
+      ],
+      "description": "Build a comprehensive observability and security posture using Azure Monitor, Defender for Cloud, and Microsoft Sentinel. Configure alerting, dashboards, and SIEM rules.",
+      "topics": [
+        "Log Analytics workspaces and KQL",
+        "Azure Monitor metrics and alerts",
+        "Application Insights for APM",
+        "Defender for Cloud secure score",
+        "Microsoft Sentinel analytics rules",
+        "Azure Policy and compliance initiatives"
+      ],
+      "resources": [
+        {
+          "label": "Azure Monitor Documentation",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Microsoft Sentinel Documentation",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AZ-500 Security Course",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Deploy a Log Analytics workspace, connect all resources to it, create a KQL alert for failed login attempts, and enable Defender for Cloud with a custom policy initiative.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "azure-architect-8",
+      "title": "High Availability and Business Continuity",
+      "order": 8,
+      "techs": [
+        "Azure Site Recovery",
+        "Traffic Manager",
+        "Availability Zones",
+        "Geo-Redundancy"
+      ],
+      "description": "Design Azure solutions that meet strict availability SLAs using availability zones, Traffic Manager routing, and Azure Site Recovery for disaster recovery.",
+      "topics": [
+        "Availability sets vs availability zones",
+        "Azure Traffic Manager routing methods",
+        "Azure Front Door for global HTTP traffic",
+        "Azure Site Recovery replication and failover",
+        "Backup policies and recovery vaults",
+        "RTO RPO design for Azure workloads"
+      ],
+      "resources": [
+        {
+          "label": "Azure Reliability Documentation",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Site Recovery Guide",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AZ-305 Designing Azure Solutions Course",
+          "platform": "Microsoft Learn",
+          "type": "course"
+        }
+      ],
+      "challenge": "Set up Azure Site Recovery for a production VM to a paired region, configure Traffic Manager with performance routing and health probes, and test a full failover drill.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "azure-architect-9",
+      "title": "Azure Kubernetes Service Advanced",
+      "order": 9,
+      "techs": [
+        "AKS",
+        "Azure CNI",
+        "KEDA",
+        "Workload Identity"
+      ],
+      "description": "Operate production-grade AKS clusters with advanced networking, autoscaling, and security configurations. Integrate Azure services using workload identity and KEDA event-driven scaling.",
+      "topics": [
+        "AKS Azure CNI and Cilium networking",
+        "Workload identity and pod-level permissions",
+        "KEDA event-driven autoscaling",
+        "AKS node pool upgrades and maintenance windows",
+        "Azure Policy for Kubernetes",
+        "GitOps with Flux on AKS"
+      ],
+      "resources": [
+        {
+          "label": "AKS Best Practices Documentation",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Kubernetes Up and Running",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "KEDA Documentation",
+          "platform": "KEDA Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Configure an AKS cluster with Azure CNI, enable workload identity for a pod that reads from Key Vault, install KEDA with an Azure Service Bus scaler, and enforce admission policies via Azure Policy.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "azure-architect-10",
+      "title": "Enterprise Architecture and Azure Landing Zones",
+      "order": 10,
+      "techs": [
+        "Azure Landing Zones",
+        "Management Groups",
+        "Azure Lighthouse",
+        "Enterprise Scale"
+      ],
+      "description": "Design and implement enterprise-scale Azure architectures using the Cloud Adoption Framework landing zone accelerators. Govern multi-subscription environments with policy-driven guardrails.",
+      "topics": [
+        "Cloud Adoption Framework phases",
+        "Enterprise-scale landing zone design",
+        "Management group hierarchy and policies",
+        "Azure Lighthouse for multi-tenant management",
+        "Cost management and chargeback at scale",
+        "Well-Architected Framework for Azure"
+      ],
+      "resources": [
+        {
+          "label": "Azure Landing Zones Documentation",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AZ-305 Designing Azure Infrastructure Solutions",
+          "platform": "Microsoft Learn",
+          "type": "course"
+        },
+        {
+          "label": "Cloud Adoption Framework Documentation",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Architecture Center",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy an enterprise-scale landing zone using the ALZ Bicep accelerator with three platform subscriptions, configure Azure Policy initiatives for each, and onboard a workload team via Lighthouse.",
+      "estimatedTime": "4 weeks"
+    }
+  ],
+  "gcp-architect": [
+    {
+      "id": "gcp-architect-1",
+      "title": "GCP Fundamentals",
+      "order": 1,
+      "techs": [
+        "GCP",
+        "Compute Engine",
+        "Cloud Storage",
+        "IAM"
+      ],
+      "description": "Learn Google Cloud Platform core services, resource hierarchy, and identity management. Use the gcloud CLI and Cloud Console to provision and manage GCP resources.",
+      "topics": [
+        "GCP resource hierarchy projects folders org",
+        "IAM roles members and policies",
+        "Compute Engine VM instances and machine types",
+        "Cloud Storage buckets and object lifecycle",
+        "gcloud CLI and Cloud Shell",
+        "GCP pricing and billing accounts"
+      ],
+      "resources": [
+        {
+          "label": "Google Cloud Skills Boost - Cloud Digital Leader",
+          "platform": "Google Cloud",
+          "type": "course"
+        },
+        {
+          "label": "GCP Documentation",
+          "platform": "Google Cloud Docs",
+          "type": "docs"
+        },
+        {
+          "label": "GCP Associate Cloud Engineer Course",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Create a GCP project, enable billing, deploy a Compute Engine VM in a custom VPC, and grant a service account Storage Object Viewer access to a specific bucket.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "gcp-architect-2",
+      "title": "GCP Networking",
+      "order": 2,
+      "techs": [
+        "VPC",
+        "Cloud Load Balancing",
+        "Cloud DNS",
+        "Cloud Interconnect"
+      ],
+      "description": "Design GCP Virtual Private Cloud networks with shared VPC, VPC peering, and hybrid connectivity. Configure Cloud Load Balancing for global and regional traffic distribution.",
+      "topics": [
+        "GCP VPC and subnets auto vs custom mode",
+        "Shared VPC and VPC Network Peering",
+        "Cloud Load Balancing types and use cases",
+        "Cloud Armor WAF and DDoS protection",
+        "Cloud DNS managed zones",
+        "Cloud Interconnect and VPN tunnels"
+      ],
+      "resources": [
+        {
+          "label": "GCP VPC Documentation",
+          "platform": "Google Cloud Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Networking in Google Cloud Course",
+          "platform": "Google Cloud",
+          "type": "course"
+        },
+        {
+          "label": "GCP Networking Deep Dive",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Set up a shared VPC with a host project and two service projects, deploy an HTTP load balancer with backend instance groups in two regions, and enable Cloud Armor for rate limiting.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "gcp-architect-3",
+      "title": "Google Kubernetes Engine",
+      "order": 3,
+      "techs": [
+        "GKE",
+        "Autopilot",
+        "Workload Identity",
+        "Config Connector"
+      ],
+      "description": "Deploy and manage Kubernetes workloads on GKE Standard and Autopilot clusters. Use Workload Identity to securely access GCP services from pods without static credentials.",
+      "topics": [
+        "GKE cluster modes Standard vs Autopilot",
+        "Node pools and node auto-provisioning",
+        "Workload Identity Federation for pods",
+        "GKE Config Connector for GCP resources",
+        "Binary Authorization for image signing",
+        "GKE logging and monitoring integration"
+      ],
+      "resources": [
+        {
+          "label": "GKE Documentation",
+          "platform": "Google Cloud Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Architecting with GKE Course",
+          "platform": "Google Cloud",
+          "type": "course"
+        },
+        {
+          "label": "Google Kubernetes Engine Deep Dive",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy a microservices application on GKE Autopilot, configure Workload Identity so each service can only access its own Cloud Storage bucket, and enable Binary Authorization with a manual approval policy.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "gcp-architect-4",
+      "title": "Data and Analytics with BigQuery",
+      "order": 4,
+      "techs": [
+        "BigQuery",
+        "Dataflow",
+        "Pub/Sub",
+        "Looker Studio"
+      ],
+      "description": "Design data pipelines and analytical workloads using GCP managed data services. Understand BigQuery cost optimization, partitioning, and streaming inserts.",
+      "topics": [
+        "BigQuery datasets tables and schemas",
+        "BigQuery partitioning clustering and cost",
+        "Pub/Sub topics and subscriptions",
+        "Dataflow streaming and batch pipelines",
+        "Cloud Composer for orchestration",
+        "Looker Studio dashboards"
+      ],
+      "resources": [
+        {
+          "label": "BigQuery Documentation",
+          "platform": "Google Cloud Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Data Engineering on GCP Course",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "BigQuery: The Definitive Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a streaming analytics pipeline with Pub/Sub as input, Dataflow to transform and enrich events, write to BigQuery with partitioning, and visualize results in Looker Studio.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "gcp-architect-5",
+      "title": "Security and Compliance",
+      "order": 5,
+      "techs": [
+        "Cloud KMS",
+        "Secret Manager",
+        "VPC Service Controls",
+        "Security Command Center"
+      ],
+      "description": "Implement GCP security controls including data encryption, secret management, and perimeter security using VPC Service Controls. Monitor threats with Security Command Center.",
+      "topics": [
+        "Cloud KMS key rings and keys",
+        "Secret Manager versions and rotation",
+        "VPC Service Controls access policies",
+        "Organization Policy constraints",
+        "Security Command Center findings",
+        "Binary Authorization and Artifact Registry"
+      ],
+      "resources": [
+        {
+          "label": "GCP Security Best Practices",
+          "platform": "Google Cloud Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Security in GCP Course",
+          "platform": "Google Cloud",
+          "type": "course"
+        },
+        {
+          "label": "GCP Professional Cloud Security Engineer Guide",
+          "platform": "Google Cloud Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Create a VPC Service Controls perimeter around BigQuery and Cloud Storage, configure an organization policy blocking public buckets, and route Security Command Center findings to a Pub/Sub topic.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "gcp-architect-6",
+      "title": "Infrastructure as Code with Terraform on GCP",
+      "order": 6,
+      "techs": [
+        "Terraform",
+        "Google Provider",
+        "Cloud Build",
+        "Config Validator"
+      ],
+      "description": "Manage GCP infrastructure as code using Terraform with the Google provider. Use Cloud Build for automated apply pipelines and Config Validator for policy enforcement.",
+      "topics": [
+        "Terraform Google provider resources",
+        "GCP service account for Terraform",
+        "Remote state in Cloud Storage",
+        "Terraform modules for GCP patterns",
+        "Cloud Build triggers for Terraform CI/CD",
+        "Forseti or Config Validator policies"
+      ],
+      "resources": [
+        {
+          "label": "Terraform Google Provider Documentation",
+          "platform": "Terraform Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Automating Infrastructure on GCP with Terraform",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "Terraform Up and Running",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Write Terraform modules to deploy a GKE cluster, Cloud SQL instance, and VPC, store state in Cloud Storage, and trigger automated plans and applies from a Cloud Build pipeline on pull request.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "gcp-architect-7",
+      "title": "Serverless and App Modernization",
+      "order": 7,
+      "techs": [
+        "Cloud Run",
+        "Cloud Functions",
+        "Eventarc",
+        "Firebase"
+      ],
+      "description": "Build event-driven and HTTP-triggered serverless workloads on GCP using Cloud Run and Cloud Functions. Connect services with Eventarc and integrate with Firebase for mobile backends.",
+      "topics": [
+        "Cloud Run containers and scaling to zero",
+        "Cloud Functions gen1 vs gen2",
+        "Eventarc triggers and event routing",
+        "Cloud Tasks and Cloud Scheduler",
+        "Firebase Realtime Database and Firestore",
+        "Identity Platform for authentication"
+      ],
+      "resources": [
+        {
+          "label": "Cloud Run Documentation",
+          "platform": "Google Cloud Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Serverless on GCP Course",
+          "platform": "Google Cloud",
+          "type": "course"
+        },
+        {
+          "label": "Cloud Functions Documentation",
+          "platform": "Google Cloud Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy a stateless API on Cloud Run with minimum instances set to 1, trigger a Cloud Function via Eventarc on Cloud Storage upload events, and wire them together in a processing workflow.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "gcp-architect-8",
+      "title": "Reliability and Observability",
+      "order": 8,
+      "techs": [
+        "Cloud Monitoring",
+        "Cloud Logging",
+        "Cloud Trace",
+        "SLOs"
+      ],
+      "description": "Define and track SLOs for GCP workloads using Cloud Monitoring and create error budgets for reliability targets. Implement distributed tracing and structured logging at scale.",
+      "topics": [
+        "Cloud Monitoring metrics and dashboards",
+        "Alerting policies and notification channels",
+        "Cloud Logging log sinks and exclusions",
+        "Cloud Trace and distributed tracing",
+        "SLO definitions and error budgets",
+        "Uptime checks and synthetic monitors"
+      ],
+      "resources": [
+        {
+          "label": "Cloud Operations Suite Documentation",
+          "platform": "Google Cloud Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Site Reliability Engineering Book",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "GCP Monitoring and Logging Course",
+          "platform": "Google Cloud",
+          "type": "course"
+        }
+      ],
+      "challenge": "Define SLOs for a Cloud Run service, create an error budget burn rate alert, export logs to BigQuery for long-term analysis, and build a Cloud Monitoring dashboard with latency percentiles.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "gcp-architect-9",
+      "title": "Cost Optimization and Resource Management",
+      "order": 9,
+      "techs": [
+        "Cost Management",
+        "Recommender API",
+        "Committed Use Discounts",
+        "Budgets"
+      ],
+      "description": "Analyze and optimize GCP spending using billing exports, recommender insights, and committed use discounts. Implement budget alerts and spend controls at the project and folder level.",
+      "topics": [
+        "Billing export to BigQuery",
+        "Cost breakdown by project service label",
+        "Committed use discounts for compute",
+        "Sustained use discounts mechanics",
+        "Recommender API for right-sizing",
+        "Budget alerts and programmatic spend controls"
+      ],
+      "resources": [
+        {
+          "label": "GCP Cost Management Documentation",
+          "platform": "Google Cloud Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud FinOps Book",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "GCP Billing Best Practices",
+          "platform": "Google Cloud Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Export billing data to BigQuery, write SQL queries to find the top five cost drivers, apply committed use discounts to a compute fleet, and set up hierarchical budget alerts at the folder level.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "gcp-architect-10",
+      "title": "Professional Cloud Architect and Enterprise Patterns",
+      "order": 10,
+      "techs": [
+        "GCP",
+        "Anthos",
+        "Cloud Foundation Toolkit",
+        "Landing Zone"
+      ],
+      "description": "Design enterprise GCP environments using the Cloud Foundation Toolkit and Anthos for multi-cluster and hybrid workloads. Apply the Google Cloud Architecture Framework to all five pillars.",
+      "topics": [
+        "GCP landing zone with Cloud Foundation Toolkit",
+        "Anthos Config Management and Policy Controller",
+        "Anthos Service Mesh for multi-cluster traffic",
+        "Google Cloud Architecture Framework pillars",
+        "Cross-project service account delegation",
+        "Multi-region architecture patterns on GCP"
+      ],
+      "resources": [
+        {
+          "label": "Professional Cloud Architect Exam Guide",
+          "platform": "Google Cloud Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Google Cloud Architecture Framework",
+          "platform": "Google Cloud Docs",
+          "type": "docs"
+        },
+        {
+          "label": "GCP Professional Cloud Architect Course",
+          "platform": "A Cloud Guru",
+          "type": "course"
+        },
+        {
+          "label": "Cloud Foundation Toolkit Repository",
+          "platform": "GitHub",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy a GCP landing zone with the Cloud Foundation Toolkit covering three environments, attach Anthos Config Management to enforce policies across all clusters, and conduct a Well-Architected review.",
+      "estimatedTime": "4 weeks"
+    }
+  ],
+  "serverless-dev": [
+    {
+      "id": "serverless-dev-1",
+      "title": "Serverless Fundamentals",
+      "order": 1,
+      "techs": [
+        "Lambda",
+        "API Gateway",
+        "IAM",
+        "CloudWatch"
+      ],
+      "description": "Understand the serverless computing model, its trade-offs, and how AWS Lambda executes functions. Create and test Lambda functions with different triggers and execution roles.",
+      "topics": [
+        "Serverless model benefits and trade-offs",
+        "Lambda function anatomy handler runtime",
+        "IAM execution roles and least privilege",
+        "Lambda triggers and event sources",
+        "CloudWatch Logs for Lambda",
+        "Lambda pricing and free tier"
+      ],
+      "resources": [
+        {
+          "label": "AWS Lambda Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Serverless Fundamentals Course",
+          "platform": "AWS Training",
+          "type": "course"
+        },
+        {
+          "label": "Lambda Getting Started Guide",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a Lambda function in Python that responds to an S3 upload event, extracts metadata from the file, and writes it to CloudWatch Logs with structured JSON formatting.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "serverless-dev-2",
+      "title": "API Gateway and HTTP APIs",
+      "order": 2,
+      "techs": [
+        "API Gateway",
+        "Lambda",
+        "CORS",
+        "API Keys"
+      ],
+      "description": "Build RESTful and HTTP APIs using API Gateway integrated with Lambda. Configure authentication, CORS, request validation, and usage plans.",
+      "topics": [
+        "REST vs HTTP API in API Gateway",
+        "Lambda proxy integration",
+        "CORS configuration",
+        "API keys and usage plans",
+        "Request and response mapping templates",
+        "API Gateway logging and tracing"
+      ],
+      "resources": [
+        {
+          "label": "API Gateway Developer Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Building Serverless APIs Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "API Gateway Best Practices",
+          "platform": "AWS Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build an HTTP API with three routes backed by separate Lambda functions, add a Lambda authorizer for JWT validation, enable access logging to CloudWatch, and test the API from Postman.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "serverless-dev-3",
+      "title": "Data Storage for Serverless",
+      "order": 3,
+      "techs": [
+        "DynamoDB",
+        "S3",
+        "ElastiCache",
+        "Parameter Store"
+      ],
+      "description": "Design serverless-compatible data storage patterns using DynamoDB single-table design and S3. Understand connection reuse patterns and avoid cold-start penalties from connection pools.",
+      "topics": [
+        "DynamoDB single-table design",
+        "DynamoDB Streams for change data capture",
+        "S3 event notifications and presigned URLs",
+        "Connection reuse in Lambda for external services",
+        "SSM Parameter Store and Secrets Manager",
+        "DynamoDB DAX for read caching"
+      ],
+      "resources": [
+        {
+          "label": "DynamoDB Developer Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "The DynamoDB Book",
+          "platform": "Alex DeBrie",
+          "type": "book"
+        },
+        {
+          "label": "Serverless Data Patterns",
+          "platform": "AWS Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Design a DynamoDB single-table schema for a multi-tenant app, implement a Lambda that writes and reads using composite keys, and generate presigned S3 URLs from a Lambda for file uploads.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "serverless-dev-4",
+      "title": "AWS SAM and Local Development",
+      "order": 4,
+      "techs": [
+        "SAM",
+        "SAM CLI",
+        "LocalStack",
+        "CloudFormation"
+      ],
+      "description": "Use the AWS Serverless Application Model framework to define, test, and deploy serverless applications. Run Lambda and API Gateway locally using SAM CLI and LocalStack.",
+      "topics": [
+        "SAM template resources and globals",
+        "sam build sam local invoke and start-api",
+        "Environment variables and configuration",
+        "SAM policy templates",
+        "LocalStack for offline development",
+        "SAM pipeline for CI/CD"
+      ],
+      "resources": [
+        {
+          "label": "AWS SAM Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "SAM CLI Reference",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Serverless Applications with AWS SAM Course",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Convert an existing Lambda and API Gateway setup into a full SAM application, add sam local invoke tests with event payloads, and set up a SAM pipeline that deploys to staging and prod.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "serverless-dev-5",
+      "title": "Event-Driven Patterns with SQS and SNS",
+      "order": 5,
+      "techs": [
+        "SQS",
+        "SNS",
+        "EventBridge",
+        "Lambda"
+      ],
+      "description": "Design event-driven serverless architectures using SQS for reliable queuing, SNS for fan-out, and EventBridge for event routing. Handle failures with dead-letter queues and retry policies.",
+      "topics": [
+        "SQS standard vs FIFO queues",
+        "Lambda event source mapping for SQS",
+        "Dead-letter queues and redrive policies",
+        "SNS fan-out to multiple SQS queues",
+        "EventBridge custom buses and rules",
+        "Idempotency in event-driven systems"
+      ],
+      "resources": [
+        {
+          "label": "Amazon SQS Developer Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Event-Driven Architectures on AWS",
+          "platform": "AWS Training",
+          "type": "course"
+        },
+        {
+          "label": "EventBridge Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build an order processing flow with an SNS topic that fans out to an SQS order queue and SQS notification queue, each processed by a separate Lambda, with DLQs for failed messages.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "serverless-dev-6",
+      "title": "Orchestration with Step Functions",
+      "order": 6,
+      "techs": [
+        "Step Functions",
+        "Lambda",
+        "SAM",
+        "CloudWatch"
+      ],
+      "description": "Orchestrate multi-step workflows and handle complex business logic using AWS Step Functions state machines. Implement error handling, retries, and parallel branches.",
+      "topics": [
+        "Step Functions Standard vs Express workflows",
+        "Task catch retry and error handling",
+        "Parallel and map states",
+        "Wait for callback pattern",
+        "Step Functions local testing",
+        "Service integrations without Lambda"
+      ],
+      "resources": [
+        {
+          "label": "AWS Step Functions Developer Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Workflow Studio walkthrough",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Serverless Architectures on AWS",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Create a Step Functions state machine for a document approval workflow with parallel reviewer tasks, a timeout wait state, and error handling that notifies via SNS when the workflow fails.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "serverless-dev-7",
+      "title": "Performance and Cold Starts",
+      "order": 7,
+      "techs": [
+        "Lambda",
+        "Provisioned Concurrency",
+        "Lambda Layers",
+        "SnapStart"
+      ],
+      "description": "Diagnose and mitigate Lambda cold start latency using provisioned concurrency, SnapStart for Java, and Lambda Layers. Profile function memory and CPU allocation for cost-performance balance.",
+      "topics": [
+        "Lambda cold start causes and measurement",
+        "Provisioned concurrency configuration",
+        "Lambda SnapStart for Java runtimes",
+        "Lambda Layers for shared dependencies",
+        "Memory and CPU allocation tuning",
+        "Lambda Power Tuning tool"
+      ],
+      "resources": [
+        {
+          "label": "Lambda Performance Optimization Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Lambda Power Tuning Documentation",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "AWS re:Invent Lambda Deep Dive",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Profile a Lambda function using Lambda Power Tuning, identify the optimal memory setting, add provisioned concurrency for peak traffic windows, and measure cold start vs warm start latency.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "serverless-dev-8",
+      "title": "Security for Serverless Applications",
+      "order": 8,
+      "techs": [
+        "IAM",
+        "Cognito",
+        "WAF",
+        "Secrets Manager"
+      ],
+      "description": "Secure serverless applications with fine-grained IAM permissions, Cognito user pools for authentication, and WAF for API protection. Manage secrets without hardcoding credentials.",
+      "topics": [
+        "Least privilege Lambda execution roles",
+        "Cognito user pools and identity pools",
+        "JWT validation in Lambda authorizers",
+        "WAF rules and managed rule groups on API Gateway",
+        "Secrets rotation in Secrets Manager",
+        "OWASP serverless top 10"
+      ],
+      "resources": [
+        {
+          "label": "Serverless Security Best Practices",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Amazon Cognito Developer Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "OWASP Serverless Top 10",
+          "platform": "OWASP",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add Cognito user pool authentication to an API Gateway, configure a Lambda authorizer to validate tokens, attach a WAF with rate limiting to the API, and rotate a database secret with a Lambda rotation function.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "serverless-dev-9",
+      "title": "Observability and Debugging",
+      "order": 9,
+      "techs": [
+        "X-Ray",
+        "CloudWatch",
+        "Lambda Insights",
+        "Powertools"
+      ],
+      "description": "Implement end-to-end distributed tracing and structured observability using AWS X-Ray and Lambda Powertools. Create dashboards and alarms for serverless operational visibility.",
+      "topics": [
+        "AWS X-Ray tracing and service maps",
+        "Lambda Insights for enhanced metrics",
+        "AWS Lambda Powertools for Python and TypeScript",
+        "Structured logging with correlation IDs",
+        "Custom CloudWatch metrics from Lambda",
+        "Canary deployments and rollback for Lambda"
+      ],
+      "resources": [
+        {
+          "label": "AWS Lambda Powertools Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AWS X-Ray Developer Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Observability for Serverless Applications",
+          "platform": "AWS Training",
+          "type": "course"
+        }
+      ],
+      "challenge": "Instrument a multi-Lambda application with X-Ray active tracing and Lambda Powertools, create a CloudWatch dashboard with p99 latency and error rate, and set up a canary deployment alias.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "serverless-dev-10",
+      "title": "Production Serverless Architecture",
+      "order": 10,
+      "techs": [
+        "Lambda",
+        "SAM",
+        "CDK",
+        "EventBridge Pipes"
+      ],
+      "description": "Architect production-ready serverless platforms with multi-stage deployments, traffic shifting, and event-driven integration patterns. Apply the AWS Serverless Application Lens of the Well-Architected Framework.",
+      "topics": [
+        "AWS Serverless Application Lens review",
+        "Multi-stage SAM and CDK deployments",
+        "Lambda traffic shifting with aliases",
+        "EventBridge Pipes for integration",
+        "Serverless cost modeling at scale",
+        "Chaos engineering for serverless"
+      ],
+      "resources": [
+        {
+          "label": "AWS Serverless Application Lens Whitepaper",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Production Ready Serverless Course",
+          "platform": "Yan Cui",
+          "type": "course"
+        },
+        {
+          "label": "EventBridge Pipes Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Serverless Architectures on AWS",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Conduct a Well-Architected serverless review on an existing application, remediate all high-risk findings, implement traffic shifting on a critical Lambda alias, and document the architecture decision records.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "cloud-native": [
+    {
+      "id": "cloud-native-1",
+      "title": "Containers and Docker Fundamentals",
+      "order": 1,
+      "techs": [
+        "Docker",
+        "Dockerfile",
+        "Docker Compose",
+        "Container Registry"
+      ],
+      "description": "Build, run, and manage containerized applications using Docker. Understand image layers, multi-stage builds, and container networking basics.",
+      "topics": [
+        "Container vs VM architecture",
+        "Dockerfile instructions and best practices",
+        "Multi-stage builds for smaller images",
+        "Docker volumes and bind mounts",
+        "Docker networking bridge and host",
+        "Docker Compose for local multi-service apps"
+      ],
+      "resources": [
+        {
+          "label": "Docker Documentation",
+          "platform": "Docker Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Docker and Kubernetes Full Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Docker Deep Dive",
+          "platform": "Pluralsight",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write a multi-stage Dockerfile for a Node.js app that uses a build stage and a minimal production image, run it with Docker Compose alongside a PostgreSQL container, and push the image to Docker Hub.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-native-2",
+      "title": "Kubernetes Fundamentals",
+      "order": 2,
+      "techs": [
+        "Kubernetes",
+        "kubectl",
+        "Pods",
+        "Services"
+      ],
+      "description": "Deploy and manage containerized workloads on Kubernetes using core objects like Pods, Deployments, Services, and ConfigMaps. Understand the control plane and worker node architecture.",
+      "topics": [
+        "Kubernetes architecture control plane and nodes",
+        "Pods ReplicaSets and Deployments",
+        "Services ClusterIP NodePort LoadBalancer",
+        "ConfigMaps and Secrets",
+        "Namespaces and resource quotas",
+        "kubectl commands and context management"
+      ],
+      "resources": [
+        {
+          "label": "Kubernetes Documentation",
+          "platform": "Kubernetes Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Kubernetes for Developers Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Kubernetes Up and Running",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deploy a three-tier application (frontend, API, database) on a local Kubernetes cluster using minikube, expose each tier with appropriate Service types, and use Secrets for database credentials.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-native-3",
+      "title": "Helm and Package Management",
+      "order": 3,
+      "techs": [
+        "Helm",
+        "Helm Charts",
+        "Values",
+        "Helm Hooks"
+      ],
+      "description": "Package Kubernetes applications as Helm charts with parameterized values for different environments. Manage release lifecycle with upgrades, rollbacks, and hooks.",
+      "topics": [
+        "Helm chart structure templates and values",
+        "Helm templating with Go templates",
+        "Chart dependencies and subcharts",
+        "Helm lifecycle hooks pre-install post-upgrade",
+        "Helm repositories and OCI registries",
+        "Helmfile for multi-chart management"
+      ],
+      "resources": [
+        {
+          "label": "Helm Documentation",
+          "platform": "Helm Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Helm Deep Dive Course",
+          "platform": "Pluralsight",
+          "type": "course"
+        },
+        {
+          "label": "Learning Helm",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Package an existing multi-service Kubernetes application as a Helm chart with separate values files for dev and prod, add a pre-upgrade hook that runs database migrations, and publish the chart to an OCI registry.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-native-4",
+      "title": "Kubernetes Networking and Ingress",
+      "order": 4,
+      "techs": [
+        "Ingress",
+        "NetworkPolicy",
+        "CoreDNS",
+        "CNI"
+      ],
+      "description": "Configure external access to Kubernetes services using Ingress controllers and implement network policies for microsegmentation. Understand CNI plugins and DNS resolution.",
+      "topics": [
+        "Ingress controllers nginx and Traefik",
+        "Ingress rules TLS and path routing",
+        "NetworkPolicy for pod-to-pod isolation",
+        "CNI plugins Calico Cilium Flannel",
+        "CoreDNS configuration and troubleshooting",
+        "Service mesh vs Ingress trade-offs"
+      ],
+      "resources": [
+        {
+          "label": "Kubernetes Networking Documentation",
+          "platform": "Kubernetes Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Kubernetes Networking Course",
+          "platform": "Pluralsight",
+          "type": "course"
+        },
+        {
+          "label": "Cilium Documentation",
+          "platform": "Cilium Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy nginx-ingress with TLS termination, create NetworkPolicies that allow frontend to talk to API but deny direct frontend to database traffic, and verify with kubectl exec connectivity tests.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-native-5",
+      "title": "Kubernetes Storage and Stateful Workloads",
+      "order": 5,
+      "techs": [
+        "PersistentVolumes",
+        "StatefulSets",
+        "Storage Classes",
+        "CSI"
+      ],
+      "description": "Deploy stateful applications on Kubernetes using StatefulSets, PersistentVolumeClaims, and CSI storage drivers. Understand storage class provisioners and volume expansion.",
+      "topics": [
+        "PersistentVolumes and PersistentVolumeClaims",
+        "Storage classes and dynamic provisioning",
+        "StatefulSets stable network identities",
+        "CSI drivers for cloud storage",
+        "Volume snapshots and clones",
+        "Backup strategies for stateful apps"
+      ],
+      "resources": [
+        {
+          "label": "Kubernetes Storage Documentation",
+          "platform": "Kubernetes Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Stateful Applications in Kubernetes",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Managing Kubernetes",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deploy a PostgreSQL StatefulSet with a persistent volume claim, configure a CSI driver for dynamic provisioning, take a volume snapshot, and restore from it to validate the backup process.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-native-6",
+      "title": "Service Mesh with Istio",
+      "order": 6,
+      "techs": [
+        "Istio",
+        "Envoy",
+        "VirtualService",
+        "Kiali"
+      ],
+      "description": "Implement a service mesh using Istio to provide traffic management, mutual TLS, and observability without changing application code. Configure traffic shifting and circuit breaking.",
+      "topics": [
+        "Istio architecture control plane and data plane",
+        "VirtualService and DestinationRule",
+        "Mutual TLS with PeerAuthentication",
+        "Traffic shifting and canary releases",
+        "Circuit breaking and fault injection",
+        "Kiali Jaeger and Grafana integration"
+      ],
+      "resources": [
+        {
+          "label": "Istio Documentation",
+          "platform": "Istio Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Istio in Action",
+          "platform": "Manning",
+          "type": "book"
+        },
+        {
+          "label": "Service Mesh with Istio Course",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Install Istio on a cluster, enable sidecar injection, configure a canary release shifting 10 percent traffic to a new version, enable mutual TLS cluster-wide, and verify mTLS with istioctl.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "cloud-native-7",
+      "title": "GitOps and Continuous Delivery",
+      "order": 7,
+      "techs": [
+        "ArgoCD",
+        "Flux",
+        "Kustomize",
+        "Helm"
+      ],
+      "description": "Implement GitOps workflows using ArgoCD or Flux to declaratively manage Kubernetes deployments from Git repositories. Use Kustomize overlays for environment-specific configurations.",
+      "topics": [
+        "GitOps principles and benefits",
+        "ArgoCD applications and app-of-apps pattern",
+        "Flux Kustomization and HelmRelease",
+        "Kustomize bases and overlays",
+        "Secrets management with Sealed Secrets or ESO",
+        "Progressive delivery with Argo Rollouts"
+      ],
+      "resources": [
+        {
+          "label": "ArgoCD Documentation",
+          "platform": "ArgoCD Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Flux Documentation",
+          "platform": "Flux Docs",
+          "type": "docs"
+        },
+        {
+          "label": "GitOps and Kubernetes",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Set up ArgoCD with the app-of-apps pattern, manage three microservices each with dev and prod overlays using Kustomize, and configure Argo Rollouts for a blue-green deployment strategy.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-native-8",
+      "title": "Security and Policy Enforcement",
+      "order": 8,
+      "techs": [
+        "OPA Gatekeeper",
+        "Falco",
+        "RBAC",
+        "Pod Security Standards"
+      ],
+      "description": "Enforce security policies on Kubernetes workloads using OPA Gatekeeper admission webhooks and runtime threat detection with Falco. Implement RBAC and pod security standards.",
+      "topics": [
+        "Kubernetes RBAC roles and role bindings",
+        "Pod Security Standards baseline restricted",
+        "OPA Gatekeeper constraints and templates",
+        "Falco rules and alert channels",
+        "Image scanning in CI with Trivy",
+        "Supply chain security with Sigstore Cosign"
+      ],
+      "resources": [
+        {
+          "label": "Kubernetes Security Documentation",
+          "platform": "Kubernetes Docs",
+          "type": "docs"
+        },
+        {
+          "label": "OPA Gatekeeper Documentation",
+          "platform": "OPA Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Kubernetes Security Book",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deploy OPA Gatekeeper with constraints that require resource limits on all pods and block privileged containers, install Falco with a custom rule that alerts on exec into a production pod.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-native-9",
+      "title": "Observability for Kubernetes",
+      "order": 9,
+      "techs": [
+        "Prometheus",
+        "Grafana",
+        "OpenTelemetry",
+        "Loki"
+      ],
+      "description": "Build full-stack observability for cloud native applications using the Prometheus and Grafana ecosystem, OpenTelemetry for instrumentation, and Loki for log aggregation.",
+      "topics": [
+        "Prometheus scraping and relabeling",
+        "ServiceMonitor and PodMonitor with Prometheus Operator",
+        "Grafana dashboards and alerting rules",
+        "OpenTelemetry SDK instrumentation",
+        "Loki log aggregation and LogQL",
+        "Distributed tracing with Tempo or Jaeger"
+      ],
+      "resources": [
+        {
+          "label": "Prometheus Documentation",
+          "platform": "Prometheus Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Grafana Documentation",
+          "platform": "Grafana Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud Native Observability Course",
+          "platform": "Linux Foundation",
+          "type": "course"
+        }
+      ],
+      "challenge": "Deploy the kube-prometheus-stack, instrument a Go service with OpenTelemetry to emit traces to Tempo, forward logs to Loki, and create a Grafana dashboard showing the RED method metrics.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "cloud-native-10",
+      "title": "Production Cloud Native Platform Engineering",
+      "order": 10,
+      "techs": [
+        "Kubernetes",
+        "Platform Engineering",
+        "Backstage",
+        "CNCF"
+      ],
+      "description": "Build and operate a production-grade internal developer platform on Kubernetes with self-service capabilities, golden paths, and CNCF project integrations. Apply cloud native maturity model principles.",
+      "topics": [
+        "Platform engineering concepts and IDP",
+        "Backstage developer portal setup",
+        "Golden path templates and scaffolding",
+        "CNCF landscape project selection",
+        "Multi-cluster management with Cluster API",
+        "Cloud native maturity model assessment"
+      ],
+      "resources": [
+        {
+          "label": "CNCF Cloud Native Landscape",
+          "platform": "CNCF",
+          "type": "docs"
+        },
+        {
+          "label": "Backstage Documentation",
+          "platform": "Backstage Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Platform Engineering on Kubernetes",
+          "platform": "Manning",
+          "type": "book"
+        },
+        {
+          "label": "Cluster API Documentation",
+          "platform": "Cluster API Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy Backstage with a software catalog populated from your git repositories, create a golden path template that provisions a new microservice with CI/CD, monitoring, and GitOps configuration in one click.",
+      "estimatedTime": "4 weeks"
+    }
+  ],
+  "finops-engineer": [
+    {
+      "id": "finops-engineer-1",
+      "title": "FinOps Fundamentals",
+      "order": 1,
+      "techs": [
+        "Cloud Cost Management",
+        "FinOps Framework",
+        "Cost Explorer",
+        "Budgets"
+      ],
+      "description": "Understand the FinOps framework, personas, and the crawl-walk-run maturity model. Learn how cloud billing works across AWS, Azure, and GCP at a conceptual level.",
+      "topics": [
+        "FinOps framework phases and personas",
+        "Cloud billing models on-demand reserved spot",
+        "Variable cost model vs fixed cost",
+        "Unit economics and cost per transaction",
+        "Cloud provider billing concepts",
+        "FinOps team structure and responsibilities"
+      ],
+      "resources": [
+        {
+          "label": "FinOps Foundation Documentation",
+          "platform": "FinOps Foundation",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud FinOps Book",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "FinOps Certified Practitioner Course",
+          "platform": "Linux Foundation",
+          "type": "course"
+        }
+      ],
+      "challenge": "Map your organization cloud spend to the FinOps capability model, identify which phase you are in for each domain, and write a 1-page plan to reach the next maturity level.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "finops-engineer-2",
+      "title": "Cloud Billing and Cost Visibility",
+      "order": 2,
+      "techs": [
+        "AWS Cost Explorer",
+        "Azure Cost Management",
+        "GCP Billing Export",
+        "Tagging"
+      ],
+      "description": "Set up comprehensive cost visibility across cloud accounts using native billing tools and BigQuery exports. Identify the major cost drivers and understand how services are priced.",
+      "topics": [
+        "AWS Cost Explorer filters and grouping",
+        "Azure Cost Management and budgets",
+        "GCP billing export to BigQuery",
+        "Cost allocation tags and labels",
+        "Shared cost distribution methods",
+        "Chargeback vs showback models"
+      ],
+      "resources": [
+        {
+          "label": "AWS Cost Explorer Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Cost Management Documentation",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "GCP Billing Documentation",
+          "platform": "Google Cloud Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Enable billing export for all three major clouds, write a BigQuery query to compare month-over-month cost changes by service, and build a unified cost dashboard in Looker Studio.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "finops-engineer-3",
+      "title": "Tagging and Cost Allocation",
+      "order": 3,
+      "techs": [
+        "Resource Tagging",
+        "AWS Tag Policies",
+        "Azure Policy",
+        "Cost Allocation Labels"
+      ],
+      "description": "Design and enforce a consistent tagging taxonomy across cloud resources for accurate cost attribution. Use policy enforcement to ensure tag compliance at resource creation.",
+      "topics": [
+        "Tagging taxonomy design team env cost-center",
+        "AWS Tag Policies and enforcement",
+        "Azure Policy for required tags",
+        "GCP label requirements via Organization Policy",
+        "Cost allocation for shared services",
+        "Tag coverage monitoring and remediation"
+      ],
+      "resources": [
+        {
+          "label": "AWS Tagging Best Practices Whitepaper",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Resource Tagging Guide",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "FinOps Tagging Best Practices",
+          "platform": "FinOps Foundation",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Define a 5-tag taxonomy, enforce it with AWS Tag Policies and Azure Policy, write a script that reports tag coverage percentage per account, and remediate untagged resources automatically.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "finops-engineer-4",
+      "title": "Commitments and Rate Optimization",
+      "order": 4,
+      "techs": [
+        "Savings Plans",
+        "Reserved Instances",
+        "Committed Use Discounts",
+        "Spot Instances"
+      ],
+      "description": "Analyze usage patterns and purchase appropriate savings commitments to reduce on-demand rates by 30 to 70 percent. Model the trade-off between flexibility and savings.",
+      "topics": [
+        "AWS savings plans compute vs instance",
+        "AWS reserved instances types and terms",
+        "Azure reserved VM instances and AHB",
+        "GCP committed use discounts 1 and 3 year",
+        "Spot and preemptible instance strategies",
+        "Commitment coverage and utilization tracking"
+      ],
+      "resources": [
+        {
+          "label": "AWS Savings Plans Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Reserved Instances Guide",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud FinOps Book",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Analyze 6 months of EC2 usage, model coverage scenarios at 60, 70, and 80 percent, purchase the optimal savings plan mix, and set up alerts when utilization drops below the target threshold.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "finops-engineer-5",
+      "title": "Right-Sizing and Waste Elimination",
+      "order": 5,
+      "techs": [
+        "AWS Compute Optimizer",
+        "Azure Advisor",
+        "GCP Recommender",
+        "Idle Resources"
+      ],
+      "description": "Identify and eliminate cloud waste through right-sizing under-utilized instances, deleting idle resources, and eliminating zombie workloads. Use cloud native recommenders and custom scripts.",
+      "topics": [
+        "EC2 right-sizing with Compute Optimizer",
+        "Azure Advisor cost recommendations",
+        "GCP Recommender API",
+        "Identifying idle and unattached resources",
+        "Orphaned snapshots and unused IPs",
+        "Automated remediation of waste"
+      ],
+      "resources": [
+        {
+          "label": "AWS Compute Optimizer Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Advisor Cost Recommendations",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "FinOps Open Cost and Usage Spec",
+          "platform": "FinOps Foundation",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Run Compute Optimizer across an AWS environment, categorize findings by effort and impact, right-size the top 10 instances, and write a Lambda that automatically deletes snapshots older than 90 days.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "finops-engineer-6",
+      "title": "Budget Management and Governance",
+      "order": 6,
+      "techs": [
+        "AWS Budgets",
+        "Azure Budgets",
+        "Cost Anomaly Detection",
+        "SNS"
+      ],
+      "description": "Implement budget guardrails with automated alerting and cost anomaly detection to prevent unexpected spend. Design a governance framework for cloud cost approvals.",
+      "topics": [
+        "AWS Budgets actions and notifications",
+        "Azure budget alerts and action groups",
+        "GCP budget alerts and programmatic response",
+        "Cost anomaly detection and thresholds",
+        "Chargeback report automation",
+        "Cloud cost governance policy framework"
+      ],
+      "resources": [
+        {
+          "label": "AWS Budgets Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Cost Anomaly Detection Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "FinOps Governance Practices",
+          "platform": "FinOps Foundation",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Set up AWS Budgets for each team with 80 and 100 percent threshold alerts, enable cost anomaly detection with a 10 percent threshold, and configure a budget action that stops an EC2 instance on breach.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "finops-engineer-7",
+      "title": "Unit Economics and Metrics",
+      "order": 7,
+      "techs": [
+        "Cost Metrics",
+        "FOCUS Spec",
+        "Unit Cost",
+        "FinOps Dashboards"
+      ],
+      "description": "Build unit economic metrics that connect cloud costs to business value such as cost per customer, per API call, or per transaction. Automate metric collection and reporting.",
+      "topics": [
+        "Defining meaningful unit cost metrics",
+        "FOCUS FinOps Open Cost and Usage Specification",
+        "Connecting cost data to business metrics",
+        "Cost per environment and per feature",
+        "FinOps dashboard design and KPIs",
+        "Benchmarking against industry standards"
+      ],
+      "resources": [
+        {
+          "label": "FinOps FOCUS Specification",
+          "platform": "FinOps Foundation",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud FinOps Book",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "FinOps Unit Economics Best Practices",
+          "platform": "FinOps Foundation",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Define three unit cost metrics for a SaaS product, build a pipeline that joins billing data with application metrics in BigQuery, and publish weekly unit cost trends to a shared Grafana dashboard.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "finops-engineer-8",
+      "title": "Kubernetes and Container Cost Allocation",
+      "order": 8,
+      "techs": [
+        "Kubecost",
+        "OpenCost",
+        "Kubernetes Labels",
+        "Node Groups"
+      ],
+      "description": "Allocate Kubernetes cluster costs to teams and namespaces using OpenCost or Kubecost. Understand the challenge of shared resources and bin-packing efficiency.",
+      "topics": [
+        "Kubernetes cost allocation challenges",
+        "OpenCost and Kubecost setup",
+        "Namespace and label-based cost reports",
+        "Node efficiency and bin packing",
+        "Spot instance usage in Karpenter",
+        "Chargeback for platform teams"
+      ],
+      "resources": [
+        {
+          "label": "OpenCost Documentation",
+          "platform": "OpenCost Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Kubecost Documentation",
+          "platform": "Kubecost Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Kubernetes Cost Optimization Guide",
+          "platform": "FinOps Foundation",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy OpenCost on a Kubernetes cluster, configure namespace cost allocation by team label, identify the top three inefficient workloads, and implement resource requests and limits to improve bin-packing.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "finops-engineer-9",
+      "title": "FinOps Tooling and Automation",
+      "order": 9,
+      "techs": [
+        "Apptio Cloudability",
+        "CloudHealth",
+        "Infracost",
+        "Terraform"
+      ],
+      "description": "Integrate FinOps tooling into engineering workflows by shifting cost left with Infracost in pull requests and automating optimization actions via Lambda or Cloud Functions.",
+      "topics": [
+        "Infracost in CI/CD pull request comments",
+        "Cloud management platforms overview",
+        "Automated right-sizing with Lambda",
+        "Cost estimation in Terraform plans",
+        "Custom cost optimization rules and automation",
+        "Reporting pipelines with dbt and BigQuery"
+      ],
+      "resources": [
+        {
+          "label": "Infracost Documentation",
+          "platform": "Infracost Docs",
+          "type": "docs"
+        },
+        {
+          "label": "FinOps Automation Practices",
+          "platform": "FinOps Foundation",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud FinOps Book",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Integrate Infracost into a GitHub Actions pipeline that comments estimated monthly cost on every Terraform pull request, and build a Lambda that emails teams weekly with their top cost reduction opportunities.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "finops-engineer-10",
+      "title": "FinOps at Scale and Organizational Maturity",
+      "order": 10,
+      "techs": [
+        "FinOps Framework",
+        "Executive Reporting",
+        "Cloud Economics",
+        "FOCUS"
+      ],
+      "description": "Lead an organization to FinOps run-phase maturity with executive reporting, cross-functional collaboration, and continuous optimization culture. Align cloud spend with business outcomes.",
+      "topics": [
+        "FinOps run phase capabilities and KPIs",
+        "Executive cloud cost reporting frameworks",
+        "Cloud economics and total cost of ownership",
+        "Establishing a cloud center of excellence",
+        "Forecasting and financial planning for cloud",
+        "FOCUS specification adoption and tooling"
+      ],
+      "resources": [
+        {
+          "label": "FinOps Certified Professional Study Guide",
+          "platform": "FinOps Foundation",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud FinOps Book",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "FinOps Foundation Practitioner Course",
+          "platform": "Linux Foundation",
+          "type": "course"
+        },
+        {
+          "label": "Cloud Economics Whitepaper",
+          "platform": "AWS Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a quarterly business review deck with cloud unit economics, forecast next quarter spend within 10 percent accuracy, propose a commitment purchase plan, and present it to a simulated executive audience.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "multi-cloud-architect": [
+    {
+      "id": "multi-cloud-architect-1",
+      "title": "Multi-Cloud Strategy Fundamentals",
+      "order": 1,
+      "techs": [
+        "AWS",
+        "Azure",
+        "GCP",
+        "Cloud Agnostic Patterns"
+      ],
+      "description": "Understand why organizations adopt multi-cloud strategies and the associated trade-offs around complexity, vendor lock-in, and operational overhead. Compare core service equivalents across providers.",
+      "topics": [
+        "Multi-cloud vs poly-cloud vs hybrid cloud",
+        "Vendor lock-in risks and mitigation",
+        "Cloud provider service comparison matrix",
+        "Networking topology across clouds",
+        "Identity federation across providers",
+        "Multi-cloud cost and complexity trade-offs"
+      ],
+      "resources": [
+        {
+          "label": "AWS Multi-Cloud Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud Architecture Patterns",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Multi-Cloud Strategy Guide",
+          "platform": "Gartner",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Map the equivalent services for compute, storage, database, and messaging across AWS, Azure, and GCP, and write a decision matrix with criteria for when to prefer each provider.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "multi-cloud-architect-2",
+      "title": "Terraform for Multi-Cloud IaC",
+      "order": 2,
+      "techs": [
+        "Terraform",
+        "AWS Provider",
+        "Azure Provider",
+        "GCP Provider"
+      ],
+      "description": "Manage infrastructure across AWS, Azure, and GCP from a single Terraform codebase using multiple provider configurations. Structure workspaces and modules for multi-cloud reusability.",
+      "topics": [
+        "Terraform multi-provider configuration",
+        "Provider aliases for multiple accounts",
+        "Module design for cloud-agnostic patterns",
+        "Terraform workspaces for environment isolation",
+        "Remote state with locking across clouds",
+        "Terraform Cloud or Atlantis for team workflows"
+      ],
+      "resources": [
+        {
+          "label": "Terraform Multi-Provider Documentation",
+          "platform": "Terraform Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Terraform Up and Running",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Terraform Associate Certification Course",
+          "platform": "HashiCorp",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write a Terraform root module that deploys an identical VPC and compute instance on AWS and Azure simultaneously, using provider aliases, and stores state in separate backends.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "multi-cloud-architect-3",
+      "title": "Multi-Cloud Networking",
+      "order": 3,
+      "techs": [
+        "AWS Transit Gateway",
+        "Azure Virtual WAN",
+        "GCP NCC",
+        "SD-WAN"
+      ],
+      "description": "Design network connectivity between AWS, Azure, and GCP environments using VPN tunnels, private interconnects, and SD-WAN solutions. Implement consistent security policies across cloud perimeters.",
+      "topics": [
+        "VPN between AWS and Azure and GCP",
+        "Private connectivity with dedicated interconnects",
+        "Multi-cloud DNS resolution",
+        "Network security policy consistency",
+        "SD-WAN solutions for multi-cloud",
+        "BGP routing between cloud providers"
+      ],
+      "resources": [
+        {
+          "label": "AWS Transit Gateway Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Virtual WAN Documentation",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Multi-Cloud Networking Architecture Guide",
+          "platform": "Google Cloud Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Establish VPN connectivity between an AWS VPC and an Azure VNet, configure BGP route exchange, and validate that a VM in each cloud can ping the other using private IP addresses.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "multi-cloud-architect-4",
+      "title": "Multi-Cloud Identity and Security",
+      "order": 4,
+      "techs": [
+        "Okta",
+        "Entra ID",
+        "AWS IAM Identity Center",
+        "OIDC"
+      ],
+      "description": "Federate identities across cloud providers using a central IdP such as Okta or Entra ID. Implement consistent RBAC patterns and secret management across AWS, Azure, and GCP.",
+      "topics": [
+        "Identity federation with SAML and OIDC",
+        "Okta or Entra ID as central IdP",
+        "AWS IAM Identity Center SSO",
+        "Cross-cloud RBAC mapping",
+        "Secrets management with HashiCorp Vault",
+        "Multi-cloud audit logging and SIEM"
+      ],
+      "resources": [
+        {
+          "label": "HashiCorp Vault Documentation",
+          "platform": "HashiCorp Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AWS IAM Identity Center Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Multi-Cloud Security Best Practices",
+          "platform": "CNCF",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Configure Okta as the IdP for AWS IAM Identity Center, Azure Entra ID, and GCP Workforce Identity Federation, then test single sign-on to all three consoles with the same user credentials.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "multi-cloud-architect-5",
+      "title": "Multi-Cloud Kubernetes",
+      "order": 5,
+      "techs": [
+        "EKS",
+        "AKS",
+        "GKE",
+        "Cluster API"
+      ],
+      "description": "Operate Kubernetes clusters across AWS EKS, Azure AKS, and GCP GKE with consistent tooling. Use Cluster API or a management plane to provision and lifecycle clusters uniformly.",
+      "topics": [
+        "EKS vs AKS vs GKE feature comparison",
+        "Cluster API provider for each cloud",
+        "Unified kubectl context management",
+        "Consistent GitOps with ArgoCD ApplicationSets",
+        "Cross-cluster service discovery",
+        "Multi-cluster ingress and traffic management"
+      ],
+      "resources": [
+        {
+          "label": "Cluster API Documentation",
+          "platform": "Cluster API Docs",
+          "type": "docs"
+        },
+        {
+          "label": "EKS Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Multi-Cluster Kubernetes Architecture",
+          "platform": "CNCF",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Provision one cluster each on EKS, AKS, and GKE using Cluster API, deploy the same application to all three via ArgoCD ApplicationSets, and verify cross-cluster health from a single Grafana dashboard.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "multi-cloud-architect-6",
+      "title": "Multi-Cloud Data and Storage Patterns",
+      "order": 6,
+      "techs": [
+        "S3",
+        "Azure Blob",
+        "GCS",
+        "Delta Lake"
+      ],
+      "description": "Design portable data architectures that span multiple cloud object stores using abstraction layers and open formats. Implement cross-cloud replication for disaster recovery.",
+      "topics": [
+        "Object storage comparison S3 Blob GCS",
+        "Cross-cloud data replication patterns",
+        "Open table formats Delta Lake Iceberg",
+        "Multi-cloud data lakehouse architecture",
+        "Data residency and compliance",
+        "Rclone and cloud-agnostic data tools"
+      ],
+      "resources": [
+        {
+          "label": "Delta Lake Documentation",
+          "platform": "Delta Lake Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Apache Iceberg Documentation",
+          "platform": "Iceberg Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Multi-Cloud Data Architecture",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Set up bi-directional replication between S3 and Azure Blob Storage using Rclone, write data in Delta Lake format that can be queried from both AWS Athena and Azure Synapse.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "multi-cloud-architect-7",
+      "title": "Multi-Cloud Observability",
+      "order": 7,
+      "techs": [
+        "OpenTelemetry",
+        "Grafana",
+        "Datadog",
+        "Prometheus"
+      ],
+      "description": "Centralize observability across multi-cloud environments using OpenTelemetry for vendor-neutral instrumentation and a unified monitoring backend. Correlate metrics logs and traces across providers.",
+      "topics": [
+        "OpenTelemetry collector for multi-cloud",
+        "Vendor-neutral instrumentation strategy",
+        "Centralized Prometheus with Thanos or Cortex",
+        "Grafana unified dashboards for all clouds",
+        "Log aggregation across cloud providers",
+        "Cross-cloud SLO tracking"
+      ],
+      "resources": [
+        {
+          "label": "OpenTelemetry Documentation",
+          "platform": "OpenTelemetry Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Grafana Datasources Documentation",
+          "platform": "Grafana Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud Native Observability Course",
+          "platform": "Linux Foundation",
+          "type": "course"
+        }
+      ],
+      "challenge": "Deploy OpenTelemetry collectors in AWS and Azure, forward all telemetry to a central Grafana stack, and create a single dashboard showing request rates error rates and latency for services running in both clouds.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "multi-cloud-architect-8",
+      "title": "Multi-Cloud Cost Management",
+      "order": 8,
+      "techs": [
+        "CloudHealth",
+        "Apptio",
+        "FOCUS Spec",
+        "Unified Billing"
+      ],
+      "description": "Build a unified view of cloud spend across AWS, Azure, and GCP using the FOCUS specification and multi-cloud cost management platforms. Implement consistent tagging and allocation.",
+      "topics": [
+        "FOCUS specification for normalized billing data",
+        "Multi-cloud cost management platforms",
+        "Unified tagging taxonomy across providers",
+        "Cross-cloud chargeback and showback",
+        "Multi-cloud savings commitment strategy",
+        "Cost anomaly detection across all clouds"
+      ],
+      "resources": [
+        {
+          "label": "FinOps FOCUS Specification",
+          "platform": "FinOps Foundation",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud FinOps Book",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Multi-Cloud Cost Management Best Practices",
+          "platform": "FinOps Foundation",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Normalize billing exports from AWS, Azure, and GCP into the FOCUS schema, load them into BigQuery, and build a dashboard showing total multi-cloud spend by team with month-over-month variance.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "multi-cloud-architect-9",
+      "title": "Disaster Recovery and Business Continuity",
+      "order": 9,
+      "techs": [
+        "Multi-Cloud DR",
+        "Velero",
+        "Route 53",
+        "Traffic Manager"
+      ],
+      "description": "Design multi-cloud disaster recovery architectures that span providers to achieve cloud-provider-level resilience. Test failover between AWS and Azure with automated runbooks.",
+      "topics": [
+        "Multi-cloud DR patterns active-active vs active-passive",
+        "Velero for cross-cloud Kubernetes backup",
+        "DNS-based traffic failover across clouds",
+        "Data synchronization and RPO targets",
+        "Automated runbooks for cloud failover",
+        "Chaos engineering for multi-cloud resilience"
+      ],
+      "resources": [
+        {
+          "label": "Velero Documentation",
+          "platform": "Velero Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Multi-Cloud DR Architecture Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Disaster Recovery on AWS Whitepaper",
+          "platform": "AWS Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Set up a Velero backup pipeline for a Kubernetes workload replicating to both an S3 bucket and an Azure Blob container, implement DNS failover between AWS and Azure, and run a full DR drill.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "multi-cloud-architect-10",
+      "title": "Enterprise Multi-Cloud Governance",
+      "order": 10,
+      "techs": [
+        "Terraform Enterprise",
+        "OPA",
+        "Cloud Custodian",
+        "CSPM"
+      ],
+      "description": "Govern a large-scale multi-cloud environment with policy-as-code, cloud security posture management, and automated compliance reporting across all cloud providers.",
+      "topics": [
+        "Policy as code with OPA across clouds",
+        "Cloud Custodian for multi-cloud automation",
+        "CSPM tools for unified security posture",
+        "Terraform Enterprise or Spacelift for governance",
+        "Compliance frameworks CIS SOC2 ISO27001",
+        "Multi-cloud landing zone reference architectures"
+      ],
+      "resources": [
+        {
+          "label": "Cloud Custodian Documentation",
+          "platform": "Cloud Custodian Docs",
+          "type": "docs"
+        },
+        {
+          "label": "OPA Documentation",
+          "platform": "OPA Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Multi-Cloud Architecture Book",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "CSPM Best Practices",
+          "platform": "CNCF",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy Cloud Custodian policies that run across AWS and Azure to enforce encryption at rest, remediate public storage buckets, and generate a unified compliance report mapped to CIS benchmark controls.",
+      "estimatedTime": "4 weeks"
+    }
+  ],
+  "cloud-migration": [
+    {
+      "id": "cloud-migration-1",
+      "title": "Migration Fundamentals and Strategy",
+      "order": 1,
+      "techs": [
+        "Migration",
+        "7Rs Framework",
+        "Discovery",
+        "Assessment"
+      ],
+      "description": "Understand the cloud migration journey using the 7Rs strategy framework and learn how to build a migration business case. Identify migration drivers and stakeholder concerns.",
+      "topics": [
+        "7Rs migration strategies rehost replatform refactor",
+        "Migration business case and ROI",
+        "Total cost of ownership comparison",
+        "Migration risk assessment matrix",
+        "Stakeholder alignment and communication",
+        "Migration wave planning concepts"
+      ],
+      "resources": [
+        {
+          "label": "AWS Migration Hub Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud Migration on AWS Course",
+          "platform": "AWS Training",
+          "type": "course"
+        },
+        {
+          "label": "Cloud Strategy Book",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Analyze a fictional on-premises application portfolio of 20 apps, classify each using the 7Rs framework, and build a migration business case with a 3-year TCO comparison.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "cloud-migration-2",
+      "title": "Discovery and Portfolio Assessment",
+      "order": 2,
+      "techs": [
+        "AWS Application Discovery",
+        "Azure Migrate",
+        "Movere",
+        "Dependency Mapping"
+      ],
+      "description": "Conduct application portfolio discovery using automated tools to collect inventory, performance data, and dependency maps. Produce a rationalized portfolio view for migration planning.",
+      "topics": [
+        "AWS Application Discovery Service agent vs agentless",
+        "Azure Migrate discovery and assessment",
+        "Dependency mapping and visualization",
+        "Performance baseline collection",
+        "Application portfolio rationalization",
+        "Migration readiness assessment scoring"
+      ],
+      "resources": [
+        {
+          "label": "AWS Application Discovery Service Docs",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Migrate Documentation",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Application Portfolio Assessment Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy AWS Application Discovery Service agents on a lab environment, collect 2 weeks of performance and dependency data, and produce a migration assessment report with recommended wave groupings.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-migration-3",
+      "title": "Landing Zone and Foundation Setup",
+      "order": 3,
+      "techs": [
+        "AWS Control Tower",
+        "Azure Landing Zones",
+        "Networking",
+        "Security Baseline"
+      ],
+      "description": "Build the cloud landing zone foundation that target workloads will migrate into. Establish networking, identity, logging, and security baselines before the first migration wave.",
+      "topics": [
+        "Landing zone design principles",
+        "Hub-and-spoke network topology for migration",
+        "Directory service integration AD Connector",
+        "Centralized logging and audit trails",
+        "Security baseline and compliance guardrails",
+        "DNS and hybrid connectivity setup"
+      ],
+      "resources": [
+        {
+          "label": "AWS Landing Zone Accelerator",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Landing Zones Documentation",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud Adoption Framework Migration",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy an AWS landing zone with Control Tower including three organizational units, a shared services VPC, Direct Connect simulation with VPN, and Active Directory integration.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-migration-4",
+      "title": "Lift and Shift Migration",
+      "order": 4,
+      "techs": [
+        "AWS MGN",
+        "Azure Migrate",
+        "VM Import",
+        "CloudEndure"
+      ],
+      "description": "Execute rehost migrations moving virtual machines to the cloud with minimal changes using AWS Application Migration Service and Azure Migrate. Perform cutover with minimal downtime.",
+      "topics": [
+        "AWS Application Migration Service MGN setup",
+        "Continuous block-level replication",
+        "Test migrations and cutover planning",
+        "Azure Migrate VM assessment and migration",
+        "Post-migration validation testing",
+        "Rollback planning for failed migrations"
+      ],
+      "resources": [
+        {
+          "label": "AWS Application Migration Service Docs",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Migrate Server Migration",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Migration Acceleration Program",
+          "platform": "AWS Training",
+          "type": "course"
+        }
+      ],
+      "challenge": "Migrate three VMs from a VMware environment to AWS using AWS MGN, perform test cutovers to validate functionality, execute a production cutover during a maintenance window, and decommission the source.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "cloud-migration-5",
+      "title": "Database Migration",
+      "order": 5,
+      "techs": [
+        "AWS DMS",
+        "Azure Database Migration Service",
+        "Schema Conversion Tool",
+        "RDS"
+      ],
+      "description": "Migrate on-premises databases to cloud managed database services using AWS DMS and the Schema Conversion Tool. Handle heterogeneous migrations from Oracle and SQL Server to open source engines.",
+      "topics": [
+        "AWS Database Migration Service architecture",
+        "Schema Conversion Tool for heterogeneous migrations",
+        "Continuous data replication with CDC",
+        "Azure Database Migration Service",
+        "Database cutover and minimal downtime strategies",
+        "Post-migration data validation"
+      ],
+      "resources": [
+        {
+          "label": "AWS DMS Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Schema Conversion Tool Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Database Migration Best Practices",
+          "platform": "AWS Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Migrate an Oracle database to Amazon Aurora PostgreSQL using the Schema Conversion Tool for schema translation and DMS for full load and CDC replication, validate row counts, and cutover.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "cloud-migration-6",
+      "title": "Replatforming and Modernization",
+      "order": 6,
+      "techs": [
+        "Elastic Beanstalk",
+        "ECS",
+        "RDS",
+        "Managed Services"
+      ],
+      "description": "Replatform applications to take advantage of managed cloud services without full refactoring. Move from self-managed databases and servers to PaaS offerings for reduced operational burden.",
+      "topics": [
+        "Replatforming patterns and decision criteria",
+        "Migrating to managed databases RDS Aurora",
+        "Containerizing existing apps for ECS",
+        "App Service migration for .NET apps",
+        "Replatform testing and validation",
+        "Operational runbook updates for cloud"
+      ],
+      "resources": [
+        {
+          "label": "AWS Replatforming Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Azure App Service Migration Assistant",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Modernization Pathways on AWS",
+          "platform": "AWS Training",
+          "type": "course"
+        }
+      ],
+      "challenge": "Take a LAMP stack application, containerize it with Docker, deploy it to AWS ECS Fargate, migrate the MySQL database to RDS, and verify all functionality with automated integration tests.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-migration-7",
+      "title": "Refactoring and Application Modernization",
+      "order": 7,
+      "techs": [
+        "Microservices",
+        "Lambda",
+        "Event-Driven",
+        "Strangler Fig"
+      ],
+      "description": "Apply the strangler fig pattern to incrementally decompose monolithic applications into cloud-native microservices and serverless functions. Prioritize decomposition by business capability.",
+      "topics": [
+        "Strangler fig pattern for monolith decomposition",
+        "Domain-driven design for microservice boundaries",
+        "Event sourcing and CQRS patterns",
+        "Database per service pattern",
+        "API gateway as strangler entry point",
+        "Incremental migration with feature flags"
+      ],
+      "resources": [
+        {
+          "label": "Microservices Patterns",
+          "platform": "Manning",
+          "type": "book"
+        },
+        {
+          "label": "AWS Modernization Workshops",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Refactoring to Serverless Course",
+          "platform": "AWS Training",
+          "type": "course"
+        }
+      ],
+      "challenge": "Apply the strangler fig pattern to extract one domain from a monolith, implement it as a serverless microservice, route traffic to it via API Gateway, and keep the legacy path as fallback.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "cloud-migration-8",
+      "title": "Data Center Exit and Decommissioning",
+      "order": 8,
+      "techs": [
+        "Asset Management",
+        "Decommissioning",
+        "Migration Hub",
+        "Cost Tracking"
+      ],
+      "description": "Plan and execute the final data center exit including decommissioning physical assets, terminating colocation contracts, and validating all workloads are stable in the cloud.",
+      "topics": [
+        "Data center exit planning and timeline",
+        "Asset tracking and decommission checklist",
+        "Workload stability validation criteria",
+        "License reclamation and software inventory",
+        "Colocation contract termination planning",
+        "Post-migration cost validation"
+      ],
+      "resources": [
+        {
+          "label": "AWS Migration Hub Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Data Center Exit Playbook",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud Migration Complete Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a data center exit tracker spreadsheet with status for all 20 migrated apps, define go/no-go criteria for decommissioning, and write a runbook for the final shutdown weekend.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-migration-9",
+      "title": "Post-Migration Optimization",
+      "order": 9,
+      "techs": [
+        "Cost Optimization",
+        "Performance Tuning",
+        "Well-Architected",
+        "Tagging"
+      ],
+      "description": "Optimize migrated workloads for cloud-native performance and cost efficiency after migration is complete. Conduct Well-Architected reviews and right-size resources based on actual usage data.",
+      "topics": [
+        "Post-migration performance benchmarking",
+        "Right-sizing based on cloudwatch metrics",
+        "Reserved instance and savings plan purchases",
+        "Well-Architected review post-migration",
+        "Implementing cloud-native patterns in migrated apps",
+        "Tagging cleanup and cost allocation"
+      ],
+      "resources": [
+        {
+          "label": "AWS Well-Architected Tool Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Post-Migration Optimization Guide",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud Cost Optimization Best Practices",
+          "platform": "AWS Training",
+          "type": "course"
+        }
+      ],
+      "challenge": "Run a Well-Architected review on three migrated workloads, address all high-risk items within 30 days, right-size 80 percent of EC2 instances based on 2 weeks of CloudWatch data.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-migration-10",
+      "title": "Migration Program Management at Scale",
+      "order": 10,
+      "techs": [
+        "Migration Hub",
+        "Wave Planning",
+        "Cloud COE",
+        "Governance"
+      ],
+      "description": "Lead a large-scale cloud migration program across hundreds of applications with wave planning, governance, and a cloud center of excellence. Measure and report migration velocity and outcomes.",
+      "topics": [
+        "Migration program governance framework",
+        "Wave planning and dependency management",
+        "Cloud center of excellence structure",
+        "Migration velocity tracking and KPIs",
+        "Change management for cloud adoption",
+        "Cloud operating model transformation"
+      ],
+      "resources": [
+        {
+          "label": "AWS Migration Acceleration Program",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud Adoption Framework",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Leading Cloud Transformations",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Microsoft Cloud Adoption Framework",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Design a 12-month migration program plan for a 200-application portfolio, define wave groupings by dependency and risk, create a RACI for the cloud COE, and build a migration velocity dashboard.",
+      "estimatedTime": "4 weeks"
+    }
+  ],
+  "edge-engineer": [
+    {
+      "id": "edge-engineer-1",
+      "title": "Edge Computing Fundamentals",
+      "order": 1,
+      "techs": [
+        "CDN",
+        "Edge",
+        "Latency",
+        "Cloudflare"
+      ],
+      "description": "Understand the edge computing model, how CDNs work, and why moving computation closer to users reduces latency. Compare centralized cloud with edge and CDN delivery.",
+      "topics": [
+        "Edge computing vs cloud computing",
+        "CDN points of presence and caching",
+        "DNS resolution and anycast routing",
+        "HTTP caching headers and Cache-Control",
+        "Cloudflare network overview",
+        "Edge use cases low-latency real-time"
+      ],
+      "resources": [
+        {
+          "label": "Cloudflare Learning Center",
+          "platform": "Cloudflare",
+          "type": "docs"
+        },
+        {
+          "label": "Web Performance Fundamentals Course",
+          "platform": "Frontend Masters",
+          "type": "course"
+        },
+        {
+          "label": "HTTP Caching MDN Guide",
+          "platform": "MDN",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Set up a Cloudflare free account, proxy a domain through it, configure caching rules for static assets with long TTLs, and measure TTFB improvement with and without Cloudflare using WebPageTest.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "edge-engineer-2",
+      "title": "Cloudflare Workers Basics",
+      "order": 2,
+      "techs": [
+        "Cloudflare Workers",
+        "JavaScript",
+        "Wrangler",
+        "Service Bindings"
+      ],
+      "description": "Write and deploy serverless JavaScript functions at the Cloudflare edge using Workers. Understand the Workers runtime, request lifecycle, and how it differs from Node.js.",
+      "topics": [
+        "Cloudflare Workers runtime model",
+        "Fetch event handler and request response",
+        "Wrangler CLI for local dev and deployment",
+        "Environment variables and secrets",
+        "Workers routes and patterns",
+        "Service bindings between Workers"
+      ],
+      "resources": [
+        {
+          "label": "Cloudflare Workers Documentation",
+          "platform": "Cloudflare Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Cloudflare Workers Getting Started",
+          "platform": "Cloudflare",
+          "type": "course"
+        },
+        {
+          "label": "Workers Examples Gallery",
+          "platform": "Cloudflare Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write a Cloudflare Worker that intercepts requests, adds custom headers, rewrites URLs based on geolocation, and A/B tests two origin URLs by splitting traffic 50/50 based on a cookie.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "edge-engineer-3",
+      "title": "Edge Storage and State",
+      "order": 3,
+      "techs": [
+        "KV Store",
+        "Durable Objects",
+        "R2",
+        "D1"
+      ],
+      "description": "Persist data at the edge using Cloudflare KV, Durable Objects, R2 object storage, and D1 SQLite databases. Understand consistency trade-offs of eventually consistent KV vs strongly consistent Durable Objects.",
+      "topics": [
+        "Cloudflare KV eventual consistency model",
+        "KV namespaces and key-value patterns",
+        "Durable Objects for stateful coordination",
+        "Durable Objects WebSocket hibernation",
+        "R2 storage vs S3 cost comparison",
+        "D1 SQLite at the edge queries and migrations"
+      ],
+      "resources": [
+        {
+          "label": "Cloudflare KV Documentation",
+          "platform": "Cloudflare Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Durable Objects Documentation",
+          "platform": "Cloudflare Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Cloudflare D1 Documentation",
+          "platform": "Cloudflare Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a real-time collaborative counter using Durable Objects that handles concurrent increments without conflicts, stores results in KV for fast reads, and persists history in D1.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "edge-engineer-4",
+      "title": "WebAssembly at the Edge",
+      "order": 4,
+      "techs": [
+        "WASM",
+        "Rust",
+        "AssemblyScript",
+        "Edge WASM"
+      ],
+      "description": "Compile Rust or AssemblyScript to WebAssembly and run it inside Cloudflare Workers for near-native performance at the edge. Understand WASM module instantiation and memory management.",
+      "topics": [
+        "WebAssembly concepts and binary format",
+        "Compiling Rust to WASM with wasm-pack",
+        "AssemblyScript for TypeScript developers",
+        "WASM in Cloudflare Workers and Workers WASM bindings",
+        "WASM performance vs JS trade-offs",
+        "WASM Component Model and WASI"
+      ],
+      "resources": [
+        {
+          "label": "WebAssembly Documentation",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "Rust and WebAssembly Book",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Cloudflare WASM Workers Guide",
+          "platform": "Cloudflare Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write a Rust function that performs image resizing, compile it to WASM, load it inside a Cloudflare Worker, and benchmark it against a pure JavaScript implementation for a 1MB image.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "edge-engineer-5",
+      "title": "Edge Functions on Vercel and Netlify",
+      "order": 5,
+      "techs": [
+        "Vercel Edge Functions",
+        "Netlify Edge Functions",
+        "Next.js",
+        "Middleware"
+      ],
+      "description": "Deploy edge middleware and functions on Vercel and Netlify platforms to personalize content and handle authentication at the CDN layer. Integrate with popular front-end frameworks.",
+      "topics": [
+        "Vercel Edge Functions vs serverless functions",
+        "Next.js middleware for edge routing",
+        "Netlify Edge Functions with Deno runtime",
+        "Geolocation and personalization at edge",
+        "A/B testing at the edge with feature flags",
+        "Edge authentication with JWT validation"
+      ],
+      "resources": [
+        {
+          "label": "Vercel Edge Functions Documentation",
+          "platform": "Vercel Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Netlify Edge Functions Documentation",
+          "platform": "Netlify Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Next.js Middleware Documentation",
+          "platform": "Next.js Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a Next.js app with edge middleware that redirects users to locale-specific pages based on Accept-Language header, validates JWT tokens at the edge, and blocks specified countries via geolocation.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "edge-engineer-6",
+      "title": "Edge Security and WAF",
+      "order": 6,
+      "techs": [
+        "WAF",
+        "DDoS Protection",
+        "Bot Management",
+        "Cloudflare Access"
+      ],
+      "description": "Protect applications at the edge using Web Application Firewall rules, DDoS mitigation, and bot management. Implement Zero Trust access policies with Cloudflare Access.",
+      "topics": [
+        "WAF rule sets and custom rules",
+        "DDoS protection layers 3 4 and 7",
+        "Bot score and bot fight mode",
+        "Rate limiting at the edge",
+        "Cloudflare Access Zero Trust policies",
+        "mTLS at the edge for API security"
+      ],
+      "resources": [
+        {
+          "label": "Cloudflare WAF Documentation",
+          "platform": "Cloudflare Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Cloudflare Zero Trust Documentation",
+          "platform": "Cloudflare Docs",
+          "type": "docs"
+        },
+        {
+          "label": "OWASP Top 10 Web Application Risks",
+          "platform": "OWASP",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Configure a WAF ruleset blocking OWASP top 10 categories, implement rate limiting at 100 requests per minute per IP, set up a Cloudflare Access policy requiring SSO for an internal dashboard.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "edge-engineer-7",
+      "title": "CDN Performance Optimization",
+      "order": 7,
+      "techs": [
+        "Cache Rules",
+        "Image Optimization",
+        "HTTP3",
+        "Prefetch"
+      ],
+      "description": "Tune CDN cache rules for maximum offload and implement edge-side image optimization and format conversion. Measure and improve Core Web Vitals scores using edge capabilities.",
+      "topics": [
+        "Cache key design and variation rules",
+        "Edge-side image transformation and WebP conversion",
+        "HTTP/3 and QUIC protocol benefits",
+        "Resource hints prefetch preconnect",
+        "Cache purging strategies and cache tags",
+        "Core Web Vitals and edge optimization"
+      ],
+      "resources": [
+        {
+          "label": "Cloudflare Cache Rules Documentation",
+          "platform": "Cloudflare Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Web Performance Book",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Core Web Vitals Documentation",
+          "platform": "Google Developers",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Audit a website with Google PageSpeed Insights, implement edge image optimization with Cloudflare Polish, configure granular cache rules by content type, and improve LCP score by at least 30 percent.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "edge-engineer-8",
+      "title": "Edge AI and Inference",
+      "order": 8,
+      "techs": [
+        "Cloudflare AI",
+        "Workers AI",
+        "ONNX",
+        "Edge Inference"
+      ],
+      "description": "Run machine learning inference at the edge using Cloudflare Workers AI and ONNX runtime to reduce latency and avoid sending data to centralized inference servers.",
+      "topics": [
+        "Edge AI inference trade-offs vs cloud",
+        "Cloudflare Workers AI model catalog",
+        "ONNX model format and runtime",
+        "Text classification and embedding at edge",
+        "Image classification inference in Workers",
+        "Privacy benefits of edge inference"
+      ],
+      "resources": [
+        {
+          "label": "Cloudflare Workers AI Documentation",
+          "platform": "Cloudflare Docs",
+          "type": "docs"
+        },
+        {
+          "label": "ONNX Runtime Documentation",
+          "platform": "ONNX Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Edge AI Patterns Guide",
+          "platform": "Cloudflare Blog",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a Cloudflare Worker that classifies incoming request text as spam or not-spam using Workers AI, caches results in KV for repeated queries, and blocks requests classified as spam.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "edge-engineer-9",
+      "title": "IoT and Edge Protocols",
+      "order": 9,
+      "techs": [
+        "MQTT",
+        "WebSockets",
+        "AWS Greengrass",
+        "Azure IoT Edge"
+      ],
+      "description": "Extend edge computing to IoT devices using MQTT, WebSockets, and cloud-managed edge runtimes. Design architectures that process sensor data locally before syncing to the cloud.",
+      "topics": [
+        "MQTT protocol pub/sub and QoS levels",
+        "AWS Greengrass local compute and ML",
+        "Azure IoT Edge modules and routes",
+        "WebSocket connections through Durable Objects",
+        "Edge-to-cloud synchronization patterns",
+        "Offline-first edge device design"
+      ],
+      "resources": [
+        {
+          "label": "AWS Greengrass Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Azure IoT Edge Documentation",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "MQTT Essentials Guide",
+          "platform": "HiveMQ",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy an AWS Greengrass core device that subscribes to MQTT sensor messages, processes anomalies locally using a Lambda function, and syncs only flagged events to AWS IoT Core in the cloud.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "edge-engineer-10",
+      "title": "Production Edge Architecture",
+      "order": 10,
+      "techs": [
+        "Cloudflare",
+        "Multi-CDN",
+        "Edge Orchestration",
+        "Observability"
+      ],
+      "description": "Design and operate production edge platforms with multi-CDN failover, edge observability, and sophisticated request orchestration logic. Apply edge-first architecture patterns at scale.",
+      "topics": [
+        "Multi-CDN strategy and DNS-based failover",
+        "Edge observability with Workers Analytics Engine",
+        "Request coalescing and cache stampede prevention",
+        "Cloudflare Pages and Workers combined deployments",
+        "Edge configuration as code with Wrangler and Terraform",
+        "SLAs and incident response for edge platforms"
+      ],
+      "resources": [
+        {
+          "label": "Cloudflare Terraform Provider",
+          "platform": "Terraform Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Cloudflare Analytics Engine Documentation",
+          "platform": "Cloudflare Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Building for the Edge Architecture Guide",
+          "platform": "Cloudflare Blog",
+          "type": "docs"
+        },
+        {
+          "label": "Web Performance in Action",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a production edge platform with Terraform-managed Cloudflare configuration, custom analytics events to Workers Analytics Engine, multi-origin failover, and a runbook for edge incident response.",
+      "estimatedTime": "4 weeks"
+    }
+  ],
+  "observability-engineer": [
+    {
+      "id": "observability-engineer-1",
+      "title": "Observability Fundamentals",
+      "order": 1,
+      "techs": [
+        "Metrics",
+        "Logs",
+        "Traces",
+        "Observability"
+      ],
+      "description": "Understand the three pillars of observability and how they differ from traditional monitoring. Learn the difference between black-box and white-box monitoring and when to apply each.",
+      "topics": [
+        "Three pillars metrics logs traces",
+        "Observability vs monitoring distinction",
+        "Black-box vs white-box monitoring",
+        "RED method rate errors duration",
+        "USE method utilization saturation errors",
+        "MTTD and MTTR improvement with observability"
+      ],
+      "resources": [
+        {
+          "label": "Observability Engineering Book",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Google SRE Book",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "OpenTelemetry Documentation",
+          "platform": "OpenTelemetry Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Instrument a simple web application to emit request rate, error rate, and latency as Prometheus metrics, structured JSON logs, and traces, and visualize all three in a single Grafana dashboard.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "observability-engineer-2",
+      "title": "Prometheus Metrics",
+      "order": 2,
+      "techs": [
+        "Prometheus",
+        "PromQL",
+        "Exporters",
+        "Alertmanager"
+      ],
+      "description": "Set up Prometheus to scrape metrics from applications and infrastructure exporters. Write PromQL queries for aggregation and alerting, and configure Alertmanager notification routing.",
+      "topics": [
+        "Prometheus architecture and data model",
+        "Four metric types counter gauge histogram summary",
+        "Scrape configs and service discovery",
+        "PromQL operators functions and aggregations",
+        "Alertmanager routing inhibition silencing",
+        "Recording rules for pre-computation"
+      ],
+      "resources": [
+        {
+          "label": "Prometheus Documentation",
+          "platform": "Prometheus Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Prometheus Up and Running",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "PromQL Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy Prometheus with node-exporter and a custom application exporter, write PromQL queries for p50 p95 p99 latency, create an alert rule for high error rate, and route alerts to a Slack channel.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "observability-engineer-3",
+      "title": "Grafana Dashboards and Alerting",
+      "order": 3,
+      "techs": [
+        "Grafana",
+        "Dashboards",
+        "Panels",
+        "Grafana Alerting"
+      ],
+      "description": "Build operational dashboards in Grafana with best-practice panel choices, variables, and drill-down links. Configure Grafana-native alerting with multi-datasource support.",
+      "topics": [
+        "Grafana panel types and when to use each",
+        "Dashboard variables and template queries",
+        "Dashboard as code with Grafonnet",
+        "Grafana unified alerting architecture",
+        "Alert contact points and notification policies",
+        "Grafana dashboard best practices and anti-patterns"
+      ],
+      "resources": [
+        {
+          "label": "Grafana Documentation",
+          "platform": "Grafana Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Grafana Fundamentals Course",
+          "platform": "Grafana",
+          "type": "course"
+        },
+        {
+          "label": "Dashboard Design Best Practices",
+          "platform": "Grafana Blog",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a service dashboard with RED method panels using template variables for service and environment, add a drill-down link to traces, define two alert rules with PagerDuty routing.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "observability-engineer-4",
+      "title": "Distributed Tracing",
+      "order": 4,
+      "techs": [
+        "Jaeger",
+        "Tempo",
+        "OpenTelemetry",
+        "Trace Context"
+      ],
+      "description": "Implement distributed tracing to follow requests across microservices. Use OpenTelemetry SDK to instrument applications and store traces in Jaeger or Grafana Tempo.",
+      "topics": [
+        "Distributed tracing concepts spans and traces",
+        "W3C Trace Context propagation",
+        "OpenTelemetry SDK instrumentation",
+        "Auto-instrumentation vs manual spans",
+        "Jaeger architecture and storage backends",
+        "Grafana Tempo for cost-effective trace storage"
+      ],
+      "resources": [
+        {
+          "label": "OpenTelemetry Tracing Documentation",
+          "platform": "OpenTelemetry Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Jaeger Documentation",
+          "platform": "Jaeger Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Grafana Tempo Documentation",
+          "platform": "Grafana Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Instrument a 3-service application with OpenTelemetry, propagate trace context through HTTP headers and message queues, send traces to Grafana Tempo, and correlate a 500ms latency spike to a specific database query.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "observability-engineer-5",
+      "title": "Log Management with Loki",
+      "order": 5,
+      "techs": [
+        "Loki",
+        "Promtail",
+        "LogQL",
+        "Log Aggregation"
+      ],
+      "description": "Aggregate and query application and infrastructure logs using Grafana Loki with Promtail agents. Write LogQL queries for filtering, parsing, and creating metrics from log data.",
+      "topics": [
+        "Loki architecture and chunk storage",
+        "Promtail scrape configs and pipeline stages",
+        "LogQL filter and metric queries",
+        "Log parsing with regex and JSON stage",
+        "Loki labels and cardinality management",
+        "Correlating logs with metrics and traces in Grafana"
+      ],
+      "resources": [
+        {
+          "label": "Grafana Loki Documentation",
+          "platform": "Grafana Docs",
+          "type": "docs"
+        },
+        {
+          "label": "LogQL Reference",
+          "platform": "Grafana Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Loki Getting Started Course",
+          "platform": "Grafana",
+          "type": "course"
+        }
+      ],
+      "challenge": "Deploy Loki with Promtail to collect logs from a Kubernetes cluster, write a LogQL query that extracts HTTP status codes from nginx logs, and create a Grafana panel showing error rate derived from log data.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "observability-engineer-6",
+      "title": "OpenTelemetry Collector and Pipelines",
+      "order": 6,
+      "techs": [
+        "OpenTelemetry Collector",
+        "OTLP",
+        "Processors",
+        "Exporters"
+      ],
+      "description": "Deploy and configure the OpenTelemetry Collector as a central telemetry pipeline for receiving, processing, and exporting metrics, logs, and traces to multiple backends.",
+      "topics": [
+        "OTel Collector architecture receivers processors exporters",
+        "OTLP protocol and transport formats",
+        "Batch and memory limiter processors",
+        "Attribute processing and data enrichment",
+        "Fan-out to multiple backends",
+        "Collector deployment patterns agent vs gateway"
+      ],
+      "resources": [
+        {
+          "label": "OpenTelemetry Collector Documentation",
+          "platform": "OpenTelemetry Docs",
+          "type": "docs"
+        },
+        {
+          "label": "OTel Collector Configuration Guide",
+          "platform": "OpenTelemetry Docs",
+          "type": "docs"
+        },
+        {
+          "label": "OpenTelemetry in Practice Course",
+          "platform": "Linux Foundation",
+          "type": "course"
+        }
+      ],
+      "challenge": "Deploy an OTel Collector that receives traces from applications via OTLP, enriches them with Kubernetes pod metadata using the k8sattributes processor, and fans out to both Tempo and Datadog simultaneously.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "observability-engineer-7",
+      "title": "SLOs and Error Budgets",
+      "order": 7,
+      "techs": [
+        "SLOs",
+        "SLIs",
+        "Error Budgets",
+        "Sloth"
+      ],
+      "description": "Define service level objectives and automate error budget burn rate alerts using Prometheus recording rules and tools like Sloth. Align on-call practices with error budget consumption.",
+      "topics": [
+        "SLI SLO SLA definitions and hierarchy",
+        "Choosing meaningful SLIs for user journeys",
+        "Error budget calculation and policies",
+        "Multi-window multi-burn-rate alerts",
+        "Sloth for SLO as code",
+        "SLO dashboards in Grafana"
+      ],
+      "resources": [
+        {
+          "label": "Google SRE Workbook SLO Chapter",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Sloth Documentation",
+          "platform": "Sloth Docs",
+          "type": "docs"
+        },
+        {
+          "label": "SLO Best Practices Course",
+          "platform": "Linux Foundation",
+          "type": "course"
+        }
+      ],
+      "challenge": "Define SLOs for availability and latency for three services, implement them with Sloth generating Prometheus recording rules, set up 1-hour and 6-hour burn rate alerts, and create an error budget dashboard.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "observability-engineer-8",
+      "title": "Datadog and Commercial Observability",
+      "order": 8,
+      "techs": [
+        "Datadog",
+        "APM",
+        "Datadog Agent",
+        "Monitors"
+      ],
+      "description": "Implement end-to-end observability using Datadog APM, infrastructure monitoring, and log management. Configure Datadog monitors, dashboards, and synthetic tests.",
+      "topics": [
+        "Datadog Agent installation and configuration",
+        "APM tracing and service catalog",
+        "Datadog log management and parsing",
+        "Infrastructure metrics and host maps",
+        "Datadog monitors and composite alerts",
+        "Synthetic monitoring and browser tests"
+      ],
+      "resources": [
+        {
+          "label": "Datadog Documentation",
+          "platform": "Datadog Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Datadog Learning Center",
+          "platform": "Datadog",
+          "type": "course"
+        },
+        {
+          "label": "Datadog Fundamentals Course",
+          "platform": "Datadog",
+          "type": "course"
+        }
+      ],
+      "challenge": "Instrument a containerized application with Datadog APM using auto-instrumentation, create a service map, set up a monitor for p99 latency exceeding 500ms, and write a synthetic test simulating the checkout flow.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "observability-engineer-9",
+      "title": "Observability for Kubernetes",
+      "order": 9,
+      "techs": [
+        "kube-state-metrics",
+        "cAdvisor",
+        "Prometheus Operator",
+        "Kubernetes Events"
+      ],
+      "description": "Build comprehensive Kubernetes observability covering node, pod, and control plane metrics with the kube-prometheus-stack. Create cluster health dashboards and capacity planning views.",
+      "topics": [
+        "kube-state-metrics for Kubernetes object metrics",
+        "cAdvisor container resource usage",
+        "Prometheus Operator CRDs ServiceMonitor PodMonitor",
+        "Kubernetes control plane monitoring",
+        "Cluster capacity planning metrics",
+        "Kubernetes event tracking and alerting"
+      ],
+      "resources": [
+        {
+          "label": "kube-prometheus-stack Documentation",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Kubernetes Monitoring Guide",
+          "platform": "Prometheus Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Grafana Kubernetes Dashboards",
+          "platform": "Grafana Labs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy kube-prometheus-stack, create a capacity planning dashboard showing node CPU and memory headroom, set up alerts for nodes above 80 percent usage, and configure Kubernetes event forwarding to Loki.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "observability-engineer-10",
+      "title": "Production Observability Platform Engineering",
+      "order": 10,
+      "techs": [
+        "Thanos",
+        "Mimir",
+        "Observability as Code",
+        "Multi-Tenant"
+      ],
+      "description": "Design and operate a production-grade multi-tenant observability platform with long-term metric storage using Thanos or Grafana Mimir, and manage the full stack as code.",
+      "topics": [
+        "Thanos architecture for long-term storage",
+        "Grafana Mimir for scalable Prometheus",
+        "Multi-tenant observability with tenant isolation",
+        "Observability as code with Terraform and Jsonnet",
+        "Alertmanager high availability configuration",
+        "Observability platform cost management"
+      ],
+      "resources": [
+        {
+          "label": "Thanos Documentation",
+          "platform": "Thanos Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Grafana Mimir Documentation",
+          "platform": "Grafana Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Observability Engineering Book",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Grafana Loki Tempo Mimir Stack Course",
+          "platform": "Grafana",
+          "type": "course"
+        }
+      ],
+      "challenge": "Deploy a production Grafana Mimir cluster with S3-backed long-term storage, onboard three teams with tenant isolation, manage all dashboards and alerts as code in a Git repository with CI/CD deployment.",
+      "estimatedTime": "4 weeks"
+    }
+  ]
+}

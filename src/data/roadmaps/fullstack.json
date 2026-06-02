@@ -1,0 +1,5384 @@
+{
+  "mern": [
+    {
+      "id": "mern-1",
+      "title": "Web Fundamentals",
+      "order": 1,
+      "techs": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "description": "The foundation of everything web. Learn how browsers render pages, how to structure content with HTML, style it with CSS, and add interactivity with JavaScript.",
+      "topics": [
+        "HTML5 semantic elements & accessibility",
+        "CSS box model, flexbox, grid",
+        "CSS responsive design & media queries",
+        "JavaScript variables, types, functions",
+        "DOM manipulation & events",
+        "Browser DevTools basics"
+      ],
+      "resources": [
+        {
+          "label": "MDN Web Docs — HTML",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "MDN Web Docs — CSS",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "JavaScript.info",
+          "platform": "javascript.info",
+          "type": "docs"
+        },
+        {
+          "label": "The Odin Project — Foundations",
+          "platform": "The Odin Project",
+          "type": "course"
+        },
+        {
+          "label": "CSS Tricks — Flexbox Guide",
+          "platform": "CSS Tricks",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a fully responsive personal portfolio page using only HTML & CSS.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "mern-2",
+      "title": "JavaScript Deep Dive",
+      "order": 2,
+      "techs": [
+        "ES6+",
+        "Async/Await",
+        "Fetch API"
+      ],
+      "description": "Go beyond the basics. Master modern JavaScript features, asynchronous patterns, and how to communicate with external APIs.",
+      "topics": [
+        "ES6+ — destructuring, spread, arrow functions, modules",
+        "Closures, scope & the prototype chain",
+        "Promises & async/await",
+        "Fetch API & error handling",
+        "Array methods — map, filter, reduce",
+        "Event loop & call stack"
+      ],
+      "resources": [
+        {
+          "label": "You Don't Know JS (book series)",
+          "platform": "GitHub / O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "JavaScript.info — Advanced",
+          "platform": "javascript.info",
+          "type": "docs"
+        },
+        {
+          "label": "Fireship — JS in 100 Seconds",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Frontend Masters — JavaScript",
+          "platform": "Frontend Masters",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a weather app that fetches live data from a public API and handles loading/error states.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "mern-3",
+      "title": "React Fundamentals",
+      "order": 3,
+      "techs": [
+        "React",
+        "JSX",
+        "Props",
+        "useState"
+      ],
+      "description": "Learn how to think in components. Build dynamic UIs with React, understand the component lifecycle, and manage local state.",
+      "topics": [
+        "JSX syntax & expressions",
+        "Functional components & props",
+        "useState & useEffect hooks",
+        "Conditional rendering & lists",
+        "Handling forms & controlled inputs",
+        "Component composition patterns"
+      ],
+      "resources": [
+        {
+          "label": "React Official Docs",
+          "platform": "react.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Scrimba — Learn React",
+          "platform": "Scrimba",
+          "type": "course"
+        },
+        {
+          "label": "The Odin Project — React",
+          "platform": "The Odin Project",
+          "type": "course"
+        },
+        {
+          "label": "Codevolution — React Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a task manager app with add, delete, and filter functionality — no backend yet.",
+      "estimatedTime": "3–4 weeks"
+    },
+    {
+      "id": "mern-4",
+      "title": "React Advanced",
+      "order": 4,
+      "techs": [
+        "useContext",
+        "React Router",
+        "Custom Hooks"
+      ],
+      "description": "Level up your React skills with global state management, client-side routing, and reusable hook patterns.",
+      "topics": [
+        "useContext & the Context API",
+        "useReducer for complex state",
+        "Custom hooks & reusability",
+        "React Router v6 — nested routes, params",
+        "Code splitting & lazy loading",
+        "Performance — useMemo, useCallback, React.memo"
+      ],
+      "resources": [
+        {
+          "label": "React Router Official Docs",
+          "platform": "reactrouter.com",
+          "type": "docs"
+        },
+        {
+          "label": "Jack Herrington — Custom Hooks",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Frontend Masters — React Performance",
+          "platform": "Frontend Masters",
+          "type": "course"
+        }
+      ],
+      "challenge": "Extend your task manager with multi-page routing, a global theme toggle, and persisted state.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "mern-5",
+      "title": "Node.js & Express",
+      "order": 5,
+      "techs": [
+        "Node.js",
+        "Express.js",
+        "REST",
+        "Middleware"
+      ],
+      "description": "Move to the server. Build REST APIs with Node.js and Express, understand middleware, and handle routing and error management.",
+      "topics": [
+        "Node.js runtime & module system (CommonJS / ESM)",
+        "Express setup, routing & controllers",
+        "Middleware — logging, validation, error handling",
+        "RESTful API design & HTTP methods",
+        "Environment variables & dotenv",
+        "Working with the file system"
+      ],
+      "resources": [
+        {
+          "label": "Node.js Official Docs",
+          "platform": "nodejs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Express Official Docs",
+          "platform": "expressjs.com",
+          "type": "docs"
+        },
+        {
+          "label": "Traversy Media — Express Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "The Odin Project — NodeJS",
+          "platform": "The Odin Project",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a REST API for a blog — CRUD endpoints for posts, with input validation and error handling.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "mern-6",
+      "title": "MongoDB & Mongoose",
+      "order": 6,
+      "techs": [
+        "MongoDB",
+        "Mongoose",
+        "Atlas"
+      ],
+      "description": "Persist your data. Learn NoSQL database design, connect MongoDB to your Express app, and model data with Mongoose schemas.",
+      "topics": [
+        "NoSQL vs SQL — when to use MongoDB",
+        "MongoDB Atlas setup & cloud hosting",
+        "CRUD operations with the MongoDB driver",
+        "Mongoose schemas, models & validation",
+        "Relationships — embedding vs referencing",
+        "Indexing & query performance basics"
+      ],
+      "resources": [
+        {
+          "label": "MongoDB Official Docs",
+          "platform": "mongodb.com",
+          "type": "docs"
+        },
+        {
+          "label": "Mongoose Official Docs",
+          "platform": "mongoosejs.com",
+          "type": "docs"
+        },
+        {
+          "label": "Web Dev Simplified — MongoDB Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a MongoDB database to your blog API — store posts and authors with a proper schema and relationships.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mern-7",
+      "title": "Authentication & Security",
+      "order": 7,
+      "techs": [
+        "JWT",
+        "bcrypt",
+        "Cookies",
+        "CORS"
+      ],
+      "description": "Secure your app. Implement user registration and login, hash passwords, issue JWTs, and protect routes.",
+      "topics": [
+        "Password hashing with bcrypt",
+        "JWT — signing, verifying, refresh tokens",
+        "Auth middleware & protected routes",
+        "HTTP-only cookies vs localStorage",
+        "CORS configuration",
+        "Input sanitization & basic OWASP awareness"
+      ],
+      "resources": [
+        {
+          "label": "JWT.io — Introduction",
+          "platform": "jwt.io",
+          "type": "docs"
+        },
+        {
+          "label": "Web Dev Simplified — JWT Auth",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "OWASP Top 10",
+          "platform": "owasp.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add full auth to your blog API — register, login, JWT issuance, and protected post creation routes.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mern-8",
+      "title": "Full Stack Integration",
+      "order": 8,
+      "techs": [
+        "Axios",
+        "React Query",
+        "Zustand"
+      ],
+      "description": "Connect your React frontend to your Express backend. Handle API calls, loading states, caching, and global state across the full stack.",
+      "topics": [
+        "Axios setup & interceptors",
+        "React Query — queries, mutations, caching",
+        "Global state with Zustand",
+        "Handling auth tokens on the client",
+        "Proxy config for local dev (Vite / CRA)",
+        "Error boundaries & toast notifications"
+      ],
+      "resources": [
+        {
+          "label": "TanStack Query Docs",
+          "platform": "tanstack.com",
+          "type": "docs"
+        },
+        {
+          "label": "Zustand Docs",
+          "platform": "GitHub / npm",
+          "type": "docs"
+        },
+        {
+          "label": "Jack Herrington — React Query",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a full MERN blog — React frontend that talks to your Express/MongoDB backend with auth, protected routes, and optimistic UI.",
+      "estimatedTime": "3–4 weeks"
+    },
+    {
+      "id": "mern-9",
+      "title": "Testing",
+      "order": 9,
+      "techs": [
+        "Jest",
+        "React Testing Library",
+        "Supertest"
+      ],
+      "description": "Write tests that give you confidence. Cover your React components, API endpoints, and async logic.",
+      "topics": [
+        "Unit testing with Jest",
+        "React Testing Library — render, queries, events",
+        "Testing async code & mocking",
+        "API endpoint testing with Supertest",
+        "Test coverage & CI integration",
+        "Test-driven development basics"
+      ],
+      "resources": [
+        {
+          "label": "Jest Official Docs",
+          "platform": "jestjs.io",
+          "type": "docs"
+        },
+        {
+          "label": "React Testing Library Docs",
+          "platform": "testing-library.com",
+          "type": "docs"
+        },
+        {
+          "label": "Kent C. Dodds — Testing JavaScript",
+          "platform": "testingjavascript.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write unit + integration tests for your blog app — cover components, API routes, and auth flow.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mern-10",
+      "title": "Deployment & DevOps",
+      "order": 10,
+      "techs": [
+        "Vercel",
+        "Railway",
+        "Docker",
+        "GitHub Actions"
+      ],
+      "description": "Ship your app to the world. Deploy your frontend and backend, automate with CI/CD, and containerize with Docker.",
+      "topics": [
+        "Deploying React to Vercel / Netlify",
+        "Deploying Express API to Railway / Render",
+        "Environment variables in production",
+        "Docker basics — Dockerfile, images, containers",
+        "GitHub Actions — CI pipeline on push",
+        "Domain setup & HTTPS basics"
+      ],
+      "resources": [
+        {
+          "label": "Vercel Docs",
+          "platform": "vercel.com",
+          "type": "docs"
+        },
+        {
+          "label": "Railway Docs",
+          "platform": "railway.app",
+          "type": "docs"
+        },
+        {
+          "label": "TechWorld with Nana — Docker for Beginners",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "GitHub Actions Docs",
+          "platform": "GitHub",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy your full MERN blog app — frontend on Vercel, API on Railway, MongoDB on Atlas, with a GitHub Actions CI pipeline.",
+      "estimatedTime": "1–2 weeks"
+    }
+  ],
+  "pern": [
+    {
+      "id": "pern-1",
+      "title": "Web Fundamentals",
+      "order": 1,
+      "techs": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "description": "Every PERN app ships HTML, CSS and JavaScript to the browser. Learn how pages are structured, styled and made interactive before touching any framework.",
+      "topics": [
+        "HTML5 semantic elements & forms",
+        "CSS box model, flexbox & grid",
+        "Responsive design & media queries",
+        "JavaScript types, functions & scope",
+        "DOM manipulation & events",
+        "Browser DevTools & debugging"
+      ],
+      "resources": [
+        {
+          "label": "MDN Web Docs",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "JavaScript.info",
+          "platform": "javascript.info",
+          "type": "docs"
+        },
+        {
+          "label": "The Odin Project — Foundations",
+          "platform": "The Odin Project",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a responsive landing page with a working contact form using only HTML and CSS.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "pern-2",
+      "title": "Modern JavaScript & TypeScript",
+      "order": 2,
+      "techs": [
+        "ES2022+",
+        "TypeScript",
+        "Async/Await"
+      ],
+      "description": "Write the kind of JavaScript a PERN codebase actually uses, then add static types with TypeScript to catch bugs before runtime.",
+      "topics": [
+        "ES modules, destructuring & spread",
+        "Promises, async/await & the event loop",
+        "Array & object methods — map, filter, reduce",
+        "TypeScript types, interfaces & generics",
+        "Type narrowing & utility types",
+        "tsconfig & compiling to JavaScript"
+      ],
+      "resources": [
+        {
+          "label": "TypeScript Handbook",
+          "platform": "typescriptlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "JavaScript.info — Advanced",
+          "platform": "javascript.info",
+          "type": "docs"
+        },
+        {
+          "label": "Total TypeScript",
+          "platform": "Total TypeScript",
+          "type": "course"
+        }
+      ],
+      "challenge": "Convert a small JavaScript utility library to TypeScript with full type coverage and no 'any'.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "pern-3",
+      "title": "React Fundamentals",
+      "order": 3,
+      "techs": [
+        "React",
+        "JSX",
+        "Hooks"
+      ],
+      "description": "Build the 'R' in PERN. Think in components, manage local state, and render dynamic UIs with React and modern hooks.",
+      "topics": [
+        "JSX, props & component composition",
+        "useState & useEffect",
+        "Conditional rendering & lists",
+        "Controlled forms & inputs",
+        "Lifting state & data flow",
+        "Fetching data from an API"
+      ],
+      "resources": [
+        {
+          "label": "React Official Docs",
+          "platform": "react.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Scrimba — Learn React",
+          "platform": "Scrimba",
+          "type": "course"
+        },
+        {
+          "label": "The Odin Project — React",
+          "platform": "The Odin Project",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a task board that fetches, adds, filters and deletes tasks against a mock API.",
+      "estimatedTime": "3–4 weeks"
+    },
+    {
+      "id": "pern-4",
+      "title": "React Advanced & State",
+      "order": 4,
+      "techs": [
+        "React Router",
+        "Zustand",
+        "React Query"
+      ],
+      "description": "Scale your React app with routing, global state and server-state caching — the patterns real production frontends rely on.",
+      "topics": [
+        "React Router — nested routes & params",
+        "Global state with Zustand",
+        "Server state with TanStack Query",
+        "Custom hooks & reusability",
+        "Performance — memo, useMemo, useCallback",
+        "Code splitting & lazy loading"
+      ],
+      "resources": [
+        {
+          "label": "React Router Docs",
+          "platform": "reactrouter.com",
+          "type": "docs"
+        },
+        {
+          "label": "TanStack Query Docs",
+          "platform": "tanstack.com",
+          "type": "docs"
+        },
+        {
+          "label": "Zustand Docs",
+          "platform": "GitHub",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add multi-page routing, a global theme store, and cached server data to your task board.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "pern-5",
+      "title": "Node.js & Express APIs",
+      "order": 5,
+      "techs": [
+        "Node.js",
+        "Express.js",
+        "REST"
+      ],
+      "description": "Build the 'E' and 'N' in PERN. Create RESTful APIs with Express, structure controllers and middleware, and handle errors cleanly.",
+      "topics": [
+        "Node runtime & module system",
+        "Express routing & controllers",
+        "Middleware — logging, validation, errors",
+        "RESTful API design & status codes",
+        "Environment config with dotenv",
+        "Structuring a scalable project"
+      ],
+      "resources": [
+        {
+          "label": "Express Official Docs",
+          "platform": "expressjs.com",
+          "type": "docs"
+        },
+        {
+          "label": "Node.js Official Docs",
+          "platform": "nodejs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Traversy Media — Express Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a REST API for a notes app with CRUD routes, validation, and centralized error handling.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "pern-6",
+      "title": "Relational Databases & SQL",
+      "order": 6,
+      "techs": [
+        "SQL",
+        "Relational Modeling",
+        "Normalization"
+      ],
+      "description": "PERN is relational at its core. Learn to model data into tables and query it fluently with SQL before wiring it to Node.",
+      "topics": [
+        "Tables, rows, columns & data types",
+        "SELECT, WHERE, ORDER BY, LIMIT",
+        "JOINs — inner, left, right, full",
+        "Aggregations & GROUP BY",
+        "Normalization & relationships",
+        "Primary keys, foreign keys & constraints"
+      ],
+      "resources": [
+        {
+          "label": "SQLBolt — Interactive SQL",
+          "platform": "sqlbolt.com",
+          "type": "course"
+        },
+        {
+          "label": "Mode SQL Tutorial",
+          "platform": "mode.com",
+          "type": "docs"
+        },
+        {
+          "label": "PostgreSQL Tutorial",
+          "platform": "postgresqltutorial.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Design a normalized schema for a blog (users, posts, comments, tags) and write the queries to power its pages.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "pern-7",
+      "title": "PostgreSQL in Depth",
+      "order": 7,
+      "techs": [
+        "PostgreSQL",
+        "psql",
+        "Indexing"
+      ],
+      "description": "Go beyond basic SQL into the features that make PostgreSQL powerful — indexing, transactions, JSON and performance.",
+      "topics": [
+        "psql, roles & database administration",
+        "Indexes — B-tree, partial, composite",
+        "Transactions, ACID & isolation levels",
+        "JSONB & array columns",
+        "Views, CTEs & window functions",
+        "EXPLAIN ANALYZE & query tuning"
+      ],
+      "resources": [
+        {
+          "label": "PostgreSQL Official Docs",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "PostgreSQL Tutorial",
+          "platform": "postgresqltutorial.com",
+          "type": "docs"
+        },
+        {
+          "label": "Hussein Nasser — Database Engineering",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add indexes and use EXPLAIN ANALYZE to cut a slow blog query's execution time, then store post metadata in JSONB.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "pern-8",
+      "title": "Data Access Layer",
+      "order": 8,
+      "techs": [
+        "Prisma",
+        "node-postgres",
+        "Migrations"
+      ],
+      "description": "Connect Express to PostgreSQL through a typed data layer. Run migrations, model relations, and avoid SQL injection.",
+      "topics": [
+        "node-postgres (pg) & connection pooling",
+        "Prisma schema, client & relations",
+        "Migrations & seeding",
+        "Parameterized queries & SQL injection",
+        "Transactions across multiple writes",
+        "Repository pattern & separation of concerns"
+      ],
+      "resources": [
+        {
+          "label": "Prisma Docs",
+          "platform": "prisma.io",
+          "type": "docs"
+        },
+        {
+          "label": "node-postgres Docs",
+          "platform": "node-postgres.com",
+          "type": "docs"
+        },
+        {
+          "label": "Prisma — Build a Fullstack App",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Replace raw SQL in your notes API with Prisma, add a migration, and wrap a multi-step write in a transaction.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "pern-9",
+      "title": "Auth, Security & Validation",
+      "order": 9,
+      "techs": [
+        "JWT",
+        "bcrypt",
+        "Zod"
+      ],
+      "description": "Secure the full stack. Implement registration and login, protect routes, validate input, and follow OWASP basics.",
+      "topics": [
+        "Password hashing with bcrypt",
+        "JWT issuance, refresh & protected routes",
+        "HTTP-only cookies vs localStorage",
+        "Input validation with Zod",
+        "CORS, helmet & rate limiting",
+        "OWASP Top 10 awareness"
+      ],
+      "resources": [
+        {
+          "label": "OWASP Top 10",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "Zod Docs",
+          "platform": "zod.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Web Dev Simplified — JWT Auth",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add register/login with hashed passwords and JWTs, validate every request body with Zod, and protect write routes.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "pern-10",
+      "title": "Testing, CI/CD & Deployment",
+      "order": 10,
+      "techs": [
+        "Vitest",
+        "Docker",
+        "GitHub Actions"
+      ],
+      "description": "Ship your PERN app with confidence. Test the stack, containerize it, automate CI, and deploy frontend, API and database.",
+      "topics": [
+        "Unit & integration tests with Vitest",
+        "API testing with Supertest",
+        "Dockerizing Node + PostgreSQL with Compose",
+        "GitHub Actions CI pipeline",
+        "Deploying React to Vercel & API to Railway/Render",
+        "Managed Postgres & connection strings in prod"
+      ],
+      "resources": [
+        {
+          "label": "Vitest Docs",
+          "platform": "vitest.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Docker Docs",
+          "platform": "docs.docker.com",
+          "type": "docs"
+        },
+        {
+          "label": "GitHub Actions Docs",
+          "platform": "GitHub",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Containerize the full app with Docker Compose, add a CI pipeline that runs tests, and deploy it end to end.",
+      "estimatedTime": "1–2 weeks"
+    }
+  ],
+  "t3": [
+    {
+      "id": "t3-1",
+      "title": "TypeScript and Modern JavaScript Foundations",
+      "order": 1,
+      "techs": [
+        "TypeScript",
+        "JavaScript",
+        "Node.js"
+      ],
+      "description": "This layer builds the type-safe JavaScript foundation the entire T3 stack relies on. Strong typing skills make every later tool in the stack easier to use and far less error prone.",
+      "topics": [
+        "ES modules and modern syntax",
+        "Static types, interfaces, and type aliases",
+        "Generics and utility types",
+        "Discriminated unions and narrowing",
+        "tsconfig and compiler options",
+        "Async/await and promises"
+      ],
+      "resources": [
+        {
+          "label": "TypeScript Handbook",
+          "platform": "typescriptlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "MDN JavaScript Guide",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "TypeScript Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a typed command-line task tracker that stores tasks in a JSON file.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "t3-2",
+      "title": "React Fundamentals",
+      "order": 2,
+      "techs": [
+        "React",
+        "TypeScript",
+        "JSX"
+      ],
+      "description": "This layer covers building component-based user interfaces with React and TypeScript. Mastering components, props, and state is essential before adding the rest of the stack.",
+      "topics": [
+        "Components and props",
+        "State with useState",
+        "Effects with useEffect",
+        "Lists, keys, and conditional rendering",
+        "Forms and controlled inputs",
+        "Typing components and hooks"
+      ],
+      "resources": [
+        {
+          "label": "React Documentation",
+          "platform": "react.dev",
+          "type": "docs"
+        },
+        {
+          "label": "The Odin Project React",
+          "platform": "The Odin Project",
+          "type": "course"
+        },
+        {
+          "label": "React Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Convert the task tracker into a React single-page app with add and complete actions.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "t3-3",
+      "title": "Next.js App Router",
+      "order": 3,
+      "techs": [
+        "Next.js",
+        "React",
+        "TypeScript"
+      ],
+      "description": "This layer introduces Next.js and its App Router for routing, layouts, and rendering strategies. It is the framework backbone that ties the T3 client and server together.",
+      "topics": [
+        "File-based routing and layouts",
+        "Server and client components",
+        "Data fetching and caching",
+        "Route handlers",
+        "Metadata and SEO basics",
+        "Loading and error boundaries"
+      ],
+      "resources": [
+        {
+          "label": "Next.js Documentation",
+          "platform": "nextjs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Next.js Learn",
+          "platform": "nextjs.org",
+          "type": "course"
+        },
+        {
+          "label": "Next.js App Router Guide",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Scaffold the task tracker as a Next.js app with separate list and detail routes.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "t3-4",
+      "title": "Styling with Tailwind CSS",
+      "order": 4,
+      "techs": [
+        "Tailwind",
+        "CSS",
+        "Next.js"
+      ],
+      "description": "This layer teaches utility-first styling to build responsive interfaces quickly. Tailwind keeps styles consistent and co-located with components across the project.",
+      "topics": [
+        "Utility classes and the box model",
+        "Responsive breakpoints",
+        "Flexbox and grid utilities",
+        "Theme configuration and tokens",
+        "Dark mode and variants",
+        "Reusable component patterns"
+      ],
+      "resources": [
+        {
+          "label": "Tailwind CSS Docs",
+          "platform": "tailwindcss.com",
+          "type": "docs"
+        },
+        {
+          "label": "Tailwind in 100 Seconds",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "MDN CSS Reference",
+          "platform": "MDN",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Restyle the task tracker with Tailwind into a polished, fully responsive layout.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "t3-5",
+      "title": "End-to-End Type Safety with tRPC",
+      "order": 5,
+      "techs": [
+        "tRPC",
+        "TypeScript",
+        "Next.js"
+      ],
+      "description": "This layer connects client and server with fully typed API calls and no schemas to hand-write. tRPC removes a whole class of bugs by sharing types across the boundary.",
+      "topics": [
+        "Routers and procedures",
+        "Queries and mutations",
+        "Input validation with Zod",
+        "Context and middleware",
+        "Client hooks with React Query",
+        "Error handling and formatting"
+      ],
+      "resources": [
+        {
+          "label": "tRPC Documentation",
+          "platform": "trpc.io",
+          "type": "docs"
+        },
+        {
+          "label": "Create T3 App Docs",
+          "platform": "create.t3.gg",
+          "type": "docs"
+        },
+        {
+          "label": "tRPC Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Replace the task tracker fetch calls with typed tRPC queries and mutations.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "t3-6",
+      "title": "Database Modeling with Prisma",
+      "order": 6,
+      "techs": [
+        "Prisma",
+        "PostgreSQL",
+        "TypeScript"
+      ],
+      "description": "This layer covers defining your data model and querying it with a type-safe ORM. Prisma turns your schema into typed client code that pairs naturally with tRPC.",
+      "topics": [
+        "Prisma schema and data model",
+        "Migrations and the database push",
+        "CRUD queries with the client",
+        "Relations and nested writes",
+        "Filtering, sorting, and pagination",
+        "Seeding and Prisma Studio"
+      ],
+      "resources": [
+        {
+          "label": "Prisma Documentation",
+          "platform": "prisma.io",
+          "type": "docs"
+        },
+        {
+          "label": "Prisma in Next.js Guide",
+          "platform": "prisma.io",
+          "type": "docs"
+        },
+        {
+          "label": "Prisma Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Persist tasks in PostgreSQL through Prisma models wired into your tRPC routers.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "t3-7",
+      "title": "Authentication and Sessions",
+      "order": 7,
+      "techs": [
+        "NextAuth",
+        "Prisma",
+        "Next.js"
+      ],
+      "description": "This layer adds user accounts, login providers, and protected routes. Authentication is required before the app can store data that belongs to specific users.",
+      "topics": [
+        "OAuth and credential providers",
+        "Session and JWT strategies",
+        "Prisma adapter for users",
+        "Protecting tRPC procedures",
+        "Server-side session access",
+        "Role-based authorization"
+      ],
+      "resources": [
+        {
+          "label": "NextAuth.js Docs",
+          "platform": "next-auth.js.org",
+          "type": "docs"
+        },
+        {
+          "label": "Create T3 App Auth",
+          "platform": "create.t3.gg",
+          "type": "docs"
+        },
+        {
+          "label": "NextAuth Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add GitHub login so each user only sees and edits their own tasks.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "t3-8",
+      "title": "Advanced State and Data Fetching",
+      "order": 8,
+      "techs": [
+        "React Query",
+        "tRPC",
+        "React"
+      ],
+      "description": "This layer covers caching, mutations, and optimistic updates for a snappy user experience. Understanding the React Query cache that powers tRPC unlocks reliable real-time-feeling apps.",
+      "topics": [
+        "Query caching and invalidation",
+        "Optimistic updates and rollback",
+        "Infinite queries and pagination",
+        "Prefetching and hydration",
+        "Mutation lifecycle callbacks",
+        "Global state versus server state"
+      ],
+      "resources": [
+        {
+          "label": "TanStack Query Docs",
+          "platform": "tanstack.com",
+          "type": "docs"
+        },
+        {
+          "label": "tRPC React Query Docs",
+          "platform": "trpc.io",
+          "type": "docs"
+        },
+        {
+          "label": "React Query Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add optimistic create and delete with automatic cache invalidation to the task tracker.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "t3-9",
+      "title": "Forms, Validation, and Reusable UI",
+      "order": 9,
+      "techs": [
+        "React Hook Form",
+        "Zod",
+        "Tailwind"
+      ],
+      "description": "This layer builds robust forms with shared validation logic across client and server. Consistent validation and accessible components raise the quality of the whole product.",
+      "topics": [
+        "React Hook Form basics",
+        "Zod schemas shared with tRPC",
+        "Field errors and accessibility",
+        "Component composition patterns",
+        "Toast notifications and feedback",
+        "Reusable input primitives"
+      ],
+      "resources": [
+        {
+          "label": "React Hook Form Docs",
+          "platform": "react-hook-form.com",
+          "type": "docs"
+        },
+        {
+          "label": "Zod Documentation",
+          "platform": "zod.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Forms with Zod Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a validated task editor form that reuses one Zod schema on client and server.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "t3-10",
+      "title": "Testing and Deployment",
+      "order": 10,
+      "techs": [
+        "Vitest",
+        "Playwright",
+        "Vercel"
+      ],
+      "description": "This layer covers automated testing and shipping the app to production. Reliable tests and a smooth deploy pipeline turn your project into a real maintainable product.",
+      "topics": [
+        "Unit testing with Vitest",
+        "Component testing with Testing Library",
+        "End-to-end tests with Playwright",
+        "Environment variables and secrets",
+        "Deploying to Vercel",
+        "Production database and migrations"
+      ],
+      "resources": [
+        {
+          "label": "Vitest Documentation",
+          "platform": "vitest.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Playwright Docs",
+          "platform": "playwright.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Vercel Documentation",
+          "platform": "vercel.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add a test suite and deploy the finished task tracker to Vercel with a hosted database.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "fullstack-engineer": [
+    {
+      "id": "fullstack-engineer-1",
+      "title": "Web Fundamentals",
+      "order": 1,
+      "techs": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "description": "This layer establishes the core building blocks of every web page and app. Solid fundamentals in markup, styling, and scripting are prerequisites for all full stack work.",
+      "topics": [
+        "Semantic HTML structure",
+        "CSS layout with flexbox and grid",
+        "JavaScript variables and functions",
+        "DOM manipulation and events",
+        "Fetch and the network tab",
+        "Responsive design basics"
+      ],
+      "resources": [
+        {
+          "label": "MDN Web Docs",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "Responsive Web Design",
+          "platform": "freeCodeCamp",
+          "type": "course"
+        },
+        {
+          "label": "The Odin Project Foundations",
+          "platform": "The Odin Project",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a static personal portfolio page with responsive layout and a contact section.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "fullstack-engineer-2",
+      "title": "Frontend with React",
+      "order": 2,
+      "techs": [
+        "React",
+        "JavaScript",
+        "Vite"
+      ],
+      "description": "This layer teaches building dynamic interfaces with React components and hooks. React is the foundation for the interactive client of the full stack application.",
+      "topics": [
+        "Components, props, and state",
+        "Hooks and the effect lifecycle",
+        "Client-side routing",
+        "Lifting state and prop drilling",
+        "Fetching data in components",
+        "Forms and controlled inputs"
+      ],
+      "resources": [
+        {
+          "label": "React Documentation",
+          "platform": "react.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Front End Development Libraries",
+          "platform": "freeCodeCamp",
+          "type": "course"
+        },
+        {
+          "label": "Traversy React Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build the frontend of a recipe app that lists and filters recipes from a mock API.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "fullstack-engineer-3",
+      "title": "Backend with Node and Express",
+      "order": 3,
+      "techs": [
+        "Node.js",
+        "Express",
+        "JavaScript"
+      ],
+      "description": "This layer covers building HTTP servers and REST endpoints with Node and Express. The backend is where business logic and data access live for the application.",
+      "topics": [
+        "Node runtime and modules",
+        "Express routing and middleware",
+        "Request and response handling",
+        "REST conventions and status codes",
+        "Environment configuration",
+        "Error handling middleware"
+      ],
+      "resources": [
+        {
+          "label": "Express Documentation",
+          "platform": "expressjs.com",
+          "type": "docs"
+        },
+        {
+          "label": "Node.js Docs",
+          "platform": "nodejs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Node and Express Course",
+          "platform": "freeCodeCamp",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create an Express API that serves recipes and supports create and read endpoints.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "fullstack-engineer-4",
+      "title": "Relational Databases and SQL",
+      "order": 4,
+      "techs": [
+        "SQL",
+        "PostgreSQL",
+        "Node.js"
+      ],
+      "description": "This layer teaches modeling and querying data in a relational database. Persistent storage with SQL is the backbone of most production applications.",
+      "topics": [
+        "Tables, columns, and keys",
+        "SELECT, INSERT, UPDATE, DELETE",
+        "Joins and relationships",
+        "Indexes and constraints",
+        "Normalization basics",
+        "Connecting from Node"
+      ],
+      "resources": [
+        {
+          "label": "PostgreSQL Documentation",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "Relational Database Course",
+          "platform": "freeCodeCamp",
+          "type": "course"
+        },
+        {
+          "label": "SQLBolt",
+          "platform": "sqlbolt.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Move recipe storage into PostgreSQL with tables for recipes and ingredients.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "fullstack-engineer-5",
+      "title": "Connecting Frontend and Backend",
+      "order": 5,
+      "techs": [
+        "React",
+        "Express",
+        "REST"
+      ],
+      "description": "This layer wires the React client to the Express API over HTTP. Understanding the full request lifecycle is what makes you a true full stack engineer.",
+      "topics": [
+        "CORS and cross-origin requests",
+        "Fetching and posting JSON",
+        "Loading and error states",
+        "API client organization",
+        "Proxy setup in development",
+        "Pagination and query params"
+      ],
+      "resources": [
+        {
+          "label": "MDN Fetch API",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "The Odin Project Full Stack",
+          "platform": "The Odin Project",
+          "type": "course"
+        },
+        {
+          "label": "Fireship Full Stack Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Connect the React recipe app to your live API for full create and list flows.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "fullstack-engineer-6",
+      "title": "Authentication and Authorization",
+      "order": 6,
+      "techs": [
+        "JWT",
+        "Express",
+        "bcrypt"
+      ],
+      "description": "This layer adds user accounts, secure login, and protected routes. Authentication is essential before users can own and manage their own data.",
+      "topics": [
+        "Password hashing with bcrypt",
+        "JSON Web Tokens",
+        "Sessions versus tokens",
+        "Protected route middleware",
+        "Role-based access control",
+        "Secure cookie handling"
+      ],
+      "resources": [
+        {
+          "label": "OWASP Auth Cheat Sheet",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "JWT Introduction",
+          "platform": "jwt.io",
+          "type": "docs"
+        },
+        {
+          "label": "Auth in Node Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add signup and login so users can save private recipe collections.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "fullstack-engineer-7",
+      "title": "API Design and Advanced Backend",
+      "order": 7,
+      "techs": [
+        "Express",
+        "SQL",
+        "Node.js"
+      ],
+      "description": "This layer deepens backend skills with validation, layered architecture, and performance. Well-designed APIs scale better and are far easier to maintain.",
+      "topics": [
+        "Input validation and sanitization",
+        "Service and repository layers",
+        "Query optimization and indexing",
+        "Caching strategies",
+        "Rate limiting and security headers",
+        "Logging and monitoring basics"
+      ],
+      "resources": [
+        {
+          "label": "Express Best Practices",
+          "platform": "expressjs.com",
+          "type": "docs"
+        },
+        {
+          "label": "Web Security Academy",
+          "platform": "PortSwigger",
+          "type": "course"
+        },
+        {
+          "label": "REST API Design Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Refactor the recipe API into layered services with validation and rate limiting.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "fullstack-engineer-8",
+      "title": "Containers with Docker",
+      "order": 8,
+      "techs": [
+        "Docker",
+        "Docker Compose",
+        "PostgreSQL"
+      ],
+      "description": "This layer teaches packaging the app and its database into reproducible containers. Docker removes works-on-my-machine problems and prepares the app for deployment.",
+      "topics": [
+        "Images, containers, and layers",
+        "Writing a Dockerfile",
+        "Volumes and networking",
+        "Docker Compose for multi-service apps",
+        "Environment variables in containers",
+        "Building lean production images"
+      ],
+      "resources": [
+        {
+          "label": "Docker Documentation",
+          "platform": "docs.docker.com",
+          "type": "docs"
+        },
+        {
+          "label": "Docker Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Play with Docker",
+          "platform": "play-with-docker.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Containerize the API, frontend, and database and run them with Docker Compose.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "fullstack-engineer-9",
+      "title": "Testing the Full Stack",
+      "order": 9,
+      "techs": [
+        "Jest",
+        "Supertest",
+        "Playwright"
+      ],
+      "description": "This layer covers automated testing across the backend and frontend. A reliable test suite catches regressions and gives confidence to keep shipping.",
+      "topics": [
+        "Unit tests with Jest",
+        "API tests with Supertest",
+        "React component testing",
+        "End-to-end tests with Playwright",
+        "Mocking and test data",
+        "Coverage and continuous testing"
+      ],
+      "resources": [
+        {
+          "label": "Jest Documentation",
+          "platform": "jestjs.io",
+          "type": "docs"
+        },
+        {
+          "label": "Testing Library Docs",
+          "platform": "testing-library.com",
+          "type": "docs"
+        },
+        {
+          "label": "Playwright Docs",
+          "platform": "playwright.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write unit, API, and end-to-end tests covering the recipe app core flows.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "fullstack-engineer-10",
+      "title": "Deployment and CI/CD",
+      "order": 10,
+      "techs": [
+        "GitHub Actions",
+        "Docker",
+        "AWS"
+      ],
+      "description": "This layer covers shipping the containerized app to the cloud with an automated pipeline. Continuous delivery is what turns a project into a maintained production service.",
+      "topics": [
+        "CI pipelines with GitHub Actions",
+        "Building and pushing images",
+        "Deploying to a cloud host",
+        "Managed databases and secrets",
+        "Monitoring and logging in production",
+        "Zero-downtime deploy basics"
+      ],
+      "resources": [
+        {
+          "label": "GitHub Actions Docs",
+          "platform": "docs.github.com",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Getting Started",
+          "platform": "aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "CI/CD Pipeline Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Set up a CI/CD pipeline that builds, tests, and deploys the recipe app to the cloud.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "mean": [
+    {
+      "id": "mean-1",
+      "title": "JavaScript and Web Fundamentals",
+      "order": 1,
+      "techs": [
+        "JavaScript",
+        "HTML",
+        "CSS"
+      ],
+      "description": "This layer grounds you in the JavaScript and web basics that the whole MEAN stack shares. A strong foundation makes both the Angular frontend and Node backend approachable.",
+      "topics": [
+        "Variables, functions, and scope",
+        "Arrays, objects, and iteration",
+        "DOM and events",
+        "Promises and async/await",
+        "ES modules",
+        "Responsive layout basics"
+      ],
+      "resources": [
+        {
+          "label": "MDN JavaScript Guide",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "JavaScript Algorithms and Data Structures",
+          "platform": "freeCodeCamp",
+          "type": "course"
+        },
+        {
+          "label": "JavaScript Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build an interactive checklist page using plain JavaScript and the DOM.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "mean-2",
+      "title": "TypeScript for Angular",
+      "order": 2,
+      "techs": [
+        "TypeScript",
+        "JavaScript",
+        "Node.js"
+      ],
+      "description": "This layer introduces TypeScript, which Angular uses throughout. Understanding types and decorators prepares you for Angular's structured, class-based approach.",
+      "topics": [
+        "Types, interfaces, and enums",
+        "Classes and access modifiers",
+        "Generics",
+        "Decorators",
+        "Modules and imports",
+        "tsconfig essentials"
+      ],
+      "resources": [
+        {
+          "label": "TypeScript Handbook",
+          "platform": "typescriptlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Angular TypeScript Guide",
+          "platform": "angular.dev",
+          "type": "docs"
+        },
+        {
+          "label": "TypeScript Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Rewrite the checklist logic as typed TypeScript classes and interfaces.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "mean-3",
+      "title": "Angular Fundamentals",
+      "order": 3,
+      "techs": [
+        "Angular",
+        "TypeScript",
+        "RxJS"
+      ],
+      "description": "This layer covers building component-driven applications with the Angular framework. Angular provides the structured frontend for the MEAN stack.",
+      "topics": [
+        "Components and templates",
+        "Data binding and directives",
+        "Services and dependency injection",
+        "The Angular router",
+        "Pipes",
+        "Lifecycle hooks"
+      ],
+      "resources": [
+        {
+          "label": "Angular Documentation",
+          "platform": "angular.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Angular Tutorial",
+          "platform": "angular.dev",
+          "type": "course"
+        },
+        {
+          "label": "Angular Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build an Angular task board with components, routing, and a task service.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "mean-4",
+      "title": "Reactive Programming with RxJS",
+      "order": 4,
+      "techs": [
+        "RxJS",
+        "Angular",
+        "TypeScript"
+      ],
+      "description": "This layer teaches observables and reactive data flow that power Angular's HTTP and forms. RxJS lets you handle async streams cleanly across the app.",
+      "topics": [
+        "Observables and observers",
+        "Common operators like map and filter",
+        "Subjects and behavior subjects",
+        "Combining streams",
+        "Unsubscribing and memory leaks",
+        "Async pipe usage"
+      ],
+      "resources": [
+        {
+          "label": "RxJS Documentation",
+          "platform": "rxjs.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Learn RxJS",
+          "platform": "learnrxjs.io",
+          "type": "docs"
+        },
+        {
+          "label": "RxJS Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add live search filtering to the task board using RxJS observables.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "mean-5",
+      "title": "Node and Express Backend",
+      "order": 5,
+      "techs": [
+        "Node.js",
+        "Express",
+        "JavaScript"
+      ],
+      "description": "This layer covers building the API server with Node and Express. Express is the application framework that serves data to the Angular frontend.",
+      "topics": [
+        "Express routing and middleware",
+        "REST endpoint design",
+        "Request parsing and responses",
+        "Environment configuration",
+        "CORS setup",
+        "Error handling"
+      ],
+      "resources": [
+        {
+          "label": "Express Documentation",
+          "platform": "expressjs.com",
+          "type": "docs"
+        },
+        {
+          "label": "Node.js Docs",
+          "platform": "nodejs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Node and Express Course",
+          "platform": "freeCodeCamp",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build an Express API exposing CRUD routes for the task board.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "mean-6",
+      "title": "MongoDB and Mongoose",
+      "order": 6,
+      "techs": [
+        "MongoDB",
+        "Mongoose",
+        "Node.js"
+      ],
+      "description": "This layer teaches storing and querying data in MongoDB through Mongoose models. The document database completes the data layer of the MEAN stack.",
+      "topics": [
+        "Documents and collections",
+        "Mongoose schemas and models",
+        "CRUD operations",
+        "Querying and projections",
+        "References and population",
+        "Indexes and validation"
+      ],
+      "resources": [
+        {
+          "label": "MongoDB Documentation",
+          "platform": "mongodb.com",
+          "type": "docs"
+        },
+        {
+          "label": "Mongoose Docs",
+          "platform": "mongoosejs.com",
+          "type": "docs"
+        },
+        {
+          "label": "MongoDB University",
+          "platform": "MongoDB University",
+          "type": "course"
+        }
+      ],
+      "challenge": "Persist tasks in MongoDB using Mongoose models wired into your Express routes.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "mean-7",
+      "title": "Connecting Angular to the API",
+      "order": 7,
+      "techs": [
+        "Angular",
+        "HttpClient",
+        "Express"
+      ],
+      "description": "This layer wires the Angular client to the Express and MongoDB backend. Connecting the layers makes the application a working end-to-end product.",
+      "topics": [
+        "HttpClient and services",
+        "Observable-based data fetching",
+        "Error handling and retries",
+        "Interceptors",
+        "Environment-based API URLs",
+        "Loading states"
+      ],
+      "resources": [
+        {
+          "label": "Angular HttpClient Guide",
+          "platform": "angular.dev",
+          "type": "docs"
+        },
+        {
+          "label": "MDN HTTP Overview",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "Angular HTTP Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Connect the Angular task board to your live API for full CRUD over HTTP.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "mean-8",
+      "title": "Authentication with JWT",
+      "order": 8,
+      "techs": [
+        "JWT",
+        "Express",
+        "Angular"
+      ],
+      "description": "This layer secures the stack with token-based login and protected routes. Authentication lets users manage their own private task data.",
+      "topics": [
+        "Password hashing",
+        "Issuing JSON Web Tokens",
+        "Express auth middleware",
+        "Angular route guards",
+        "Storing tokens safely",
+        "Refresh and logout flows"
+      ],
+      "resources": [
+        {
+          "label": "JWT Introduction",
+          "platform": "jwt.io",
+          "type": "docs"
+        },
+        {
+          "label": "Angular Route Guards Docs",
+          "platform": "angular.dev",
+          "type": "docs"
+        },
+        {
+          "label": "MEAN Auth Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add JWT login with Angular route guards so users see only their own tasks.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "mean-9",
+      "title": "Advanced Angular and Forms",
+      "order": 9,
+      "techs": [
+        "Angular",
+        "Reactive Forms",
+        "RxJS"
+      ],
+      "description": "This layer covers reactive forms, state management, and performance patterns. These skills make complex Angular apps maintainable and responsive.",
+      "topics": [
+        "Reactive forms and validation",
+        "Form arrays and dynamic fields",
+        "State management patterns",
+        "Lazy loading modules",
+        "Change detection strategies",
+        "Reusable components"
+      ],
+      "resources": [
+        {
+          "label": "Angular Forms Guide",
+          "platform": "angular.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Angular Performance Guide",
+          "platform": "angular.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Reactive Forms Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a validated reactive form for creating and editing tasks with subtasks.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "mean-10",
+      "title": "Testing and Deployment",
+      "order": 10,
+      "techs": [
+        "Jasmine",
+        "Karma",
+        "MongoDB Atlas"
+      ],
+      "description": "This layer covers testing the app and deploying it to production. Tests and a hosted environment turn the project into a real, reliable product.",
+      "topics": [
+        "Unit testing Angular with Jasmine",
+        "Backend tests with Jest",
+        "End-to-end testing",
+        "Building Angular for production",
+        "Deploying Node and Angular",
+        "MongoDB Atlas hosting"
+      ],
+      "resources": [
+        {
+          "label": "Angular Testing Guide",
+          "platform": "angular.dev",
+          "type": "docs"
+        },
+        {
+          "label": "MongoDB Atlas Docs",
+          "platform": "mongodb.com",
+          "type": "docs"
+        },
+        {
+          "label": "Deploy MEAN App Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add tests and deploy the full MEAN task board with a hosted Atlas database.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "jamstack": [
+    {
+      "id": "jamstack-1",
+      "title": "Web Foundations and the JAMstack Model",
+      "order": 1,
+      "techs": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "description": "This layer covers web basics and the core idea of pre-rendered markup with APIs. Understanding the JAMstack philosophy frames every tool you learn later.",
+      "topics": [
+        "Semantic HTML and CSS",
+        "JavaScript essentials",
+        "Static versus dynamic sites",
+        "What JAMstack means",
+        "CDNs and edge delivery",
+        "Working with third-party APIs"
+      ],
+      "resources": [
+        {
+          "label": "MDN Web Docs",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "Jamstack Introduction",
+          "platform": "jamstack.org",
+          "type": "docs"
+        },
+        {
+          "label": "Responsive Web Design",
+          "platform": "freeCodeCamp",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a static landing page that pulls a quote from a public API.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "jamstack-2",
+      "title": "React and Component Thinking",
+      "order": 2,
+      "techs": [
+        "React",
+        "JavaScript",
+        "JSX"
+      ],
+      "description": "This layer teaches building reusable UI with React, the basis for both Next.js and Gatsby. Component thinking is central to modern JAMstack frameworks.",
+      "topics": [
+        "Components and props",
+        "State and hooks",
+        "Conditional rendering and lists",
+        "Composition patterns",
+        "Fetching data in components",
+        "Project structure"
+      ],
+      "resources": [
+        {
+          "label": "React Documentation",
+          "platform": "react.dev",
+          "type": "docs"
+        },
+        {
+          "label": "The Odin Project React",
+          "platform": "The Odin Project",
+          "type": "course"
+        },
+        {
+          "label": "React Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Rebuild the landing page as reusable React components with a quote card.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "jamstack-3",
+      "title": "Static Sites with Next.js",
+      "order": 3,
+      "techs": [
+        "Next.js",
+        "React",
+        "JavaScript"
+      ],
+      "description": "This layer covers static and hybrid rendering with Next.js. Next.js is a leading framework for fast, SEO-friendly JAMstack sites.",
+      "topics": [
+        "Pages and routing",
+        "Static generation",
+        "Incremental static regeneration",
+        "Image and font optimization",
+        "Metadata and SEO",
+        "Data fetching patterns"
+      ],
+      "resources": [
+        {
+          "label": "Next.js Documentation",
+          "platform": "nextjs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Next.js Learn",
+          "platform": "nextjs.org",
+          "type": "course"
+        },
+        {
+          "label": "Next.js Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create a statically generated blog index with a Next.js page per post.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "jamstack-4",
+      "title": "Gatsby and the Data Layer",
+      "order": 4,
+      "techs": [
+        "Gatsby",
+        "GraphQL",
+        "React"
+      ],
+      "description": "This layer introduces Gatsby and its GraphQL data layer for sourcing content. Gatsby excels at building content-rich, image-heavy static sites.",
+      "topics": [
+        "Gatsby pages and templates",
+        "GraphQL data queries",
+        "Source plugins",
+        "Programmatic page creation",
+        "Image processing",
+        "Static query and page query"
+      ],
+      "resources": [
+        {
+          "label": "Gatsby Documentation",
+          "platform": "gatsbyjs.com",
+          "type": "docs"
+        },
+        {
+          "label": "Gatsby Tutorial",
+          "platform": "gatsbyjs.com",
+          "type": "course"
+        },
+        {
+          "label": "Gatsby Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a Gatsby photo gallery sourcing images and metadata through GraphQL.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "jamstack-5",
+      "title": "Headless CMS with Contentful",
+      "order": 5,
+      "techs": [
+        "Contentful",
+        "GraphQL",
+        "Next.js"
+      ],
+      "description": "This layer teaches managing content in a headless CMS and pulling it into your site. Decoupling content from code lets non-developers update the site safely.",
+      "topics": [
+        "Content models and fields",
+        "The Content Delivery API",
+        "Querying with GraphQL",
+        "Rich text rendering",
+        "Assets and media",
+        "Preview versus published content"
+      ],
+      "resources": [
+        {
+          "label": "Contentful Documentation",
+          "platform": "contentful.com",
+          "type": "docs"
+        },
+        {
+          "label": "Contentful and Next.js Guide",
+          "platform": "contentful.com",
+          "type": "docs"
+        },
+        {
+          "label": "Headless CMS Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Move the blog content into Contentful and render posts from the CMS.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "jamstack-6",
+      "title": "APIs and Serverless Functions",
+      "order": 6,
+      "techs": [
+        "Netlify Functions",
+        "JavaScript",
+        "REST"
+      ],
+      "description": "This layer adds dynamic behavior through serverless functions and APIs. Serverless logic provides the A in JAMstack without managing servers.",
+      "topics": [
+        "Serverless function basics",
+        "Handling requests and responses",
+        "Calling external APIs securely",
+        "Environment variables and secrets",
+        "Form submissions",
+        "Rate limits and errors"
+      ],
+      "resources": [
+        {
+          "label": "Netlify Functions Docs",
+          "platform": "netlify.com",
+          "type": "docs"
+        },
+        {
+          "label": "MDN Fetch API",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "Serverless Functions Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a serverless contact form and a newsletter signup function to the blog.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "jamstack-7",
+      "title": "Authentication and Identity",
+      "order": 7,
+      "techs": [
+        "Netlify Identity",
+        "JWT",
+        "JavaScript"
+      ],
+      "description": "This layer adds user accounts and gated content to an otherwise static site. Identity lets you offer members-only areas without a traditional backend.",
+      "topics": [
+        "Identity providers and OAuth",
+        "Login and signup flows",
+        "JWT and session handling",
+        "Protecting routes and content",
+        "Roles and gated pages",
+        "Securing serverless calls"
+      ],
+      "resources": [
+        {
+          "label": "Netlify Identity Docs",
+          "platform": "netlify.com",
+          "type": "docs"
+        },
+        {
+          "label": "Auth0 Documentation",
+          "platform": "auth0.com",
+          "type": "docs"
+        },
+        {
+          "label": "JAMstack Auth Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add member login that unlocks a subscriber-only section of the blog.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "jamstack-8",
+      "title": "Performance and SEO",
+      "order": 8,
+      "techs": [
+        "Lighthouse",
+        "Next.js",
+        "Gatsby"
+      ],
+      "description": "This layer focuses on making JAMstack sites fast and discoverable. Performance and SEO are core selling points of the JAMstack approach.",
+      "topics": [
+        "Core Web Vitals",
+        "Image and asset optimization",
+        "Code splitting and lazy loading",
+        "Structured data and meta tags",
+        "Sitemaps and robots",
+        "Lighthouse auditing"
+      ],
+      "resources": [
+        {
+          "label": "web.dev Performance",
+          "platform": "web.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Google Search Central",
+          "platform": "developers.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "Lighthouse Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Audit and optimize the blog to reach strong Lighthouse scores across the board.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "jamstack-9",
+      "title": "E-commerce and Dynamic Data",
+      "order": 9,
+      "techs": [
+        "Stripe",
+        "Next.js",
+        "Contentful"
+      ],
+      "description": "This layer adds commerce and richer dynamic data to a static foundation. It shows how JAMstack scales from blogs to real transactional sites.",
+      "topics": [
+        "Product catalogs from a CMS",
+        "Cart state management",
+        "Stripe checkout integration",
+        "Serverless payment handling",
+        "Order confirmation flows",
+        "Webhooks basics"
+      ],
+      "resources": [
+        {
+          "label": "Stripe Documentation",
+          "platform": "stripe.com",
+          "type": "docs"
+        },
+        {
+          "label": "Stripe Checkout Guide",
+          "platform": "stripe.com",
+          "type": "docs"
+        },
+        {
+          "label": "Jamstack Commerce Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a small store to the site with CMS products and Stripe checkout.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "jamstack-10",
+      "title": "Deployment and Continuous Delivery",
+      "order": 10,
+      "techs": [
+        "Netlify",
+        "Git",
+        "Lighthouse CI"
+      ],
+      "description": "This layer covers deploying and automating builds for JAMstack sites. Git-based continuous delivery is what makes JAMstack workflows so smooth in production.",
+      "topics": [
+        "Connecting Git to Netlify",
+        "Build commands and environments",
+        "Deploy previews",
+        "Build hooks and CMS triggers",
+        "Custom domains and HTTPS",
+        "Monitoring and rollbacks"
+      ],
+      "resources": [
+        {
+          "label": "Netlify Documentation",
+          "platform": "netlify.com",
+          "type": "docs"
+        },
+        {
+          "label": "Netlify Deploy Guide",
+          "platform": "netlify.com",
+          "type": "docs"
+        },
+        {
+          "label": "Deploy Jamstack Site Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy the full site to Netlify with deploy previews and CMS-triggered builds.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "django-react": [
+    {
+      "id": "django-react-1",
+      "title": "Python Fundamentals",
+      "order": 1,
+      "techs": [
+        "Python",
+        "pip",
+        "venv"
+      ],
+      "description": "This layer establishes core Python skills that Django is built on. A firm grasp of the language makes the framework far easier to learn.",
+      "topics": [
+        "Variables, types, and control flow",
+        "Functions and modules",
+        "Lists, dicts, and comprehensions",
+        "Classes and objects",
+        "Virtual environments and pip",
+        "Error handling"
+      ],
+      "resources": [
+        {
+          "label": "Python Documentation",
+          "platform": "python.org",
+          "type": "docs"
+        },
+        {
+          "label": "Python for Everybody",
+          "platform": "freeCodeCamp",
+          "type": "course"
+        },
+        {
+          "label": "Python Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a Python script that manages a simple address book in memory.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "django-react-2",
+      "title": "Django Basics",
+      "order": 2,
+      "techs": [
+        "Django",
+        "Python",
+        "SQLite"
+      ],
+      "description": "This layer introduces the Django framework, its project structure, and the request cycle. Django provides the batteries-included backend for the stack.",
+      "topics": [
+        "Projects and apps",
+        "URLs, views, and templates",
+        "The request and response cycle",
+        "Settings and configuration",
+        "Static files",
+        "The Django admin"
+      ],
+      "resources": [
+        {
+          "label": "Django Documentation",
+          "platform": "djangoproject.com",
+          "type": "docs"
+        },
+        {
+          "label": "Django Official Tutorial",
+          "platform": "djangoproject.com",
+          "type": "course"
+        },
+        {
+          "label": "Django Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a Django app that lists blog posts rendered from server-side views.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "django-react-3",
+      "title": "Django Models and the ORM",
+      "order": 3,
+      "techs": [
+        "Django",
+        "PostgreSQL",
+        "ORM"
+      ],
+      "description": "This layer covers modeling data and querying it with the Django ORM. The ORM is how Django apps store and retrieve persistent data.",
+      "topics": [
+        "Models and fields",
+        "Migrations",
+        "QuerySets and filtering",
+        "Relationships and foreign keys",
+        "Aggregations",
+        "Connecting PostgreSQL"
+      ],
+      "resources": [
+        {
+          "label": "Django Models Docs",
+          "platform": "djangoproject.com",
+          "type": "docs"
+        },
+        {
+          "label": "PostgreSQL Documentation",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "Django ORM Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Model posts and comments in PostgreSQL and query them through the ORM.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "django-react-4",
+      "title": "Building APIs with Django REST Framework",
+      "order": 4,
+      "techs": [
+        "Django REST Framework",
+        "Django",
+        "JSON"
+      ],
+      "description": "This layer teaches exposing your data as a REST API with DRF. The API is the bridge that lets a React frontend talk to Django.",
+      "topics": [
+        "Serializers",
+        "Views and viewsets",
+        "Routers and URLs",
+        "Pagination and filtering",
+        "Permissions and throttling",
+        "Browsable API"
+      ],
+      "resources": [
+        {
+          "label": "DRF Documentation",
+          "platform": "django-rest-framework.org",
+          "type": "docs"
+        },
+        {
+          "label": "DRF Tutorial",
+          "platform": "django-rest-framework.org",
+          "type": "course"
+        },
+        {
+          "label": "Django REST Framework Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Expose CRUD API endpoints for posts and comments using DRF viewsets.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "django-react-5",
+      "title": "React Frontend",
+      "order": 5,
+      "techs": [
+        "React",
+        "JavaScript",
+        "Vite"
+      ],
+      "description": "This layer covers building the React client that consumes the Django API. React provides the interactive frontend half of the stack.",
+      "topics": [
+        "Components and props",
+        "State and hooks",
+        "Routing",
+        "Fetching from the API",
+        "Forms and inputs",
+        "Project structure"
+      ],
+      "resources": [
+        {
+          "label": "React Documentation",
+          "platform": "react.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Front End Development Libraries",
+          "platform": "freeCodeCamp",
+          "type": "course"
+        },
+        {
+          "label": "React Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a React frontend that lists posts fetched from the Django API.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "django-react-6",
+      "title": "Connecting React and Django",
+      "order": 6,
+      "techs": [
+        "React",
+        "Django REST Framework",
+        "Axios"
+      ],
+      "description": "This layer wires the React client and Django API together over HTTP. Integrating the two halves produces a working full stack application.",
+      "topics": [
+        "CORS configuration",
+        "API client setup with Axios",
+        "Handling loading and errors",
+        "Posting and updating data",
+        "Environment configuration",
+        "Pagination on the client"
+      ],
+      "resources": [
+        {
+          "label": "django-cors-headers Docs",
+          "platform": "github.com",
+          "type": "docs"
+        },
+        {
+          "label": "MDN Fetch API",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "Django React Integration Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Wire the React app to create, edit, and delete posts through the Django API.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "django-react-7",
+      "title": "Authentication with Tokens",
+      "order": 7,
+      "techs": [
+        "JWT",
+        "Django REST Framework",
+        "React"
+      ],
+      "description": "This layer adds secure login and protected endpoints across the stack. Authentication lets users own and manage their own content.",
+      "topics": [
+        "Token and JWT authentication",
+        "Login and registration endpoints",
+        "Protected API views",
+        "Storing tokens in React",
+        "Protected routes on the client",
+        "Refresh and logout"
+      ],
+      "resources": [
+        {
+          "label": "DRF Authentication Docs",
+          "platform": "django-rest-framework.org",
+          "type": "docs"
+        },
+        {
+          "label": "Simple JWT Docs",
+          "platform": "django-rest-framework-simplejwt.readthedocs.io",
+          "type": "docs"
+        },
+        {
+          "label": "Django React Auth Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add JWT login so users can manage only their own posts on both sides.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "django-react-8",
+      "title": "Advanced Django",
+      "order": 8,
+      "techs": [
+        "Django",
+        "Celery",
+        "Redis"
+      ],
+      "description": "This layer covers performance, background tasks, and advanced backend features. These skills prepare a Django app to handle real production workloads.",
+      "topics": [
+        "Query optimization and select_related",
+        "Caching with Redis",
+        "Background jobs with Celery",
+        "Signals",
+        "Custom management commands",
+        "File and media uploads"
+      ],
+      "resources": [
+        {
+          "label": "Django Performance Docs",
+          "platform": "djangoproject.com",
+          "type": "docs"
+        },
+        {
+          "label": "Celery Documentation",
+          "platform": "docs.celeryq.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Django Celery Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add image uploads and a background email task when a new post is published.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "django-react-9",
+      "title": "Advanced React State and UX",
+      "order": 9,
+      "techs": [
+        "React Query",
+        "React",
+        "React Router"
+      ],
+      "description": "This layer improves the frontend with caching, data fetching libraries, and polished UX. Mature client patterns make the app feel fast and reliable.",
+      "topics": [
+        "Server state with React Query",
+        "Caching and invalidation",
+        "Optimistic updates",
+        "Global state patterns",
+        "Form validation",
+        "Accessible UI components"
+      ],
+      "resources": [
+        {
+          "label": "TanStack Query Docs",
+          "platform": "tanstack.com",
+          "type": "docs"
+        },
+        {
+          "label": "React Router Docs",
+          "platform": "reactrouter.com",
+          "type": "docs"
+        },
+        {
+          "label": "React Query Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add React Query caching and optimistic post updates to the frontend.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "django-react-10",
+      "title": "Testing and Deployment",
+      "order": 10,
+      "techs": [
+        "pytest",
+        "Docker",
+        "Gunicorn"
+      ],
+      "description": "This layer covers testing the stack and deploying it to production. Tests and a real deployment pipeline turn the project into a maintainable product.",
+      "topics": [
+        "Django tests with pytest",
+        "React component testing",
+        "Containerizing with Docker",
+        "Serving with Gunicorn and Nginx",
+        "Static files and collectstatic",
+        "Deploying to a cloud host"
+      ],
+      "resources": [
+        {
+          "label": "Django Testing Docs",
+          "platform": "djangoproject.com",
+          "type": "docs"
+        },
+        {
+          "label": "Docker Documentation",
+          "platform": "docs.docker.com",
+          "type": "docs"
+        },
+        {
+          "label": "Deploy Django Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add tests, containerize the app, and deploy the Django and React blog to the cloud.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "rails-dev": [
+    {
+      "id": "rails-dev-1",
+      "title": "Ruby Fundamentals",
+      "order": 1,
+      "techs": [
+        "Ruby",
+        "IRB",
+        "Bundler"
+      ],
+      "description": "This layer builds core Ruby skills that the Rails framework depends on. Comfort with Ruby idioms makes Rails feel natural and productive.",
+      "topics": [
+        "Variables, methods, and blocks",
+        "Arrays, hashes, and enumerables",
+        "Classes, modules, and mixins",
+        "Symbols and ranges",
+        "Gems and Bundler",
+        "Exception handling"
+      ],
+      "resources": [
+        {
+          "label": "Ruby Documentation",
+          "platform": "ruby-lang.org",
+          "type": "docs"
+        },
+        {
+          "label": "The Odin Project Ruby",
+          "platform": "The Odin Project",
+          "type": "course"
+        },
+        {
+          "label": "Ruby Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a Ruby program that manages a small library catalog using classes.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "rails-dev-2",
+      "title": "Rails Basics and MVC",
+      "order": 2,
+      "techs": [
+        "Rails",
+        "Ruby",
+        "SQLite"
+      ],
+      "description": "This layer introduces Rails conventions, the MVC pattern, and the request cycle. Understanding Rails structure is the foundation for everything else.",
+      "topics": [
+        "Rails project structure",
+        "Routes, controllers, and views",
+        "The MVC pattern",
+        "Convention over configuration",
+        "The Rails console",
+        "Generators and scaffolding"
+      ],
+      "resources": [
+        {
+          "label": "Rails Guides",
+          "platform": "guides.rubyonrails.org",
+          "type": "docs"
+        },
+        {
+          "label": "Getting Started with Rails",
+          "platform": "guides.rubyonrails.org",
+          "type": "course"
+        },
+        {
+          "label": "Rails Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Generate a Rails app that lists and shows articles using controllers and views.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "rails-dev-3",
+      "title": "Active Record and Databases",
+      "order": 3,
+      "techs": [
+        "Active Record",
+        "PostgreSQL",
+        "Rails"
+      ],
+      "description": "This layer teaches modeling data and querying it with Active Record. The ORM is how Rails apps persist and relate their data.",
+      "topics": [
+        "Models and migrations",
+        "CRUD with Active Record",
+        "Associations",
+        "Validations",
+        "Query interface and scopes",
+        "Switching to PostgreSQL"
+      ],
+      "resources": [
+        {
+          "label": "Active Record Basics",
+          "platform": "guides.rubyonrails.org",
+          "type": "docs"
+        },
+        {
+          "label": "PostgreSQL Documentation",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "Active Record Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Model articles and comments in PostgreSQL with validations and associations.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "rails-dev-4",
+      "title": "Views, Forms, and Assets",
+      "order": 4,
+      "techs": [
+        "ERB",
+        "Rails",
+        "CSS"
+      ],
+      "description": "This layer covers building the server-rendered frontend with views, forms, and the asset pipeline. Polished views turn a working backend into a usable product.",
+      "topics": [
+        "ERB templates and layouts",
+        "Partials and helpers",
+        "Form helpers and strong params",
+        "Flash messages",
+        "The asset pipeline",
+        "Importing stylesheets"
+      ],
+      "resources": [
+        {
+          "label": "Action View Overview",
+          "platform": "guides.rubyonrails.org",
+          "type": "docs"
+        },
+        {
+          "label": "Rails Form Helpers Guide",
+          "platform": "guides.rubyonrails.org",
+          "type": "docs"
+        },
+        {
+          "label": "Rails Views Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add forms to create and edit articles with validation feedback and styled layouts.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "rails-dev-5",
+      "title": "Authentication and Authorization",
+      "order": 5,
+      "techs": [
+        "Devise",
+        "Pundit",
+        "Rails"
+      ],
+      "description": "This layer adds user accounts and access control to the application. Authentication lets users own and manage their own content securely.",
+      "topics": [
+        "Sessions and cookies",
+        "User signup and login with Devise",
+        "Password security",
+        "Authorization with Pundit",
+        "Roles and permissions",
+        "Protecting controller actions"
+      ],
+      "resources": [
+        {
+          "label": "Devise Documentation",
+          "platform": "github.com",
+          "type": "docs"
+        },
+        {
+          "label": "Rails Security Guide",
+          "platform": "guides.rubyonrails.org",
+          "type": "docs"
+        },
+        {
+          "label": "Devise Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add login so users can only edit and delete the articles they authored.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "rails-dev-6",
+      "title": "Interactivity with Hotwire",
+      "order": 6,
+      "techs": [
+        "Hotwire",
+        "Turbo",
+        "Stimulus"
+      ],
+      "description": "This layer brings modern interactivity to Rails without a heavy JavaScript framework. Hotwire is the Rails-native way to build fast, reactive interfaces.",
+      "topics": [
+        "Turbo Drive and navigation",
+        "Turbo Frames",
+        "Turbo Streams",
+        "Stimulus controllers",
+        "Real-time updates over WebSockets",
+        "Progressive enhancement"
+      ],
+      "resources": [
+        {
+          "label": "Hotwire Documentation",
+          "platform": "hotwired.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Turbo Handbook",
+          "platform": "turbo.hotwired.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Hotwire Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Use Turbo and Stimulus to add inline comment posting without full page reloads.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "rails-dev-7",
+      "title": "Background Jobs and Mailers",
+      "order": 7,
+      "techs": [
+        "Active Job",
+        "Sidekiq",
+        "Action Mailer"
+      ],
+      "description": "This layer covers running work in the background and sending email. Offloading slow tasks keeps the app responsive and reliable.",
+      "topics": [
+        "Active Job basics",
+        "Sidekiq and Redis",
+        "Scheduling and retries",
+        "Action Mailer",
+        "Email templates and previews",
+        "Job error handling"
+      ],
+      "resources": [
+        {
+          "label": "Active Job Basics",
+          "platform": "guides.rubyonrails.org",
+          "type": "docs"
+        },
+        {
+          "label": "Sidekiq Wiki",
+          "platform": "github.com",
+          "type": "docs"
+        },
+        {
+          "label": "Rails Background Jobs Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Send a welcome email through a background job when a user signs up.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "rails-dev-8",
+      "title": "Building APIs with Rails",
+      "order": 8,
+      "techs": [
+        "Rails",
+        "JSON",
+        "JWT"
+      ],
+      "description": "This layer covers exposing your app as a JSON API for clients and integrations. API mode broadens what your Rails backend can power.",
+      "topics": [
+        "API-only controllers",
+        "Serializing JSON responses",
+        "Versioning endpoints",
+        "Token authentication",
+        "CORS and rate limiting",
+        "API documentation"
+      ],
+      "resources": [
+        {
+          "label": "Rails API Guide",
+          "platform": "guides.rubyonrails.org",
+          "type": "docs"
+        },
+        {
+          "label": "Active Model Serializers",
+          "platform": "github.com",
+          "type": "docs"
+        },
+        {
+          "label": "Rails API Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a versioned JSON API exposing articles for an external client.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "rails-dev-9",
+      "title": "Performance and Advanced Patterns",
+      "order": 9,
+      "techs": [
+        "Rails",
+        "Redis",
+        "Active Record"
+      ],
+      "description": "This layer covers optimizing queries, caching, and structuring larger Rails apps. These practices keep a growing codebase fast and maintainable.",
+      "topics": [
+        "N plus one queries and eager loading",
+        "Fragment and Russian doll caching",
+        "Database indexing",
+        "Service objects",
+        "Concerns and refactoring",
+        "Monitoring and profiling"
+      ],
+      "resources": [
+        {
+          "label": "Rails Caching Guide",
+          "platform": "guides.rubyonrails.org",
+          "type": "docs"
+        },
+        {
+          "label": "Active Record Querying Guide",
+          "platform": "guides.rubyonrails.org",
+          "type": "docs"
+        },
+        {
+          "label": "Rails Performance Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Profile the app, fix N plus one queries, and add caching to the article list.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "rails-dev-10",
+      "title": "Testing and Deployment",
+      "order": 10,
+      "techs": [
+        "RSpec",
+        "Capybara",
+        "Docker"
+      ],
+      "description": "This layer covers automated testing and deploying Rails to production. A solid test suite and deploy pipeline make the app reliable and maintainable.",
+      "topics": [
+        "Model and request specs with RSpec",
+        "System tests with Capybara",
+        "Fixtures and factories",
+        "Continuous integration",
+        "Containerizing Rails",
+        "Deploying to a cloud host"
+      ],
+      "resources": [
+        {
+          "label": "Rails Testing Guide",
+          "platform": "guides.rubyonrails.org",
+          "type": "docs"
+        },
+        {
+          "label": "RSpec Documentation",
+          "platform": "rspec.info",
+          "type": "docs"
+        },
+        {
+          "label": "Deploy Rails Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add an RSpec suite and deploy the finished Rails blog to a cloud platform.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "next-fullstack": [
+    {
+      "id": "next-fullstack-1",
+      "title": "TypeScript and React Foundations",
+      "order": 1,
+      "techs": [
+        "TypeScript",
+        "React",
+        "JavaScript"
+      ],
+      "description": "This layer grounds you in TypeScript and React, the core of Next.js development. These skills underpin every feature you build in the framework.",
+      "topics": [
+        "TypeScript types and interfaces",
+        "React components and props",
+        "State and hooks",
+        "Typing props and events",
+        "Composition patterns",
+        "Modern JavaScript syntax"
+      ],
+      "resources": [
+        {
+          "label": "TypeScript Handbook",
+          "platform": "typescriptlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "React Documentation",
+          "platform": "react.dev",
+          "type": "docs"
+        },
+        {
+          "label": "React with TypeScript Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a typed React component library with a button, card, and input.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "next-fullstack-2",
+      "title": "Next.js App Router and Routing",
+      "order": 2,
+      "techs": [
+        "Next.js",
+        "React",
+        "TypeScript"
+      ],
+      "description": "This layer covers routing, layouts, and navigation with the Next.js App Router. The router defines how pages and shared UI are structured.",
+      "topics": [
+        "File-based routing",
+        "Nested layouts",
+        "Dynamic and catch-all routes",
+        "Linking and navigation",
+        "Route groups",
+        "Loading and error files"
+      ],
+      "resources": [
+        {
+          "label": "Next.js Documentation",
+          "platform": "nextjs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Next.js Learn",
+          "platform": "nextjs.org",
+          "type": "course"
+        },
+        {
+          "label": "App Router Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Scaffold a dashboard app with nested layouts and dynamic project routes.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "next-fullstack-3",
+      "title": "Server Components and Rendering",
+      "order": 3,
+      "techs": [
+        "Next.js",
+        "React",
+        "TypeScript"
+      ],
+      "description": "This layer explains server and client components and Next.js rendering strategies. Choosing the right rendering model is key to performance and correctness.",
+      "topics": [
+        "Server versus client components",
+        "Static and dynamic rendering",
+        "Streaming and Suspense",
+        "Caching and revalidation",
+        "Data fetching in server components",
+        "The use client boundary"
+      ],
+      "resources": [
+        {
+          "label": "Next.js Rendering Docs",
+          "platform": "nextjs.org",
+          "type": "docs"
+        },
+        {
+          "label": "React Server Components Docs",
+          "platform": "react.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Server Components Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Render the dashboard data on the server with streaming and Suspense boundaries.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "next-fullstack-4",
+      "title": "Database with Prisma",
+      "order": 4,
+      "techs": [
+        "Prisma",
+        "PostgreSQL",
+        "TypeScript"
+      ],
+      "description": "This layer covers modeling and querying data with Prisma. The database layer gives your Next.js app persistent, typed data.",
+      "topics": [
+        "Prisma schema and models",
+        "Migrations",
+        "Typed CRUD queries",
+        "Relations",
+        "Filtering and pagination",
+        "Seeding and Prisma Studio"
+      ],
+      "resources": [
+        {
+          "label": "Prisma Documentation",
+          "platform": "prisma.io",
+          "type": "docs"
+        },
+        {
+          "label": "Prisma with Next.js Guide",
+          "platform": "prisma.io",
+          "type": "docs"
+        },
+        {
+          "label": "Prisma Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Model projects and tasks in PostgreSQL and query them from server components.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "next-fullstack-5",
+      "title": "Server Actions and Mutations",
+      "order": 5,
+      "techs": [
+        "Next.js",
+        "Prisma",
+        "TypeScript"
+      ],
+      "description": "This layer teaches mutating data with server actions and route handlers. Server actions let you write secure backend logic right alongside your UI.",
+      "topics": [
+        "Server actions basics",
+        "Form submissions",
+        "Revalidation after mutations",
+        "Route handlers for APIs",
+        "Validation with Zod",
+        "Error and pending states"
+      ],
+      "resources": [
+        {
+          "label": "Next.js Server Actions Docs",
+          "platform": "nextjs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Zod Documentation",
+          "platform": "zod.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Server Actions Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add create, edit, and delete tasks using server actions with Zod validation.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "next-fullstack-6",
+      "title": "Authentication",
+      "order": 6,
+      "techs": [
+        "NextAuth",
+        "Prisma",
+        "Next.js"
+      ],
+      "description": "This layer adds login, sessions, and protected routes to the app. Authentication enables per-user data and secure access control.",
+      "topics": [
+        "OAuth and credential providers",
+        "Sessions and JWT",
+        "Prisma adapter",
+        "Protecting server actions and routes",
+        "Reading the session on the server",
+        "Middleware-based protection"
+      ],
+      "resources": [
+        {
+          "label": "NextAuth.js Docs",
+          "platform": "next-auth.js.org",
+          "type": "docs"
+        },
+        {
+          "label": "Next.js Authentication Guide",
+          "platform": "nextjs.org",
+          "type": "docs"
+        },
+        {
+          "label": "NextAuth Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add authentication so each user sees and manages only their own projects.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "next-fullstack-7",
+      "title": "Styling and UI",
+      "order": 7,
+      "techs": [
+        "Tailwind",
+        "shadcn/ui",
+        "Next.js"
+      ],
+      "description": "This layer covers building an accessible, responsive interface with Tailwind and component libraries. A clean UI makes the full stack app feel professional.",
+      "topics": [
+        "Tailwind utility styling",
+        "Responsive and dark mode",
+        "Accessible component primitives",
+        "Reusable design system parts",
+        "Loading skeletons",
+        "Toasts and dialogs"
+      ],
+      "resources": [
+        {
+          "label": "Tailwind CSS Docs",
+          "platform": "tailwindcss.com",
+          "type": "docs"
+        },
+        {
+          "label": "shadcn/ui Documentation",
+          "platform": "ui.shadcn.com",
+          "type": "docs"
+        },
+        {
+          "label": "Tailwind UI Patterns Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a polished, responsive dashboard UI with reusable styled components.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "next-fullstack-8",
+      "title": "Advanced Data and Caching",
+      "order": 8,
+      "techs": [
+        "Next.js",
+        "React",
+        "Prisma"
+      ],
+      "description": "This layer covers Next.js caching layers, revalidation, and optimistic UI. Mastering caching is what makes Next.js apps both fast and correct.",
+      "topics": [
+        "Request and data cache",
+        "Time and tag-based revalidation",
+        "Optimistic updates",
+        "Parallel and sequential fetching",
+        "Edge versus node runtime",
+        "Avoiding stale data"
+      ],
+      "resources": [
+        {
+          "label": "Next.js Caching Docs",
+          "platform": "nextjs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Next.js Data Fetching Docs",
+          "platform": "nextjs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Next.js Caching Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add tag-based revalidation and optimistic task updates to the dashboard.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "next-fullstack-9",
+      "title": "API Routes and Integrations",
+      "order": 9,
+      "techs": [
+        "Next.js",
+        "Stripe",
+        "Webhooks"
+      ],
+      "description": "This layer covers building APIs and integrating third-party services. Real apps depend on external services for payments, email, and more.",
+      "topics": [
+        "Route handlers and REST",
+        "Calling external APIs securely",
+        "Stripe payments",
+        "Webhooks and verification",
+        "File uploads",
+        "Environment secrets"
+      ],
+      "resources": [
+        {
+          "label": "Next.js Route Handlers Docs",
+          "platform": "nextjs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Stripe Documentation",
+          "platform": "stripe.com",
+          "type": "docs"
+        },
+        {
+          "label": "Next.js Stripe Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a paid pro plan with Stripe checkout and a webhook that updates the user.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "next-fullstack-10",
+      "title": "Testing and Deployment to Vercel",
+      "order": 10,
+      "techs": [
+        "Vitest",
+        "Playwright",
+        "Vercel"
+      ],
+      "description": "This layer covers testing the app and deploying it to production on Vercel. Tests and a smooth deploy pipeline make the project a real product.",
+      "topics": [
+        "Unit testing with Vitest",
+        "End-to-end testing with Playwright",
+        "Environment variables in Vercel",
+        "Production database setup",
+        "Preview deployments",
+        "Analytics and monitoring"
+      ],
+      "resources": [
+        {
+          "label": "Vercel Documentation",
+          "platform": "vercel.com",
+          "type": "docs"
+        },
+        {
+          "label": "Playwright Docs",
+          "platform": "playwright.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Deploy Next.js Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add tests and deploy the dashboard to Vercel with a hosted database and previews.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "sveltekit-dev": [
+    {
+      "id": "sveltekit-dev-1",
+      "title": "JavaScript and TypeScript Foundations",
+      "order": 1,
+      "techs": [
+        "JavaScript",
+        "TypeScript",
+        "Vite"
+      ],
+      "description": "This layer grounds you in the language fundamentals Svelte builds on. Comfort with modern JavaScript and types makes Svelte development smooth.",
+      "topics": [
+        "Modern JavaScript syntax",
+        "Modules and imports",
+        "Promises and async/await",
+        "TypeScript types and interfaces",
+        "DOM basics",
+        "The Vite dev server"
+      ],
+      "resources": [
+        {
+          "label": "MDN JavaScript Guide",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "TypeScript Handbook",
+          "platform": "typescriptlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Vite Documentation",
+          "platform": "vitejs.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a small typed utility module with functions to format dates and currency.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "sveltekit-dev-2",
+      "title": "Svelte Fundamentals",
+      "order": 2,
+      "techs": [
+        "Svelte",
+        "JavaScript",
+        "CSS"
+      ],
+      "description": "This layer covers building components with Svelte's reactive, compiler-based model. Svelte is the foundation that SvelteKit extends into a full framework.",
+      "topics": [
+        "Components and props",
+        "Reactivity and runes",
+        "Events and bindings",
+        "Conditional and list rendering",
+        "Scoped styles",
+        "Slots and composition"
+      ],
+      "resources": [
+        {
+          "label": "Svelte Documentation",
+          "platform": "svelte.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Svelte Interactive Tutorial",
+          "platform": "svelte.dev",
+          "type": "course"
+        },
+        {
+          "label": "Svelte Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a reactive counter and a reusable card component in Svelte.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "sveltekit-dev-3",
+      "title": "SvelteKit Routing and Pages",
+      "order": 3,
+      "techs": [
+        "SvelteKit",
+        "Svelte",
+        "Vite"
+      ],
+      "description": "This layer introduces SvelteKit's file-based routing, layouts, and project structure. Routing is the backbone of building full applications with SvelteKit.",
+      "topics": [
+        "File-based routing",
+        "Layouts and nesting",
+        "Dynamic route parameters",
+        "Navigation and links",
+        "Error pages",
+        "Project structure"
+      ],
+      "resources": [
+        {
+          "label": "SvelteKit Documentation",
+          "platform": "kit.svelte.dev",
+          "type": "docs"
+        },
+        {
+          "label": "SvelteKit Tutorial",
+          "platform": "svelte.dev",
+          "type": "course"
+        },
+        {
+          "label": "SvelteKit Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Scaffold a notes app with a list page, dynamic note route, and shared layout.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "sveltekit-dev-4",
+      "title": "Loading Data",
+      "order": 4,
+      "techs": [
+        "SvelteKit",
+        "TypeScript",
+        "Fetch"
+      ],
+      "description": "This layer covers loading data on the server and client with load functions. Proper data loading is essential for fast, SEO-friendly pages.",
+      "topics": [
+        "Page and layout load functions",
+        "Server versus universal load",
+        "Type-safe load data",
+        "Parameters and the fetch helper",
+        "Streaming promises",
+        "Error and redirect handling"
+      ],
+      "resources": [
+        {
+          "label": "SvelteKit Loading Data Docs",
+          "platform": "kit.svelte.dev",
+          "type": "docs"
+        },
+        {
+          "label": "MDN Fetch API",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "SvelteKit Data Loading Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Load notes from an external API using server load functions with typed data.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "sveltekit-dev-5",
+      "title": "Form Actions and Mutations",
+      "order": 5,
+      "techs": [
+        "SvelteKit",
+        "TypeScript",
+        "Zod"
+      ],
+      "description": "This layer teaches handling form submissions and mutations with form actions. Form actions provide progressive, secure server-side data changes.",
+      "topics": [
+        "Form actions",
+        "Progressive enhancement with enhance",
+        "Validation with Zod",
+        "Named actions",
+        "Returning errors and data",
+        "Invalidation after mutations"
+      ],
+      "resources": [
+        {
+          "label": "SvelteKit Form Actions Docs",
+          "platform": "kit.svelte.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Zod Documentation",
+          "platform": "zod.dev",
+          "type": "docs"
+        },
+        {
+          "label": "SvelteKit Forms Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add create, edit, and delete notes using form actions with Zod validation.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "sveltekit-dev-6",
+      "title": "Databases and Persistence",
+      "order": 6,
+      "techs": [
+        "Prisma",
+        "PostgreSQL",
+        "SvelteKit"
+      ],
+      "description": "This layer covers persisting data with a database and ORM in SvelteKit. Real storage turns the notes demo into a durable application.",
+      "topics": [
+        "Prisma schema and models",
+        "Migrations",
+        "Querying in server code",
+        "Relations",
+        "Environment variables",
+        "Seeding data"
+      ],
+      "resources": [
+        {
+          "label": "Prisma Documentation",
+          "platform": "prisma.io",
+          "type": "docs"
+        },
+        {
+          "label": "SvelteKit Database Guide",
+          "platform": "kit.svelte.dev",
+          "type": "docs"
+        },
+        {
+          "label": "SvelteKit Prisma Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Persist notes in PostgreSQL via Prisma inside your server load and actions.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "sveltekit-dev-7",
+      "title": "Authentication and Hooks",
+      "order": 7,
+      "techs": [
+        "SvelteKit",
+        "Lucia",
+        "Cookies"
+      ],
+      "description": "This layer adds sessions, login, and request hooks for protected routes. Authentication enables per-user data and secure access control.",
+      "topics": [
+        "Server hooks and handle",
+        "Sessions and cookies",
+        "Login and signup flows",
+        "Protecting routes",
+        "Accessing the user in load",
+        "Logout and security"
+      ],
+      "resources": [
+        {
+          "label": "SvelteKit Hooks Docs",
+          "platform": "kit.svelte.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Lucia Auth Documentation",
+          "platform": "lucia-auth.com",
+          "type": "docs"
+        },
+        {
+          "label": "SvelteKit Auth Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add login so each user can manage only their own notes using hooks and sessions.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "sveltekit-dev-8",
+      "title": "Advanced UI and Stores",
+      "order": 8,
+      "techs": [
+        "Svelte",
+        "Stores",
+        "Transitions"
+      ],
+      "description": "This layer covers shared state, animations, and polished interactions. Rich UI patterns make the application feel smooth and professional.",
+      "topics": [
+        "Writable and derived stores",
+        "Context API",
+        "Transitions and animations",
+        "Actions and use directives",
+        "Reusable component patterns",
+        "Accessibility"
+      ],
+      "resources": [
+        {
+          "label": "Svelte Stores Docs",
+          "platform": "svelte.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Svelte Transitions Docs",
+          "platform": "svelte.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Svelte Stores Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a theme store and animated transitions when notes are added or removed.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "sveltekit-dev-9",
+      "title": "APIs and Advanced SvelteKit",
+      "order": 9,
+      "techs": [
+        "SvelteKit",
+        "Endpoints",
+        "TypeScript"
+      ],
+      "description": "This layer covers building API endpoints and advanced rendering options. These features let SvelteKit power APIs and integrate with other clients.",
+      "topics": [
+        "API routes with server endpoints",
+        "Request and response helpers",
+        "Prerendering and SSR control",
+        "Page options",
+        "Adapters",
+        "Environment configuration"
+      ],
+      "resources": [
+        {
+          "label": "SvelteKit API Routes Docs",
+          "platform": "kit.svelte.dev",
+          "type": "docs"
+        },
+        {
+          "label": "SvelteKit Page Options Docs",
+          "platform": "kit.svelte.dev",
+          "type": "docs"
+        },
+        {
+          "label": "SvelteKit Endpoints Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a JSON API endpoint that exposes notes for an external client.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "sveltekit-dev-10",
+      "title": "Testing and Deployment",
+      "order": 10,
+      "techs": [
+        "Vitest",
+        "Playwright",
+        "Vercel"
+      ],
+      "description": "This layer covers testing the app and deploying it to production. Tests and an adapter-based deploy make the project a real, reliable product.",
+      "topics": [
+        "Unit tests with Vitest",
+        "End-to-end tests with Playwright",
+        "Choosing an adapter",
+        "Environment variables in production",
+        "Deploying to a host",
+        "Monitoring and previews"
+      ],
+      "resources": [
+        {
+          "label": "Vitest Documentation",
+          "platform": "vitest.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Playwright Docs",
+          "platform": "playwright.dev",
+          "type": "docs"
+        },
+        {
+          "label": "SvelteKit Adapters Docs",
+          "platform": "kit.svelte.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add tests and deploy the SvelteKit notes app with a hosted database.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "nuxt-dev": [
+    {
+      "id": "nuxt-dev-1",
+      "title": "JavaScript and TypeScript Foundations",
+      "order": 1,
+      "techs": [
+        "JavaScript",
+        "TypeScript",
+        "Node.js"
+      ],
+      "description": "This layer grounds you in the language fundamentals Vue and Nuxt build on. Solid JavaScript and types make the rest of the stack approachable.",
+      "topics": [
+        "Modern JavaScript syntax",
+        "Modules and imports",
+        "Promises and async/await",
+        "TypeScript types and interfaces",
+        "DOM basics",
+        "Tooling and package managers"
+      ],
+      "resources": [
+        {
+          "label": "MDN JavaScript Guide",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "TypeScript Handbook",
+          "platform": "typescriptlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "JavaScript Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a typed module of helper functions for formatting and filtering data.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "nuxt-dev-2",
+      "title": "Vue 3 Fundamentals",
+      "order": 2,
+      "techs": [
+        "Vue",
+        "JavaScript",
+        "Vite"
+      ],
+      "description": "This layer covers building reactive components with Vue 3 and the Composition API. Vue is the framework that Nuxt extends into a full stack tool.",
+      "topics": [
+        "Template syntax and directives",
+        "Reactivity with ref and reactive",
+        "Components and props",
+        "Events and v-model",
+        "Computed and watchers",
+        "Composition API and composables"
+      ],
+      "resources": [
+        {
+          "label": "Vue.js Documentation",
+          "platform": "vuejs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Vue.js Tutorial",
+          "platform": "vuejs.org",
+          "type": "course"
+        },
+        {
+          "label": "Vue 3 Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a reactive product list component with search and a reusable card.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "nuxt-dev-3",
+      "title": "Nuxt Basics and Routing",
+      "order": 3,
+      "techs": [
+        "Nuxt",
+        "Vue",
+        "Vite"
+      ],
+      "description": "This layer introduces Nuxt structure, file-based routing, and layouts. Nuxt conventions provide the scaffolding for full applications.",
+      "topics": [
+        "Project structure",
+        "Pages and file-based routing",
+        "Layouts",
+        "Navigation with NuxtLink",
+        "Auto-imports",
+        "App configuration"
+      ],
+      "resources": [
+        {
+          "label": "Nuxt Documentation",
+          "platform": "nuxt.com",
+          "type": "docs"
+        },
+        {
+          "label": "Nuxt Getting Started",
+          "platform": "nuxt.com",
+          "type": "course"
+        },
+        {
+          "label": "Nuxt Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Scaffold a shop app with a products page, dynamic product route, and layout.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "nuxt-dev-4",
+      "title": "Data Fetching and Rendering",
+      "order": 4,
+      "techs": [
+        "Nuxt",
+        "TypeScript",
+        "Composables"
+      ],
+      "description": "This layer covers fetching data and Nuxt's rendering modes. Choosing the right rendering and fetch strategy is key to performance and SEO.",
+      "topics": [
+        "useFetch and useAsyncData",
+        "Server-side rendering",
+        "Static generation",
+        "Caching and refresh",
+        "Error handling",
+        "Head management and SEO"
+      ],
+      "resources": [
+        {
+          "label": "Nuxt Data Fetching Docs",
+          "platform": "nuxt.com",
+          "type": "docs"
+        },
+        {
+          "label": "Nuxt Rendering Modes Docs",
+          "platform": "nuxt.com",
+          "type": "docs"
+        },
+        {
+          "label": "Nuxt Data Fetching Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Fetch products from an external API with useFetch and add page metadata.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "nuxt-dev-5",
+      "title": "Server Engine with Nitro",
+      "order": 5,
+      "techs": [
+        "Nitro",
+        "Nuxt",
+        "TypeScript"
+      ],
+      "description": "This layer covers building backend API routes with the Nitro server engine. Nitro lets Nuxt apps include their own server logic and endpoints.",
+      "topics": [
+        "Server routes and API handlers",
+        "Reading request data",
+        "Server utilities",
+        "Environment and runtime config",
+        "Middleware",
+        "Caching responses"
+      ],
+      "resources": [
+        {
+          "label": "Nuxt Server Directory Docs",
+          "platform": "nuxt.com",
+          "type": "docs"
+        },
+        {
+          "label": "Nitro Documentation",
+          "platform": "nitro.unjs.io",
+          "type": "docs"
+        },
+        {
+          "label": "Nuxt Server Routes Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add Nitro API routes that serve and create products for the shop app.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "nuxt-dev-6",
+      "title": "Databases and Persistence",
+      "order": 6,
+      "techs": [
+        "Prisma",
+        "PostgreSQL",
+        "Nitro"
+      ],
+      "description": "This layer covers persisting data through a database in your Nitro server routes. Real storage turns the demo into a durable application.",
+      "topics": [
+        "Prisma schema and models",
+        "Migrations",
+        "Querying in server routes",
+        "Relations",
+        "Seeding",
+        "Connection management"
+      ],
+      "resources": [
+        {
+          "label": "Prisma Documentation",
+          "platform": "prisma.io",
+          "type": "docs"
+        },
+        {
+          "label": "Nuxt Database Guide",
+          "platform": "nuxt.com",
+          "type": "docs"
+        },
+        {
+          "label": "Nuxt Prisma Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Persist products in PostgreSQL via Prisma inside your Nitro API routes.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "nuxt-dev-7",
+      "title": "State and Authentication",
+      "order": 7,
+      "techs": [
+        "Pinia",
+        "Nuxt",
+        "Cookies"
+      ],
+      "description": "This layer covers shared state with Pinia and adding user authentication. State and auth enable carts, sessions, and per-user data.",
+      "topics": [
+        "State with useState and Pinia",
+        "Server middleware for auth",
+        "Sessions and cookies",
+        "Login and signup",
+        "Protecting routes",
+        "Accessing the user on server and client"
+      ],
+      "resources": [
+        {
+          "label": "Pinia Documentation",
+          "platform": "pinia.vuejs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Nuxt State Management Docs",
+          "platform": "nuxt.com",
+          "type": "docs"
+        },
+        {
+          "label": "Nuxt Auth Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add login and a Pinia-backed cart so users manage their own orders.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "nuxt-dev-8",
+      "title": "Modules and Advanced Patterns",
+      "order": 8,
+      "techs": [
+        "Nuxt",
+        "Modules",
+        "Composables"
+      ],
+      "description": "This layer covers the Nuxt module ecosystem and reusable patterns. Modules and composables speed up development and keep code clean.",
+      "topics": [
+        "Using official modules",
+        "Image and font optimization",
+        "Writing custom composables",
+        "Plugins",
+        "Runtime hooks",
+        "Layers for reuse"
+      ],
+      "resources": [
+        {
+          "label": "Nuxt Modules Docs",
+          "platform": "nuxt.com",
+          "type": "docs"
+        },
+        {
+          "label": "Nuxt Image Docs",
+          "platform": "image.nuxt.com",
+          "type": "docs"
+        },
+        {
+          "label": "Nuxt Modules Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add image optimization and a custom composable for currency formatting.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "nuxt-dev-9",
+      "title": "Performance and SEO",
+      "order": 9,
+      "techs": [
+        "Nuxt",
+        "Nitro",
+        "Lighthouse"
+      ],
+      "description": "This layer focuses on making Nuxt apps fast and discoverable. Performance and SEO are central strengths of server-rendered Nuxt apps.",
+      "topics": [
+        "Core Web Vitals",
+        "Lazy loading and code splitting",
+        "Caching and ISR",
+        "Structured data and meta tags",
+        "Sitemap and robots",
+        "Lighthouse auditing"
+      ],
+      "resources": [
+        {
+          "label": "Nuxt SEO Docs",
+          "platform": "nuxt.com",
+          "type": "docs"
+        },
+        {
+          "label": "web.dev Performance",
+          "platform": "web.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Nuxt Performance Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Audit and optimize the shop for strong Lighthouse and SEO scores.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "nuxt-dev-10",
+      "title": "Testing and Deployment",
+      "order": 10,
+      "techs": [
+        "Vitest",
+        "Playwright",
+        "Vercel"
+      ],
+      "description": "This layer covers testing the app and deploying it to production. Tests and a smooth deploy turn the project into a real, reliable product.",
+      "topics": [
+        "Unit testing with Vitest",
+        "Nuxt test utils",
+        "End-to-end tests with Playwright",
+        "Choosing a deployment preset",
+        "Environment variables in production",
+        "Monitoring and previews"
+      ],
+      "resources": [
+        {
+          "label": "Nuxt Testing Docs",
+          "platform": "nuxt.com",
+          "type": "docs"
+        },
+        {
+          "label": "Nuxt Deployment Docs",
+          "platform": "nuxt.com",
+          "type": "docs"
+        },
+        {
+          "label": "Playwright Docs",
+          "platform": "playwright.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add tests and deploy the Nuxt shop app with a hosted database.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "astro-dev": [
+    {
+      "id": "astro-dev-1",
+      "title": "Web and TypeScript Foundations",
+      "order": 1,
+      "techs": [
+        "HTML",
+        "CSS",
+        "TypeScript"
+      ],
+      "description": "This layer covers the web fundamentals and types that Astro builds on. A strong base in markup, styling, and TypeScript makes Astro intuitive.",
+      "topics": [
+        "Semantic HTML and CSS",
+        "Responsive layout",
+        "JavaScript essentials",
+        "TypeScript types and interfaces",
+        "Modules and tooling",
+        "How the browser renders pages"
+      ],
+      "resources": [
+        {
+          "label": "MDN Web Docs",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "TypeScript Handbook",
+          "platform": "typescriptlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Responsive Web Design",
+          "platform": "freeCodeCamp",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a static styled landing page with semantic, responsive HTML and CSS.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "astro-dev-2",
+      "title": "Astro Basics and Components",
+      "order": 2,
+      "techs": [
+        "Astro",
+        "HTML",
+        "TypeScript"
+      ],
+      "description": "This layer introduces Astro components, the .astro syntax, and the project structure. Understanding Astro's component model is the entry point to the framework.",
+      "topics": [
+        "Astro component syntax",
+        "Component script and template",
+        "Props and slots",
+        "Scoped and global styles",
+        "Importing components",
+        "Project structure"
+      ],
+      "resources": [
+        {
+          "label": "Astro Documentation",
+          "platform": "astro.build",
+          "type": "docs"
+        },
+        {
+          "label": "Astro Build a Blog Tutorial",
+          "platform": "astro.build",
+          "type": "course"
+        },
+        {
+          "label": "Astro Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Rebuild the landing page as reusable Astro components with props and slots.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "astro-dev-3",
+      "title": "Routing, Layouts, and Pages",
+      "order": 3,
+      "techs": [
+        "Astro",
+        "TypeScript",
+        "HTML"
+      ],
+      "description": "This layer covers file-based routing, layouts, and dynamic pages in Astro. Routing and layouts are how you assemble a multi-page site.",
+      "topics": [
+        "File-based routing",
+        "Layout components",
+        "Dynamic routes and params",
+        "getStaticPaths",
+        "Navigation",
+        "404 and error pages"
+      ],
+      "resources": [
+        {
+          "label": "Astro Routing Docs",
+          "platform": "astro.build",
+          "type": "docs"
+        },
+        {
+          "label": "Astro Layouts Docs",
+          "platform": "astro.build",
+          "type": "docs"
+        },
+        {
+          "label": "Astro Routing Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create a multi-page blog with a shared layout and dynamic post routes.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "astro-dev-4",
+      "title": "Content Collections and MDX",
+      "order": 4,
+      "techs": [
+        "MDX",
+        "Astro",
+        "Markdown"
+      ],
+      "description": "This layer covers managing content with collections, Markdown, and MDX. Content collections give Astro a type-safe content layer for blogs and docs.",
+      "topics": [
+        "Markdown and frontmatter",
+        "MDX with components",
+        "Content collections",
+        "Schema validation with Zod",
+        "Querying content",
+        "Rendering content entries"
+      ],
+      "resources": [
+        {
+          "label": "Astro Content Collections Docs",
+          "platform": "astro.build",
+          "type": "docs"
+        },
+        {
+          "label": "MDX Documentation",
+          "platform": "mdxjs.com",
+          "type": "docs"
+        },
+        {
+          "label": "Astro Content Collections Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Move blog posts into a typed content collection authored in MDX.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "astro-dev-5",
+      "title": "Islands and Interactivity",
+      "order": 5,
+      "techs": [
+        "Islands",
+        "Astro",
+        "React"
+      ],
+      "description": "This layer teaches Astro's islands architecture for adding interactive components. Islands let you ship mostly static HTML with targeted client-side interactivity.",
+      "topics": [
+        "Islands architecture",
+        "Framework integrations",
+        "Client directives",
+        "Hydration strategies",
+        "Sharing state between islands",
+        "When to use an island"
+      ],
+      "resources": [
+        {
+          "label": "Astro Islands Docs",
+          "platform": "astro.build",
+          "type": "docs"
+        },
+        {
+          "label": "Astro Framework Components Docs",
+          "platform": "astro.build",
+          "type": "docs"
+        },
+        {
+          "label": "Astro Islands Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add an interactive search island to the blog using a framework component.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "astro-dev-6",
+      "title": "Styling and Design Systems",
+      "order": 6,
+      "techs": [
+        "Tailwind",
+        "Astro",
+        "CSS"
+      ],
+      "description": "This layer covers building a cohesive, responsive design with Tailwind in Astro. Consistent styling makes a content site look polished and trustworthy.",
+      "topics": [
+        "Tailwind integration",
+        "Responsive utilities",
+        "Dark mode",
+        "Reusable styled components",
+        "Typography for content",
+        "Design tokens"
+      ],
+      "resources": [
+        {
+          "label": "Tailwind CSS Docs",
+          "platform": "tailwindcss.com",
+          "type": "docs"
+        },
+        {
+          "label": "Astro Styling Docs",
+          "platform": "astro.build",
+          "type": "docs"
+        },
+        {
+          "label": "Tailwind in Astro Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Apply a Tailwind design system with dark mode across the blog and posts.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "astro-dev-7",
+      "title": "Server Rendering and Endpoints",
+      "order": 7,
+      "techs": [
+        "Astro",
+        "Endpoints",
+        "TypeScript"
+      ],
+      "description": "This layer covers server-side rendering, adapters, and API endpoints. On-demand rendering lets Astro handle dynamic data and form submissions.",
+      "topics": [
+        "Static versus server output",
+        "Adapters and SSR",
+        "API endpoints",
+        "Handling form submissions",
+        "Reading request data",
+        "Environment variables"
+      ],
+      "resources": [
+        {
+          "label": "Astro On-demand Rendering Docs",
+          "platform": "astro.build",
+          "type": "docs"
+        },
+        {
+          "label": "Astro Endpoints Docs",
+          "platform": "astro.build",
+          "type": "docs"
+        },
+        {
+          "label": "Astro SSR Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a server-rendered contact form backed by an Astro API endpoint.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "astro-dev-8",
+      "title": "Data, CMS, and Integrations",
+      "order": 8,
+      "techs": [
+        "Astro",
+        "Contentful",
+        "TypeScript"
+      ],
+      "description": "This layer covers pulling data from APIs and a headless CMS into Astro. External content sources let non-developers manage the site safely.",
+      "topics": [
+        "Fetching from external APIs",
+        "Connecting a headless CMS",
+        "Content loaders",
+        "Image handling and optimization",
+        "Integrations ecosystem",
+        "Environment secrets"
+      ],
+      "resources": [
+        {
+          "label": "Astro Integrations Docs",
+          "platform": "astro.build",
+          "type": "docs"
+        },
+        {
+          "label": "Astro Images Docs",
+          "platform": "astro.build",
+          "type": "docs"
+        },
+        {
+          "label": "Astro CMS Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Source blog posts from a headless CMS with optimized cover images.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "astro-dev-9",
+      "title": "Performance and SEO",
+      "order": 9,
+      "techs": [
+        "Astro",
+        "Lighthouse",
+        "HTML"
+      ],
+      "description": "This layer focuses on Astro's performance strengths and search optimization. Fast, well-indexed sites are the core promise of the Astro framework.",
+      "topics": [
+        "Core Web Vitals",
+        "Minimal JavaScript shipping",
+        "Image and asset optimization",
+        "Meta tags and structured data",
+        "Sitemap and RSS",
+        "Lighthouse auditing"
+      ],
+      "resources": [
+        {
+          "label": "Astro Performance Docs",
+          "platform": "astro.build",
+          "type": "docs"
+        },
+        {
+          "label": "web.dev Performance",
+          "platform": "web.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Astro SEO Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add an RSS feed and sitemap and tune the blog to top Lighthouse scores.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "astro-dev-10",
+      "title": "Testing and Deployment",
+      "order": 10,
+      "techs": [
+        "Vitest",
+        "Playwright",
+        "Netlify"
+      ],
+      "description": "This layer covers testing the site and deploying it to production. Tests and an adapter-based deploy make the project a real, reliable product.",
+      "topics": [
+        "Unit testing with Vitest",
+        "End-to-end tests with Playwright",
+        "Choosing an adapter",
+        "Environment variables in production",
+        "Deploying to a host",
+        "Preview builds and monitoring"
+      ],
+      "resources": [
+        {
+          "label": "Astro Deploy Docs",
+          "platform": "astro.build",
+          "type": "docs"
+        },
+        {
+          "label": "Playwright Docs",
+          "platform": "playwright.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Netlify Documentation",
+          "platform": "netlify.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add tests and deploy the finished Astro blog with preview builds enabled.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "laravel-vue": [
+    {
+      "id": "laravel-vue-1",
+      "title": "PHP Fundamentals",
+      "order": 1,
+      "techs": [
+        "PHP",
+        "Composer",
+        "Web"
+      ],
+      "description": "This layer establishes modern PHP skills that Laravel is built on. A solid language base makes the framework far easier to adopt.",
+      "topics": [
+        "Variables, types, and control flow",
+        "Functions and arrays",
+        "Classes, interfaces, and traits",
+        "Namespaces and autoloading",
+        "Composer and packages",
+        "Error handling"
+      ],
+      "resources": [
+        {
+          "label": "PHP Manual",
+          "platform": "php.net",
+          "type": "docs"
+        },
+        {
+          "label": "PHP The Right Way",
+          "platform": "phptherightway.com",
+          "type": "docs"
+        },
+        {
+          "label": "PHP Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a PHP script that processes a CSV of products into formatted output.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "laravel-vue-2",
+      "title": "Laravel Basics and Routing",
+      "order": 2,
+      "techs": [
+        "Laravel",
+        "PHP",
+        "Blade"
+      ],
+      "description": "This layer introduces Laravel structure, routing, controllers, and views. Understanding the request lifecycle is the foundation for the backend.",
+      "topics": [
+        "Project structure and Artisan",
+        "Routing and controllers",
+        "Blade templates",
+        "Request and response handling",
+        "Configuration and environment",
+        "Middleware basics"
+      ],
+      "resources": [
+        {
+          "label": "Laravel Documentation",
+          "platform": "laravel.com",
+          "type": "docs"
+        },
+        {
+          "label": "Laravel Bootcamp",
+          "platform": "bootcamp.laravel.com",
+          "type": "course"
+        },
+        {
+          "label": "Laravel Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a Laravel app that lists products through routes, controllers, and Blade.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "laravel-vue-3",
+      "title": "Eloquent and Databases",
+      "order": 3,
+      "techs": [
+        "Eloquent",
+        "MySQL",
+        "Laravel"
+      ],
+      "description": "This layer covers modeling and querying data with the Eloquent ORM. Eloquent and migrations give the app reliable persistent storage.",
+      "topics": [
+        "Migrations and schema",
+        "Eloquent models and CRUD",
+        "Relationships",
+        "Query builder",
+        "Seeders and factories",
+        "Connecting MySQL"
+      ],
+      "resources": [
+        {
+          "label": "Eloquent Documentation",
+          "platform": "laravel.com",
+          "type": "docs"
+        },
+        {
+          "label": "MySQL Documentation",
+          "platform": "dev.mysql.com",
+          "type": "docs"
+        },
+        {
+          "label": "Eloquent Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Model products and categories in MySQL with Eloquent relationships and seeders.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "laravel-vue-4",
+      "title": "Validation, Forms, and Auth",
+      "order": 4,
+      "techs": [
+        "Laravel",
+        "Blade",
+        "PHP"
+      ],
+      "description": "This layer covers request validation, forms, and built-in authentication. Secure forms and login are essential to a usable application.",
+      "topics": [
+        "Form requests and validation",
+        "CSRF protection",
+        "Flash messages and old input",
+        "Laravel Breeze authentication",
+        "Authorization with gates and policies",
+        "Sessions"
+      ],
+      "resources": [
+        {
+          "label": "Laravel Validation Docs",
+          "platform": "laravel.com",
+          "type": "docs"
+        },
+        {
+          "label": "Laravel Authentication Docs",
+          "platform": "laravel.com",
+          "type": "docs"
+        },
+        {
+          "label": "Laravel Auth Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add product create and edit forms with validation and login-gated access.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "laravel-vue-5",
+      "title": "Vue 3 Fundamentals",
+      "order": 5,
+      "techs": [
+        "Vue 3",
+        "JavaScript",
+        "Vite"
+      ],
+      "description": "This layer introduces building reactive interfaces with Vue 3 and the Composition API. Vue provides the dynamic frontend half of the stack.",
+      "topics": [
+        "Template syntax and directives",
+        "Reactivity with ref and reactive",
+        "Components and props",
+        "Events and v-model",
+        "Computed and watchers",
+        "Composition API"
+      ],
+      "resources": [
+        {
+          "label": "Vue.js Documentation",
+          "platform": "vuejs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Vue.js Tutorial",
+          "platform": "vuejs.org",
+          "type": "course"
+        },
+        {
+          "label": "Vue 3 Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a Vue product filter component with reactive search and sorting.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "laravel-vue-6",
+      "title": "Building APIs with Laravel",
+      "order": 6,
+      "techs": [
+        "Laravel",
+        "Sanctum",
+        "JSON"
+      ],
+      "description": "This layer covers exposing Laravel as a JSON API for the Vue frontend. A clean API decouples the backend from the client.",
+      "topics": [
+        "API routes and controllers",
+        "API resources and transformers",
+        "Pagination and filtering",
+        "Token auth with Sanctum",
+        "Rate limiting",
+        "Error responses"
+      ],
+      "resources": [
+        {
+          "label": "Laravel API Resources Docs",
+          "platform": "laravel.com",
+          "type": "docs"
+        },
+        {
+          "label": "Laravel Sanctum Docs",
+          "platform": "laravel.com",
+          "type": "docs"
+        },
+        {
+          "label": "Laravel API Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a JSON API for products with Sanctum token authentication.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "laravel-vue-7",
+      "title": "Connecting Vue to Laravel",
+      "order": 7,
+      "techs": [
+        "Vue 3",
+        "Axios",
+        "Pinia"
+      ],
+      "description": "This layer wires the Vue frontend to the Laravel API and manages client state. Integration produces a complete single-page application.",
+      "topics": [
+        "API calls with Axios",
+        "State management with Pinia",
+        "Vue Router",
+        "Handling auth tokens",
+        "Loading and error states",
+        "Protected client routes"
+      ],
+      "resources": [
+        {
+          "label": "Pinia Documentation",
+          "platform": "pinia.vuejs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Vue Router Docs",
+          "platform": "router.vuejs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Vue Laravel SPA Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a Vue SPA that lists and manages products through the Laravel API.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "laravel-vue-8",
+      "title": "Queues, Jobs, and Email",
+      "order": 8,
+      "techs": [
+        "Laravel",
+        "Redis",
+        "Mailable"
+      ],
+      "description": "This layer covers background processing and sending email in Laravel. Offloading slow work keeps the app fast and responsive.",
+      "topics": [
+        "Queues and workers",
+        "Jobs and dispatching",
+        "Scheduling tasks",
+        "Mailables and notifications",
+        "Events and listeners",
+        "Failed job handling"
+      ],
+      "resources": [
+        {
+          "label": "Laravel Queues Docs",
+          "platform": "laravel.com",
+          "type": "docs"
+        },
+        {
+          "label": "Laravel Mail Docs",
+          "platform": "laravel.com",
+          "type": "docs"
+        },
+        {
+          "label": "Laravel Queues Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Send an order confirmation email through a queued job when checkout completes.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "laravel-vue-9",
+      "title": "Advanced Patterns and Performance",
+      "order": 9,
+      "techs": [
+        "Laravel",
+        "Redis",
+        "Eloquent"
+      ],
+      "description": "This layer covers caching, optimization, and clean architecture in larger apps. These practices keep a growing Laravel codebase fast and maintainable.",
+      "topics": [
+        "Eager loading and N plus one",
+        "Caching with Redis",
+        "Service classes and repositories",
+        "Database indexing",
+        "API resource optimization",
+        "Profiling and debugging"
+      ],
+      "resources": [
+        {
+          "label": "Laravel Cache Docs",
+          "platform": "laravel.com",
+          "type": "docs"
+        },
+        {
+          "label": "Laravel Eloquent Performance Docs",
+          "platform": "laravel.com",
+          "type": "docs"
+        },
+        {
+          "label": "Laravel Performance Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Profile and optimize the product API with eager loading and Redis caching.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "laravel-vue-10",
+      "title": "Testing and Deployment",
+      "order": 10,
+      "techs": [
+        "PHPUnit",
+        "Pest",
+        "Docker"
+      ],
+      "description": "This layer covers testing the stack and deploying it to production. Tests and a deploy pipeline turn the project into a maintainable product.",
+      "topics": [
+        "Feature and unit tests with Pest",
+        "Vue component testing",
+        "Database testing",
+        "Containerizing with Docker and Sail",
+        "Building Vue for production",
+        "Deploying to a cloud host"
+      ],
+      "resources": [
+        {
+          "label": "Laravel Testing Docs",
+          "platform": "laravel.com",
+          "type": "docs"
+        },
+        {
+          "label": "Pest Documentation",
+          "platform": "pestphp.com",
+          "type": "docs"
+        },
+        {
+          "label": "Deploy Laravel Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add tests and deploy the Laravel and Vue store to a cloud platform.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "remix-dev": [
+    {
+      "id": "remix-dev-1",
+      "title": "TypeScript and React Foundations",
+      "order": 1,
+      "techs": [
+        "TypeScript",
+        "React",
+        "JavaScript"
+      ],
+      "description": "This layer grounds you in TypeScript and React, the core of Remix development. These skills underpin every route and component you build.",
+      "topics": [
+        "TypeScript types and interfaces",
+        "React components and props",
+        "State and hooks",
+        "Typing props and events",
+        "Composition patterns",
+        "Modern JavaScript syntax"
+      ],
+      "resources": [
+        {
+          "label": "TypeScript Handbook",
+          "platform": "typescriptlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "React Documentation",
+          "platform": "react.dev",
+          "type": "docs"
+        },
+        {
+          "label": "React with TypeScript Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a small typed React component set with a list, item, and form.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "remix-dev-2",
+      "title": "Remix Basics and Routing",
+      "order": 2,
+      "techs": [
+        "Remix",
+        "React",
+        "Vite"
+      ],
+      "description": "This layer introduces Remix structure, nested routing, and the web fundamentals it embraces. Routing is the backbone of every Remix application.",
+      "topics": [
+        "Project structure",
+        "File-based nested routes",
+        "Layouts and the Outlet",
+        "Links and navigation",
+        "Route parameters",
+        "The web platform mindset"
+      ],
+      "resources": [
+        {
+          "label": "Remix Documentation",
+          "platform": "remix.run",
+          "type": "docs"
+        },
+        {
+          "label": "Remix Tutorial",
+          "platform": "remix.run",
+          "type": "course"
+        },
+        {
+          "label": "Remix Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Scaffold a contacts app with nested routes and a shared sidebar layout.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "remix-dev-3",
+      "title": "Loaders and Data Loading",
+      "order": 3,
+      "techs": [
+        "Remix",
+        "TypeScript",
+        "Fetch"
+      ],
+      "description": "This layer covers loading data on the server with loaders. Loaders are how Remix fetches data before rendering each route.",
+      "topics": [
+        "Loader functions",
+        "useLoaderData",
+        "Type-safe loader data",
+        "URL params and search params",
+        "Deferred data and streaming",
+        "Error and not-found handling"
+      ],
+      "resources": [
+        {
+          "label": "Remix Data Loading Docs",
+          "platform": "remix.run",
+          "type": "docs"
+        },
+        {
+          "label": "MDN Fetch API",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "Remix Loaders Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Load contacts from a data source using loaders with typed loader data.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "remix-dev-4",
+      "title": "Actions, Forms, and Mutations",
+      "order": 4,
+      "techs": [
+        "Remix",
+        "TypeScript",
+        "Zod"
+      ],
+      "description": "This layer covers handling form submissions and mutations with actions. Remix uses standard forms and actions for progressive, resilient data changes.",
+      "topics": [
+        "Action functions",
+        "The Form component",
+        "Validation with Zod",
+        "useNavigation pending states",
+        "Optimistic UI",
+        "Revalidation after mutations"
+      ],
+      "resources": [
+        {
+          "label": "Remix Actions Docs",
+          "platform": "remix.run",
+          "type": "docs"
+        },
+        {
+          "label": "Zod Documentation",
+          "platform": "zod.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Remix Forms Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add create, edit, and delete contacts using actions with Zod validation.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "remix-dev-5",
+      "title": "Databases and Persistence",
+      "order": 5,
+      "techs": [
+        "Prisma",
+        "PostgreSQL",
+        "Remix"
+      ],
+      "description": "This layer covers persisting data through a database and ORM in Remix. Real storage turns the contacts demo into a durable application.",
+      "topics": [
+        "Prisma schema and models",
+        "Migrations",
+        "Querying in loaders and actions",
+        "Relations",
+        "Environment variables",
+        "Seeding data"
+      ],
+      "resources": [
+        {
+          "label": "Prisma Documentation",
+          "platform": "prisma.io",
+          "type": "docs"
+        },
+        {
+          "label": "Remix Database Guide",
+          "platform": "remix.run",
+          "type": "docs"
+        },
+        {
+          "label": "Remix Prisma Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Persist contacts in PostgreSQL via Prisma inside your loaders and actions.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "remix-dev-6",
+      "title": "Authentication and Sessions",
+      "order": 6,
+      "techs": [
+        "Remix",
+        "Sessions",
+        "Cookies"
+      ],
+      "description": "This layer adds login, sessions, and protected routes using Remix's session helpers. Authentication enables per-user data and secure access control.",
+      "topics": [
+        "Cookie-based sessions",
+        "Login and signup flows",
+        "Password hashing",
+        "Protecting loaders and actions",
+        "Reading the user in routes",
+        "Logout and security"
+      ],
+      "resources": [
+        {
+          "label": "Remix Sessions Docs",
+          "platform": "remix.run",
+          "type": "docs"
+        },
+        {
+          "label": "Remix Auth Documentation",
+          "platform": "github.com",
+          "type": "docs"
+        },
+        {
+          "label": "Remix Auth Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add login so each user can manage only their own contacts using sessions.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "remix-dev-7",
+      "title": "Error Handling and Resilience",
+      "order": 7,
+      "techs": [
+        "Remix",
+        "React",
+        "TypeScript"
+      ],
+      "description": "This layer covers error boundaries, status handling, and resilient UX. Graceful error handling is a core strength of the Remix model.",
+      "topics": [
+        "Error boundaries",
+        "Catch and thrown responses",
+        "Status codes and headers",
+        "Not-found handling",
+        "Nested error isolation",
+        "Logging errors"
+      ],
+      "resources": [
+        {
+          "label": "Remix Error Handling Docs",
+          "platform": "remix.run",
+          "type": "docs"
+        },
+        {
+          "label": "Remix Routing Docs",
+          "platform": "remix.run",
+          "type": "docs"
+        },
+        {
+          "label": "Remix Error Boundaries Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add route-level error boundaries and friendly not-found pages to the app.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "remix-dev-8",
+      "title": "Advanced Data Patterns",
+      "order": 8,
+      "techs": [
+        "Remix",
+        "React",
+        "TypeScript"
+      ],
+      "description": "This layer covers advanced fetching, caching, and optimistic patterns. These techniques make Remix apps feel fast and stay in sync.",
+      "topics": [
+        "useFetcher for background work",
+        "Optimistic UI patterns",
+        "HTTP caching headers",
+        "Prefetching",
+        "Resource routes",
+        "Pagination and infinite lists"
+      ],
+      "resources": [
+        {
+          "label": "Remix useFetcher Docs",
+          "platform": "remix.run",
+          "type": "docs"
+        },
+        {
+          "label": "Remix Caching Guide",
+          "platform": "remix.run",
+          "type": "docs"
+        },
+        {
+          "label": "Remix Advanced Data Video",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add inline editing with useFetcher and optimistic updates to the contacts list.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "remix-dev-9",
+      "title": "Styling and Performance",
+      "order": 9,
+      "techs": [
+        "Tailwind",
+        "Remix",
+        "Lighthouse"
+      ],
+      "description": "This layer covers building a responsive UI and optimizing performance. A clean, fast interface makes the application feel professional.",
+      "topics": [
+        "Tailwind integration",
+        "Responsive and dark mode",
+        "Reusable styled components",
+        "Asset and link optimization",
+        "Core Web Vitals",
+        "SEO meta and links"
+      ],
+      "resources": [
+        {
+          "label": "Tailwind CSS Docs",
+          "platform": "tailwindcss.com",
+          "type": "docs"
+        },
+        {
+          "label": "Remix Styling Docs",
+          "platform": "remix.run",
+          "type": "docs"
+        },
+        {
+          "label": "web.dev Performance",
+          "platform": "web.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Apply a responsive Tailwind design and tune the app for strong Web Vitals.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "remix-dev-10",
+      "title": "Testing and Deployment",
+      "order": 10,
+      "techs": [
+        "Vitest",
+        "Playwright",
+        "Fly.io"
+      ],
+      "description": "This layer covers testing the app and deploying it to production. Tests and an adapter-based deploy make the project a real, reliable product.",
+      "topics": [
+        "Unit testing with Vitest",
+        "End-to-end tests with Playwright",
+        "Choosing a deployment target",
+        "Environment variables in production",
+        "Production database setup",
+        "Monitoring and previews"
+      ],
+      "resources": [
+        {
+          "label": "Remix Deployment Docs",
+          "platform": "remix.run",
+          "type": "docs"
+        },
+        {
+          "label": "Vitest Documentation",
+          "platform": "vitest.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Playwright Docs",
+          "platform": "playwright.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add tests and deploy the Remix contacts app with a hosted database.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ]
+}

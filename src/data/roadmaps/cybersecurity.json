@@ -1,0 +1,4671 @@
+{
+  "malware-analyst": [
+    {
+      "id": "malware-analyst-1",
+      "title": "Foundations of Malware Analysis",
+      "order": 1,
+      "techs": [
+        "Assembly",
+        "Windows OS",
+        "CMD",
+        "Python"
+      ],
+      "description": "Build foundational knowledge of how malware operates at the OS and CPU level. Understand memory, processes, and file system concepts before touching any sample.",
+      "topics": [
+        "Windows process and memory model",
+        "x86 and x64 assembly basics",
+        "PE file format structure",
+        "Static vs dynamic analysis overview",
+        "Setting up an isolated analysis VM",
+        "Basic Python scripting for automation"
+      ],
+      "resources": [
+        {
+          "label": "Practical Malware Analysis (Sikorski & Honig)",
+          "platform": "No Starch Press",
+          "type": "book"
+        },
+        {
+          "label": "x86 Assembly Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Windows Internals Part 1",
+          "platform": "Microsoft Press",
+          "type": "book"
+        }
+      ],
+      "challenge": "Set up a Windows 10 analysis VM with snapshots and document the PE structure of a benign executable using a hex editor.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "malware-analyst-2",
+      "title": "Static Analysis Techniques",
+      "order": 2,
+      "techs": [
+        "PEiD",
+        "CFF Explorer",
+        "strings",
+        "YARA"
+      ],
+      "description": "Examine malware without executing it by extracting strings, imports, and metadata from binary files. Learn to write YARA rules to classify samples by pattern.",
+      "topics": [
+        "Extracting printable strings from binaries",
+        "Analyzing PE imports and exports",
+        "Identifying packers and obfuscation",
+        "Writing basic YARA signatures",
+        "Hashing and file identification",
+        "Using VirusTotal and threat intel feeds"
+      ],
+      "resources": [
+        {
+          "label": "YARA Documentation",
+          "platform": "VirusTotal GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Malware Analysis Fundamentals",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "Practical Malware Analysis",
+          "platform": "No Starch Press",
+          "type": "book"
+        }
+      ],
+      "challenge": "Write three YARA rules that detect different malware families based on string and import patterns from public samples.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "malware-analyst-3",
+      "title": "Dynamic Analysis and Sandboxing",
+      "order": 3,
+      "techs": [
+        "Cuckoo Sandbox",
+        "Process Monitor",
+        "Wireshark",
+        "Regshot"
+      ],
+      "description": "Execute malware in a controlled environment and observe its behavior in real time. Capture registry changes, network traffic, and file system modifications.",
+      "topics": [
+        "Safe detonation environment setup",
+        "Monitoring file system and registry changes",
+        "Capturing network indicators (IPs, domains)",
+        "Using Cuckoo Sandbox for automated reports",
+        "Identifying C2 communication patterns",
+        "Behavioral report writing"
+      ],
+      "resources": [
+        {
+          "label": "Cuckoo Sandbox Docs",
+          "platform": "Cuckoosandbox.org",
+          "type": "docs"
+        },
+        {
+          "label": "Dynamic Malware Analysis",
+          "platform": "Pluralsight",
+          "type": "course"
+        },
+        {
+          "label": "Malware Traffic Analysis Labs",
+          "platform": "malware-traffic-analysis.net",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Analyze a known ransomware sample in Cuckoo and produce a full behavioral report listing all file, registry, and network indicators.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "malware-analyst-4",
+      "title": "Disassembly with Ghidra",
+      "order": 4,
+      "techs": [
+        "Ghidra",
+        "Assembly",
+        "C pseudo-code",
+        "Namespacing"
+      ],
+      "description": "Use Ghidra to decompile and annotate malware binaries to understand code logic. Practice renaming variables, functions, and structures to build readable pseudo-code.",
+      "topics": [
+        "Ghidra project setup and binary import",
+        "Navigating the disassembly and decompiler views",
+        "Identifying functions and control flow",
+        "Renaming and annotating code",
+        "Working with cross-references",
+        "Identifying anti-disassembly tricks"
+      ],
+      "resources": [
+        {
+          "label": "Ghidra Official Documentation",
+          "platform": "NSA GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Ghidra Book",
+          "platform": "No Starch Press",
+          "type": "book"
+        },
+        {
+          "label": "Reverse Engineering with Ghidra",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Reverse engineer a crackme binary in Ghidra, identify the correct serial key logic, and document each function with descriptive names.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "malware-analyst-5",
+      "title": "Anti-Analysis Techniques",
+      "order": 5,
+      "techs": [
+        "x64dbg",
+        "OllyDbg",
+        "ScyllaHide",
+        "API Monitor"
+      ],
+      "description": "Understand the methods malware uses to detect and evade analysis tools, debuggers, and sandboxes. Learn countermeasures to defeat anti-debugging, anti-VM, and packing tricks.",
+      "topics": [
+        "Debugger detection methods (IsDebuggerPresent, NtQueryInformationProcess)",
+        "VM and sandbox detection artifacts",
+        "Timing-based evasion techniques",
+        "Manual unpacking of packed binaries",
+        "Code obfuscation and control-flow flattening",
+        "Defeating anti-analysis with patches and plugins"
+      ],
+      "resources": [
+        {
+          "label": "The Art of Unpacking",
+          "platform": "OpenRCE",
+          "type": "docs"
+        },
+        {
+          "label": "Practical Reverse Engineering",
+          "platform": "Wiley",
+          "type": "book"
+        },
+        {
+          "label": "x64dbg Plugin Development",
+          "platform": "x64dbg.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Manually unpack a UPX-packed sample and a custom-packed sample, restoring the original IAT and producing a runnable unpacked binary.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "malware-analyst-6",
+      "title": "Rootkits and Kernel-Mode Malware",
+      "order": 6,
+      "techs": [
+        "WinDbg",
+        "Kernel Debugging",
+        "DKOM",
+        "Driver analysis"
+      ],
+      "description": "Investigate malware that operates at the kernel level to hide processes, files, and network connections. Learn to use kernel debuggers and live memory analysis to expose rootkit behavior.",
+      "topics": [
+        "Windows kernel architecture overview",
+        "Kernel driver structure and signing",
+        "Direct Kernel Object Manipulation (DKOM)",
+        "Hooking SSDT and IRP handlers",
+        "Detecting hidden processes with memory analysis",
+        "Analyzing rootkit samples with WinDbg"
+      ],
+      "resources": [
+        {
+          "label": "Windows Kernel Programming",
+          "platform": "Leanpub",
+          "type": "book"
+        },
+        {
+          "label": "WinDbg Kernel Debugging Docs",
+          "platform": "Microsoft Learn",
+          "type": "docs"
+        },
+        {
+          "label": "Rootkit Arsenal",
+          "platform": "Jones and Bartlett",
+          "type": "book"
+        }
+      ],
+      "challenge": "Analyze a publicly available rootkit sample in a kernel debugging session and identify all SSDT hooks and hidden objects it installs.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "malware-analyst-7",
+      "title": "Scripting and Automation for Analysis",
+      "order": 7,
+      "techs": [
+        "Python",
+        "Ghidra Scripting",
+        "YARA",
+        "pefile"
+      ],
+      "description": "Automate repetitive analysis tasks using Python and Ghidra scripts to scale sample processing. Build tooling to extract IOCs, rename functions, and classify samples in bulk.",
+      "topics": [
+        "Python pefile library for PE parsing",
+        "Automating IOC extraction scripts",
+        "Writing Ghidra Python analysis scripts",
+        "Bulk YARA scanning pipelines",
+        "Integrating with VirusTotal API",
+        "Building a simple analysis pipeline"
+      ],
+      "resources": [
+        {
+          "label": "pefile Documentation",
+          "platform": "PyPI",
+          "type": "docs"
+        },
+        {
+          "label": "Automating Malware Analysis",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Ghidra Scripting API",
+          "platform": "NSA GitHub",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write a Python script that accepts a directory of PE samples, extracts all imports and strings, scores them with YARA, and outputs a CSV report.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "malware-analyst-8",
+      "title": "Malware Families and Campaign Analysis",
+      "order": 8,
+      "techs": [
+        "MITRE ATT&CK",
+        "Threat Intel",
+        "TTP mapping",
+        "Maltego"
+      ],
+      "description": "Study real-world malware families - ransomware, RATs, banking trojans, and wipers - to understand campaign tactics and threat actor patterns. Map observed behaviors to MITRE ATT&CK techniques.",
+      "topics": [
+        "Anatomy of major malware families",
+        "Mapping behaviors to ATT&CK techniques",
+        "Tracking threat actor TTPs",
+        "Pivoting on infrastructure indicators",
+        "Writing threat intelligence reports",
+        "Using open CTI platforms and feeds"
+      ],
+      "resources": [
+        {
+          "label": "MITRE ATT&CK Framework",
+          "platform": "attack.mitre.org",
+          "type": "docs"
+        },
+        {
+          "label": "Threat Intelligence and Hunting",
+          "platform": "SANS",
+          "type": "course"
+        },
+        {
+          "label": "The Malware Analyst Cookbook",
+          "platform": "Wiley",
+          "type": "book"
+        }
+      ],
+      "challenge": "Reverse engineer a recent ransomware sample, map all observed behaviors to ATT&CK, and write a two-page threat intelligence report.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "malware-analyst-9",
+      "title": "Memory Forensics and Advanced Evasion",
+      "order": 9,
+      "techs": [
+        "Volatility",
+        "Process Herpaderping",
+        "Hollowing",
+        "Injection"
+      ],
+      "description": "Analyze in-memory malware that leaves minimal disk artifacts and uses advanced injection techniques. Use Volatility to extract and reconstruct malicious code from memory dumps.",
+      "topics": [
+        "Process injection variants (hollowing, herpaderping, doppelganging)",
+        "Reflective DLL loading",
+        "Fileless malware execution chains",
+        "Volatility plugins for injection detection",
+        "Reconstructing injected shellcode",
+        "Hunting evasive malware in memory"
+      ],
+      "resources": [
+        {
+          "label": "The Art of Memory Forensics",
+          "platform": "Wiley",
+          "type": "book"
+        },
+        {
+          "label": "Volatility Framework Docs",
+          "platform": "volatilityfoundation.org",
+          "type": "docs"
+        },
+        {
+          "label": "Advanced Malware Analysis",
+          "platform": "Offensive Security",
+          "type": "course"
+        }
+      ],
+      "challenge": "Obtain a memory image containing a fileless implant, use Volatility to locate and extract the injected shellcode, and analyze it in Ghidra.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "malware-analyst-10",
+      "title": "Production Malware Analysis Operations",
+      "order": 10,
+      "techs": [
+        "CAPE Sandbox",
+        "OpenCTI",
+        "MISP",
+        "Detection Engineering"
+      ],
+      "description": "Operate as a professional malware analyst inside a SOC or threat intelligence team, managing sample intake, detection development, and intelligence sharing. Build and maintain an automated analysis pipeline integrated with threat intel platforms.",
+      "topics": [
+        "Designing a malware analysis lab at scale",
+        "Integrating CAPE with MISP and OpenCTI",
+        "Detection rule development from analysis output",
+        "Sample triage and priority queue management",
+        "Sharing intelligence in STIX/TAXII format",
+        "Collaborating with incident response teams",
+        "Metrics and KPIs for analysis programs"
+      ],
+      "resources": [
+        {
+          "label": "MISP Project Documentation",
+          "platform": "misp-project.org",
+          "type": "docs"
+        },
+        {
+          "label": "CAPE Sandbox Documentation",
+          "platform": "capesandbox.com",
+          "type": "docs"
+        },
+        {
+          "label": "Detection Engineering with Sigma",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build an end-to-end pipeline that ingests samples from email, detonates them in CAPE, pushes IOCs to MISP, and auto-generates Sigma detection rules.",
+      "estimatedTime": "6 weeks"
+    }
+  ],
+  "grc-analyst": [
+    {
+      "id": "grc-analyst-1",
+      "title": "Introduction to GRC and Compliance",
+      "order": 1,
+      "techs": [
+        "GRC concepts",
+        "Risk basics",
+        "Compliance frameworks",
+        "Documentation"
+      ],
+      "description": "Understand the three pillars of GRC - Governance, Risk, and Compliance - and why organizations invest in structured programs. Learn how regulations and voluntary frameworks shape security programs.",
+      "topics": [
+        "What is GRC and why it matters",
+        "Governance structures and accountability",
+        "Compliance vs security mindset",
+        "Overview of major frameworks (ISO, NIST, SOC 2)",
+        "Regulatory landscape (GDPR, HIPAA, PCI-DSS)",
+        "GRC analyst career paths and responsibilities"
+      ],
+      "resources": [
+        {
+          "label": "ISACA GRC Fundamentals",
+          "platform": "ISACA",
+          "type": "course"
+        },
+        {
+          "label": "NIST Cybersecurity Framework Overview",
+          "platform": "NIST.gov",
+          "type": "docs"
+        },
+        {
+          "label": "IT Governance: An International Guide",
+          "platform": "Kogan Page",
+          "type": "book"
+        }
+      ],
+      "challenge": "Research one real-world data breach, identify which compliance failures contributed to it, and map them to a specific framework control.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "grc-analyst-2",
+      "title": "NIST Cybersecurity Framework",
+      "order": 2,
+      "techs": [
+        "NIST CSF",
+        "NIST SP 800-53",
+        "Control mapping",
+        "Gap analysis"
+      ],
+      "description": "Deep-dive into the NIST Cybersecurity Framework and its five core functions - Identify, Protect, Detect, Respond, Recover. Apply the framework to assess an organization against target maturity profiles.",
+      "topics": [
+        "CSF Core, Tiers, and Profiles",
+        "NIST SP 800-53 control catalog",
+        "Conducting a CSF-based gap assessment",
+        "Mapping controls to business outcomes",
+        "Creating a Current and Target Profile",
+        "Prioritizing roadmap items by risk"
+      ],
+      "resources": [
+        {
+          "label": "NIST CSF 2.0 Documentation",
+          "platform": "NIST.gov",
+          "type": "docs"
+        },
+        {
+          "label": "NIST 800-53 Rev 5 Control Catalog",
+          "platform": "NIST.gov",
+          "type": "docs"
+        },
+        {
+          "label": "Mastering NIST Cybersecurity Framework",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Perform a CSF gap assessment on a fictional mid-size company scenario and produce a prioritized remediation roadmap for the top 10 control gaps.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "grc-analyst-3",
+      "title": "ISO 27001 Information Security Management",
+      "order": 3,
+      "techs": [
+        "ISO 27001",
+        "ISMS",
+        "Annex A controls",
+        "Internal audit"
+      ],
+      "description": "Understand ISO 27001 as an internationally recognized ISMS standard and what achieving certification requires. Learn to scope an ISMS, perform gap analysis, and prepare documentation for certification audits.",
+      "topics": [
+        "ISO 27001 structure and clause requirements",
+        "Defining ISMS scope and boundaries",
+        "Risk assessment and Statement of Applicability",
+        "Annex A control selection and justification",
+        "ISMS documentation requirements",
+        "Internal audit process and corrective actions"
+      ],
+      "resources": [
+        {
+          "label": "ISO 27001 Standard (official text)",
+          "platform": "ISO.org",
+          "type": "docs"
+        },
+        {
+          "label": "ISO 27001 Implementation Guide",
+          "platform": "IT Governance Ltd",
+          "type": "book"
+        },
+        {
+          "label": "ISO 27001 Lead Implementer Course",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write a draft Statement of Applicability for a fictional SaaS company, justifying inclusion or exclusion of all Annex A controls with risk rationale.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "grc-analyst-4",
+      "title": "SOC 2 Trust Services Criteria",
+      "order": 4,
+      "techs": [
+        "SOC 2 Type I",
+        "SOC 2 Type II",
+        "Trust Services Criteria",
+        "Evidence collection"
+      ],
+      "description": "Learn the AICPA Trust Services Criteria that form the basis of SOC 2 reports and how service organizations demonstrate control effectiveness. Understand the difference between Type I point-in-time and Type II over-time engagements.",
+      "topics": [
+        "Trust Services Criteria (Security, Availability, Confidentiality, Privacy, Processing Integrity)",
+        "SOC 2 Type I vs Type II differences",
+        "Selecting in-scope systems and services",
+        "Control design vs operating effectiveness",
+        "Preparing evidence packages for auditors",
+        "Remediating exceptions and control gaps"
+      ],
+      "resources": [
+        {
+          "label": "AICPA SOC 2 Guide",
+          "platform": "AICPA.org",
+          "type": "docs"
+        },
+        {
+          "label": "SOC 2 Compliance Preparation",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "Practical Guide to SOC 2",
+          "platform": "Secureframe Blog",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Map 20 sample security controls to the relevant Trust Services Criteria categories and draft evidence descriptions for an auditor evidence request list.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "grc-analyst-5",
+      "title": "Risk Management and Risk Registers",
+      "order": 5,
+      "techs": [
+        "Risk register",
+        "Qualitative scoring",
+        "Quantitative risk (FAIR)",
+        "Heat maps"
+      ],
+      "description": "Build and maintain risk registers using both qualitative and quantitative risk methodologies to support business decisions. Learn the FAIR model for translating cyber risk into financial terms executives understand.",
+      "topics": [
+        "Risk identification techniques and workshops",
+        "Qualitative likelihood and impact scoring",
+        "Introduction to FAIR quantitative risk analysis",
+        "Building and maintaining a risk register",
+        "Risk treatment options (accept, mitigate, transfer, avoid)",
+        "Communicating risk to non-technical stakeholders",
+        "KRI development and monitoring"
+      ],
+      "resources": [
+        {
+          "label": "FAIR Institute Resources",
+          "platform": "fairinstitute.org",
+          "type": "docs"
+        },
+        {
+          "label": "How to Measure Anything in Cybersecurity Risk",
+          "platform": "Wiley",
+          "type": "book"
+        },
+        {
+          "label": "Risk Management Professional (RMP) Prep",
+          "platform": "Pluralsight",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a 25-item risk register for a fictional e-commerce company, score each risk qualitatively, and produce a heat map with recommended treatment decisions.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "grc-analyst-6",
+      "title": "Policy Development and Management",
+      "order": 6,
+      "techs": [
+        "Policy lifecycle",
+        "Templates",
+        "Exception management",
+        "Awareness programs"
+      ],
+      "description": "Develop, maintain, and enforce information security policies that align business requirements with regulatory obligations. Learn the full policy lifecycle from drafting through annual review and exception handling.",
+      "topics": [
+        "Policy hierarchy (policy, standard, procedure, guideline)",
+        "Writing clear and enforceable security policies",
+        "Managing policy review and approval workflows",
+        "Exception request and waiver processes",
+        "Measuring policy compliance and adherence",
+        "Security awareness program integration"
+      ],
+      "resources": [
+        {
+          "label": "SANS Security Policy Templates",
+          "platform": "SANS Institute",
+          "type": "docs"
+        },
+        {
+          "label": "Writing Information Security Policies",
+          "platform": "Sams Publishing",
+          "type": "book"
+        },
+        {
+          "label": "Security Policy Management",
+          "platform": "LinkedIn Learning",
+          "type": "course"
+        }
+      ],
+      "challenge": "Draft a complete Acceptable Use Policy and a companion exception request process with an SLA, approval matrix, and risk escalation path.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "grc-analyst-7",
+      "title": "Third-Party and Vendor Risk Management",
+      "order": 7,
+      "techs": [
+        "TPRM",
+        "SIG Questionnaire",
+        "Contract review",
+        "Vendor tiering"
+      ],
+      "description": "Assess and manage the security risks introduced by third-party vendors, suppliers, and partners who access or process organizational data. Build a vendor risk program with tiering, questionnaires, and contractual requirements.",
+      "topics": [
+        "Vendor risk tiering and inherent risk classification",
+        "Using SIG and CAIQ questionnaires",
+        "Reviewing vendor SOC 2 reports and certifications",
+        "Security requirements in contracts and BAAs",
+        "Ongoing vendor monitoring and reassessment",
+        "Managing fourth-party (sub-processor) risk"
+      ],
+      "resources": [
+        {
+          "label": "Shared Assessments SIG Documentation",
+          "platform": "Sharedassessments.org",
+          "type": "docs"
+        },
+        {
+          "label": "Third-Party Risk Management",
+          "platform": "ISACA",
+          "type": "course"
+        },
+        {
+          "label": "Supply Chain Risk Management Guide (NIST SP 800-161)",
+          "platform": "NIST.gov",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a vendor risk program template including a tiering matrix, a 30-question security questionnaire for high-risk vendors, and a remediation tracking SLA table.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "grc-analyst-8",
+      "title": "Audit Management and Evidence Programs",
+      "order": 8,
+      "techs": [
+        "Audit planning",
+        "Evidence management",
+        "Audit tools (Vanta, Drata)",
+        "Control testing"
+      ],
+      "description": "Manage internal and external audit engagements from scoping through remediation closure, using GRC platforms to automate evidence collection. Learn to write audit findings and track remediation plans.",
+      "topics": [
+        "Audit lifecycle (planning, fieldwork, reporting, closure)",
+        "Writing clear and actionable audit findings",
+        "Evidence collection and artifact management",
+        "Using Vanta or Drata for continuous compliance",
+        "Tracking corrective action plans (CAPs)",
+        "Coordinating with external auditors",
+        "Audit committee reporting and escalation"
+      ],
+      "resources": [
+        {
+          "label": "Vanta Compliance Automation Docs",
+          "platform": "Vanta.com",
+          "type": "docs"
+        },
+        {
+          "label": "Certified Information Systems Auditor (CISA) Study Guide",
+          "platform": "Sybex",
+          "type": "book"
+        },
+        {
+          "label": "IT Audit Fundamentals",
+          "platform": "ISACA",
+          "type": "course"
+        }
+      ],
+      "challenge": "Simulate an audit by drafting a full audit plan, requesting 15 evidence items, writing three sample findings with risk ratings, and creating a CAP for each.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "grc-analyst-9",
+      "title": "Privacy Regulations and Data Governance",
+      "order": 9,
+      "techs": [
+        "GDPR",
+        "CCPA",
+        "DPIA",
+        "Data mapping"
+      ],
+      "description": "Navigate major privacy regulations and build data governance programs that align compliance obligations with data lifecycle management. Learn to conduct Data Protection Impact Assessments and manage data subject rights requests.",
+      "topics": [
+        "GDPR principles and lawful bases for processing",
+        "CCPA and US state privacy law landscape",
+        "Data mapping and Records of Processing Activities (RoPA)",
+        "Conducting DPIAs for high-risk processing",
+        "Data subject rights fulfilment processes",
+        "Privacy by design principles",
+        "Cross-border data transfer mechanisms"
+      ],
+      "resources": [
+        {
+          "label": "GDPR Official Text and Recitals",
+          "platform": "gdpr-info.eu",
+          "type": "docs"
+        },
+        {
+          "label": "IAPP CIPP/E Study Guide",
+          "platform": "IAPP",
+          "type": "book"
+        },
+        {
+          "label": "Privacy Law Fundamentals",
+          "platform": "Coursera",
+          "type": "course"
+        }
+      ],
+      "challenge": "Create a data mapping inventory for a fictional health-tech startup, perform a DPIA for its primary data processing activity, and identify applicable transfer mechanisms.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "grc-analyst-10",
+      "title": "Integrated GRC Program Leadership",
+      "order": 10,
+      "techs": [
+        "Integrated controls",
+        "Board reporting",
+        "Metrics and dashboards",
+        "Continuous compliance"
+      ],
+      "description": "Lead a mature, integrated GRC program that aligns multiple frameworks under a unified control library while reporting meaningful metrics to executive leadership and the board. Drive continuous compliance automation and culture of accountability.",
+      "topics": [
+        "Unified control framework and control mapping",
+        "Building a GRC platform (ServiceNow GRC, Archer)",
+        "Executive and board-level security reporting",
+        "Developing GRC program metrics and OKRs",
+        "Integrating GRC with DevSecOps pipelines",
+        "Managing regulatory change and horizon scanning",
+        "Building a culture of compliance across the organization"
+      ],
+      "resources": [
+        {
+          "label": "OCEG GRC Capability Model (Red Book)",
+          "platform": "OCEG.org",
+          "type": "docs"
+        },
+        {
+          "label": "ServiceNow GRC Product Documentation",
+          "platform": "ServiceNow",
+          "type": "docs"
+        },
+        {
+          "label": "CGEIT Certification Review Manual",
+          "platform": "ISACA",
+          "type": "book"
+        }
+      ],
+      "challenge": "Design a unified GRC program for a company subject to ISO 27001, SOC 2, and GDPR, producing a single control library, a board risk dashboard, and a 3-year maturity roadmap.",
+      "estimatedTime": "6 weeks"
+    }
+  ],
+  "security-architect": [
+    {
+      "id": "security-architect-1",
+      "title": "Security Architecture Fundamentals",
+      "order": 1,
+      "techs": [
+        "Security frameworks",
+        "Architecture documentation",
+        "Threat concepts",
+        "Design principles"
+      ],
+      "description": "Establish the foundational mindset and vocabulary of security architecture, separating it from engineering and operations roles. Learn classic architecture frameworks and security design principles used throughout a career.",
+      "topics": [
+        "Role of a security architect vs engineer vs analyst",
+        "Core security design principles (least privilege, defense in depth, fail-safe defaults)",
+        "SABSA and TOGAF architecture frameworks overview",
+        "Security architecture documentation artifacts",
+        "CIA triad and beyond in architecture decisions",
+        "Stakeholder communication and architecture governance"
+      ],
+      "resources": [
+        {
+          "label": "SABSA Framework Overview",
+          "platform": "sabsa.org",
+          "type": "docs"
+        },
+        {
+          "label": "Security Architecture: Design, Deployment and Operations",
+          "platform": "McGraw-Hill",
+          "type": "book"
+        },
+        {
+          "label": "Security Architecture Fundamentals",
+          "platform": "Pluralsight",
+          "type": "course"
+        }
+      ],
+      "challenge": "Draw an annotated architecture diagram for a fictional three-tier web application, labeling all trust boundaries, data flows, and applicable security controls.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "security-architect-2",
+      "title": "Threat Modeling",
+      "order": 2,
+      "techs": [
+        "STRIDE",
+        "PASTA",
+        "Attack trees",
+        "Data Flow Diagrams"
+      ],
+      "description": "Apply structured threat modeling methodologies to identify, prioritize, and mitigate threats during the design phase rather than after deployment. Practice building Data Flow Diagrams and using STRIDE to enumerate threats systematically.",
+      "topics": [
+        "Threat modeling process and when to apply it",
+        "Drawing accurate Data Flow Diagrams (DFDs)",
+        "STRIDE threat enumeration per element",
+        "PASTA risk-centric threat modeling",
+        "Building and using attack trees",
+        "Prioritizing mitigations by risk",
+        "Integrating threat modeling into SDLC"
+      ],
+      "resources": [
+        {
+          "label": "Threat Modeling: Designing for Security (Shostack)",
+          "platform": "Wiley",
+          "type": "book"
+        },
+        {
+          "label": "OWASP Threat Modeling Cheat Sheet",
+          "platform": "OWASP.org",
+          "type": "docs"
+        },
+        {
+          "label": "Threat Modeling with STRIDE",
+          "platform": "Microsoft Learn",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Perform a complete STRIDE threat model on a fictional payment API, producing a DFD, a STRIDE table with 15+ threats, and a prioritized mitigation backlog.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "security-architect-3",
+      "title": "Identity and Access Management Architecture",
+      "order": 3,
+      "techs": [
+        "IAM",
+        "OAuth 2.0",
+        "SAML",
+        "MFA"
+      ],
+      "description": "Design identity and access management systems that enforce least-privilege access across users, services, and machines. Understand federation, SSO, and modern identity protocols that underpin enterprise and cloud environments.",
+      "topics": [
+        "Identity lifecycle management (joiner-mover-leaver)",
+        "Authentication protocols (SAML, OIDC, OAuth 2.0)",
+        "Single Sign-On architecture patterns",
+        "MFA methods and assurance levels",
+        "Privileged Access Management (PAM) design",
+        "Machine identity and service account governance",
+        "Directory services (LDAP, Active Directory, Azure AD)"
+      ],
+      "resources": [
+        {
+          "label": "OAuth 2.0 RFC Documentation",
+          "platform": "oauth.net",
+          "type": "docs"
+        },
+        {
+          "label": "Identity and Access Management",
+          "platform": "SANS",
+          "type": "course"
+        },
+        {
+          "label": "Solving Identity Management in Modern Applications",
+          "platform": "Apress",
+          "type": "book"
+        }
+      ],
+      "challenge": "Design a full IAM architecture for a multi-tenant SaaS platform including SSO, MFA, RBAC, PAM, and machine identities with a trust model diagram.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "security-architect-4",
+      "title": "Network Security Architecture",
+      "order": 4,
+      "techs": [
+        "Firewalls",
+        "Segmentation",
+        "VPN",
+        "DMZ design"
+      ],
+      "description": "Design resilient network security architectures that isolate sensitive assets, control traffic flows, and limit lateral movement. Apply segmentation, demilitarized zones, and encrypted tunnels to real enterprise topologies.",
+      "topics": [
+        "Defense-in-depth network layering",
+        "Firewall architecture and rule design principles",
+        "DMZ patterns for public-facing services",
+        "Network segmentation and micro-segmentation",
+        "VPN and remote access architecture",
+        "East-west traffic inspection and lateral movement prevention",
+        "DNS and email security architecture"
+      ],
+      "resources": [
+        {
+          "label": "Network Security Architecture (Sean Convery)",
+          "platform": "Cisco Press",
+          "type": "book"
+        },
+        {
+          "label": "NIST SP 800-125B Secure Virtual Network Config",
+          "platform": "NIST.gov",
+          "type": "docs"
+        },
+        {
+          "label": "Network Security Design",
+          "platform": "Pluralsight",
+          "type": "course"
+        }
+      ],
+      "challenge": "Design a secure network architecture for a retail company with POS, e-commerce, corporate, and cloud segments, including firewall policy and segmentation rationale.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "security-architect-5",
+      "title": "Cloud Security Architecture",
+      "order": 5,
+      "techs": [
+        "AWS Security",
+        "Azure Security",
+        "Shared Responsibility",
+        "CSPM"
+      ],
+      "description": "Architect secure cloud environments using native security services and well-architected framework principles across AWS and Azure. Apply cloud security posture management and enforce guardrails through Infrastructure as Code.",
+      "topics": [
+        "Cloud shared responsibility model",
+        "AWS Security Hub and Azure Security Center",
+        "Identity and access in cloud (roles, policies, managed identity)",
+        "Cloud network security (VPC, security groups, NSGs)",
+        "Encryption at rest and in transit in cloud",
+        "CSPM tools and misconfiguration detection",
+        "Landing zone and security baseline design"
+      ],
+      "resources": [
+        {
+          "label": "AWS Well-Architected Security Pillar",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Azure Security Best Practices",
+          "platform": "Microsoft Learn",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud Security Architecture",
+          "platform": "Pluralsight",
+          "type": "course"
+        }
+      ],
+      "challenge": "Design a secure AWS landing zone for a financial services company including account structure, SCPs, guardrails, logging, and network topology.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "security-architect-6",
+      "title": "Zero Trust Architecture",
+      "order": 6,
+      "techs": [
+        "Zero Trust",
+        "BeyondCorp",
+        "ZTNA",
+        "Microsegmentation"
+      ],
+      "description": "Design and implement Zero Trust architectures that eliminate implicit trust for users, devices, and network location. Apply the NIST ZTA model and understand modern ZTNA products replacing legacy VPN models.",
+      "topics": [
+        "Zero Trust principles (verify explicitly, least privilege, assume breach)",
+        "NIST SP 800-207 Zero Trust Architecture",
+        "Identity-centric perimeter vs network-centric perimeter",
+        "Device health and posture verification",
+        "ZTNA products and deployment patterns",
+        "Microsegmentation strategies in ZTA",
+        "Migration path from legacy to Zero Trust"
+      ],
+      "resources": [
+        {
+          "label": "NIST SP 800-207 Zero Trust Architecture",
+          "platform": "NIST.gov",
+          "type": "docs"
+        },
+        {
+          "label": "Zero Trust Networks (Evans and Gilman)",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Implementing Zero Trust",
+          "platform": "Coursera",
+          "type": "course"
+        }
+      ],
+      "challenge": "Produce a Zero Trust migration plan for a hybrid enterprise, mapping the current state, target state architecture, and phased implementation roadmap.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "security-architect-7",
+      "title": "Application Security Architecture",
+      "order": 7,
+      "techs": [
+        "OWASP",
+        "SSDLC",
+        "Secrets management",
+        "API security"
+      ],
+      "description": "Embed security into application design by applying OWASP principles, defining security requirements, and selecting appropriate security controls for web, mobile, and API surfaces. Lead security reviews of application designs.",
+      "topics": [
+        "OWASP Top 10 and ASVS framework",
+        "Security requirements definition",
+        "Secure SDLC integration points",
+        "Secrets management architecture (Vault, KMS)",
+        "API security design (OAuth scopes, rate limiting, input validation)",
+        "Session management and CSRF protection design",
+        "Third-party library and supply chain risk"
+      ],
+      "resources": [
+        {
+          "label": "OWASP Application Security Verification Standard",
+          "platform": "OWASP.org",
+          "type": "docs"
+        },
+        {
+          "label": "The Web Application Hacker Handbook",
+          "platform": "Wiley",
+          "type": "book"
+        },
+        {
+          "label": "Secure Software Design",
+          "platform": "Coursera",
+          "type": "course"
+        }
+      ],
+      "challenge": "Conduct a security architecture review of a fictional microservices application, producing findings, design recommendations, and a ranked risk register.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "security-architect-8",
+      "title": "Cryptography in Architecture",
+      "order": 8,
+      "techs": [
+        "TLS",
+        "PKI",
+        "Key management",
+        "HSM"
+      ],
+      "description": "Select and implement the right cryptographic mechanisms for data protection, integrity, and non-repudiation across complex system designs. Understand PKI, key lifecycle management, and emerging post-quantum considerations.",
+      "topics": [
+        "Symmetric vs asymmetric cryptography in system design",
+        "TLS 1.3 configuration and certificate management",
+        "PKI design, CA hierarchy, and certificate lifecycle",
+        "Key management systems and HSM integration",
+        "Encryption at rest patterns (application vs database vs disk level)",
+        "Digital signatures and non-repudiation architecture",
+        "Post-quantum cryptography planning"
+      ],
+      "resources": [
+        {
+          "label": "Cryptography Engineering (Ferguson, Schneier, Kohno)",
+          "platform": "Wiley",
+          "type": "book"
+        },
+        {
+          "label": "NIST Cryptographic Standards Documentation",
+          "platform": "NIST.gov",
+          "type": "docs"
+        },
+        {
+          "label": "Applied Cryptography for Architects",
+          "platform": "Pluralsight",
+          "type": "course"
+        }
+      ],
+      "challenge": "Design a PKI and key management architecture for an enterprise, covering CA hierarchy, certificate issuance workflows, HSM integration, and key rotation policy.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "security-architect-9",
+      "title": "Security Architecture Review and Governance",
+      "order": 9,
+      "techs": [
+        "Architecture review boards",
+        "Risk acceptance",
+        "Design patterns",
+        "Security by design"
+      ],
+      "description": "Establish and run a Security Architecture Review process that evaluates designs at scale without becoming a bottleneck to development teams. Build a library of approved patterns and a risk acceptance framework for exceptions.",
+      "topics": [
+        "Architecture review board (ARB) setup and process",
+        "Tiered review process based on risk level",
+        "Security design pattern library creation",
+        "Risk acceptance and exception frameworks",
+        "Measuring architecture review program effectiveness",
+        "Integrating architecture review into agile delivery",
+        "Security champion programs and developer enablement"
+      ],
+      "resources": [
+        {
+          "label": "Security Architecture Patterns",
+          "platform": "OWASP.org",
+          "type": "docs"
+        },
+        {
+          "label": "Building Secure and Reliable Systems (Google SRE)",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Enterprise Security Architecture",
+          "platform": "SANS",
+          "type": "course"
+        }
+      ],
+      "challenge": "Design a tiered security architecture review program for a 500-engineer organization, including intake criteria, review SLAs, pattern library structure, and exception tracking.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "security-architect-10",
+      "title": "Enterprise Security Architecture Leadership",
+      "order": 10,
+      "techs": [
+        "Enterprise architecture",
+        "CISO partnership",
+        "Roadmapping",
+        "Resilience design"
+      ],
+      "description": "Lead an enterprise security architecture function that aligns security investments with business strategy and drives multi-year architecture transformation programs. Communicate architecture risk and vision to C-suite and board audiences.",
+      "topics": [
+        "Aligning security architecture to business strategy",
+        "Building and communicating a multi-year security roadmap",
+        "Architecture metrics and maturity measurement",
+        "Resilience and business continuity architecture",
+        "Emerging technology threat assessment (AI, quantum)",
+        "Managing a team of security architects",
+        "Influencing without authority across engineering and product"
+      ],
+      "resources": [
+        {
+          "label": "CISO Compass (Todd Fitzgerald)",
+          "platform": "CRC Press",
+          "type": "book"
+        },
+        {
+          "label": "Enterprise Architecture as Strategy",
+          "platform": "Harvard Business Review Press",
+          "type": "book"
+        },
+        {
+          "label": "CISSP Official Study Guide",
+          "platform": "Sybex",
+          "type": "book"
+        }
+      ],
+      "challenge": "Present a 3-year enterprise security architecture transformation plan to a simulated board, covering current state risks, target architecture, investment roadmap, and success metrics.",
+      "estimatedTime": "6 weeks"
+    }
+  ],
+  "threat-hunter": [
+    {
+      "id": "threat-hunter-1",
+      "title": "Threat Hunting Foundations",
+      "order": 1,
+      "techs": [
+        "SOC concepts",
+        "Log analysis",
+        "Hypothesis thinking",
+        "SIEM basics"
+      ],
+      "description": "Understand what threat hunting is, how it differs from reactive detection, and what a structured hunting program looks like. Build the analytical mindset required to generate and test hypotheses about adversary behavior.",
+      "topics": [
+        "Threat hunting vs incident response vs detection engineering",
+        "The threat hunting maturity model",
+        "Intelligence-driven vs technique-driven hunting",
+        "Introduction to SIEM platforms",
+        "Log source fundamentals (Windows events, network logs)",
+        "Developing a hunt hypothesis"
+      ],
+      "resources": [
+        {
+          "label": "The ThreatHunter Playbook",
+          "platform": "threathunterplaybook.com",
+          "type": "docs"
+        },
+        {
+          "label": "Applied Network Security Monitoring",
+          "platform": "Syngress",
+          "type": "book"
+        },
+        {
+          "label": "Threat Hunting Fundamentals",
+          "platform": "Pluralsight",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write five hunting hypotheses for a corporate Windows environment, each linked to a specific MITRE ATT&CK technique and listing the data sources required.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "threat-hunter-2",
+      "title": "MITRE ATT&CK Framework for Hunters",
+      "order": 2,
+      "techs": [
+        "MITRE ATT&CK",
+        "ATT&CK Navigator",
+        "TTP mapping",
+        "Adversary emulation"
+      ],
+      "description": "Master the MITRE ATT&CK framework as the primary language for describing, hunting, and detecting adversary techniques. Use ATT&CK Navigator to visualize coverage gaps and prioritize hunting campaigns.",
+      "topics": [
+        "ATT&CK matrix structure (tactics, techniques, sub-techniques)",
+        "Using ATT&CK Navigator for coverage mapping",
+        "Mapping observed behaviors to ATT&CK",
+        "Top techniques used by tracked threat groups",
+        "ATT&CK-based detection gap analysis",
+        "Adversary emulation plans (CTID)"
+      ],
+      "resources": [
+        {
+          "label": "MITRE ATT&CK Framework Documentation",
+          "platform": "attack.mitre.org",
+          "type": "docs"
+        },
+        {
+          "label": "ATT&CK for Cyber Threat Intelligence",
+          "platform": "MITRE",
+          "type": "course"
+        },
+        {
+          "label": "Threat Hunting with ATT&CK",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Use ATT&CK Navigator to visualize your current SOC detection coverage and identify the top five uncovered techniques most commonly used by APT groups targeting your sector.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "threat-hunter-3",
+      "title": "Windows Event Log Analysis",
+      "order": 3,
+      "techs": [
+        "Windows Event Logs",
+        "Sysmon",
+        "PowerShell logging",
+        "Audit policy"
+      ],
+      "description": "Develop expertise in Windows telemetry by learning which event IDs expose adversary activity and how to tune logging to catch attacker techniques. Deploy Sysmon for deep process, network, and file telemetry.",
+      "topics": [
+        "Critical Windows Event IDs for security (4624, 4688, 7045, etc.)",
+        "Sysmon configuration and deployment",
+        "PowerShell Script Block logging and transcription",
+        "Command-line auditing and process creation logging",
+        "Detecting lateral movement via Windows events",
+        "Audit policy configuration best practices"
+      ],
+      "resources": [
+        {
+          "label": "Sysmon Configuration Guide",
+          "platform": "SwiftOnSecurity GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Windows Security Log Encyclopedia",
+          "platform": "ultimatewindowssecurity.com",
+          "type": "docs"
+        },
+        {
+          "label": "Detecting Lateral Movement with Windows Events",
+          "platform": "SANS",
+          "type": "course"
+        }
+      ],
+      "challenge": "Configure a Sysmon deployment on a test Windows host, generate 10 ATT&CK technique artifacts, and confirm each one is captured in the event log with the expected event IDs.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "threat-hunter-4",
+      "title": "SIEM Hunting with Splunk or Elastic",
+      "order": 4,
+      "techs": [
+        "Splunk SPL",
+        "Elastic KQL",
+        "Dashboards",
+        "Alert tuning"
+      ],
+      "description": "Write effective hunt queries in Splunk SPL or Elastic KQL to surface anomalous patterns across large log datasets. Build hunt dashboards that help analysts rapidly triage suspicious activity.",
+      "topics": [
+        "SPL and KQL fundamentals for security use cases",
+        "Searching, filtering, and aggregating security events",
+        "Statistical hunting techniques (rare, outlier, baseline deviation)",
+        "Building hunt dashboards and saved searches",
+        "Alert threshold tuning to reduce false positives",
+        "Documenting and sharing hunt queries"
+      ],
+      "resources": [
+        {
+          "label": "Splunk Security Essentials App Docs",
+          "platform": "Splunk",
+          "type": "docs"
+        },
+        {
+          "label": "Elastic SIEM Detection Rules",
+          "platform": "Elastic GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Splunk Fundamentals 1",
+          "platform": "Splunk Training",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write 10 hunt queries in SPL or KQL covering techniques from Initial Access to Exfiltration, each with a comment explaining the detection logic and expected false positive sources.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "threat-hunter-5",
+      "title": "Network Traffic Analysis for Hunting",
+      "order": 5,
+      "techs": [
+        "Wireshark",
+        "Zeek",
+        "Suricata",
+        "Network baselines"
+      ],
+      "description": "Analyze network traffic to detect command-and-control beaconing, data exfiltration, lateral movement, and protocol abuse. Use Zeek to generate structured network metadata at scale for hunt queries.",
+      "topics": [
+        "Network baseline establishment and anomaly detection",
+        "Identifying C2 beaconing patterns",
+        "DNS query analysis for tunneling and DGA detection",
+        "TLS certificate and JA3 fingerprinting",
+        "Zeek log schema and query patterns",
+        "Detecting data exfiltration via network telemetry"
+      ],
+      "resources": [
+        {
+          "label": "Zeek Documentation",
+          "platform": "zeek.org",
+          "type": "docs"
+        },
+        {
+          "label": "The Practice of Network Security Monitoring",
+          "platform": "No Starch Press",
+          "type": "book"
+        },
+        {
+          "label": "Network Traffic Analysis with Wireshark",
+          "platform": "Pluralsight",
+          "type": "course"
+        }
+      ],
+      "challenge": "Analyze a provided packet capture containing C2 traffic, identify the beacon interval, exfiltration method, and at least three network indicators with supporting evidence.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "threat-hunter-6",
+      "title": "Endpoint Detection and Response (EDR) Hunting",
+      "order": 6,
+      "techs": [
+        "CrowdStrike Falcon",
+        "Microsoft Defender for Endpoint",
+        "EDR telemetry",
+        "Process trees"
+      ],
+      "description": "Leverage EDR platforms to hunt for adversary behavior across endpoints using rich process, file, and registry telemetry unavailable in traditional SIEMs. Understand process tree analysis and timeline reconstruction.",
+      "topics": [
+        "EDR telemetry sources and query languages",
+        "Process tree analysis for suspicious chains",
+        "Hunting with CrowdStrike Falcon or MDE Advanced Hunting",
+        "Detecting Living-off-the-Land (LotL) techniques",
+        "Memory-based threat hunting via EDR",
+        "EDR alert triage and investigation workflow"
+      ],
+      "resources": [
+        {
+          "label": "Microsoft Defender for Endpoint Advanced Hunting Docs",
+          "platform": "Microsoft Learn",
+          "type": "docs"
+        },
+        {
+          "label": "CrowdStrike Falcon EDR Documentation",
+          "platform": "CrowdStrike",
+          "type": "docs"
+        },
+        {
+          "label": "Threat Hunting with EDR",
+          "platform": "SANS",
+          "type": "course"
+        }
+      ],
+      "challenge": "Use MDE Advanced Hunting or CrowdStrike to hunt for suspicious PowerShell spawning from Office processes across a simulated environment, documenting all findings.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "threat-hunter-7",
+      "title": "Threat Intelligence Integration",
+      "order": 7,
+      "techs": [
+        "STIX/TAXII",
+        "MISP",
+        "OpenCTI",
+        "IOC enrichment"
+      ],
+      "description": "Integrate threat intelligence feeds and platforms into the hunt workflow to focus hunts on relevant adversary infrastructure and TTPs. Learn to evaluate, enrich, and operationalize intelligence for proactive detection.",
+      "topics": [
+        "Types of threat intelligence (strategic, tactical, operational)",
+        "STIX/TAXII protocol and data model",
+        "Consuming threat feeds in MISP and OpenCTI",
+        "IOC-based vs TTP-based hunting trade-offs",
+        "Enriching alerts and hunt pivots with CTI",
+        "Tracking threat actor groups and campaigns",
+        "Producing actionable intelligence from hunt findings"
+      ],
+      "resources": [
+        {
+          "label": "MISP Project Documentation",
+          "platform": "misp-project.org",
+          "type": "docs"
+        },
+        {
+          "label": "Intelligence-Driven Incident Response",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Cyber Threat Intelligence",
+          "platform": "Coursera",
+          "type": "course"
+        }
+      ],
+      "challenge": "Ingest a threat feed into MISP, extract 20 IOCs, write hunt queries for each IOC type, and build a MITRE ATT&CK heatmap of the TTPs covered.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "threat-hunter-8",
+      "title": "Detection Engineering and Sigma Rules",
+      "order": 8,
+      "techs": [
+        "Sigma",
+        "Detection as Code",
+        "SOAR",
+        "Alert lifecycle"
+      ],
+      "description": "Convert hunt findings into durable, portable detection rules using the Sigma format that can be deployed across multiple SIEM backends. Build a detection lifecycle that tracks rules from hypothesis through retirement.",
+      "topics": [
+        "Sigma rule syntax and structure",
+        "Converting hunt queries to Sigma rules",
+        "Sigma backends for Splunk, Elastic, and QRadar",
+        "Detection as Code: versioning and CI/CD for rules",
+        "Alert fatigue management and rule quality metrics",
+        "SOAR playbook integration for automated triage",
+        "Detection coverage heat mapping"
+      ],
+      "resources": [
+        {
+          "label": "SigmaHQ Documentation and Rule Repository",
+          "platform": "GitHub SigmaHQ",
+          "type": "docs"
+        },
+        {
+          "label": "Detection as Code",
+          "platform": "Panther Labs Blog",
+          "type": "docs"
+        },
+        {
+          "label": "Detection Engineering for SOC Analysts",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write 10 production-quality Sigma rules covering high-priority ATT&CK techniques, validate them with sigma-cli, convert to SPL, and submit a PR to a test rule repository.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "threat-hunter-9",
+      "title": "Advanced Adversary Simulation and Purple Teaming",
+      "order": 9,
+      "techs": [
+        "Atomic Red Team",
+        "Caldera",
+        "Purple teaming",
+        "Gap analysis"
+      ],
+      "description": "Run controlled adversary simulations using Atomic Red Team and MITRE Caldera to validate detection coverage and identify blind spots. Conduct purple team exercises that directly improve hunt and detection capabilities.",
+      "topics": [
+        "Atomic Red Team test execution and logging",
+        "MITRE Caldera adversary emulation platform",
+        "Purple team exercise planning and scope",
+        "Mapping simulation results to detection gaps",
+        "Iterating detection rules based on simulation output",
+        "Reporting purple team findings to stakeholders",
+        "Continuous validation pipelines"
+      ],
+      "resources": [
+        {
+          "label": "Atomic Red Team Documentation",
+          "platform": "atomicredteam.io",
+          "type": "docs"
+        },
+        {
+          "label": "MITRE Caldera Documentation",
+          "platform": "caldera.mitre.org",
+          "type": "docs"
+        },
+        {
+          "label": "Purple Teaming Fundamentals",
+          "platform": "SANS",
+          "type": "course"
+        }
+      ],
+      "challenge": "Execute a 20-technique adversary emulation using Atomic Red Team against a test environment, measure detection rate, and produce a gap remediation plan with new Sigma rules.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "threat-hunter-10",
+      "title": "Hunt Program Operations and Leadership",
+      "order": 10,
+      "techs": [
+        "Hunt program management",
+        "KPIs",
+        "Playbook development",
+        "Team enablement"
+      ],
+      "description": "Build and operate a mature threat hunting program with defined processes, metrics, and continuous improvement cycles integrated into the broader SOC. Lead a team of hunters and communicate program value to leadership.",
+      "topics": [
+        "Hunt program framework and maturity model",
+        "Hunt campaign planning and tracking",
+        "KPIs: dwell time, hypothesis validation rate, detection uplift",
+        "Hunt playbook library development",
+        "Cross-team collaboration with IR and detection engineering",
+        "Communicating hunt findings to executive stakeholders",
+        "Continuous training and knowledge sharing"
+      ],
+      "resources": [
+        {
+          "label": "SQRRL Threat Hunting Reference Model",
+          "platform": "Sqrrl (archived)",
+          "type": "docs"
+        },
+        {
+          "label": "The Hunter Mindset",
+          "platform": "SANS Reading Room",
+          "type": "docs"
+        },
+        {
+          "label": "SOC Analyst to Threat Hunter Career Path",
+          "platform": "SANS",
+          "type": "course"
+        }
+      ],
+      "challenge": "Design a quarterly threat hunting program calendar with 6 targeted hunt campaigns, each with a hypothesis, required data sources, success criteria, and output deliverables.",
+      "estimatedTime": "5 weeks"
+    }
+  ],
+  "forensics-analyst": [
+    {
+      "id": "forensics-analyst-1",
+      "title": "Digital Forensics Fundamentals",
+      "order": 1,
+      "techs": [
+        "Forensic principles",
+        "Chain of custody",
+        "Evidence handling",
+        "Legal basics"
+      ],
+      "description": "Establish the principles and legal context of digital forensics including evidence integrity, chain of custody, and courtroom admissibility standards. Understand the investigative process from first response through reporting.",
+      "topics": [
+        "Forensic investigation lifecycle",
+        "Chain of custody documentation and evidence handling",
+        "Forensic soundness and write-blocking",
+        "Legal and jurisdictional considerations",
+        "Types of digital evidence (disk, memory, network, cloud)",
+        "Documenting and reporting findings"
+      ],
+      "resources": [
+        {
+          "label": "Digital Forensics with Open Source Tools",
+          "platform": "Syngress",
+          "type": "book"
+        },
+        {
+          "label": "NIST SP 800-86 Guide to Integrating Forensic Techniques",
+          "platform": "NIST.gov",
+          "type": "docs"
+        },
+        {
+          "label": "Computer Forensics Fundamentals",
+          "platform": "Coursera",
+          "type": "course"
+        }
+      ],
+      "challenge": "Document a mock evidence acquisition of a USB drive including chain of custody form, hash verification steps, and a written procedure for maintaining forensic integrity.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "forensics-analyst-2",
+      "title": "Disk Imaging and Acquisition",
+      "order": 2,
+      "techs": [
+        "dd",
+        "FTK Imager",
+        "Guymager",
+        "Write blockers"
+      ],
+      "description": "Perform forensically sound disk and drive acquisitions using hardware write blockers and trusted imaging tools that preserve original evidence. Verify image integrity with cryptographic hashing.",
+      "topics": [
+        "Forensic imaging formats (RAW/dd, E01, AFF)",
+        "Hardware and software write-blocking",
+        "Acquiring with FTK Imager and Guymager",
+        "Cryptographic hash verification (MD5, SHA-256)",
+        "Partial and triage acquisition strategies",
+        "Acquiring from SSDs, encrypted drives, and mobile devices"
+      ],
+      "resources": [
+        {
+          "label": "FTK Imager User Guide",
+          "platform": "AccessData",
+          "type": "docs"
+        },
+        {
+          "label": "The Art of Memory Forensics",
+          "platform": "Wiley",
+          "type": "book"
+        },
+        {
+          "label": "Disk Imaging for Forensics",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Image a test USB drive using both FTK Imager and dd, verify hashes match for both images, and document the acquisition process in a formal evidence log.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "forensics-analyst-3",
+      "title": "File System Forensics",
+      "order": 3,
+      "techs": [
+        "NTFS",
+        "FAT32",
+        "Autopsy",
+        "Sleuth Kit"
+      ],
+      "description": "Analyze file system structures to recover deleted files, examine metadata, and identify timeline artifacts left by user and attacker activity. Use Autopsy and The Sleuth Kit to navigate and carve file system data.",
+      "topics": [
+        "NTFS structures (MFT, $LogFile, $USN journal)",
+        "File metadata and MAC times (Modified, Accessed, Created)",
+        "Deleted file recovery techniques",
+        "File carving from unallocated space",
+        "Autopsy case setup and evidence analysis",
+        "Timeline creation from file system metadata"
+      ],
+      "resources": [
+        {
+          "label": "Autopsy Documentation",
+          "platform": "sleuthkit.org",
+          "type": "docs"
+        },
+        {
+          "label": "File System Forensic Analysis (Carrier)",
+          "platform": "Addison-Wesley",
+          "type": "book"
+        },
+        {
+          "label": "Sleuth Kit and Autopsy Forensics",
+          "platform": "Pluralsight",
+          "type": "course"
+        }
+      ],
+      "challenge": "Analyze a forensic image containing simulated user activity, recover five deleted files, build an activity timeline, and write an analysis report with supporting evidence.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "forensics-analyst-4",
+      "title": "Windows Artifact Analysis",
+      "order": 4,
+      "techs": [
+        "Registry",
+        "Prefetch",
+        "LNK files",
+        "Event Logs"
+      ],
+      "description": "Extract and interpret the rich set of forensic artifacts that Windows leaves behind to reconstruct user actions, program execution, and attacker activity. Analyze registry hives, prefetch files, jump lists, and event logs.",
+      "topics": [
+        "Windows Registry forensic artifacts (UserAssist, RecentDocs, MRU)",
+        "Prefetch file analysis for program execution evidence",
+        "LNK file and jump list analysis",
+        "Windows Event Log forensic review",
+        "Shellbag analysis for folder access history",
+        "Recycle Bin and Volume Shadow Copy analysis"
+      ],
+      "resources": [
+        {
+          "label": "Windows Forensic Analysis Toolkit (Carvey)",
+          "platform": "Syngress",
+          "type": "book"
+        },
+        {
+          "label": "SANS Windows Forensic Analysis Poster",
+          "platform": "SANS",
+          "type": "docs"
+        },
+        {
+          "label": "Windows Forensics",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Analyze a Windows disk image from a simulated insider threat case, identify all evidence of data exfiltration activity using at least five distinct artifact types.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "forensics-analyst-5",
+      "title": "Memory Forensics with Volatility",
+      "order": 5,
+      "techs": [
+        "Volatility 3",
+        "RAM acquisition",
+        "Process analysis",
+        "Network artifacts"
+      ],
+      "description": "Capture and analyze volatile memory to uncover running malware, injected code, network connections, and credentials that leave no disk trace. Master Volatility 3 plugins for process, network, and malware artifact extraction.",
+      "topics": [
+        "Memory acquisition methods and tools (WinPmem, LiME)",
+        "Volatility 3 setup and profile identification",
+        "Process list and process tree analysis (pslist, pstree)",
+        "Detecting process injection (malfind, cmdline)",
+        "Network connection and socket analysis",
+        "Extracting registry hives and credentials from memory"
+      ],
+      "resources": [
+        {
+          "label": "Volatility 3 Documentation",
+          "platform": "volatilityfoundation.org",
+          "type": "docs"
+        },
+        {
+          "label": "The Art of Memory Forensics",
+          "platform": "Wiley",
+          "type": "book"
+        },
+        {
+          "label": "Memory Forensics with Volatility",
+          "platform": "Pluralsight",
+          "type": "course"
+        }
+      ],
+      "challenge": "Analyze a memory image from a compromised Windows system, identify the malicious process, extract its network indicators, and recover any injected shellcode.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "forensics-analyst-6",
+      "title": "Network Forensics",
+      "order": 6,
+      "techs": [
+        "Wireshark",
+        "NetworkMiner",
+        "Zeek logs",
+        "PCAP analysis"
+      ],
+      "description": "Reconstruct network-based attacker activity from packet captures and flow data to establish timelines of intrusion, data theft, and lateral movement. Carve transferred files and credentials from PCAP evidence.",
+      "topics": [
+        "Full packet capture collection and preservation",
+        "Protocol analysis and session reconstruction",
+        "File carving from network captures",
+        "Identifying C2 and exfiltration patterns in PCAP",
+        "Zeek log analysis for network forensics",
+        "Correlating network and host-based evidence"
+      ],
+      "resources": [
+        {
+          "label": "Network Forensics: Tracking Hackers Through Cyberspace",
+          "platform": "Prentice Hall",
+          "type": "book"
+        },
+        {
+          "label": "Wireshark User Guide",
+          "platform": "Wireshark Foundation",
+          "type": "docs"
+        },
+        {
+          "label": "Network Forensics",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Analyze a PCAP file from a simulated breach, reconstruct the attacker kill chain from initial access through data exfiltration, carve exfiltrated files, and document findings.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "forensics-analyst-7",
+      "title": "Mobile and Cloud Forensics",
+      "order": 7,
+      "techs": [
+        "Cellebrite UFED",
+        "Android ADB",
+        "AWS CloudTrail",
+        "M365 logs"
+      ],
+      "description": "Extend forensic investigation skills to mobile devices and cloud platforms where modern attackers increasingly operate. Understand logical and physical acquisition of iOS/Android devices and forensic analysis of cloud audit logs.",
+      "topics": [
+        "iOS and Android acquisition methods (logical, filesystem, physical)",
+        "Mobile artifact categories (call logs, messages, app data, location)",
+        "Cloud forensics concepts and challenges",
+        "AWS CloudTrail log analysis for intrusion evidence",
+        "Microsoft 365 audit log investigation",
+        "Preserving and authenticating cloud evidence"
+      ],
+      "resources": [
+        {
+          "label": "Android Forensics (Hoog)",
+          "platform": "Syngress",
+          "type": "book"
+        },
+        {
+          "label": "AWS CloudTrail Documentation",
+          "platform": "AWS Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Mobile and Cloud Forensics",
+          "platform": "SANS",
+          "type": "course"
+        }
+      ],
+      "challenge": "Investigate a simulated cloud breach using AWS CloudTrail logs, reconstruct the attacker timeline from initial credential compromise through data exfiltration.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "forensics-analyst-8",
+      "title": "Malware Forensics and Anti-Forensics Detection",
+      "order": 8,
+      "techs": [
+        "Malware artifacts",
+        "Timestamp manipulation",
+        "Log clearing",
+        "Steganography"
+      ],
+      "description": "Identify and counter techniques attackers use to destroy or manipulate forensic evidence including log clearing, timestamp tampering, and data hiding. Detect malware presence through artifact analysis even when the binary is removed.",
+      "topics": [
+        "Detecting log clearing events and tampered logs",
+        "Timestamp analysis and MACE manipulation detection",
+        "Detecting evidence of file wiping tools",
+        "Steganography detection techniques",
+        "Identifying malware through persistence artifacts without the binary",
+        "Recovering overwritten evidence with carving"
+      ],
+      "resources": [
+        {
+          "label": "Incident Response and Computer Forensics (Luttgens)",
+          "platform": "McGraw-Hill",
+          "type": "book"
+        },
+        {
+          "label": "Anti-Forensics Countermeasures",
+          "platform": "SANS Reading Room",
+          "type": "docs"
+        },
+        {
+          "label": "Advanced Digital Forensics",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Investigate a forensic image where an attacker attempted evidence destruction, identify all artifacts indicating log clearing and timestamp manipulation, and document the evasion techniques used.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "forensics-analyst-9",
+      "title": "Forensic Reporting and Expert Testimony",
+      "order": 9,
+      "techs": [
+        "Report writing",
+        "Case management",
+        "Evidence presentation",
+        "Legal standards"
+      ],
+      "description": "Produce legally defensible forensic reports that clearly communicate findings to non-technical attorneys, law enforcement, and executives. Prepare for and survive cross-examination as an expert witness.",
+      "topics": [
+        "Technical report structure for forensic cases",
+        "Writing findings for legal vs executive audiences",
+        "Maintaining investigative notes and documentation",
+        "Expert witness qualification and standards",
+        "Daubert standard and scientific methodology",
+        "Presenting digital evidence in court",
+        "Case management tools and workflows"
+      ],
+      "resources": [
+        {
+          "label": "Writing Information Security Policies and Reports",
+          "platform": "Sams Publishing",
+          "type": "book"
+        },
+        {
+          "label": "Expert Witness Handbook",
+          "platform": "ACFE",
+          "type": "book"
+        },
+        {
+          "label": "Digital Forensics Reporting",
+          "platform": "SANS",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write a complete forensic investigation report for a simulated insider threat case suitable for court submission, including executive summary, methodology, findings, and conclusions.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "forensics-analyst-10",
+      "title": "Enterprise DFIR Operations",
+      "order": 10,
+      "techs": [
+        "DFIR platforms",
+        "Velociraptor",
+        "GRR",
+        "Forensic triage at scale"
+      ],
+      "description": "Lead digital forensics and incident response operations at enterprise scale using remote forensic tools that enable simultaneous investigation across thousands of endpoints. Build and manage a DFIR program with defined playbooks and SLAs.",
+      "topics": [
+        "Remote forensic collection at scale with Velociraptor",
+        "Building forensic triage workflows for SOC escalations",
+        "DFIR playbook development for common scenarios",
+        "Evidence management and retention policies",
+        "DFIR program metrics and SLA tracking",
+        "Cross-functional coordination with legal, HR, and law enforcement",
+        "Threat intel integration into DFIR operations"
+      ],
+      "resources": [
+        {
+          "label": "Velociraptor Documentation",
+          "platform": "docs.velociraptor.app",
+          "type": "docs"
+        },
+        {
+          "label": "The Practice of Network Security Monitoring",
+          "platform": "No Starch Press",
+          "type": "book"
+        },
+        {
+          "label": "Enterprise DFIR",
+          "platform": "SANS",
+          "type": "course"
+        }
+      ],
+      "challenge": "Deploy Velociraptor in a lab, build a triage artifact collection pack for ransomware incidents, execute it across five hosts, and produce a consolidated forensic report.",
+      "estimatedTime": "6 weeks"
+    }
+  ],
+  "bug-bounty-hunter": [
+    {
+      "id": "bug-bounty-hunter-1",
+      "title": "Bug Bounty Foundations and Ethics",
+      "order": 1,
+      "techs": [
+        "HackerOne",
+        "Bugcrowd",
+        "Scope rules",
+        "Responsible disclosure"
+      ],
+      "description": "Understand the legal, ethical, and operational framework of authorized bug bounty hunting before touching any target. Learn how programs define scope, safe harbor protections, and responsible disclosure standards.",
+      "topics": [
+        "What bug bounty programs are and how they work",
+        "Reading and respecting program scope and rules",
+        "Safe harbor and legal protections for hunters",
+        "Responsible disclosure vs full disclosure",
+        "Setting up HackerOne and Bugcrowd profiles",
+        "Common report writing expectations and quality standards"
+      ],
+      "resources": [
+        {
+          "label": "HackerOne Hacker101 Free Course",
+          "platform": "Hacker101.com",
+          "type": "course"
+        },
+        {
+          "label": "Bug Bounty Bootcamp (Vickie Li)",
+          "platform": "No Starch Press",
+          "type": "book"
+        },
+        {
+          "label": "Bugcrowd University",
+          "platform": "Bugcrowd",
+          "type": "course"
+        }
+      ],
+      "challenge": "Read three real-world disclosed HackerOne reports, analyze the bug class, impact, and report quality for each, and write a critique identifying what made each report strong or weak.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "bug-bounty-hunter-2",
+      "title": "Reconnaissance and Attack Surface Mapping",
+      "order": 2,
+      "techs": [
+        "Amass",
+        "Subfinder",
+        "Shodan",
+        "Recon-ng"
+      ],
+      "description": "Build a systematic recon methodology to map the full attack surface of a target before attempting any exploitation. Discover subdomains, open ports, exposed services, and technology fingerprints within authorized scope.",
+      "topics": [
+        "Passive vs active reconnaissance trade-offs",
+        "Subdomain enumeration with Amass and Subfinder",
+        "Port and service scanning within authorized scope",
+        "Technology fingerprinting with Wappalyzer and Whatweb",
+        "Google Dorks and search engine recon",
+        "Shodan and Censys for asset discovery",
+        "Organizing and managing recon output"
+      ],
+      "resources": [
+        {
+          "label": "OWASP Testing Guide v4 - Information Gathering",
+          "platform": "OWASP.org",
+          "type": "docs"
+        },
+        {
+          "label": "Bug Bounty Bootcamp",
+          "platform": "No Starch Press",
+          "type": "book"
+        },
+        {
+          "label": "Practical Ethical Hacking",
+          "platform": "TCM Security",
+          "type": "course"
+        }
+      ],
+      "challenge": "Perform authorized recon against a HackerOne public program target (within scope), document all discovered assets, technologies, and potential entry points in a structured spreadsheet.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "bug-bounty-hunter-3",
+      "title": "Web Vulnerability Fundamentals with Burp Suite",
+      "order": 3,
+      "techs": [
+        "Burp Suite Community",
+        "HTTP interception",
+        "Repeater",
+        "Intruder"
+      ],
+      "description": "Master Burp Suite as the primary tool for intercepting, modifying, and replaying HTTP traffic to test web application security controls. Learn the core workflow for manually testing web vulnerabilities in authorized programs.",
+      "topics": [
+        "Burp Suite proxy setup and browser configuration",
+        "Intercepting and modifying HTTP requests",
+        "Using Repeater for manual vulnerability testing",
+        "Sitemap and crawling within authorized scope",
+        "Intruder for brute force and parameter fuzzing",
+        "Saving and organizing Burp project files"
+      ],
+      "resources": [
+        {
+          "label": "Burp Suite Documentation",
+          "platform": "PortSwigger",
+          "type": "docs"
+        },
+        {
+          "label": "Web Security Academy",
+          "platform": "PortSwigger",
+          "type": "course"
+        },
+        {
+          "label": "Bug Bounty Bootcamp",
+          "platform": "No Starch Press",
+          "type": "book"
+        }
+      ],
+      "challenge": "Complete 10 Web Security Academy labs using Burp Suite covering at least five different vulnerability classes, documenting the exploitation steps and remediation for each.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "bug-bounty-hunter-4",
+      "title": "OWASP Top 10 in Practice",
+      "order": 4,
+      "techs": [
+        "OWASP Top 10",
+        "DVWA",
+        "WebGoat",
+        "Juice Shop"
+      ],
+      "description": "Gain hands-on experience exploiting every OWASP Top 10 vulnerability category in legal practice environments before hunting in real authorized programs. Build muscle memory for identifying these issues during recon and testing.",
+      "topics": [
+        "Injection attacks (SQLi, command injection, SSTI)",
+        "Broken authentication and session management",
+        "Cross-Site Scripting (XSS) - reflected, stored, DOM",
+        "Insecure Direct Object References (IDOR)",
+        "Security misconfiguration and exposed admin panels",
+        "Vulnerable and outdated components",
+        "Cryptographic failures and sensitive data exposure"
+      ],
+      "resources": [
+        {
+          "label": "OWASP Top 10 Documentation",
+          "platform": "OWASP.org",
+          "type": "docs"
+        },
+        {
+          "label": "Web Security Academy Labs",
+          "platform": "PortSwigger",
+          "type": "course"
+        },
+        {
+          "label": "The Web Application Hacker Handbook",
+          "platform": "Wiley",
+          "type": "book"
+        }
+      ],
+      "challenge": "Exploit all 10 OWASP Top 10 categories in OWASP Juice Shop, screenshot each finding, and write a proof-of-concept report for each as if submitting to a real bug bounty program.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "bug-bounty-hunter-5",
+      "title": "Authentication and Authorization Bugs",
+      "order": 5,
+      "techs": [
+        "IDOR",
+        "BOLA",
+        "OAuth testing",
+        "JWT analysis"
+      ],
+      "description": "Develop expertise in finding authentication flaws and authorization bypasses - consistently among the highest-paid vulnerability classes in bug bounty programs. Learn to systematically test IDOR, BOLA, and broken OAuth implementations.",
+      "topics": [
+        "IDOR discovery methodology and horizontal vs vertical privilege escalation",
+        "Testing multi-step workflows for authorization gaps",
+        "OAuth 2.0 common vulnerabilities (open redirect, state bypass, token leakage)",
+        "JWT algorithm confusion and signature bypass",
+        "Password reset flow vulnerabilities",
+        "Multi-tenancy isolation bypass testing"
+      ],
+      "resources": [
+        {
+          "label": "OWASP API Security Top 10",
+          "platform": "OWASP.org",
+          "type": "docs"
+        },
+        {
+          "label": "OAuth 2.0 Security Best Current Practice",
+          "platform": "oauth.net",
+          "type": "docs"
+        },
+        {
+          "label": "Advanced Web Attacks and Exploitation",
+          "platform": "Offensive Security",
+          "type": "course"
+        }
+      ],
+      "challenge": "Find and responsibly report an IDOR or authorization bypass in a live authorized bug bounty program, submitting a high-quality report with impact analysis and reproduction steps.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "bug-bounty-hunter-6",
+      "title": "Fuzzing and Automated Vulnerability Discovery",
+      "order": 6,
+      "techs": [
+        "ffuf",
+        "Nuclei",
+        "Param Miner",
+        "Turbo Intruder"
+      ],
+      "description": "Automate vulnerability discovery at scale using fuzzing and template-based scanning to find issues across large scopes faster than manual testing alone. Learn to build custom Nuclei templates and ffuf wordlists for specific targets.",
+      "topics": [
+        "Directory and parameter fuzzing with ffuf",
+        "Nuclei template-based scanning within authorized scope",
+        "Parameter discovery with Param Miner",
+        "High-speed fuzzing with Turbo Intruder",
+        "Building custom wordlists from target technology",
+        "Interpreting and triaging automated scan results"
+      ],
+      "resources": [
+        {
+          "label": "Nuclei Documentation",
+          "platform": "projectdiscovery.io",
+          "type": "docs"
+        },
+        {
+          "label": "ffuf Wiki",
+          "platform": "GitHub ffuf",
+          "type": "docs"
+        },
+        {
+          "label": "Automated Bug Bounty Hunting",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a custom recon and fuzzing pipeline for an authorized target, write three custom Nuclei templates for the target technology stack, and document all validated findings.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "bug-bounty-hunter-7",
+      "title": "Server-Side Vulnerabilities",
+      "order": 7,
+      "techs": [
+        "SSRF",
+        "XXE",
+        "Deserialization",
+        "Path traversal"
+      ],
+      "description": "Master server-side vulnerability classes that often lead to critical and high severity findings with major business impact in authorized programs. Learn to identify and exploit SSRF, XXE, and insecure deserialization issues.",
+      "topics": [
+        "Server-Side Request Forgery (SSRF) identification and exploitation",
+        "Cloud metadata endpoint abuse via SSRF",
+        "XML External Entity (XXE) injection",
+        "Insecure deserialization identification and gadget chains",
+        "Path traversal and local file inclusion",
+        "Template injection (SSTI) in common frameworks"
+      ],
+      "resources": [
+        {
+          "label": "PortSwigger Web Security Academy - SSRF",
+          "platform": "PortSwigger",
+          "type": "course"
+        },
+        {
+          "label": "OWASP XXE Prevention Cheat Sheet",
+          "platform": "OWASP.org",
+          "type": "docs"
+        },
+        {
+          "label": "Real-World Bug Hunting (Yaworski)",
+          "platform": "No Starch Press",
+          "type": "book"
+        }
+      ],
+      "challenge": "Complete all SSRF, XXE, and SSTI labs on PortSwigger Web Security Academy and find one server-side vulnerability in an authorized program to report.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "bug-bounty-hunter-8",
+      "title": "API Security Testing",
+      "order": 8,
+      "techs": [
+        "REST API testing",
+        "GraphQL",
+        "Postman",
+        "API fuzzing"
+      ],
+      "description": "Test REST and GraphQL APIs for security issues using the OWASP API Security Top 10 as a guide, with specialized tooling for API-specific attack classes. Many modern programs have large API attack surfaces with fewer eyes on them.",
+      "topics": [
+        "OWASP API Security Top 10 overview",
+        "REST API testing methodology with Burp and Postman",
+        "GraphQL introspection and injection testing",
+        "Excessive data exposure in API responses",
+        "API rate limiting and resource exhaustion testing",
+        "Mass assignment and parameter pollution",
+        "API key leakage and authentication bypass"
+      ],
+      "resources": [
+        {
+          "label": "OWASP API Security Top 10",
+          "platform": "OWASP.org",
+          "type": "docs"
+        },
+        {
+          "label": "Hacking APIs (Corey Ball)",
+          "platform": "No Starch Press",
+          "type": "book"
+        },
+        {
+          "label": "API Security Testing",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Perform a full API security assessment against a vulnerable API lab (crAPI or vAPI), exploiting at least 8 of the OWASP API Security Top 10 categories and writing a professional report.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "bug-bounty-hunter-9",
+      "title": "Business Logic and High-Impact Chaining",
+      "order": 9,
+      "techs": [
+        "Business logic testing",
+        "Vulnerability chaining",
+        "Impact analysis",
+        "PoC development"
+      ],
+      "description": "Find and exploit business logic vulnerabilities that automated scanners miss entirely, and chain multiple low-severity bugs into high or critical severity findings through creative impact analysis. Learn to maximize bounty rewards by demonstrating full impact.",
+      "topics": [
+        "Business logic flaw identification methodology",
+        "Common logic flaws (price manipulation, workflow bypass, race conditions)",
+        "Race condition testing and exploitation",
+        "Chaining low-severity bugs for maximum impact",
+        "Escalating SSRF to RCE or credential theft",
+        "Writing PoC code that demonstrates real-world impact",
+        "Impact justification in reports to increase bounty value"
+      ],
+      "resources": [
+        {
+          "label": "OWASP Testing Guide - Business Logic",
+          "platform": "OWASP.org",
+          "type": "docs"
+        },
+        {
+          "label": "Real-World Bug Hunting",
+          "platform": "No Starch Press",
+          "type": "book"
+        },
+        {
+          "label": "Bug Bounty Hunting Advanced",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Find a business logic vulnerability or vulnerability chain in an authorized program that results in a high or critical severity finding, and submit a report with complete impact demonstration.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "bug-bounty-hunter-10",
+      "title": "Advanced Techniques and Program Scaling",
+      "order": 10,
+      "techs": [
+        "Automation pipelines",
+        "Custom tooling",
+        "Program selection strategy",
+        "Reputation building"
+      ],
+      "description": "Operate as a professional bug bounty hunter with systematic workflows, custom automation, and a strong reputation on major platforms. Build sustainable hunting processes that scale across multiple programs and bug classes.",
+      "topics": [
+        "Building a personal bug bounty automation pipeline",
+        "Program selection and ROI analysis",
+        "Continuous monitoring for new assets and changes",
+        "Writing top-tier reports that maximize bounty rewards",
+        "Building platform reputation and private program access",
+        "Collaborating with other hunters on team bounties",
+        "Tax, legal, and business considerations for full-time hunters"
+      ],
+      "resources": [
+        {
+          "label": "HackerOne Disclosure Reports Archive",
+          "platform": "HackerOne",
+          "type": "docs"
+        },
+        {
+          "label": "Bug Bounty Bootcamp",
+          "platform": "No Starch Press",
+          "type": "book"
+        },
+        {
+          "label": "Full-Time Bug Bounty Hunting Masterclass",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a fully automated recon pipeline that monitors three authorized program scopes for new assets, runs Nuclei scans on discovered targets, and sends alerts for new findings.",
+      "estimatedTime": "6 weeks"
+    }
+  ],
+  "pentester": [
+    {
+      "id": "pentester-1",
+      "title": "Networking and OS Fundamentals",
+      "order": 1,
+      "techs": [
+        "TCP/IP",
+        "Linux",
+        "Windows",
+        "Wireshark"
+      ],
+      "description": "Build a solid foundation in networking protocols and operating system internals. Understanding how systems communicate is essential before attempting any security testing.",
+      "topics": [
+        "OSI model",
+        "TCP/IP stack",
+        "Linux command line basics",
+        "Windows CLI basics",
+        "Packet capture with Wireshark"
+      ],
+      "resources": [
+        {
+          "label": "CompTIA Network+ Study Guide",
+          "platform": "CompTIA",
+          "type": "book"
+        },
+        {
+          "label": "The Linux Command Line",
+          "platform": "No Starch Press",
+          "type": "book"
+        },
+        {
+          "label": "Wireshark for Beginners",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Capture and analyze HTTP and DNS traffic on a local network using Wireshark.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "pentester-2",
+      "title": "Security Concepts and Ethics",
+      "order": 2,
+      "techs": [
+        "CVE",
+        "CVSS",
+        "CIA Triad",
+        "Legal Frameworks"
+      ],
+      "description": "Learn core security concepts, vulnerability scoring, and the legal boundaries of ethical hacking. All testing must occur only in authorized lab environments.",
+      "topics": [
+        "CIA Triad",
+        "CVE and CVSS scoring",
+        "Responsible disclosure",
+        "Legal authorization requirements",
+        "Bug bounty basics"
+      ],
+      "resources": [
+        {
+          "label": "CEH Study Guide",
+          "platform": "Sybex",
+          "type": "book"
+        },
+        {
+          "label": "Cybersecurity Fundamentals",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "NIST SP 800-115",
+          "platform": "NIST",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Research three real CVEs and summarize their CVSS scores and impact.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "pentester-3",
+      "title": "Kali Linux and Lab Setup",
+      "order": 3,
+      "techs": [
+        "Kali Linux",
+        "VirtualBox",
+        "VMware",
+        "Nmap"
+      ],
+      "description": "Set up a personal penetration testing lab using Kali Linux and virtualization tools. Practice all techniques exclusively inside isolated lab environments.",
+      "topics": [
+        "Installing Kali Linux",
+        "VirtualBox network modes",
+        "Vulnerable VMs setup",
+        "Basic Nmap scans",
+        "Service enumeration"
+      ],
+      "resources": [
+        {
+          "label": "Kali Linux Revealed",
+          "platform": "Offensive Security",
+          "type": "book"
+        },
+        {
+          "label": "Building a Pentest Lab",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Kali Linux Docs",
+          "platform": "Kali.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy Metasploitable2 in VirtualBox and run a full Nmap scan against it.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "pentester-4",
+      "title": "Reconnaissance and OSINT",
+      "order": 4,
+      "techs": [
+        "Nmap",
+        "theHarvester",
+        "Maltego",
+        "Shodan"
+      ],
+      "description": "Learn passive and active reconnaissance techniques to gather target intelligence before an engagement. Use only authorized targets and public information sources.",
+      "topics": [
+        "Passive vs active recon",
+        "OSINT sources",
+        "DNS enumeration",
+        "Port and service scanning",
+        "Banner grabbing"
+      ],
+      "resources": [
+        {
+          "label": "OSINT Framework",
+          "platform": "osintframework.com",
+          "type": "docs"
+        },
+        {
+          "label": "Practical OSINT",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Nmap Network Scanning",
+          "platform": "No Starch Press",
+          "type": "book"
+        }
+      ],
+      "challenge": "Perform full passive and active recon against a personal authorized lab VM.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "pentester-5",
+      "title": "Vulnerability Scanning",
+      "order": 5,
+      "techs": [
+        "Nessus",
+        "OpenVAS",
+        "Nikto",
+        "Nmap NSE"
+      ],
+      "description": "Use automated scanning tools to identify known vulnerabilities in target systems. Always obtain written authorization before scanning any system.",
+      "topics": [
+        "Nessus scan types",
+        "OpenVAS setup",
+        "Web server scanning with Nikto",
+        "Nmap scripting engine",
+        "Interpreting scan reports"
+      ],
+      "resources": [
+        {
+          "label": "Nessus Documentation",
+          "platform": "Tenable",
+          "type": "docs"
+        },
+        {
+          "label": "OpenVAS Beginner Guide",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Vulnerability Scanning Course",
+          "platform": "Pluralsight",
+          "type": "course"
+        }
+      ],
+      "challenge": "Run Nessus and Nikto against a lab web server and produce a findings report.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "pentester-6",
+      "title": "Exploitation with Metasploit",
+      "order": 6,
+      "techs": [
+        "Metasploit",
+        "msfconsole",
+        "msfvenom",
+        "Payloads"
+      ],
+      "description": "Learn to use Metasploit Framework to exploit known vulnerabilities in lab environments. Use Metasploit only against machines you own or have explicit written permission to test.",
+      "topics": [
+        "Metasploit architecture",
+        "Selecting and configuring exploits",
+        "Payload types",
+        "Post-exploitation basics",
+        "Meterpreter commands"
+      ],
+      "resources": [
+        {
+          "label": "Metasploit Unleashed",
+          "platform": "Offensive Security",
+          "type": "docs"
+        },
+        {
+          "label": "The Metasploit Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Metasploit: The Penetration Tester Guide",
+          "platform": "No Starch Press",
+          "type": "book"
+        }
+      ],
+      "challenge": "Exploit a known vulnerability on Metasploitable2 and gain a Meterpreter shell.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "pentester-7",
+      "title": "Web Application Pentesting",
+      "order": 7,
+      "techs": [
+        "Burp Suite",
+        "OWASP ZAP",
+        "SQLmap",
+        "DVWA"
+      ],
+      "description": "Learn to identify and exploit common web vulnerabilities including SQL injection, XSS, and CSRF. Practice exclusively on DVWA, OWASP WebGoat, or authorized web targets.",
+      "topics": [
+        "OWASP Top 10",
+        "Burp Suite proxy setup",
+        "SQL injection",
+        "Cross-site scripting",
+        "Broken authentication testing"
+      ],
+      "resources": [
+        {
+          "label": "Burp Suite Documentation",
+          "platform": "PortSwigger",
+          "type": "docs"
+        },
+        {
+          "label": "Web Security Academy",
+          "platform": "PortSwigger",
+          "type": "course"
+        },
+        {
+          "label": "The Web Application Hacker Handbook",
+          "platform": "Wiley",
+          "type": "book"
+        }
+      ],
+      "challenge": "Complete 10 Web Security Academy labs covering SQL injection and XSS.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "pentester-8",
+      "title": "Password Attacks and Privilege Escalation",
+      "order": 8,
+      "techs": [
+        "Hashcat",
+        "John the Ripper",
+        "Hydra",
+        "LinPEAS"
+      ],
+      "description": "Learn password cracking techniques and privilege escalation paths on Linux and Windows systems. Practice only in isolated authorized lab environments.",
+      "topics": [
+        "Hash identification",
+        "Dictionary and brute-force attacks",
+        "Linux privesc techniques",
+        "Windows privesc techniques",
+        "SUID and sudo misconfigurations"
+      ],
+      "resources": [
+        {
+          "label": "Hashcat Documentation",
+          "platform": "Hashcat.net",
+          "type": "docs"
+        },
+        {
+          "label": "TryHackMe Privilege Escalation Rooms",
+          "platform": "TryHackMe",
+          "type": "course"
+        },
+        {
+          "label": "Linux Privilege Escalation Guide",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Crack a set of MD5 and bcrypt hashes using Hashcat with a wordlist.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "pentester-9",
+      "title": "Reporting and Pentest Methodology",
+      "order": 9,
+      "techs": [
+        "PTES",
+        "OWASP Testing Guide",
+        "Dradis",
+        "Markdown"
+      ],
+      "description": "Learn to document findings professionally and follow standard penetration testing methodologies. A well-written report is as important as the technical findings themselves.",
+      "topics": [
+        "PTES phases",
+        "Risk rating findings",
+        "Executive summary writing",
+        "Technical findings format",
+        "Remediation recommendations"
+      ],
+      "resources": [
+        {
+          "label": "Penetration Testing Execution Standard",
+          "platform": "PTES.org",
+          "type": "docs"
+        },
+        {
+          "label": "Writing Pentest Reports",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "OWASP Testing Guide",
+          "platform": "OWASP",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write a complete pentest report for your Metasploitable2 lab engagement.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "pentester-10",
+      "title": "Advanced Exploitation and OSCP Prep",
+      "order": 10,
+      "techs": [
+        "Buffer Overflow",
+        "Active Directory",
+        "Kali",
+        "Exploit Development"
+      ],
+      "description": "Master advanced exploitation including buffer overflows and Active Directory attacks in authorized lab environments. This layer prepares you for OSCP-level certification challenges.",
+      "topics": [
+        "Stack-based buffer overflows",
+        "Active Directory enumeration",
+        "Kerberoasting",
+        "Pass-the-hash",
+        "Custom exploit development basics"
+      ],
+      "resources": [
+        {
+          "label": "PWK Course (OSCP)",
+          "platform": "Offensive Security",
+          "type": "course"
+        },
+        {
+          "label": "HackTheBox Pro Labs",
+          "platform": "HackTheBox",
+          "type": "course"
+        },
+        {
+          "label": "The Hacker Playbook 3",
+          "platform": "No Starch Press",
+          "type": "book"
+        }
+      ],
+      "challenge": "Root five HackTheBox machines independently and document each exploitation chain.",
+      "estimatedTime": "8 weeks"
+    }
+  ],
+  "soc-analyst": [
+    {
+      "id": "soc-analyst-1",
+      "title": "IT and Networking Foundations",
+      "order": 1,
+      "techs": [
+        "TCP/IP",
+        "DNS",
+        "HTTP",
+        "Wireshark"
+      ],
+      "description": "Establish core networking and IT knowledge required for monitoring and incident analysis. SOC analysts must understand normal traffic to identify anomalies.",
+      "topics": [
+        "TCP/IP fundamentals",
+        "DNS and HTTP protocols",
+        "Common ports and services",
+        "Packet analysis basics",
+        "Log types overview"
+      ],
+      "resources": [
+        {
+          "label": "CompTIA Network+ Guide",
+          "platform": "CompTIA",
+          "type": "book"
+        },
+        {
+          "label": "Networking Fundamentals",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "Wireshark Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Identify all DNS queries and HTTP requests in a provided PCAP file.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "soc-analyst-2",
+      "title": "Security Fundamentals",
+      "order": 2,
+      "techs": [
+        "CIA Triad",
+        "CVE",
+        "MITRE ATT&CK",
+        "IOCs"
+      ],
+      "description": "Learn foundational security concepts and threat frameworks used daily in SOC operations. Familiarity with MITRE ATT&CK accelerates alert triage and investigation.",
+      "topics": [
+        "CIA Triad",
+        "Threat actors and motives",
+        "MITRE ATT&CK framework",
+        "Indicators of compromise",
+        "Kill chain model"
+      ],
+      "resources": [
+        {
+          "label": "MITRE ATT&CK Docs",
+          "platform": "MITRE",
+          "type": "docs"
+        },
+        {
+          "label": "CompTIA Security+ Guide",
+          "platform": "CompTIA",
+          "type": "book"
+        },
+        {
+          "label": "SOC Analyst Fundamentals",
+          "platform": "Cybrary",
+          "type": "course"
+        }
+      ],
+      "challenge": "Map a known malware campaign to at least five MITRE ATT&CK techniques.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "soc-analyst-3",
+      "title": "Log Analysis",
+      "order": 3,
+      "techs": [
+        "Windows Event Logs",
+        "Syslog",
+        "Linux Logs",
+        "Grep"
+      ],
+      "description": "Develop skills in reading and parsing logs from operating systems and applications. Log analysis is the primary daily activity for Tier 1 and Tier 2 SOC analysts.",
+      "topics": [
+        "Windows Event IDs",
+        "Linux auth logs",
+        "Apache access logs",
+        "Log parsing with grep and awk",
+        "Identifying failed logins"
+      ],
+      "resources": [
+        {
+          "label": "Windows Event Log Reference",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Linux Log Analysis",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "TryHackMe SOC Level 1",
+          "platform": "TryHackMe",
+          "type": "course"
+        }
+      ],
+      "challenge": "Identify a brute-force attack in a Windows Security event log export.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "soc-analyst-4",
+      "title": "SIEM Fundamentals",
+      "order": 4,
+      "techs": [
+        "Splunk",
+        "Elastic SIEM",
+        "QRadar",
+        "Alerts"
+      ],
+      "description": "Learn to ingest, search, and correlate security events using a SIEM platform. Splunk and Elastic SIEM are the most common platforms in enterprise SOC environments.",
+      "topics": [
+        "SIEM architecture",
+        "Log ingestion and parsing",
+        "Search queries",
+        "Creating dashboards",
+        "Correlation rules basics"
+      ],
+      "resources": [
+        {
+          "label": "Splunk Fundamentals 1",
+          "platform": "Splunk",
+          "type": "course"
+        },
+        {
+          "label": "Elastic SIEM Docs",
+          "platform": "Elastic",
+          "type": "docs"
+        },
+        {
+          "label": "SIEM for Beginners",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a Splunk dashboard showing failed logins and geographic source IPs.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "soc-analyst-5",
+      "title": "IDS and IPS",
+      "order": 5,
+      "techs": [
+        "Snort",
+        "Suricata",
+        "Zeek",
+        "Alert Rules"
+      ],
+      "description": "Understand how intrusion detection and prevention systems generate and classify alerts. Analysts must tune IDS rules to minimize false positives while catching real threats.",
+      "topics": [
+        "IDS vs IPS",
+        "Snort rule syntax",
+        "Suricata deployment",
+        "Alert categories",
+        "Reducing false positives"
+      ],
+      "resources": [
+        {
+          "label": "Snort Documentation",
+          "platform": "Snort.org",
+          "type": "docs"
+        },
+        {
+          "label": "Suricata User Guide",
+          "platform": "Suricata.io",
+          "type": "docs"
+        },
+        {
+          "label": "IDS Fundamentals Course",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write a custom Snort rule to detect ICMP flood traffic in a lab environment.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "soc-analyst-6",
+      "title": "Threat Intelligence",
+      "order": 6,
+      "techs": [
+        "MISP",
+        "VirusTotal",
+        "OTX",
+        "Threat Feeds"
+      ],
+      "description": "Learn to consume and apply threat intelligence to improve detection and investigation quality. Threat intel enriches alerts with context about known adversaries and indicators.",
+      "topics": [
+        "Threat intel types",
+        "IOC feeds",
+        "VirusTotal analysis",
+        "MISP platform basics",
+        "Enriching SIEM alerts with intel"
+      ],
+      "resources": [
+        {
+          "label": "MISP Documentation",
+          "platform": "MISP Project",
+          "type": "docs"
+        },
+        {
+          "label": "Threat Intelligence Fundamentals",
+          "platform": "Cybrary",
+          "type": "course"
+        },
+        {
+          "label": "VirusTotal Walkthrough",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Analyze a malware sample hash in VirusTotal and map findings to ATT&CK.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "soc-analyst-7",
+      "title": "Incident Triage and Response",
+      "order": 7,
+      "techs": [
+        "Playbooks",
+        "Ticketing",
+        "TheHive",
+        "Escalation"
+      ],
+      "description": "Learn structured incident triage workflows and how to escalate and document security events. Following playbooks ensures consistent and thorough response to common alert types.",
+      "topics": [
+        "Alert triage process",
+        "Severity classification",
+        "Escalation criteria",
+        "Incident documentation",
+        "SOC ticketing workflows"
+      ],
+      "resources": [
+        {
+          "label": "TheHive Documentation",
+          "platform": "TheHive Project",
+          "type": "docs"
+        },
+        {
+          "label": "Incident Response Playbooks",
+          "platform": "CISA",
+          "type": "docs"
+        },
+        {
+          "label": "SOC Analyst Training",
+          "platform": "LetsDefend.io",
+          "type": "course"
+        }
+      ],
+      "challenge": "Triage five simulated alerts on LetsDefend and document your analysis for each.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "soc-analyst-8",
+      "title": "Malware Analysis Basics",
+      "order": 8,
+      "techs": [
+        "Any.run",
+        "Cuckoo",
+        "PEStudio",
+        "Strings"
+      ],
+      "description": "Develop basic malware analysis skills to enrich SOC investigations without a dedicated reverse engineering role. Static and dynamic analysis helps classify threats quickly.",
+      "topics": [
+        "Static vs dynamic analysis",
+        "PE header analysis",
+        "Sandboxing with Any.run",
+        "Extracting strings",
+        "Behavioral indicators"
+      ],
+      "resources": [
+        {
+          "label": "Practical Malware Analysis",
+          "platform": "No Starch Press",
+          "type": "book"
+        },
+        {
+          "label": "Any.run Interactive Sandbox",
+          "platform": "Any.run",
+          "type": "docs"
+        },
+        {
+          "label": "Malware Analysis Basics",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Submit a malware sample to Any.run and produce a behavioral analysis report.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "soc-analyst-9",
+      "title": "Advanced SIEM and Detection Engineering",
+      "order": 9,
+      "techs": [
+        "Splunk SPL",
+        "Sigma Rules",
+        "YARA",
+        "KQL"
+      ],
+      "description": "Build custom detection rules and advanced queries to proactively find threats in SIEM data. Detection engineering reduces analyst fatigue by automating high-confidence alert logic.",
+      "topics": [
+        "Advanced Splunk SPL queries",
+        "Writing Sigma rules",
+        "YARA rule syntax",
+        "KQL for Microsoft Sentinel",
+        "Tuning detection logic"
+      ],
+      "resources": [
+        {
+          "label": "Splunk Advanced Searching",
+          "platform": "Splunk",
+          "type": "course"
+        },
+        {
+          "label": "Sigma Rule Repository",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "YARA Documentation",
+          "platform": "VirusTotal",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write a Sigma rule detecting lateral movement via PsExec and test it in Splunk.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "soc-analyst-10",
+      "title": "Threat Hunting and SOC Maturity",
+      "order": 10,
+      "techs": [
+        "Threat Hunting",
+        "Splunk",
+        "MITRE ATT&CK",
+        "Hypothesis-Based Hunting"
+      ],
+      "description": "Move from reactive alert-handling to proactive threat hunting using hypothesis-driven methodologies. Senior SOC analysts lead hunting initiatives that surface threats before they trigger alerts.",
+      "topics": [
+        "Threat hunting methodology",
+        "Hypothesis development",
+        "Hunting with ATT&CK",
+        "Documenting hunt results",
+        "Feeding hunt outcomes into detections"
+      ],
+      "resources": [
+        {
+          "label": "SANS Threat Hunting Course",
+          "platform": "SANS",
+          "type": "course"
+        },
+        {
+          "label": "TaHiTI Hunting Methodology",
+          "platform": "MITRE",
+          "type": "docs"
+        },
+        {
+          "label": "Threat Hunting with Splunk",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Conduct a hypothesis-based hunt for persistence mechanisms in a lab SIEM dataset.",
+      "estimatedTime": "4 weeks"
+    }
+  ],
+  "appsec-engineer": [
+    {
+      "id": "appsec-engineer-1",
+      "title": "Secure Development Foundations",
+      "order": 1,
+      "techs": [
+        "HTTP",
+        "REST APIs",
+        "Git",
+        "OWASP"
+      ],
+      "description": "Understand web application architecture and how developers build modern applications. AppSec engineers must read and reason about code to find and fix security issues.",
+      "topics": [
+        "HTTP request and response cycle",
+        "REST API basics",
+        "Authentication flows",
+        "Source control with Git",
+        "Developer security mindset"
+      ],
+      "resources": [
+        {
+          "label": "OWASP Developer Guide",
+          "platform": "OWASP",
+          "type": "docs"
+        },
+        {
+          "label": "Web Security for Developers",
+          "platform": "No Starch Press",
+          "type": "book"
+        },
+        {
+          "label": "HTTP Fundamentals",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Document the full authentication flow of an open-source web application on GitHub.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "appsec-engineer-2",
+      "title": "OWASP Top 10",
+      "order": 2,
+      "techs": [
+        "OWASP",
+        "DVWA",
+        "WebGoat",
+        "Burp Suite"
+      ],
+      "description": "Study the OWASP Top 10 vulnerabilities and understand how each occurs and how to remediate them. Hands-on practice with intentionally vulnerable apps reinforces each concept.",
+      "topics": [
+        "Injection flaws",
+        "Broken authentication",
+        "Insecure deserialization",
+        "SSRF",
+        "Security misconfiguration"
+      ],
+      "resources": [
+        {
+          "label": "OWASP Top 10 Docs",
+          "platform": "OWASP",
+          "type": "docs"
+        },
+        {
+          "label": "Web Security Academy",
+          "platform": "PortSwigger",
+          "type": "course"
+        },
+        {
+          "label": "OWASP WebGoat",
+          "platform": "OWASP",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Exploit and then remediate all OWASP Top 10 categories in DVWA.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "appsec-engineer-3",
+      "title": "Static Analysis and SAST",
+      "order": 3,
+      "techs": [
+        "Semgrep",
+        "SonarQube",
+        "Checkmarx",
+        "CodeQL"
+      ],
+      "description": "Learn to use static application security testing tools to find vulnerabilities in source code. SAST shifts security left by catching issues before code reaches production.",
+      "topics": [
+        "SAST tool types",
+        "Running Semgrep rules",
+        "SonarQube setup",
+        "Interpreting findings",
+        "Reducing false positives"
+      ],
+      "resources": [
+        {
+          "label": "Semgrep Documentation",
+          "platform": "Semgrep.dev",
+          "type": "docs"
+        },
+        {
+          "label": "SonarQube Docs",
+          "platform": "SonarSource",
+          "type": "docs"
+        },
+        {
+          "label": "SAST Tools Overview",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Run Semgrep against an open-source Python app and triage every finding.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "appsec-engineer-4",
+      "title": "Dynamic Analysis and DAST",
+      "order": 4,
+      "techs": [
+        "OWASP ZAP",
+        "Burp Suite",
+        "Nikto",
+        "API Fuzzing"
+      ],
+      "description": "Use dynamic testing tools to find runtime vulnerabilities in running applications. DAST complements SAST by catching issues that only appear during execution.",
+      "topics": [
+        "DAST vs SAST",
+        "OWASP ZAP automated scan",
+        "Burp Suite active scanner",
+        "API endpoint fuzzing",
+        "Reporting DAST findings"
+      ],
+      "resources": [
+        {
+          "label": "OWASP ZAP Documentation",
+          "platform": "OWASP",
+          "type": "docs"
+        },
+        {
+          "label": "Burp Suite Pro Guide",
+          "platform": "PortSwigger",
+          "type": "docs"
+        },
+        {
+          "label": "DAST with ZAP",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Run a full OWASP ZAP active scan against DVWA and document all findings.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "appsec-engineer-5",
+      "title": "Threat Modeling",
+      "order": 5,
+      "techs": [
+        "STRIDE",
+        "PASTA",
+        "Microsoft Threat Modeling Tool",
+        "Data Flow Diagrams"
+      ],
+      "description": "Learn structured threat modeling to identify security risks during the design phase. Early threat modeling prevents costly redesigns and reduces attack surface before code is written.",
+      "topics": [
+        "STRIDE methodology",
+        "Data flow diagrams",
+        "Trust boundaries",
+        "Threat enumeration",
+        "Mitigation mapping"
+      ],
+      "resources": [
+        {
+          "label": "Microsoft Threat Modeling Tool Docs",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Threat Modeling Manifesto",
+          "platform": "threatmodelingmanifesto.org",
+          "type": "docs"
+        },
+        {
+          "label": "Threat Modeling Course",
+          "platform": "Pluralsight",
+          "type": "course"
+        }
+      ],
+      "challenge": "Create a complete STRIDE threat model for a simple login and session management flow.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "appsec-engineer-6",
+      "title": "Secure Code Review",
+      "order": 6,
+      "techs": [
+        "Python",
+        "JavaScript",
+        "Java",
+        "Code Review Tools"
+      ],
+      "description": "Develop the ability to manually review source code for security vulnerabilities across common languages. Manual review catches logic flaws that automated tools miss.",
+      "topics": [
+        "Input validation patterns",
+        "SQL injection in code",
+        "Insecure crypto usage",
+        "Auth and session flaws",
+        "Code review checklist"
+      ],
+      "resources": [
+        {
+          "label": "OWASP Code Review Guide",
+          "platform": "OWASP",
+          "type": "docs"
+        },
+        {
+          "label": "Secure Code Review",
+          "platform": "Cybrary",
+          "type": "course"
+        },
+        {
+          "label": "Secure Coding in Python",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Review a provided Python Flask app and identify all input validation and auth issues.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "appsec-engineer-7",
+      "title": "API Security",
+      "order": 7,
+      "techs": [
+        "REST",
+        "GraphQL",
+        "JWT",
+        "OWASP API Top 10"
+      ],
+      "description": "Learn the unique security challenges of modern REST and GraphQL APIs. APIs are a primary attack surface in modern applications and require dedicated security testing approaches.",
+      "topics": [
+        "OWASP API Top 10",
+        "JWT vulnerabilities",
+        "Broken object level authorization",
+        "API fuzzing techniques",
+        "API gateway security"
+      ],
+      "resources": [
+        {
+          "label": "OWASP API Security Top 10",
+          "platform": "OWASP",
+          "type": "docs"
+        },
+        {
+          "label": "API Security Fundamentals",
+          "platform": "APIsecurity.io",
+          "type": "course"
+        },
+        {
+          "label": "JWT Security Guide",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Exploit BOLA and JWT signature bypass vulnerabilities in a lab API.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "appsec-engineer-8",
+      "title": "DevSecOps and CI/CD Security",
+      "order": 8,
+      "techs": [
+        "GitHub Actions",
+        "Jenkins",
+        "Semgrep",
+        "SCA"
+      ],
+      "description": "Integrate security tooling into CI/CD pipelines so security checks run on every code change. DevSecOps embeds AppSec engineers as partners in the development workflow.",
+      "topics": [
+        "CI/CD pipeline stages",
+        "Adding SAST to GitHub Actions",
+        "Software composition analysis",
+        "Container image scanning",
+        "Security gates in pipelines"
+      ],
+      "resources": [
+        {
+          "label": "GitHub Actions Security Docs",
+          "platform": "GitHub Docs",
+          "type": "docs"
+        },
+        {
+          "label": "DevSecOps Fundamentals",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "OWASP DevSecOps Guideline",
+          "platform": "OWASP",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Configure a GitHub Actions workflow that runs Semgrep and blocks merges on critical findings.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "appsec-engineer-9",
+      "title": "Vulnerability Management and Triage",
+      "order": 9,
+      "techs": [
+        "CVSS",
+        "Jira",
+        "Risk Scoring",
+        "Bug Bounty"
+      ],
+      "description": "Learn to prioritize and manage a vulnerability backlog across engineering teams. AppSec engineers must balance security risk against development velocity with clear communication.",
+      "topics": [
+        "CVSS scoring",
+        "Risk-based prioritization",
+        "Writing developer-friendly findings",
+        "SLA and remediation tracking",
+        "Bug bounty triage"
+      ],
+      "resources": [
+        {
+          "label": "CVSS v3.1 Specification",
+          "platform": "FIRST.org",
+          "type": "docs"
+        },
+        {
+          "label": "Vulnerability Management",
+          "platform": "Pluralsight",
+          "type": "course"
+        },
+        {
+          "label": "Bug Bounty Triage Guide",
+          "platform": "HackerOne",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Score and prioritize ten sample AppSec findings using CVSS and present a remediation plan.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "appsec-engineer-10",
+      "title": "Advanced AppSec Program Leadership",
+      "order": 10,
+      "techs": [
+        "BSIMM",
+        "SAMM",
+        "Pentest Coordination",
+        "Security Champions"
+      ],
+      "description": "Lead a mature application security program by building developer security culture and measuring program effectiveness. Senior AppSec engineers drive organizational security improvement through metrics and advocacy.",
+      "topics": [
+        "OWASP SAMM maturity model",
+        "Security champions program",
+        "AppSec metrics and KPIs",
+        "Coordinating third-party pentests",
+        "Secure design reviews at scale"
+      ],
+      "resources": [
+        {
+          "label": "OWASP SAMM Docs",
+          "platform": "OWASP",
+          "type": "docs"
+        },
+        {
+          "label": "BSIMM Report",
+          "platform": "Synopsys",
+          "type": "docs"
+        },
+        {
+          "label": "Building AppSec Programs",
+          "platform": "SANS",
+          "type": "course"
+        }
+      ],
+      "challenge": "Assess a sample company against OWASP SAMM and write a 12-month improvement roadmap.",
+      "estimatedTime": "6 weeks"
+    }
+  ],
+  "red-team": [
+    {
+      "id": "red-team-1",
+      "title": "Foundations and Legal Framework",
+      "order": 1,
+      "techs": [
+        "Rules of Engagement",
+        "Legal Docs",
+        "PTES",
+        "Scoping"
+      ],
+      "description": "Understand the legal, ethical, and operational framework that governs red team engagements. All red team activity must occur only against authorized targets under a signed rules of engagement.",
+      "topics": [
+        "Rules of engagement",
+        "Scope definition",
+        "Authorization documents",
+        "Deconfliction procedures",
+        "Red team vs pentest differences"
+      ],
+      "resources": [
+        {
+          "label": "PTES Documentation",
+          "platform": "PTES.org",
+          "type": "docs"
+        },
+        {
+          "label": "Red Team Development and Operations",
+          "platform": "Lulu Press",
+          "type": "book"
+        },
+        {
+          "label": "Red Team Planning Guide",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Draft a rules of engagement document for a simulated red team engagement scenario.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "red-team-2",
+      "title": "Pentesting Prerequisites",
+      "order": 2,
+      "techs": [
+        "Kali Linux",
+        "Metasploit",
+        "Nmap",
+        "Burp Suite"
+      ],
+      "description": "Ensure solid penetration testing fundamentals before progressing to red team tradecraft. Red teamers build on pentesting skills with added emphasis on stealth and persistence.",
+      "topics": [
+        "Network scanning",
+        "Exploitation basics",
+        "Web app testing",
+        "Password attacks",
+        "Post-exploitation basics"
+      ],
+      "resources": [
+        {
+          "label": "Penetration Testing by Georgia Weidman",
+          "platform": "No Starch Press",
+          "type": "book"
+        },
+        {
+          "label": "TryHackMe Jr Penetration Tester",
+          "platform": "TryHackMe",
+          "type": "course"
+        },
+        {
+          "label": "HackTheBox Starting Point",
+          "platform": "HackTheBox",
+          "type": "course"
+        }
+      ],
+      "challenge": "Complete HackTheBox Starting Point Tier 2 machines independently.",
+      "estimatedTime": "6 weeks"
+    },
+    {
+      "id": "red-team-3",
+      "title": "OPSEC and Tradecraft",
+      "order": 3,
+      "techs": [
+        "OPSEC",
+        "Logging Awareness",
+        "Infrastructure Setup",
+        "Redirectors"
+      ],
+      "description": "Learn operational security practices that prevent detection during authorized red team engagements. Good OPSEC simulates real adversary behavior and tests blue team detection capabilities.",
+      "topics": [
+        "OPSEC principles",
+        "Avoiding log artifacts",
+        "Redirector infrastructure",
+        "Domain fronting basics",
+        "Attack infrastructure design"
+      ],
+      "resources": [
+        {
+          "label": "Red Team Infrastructure Wiki",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "OPSEC for Red Teams",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "The Hacker Playbook 3",
+          "platform": "No Starch Press",
+          "type": "book"
+        }
+      ],
+      "challenge": "Set up a basic redirector infrastructure in an authorized lab using a VPS and test C2 connectivity.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "red-team-4",
+      "title": "Command and Control",
+      "order": 4,
+      "techs": [
+        "Cobalt Strike",
+        "Havoc",
+        "Sliver",
+        "Mythic"
+      ],
+      "description": "Learn to operate C2 frameworks to manage implants and execute post-exploitation tasks during authorized engagements. C2 infrastructure forms the backbone of red team operations.",
+      "topics": [
+        "C2 architecture",
+        "Beacon configuration",
+        "Listener types",
+        "Payload staging",
+        "C2 profiles and evasion"
+      ],
+      "resources": [
+        {
+          "label": "Cobalt Strike Documentation",
+          "platform": "HelpSystems",
+          "type": "docs"
+        },
+        {
+          "label": "Havoc C2 GitHub",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "C2 Matrix",
+          "platform": "thec2matrix.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy Sliver C2 in an authorized lab, create a beacon, and execute post-exploitation commands.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "red-team-5",
+      "title": "Active Directory Attacks",
+      "order": 5,
+      "techs": [
+        "BloodHound",
+        "Impacket",
+        "Rubeus",
+        "PowerView"
+      ],
+      "description": "Master Active Directory attack techniques including enumeration, privilege escalation, and lateral movement in authorized lab environments. AD attacks are central to most enterprise red team engagements.",
+      "topics": [
+        "AD enumeration with BloodHound",
+        "Kerberoasting",
+        "AS-REP roasting",
+        "Pass-the-hash",
+        "DCSync attacks"
+      ],
+      "resources": [
+        {
+          "label": "SpecterOps BloodHound Docs",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Active Directory Security Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Attacking Active Directory",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Compromise a lab AD domain from initial access to domain admin using BloodHound paths.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "red-team-6",
+      "title": "Phishing and Initial Access",
+      "order": 6,
+      "techs": [
+        "GoPhish",
+        "Evilginx",
+        "Macro Payloads",
+        "HTML Smuggling"
+      ],
+      "description": "Learn social engineering and phishing techniques used to simulate real-world initial access in authorized engagements. Phishing remains the most common initial access vector in enterprise breaches.",
+      "topics": [
+        "Phishing campaign setup",
+        "Evilginx reverse proxy",
+        "Payload delivery methods",
+        "HTML smuggling",
+        "Spear phishing pretexting"
+      ],
+      "resources": [
+        {
+          "label": "GoPhish Documentation",
+          "platform": "GetGoPhish.com",
+          "type": "docs"
+        },
+        {
+          "label": "Phishing Simulation Guide",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "The Social Engineer Toolkit",
+          "platform": "TrustedSec",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Run a GoPhish campaign against a lab environment and capture credentials via a login page clone.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "red-team-7",
+      "title": "Evasion and AV Bypass",
+      "order": 7,
+      "techs": [
+        "Shellcode",
+        "Obfuscation",
+        "AMSI Bypass",
+        "EDR Evasion"
+      ],
+      "description": "Learn payload obfuscation and AV/EDR evasion techniques for authorized lab use. Bypassing security controls tests the real-world effectiveness of a target organizations defenses.",
+      "topics": [
+        "AMSI bypass techniques",
+        "Shellcode injection methods",
+        "EDR hook evasion",
+        "Payload obfuscation",
+        "Living-off-the-land binaries"
+      ],
+      "resources": [
+        {
+          "label": "Malware Development for Red Teams",
+          "platform": "Sektor7",
+          "type": "course"
+        },
+        {
+          "label": "AMSI Bypass Guide",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Evasion Techniques Overview",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create a shellcode loader that bypasses Windows Defender in an authorized lab VM.",
+      "estimatedTime": "5 weeks"
+    },
+    {
+      "id": "red-team-8",
+      "title": "Lateral Movement and Persistence",
+      "order": 8,
+      "techs": [
+        "WMI",
+        "PsExec",
+        "Scheduled Tasks",
+        "Registry"
+      ],
+      "description": "Execute lateral movement and establish persistence mechanisms as part of authorized adversary simulation. These techniques test whether blue teams can detect long-dwell threats.",
+      "topics": [
+        "WMI lateral movement",
+        "SMB-based movement",
+        "Scheduled task persistence",
+        "Registry run key persistence",
+        "Service-based persistence"
+      ],
+      "resources": [
+        {
+          "label": "Red Team Tactics",
+          "platform": "SpecterOps",
+          "type": "docs"
+        },
+        {
+          "label": "Lateral Movement Techniques",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "MITRE ATT&CK Persistence Tactics",
+          "platform": "MITRE",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Establish three different persistence mechanisms on a lab Windows host and verify survivability across reboots.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "red-team-9",
+      "title": "Reporting and Adversary Emulation",
+      "order": 9,
+      "techs": [
+        "VECTR",
+        "ATT&CK Navigator",
+        "Executive Reports",
+        "Technical Reports"
+      ],
+      "description": "Document red team findings with precision and map techniques to ATT&CK for blue team improvement. Red team reports must communicate risk clearly to both executive and technical audiences.",
+      "topics": [
+        "Adversary emulation plans",
+        "ATT&CK Navigator mapping",
+        "Attack path narrative",
+        "Executive summary writing",
+        "Remediation recommendations"
+      ],
+      "resources": [
+        {
+          "label": "ATT&CK Navigator",
+          "platform": "MITRE",
+          "type": "docs"
+        },
+        {
+          "label": "VECTR Documentation",
+          "platform": "SecurityRisk.Advisors",
+          "type": "docs"
+        },
+        {
+          "label": "Red Team Report Writing",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a full red team report for a lab engagement including executive summary and ATT&CK mapping.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "red-team-10",
+      "title": "Advanced Adversary Simulation",
+      "order": 10,
+      "techs": [
+        "APT Emulation",
+        "Custom Implants",
+        "Purple Teaming",
+        "TIBER-EU"
+      ],
+      "description": "Simulate advanced persistent threat actor TTPs in authorized purple team and TIBER-style engagements. Elite red teamers collaborate directly with blue teams to rapidly improve enterprise defenses.",
+      "topics": [
+        "APT campaign emulation",
+        "Custom C2 implant development",
+        "Purple team exercises",
+        "TIBER-EU methodology",
+        "Continuous red team programs"
+      ],
+      "resources": [
+        {
+          "label": "TIBER-EU Framework",
+          "platform": "European Central Bank",
+          "type": "docs"
+        },
+        {
+          "label": "Advanced Threat Tactics Course",
+          "platform": "Cobalt Strike",
+          "type": "course"
+        },
+        {
+          "label": "Purple Team Exercise Framework",
+          "platform": "SCYTHE",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Design and execute a purple team exercise emulating a named APT group against an authorized lab environment.",
+      "estimatedTime": "8 weeks"
+    }
+  ],
+  "blue-team": [
+    {
+      "id": "blue-team-1",
+      "title": "Networking and OS Security Basics",
+      "order": 1,
+      "techs": [
+        "TCP/IP",
+        "Windows",
+        "Linux",
+        "Firewalls"
+      ],
+      "description": "Build the foundational networking and operating system knowledge needed for defensive security work. Blue teamers must deeply understand normal system behavior to detect deviations.",
+      "topics": [
+        "TCP/IP fundamentals",
+        "Windows security model",
+        "Linux hardening basics",
+        "Firewall rule logic",
+        "Common attack vectors overview"
+      ],
+      "resources": [
+        {
+          "label": "CompTIA Security+ Guide",
+          "platform": "CompTIA",
+          "type": "book"
+        },
+        {
+          "label": "Networking Fundamentals",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "Windows Security Basics",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Harden a fresh Windows 10 VM using the CIS Benchmark Level 1 checklist.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "blue-team-2",
+      "title": "Hardening and Secure Configuration",
+      "order": 2,
+      "techs": [
+        "CIS Benchmarks",
+        "Group Policy",
+        "Lynis",
+        "AppArmor"
+      ],
+      "description": "Apply industry-standard hardening baselines to operating systems and applications. Reducing attack surface through hardening is the most cost-effective defensive control.",
+      "topics": [
+        "CIS Benchmark application",
+        "Windows Group Policy hardening",
+        "Linux hardening with Lynis",
+        "Disabling unnecessary services",
+        "Patch management basics"
+      ],
+      "resources": [
+        {
+          "label": "CIS Benchmarks",
+          "platform": "CIS Security",
+          "type": "docs"
+        },
+        {
+          "label": "STIG Viewer",
+          "platform": "DISA",
+          "type": "docs"
+        },
+        {
+          "label": "Linux Hardening Guide",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Run Lynis against a Linux VM and remediate all high-severity findings.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "blue-team-3",
+      "title": "Log Analysis and Monitoring",
+      "order": 3,
+      "techs": [
+        "Windows Event Logs",
+        "Syslog",
+        "Elastic Stack",
+        "Graylog"
+      ],
+      "description": "Collect and analyze logs from endpoints, servers, and network devices to detect threats. Centralized logging is the foundation of any effective defensive monitoring capability.",
+      "topics": [
+        "Windows Event IDs for security",
+        "Syslog centralization",
+        "Elastic Stack setup",
+        "Creating log alerts",
+        "Baseline behavior analysis"
+      ],
+      "resources": [
+        {
+          "label": "Elastic SIEM Docs",
+          "platform": "Elastic",
+          "type": "docs"
+        },
+        {
+          "label": "Windows Event Log Guide",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Log Analysis for Blue Teams",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy Elastic SIEM in a lab and ingest Windows and Linux endpoint logs.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "blue-team-4",
+      "title": "EDR and Endpoint Security",
+      "order": 4,
+      "techs": [
+        "Microsoft Defender",
+        "CrowdStrike",
+        "Carbon Black",
+        "Sysmon"
+      ],
+      "description": "Deploy and configure endpoint detection and response tools to monitor and protect endpoints. EDR provides deep visibility into endpoint activity that traditional AV cannot match.",
+      "topics": [
+        "EDR architecture",
+        "Sysmon deployment and config",
+        "Endpoint alert triage",
+        "Behavioral detection rules",
+        "Isolating infected endpoints"
+      ],
+      "resources": [
+        {
+          "label": "Sysmon Configuration Guide",
+          "platform": "Microsoft Docs",
+          "type": "docs"
+        },
+        {
+          "label": "SwiftOnSecurity Sysmon Config",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "EDR Fundamentals",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy Sysmon with the SwiftOnSecurity config and detect a Mimikatz execution.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "blue-team-5",
+      "title": "Network Defense",
+      "order": 5,
+      "techs": [
+        "Zeek",
+        "Suricata",
+        "pfSense",
+        "NetFlow"
+      ],
+      "description": "Monitor and protect network infrastructure using network security tools and traffic analysis. Network-based controls complement endpoint defenses and catch threats that bypass EDR.",
+      "topics": [
+        "Network segmentation",
+        "IDS/IPS with Suricata",
+        "Zeek network logging",
+        "NetFlow analysis",
+        "Firewall rule management"
+      ],
+      "resources": [
+        {
+          "label": "Suricata Documentation",
+          "platform": "Suricata.io",
+          "type": "docs"
+        },
+        {
+          "label": "Zeek Documentation",
+          "platform": "Zeek.org",
+          "type": "docs"
+        },
+        {
+          "label": "Network Defense Course",
+          "platform": "Pluralsight",
+          "type": "course"
+        }
+      ],
+      "challenge": "Configure Suricata to detect port scans and alert on them in a lab network.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "blue-team-6",
+      "title": "Incident Response",
+      "order": 6,
+      "techs": [
+        "IR Playbooks",
+        "Volatility",
+        "FTK Imager",
+        "TheHive"
+      ],
+      "description": "Execute structured incident response procedures to contain and eradicate threats quickly. A well-rehearsed IR process minimizes attacker dwell time and business impact.",
+      "topics": [
+        "IR lifecycle phases",
+        "Evidence preservation",
+        "Memory acquisition",
+        "Containment strategies",
+        "Post-incident review"
+      ],
+      "resources": [
+        {
+          "label": "NIST SP 800-61",
+          "platform": "NIST",
+          "type": "docs"
+        },
+        {
+          "label": "Incident Response Course",
+          "platform": "SANS",
+          "type": "course"
+        },
+        {
+          "label": "Volatility Documentation",
+          "platform": "Volatility Foundation",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Respond to a simulated ransomware incident in a lab, document all IR steps, and write a post-incident report.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "blue-team-7",
+      "title": "Digital Forensics",
+      "order": 7,
+      "techs": [
+        "Autopsy",
+        "Volatility",
+        "FTK",
+        "KAPE"
+      ],
+      "description": "Investigate compromised systems using digital forensics tools to reconstruct attacker activity. Forensic evidence supports legal proceedings and improves detection after an incident.",
+      "topics": [
+        "Disk image acquisition",
+        "File system forensics",
+        "Memory forensics with Volatility",
+        "Artifact collection with KAPE",
+        "Timeline analysis"
+      ],
+      "resources": [
+        {
+          "label": "Autopsy Documentation",
+          "platform": "Basis Technology",
+          "type": "docs"
+        },
+        {
+          "label": "Practical Forensic Imaging",
+          "platform": "No Starch Press",
+          "type": "book"
+        },
+        {
+          "label": "DFIR.training Resources",
+          "platform": "DFIR.training",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Analyze a provided memory dump with Volatility and identify all running malicious processes.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "blue-team-8",
+      "title": "Threat Intelligence Integration",
+      "order": 8,
+      "techs": [
+        "MISP",
+        "OpenCTI",
+        "VirusTotal",
+        "STIX/TAXII"
+      ],
+      "description": "Ingest and operationalize threat intelligence to proactively block and detect known threats. Integrating intelligence feeds with SIEM and firewalls automates response to known indicators.",
+      "topics": [
+        "STIX and TAXII standards",
+        "MISP platform setup",
+        "IOC ingestion into SIEM",
+        "Threat intel sharing",
+        "Intel-driven hunting"
+      ],
+      "resources": [
+        {
+          "label": "MISP Documentation",
+          "platform": "MISP Project",
+          "type": "docs"
+        },
+        {
+          "label": "OpenCTI Docs",
+          "platform": "OpenCTI",
+          "type": "docs"
+        },
+        {
+          "label": "Threat Intel Integration Course",
+          "platform": "Cybrary",
+          "type": "course"
+        }
+      ],
+      "challenge": "Configure MISP to receive a public threat feed and push IOCs into Elastic SIEM alerts.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "blue-team-9",
+      "title": "Detection Engineering",
+      "order": 9,
+      "techs": [
+        "Sigma",
+        "YARA",
+        "Splunk SPL",
+        "ATT&CK"
+      ],
+      "description": "Build and maintain high-fidelity detection rules mapped to the MITRE ATT&CK framework. Detection engineering reduces noise and ensures critical attacker techniques reliably trigger alerts.",
+      "topics": [
+        "Sigma rule writing",
+        "YARA rule development",
+        "ATT&CK coverage mapping",
+        "Alert tuning and baselining",
+        "Detection lifecycle management"
+      ],
+      "resources": [
+        {
+          "label": "Sigma Repository",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "YARA Documentation",
+          "platform": "VirusTotal",
+          "type": "docs"
+        },
+        {
+          "label": "Detection Engineering Course",
+          "platform": "Pluralsight",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write and deploy five Sigma rules covering different ATT&CK techniques in a lab SIEM.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "blue-team-10",
+      "title": "Blue Team Program Maturity",
+      "order": 10,
+      "techs": [
+        "Purple Teaming",
+        "SOC Metrics",
+        "SOAR",
+        "Tabletop Exercises"
+      ],
+      "description": "Lead a mature defensive security program by measuring effectiveness and continuously improving through purple teaming. Senior blue teamers drive organizational resilience through data-driven decision making.",
+      "topics": [
+        "SOAR platform automation",
+        "SOC KPIs and metrics",
+        "Purple team exercises",
+        "Tabletop exercise design",
+        "Blue team maturity models"
+      ],
+      "resources": [
+        {
+          "label": "SOAR Buyer Guide",
+          "platform": "Gartner",
+          "type": "docs"
+        },
+        {
+          "label": "Purple Team Exercise Framework",
+          "platform": "SCYTHE",
+          "type": "docs"
+        },
+        {
+          "label": "Building a World-Class SOC",
+          "platform": "SANS",
+          "type": "course"
+        }
+      ],
+      "challenge": "Design and run a tabletop incident response exercise for a simulated ransomware attack scenario.",
+      "estimatedTime": "5 weeks"
+    }
+  ],
+  "cloud-security": [
+    {
+      "id": "cloud-security-1",
+      "title": "Cloud Computing Fundamentals",
+      "order": 1,
+      "techs": [
+        "AWS",
+        "Azure",
+        "GCP",
+        "Shared Responsibility Model"
+      ],
+      "description": "Understand cloud service models, deployment types, and the shared responsibility model. Cloud security engineers must know what security obligations fall to the customer versus the provider.",
+      "topics": [
+        "IaaS PaaS SaaS differences",
+        "Shared responsibility model",
+        "AWS global infrastructure",
+        "Cloud pricing basics",
+        "Cloud account setup"
+      ],
+      "resources": [
+        {
+          "label": "AWS Cloud Practitioner Docs",
+          "platform": "AWS",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud Computing Fundamentals",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "Shared Responsibility Explained",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create an AWS free-tier account and document the shared responsibility boundaries for EC2 and S3.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-security-2",
+      "title": "Identity and Access Management",
+      "order": 2,
+      "techs": [
+        "AWS IAM",
+        "Azure AD",
+        "RBAC",
+        "Least Privilege"
+      ],
+      "description": "Master cloud IAM concepts including roles, policies, and the principle of least privilege. IAM misconfiguration is the most common cause of cloud security breaches.",
+      "topics": [
+        "IAM users roles and policies",
+        "Policy evaluation logic",
+        "Cross-account roles",
+        "Service control policies",
+        "IAM access analyzer"
+      ],
+      "resources": [
+        {
+          "label": "AWS IAM Documentation",
+          "platform": "AWS",
+          "type": "docs"
+        },
+        {
+          "label": "IAM Security Best Practices",
+          "platform": "AWS",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud IAM Course",
+          "platform": "Pluralsight",
+          "type": "course"
+        }
+      ],
+      "challenge": "Audit an AWS account IAM configuration and eliminate all overly permissive policies.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "cloud-security-3",
+      "title": "Network Security in the Cloud",
+      "order": 3,
+      "techs": [
+        "VPC",
+        "Security Groups",
+        "NACLs",
+        "AWS WAF"
+      ],
+      "description": "Design and implement secure cloud network architectures using VPCs, security groups, and access control lists. Network segmentation in the cloud prevents lateral movement between workloads.",
+      "topics": [
+        "VPC design patterns",
+        "Security group rules",
+        "Network ACL differences",
+        "Private vs public subnets",
+        "VPC flow log analysis"
+      ],
+      "resources": [
+        {
+          "label": "AWS VPC Documentation",
+          "platform": "AWS",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud Network Security",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "AWS Networking Cookbook",
+          "platform": "Packt",
+          "type": "book"
+        }
+      ],
+      "challenge": "Design a three-tier VPC architecture with proper security group rules and document each boundary.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "cloud-security-4",
+      "title": "Cloud Security Posture Management",
+      "order": 4,
+      "techs": [
+        "AWS Security Hub",
+        "Prisma Cloud",
+        "Wiz",
+        "Scout Suite"
+      ],
+      "description": "Use CSPM tools to continuously assess cloud environment configurations against security benchmarks. CSPM catches misconfigurations before attackers discover them.",
+      "topics": [
+        "CSPM concepts",
+        "CIS cloud benchmarks",
+        "Security Hub setup",
+        "Findings prioritization",
+        "Remediation automation"
+      ],
+      "resources": [
+        {
+          "label": "AWS Security Hub Docs",
+          "platform": "AWS",
+          "type": "docs"
+        },
+        {
+          "label": "Scout Suite Documentation",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "CSPM Overview Course",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Run Scout Suite against a lab AWS account and remediate all critical findings.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "cloud-security-5",
+      "title": "Data Security and Encryption",
+      "order": 5,
+      "techs": [
+        "AWS KMS",
+        "S3 Encryption",
+        "Secrets Manager",
+        "Macie"
+      ],
+      "description": "Protect data at rest and in transit using cloud-native encryption and secrets management services. Unencrypted data stores and exposed secrets are leading causes of cloud data breaches.",
+      "topics": [
+        "Encryption key management",
+        "S3 bucket encryption policies",
+        "Secrets rotation",
+        "AWS Macie for data discovery",
+        "TLS enforcement"
+      ],
+      "resources": [
+        {
+          "label": "AWS KMS Documentation",
+          "platform": "AWS",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Secrets Manager Docs",
+          "platform": "AWS",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud Data Security Course",
+          "platform": "Coursera",
+          "type": "course"
+        }
+      ],
+      "challenge": "Configure S3 server-side encryption with KMS and enforce it via a bucket policy.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cloud-security-6",
+      "title": "Logging, Monitoring, and Alerting",
+      "order": 6,
+      "techs": [
+        "AWS CloudTrail",
+        "CloudWatch",
+        "GuardDuty",
+        "EventBridge"
+      ],
+      "description": "Implement comprehensive cloud logging and threat detection using native and third-party tools. Without proper logging, cloud incidents go undetected for months.",
+      "topics": [
+        "CloudTrail configuration",
+        "CloudWatch log groups",
+        "GuardDuty findings",
+        "EventBridge alert routing",
+        "Log retention policies"
+      ],
+      "resources": [
+        {
+          "label": "AWS CloudTrail Docs",
+          "platform": "AWS",
+          "type": "docs"
+        },
+        {
+          "label": "GuardDuty User Guide",
+          "platform": "AWS",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Security Monitoring",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Configure GuardDuty and route high-severity findings to an SNS email alert.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "cloud-security-7",
+      "title": "Zero Trust Architecture",
+      "order": 7,
+      "techs": [
+        "Zero Trust",
+        "BeyondCorp",
+        "mTLS",
+        "AWS Verified Access"
+      ],
+      "description": "Design and implement Zero Trust network access patterns that assume breach at all times. Zero Trust replaces perimeter-based security with identity-centric continuous verification.",
+      "topics": [
+        "Zero Trust principles",
+        "Microsegmentation",
+        "Mutual TLS",
+        "Identity-aware proxies",
+        "AWS Verified Access setup"
+      ],
+      "resources": [
+        {
+          "label": "NIST SP 800-207 Zero Trust",
+          "platform": "NIST",
+          "type": "docs"
+        },
+        {
+          "label": "Zero Trust Architecture Course",
+          "platform": "Pluralsight",
+          "type": "course"
+        },
+        {
+          "label": "Google BeyondCorp Paper",
+          "platform": "Google",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Implement a Zero Trust access pattern for a lab application using AWS Verified Access.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "cloud-security-8",
+      "title": "Container and Kubernetes Security",
+      "order": 8,
+      "techs": [
+        "Docker",
+        "Kubernetes",
+        "Trivy",
+        "Falco"
+      ],
+      "description": "Secure containerized workloads from image build through runtime using cloud-native tools. Container escape and cluster misconfiguration are critical risks in modern cloud deployments.",
+      "topics": [
+        "Container image hardening",
+        "Kubernetes RBAC",
+        "Pod security standards",
+        "Runtime threat detection with Falco",
+        "Image scanning with Trivy"
+      ],
+      "resources": [
+        {
+          "label": "Kubernetes Security Docs",
+          "platform": "Kubernetes.io",
+          "type": "docs"
+        },
+        {
+          "label": "Falco Documentation",
+          "platform": "Falco.org",
+          "type": "docs"
+        },
+        {
+          "label": "Container Security Course",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Scan a Kubernetes cluster with kube-bench and remediate all CIS benchmark failures.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "cloud-security-9",
+      "title": "Cloud Incident Response",
+      "order": 9,
+      "techs": [
+        "AWS CloudTrail",
+        "Forensics",
+        "IR Runbooks",
+        "Isolation"
+      ],
+      "description": "Execute cloud-specific incident response procedures to investigate and contain cloud security incidents. Cloud IR requires different tooling and skills compared to traditional endpoint-based response.",
+      "topics": [
+        "Cloud IR methodology",
+        "Preserving CloudTrail evidence",
+        "Isolating compromised resources",
+        "IAM forensics",
+        "Cloud IR runbooks"
+      ],
+      "resources": [
+        {
+          "label": "AWS Security Incident Response Guide",
+          "platform": "AWS",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud Forensics Course",
+          "platform": "SANS",
+          "type": "course"
+        },
+        {
+          "label": "Cloud IR Playbooks",
+          "platform": "GitHub",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Simulate an IAM key compromise in a lab environment and execute a full cloud IR runbook.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "cloud-security-10",
+      "title": "Cloud Security Architecture and Governance",
+      "order": 10,
+      "techs": [
+        "AWS Organizations",
+        "Landing Zone",
+        "SCPs",
+        "Cloud Governance"
+      ],
+      "description": "Design enterprise-scale cloud security architectures with multi-account governance and policy automation. Senior cloud security engineers build guardrails that enforce security at scale across hundreds of accounts.",
+      "topics": [
+        "AWS Organizations setup",
+        "Service control policies",
+        "AWS Landing Zone",
+        "Cloud security benchmarks",
+        "FinOps and security alignment"
+      ],
+      "resources": [
+        {
+          "label": "AWS Security Reference Architecture",
+          "platform": "AWS",
+          "type": "docs"
+        },
+        {
+          "label": "AWS Well-Architected Security Pillar",
+          "platform": "AWS",
+          "type": "docs"
+        },
+        {
+          "label": "Cloud Security Alliance Docs",
+          "platform": "CSA",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Design a multi-account AWS landing zone with SCPs enforcing encryption and logging in all child accounts.",
+      "estimatedTime": "6 weeks"
+    }
+  ]
+}

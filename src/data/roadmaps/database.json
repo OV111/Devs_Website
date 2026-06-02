@@ -1,0 +1,4105 @@
+{
+  "postgres-dba": [
+    {
+      "id": "postgres-dba-1",
+      "title": "PostgreSQL Fundamentals",
+      "order": 1,
+      "techs": [
+        "PostgreSQL",
+        "psql",
+        "SQL",
+        "pgAdmin"
+      ],
+      "description": "Learn the core concepts of relational databases using PostgreSQL as the engine. Understand how to install, configure, and interact with a PostgreSQL server.",
+      "topics": [
+        "Installing PostgreSQL",
+        "psql CLI basics",
+        "Creating databases and users",
+        "Basic SQL CRUD",
+        "Data types in PostgreSQL",
+        "Schema and table design"
+      ],
+      "resources": [
+        {
+          "label": "PostgreSQL Official Documentation",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "Learn PostgreSQL",
+          "platform": "freeCodeCamp",
+          "type": "course"
+        },
+        {
+          "label": "PostgreSQL Tutorial for Beginners",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "PostgreSQL: Up and Running",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Create a local PostgreSQL instance, create a database, define three related tables, and perform basic CRUD operations using psql.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "postgres-dba-2",
+      "title": "SQL Querying and Joins",
+      "order": 2,
+      "techs": [
+        "PostgreSQL",
+        "SQL",
+        "psql",
+        "pgAdmin"
+      ],
+      "description": "Master advanced SQL queries including joins, subqueries, aggregations, and window functions. Practice writing efficient queries against multi-table schemas.",
+      "topics": [
+        "INNER, LEFT, RIGHT, FULL joins",
+        "Subqueries and CTEs",
+        "GROUP BY and HAVING",
+        "Window functions",
+        "EXPLAIN and query plans",
+        "Indexes basics"
+      ],
+      "resources": [
+        {
+          "label": "PostgreSQL SQL Syntax Docs",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "SQL for Data Analysis",
+          "platform": "Udacity",
+          "type": "course"
+        },
+        {
+          "label": "Advanced SQL Queries",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Learning SQL",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Write 10 progressively complex queries against a sample e-commerce schema including at least one CTE and one window function.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "postgres-dba-3",
+      "title": "Indexing and Query Optimization",
+      "order": 3,
+      "techs": [
+        "PostgreSQL",
+        "EXPLAIN ANALYZE",
+        "B-tree",
+        "GIN"
+      ],
+      "description": "Understand how PostgreSQL uses indexes to speed up queries and learn when and how to create the right index type. Analyze query plans to identify bottlenecks.",
+      "topics": [
+        "B-tree, Hash, GIN, GiST indexes",
+        "EXPLAIN and EXPLAIN ANALYZE",
+        "Index selectivity",
+        "Partial and expression indexes",
+        "Vacuum and autovacuum",
+        "Table statistics"
+      ],
+      "resources": [
+        {
+          "label": "Indexes in PostgreSQL",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "PostgreSQL Query Optimization",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Understanding EXPLAIN",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "PostgreSQL Query Optimization",
+          "platform": "Apress",
+          "type": "book"
+        }
+      ],
+      "challenge": "Take a slow query from a test dataset, analyze it with EXPLAIN ANALYZE, add appropriate indexes, and document the performance improvement.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "postgres-dba-4",
+      "title": "Transactions, Locking, and Concurrency",
+      "order": 4,
+      "techs": [
+        "PostgreSQL",
+        "MVCC",
+        "SERIALIZABLE",
+        "pg_locks"
+      ],
+      "description": "Learn how PostgreSQL handles concurrent access through MVCC and locking mechanisms. Understand isolation levels and how to prevent deadlocks.",
+      "topics": [
+        "ACID properties",
+        "Transaction isolation levels",
+        "MVCC internals",
+        "Row-level and table-level locks",
+        "Deadlock detection",
+        "Advisory locks"
+      ],
+      "resources": [
+        {
+          "label": "Concurrency Control in PostgreSQL",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "Database Internals",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "PostgreSQL Locking Deep Dive",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Simulate a deadlock scenario in a test environment, identify it using pg_locks, and refactor the transaction order to eliminate the deadlock.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "postgres-dba-5",
+      "title": "Backup, Restore, and PITR",
+      "order": 5,
+      "techs": [
+        "pg_dump",
+        "pg_restore",
+        "pg_basebackup",
+        "WAL"
+      ],
+      "description": "Learn backup strategies for PostgreSQL including logical and physical backups and point-in-time recovery. Practice restore procedures to verify backup integrity.",
+      "topics": [
+        "pg_dump and pg_dumpall",
+        "pg_restore",
+        "pg_basebackup",
+        "WAL archiving",
+        "Point-in-time recovery (PITR)",
+        "Backup scheduling and retention"
+      ],
+      "resources": [
+        {
+          "label": "Backup and Restore - PostgreSQL Docs",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "PostgreSQL Administration",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "PostgreSQL PITR Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Practical PostgreSQL",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Set up WAL archiving, simulate data loss, and restore the database to a specific point in time using PITR.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "postgres-dba-6",
+      "title": "Replication Fundamentals",
+      "order": 6,
+      "techs": [
+        "PostgreSQL",
+        "Streaming Replication",
+        "WAL",
+        "pg_hba.conf"
+      ],
+      "description": "Configure streaming replication between a primary and one or more standby servers. Understand synchronous vs asynchronous replication trade-offs.",
+      "topics": [
+        "Streaming replication setup",
+        "Synchronous vs asynchronous replication",
+        "Replication slots",
+        "Hot standby",
+        "Replication monitoring",
+        "Failover basics"
+      ],
+      "resources": [
+        {
+          "label": "High Availability - PostgreSQL Docs",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "PostgreSQL Replication",
+          "platform": "Packt",
+          "type": "book"
+        },
+        {
+          "label": "Setting Up Streaming Replication",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Configure a primary and standby PostgreSQL server with streaming replication and verify that changes on primary propagate to standby.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "postgres-dba-7",
+      "title": "PostgreSQL Security and Access Control",
+      "order": 7,
+      "techs": [
+        "PostgreSQL",
+        "pg_hba.conf",
+        "GRANT",
+        "SSL"
+      ],
+      "description": "Implement security best practices including role-based access control, SSL encryption, and network-level restrictions. Audit access and privilege assignments.",
+      "topics": [
+        "Roles and privileges",
+        "pg_hba.conf configuration",
+        "SSL/TLS setup",
+        "Row-level security",
+        "Audit logging",
+        "Password policies"
+      ],
+      "resources": [
+        {
+          "label": "PostgreSQL Security Docs",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "Database Security Fundamentals",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "PostgreSQL Security Best Practices",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create a multi-role access control scheme with read-only, read-write, and admin roles, enable SSL, and test that privileges are enforced correctly.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "postgres-dba-8",
+      "title": "Performance Tuning and Configuration",
+      "order": 8,
+      "techs": [
+        "PostgreSQL",
+        "postgresql.conf",
+        "pg_stat_statements",
+        "pgBadger"
+      ],
+      "description": "Tune PostgreSQL configuration parameters for memory, connections, and I/O to maximize performance for a specific workload. Use pg_stat_statements to identify slow queries.",
+      "topics": [
+        "shared_buffers, work_mem, wal_buffers",
+        "Connection pooling with PgBouncer",
+        "pg_stat_statements setup",
+        "Checkpoint tuning",
+        "Parallel query settings",
+        "Log analysis with pgBadger"
+      ],
+      "resources": [
+        {
+          "label": "Resource Consumption - PostgreSQL Docs",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "PostgreSQL High Performance",
+          "platform": "Packt",
+          "type": "book"
+        },
+        {
+          "label": "Tuning PostgreSQL Configs",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "PgBouncer Docs",
+          "platform": "pgbouncer.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Profile a write-heavy workload, tune postgresql.conf for that workload, and show measurable throughput improvement using pgbench.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "postgres-dba-9",
+      "title": "Logical Replication, Partitioning, and Extensions",
+      "order": 9,
+      "techs": [
+        "PostgreSQL",
+        "Logical Replication",
+        "Table Partitioning",
+        "PostGIS"
+      ],
+      "description": "Use logical replication for cross-version migrations and selective table replication. Implement table partitioning for large datasets and explore useful extensions.",
+      "topics": [
+        "Logical replication publication and subscription",
+        "Range, list, and hash partitioning",
+        "Partition pruning",
+        "pg_partman",
+        "PostGIS basics",
+        "pg_cron and other extensions"
+      ],
+      "resources": [
+        {
+          "label": "Logical Replication - PostgreSQL Docs",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "Partitioning in PostgreSQL",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "PostgreSQL Partitioning Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "PostGIS Documentation",
+          "platform": "postgis.net",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Set up logical replication from one database to another, partition a 10-million-row table by range, and query it to verify partition pruning.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "postgres-dba-10",
+      "title": "High Availability, Patroni, and Production Operations",
+      "order": 10,
+      "techs": [
+        "Patroni",
+        "etcd",
+        "HAProxy",
+        "pgBackRest"
+      ],
+      "description": "Deploy a production-grade highly available PostgreSQL cluster using Patroni for automatic failover and etcd for consensus. Implement automated backup with pgBackRest.",
+      "topics": [
+        "Patroni architecture and setup",
+        "etcd cluster configuration",
+        "Automatic failover",
+        "HAProxy for load balancing",
+        "pgBackRest for backup and PITR",
+        "Monitoring with Prometheus and Grafana"
+      ],
+      "resources": [
+        {
+          "label": "Patroni Documentation",
+          "platform": "patroni.readthedocs.io",
+          "type": "docs"
+        },
+        {
+          "label": "pgBackRest Documentation",
+          "platform": "pgbackrest.org",
+          "type": "docs"
+        },
+        {
+          "label": "HA PostgreSQL with Patroni",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "PostgreSQL High Availability Cookbook",
+          "platform": "Packt",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deploy a 3-node Patroni cluster, simulate a primary failure, verify automatic failover, and restore from a pgBackRest backup to a point in time.",
+      "estimatedTime": "4 weeks"
+    }
+  ],
+  "mysql-dba": [
+    {
+      "id": "mysql-dba-1",
+      "title": "MySQL Fundamentals",
+      "order": 1,
+      "techs": [
+        "MySQL",
+        "mysql CLI",
+        "SQL",
+        "MySQL Workbench"
+      ],
+      "description": "Get started with MySQL by installing the server and learning to interact with it via the command-line client and MySQL Workbench. Understand the basic data types and SQL syntax.",
+      "topics": [
+        "Installing MySQL Server",
+        "mysql CLI basics",
+        "Creating databases and tables",
+        "Basic SQL CRUD",
+        "MySQL data types",
+        "Character sets and collations"
+      ],
+      "resources": [
+        {
+          "label": "MySQL 8.0 Reference Manual",
+          "platform": "dev.mysql.com",
+          "type": "docs"
+        },
+        {
+          "label": "MySQL for Beginners",
+          "platform": "freeCodeCamp",
+          "type": "course"
+        },
+        {
+          "label": "MySQL Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Learning MySQL",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Install MySQL, create a schema for a library system with books, authors, and members tables, and populate it with sample data.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mysql-dba-2",
+      "title": "InnoDB Storage Engine",
+      "order": 2,
+      "techs": [
+        "MySQL",
+        "InnoDB",
+        "MVCC",
+        "ibdata"
+      ],
+      "description": "Understand the InnoDB storage engine, which provides ACID-compliant transactions and row-level locking. Learn about its internal architecture including buffer pool and redo logs.",
+      "topics": [
+        "InnoDB vs MyISAM",
+        "Buffer pool configuration",
+        "Redo and undo logs",
+        "Clustered indexes",
+        "Foreign key constraints",
+        "InnoDB file structure"
+      ],
+      "resources": [
+        {
+          "label": "InnoDB Storage Engine Docs",
+          "platform": "dev.mysql.com",
+          "type": "docs"
+        },
+        {
+          "label": "MySQL Internals Manual",
+          "platform": "dev.mysql.com",
+          "type": "docs"
+        },
+        {
+          "label": "InnoDB Deep Dive",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "High Performance MySQL",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Configure InnoDB buffer pool size, create a transactional test scenario, and verify that uncommitted data is isolated from other sessions.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mysql-dba-3",
+      "title": "Indexing and Query Optimization",
+      "order": 3,
+      "techs": [
+        "MySQL",
+        "EXPLAIN",
+        "B-tree indexes",
+        "slow_query_log"
+      ],
+      "description": "Learn to create and manage indexes in MySQL and use EXPLAIN to analyze query execution plans. Enable and interpret the slow query log to find problem queries.",
+      "topics": [
+        "B-tree and hash indexes",
+        "Composite indexes and prefix indexes",
+        "EXPLAIN output interpretation",
+        "Covering indexes",
+        "Slow query log setup",
+        "Optimizer hints"
+      ],
+      "resources": [
+        {
+          "label": "MySQL Optimization Docs",
+          "platform": "dev.mysql.com",
+          "type": "docs"
+        },
+        {
+          "label": "MySQL Query Optimization",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "MySQL EXPLAIN Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "High Performance MySQL",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Enable the slow query log, identify the top 5 slowest queries in a test workload, and optimize each with appropriate indexes or query rewrites.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mysql-dba-4",
+      "title": "Backup and Recovery",
+      "order": 4,
+      "techs": [
+        "mysqldump",
+        "mysqlpump",
+        "MySQL Enterprise Backup",
+        "binary log"
+      ],
+      "description": "Implement a comprehensive backup strategy using logical and physical backup tools. Practice full and incremental restores including binary log-based point-in-time recovery.",
+      "topics": [
+        "mysqldump usage and options",
+        "mysqlpump for parallel dumps",
+        "Physical backups with xtrabackup",
+        "Binary log basics",
+        "Point-in-time recovery",
+        "Backup scheduling"
+      ],
+      "resources": [
+        {
+          "label": "MySQL Backup and Recovery Docs",
+          "platform": "dev.mysql.com",
+          "type": "docs"
+        },
+        {
+          "label": "Percona XtraBackup Docs",
+          "platform": "percona.com",
+          "type": "docs"
+        },
+        {
+          "label": "MySQL Backup Strategies",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "MySQL Administration Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Perform a full backup with XtraBackup, apply binary logs to restore to a specific transaction, and verify data consistency after recovery.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mysql-dba-5",
+      "title": "User Management and Security",
+      "order": 5,
+      "techs": [
+        "MySQL",
+        "GRANT",
+        "mysql_secure_installation",
+        "SSL"
+      ],
+      "description": "Secure MySQL by configuring user accounts, privileges, and encrypted connections. Understand the privilege system and best practices for least-privilege access.",
+      "topics": [
+        "Creating and managing users",
+        "GRANT and REVOKE",
+        "mysql_secure_installation",
+        "SSL/TLS configuration",
+        "Audit plugin",
+        "Password validation policies"
+      ],
+      "resources": [
+        {
+          "label": "MySQL Access Control Docs",
+          "platform": "dev.mysql.com",
+          "type": "docs"
+        },
+        {
+          "label": "MySQL Security Best Practices",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Database Security Fundamentals",
+          "platform": "Coursera",
+          "type": "course"
+        }
+      ],
+      "challenge": "Create roles for read-only analyst, read-write app user, and DBA, assign users to roles, enable SSL, and test that each role has only the intended access.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "mysql-dba-6",
+      "title": "MySQL Replication Basics",
+      "order": 6,
+      "techs": [
+        "MySQL",
+        "Binary Log",
+        "GTID",
+        "Replication"
+      ],
+      "description": "Configure MySQL asynchronous replication with GTID-based auto-positioning. Understand the binary log format and how replication threads work.",
+      "topics": [
+        "Binary log formats (ROW, STATEMENT, MIXED)",
+        "GTID replication setup",
+        "CHANGE MASTER TO syntax",
+        "Replication monitoring",
+        "Semi-synchronous replication",
+        "Replication filters"
+      ],
+      "resources": [
+        {
+          "label": "MySQL Replication Docs",
+          "platform": "dev.mysql.com",
+          "type": "docs"
+        },
+        {
+          "label": "MySQL Replication Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "MySQL High Availability",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Set up a GTID-based primary-replica pair, stop the replica, make changes on primary, restart replica, and verify it catches up automatically.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mysql-dba-7",
+      "title": "Performance Schema and Monitoring",
+      "order": 7,
+      "techs": [
+        "MySQL",
+        "Performance Schema",
+        "sys schema",
+        "Prometheus"
+      ],
+      "description": "Use the Performance Schema and sys schema to monitor query performance, wait events, and resource usage in real time. Set up external monitoring with Prometheus and mysqld_exporter.",
+      "topics": [
+        "Performance Schema tables",
+        "sys schema views",
+        "Statement digest analysis",
+        "Wait event analysis",
+        "Prometheus mysqld_exporter",
+        "Grafana dashboards"
+      ],
+      "resources": [
+        {
+          "label": "Performance Schema Docs",
+          "platform": "dev.mysql.com",
+          "type": "docs"
+        },
+        {
+          "label": "MySQL Monitoring with Prometheus",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "High Performance MySQL",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Prometheus Documentation",
+          "platform": "prometheus.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Use the sys schema to identify the top 10 queries by total latency, then set up Prometheus and Grafana to visualize MySQL metrics in a dashboard.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mysql-dba-8",
+      "title": "MySQL Configuration Tuning",
+      "order": 8,
+      "techs": [
+        "MySQL",
+        "my.cnf",
+        "InnoDB",
+        "thread_pool"
+      ],
+      "description": "Tune MySQL configuration for production workloads by adjusting memory, I/O, and connection settings. Understand how to benchmark changes using sysbench.",
+      "topics": [
+        "innodb_buffer_pool_size tuning",
+        "innodb_log_file_size",
+        "max_connections and thread caching",
+        "Query cache deprecation",
+        "File-per-table settings",
+        "sysbench benchmarking"
+      ],
+      "resources": [
+        {
+          "label": "MySQL Server Configuration Docs",
+          "platform": "dev.mysql.com",
+          "type": "docs"
+        },
+        {
+          "label": "MySQL Performance Tuning",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Tuning MySQL for Production",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "High Performance MySQL",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Run a sysbench OLTP benchmark before and after tuning InnoDB buffer pool and log file size, and document the TPS improvement.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mysql-dba-9",
+      "title": "Group Replication and InnoDB Cluster",
+      "order": 9,
+      "techs": [
+        "MySQL",
+        "Group Replication",
+        "InnoDB Cluster",
+        "MySQL Router"
+      ],
+      "description": "Configure MySQL Group Replication for multi-primary or single-primary fault-tolerant setups. Use MySQL Shell and MySQL Router to build a full InnoDB Cluster.",
+      "topics": [
+        "Group Replication concepts",
+        "Single-primary vs multi-primary mode",
+        "MySQL Shell AdminAPI",
+        "InnoDB Cluster setup",
+        "MySQL Router for load balancing",
+        "Handling member failures"
+      ],
+      "resources": [
+        {
+          "label": "MySQL InnoDB Cluster Docs",
+          "platform": "dev.mysql.com",
+          "type": "docs"
+        },
+        {
+          "label": "InnoDB Cluster Setup Guide",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "MySQL High Availability",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deploy a 3-node InnoDB Cluster using MySQL Shell, simulate a primary failure, and verify automatic failover with MySQL Router re-routing connections.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "mysql-dba-10",
+      "title": "Production Operations and Disaster Recovery",
+      "order": 10,
+      "techs": [
+        "MySQL",
+        "ProxySQL",
+        "Orchestrator",
+        "MEB"
+      ],
+      "description": "Operate MySQL at production scale using ProxySQL for connection pooling and query routing, and Orchestrator for topology management and automated failover. Implement a full DR plan.",
+      "topics": [
+        "ProxySQL setup and query rules",
+        "Orchestrator topology management",
+        "Automated failover with Orchestrator",
+        "Schema migrations with pt-online-schema-change",
+        "Disaster recovery runbook",
+        "SLA and RPO/RTO planning"
+      ],
+      "resources": [
+        {
+          "label": "ProxySQL Documentation",
+          "platform": "proxysql.com",
+          "type": "docs"
+        },
+        {
+          "label": "Orchestrator Documentation",
+          "platform": "github.com/openark/orchestrator",
+          "type": "docs"
+        },
+        {
+          "label": "MySQL DR Strategies",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "MySQL High Availability",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Set up ProxySQL in front of a replicated MySQL cluster, configure read-write splitting rules, trigger a failover via Orchestrator, and verify zero query routing errors.",
+      "estimatedTime": "4 weeks"
+    }
+  ],
+  "mongodb-admin": [
+    {
+      "id": "mongodb-admin-1",
+      "title": "MongoDB Fundamentals",
+      "order": 1,
+      "techs": [
+        "MongoDB",
+        "mongosh",
+        "BSON",
+        "MongoDB Compass"
+      ],
+      "description": "Learn the document model of MongoDB and how it differs from relational databases. Install MongoDB, use mongosh, and perform basic CRUD operations on collections.",
+      "topics": [
+        "Document model and BSON types",
+        "Installing MongoDB",
+        "mongosh basics",
+        "Creating databases and collections",
+        "CRUD operations",
+        "MongoDB Compass GUI"
+      ],
+      "resources": [
+        {
+          "label": "MongoDB Manual",
+          "platform": "mongodb.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "MongoDB Basics (M001)",
+          "platform": "MongoDB University",
+          "type": "course"
+        },
+        {
+          "label": "MongoDB Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "MongoDB: The Definitive Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Create a MongoDB database for a blog platform with posts, comments, and users collections, and perform all CRUD operations using mongosh.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mongodb-admin-2",
+      "title": "Querying and Aggregation",
+      "order": 2,
+      "techs": [
+        "MongoDB",
+        "MQL",
+        "Aggregation Pipeline",
+        "mongosh"
+      ],
+      "description": "Master MongoDB Query Language (MQL) for filtering documents and learn the aggregation pipeline for complex data transformations and analytics.",
+      "topics": [
+        "Query operators ($eq, $in, $gt, etc.)",
+        "Array and embedded document queries",
+        "Aggregation stages ($match, $group, $project)",
+        "Lookup (joins in MongoDB)",
+        "$unwind and $facet",
+        "Aggregation performance"
+      ],
+      "resources": [
+        {
+          "label": "Aggregation Pipeline Docs",
+          "platform": "mongodb.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "MongoDB Aggregation (M121)",
+          "platform": "MongoDB University",
+          "type": "course"
+        },
+        {
+          "label": "MongoDB Aggregation Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write an aggregation pipeline that calculates total sales by category, filters categories with more than 100 sales, and sorts the result by revenue.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mongodb-admin-3",
+      "title": "Indexing in MongoDB",
+      "order": 3,
+      "techs": [
+        "MongoDB",
+        "Indexes",
+        "explain()",
+        "Atlas Search"
+      ],
+      "description": "Create and manage indexes in MongoDB to improve query performance. Use explain() to analyze query plans and understand when indexes are and are not used.",
+      "topics": [
+        "Single field and compound indexes",
+        "Multikey indexes for arrays",
+        "Text and geospatial indexes",
+        "explain() and winning plan analysis",
+        "Index hints and covered queries",
+        "TTL indexes"
+      ],
+      "resources": [
+        {
+          "label": "MongoDB Indexes Docs",
+          "platform": "mongodb.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "MongoDB Performance (M201)",
+          "platform": "MongoDB University",
+          "type": "course"
+        },
+        {
+          "label": "MongoDB Indexing Deep Dive",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Identify a collection scan in a slow query using explain(), add appropriate indexes, and demonstrate a covered query that returns data from the index alone.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mongodb-admin-4",
+      "title": "Schema Design and Data Modeling",
+      "order": 4,
+      "techs": [
+        "MongoDB",
+        "Schema Design",
+        "Embedding",
+        "References"
+      ],
+      "description": "Design MongoDB schemas by choosing between embedding and referencing documents based on access patterns. Apply design patterns like bucket, polymorphic, and outlier.",
+      "topics": [
+        "Embedding vs referencing trade-offs",
+        "One-to-many relationships",
+        "Many-to-many with references",
+        "Bucket pattern",
+        "Polymorphic pattern",
+        "Schema versioning"
+      ],
+      "resources": [
+        {
+          "label": "Data Modeling Docs",
+          "platform": "mongodb.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "MongoDB Data Modeling (M320)",
+          "platform": "MongoDB University",
+          "type": "course"
+        },
+        {
+          "label": "MongoDB Schema Design Patterns",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "MongoDB: The Definitive Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Design a schema for an IoT sensor platform storing time-series readings, apply the bucket pattern to reduce document count, and compare query performance.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mongodb-admin-5",
+      "title": "Backup and Security",
+      "order": 5,
+      "techs": [
+        "MongoDB",
+        "mongodump",
+        "mongorestore",
+        "TLS",
+        "RBAC"
+      ],
+      "description": "Implement backup and restore procedures using mongodump and mongorestore or Atlas Backup. Secure MongoDB with role-based access control and TLS encryption.",
+      "topics": [
+        "mongodump and mongorestore",
+        "Atlas Backup and snapshots",
+        "RBAC roles and privileges",
+        "Creating custom roles",
+        "TLS/SSL configuration",
+        "Field-level encryption"
+      ],
+      "resources": [
+        {
+          "label": "MongoDB Security Docs",
+          "platform": "mongodb.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "MongoDB Security (M310)",
+          "platform": "MongoDB University",
+          "type": "course"
+        },
+        {
+          "label": "Securing MongoDB",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Enable RBAC with least-privilege roles, configure TLS for client connections, perform a full mongodump backup, drop a collection, and restore it.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mongodb-admin-6",
+      "title": "Replica Sets",
+      "order": 6,
+      "techs": [
+        "MongoDB",
+        "Replica Set",
+        "oplog",
+        "Read Preferences"
+      ],
+      "description": "Deploy a MongoDB replica set for high availability and data redundancy. Understand the oplog, election process, and read preference options for distributing load.",
+      "topics": [
+        "Replica set architecture",
+        "Primary election process",
+        "Oplog sizing and monitoring",
+        "Read preferences (primary, secondary, nearest)",
+        "Write concerns",
+        "Replica set maintenance operations"
+      ],
+      "resources": [
+        {
+          "label": "Replica Sets Docs",
+          "platform": "mongodb.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "MongoDB Replica Set Setup",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "MongoDB: The Definitive Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deploy a 3-member replica set, step down the primary, observe the election, and configure an application to route reads to secondary nodes.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mongodb-admin-7",
+      "title": "Sharding and Horizontal Scaling",
+      "order": 7,
+      "techs": [
+        "MongoDB",
+        "Sharding",
+        "mongos",
+        "Shard Key"
+      ],
+      "description": "Scale MongoDB horizontally by configuring a sharded cluster with config servers and mongos routers. Choose shard keys strategically to avoid hotspots.",
+      "topics": [
+        "Sharded cluster components",
+        "Choosing a shard key",
+        "Hashed vs ranged sharding",
+        "Chunk distribution and balancing",
+        "Tag-aware sharding",
+        "Sharding a live collection"
+      ],
+      "resources": [
+        {
+          "label": "Sharding Docs",
+          "platform": "mongodb.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "MongoDB Sharding Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "MongoDB Operations (M312)",
+          "platform": "MongoDB University",
+          "type": "course"
+        }
+      ],
+      "challenge": "Deploy a 2-shard cluster with config servers and mongos, enable sharding on a collection with a hashed shard key, and verify even chunk distribution.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "mongodb-admin-8",
+      "title": "Performance Monitoring and Tuning",
+      "order": 8,
+      "techs": [
+        "MongoDB",
+        "mongostat",
+        "mongotop",
+        "Atlas Performance Advisor"
+      ],
+      "description": "Monitor MongoDB performance using built-in tools and Atlas dashboards. Identify slow operations, analyze the profiler output, and tune configuration parameters.",
+      "topics": [
+        "mongostat and mongotop",
+        "Database profiler setup",
+        "currentOp and killOp",
+        "WiredTiger cache tuning",
+        "Connection pool settings",
+        "Atlas Performance Advisor"
+      ],
+      "resources": [
+        {
+          "label": "MongoDB Monitoring Docs",
+          "platform": "mongodb.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "MongoDB Performance Tuning",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "MongoDB Performance (M201)",
+          "platform": "MongoDB University",
+          "type": "course"
+        }
+      ],
+      "challenge": "Enable the database profiler at level 1, load test the cluster, identify the top 3 slow operations, and optimize them with indexes or query rewrites.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mongodb-admin-9",
+      "title": "Transactions and Change Streams",
+      "order": 9,
+      "techs": [
+        "MongoDB",
+        "Multi-document Transactions",
+        "Change Streams",
+        "Sessions"
+      ],
+      "description": "Use multi-document ACID transactions for operations that span multiple collections. Leverage change streams to build real-time event-driven applications.",
+      "topics": [
+        "Multi-document transaction syntax",
+        "Session management",
+        "Transaction performance considerations",
+        "Change stream basics",
+        "Resume tokens",
+        "Change streams with aggregation filters"
+      ],
+      "resources": [
+        {
+          "label": "Transactions Docs",
+          "platform": "mongodb.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Change Streams Docs",
+          "platform": "mongodb.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "MongoDB Transactions Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement a fund transfer between two account documents using a multi-document transaction and build a change stream listener that logs all balance changes.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mongodb-admin-10",
+      "title": "Atlas Operations and Production Readiness",
+      "order": 10,
+      "techs": [
+        "MongoDB Atlas",
+        "Atlas CLI",
+        "Atlas Search",
+        "Atlas Data Federation"
+      ],
+      "description": "Operate MongoDB at production scale using Atlas managed service, including cluster tier selection, automated backups, Atlas Search, and global distributed clusters.",
+      "topics": [
+        "Atlas cluster configuration and tiers",
+        "Atlas Backup and restore",
+        "Atlas Search index creation",
+        "Atlas Data Federation",
+        "Global clusters and zone sharding",
+        "Atlas alerts and monitoring"
+      ],
+      "resources": [
+        {
+          "label": "MongoDB Atlas Docs",
+          "platform": "mongodb.com/docs/atlas",
+          "type": "docs"
+        },
+        {
+          "label": "Atlas Administration",
+          "platform": "MongoDB University",
+          "type": "course"
+        },
+        {
+          "label": "MongoDB Atlas in Production",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "MongoDB: The Definitive Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deploy a production-like Atlas cluster with a 3-region global setup, configure Atlas Search on a text field, set up backup policies, and simulate a region failure.",
+      "estimatedTime": "4 weeks"
+    }
+  ],
+  "data-modeler": [
+    {
+      "id": "data-modeler-1",
+      "title": "Relational Data Modeling Basics",
+      "order": 1,
+      "techs": [
+        "ER Diagrams",
+        "SQL",
+        "Normalization",
+        "ERD tools"
+      ],
+      "description": "Learn the fundamentals of relational data modeling including entities, attributes, and relationships. Draw entity-relationship diagrams and translate them to SQL tables.",
+      "topics": [
+        "Entities and attributes",
+        "Relationships (one-to-one, one-to-many, many-to-many)",
+        "ER diagram notation",
+        "Primary and foreign keys",
+        "Translating ERD to SQL DDL",
+        "Naming conventions"
+      ],
+      "resources": [
+        {
+          "label": "Database Design Tutorial",
+          "platform": "lucidchart.com",
+          "type": "docs"
+        },
+        {
+          "label": "Database Design Course",
+          "platform": "freeCodeCamp",
+          "type": "course"
+        },
+        {
+          "label": "Entity Relationship Diagrams",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Database Design for Mere Mortals",
+          "platform": "Addison-Wesley",
+          "type": "book"
+        }
+      ],
+      "challenge": "Model a university registration system with students, courses, instructors, and enrollments, draw the ERD, and write the DDL SQL for all tables.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-modeler-2",
+      "title": "Normalization Forms",
+      "order": 2,
+      "techs": [
+        "SQL",
+        "Normalization",
+        "Functional Dependencies",
+        "1NF-3NF"
+      ],
+      "description": "Understand the first through third normal forms and how to apply normalization to remove data redundancy and update anomalies. Practice decomposing denormalized tables.",
+      "topics": [
+        "1NF - eliminating repeating groups",
+        "2NF - removing partial dependencies",
+        "3NF - removing transitive dependencies",
+        "Boyce-Codd normal form (BCNF)",
+        "Functional dependency analysis",
+        "When to denormalize"
+      ],
+      "resources": [
+        {
+          "label": "Database Normalization Explained",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "SQL and Relational Theory",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Normalization Tutorial",
+          "platform": "studytonight.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Take a single unnormalized spreadsheet of invoice data and normalize it to 3NF, documenting each step and the functional dependencies identified.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-modeler-3",
+      "title": "Advanced ER Modeling",
+      "order": 3,
+      "techs": [
+        "ER Modeling",
+        "UML",
+        "draw.io",
+        "Crow's Foot Notation"
+      ],
+      "description": "Apply advanced ER modeling concepts including weak entities, generalization, and specialization hierarchies. Use Crow's Foot and UML notations in professional tools.",
+      "topics": [
+        "Weak entities and identifying relationships",
+        "Generalization and specialization (ISA)",
+        "Aggregation",
+        "Crow's Foot notation",
+        "UML class diagrams for data",
+        "Using draw.io and ERD tools"
+      ],
+      "resources": [
+        {
+          "label": "Advanced ER Modeling",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Database Design for Mere Mortals",
+          "platform": "Addison-Wesley",
+          "type": "book"
+        },
+        {
+          "label": "draw.io Documentation",
+          "platform": "drawio.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Model a healthcare system with patients, doctors, specialists, appointments, and diagnoses using ISA hierarchies and draw it in Crow's Foot notation.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-modeler-4",
+      "title": "Dimensional Modeling for Analytics",
+      "order": 4,
+      "techs": [
+        "Star Schema",
+        "Snowflake Schema",
+        "Fact Tables",
+        "Dimension Tables"
+      ],
+      "description": "Design data warehouse schemas using dimensional modeling techniques. Understand fact and dimension tables and choose between star and snowflake schemas.",
+      "topics": [
+        "Fact table design",
+        "Dimension table design",
+        "Star schema vs snowflake schema",
+        "Slowly changing dimensions (SCD Type 1, 2, 3)",
+        "Degenerate dimensions",
+        "Conformed dimensions"
+      ],
+      "resources": [
+        {
+          "label": "The Data Warehouse Toolkit",
+          "platform": "Wiley",
+          "type": "book"
+        },
+        {
+          "label": "Dimensional Modeling Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Data Warehousing Fundamentals",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Design a star schema for an e-commerce analytics system with sales facts and date, product, customer, and geography dimensions.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-modeler-5",
+      "title": "SQL DDL and Schema Implementation",
+      "order": 5,
+      "techs": [
+        "SQL",
+        "DDL",
+        "Constraints",
+        "PostgreSQL"
+      ],
+      "description": "Translate data models into production SQL schemas using proper DDL with constraints, defaults, and domain types. Manage schema changes safely.",
+      "topics": [
+        "CREATE TABLE with constraints",
+        "CHECK, UNIQUE, NOT NULL constraints",
+        "DEFAULT values and sequences",
+        "Composite primary keys",
+        "Domain types and enums",
+        "Altering tables in production"
+      ],
+      "resources": [
+        {
+          "label": "PostgreSQL DDL Docs",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "SQL for Data Modeling",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Schema Design in SQL",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement the healthcare system model from earlier as a complete PostgreSQL schema with all constraints, and write a migration script to add a new diagnosis_notes column.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "data-modeler-6",
+      "title": "NoSQL and Polyglot Data Modeling",
+      "order": 6,
+      "techs": [
+        "MongoDB",
+        "DynamoDB",
+        "Document Modeling",
+        "Access Patterns"
+      ],
+      "description": "Learn how data modeling differs for document, key-value, and wide-column stores. Design schemas driven by access patterns rather than normalization rules.",
+      "topics": [
+        "Access pattern analysis",
+        "Document embedding vs referencing",
+        "DynamoDB single-table design",
+        "Key-value data patterns",
+        "Denormalization strategies",
+        "Hybrid relational and NoSQL models"
+      ],
+      "resources": [
+        {
+          "label": "DynamoDB Developer Guide",
+          "platform": "aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "MongoDB Data Modeling (M320)",
+          "platform": "MongoDB University",
+          "type": "course"
+        },
+        {
+          "label": "DynamoDB Book",
+          "platform": "dynamodbbook.com",
+          "type": "book"
+        },
+        {
+          "label": "NoSQL Data Modeling",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Design a DynamoDB single-table schema for a social media platform supporting user lookups, post feeds, and comment threads with minimal queries.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "data-modeler-7",
+      "title": "Data Integrity and Referential Integrity",
+      "order": 7,
+      "techs": [
+        "SQL",
+        "Foreign Keys",
+        "Triggers",
+        "Check Constraints"
+      ],
+      "description": "Enforce data integrity at the database level using foreign key constraints, check constraints, and triggers. Understand cascading actions and deferrable constraints.",
+      "topics": [
+        "Foreign key cascade actions",
+        "Deferrable constraints",
+        "CHECK constraints for business rules",
+        "Triggers for derived data",
+        "Partial and filtered constraints",
+        "Application vs database-level integrity"
+      ],
+      "resources": [
+        {
+          "label": "PostgreSQL Constraints Docs",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "Database Integrity Patterns",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "SQL and Relational Theory",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Design a bank account schema with triggers that prevent negative balances and foreign key constraints that cascade correctly when accounts are closed.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-modeler-8",
+      "title": "Temporal and Historical Data Modeling",
+      "order": 8,
+      "techs": [
+        "SQL",
+        "Temporal Tables",
+        "Bitemporal Modeling",
+        "SCD"
+      ],
+      "description": "Model data that changes over time using temporal tables and bitemporal design. Track both valid time and transaction time for full audit history.",
+      "topics": [
+        "Valid time vs transaction time",
+        "Slowly changing dimensions revisited",
+        "Temporal table SQL extensions",
+        "Bitemporal data modeling",
+        "Audit log table patterns",
+        "Event sourcing as a data model"
+      ],
+      "resources": [
+        {
+          "label": "Temporal Data and the Relational Model",
+          "platform": "Morgan Kaufmann",
+          "type": "book"
+        },
+        {
+          "label": "Temporal Tables in SQL",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "SQL:2011 Temporal Features",
+          "platform": "docs.microsoft.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add bitemporal tracking to the bank account schema, storing both when a balance was valid and when each change was recorded.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "data-modeler-9",
+      "title": "Schema Migration and Evolution",
+      "order": 9,
+      "techs": [
+        "Flyway",
+        "Liquibase",
+        "SQL",
+        "CI/CD"
+      ],
+      "description": "Manage schema changes in a team environment using migration tools. Design schemas that can evolve safely without downtime using expand-contract patterns.",
+      "topics": [
+        "Flyway migration scripts",
+        "Liquibase changesets",
+        "Expand-contract (parallel change) pattern",
+        "Zero-downtime schema changes",
+        "Schema version control",
+        "Rollback strategies"
+      ],
+      "resources": [
+        {
+          "label": "Flyway Documentation",
+          "platform": "flywaydb.org",
+          "type": "docs"
+        },
+        {
+          "label": "Liquibase Documentation",
+          "platform": "liquibase.org",
+          "type": "docs"
+        },
+        {
+          "label": "Zero Downtime Schema Migrations",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Use Flyway to manage a sequence of 5 schema migrations on a test database, including one zero-downtime column rename using the expand-contract pattern.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-modeler-10",
+      "title": "Enterprise Data Architecture and Governance",
+      "order": 10,
+      "techs": [
+        "Data Catalog",
+        "Metadata Management",
+        "MDM",
+        "Data Lineage"
+      ],
+      "description": "Apply data modeling at enterprise scale with canonical data models, master data management, and data governance practices. Document and govern schemas using data catalogs.",
+      "topics": [
+        "Canonical data models",
+        "Master data management (MDM)",
+        "Data catalog tools (Amundsen, DataHub)",
+        "Data lineage tracking",
+        "Schema registries",
+        "Data governance policies"
+      ],
+      "resources": [
+        {
+          "label": "DataHub Documentation",
+          "platform": "datahubproject.io",
+          "type": "docs"
+        },
+        {
+          "label": "Data Management Body of Knowledge",
+          "platform": "DAMA International",
+          "type": "book"
+        },
+        {
+          "label": "Enterprise Data Architecture",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Fundamentals of Data Engineering",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Design a canonical data model for a retail enterprise, document it in a data catalog tool, and define data lineage from source systems to analytics tables.",
+      "estimatedTime": "4 weeks"
+    }
+  ],
+  "nosql-engineer": [
+    {
+      "id": "nosql-engineer-1",
+      "title": "NoSQL Foundations",
+      "order": 1,
+      "techs": [
+        "NoSQL",
+        "CAP Theorem",
+        "BASE",
+        "Document DBs"
+      ],
+      "description": "Understand the motivations for NoSQL databases and the theoretical foundations including CAP theorem and BASE consistency. Survey the main NoSQL categories.",
+      "topics": [
+        "CAP theorem and trade-offs",
+        "BASE vs ACID",
+        "Document, key-value, wide-column, graph types",
+        "Eventual consistency",
+        "Use case selection for NoSQL",
+        "NoSQL vs relational trade-offs"
+      ],
+      "resources": [
+        {
+          "label": "NoSQL Distilled",
+          "platform": "Addison-Wesley",
+          "type": "book"
+        },
+        {
+          "label": "NoSQL Database Fundamentals",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Introduction to NoSQL",
+          "platform": "Coursera",
+          "type": "course"
+        }
+      ],
+      "challenge": "Research and compare MongoDB, Cassandra, Redis, and DynamoDB across five dimensions (consistency model, scaling, query model, latency, use cases) in a written analysis.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "nosql-engineer-2",
+      "title": "MongoDB for Application Development",
+      "order": 2,
+      "techs": [
+        "MongoDB",
+        "MQL",
+        "Aggregation",
+        "Mongoose"
+      ],
+      "description": "Build applications backed by MongoDB, designing schemas around access patterns and using the aggregation pipeline for analytics. Integrate with Node.js using Mongoose.",
+      "topics": [
+        "Schema design for applications",
+        "CRUD with MQL",
+        "Aggregation pipeline",
+        "Mongoose ODM",
+        "Transactions in MongoDB",
+        "Error handling and retries"
+      ],
+      "resources": [
+        {
+          "label": "MongoDB Manual",
+          "platform": "mongodb.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "MongoDB for JS Developers",
+          "platform": "MongoDB University",
+          "type": "course"
+        },
+        {
+          "label": "MongoDB and Node.js Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a REST API backed by MongoDB that supports paginated listing, text search, and an aggregation endpoint reporting totals by category.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "nosql-engineer-3",
+      "title": "Redis for Caching and Data Structures",
+      "order": 3,
+      "techs": [
+        "Redis",
+        "Strings",
+        "Hashes",
+        "Sorted Sets"
+      ],
+      "description": "Use Redis as a cache and in-memory data store, leveraging its rich data structure types. Implement caching patterns like cache-aside and write-through.",
+      "topics": [
+        "Redis data types (strings, lists, sets, hashes, sorted sets)",
+        "Cache-aside and write-through patterns",
+        "TTL and expiration",
+        "Atomic operations",
+        "Lua scripting basics",
+        "Redis persistence (RDB and AOF)"
+      ],
+      "resources": [
+        {
+          "label": "Redis Documentation",
+          "platform": "redis.io",
+          "type": "docs"
+        },
+        {
+          "label": "Redis University RU101",
+          "platform": "Redis University",
+          "type": "course"
+        },
+        {
+          "label": "Redis Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Redis in Action",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Add Redis caching to a Node.js API using cache-aside pattern, implement a leaderboard using sorted sets, and benchmark the API with and without cache.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "nosql-engineer-4",
+      "title": "Apache Cassandra Basics",
+      "order": 4,
+      "techs": [
+        "Cassandra",
+        "CQL",
+        "Partition Key",
+        "Keyspace"
+      ],
+      "description": "Get started with Apache Cassandra, understanding its distributed architecture and query-first data modeling approach. Write CQL queries and design tables around known access patterns.",
+      "topics": [
+        "Cassandra ring architecture",
+        "Keyspaces and replication factors",
+        "CQL syntax",
+        "Partition key and clustering columns",
+        "Query-first data modeling",
+        "Cassandra vs RDBMS"
+      ],
+      "resources": [
+        {
+          "label": "Apache Cassandra Documentation",
+          "platform": "cassandra.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "Cassandra Fundamentals",
+          "platform": "DataStax Academy",
+          "type": "course"
+        },
+        {
+          "label": "Apache Cassandra Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Cassandra: The Definitive Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Design and implement a Cassandra schema for a time-series event log that supports efficient queries by user ID and time range.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "nosql-engineer-5",
+      "title": "DynamoDB Design and Operations",
+      "order": 5,
+      "techs": [
+        "DynamoDB",
+        "Single-table design",
+        "GSI",
+        "LSI"
+      ],
+      "description": "Design DynamoDB tables using single-table design principles for efficiency and scalability. Use Global Secondary Indexes to support multiple access patterns.",
+      "topics": [
+        "DynamoDB key design (PK, SK)",
+        "Single-table design patterns",
+        "Global Secondary Indexes (GSI)",
+        "Local Secondary Indexes (LSI)",
+        "Capacity modes (on-demand vs provisioned)",
+        "DynamoDB Streams"
+      ],
+      "resources": [
+        {
+          "label": "DynamoDB Developer Guide",
+          "platform": "aws.amazon.com",
+          "type": "docs"
+        },
+        {
+          "label": "DynamoDB Book",
+          "platform": "dynamodbbook.com",
+          "type": "book"
+        },
+        {
+          "label": "DynamoDB Data Modeling",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Design a DynamoDB single-table schema for an order management system that supports lookups by order ID, customer orders list, and orders by status.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "nosql-engineer-6",
+      "title": "Redis Advanced Patterns",
+      "order": 6,
+      "techs": [
+        "Redis",
+        "Pub/Sub",
+        "Streams",
+        "RedisSearch"
+      ],
+      "description": "Use advanced Redis features including Pub/Sub messaging, Redis Streams for event processing, and RedisSearch for full-text search capabilities.",
+      "topics": [
+        "Redis Pub/Sub patterns",
+        "Redis Streams consumer groups",
+        "RedisSearch index creation",
+        "Redis Modules ecosystem",
+        "Rate limiting with Redis",
+        "Distributed locks"
+      ],
+      "resources": [
+        {
+          "label": "Redis Streams Docs",
+          "platform": "redis.io",
+          "type": "docs"
+        },
+        {
+          "label": "Redis Advanced Patterns",
+          "platform": "Redis University",
+          "type": "course"
+        },
+        {
+          "label": "Redis Streams Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement a real-time activity feed using Redis Streams with consumer groups, and add a distributed rate limiter for an API endpoint.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "nosql-engineer-7",
+      "title": "Cassandra Data Modeling Patterns",
+      "order": 7,
+      "techs": [
+        "Cassandra",
+        "CQL",
+        "Materialized Views",
+        "Secondary Indexes"
+      ],
+      "description": "Apply advanced Cassandra data modeling patterns including time-series, user activity, and time-bucket patterns. Handle multi-access-pattern requirements with denormalization.",
+      "topics": [
+        "Time-series patterns with Cassandra",
+        "Time-bucket pattern for hot partitions",
+        "Materialized views",
+        "Secondary indexes limitations",
+        "Batch operations in Cassandra",
+        "Tombstones and compaction effects"
+      ],
+      "resources": [
+        {
+          "label": "Cassandra Data Modeling Docs",
+          "platform": "cassandra.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "Cassandra Data Modeling",
+          "platform": "DataStax Academy",
+          "type": "course"
+        },
+        {
+          "label": "Cassandra Patterns",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Re-design the event log schema from the earlier layer to handle a traffic spike scenario using time-bucket partitioning and test it with a load test.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "nosql-engineer-8",
+      "title": "Multi-model and Polyglot Persistence",
+      "order": 8,
+      "techs": [
+        "MongoDB",
+        "Redis",
+        "Cassandra",
+        "PostgreSQL"
+      ],
+      "description": "Design a polyglot persistence architecture where different data stores serve different components based on their strengths. Manage consistency across multiple stores.",
+      "topics": [
+        "Polyglot persistence patterns",
+        "CQRS with multiple data stores",
+        "Event-driven sync between stores",
+        "Saga pattern for distributed transactions",
+        "Read model caching strategies",
+        "Data synchronization challenges"
+      ],
+      "resources": [
+        {
+          "label": "Building Microservices",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Polyglot Persistence Patterns",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Designing Data-Intensive Applications",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Design an e-commerce system using PostgreSQL for orders, Redis for cart and sessions, and Elasticsearch for product search, with an event-driven sync layer.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "nosql-engineer-9",
+      "title": "Observability and Performance Tuning",
+      "order": 9,
+      "techs": [
+        "MongoDB",
+        "Cassandra",
+        "Redis",
+        "Prometheus"
+      ],
+      "description": "Monitor and tune multiple NoSQL systems using metrics, tracing, and profiling tools. Set up dashboards and alerts for key performance indicators.",
+      "topics": [
+        "MongoDB Atlas Performance Advisor",
+        "Cassandra nodetool and JMX metrics",
+        "Redis INFO command and latency tracking",
+        "Prometheus exporters for each DB",
+        "Grafana dashboards",
+        "Query profiling across systems"
+      ],
+      "resources": [
+        {
+          "label": "Prometheus Documentation",
+          "platform": "prometheus.io",
+          "type": "docs"
+        },
+        {
+          "label": "Grafana Documentation",
+          "platform": "grafana.com",
+          "type": "docs"
+        },
+        {
+          "label": "NoSQL Performance Monitoring",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Set up Prometheus exporters and Grafana dashboards for MongoDB, Redis, and Cassandra running locally, and create alerts for high latency and error rate.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "nosql-engineer-10",
+      "title": "Production Deployment and Resilience",
+      "order": 10,
+      "techs": [
+        "Kubernetes",
+        "Helm",
+        "Terraform",
+        "Chaos Engineering"
+      ],
+      "description": "Deploy NoSQL systems to Kubernetes using Helm charts and manage infrastructure with Terraform. Apply chaos engineering to test resilience under failure conditions.",
+      "topics": [
+        "Stateful workloads on Kubernetes",
+        "Helm charts for MongoDB, Redis, Cassandra",
+        "Terraform for managed cloud NoSQL",
+        "PersistentVolumeClaim management",
+        "Chaos engineering with Chaos Monkey",
+        "Disaster recovery for NoSQL"
+      ],
+      "resources": [
+        {
+          "label": "Kubernetes StatefulSets Docs",
+          "platform": "kubernetes.io",
+          "type": "docs"
+        },
+        {
+          "label": "NoSQL on Kubernetes",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Terraform Documentation",
+          "platform": "terraform.io",
+          "type": "docs"
+        },
+        {
+          "label": "Designing Data-Intensive Applications",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deploy a MongoDB replica set and Redis cluster on Kubernetes using Helm, inject pod failures with a chaos tool, and verify the system recovers automatically.",
+      "estimatedTime": "4 weeks"
+    }
+  ],
+  "db-reliability": [
+    {
+      "id": "db-reliability-1",
+      "title": "Database Reliability Fundamentals",
+      "order": 1,
+      "techs": [
+        "SRE",
+        "SLO",
+        "Error Budgets",
+        "Observability"
+      ],
+      "description": "Understand SRE principles applied to database systems, including SLOs, error budgets, and the reliability mindset. Learn how databases fail and how to reason about reliability.",
+      "topics": [
+        "SLO and SLA for databases",
+        "Error budgets",
+        "Common database failure modes",
+        "Observability pillars (metrics, logs, traces)",
+        "Toil and its reduction",
+        "Incident response basics"
+      ],
+      "resources": [
+        {
+          "label": "Site Reliability Engineering Book",
+          "platform": "Google SRE",
+          "type": "book"
+        },
+        {
+          "label": "Database Reliability Engineering",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "SRE Fundamentals",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Define SLOs for a hypothetical production database, including availability, query latency p99, and replication lag, with justification for each target.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "db-reliability-2",
+      "title": "Monitoring and Alerting",
+      "order": 2,
+      "techs": [
+        "Prometheus",
+        "Grafana",
+        "AlertManager",
+        "mysql_exporter"
+      ],
+      "description": "Set up a full monitoring stack for database systems using Prometheus, Grafana, and exporters. Create actionable alerts based on golden signals.",
+      "topics": [
+        "Golden signals (latency, traffic, errors, saturation)",
+        "Prometheus scrape configuration",
+        "Database-specific exporters",
+        "PromQL query language",
+        "Grafana dashboard design",
+        "AlertManager routing and silences"
+      ],
+      "resources": [
+        {
+          "label": "Prometheus Documentation",
+          "platform": "prometheus.io",
+          "type": "docs"
+        },
+        {
+          "label": "Grafana Documentation",
+          "platform": "grafana.com",
+          "type": "docs"
+        },
+        {
+          "label": "Database Monitoring with Prometheus",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy Prometheus with postgresql_exporter and mysqld_exporter, create Grafana dashboards for each, and write alert rules for connection saturation and replication lag.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "db-reliability-3",
+      "title": "Backup Strategies and Validation",
+      "order": 3,
+      "techs": [
+        "pg_basebackup",
+        "XtraBackup",
+        "pgBackRest",
+        "Checksum"
+      ],
+      "description": "Design and implement comprehensive backup strategies for multiple database systems. Validate backups regularly by performing test restores in isolated environments.",
+      "topics": [
+        "Backup types (full, incremental, differential)",
+        "Physical vs logical backups",
+        "Backup retention policies",
+        "Automated backup validation",
+        "Checksum verification",
+        "Offsite backup storage"
+      ],
+      "resources": [
+        {
+          "label": "pgBackRest Documentation",
+          "platform": "pgbackrest.org",
+          "type": "docs"
+        },
+        {
+          "label": "Percona XtraBackup Docs",
+          "platform": "percona.com",
+          "type": "docs"
+        },
+        {
+          "label": "Database Backup Best Practices",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Database Reliability Engineering",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Automate weekly full and nightly incremental backups for a PostgreSQL instance, run a weekly restore test in a separate environment, and alert on restore failure.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "db-reliability-4",
+      "title": "Replication Health and Lag Management",
+      "order": 4,
+      "techs": [
+        "PostgreSQL",
+        "MySQL",
+        "Replication Lag",
+        "Monitoring"
+      ],
+      "description": "Monitor and manage replication lag across PostgreSQL and MySQL replica sets. Implement lag-based alerting and automated corrective actions.",
+      "topics": [
+        "Measuring replication lag accurately",
+        "Causes of replication lag",
+        "Lag alerting thresholds",
+        "Semi-sync replication for durability",
+        "Replica health checks",
+        "Automatic lag-based read routing"
+      ],
+      "resources": [
+        {
+          "label": "PostgreSQL Replication Monitoring",
+          "platform": "postgresql.org",
+          "type": "docs"
+        },
+        {
+          "label": "MySQL Replication Docs",
+          "platform": "dev.mysql.com",
+          "type": "docs"
+        },
+        {
+          "label": "Replication Lag Deep Dive",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create a replication lag monitoring script that queries lag from both PostgreSQL and MySQL replication views, logs to a time-series DB, and fires alerts over 30 seconds.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "db-reliability-5",
+      "title": "High Availability Architecture",
+      "order": 5,
+      "techs": [
+        "Patroni",
+        "MHA",
+        "ProxySQL",
+        "Keepalived"
+      ],
+      "description": "Design and deploy high-availability database architectures with automatic failover. Understand the role of VIPs, proxies, and consensus systems in HA setups.",
+      "topics": [
+        "HA patterns for RDBMS",
+        "Automatic failover tools (Patroni, MHA)",
+        "Virtual IP and DNS-based failover",
+        "Connection proxy HA with ProxySQL",
+        "Health check design",
+        "Failover testing"
+      ],
+      "resources": [
+        {
+          "label": "Patroni Documentation",
+          "platform": "patroni.readthedocs.io",
+          "type": "docs"
+        },
+        {
+          "label": "HA Database Architectures",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Database Reliability Engineering",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deploy Patroni with etcd for a 3-node PostgreSQL cluster, document the failover procedure, and run a chaos test by killing the primary to verify automatic promotion.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "db-reliability-6",
+      "title": "Incident Response for Databases",
+      "order": 6,
+      "techs": [
+        "Runbooks",
+        "PagerDuty",
+        "Postmortems",
+        "On-call"
+      ],
+      "description": "Build incident response processes specific to database outages and degradations. Write runbooks, conduct blameless postmortems, and improve MTTR over time.",
+      "topics": [
+        "On-call rotation design",
+        "Runbook writing for common database incidents",
+        "Incident severity levels",
+        "Blameless postmortem process",
+        "MTTR and MTBF tracking",
+        "Oncall tooling (PagerDuty, Opsgenie)"
+      ],
+      "resources": [
+        {
+          "label": "Google SRE Workbook",
+          "platform": "Google SRE",
+          "type": "book"
+        },
+        {
+          "label": "Incident Response for Databases",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "PagerDuty Incident Response Guide",
+          "platform": "pagerduty.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write runbooks for three database incidents (replication lag spike, connection pool exhaustion, disk full), and simulate one incident with a teammate using the runbook.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "db-reliability-7",
+      "title": "Capacity Planning and Scaling",
+      "order": 7,
+      "techs": [
+        "Prometheus",
+        "forecasting",
+        "Vertical Scaling",
+        "Read Replicas"
+      ],
+      "description": "Forecast database growth using historical metrics and plan capacity additions before thresholds are breached. Decide between vertical scaling, read replicas, and sharding.",
+      "topics": [
+        "Growth rate analysis from metrics",
+        "Disk, CPU, and connection capacity models",
+        "Vertical scaling considerations",
+        "Read replica provisioning",
+        "Sharding decision framework",
+        "Cost modeling for cloud databases"
+      ],
+      "resources": [
+        {
+          "label": "Capacity Planning for Web Performance",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Database Capacity Planning",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "AWS RDS Sizing Guide",
+          "platform": "aws.amazon.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Use 90 days of Prometheus metrics to build a capacity forecast model, identify when disk will be exhausted, and propose a scaling plan with cost estimate.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "db-reliability-8",
+      "title": "Database Change Management",
+      "order": 8,
+      "techs": [
+        "Flyway",
+        "pt-online-schema-change",
+        "gh-ost",
+        "CI/CD"
+      ],
+      "description": "Manage schema and data changes in production safely using migration tools and online DDL tools. Integrate database migrations into CI/CD pipelines.",
+      "topics": [
+        "Online schema change with gh-ost",
+        "pt-online-schema-change for MySQL",
+        "Flyway in CI/CD pipelines",
+        "Backward-compatible migration patterns",
+        "Feature flags for data migrations",
+        "Rollback strategies"
+      ],
+      "resources": [
+        {
+          "label": "gh-ost Documentation",
+          "platform": "github.com/github/gh-ost",
+          "type": "docs"
+        },
+        {
+          "label": "Flyway Documentation",
+          "platform": "flywaydb.org",
+          "type": "docs"
+        },
+        {
+          "label": "Safe Schema Migrations",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Use gh-ost to add a non-null column with a default to a large MySQL table, integrate the migration into a CI/CD pipeline, and implement an automated rollback trigger.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "db-reliability-9",
+      "title": "Security and Compliance for Databases",
+      "order": 9,
+      "techs": [
+        "Encryption at Rest",
+        "TLS",
+        "Audit Logging",
+        "Vault"
+      ],
+      "description": "Implement database security controls required for compliance frameworks including encryption at rest, audit logging, credential rotation, and access reviews.",
+      "topics": [
+        "Encryption at rest configuration",
+        "TLS for in-transit encryption",
+        "Database audit logging",
+        "Dynamic secrets with HashiCorp Vault",
+        "Credential rotation automation",
+        "SOC2 and PCI DSS database controls"
+      ],
+      "resources": [
+        {
+          "label": "HashiCorp Vault Documentation",
+          "platform": "vaultproject.io",
+          "type": "docs"
+        },
+        {
+          "label": "Database Security Hardening",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Database Reliability Engineering",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Configure HashiCorp Vault to issue short-lived PostgreSQL credentials, rotate them every 1 hour, and demonstrate that revoked credentials are immediately rejected.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "db-reliability-10",
+      "title": "Chaos Engineering and DR Validation",
+      "order": 10,
+      "techs": [
+        "Chaos Monkey",
+        "Gremlin",
+        "DR Runbooks",
+        "RTO/RPO"
+      ],
+      "description": "Use chaos engineering to proactively test database resilience under failure conditions. Conduct regular DR drills and measure actual RTO and RPO against targets.",
+      "topics": [
+        "Chaos engineering principles",
+        "Database-specific chaos experiments",
+        "Network partition simulation",
+        "DR drill planning and execution",
+        "RTO and RPO measurement",
+        "Resilience score tracking"
+      ],
+      "resources": [
+        {
+          "label": "Gremlin Documentation",
+          "platform": "gremlin.com",
+          "type": "docs"
+        },
+        {
+          "label": "Chaos Engineering Book",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Database Chaos Engineering",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Design and execute a DR drill for a Patroni PostgreSQL cluster, measure actual RTO and RPO, compare to targets, and produce an improvement plan for any gaps.",
+      "estimatedTime": "4 weeks"
+    }
+  ],
+  "redis-engineer": [
+    {
+      "id": "redis-engineer-1",
+      "title": "Redis Fundamentals",
+      "order": 1,
+      "techs": [
+        "Redis",
+        "redis-cli",
+        "Strings",
+        "Key Expiry"
+      ],
+      "description": "Install Redis and learn the basics of interacting with it using redis-cli. Understand the key-value model, TTL-based expiration, and the most common data types.",
+      "topics": [
+        "Installing Redis",
+        "redis-cli basics",
+        "String get/set operations",
+        "Key expiration with TTL",
+        "Key naming conventions",
+        "INFO command overview"
+      ],
+      "resources": [
+        {
+          "label": "Redis Documentation",
+          "platform": "redis.io",
+          "type": "docs"
+        },
+        {
+          "label": "Redis University RU101",
+          "platform": "Redis University",
+          "type": "course"
+        },
+        {
+          "label": "Redis Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Redis in Action",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Use redis-cli to store session data for 100 simulated users with TTL expiry, and write a script that checks how many sessions are still active after 5 minutes.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "redis-engineer-2",
+      "title": "Redis Data Structures",
+      "order": 2,
+      "techs": [
+        "Redis",
+        "Lists",
+        "Sets",
+        "Hashes",
+        "Sorted Sets"
+      ],
+      "description": "Master all major Redis data structures and understand the use cases each is best suited for. Practice building real-world patterns with lists, sets, hashes, and sorted sets.",
+      "topics": [
+        "Lists as queues and stacks",
+        "Sets for unique membership",
+        "Hashes for objects",
+        "Sorted sets for rankings",
+        "Bitmaps and HyperLogLog",
+        "Geospatial commands"
+      ],
+      "resources": [
+        {
+          "label": "Redis Data Types Docs",
+          "platform": "redis.io",
+          "type": "docs"
+        },
+        {
+          "label": "Redis Data Structures",
+          "platform": "Redis University",
+          "type": "course"
+        },
+        {
+          "label": "Redis Data Types Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a leaderboard for a gaming app using sorted sets that supports adding scores, retrieving top 10 players, and looking up a specific player's rank.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "redis-engineer-3",
+      "title": "Caching Patterns",
+      "order": 3,
+      "techs": [
+        "Redis",
+        "Cache-aside",
+        "Write-through",
+        "Cache Invalidation"
+      ],
+      "description": "Implement common caching patterns using Redis to reduce database load and improve application latency. Understand cache invalidation strategies and cache stampede prevention.",
+      "topics": [
+        "Cache-aside pattern",
+        "Write-through caching",
+        "Write-behind caching",
+        "Cache invalidation strategies",
+        "Cache stampede and solutions",
+        "Cache warming"
+      ],
+      "resources": [
+        {
+          "label": "Redis Caching Patterns",
+          "platform": "redis.io",
+          "type": "docs"
+        },
+        {
+          "label": "Caching Strategies",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Redis in Action",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Add Redis caching to a REST API using cache-aside, implement probabilistic early expiration to prevent stampede, and measure p99 latency before and after.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "redis-engineer-4",
+      "title": "Redis Persistence",
+      "order": 4,
+      "techs": [
+        "Redis",
+        "RDB",
+        "AOF",
+        "BGSAVE"
+      ],
+      "description": "Understand and configure Redis persistence options including RDB snapshots and Append-Only File. Choose the right persistence mode based on durability requirements.",
+      "topics": [
+        "RDB snapshot configuration",
+        "AOF persistence and fsync policies",
+        "RDB vs AOF trade-offs",
+        "Mixed persistence mode",
+        "BGSAVE and BGREWRITEAOF",
+        "Persistence and performance impact"
+      ],
+      "resources": [
+        {
+          "label": "Redis Persistence Docs",
+          "platform": "redis.io",
+          "type": "docs"
+        },
+        {
+          "label": "Redis Persistence Deep Dive",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Redis in Action",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Configure Redis with AOF persistence using everysec fsync, simulate a crash, restart Redis, and verify all committed data is recovered with no loss.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "redis-engineer-5",
+      "title": "Pub/Sub and Redis Streams",
+      "order": 5,
+      "techs": [
+        "Redis",
+        "Pub/Sub",
+        "Redis Streams",
+        "Consumer Groups"
+      ],
+      "description": "Build real-time messaging and event processing systems using Redis Pub/Sub and Redis Streams. Use consumer groups for reliable at-least-once message processing.",
+      "topics": [
+        "Pub/Sub publish and subscribe",
+        "Pub/Sub limitations",
+        "Redis Streams XADD and XREAD",
+        "Consumer groups with XREADGROUP",
+        "Stream trimming",
+        "Pending message acknowledgment"
+      ],
+      "resources": [
+        {
+          "label": "Redis Streams Introduction",
+          "platform": "redis.io",
+          "type": "docs"
+        },
+        {
+          "label": "Redis Pub/Sub Docs",
+          "platform": "redis.io",
+          "type": "docs"
+        },
+        {
+          "label": "Redis Streams Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build an order processing pipeline using Redis Streams where producers emit orders and two consumer groups (fulfillment and analytics) process them independently.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "redis-engineer-6",
+      "title": "Redis Security and Access Control",
+      "order": 6,
+      "techs": [
+        "Redis",
+        "ACL",
+        "TLS",
+        "AUTH"
+      ],
+      "description": "Secure Redis with ACL-based user management, TLS for encrypted connections, and network-level restrictions. Audit Redis access and apply least-privilege principles.",
+      "topics": [
+        "Redis ACL user creation",
+        "ACL command and key permissions",
+        "TLS configuration",
+        "Protected mode",
+        "requirepass vs ACLs",
+        "Audit logging"
+      ],
+      "resources": [
+        {
+          "label": "Redis Security Docs",
+          "platform": "redis.io",
+          "type": "docs"
+        },
+        {
+          "label": "Securing Redis",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Redis University Security",
+          "platform": "Redis University",
+          "type": "course"
+        }
+      ],
+      "challenge": "Create Redis ACL users with read-only, read-write, and admin roles, enable TLS, and verify that each user can only perform the commands matching their role.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "redis-engineer-7",
+      "title": "Redis Replication and Sentinel",
+      "order": 7,
+      "techs": [
+        "Redis",
+        "Replication",
+        "Redis Sentinel",
+        "Failover"
+      ],
+      "description": "Configure Redis replication for data redundancy and set up Redis Sentinel for automatic failover and service discovery. Monitor replication health.",
+      "topics": [
+        "Redis primary-replica replication",
+        "Replication configuration",
+        "Redis Sentinel setup",
+        "Sentinel quorum",
+        "Automatic failover process",
+        "Connecting clients through Sentinel"
+      ],
+      "resources": [
+        {
+          "label": "Redis Replication Docs",
+          "platform": "redis.io",
+          "type": "docs"
+        },
+        {
+          "label": "Redis Sentinel Docs",
+          "platform": "redis.io",
+          "type": "docs"
+        },
+        {
+          "label": "Redis HA with Sentinel",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy a Redis primary with two replicas and a 3-sentinel setup, kill the primary, and verify Sentinel promotes a replica and clients reconnect automatically.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "redis-engineer-8",
+      "title": "Redis Cluster",
+      "order": 8,
+      "techs": [
+        "Redis Cluster",
+        "Hash Slots",
+        "Cluster Bus",
+        "MOVED redirect"
+      ],
+      "description": "Deploy and manage a Redis Cluster for horizontal scaling across multiple nodes. Understand hash slot distribution, resharding, and how clients interact with cluster topology.",
+      "topics": [
+        "Hash slot assignment",
+        "Cluster setup with redis-cli",
+        "Resharding and rebalancing",
+        "MOVED and ASK redirects",
+        "Cluster bus protocol",
+        "Node failure and failover"
+      ],
+      "resources": [
+        {
+          "label": "Redis Cluster Specification",
+          "platform": "redis.io",
+          "type": "docs"
+        },
+        {
+          "label": "Redis Cluster Setup Guide",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Redis in Action",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Set up a 6-node Redis Cluster (3 primary, 3 replica), distribute a keyspace across it, simulate a primary node failure, and verify automatic failover.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "redis-engineer-9",
+      "title": "Redis Modules and Advanced Features",
+      "order": 9,
+      "techs": [
+        "RedisSearch",
+        "RedisJSON",
+        "RedisTimeSeries",
+        "Lua"
+      ],
+      "description": "Extend Redis functionality using official modules for full-text search, JSON storage, time-series data, and probabilistic data structures. Write Lua scripts for atomic operations.",
+      "topics": [
+        "RedisJSON document storage",
+        "RedisSearch full-text indexing",
+        "RedisTimeSeries for metrics",
+        "Lua scripting for atomicity",
+        "Bloom filter module",
+        "EVAL and EVALSHA"
+      ],
+      "resources": [
+        {
+          "label": "Redis Modules Documentation",
+          "platform": "redis.io",
+          "type": "docs"
+        },
+        {
+          "label": "RedisJSON and RedisSearch Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Redis University RU203",
+          "platform": "Redis University",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a product catalog using RedisJSON for storage and RedisSearch for full-text and faceted search, serving sub-millisecond query responses.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "redis-engineer-10",
+      "title": "Production Redis Operations",
+      "order": 10,
+      "techs": [
+        "Redis",
+        "Prometheus",
+        "Grafana",
+        "redis-benchmark"
+      ],
+      "description": "Operate Redis in production by tuning memory, eviction policies, and connection settings. Monitor with Prometheus and run capacity planning using redis-benchmark.",
+      "topics": [
+        "maxmemory and eviction policies",
+        "Memory optimization with object encoding",
+        "Connection pooling best practices",
+        "Prometheus redis_exporter",
+        "Latency monitoring and latency history",
+        "redis-benchmark for capacity planning"
+      ],
+      "resources": [
+        {
+          "label": "Redis Memory Optimization Docs",
+          "platform": "redis.io",
+          "type": "docs"
+        },
+        {
+          "label": "redis_exporter Documentation",
+          "platform": "github.com/oliver006/redis_exporter",
+          "type": "docs"
+        },
+        {
+          "label": "Redis Production Best Practices",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Redis in Action",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Run redis-benchmark to profile a Redis Cluster under load, tune maxmemory with allkeys-lru eviction, and build a Grafana dashboard tracking eviction rate and memory fragmentation ratio.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "cassandra-engineer": [
+    {
+      "id": "cassandra-engineer-1",
+      "title": "Cassandra Architecture Fundamentals",
+      "order": 1,
+      "techs": [
+        "Cassandra",
+        "CQL",
+        "nodetool",
+        "cqlsh"
+      ],
+      "description": "Learn Cassandra's peer-to-peer distributed architecture and how it achieves high availability without a single point of failure. Install a local cluster and use cqlsh for basic operations.",
+      "topics": [
+        "Peer-to-peer ring architecture",
+        "Consistent hashing and tokens",
+        "Gossip protocol",
+        "Installing Cassandra",
+        "cqlsh basics",
+        "nodetool status"
+      ],
+      "resources": [
+        {
+          "label": "Apache Cassandra Documentation",
+          "platform": "cassandra.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "Cassandra Fundamentals",
+          "platform": "DataStax Academy",
+          "type": "course"
+        },
+        {
+          "label": "Cassandra Architecture Overview",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Cassandra: The Definitive Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Set up a 3-node Cassandra cluster locally, verify ring status with nodetool, create a keyspace, and insert and query data using cqlsh.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cassandra-engineer-2",
+      "title": "CQL and Data Types",
+      "order": 2,
+      "techs": [
+        "Cassandra",
+        "CQL",
+        "UDT",
+        "Collections"
+      ],
+      "description": "Learn the Cassandra Query Language in depth including all data types, collection types, user-defined types, and counter tables.",
+      "topics": [
+        "CQL data types (text, uuid, timeuuid, etc.)",
+        "List, set, and map collections",
+        "User-defined types (UDT)",
+        "Counter tables",
+        "Static columns",
+        "BLOB and large data handling"
+      ],
+      "resources": [
+        {
+          "label": "CQL Language Reference",
+          "platform": "cassandra.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "CQL Deep Dive",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Cassandra: The Definitive Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Design a user profile table using UDTs for addresses and collections for tags, insert sample data, and demonstrate updating individual collection elements.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "cassandra-engineer-3",
+      "title": "Data Modeling in Cassandra",
+      "order": 3,
+      "techs": [
+        "Cassandra",
+        "Partition Key",
+        "Clustering Columns",
+        "Denormalization"
+      ],
+      "description": "Master Cassandra's query-first data modeling approach by designing partition keys and clustering columns around application access patterns. Embrace denormalization.",
+      "topics": [
+        "Query-first design process",
+        "Partition key selection",
+        "Clustering column ordering",
+        "Wide-row patterns",
+        "Denormalization and data duplication",
+        "Avoiding hot partitions"
+      ],
+      "resources": [
+        {
+          "label": "Cassandra Data Modeling",
+          "platform": "DataStax Academy",
+          "type": "course"
+        },
+        {
+          "label": "Cassandra Data Modeling Guide",
+          "platform": "cassandra.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "Cassandra Data Modeling Patterns",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Model a social media timeline for a platform with millions of users, supporting per-user feed queries ordered by time, with no hot partition risk.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "cassandra-engineer-4",
+      "title": "Replication and Consistency",
+      "order": 4,
+      "techs": [
+        "Cassandra",
+        "Replication Factor",
+        "Consistency Levels",
+        "NetworkTopologyStrategy"
+      ],
+      "description": "Configure replication strategies and consistency levels to balance between availability and consistency. Understand how quorum reads and writes provide tunable guarantees.",
+      "topics": [
+        "SimpleStrategy vs NetworkTopologyStrategy",
+        "Replication factor configuration",
+        "Consistency levels (ONE, QUORUM, ALL)",
+        "Read repair",
+        "Hinted handoff",
+        "Lightweight transactions (LWT)"
+      ],
+      "resources": [
+        {
+          "label": "Cassandra Consistency Docs",
+          "platform": "cassandra.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "Cassandra Consistency Levels Explained",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Cassandra: The Definitive Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deploy a multi-datacenter Cassandra setup, write data at LOCAL_QUORUM, simulate a datacenter failure, and verify reads succeed from the surviving datacenter.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "cassandra-engineer-5",
+      "title": "Operations and Maintenance",
+      "order": 5,
+      "techs": [
+        "Cassandra",
+        "nodetool",
+        "Compaction",
+        "Repair"
+      ],
+      "description": "Perform routine Cassandra cluster operations including compaction, repair, and node replacement. Understand how to add and decommission nodes safely.",
+      "topics": [
+        "Compaction strategies (STCS, LCS, TWCS)",
+        "nodetool repair",
+        "Adding nodes to a cluster",
+        "Decommissioning nodes",
+        "Snapshot and backup",
+        "Bootstrap and replace operations"
+      ],
+      "resources": [
+        {
+          "label": "Cassandra Operations Guide",
+          "platform": "cassandra.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "Cassandra Operations Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Cassandra: The Definitive Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Add a 4th node to a 3-node cluster, monitor token rebalancing with nodetool, run a full repair, and then safely decommission the added node.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cassandra-engineer-6",
+      "title": "Performance Tuning",
+      "order": 6,
+      "techs": [
+        "Cassandra",
+        "JVM Tuning",
+        "cassandra-stress",
+        "Tracing"
+      ],
+      "description": "Tune Cassandra performance by optimizing JVM settings, compaction strategies, and caching. Use cassandra-stress and query tracing to identify and fix bottlenecks.",
+      "topics": [
+        "JVM heap and GC tuning",
+        "Row and key cache configuration",
+        "Compaction strategy selection",
+        "cassandra-stress benchmarking",
+        "Query tracing with TRACING ON",
+        "Thread pool tuning"
+      ],
+      "resources": [
+        {
+          "label": "Cassandra Performance Tuning Docs",
+          "platform": "cassandra.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "Cassandra Performance Tuning",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Cassandra Performance (DataStax)",
+          "platform": "DataStax Academy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Run cassandra-stress on a test table, identify the bottleneck using thread pool metrics, tune compaction and caching, and show at least 20% throughput improvement.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "cassandra-engineer-7",
+      "title": "Security in Cassandra",
+      "order": 7,
+      "techs": [
+        "Cassandra",
+        "Authentication",
+        "Authorization",
+        "SSL/TLS"
+      ],
+      "description": "Secure Cassandra clusters with authentication, role-based authorization, and encrypted inter-node and client-node communications using TLS.",
+      "topics": [
+        "Enabling authentication in Cassandra",
+        "Role-based access control",
+        "Object permissions (GRANT/REVOKE)",
+        "Client-to-node TLS",
+        "Node-to-node TLS",
+        "Audit logging"
+      ],
+      "resources": [
+        {
+          "label": "Cassandra Security Documentation",
+          "platform": "cassandra.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "Securing Cassandra",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "DataStax Security Guide",
+          "platform": "DataStax Academy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Enable authentication, create roles with table-level permissions, configure TLS for both client and internode traffic, and verify encrypted connections in logs.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cassandra-engineer-8",
+      "title": "Monitoring and Observability",
+      "order": 8,
+      "techs": [
+        "Cassandra",
+        "JMX",
+        "Prometheus",
+        "Grafana"
+      ],
+      "description": "Monitor Cassandra clusters using JMX metrics exposed to Prometheus via the JMX exporter. Build Grafana dashboards for key Cassandra health indicators.",
+      "topics": [
+        "Cassandra JMX metrics overview",
+        "Prometheus JMX exporter setup",
+        "Key metrics (read/write latency, compaction, GC)",
+        "Grafana dashboard for Cassandra",
+        "Alerting on tombstone count and GC pause",
+        "nodetool tpstats and cfstats"
+      ],
+      "resources": [
+        {
+          "label": "Cassandra Metrics Documentation",
+          "platform": "cassandra.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "Prometheus JMX Exporter",
+          "platform": "github.com/prometheus/jmx_exporter",
+          "type": "docs"
+        },
+        {
+          "label": "Cassandra Monitoring with Prometheus",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Set up Prometheus with JMX exporter for a Cassandra cluster, build a Grafana dashboard, and create alerts for P99 read latency exceeding 10ms and GC pause over 500ms.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cassandra-engineer-9",
+      "title": "Multi-datacenter and Global Deployments",
+      "order": 9,
+      "techs": [
+        "Cassandra",
+        "NetworkTopologyStrategy",
+        "Multi-DC",
+        "Latency-aware routing"
+      ],
+      "description": "Deploy Cassandra across multiple datacenters for geographic distribution and disaster recovery. Configure local consistency levels and latency-aware routing in drivers.",
+      "topics": [
+        "Multi-datacenter replication topology",
+        "LOCAL_QUORUM and LOCAL_ONE consistency",
+        "Rack and datacenter awareness",
+        "Driver-level DC routing",
+        "Cross-DC repair strategy",
+        "Active-active multi-region patterns"
+      ],
+      "resources": [
+        {
+          "label": "Cassandra Multi-DC Docs",
+          "platform": "cassandra.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "Multi-DC Cassandra Setup",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Cassandra: The Definitive Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deploy a 2-datacenter Cassandra cluster with RF=3 in each DC, write using LOCAL_QUORUM, simulate a DC outage, and verify reads continue from the surviving DC.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "cassandra-engineer-10",
+      "title": "Production Operations and Disaster Recovery",
+      "order": 10,
+      "techs": [
+        "Cassandra",
+        "Medusa",
+        "K8ssandra",
+        "Chaos Engineering"
+      ],
+      "description": "Run Cassandra in production on Kubernetes using K8ssandra, automate backups with Medusa, and validate resilience through chaos engineering experiments.",
+      "topics": [
+        "K8ssandra operator deployment",
+        "Medusa backup and restore",
+        "Cassandra on Kubernetes storage",
+        "Chaos testing with Chaos Toolkit",
+        "DR runbook creation",
+        "Token-aware driver configuration"
+      ],
+      "resources": [
+        {
+          "label": "K8ssandra Documentation",
+          "platform": "k8ssandra.io",
+          "type": "docs"
+        },
+        {
+          "label": "Medusa Backup Docs",
+          "platform": "github.com/thelastpickle/cassandra-medusa",
+          "type": "docs"
+        },
+        {
+          "label": "Cassandra on Kubernetes",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Cassandra: The Definitive Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deploy Cassandra on Kubernetes via K8ssandra, configure Medusa for nightly backups, inject a pod failure via chaos tooling, and restore from backup to validate the DR process.",
+      "estimatedTime": "4 weeks"
+    }
+  ],
+  "vector-db-engineer": [
+    {
+      "id": "vector-db-engineer-1",
+      "title": "Embeddings and Vector Representations",
+      "order": 1,
+      "techs": [
+        "Python",
+        "OpenAI Embeddings",
+        "Sentence Transformers",
+        "NumPy"
+      ],
+      "description": "Understand what vector embeddings are, how they encode semantic meaning, and how they are generated using pre-trained models. Compare embedding model outputs for different inputs.",
+      "topics": [
+        "What are vector embeddings",
+        "Dense vs sparse vectors",
+        "OpenAI text-embedding models",
+        "Sentence Transformers library",
+        "Cosine similarity",
+        "Euclidean distance vs cosine similarity"
+      ],
+      "resources": [
+        {
+          "label": "OpenAI Embeddings Guide",
+          "platform": "platform.openai.com",
+          "type": "docs"
+        },
+        {
+          "label": "Sentence Transformers Documentation",
+          "platform": "sbert.net",
+          "type": "docs"
+        },
+        {
+          "label": "Vector Embeddings Explained",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Hands-On Machine Learning",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Generate embeddings for 1000 text passages using Sentence Transformers, compute pairwise cosine similarity, and find the 5 most semantically similar pairs.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "vector-db-engineer-2",
+      "title": "Approximate Nearest Neighbor (ANN) Algorithms",
+      "order": 2,
+      "techs": [
+        "FAISS",
+        "HNSW",
+        "IVF",
+        "ScaNN"
+      ],
+      "description": "Learn the algorithms that power fast vector similarity search including HNSW, IVF, and product quantization. Understand the accuracy vs speed trade-offs.",
+      "topics": [
+        "Brute-force vs approximate search",
+        "HNSW (Hierarchical Navigable Small World)",
+        "IVF (Inverted File Index)",
+        "Product quantization",
+        "FAISS library basics",
+        "Recall vs throughput trade-offs"
+      ],
+      "resources": [
+        {
+          "label": "FAISS Wiki",
+          "platform": "github.com/facebookresearch/faiss",
+          "type": "docs"
+        },
+        {
+          "label": "ANN Benchmarks",
+          "platform": "ann-benchmarks.com",
+          "type": "docs"
+        },
+        {
+          "label": "HNSW Explained",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Vector Search Algorithms",
+          "platform": "Coursera",
+          "type": "course"
+        }
+      ],
+      "challenge": "Use FAISS to build HNSW and IVF indexes over 1 million 768-dimensional vectors, benchmark query time and recall at different efSearch values.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "vector-db-engineer-3",
+      "title": "pgvector Fundamentals",
+      "order": 3,
+      "techs": [
+        "PostgreSQL",
+        "pgvector",
+        "SQL",
+        "HNSW index"
+      ],
+      "description": "Install the pgvector extension and store, index, and query vector embeddings directly in PostgreSQL. Integrate vector search with relational filtering.",
+      "topics": [
+        "Installing pgvector",
+        "Vector column type",
+        "Exact and approximate search operators",
+        "HNSW and IVF indexes in pgvector",
+        "Combining vector search with SQL WHERE clauses",
+        "Indexing parameters tuning"
+      ],
+      "resources": [
+        {
+          "label": "pgvector GitHub Documentation",
+          "platform": "github.com/pgvector/pgvector",
+          "type": "docs"
+        },
+        {
+          "label": "pgvector Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "PostgreSQL Documentation",
+          "platform": "postgresql.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Store 500k product embeddings in pgvector, create an HNSW index, and write a SQL query that finds the 10 most similar products within a specific category and price range.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "vector-db-engineer-4",
+      "title": "Pinecone and Managed Vector Databases",
+      "order": 4,
+      "techs": [
+        "Pinecone",
+        "Python SDK",
+        "Namespaces",
+        "Metadata Filtering"
+      ],
+      "description": "Use Pinecone as a fully managed vector database to store and query embeddings at scale. Understand namespaces, metadata filtering, and the upsert/query API.",
+      "topics": [
+        "Pinecone index creation",
+        "Upsert and query API",
+        "Metadata filtering",
+        "Namespaces for multi-tenancy",
+        "Sparse-dense hybrid search",
+        "Pod vs serverless indexes"
+      ],
+      "resources": [
+        {
+          "label": "Pinecone Documentation",
+          "platform": "docs.pinecone.io",
+          "type": "docs"
+        },
+        {
+          "label": "Pinecone Quickstart Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Vector Databases Course",
+          "platform": "DeepLearning.AI",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a semantic document search system in Pinecone, index 10k documents with metadata, and implement a hybrid search filtering by document category and semantic similarity.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "vector-db-engineer-5",
+      "title": "RAG (Retrieval Augmented Generation) Patterns",
+      "order": 5,
+      "techs": [
+        "LangChain",
+        "pgvector",
+        "OpenAI",
+        "Python"
+      ],
+      "description": "Build Retrieval Augmented Generation (RAG) pipelines that combine vector search with large language models. Understand chunking strategies and retrieval quality evaluation.",
+      "topics": [
+        "RAG pipeline architecture",
+        "Text chunking strategies",
+        "Embedding generation pipeline",
+        "Retrieval and re-ranking",
+        "LangChain vector store integration",
+        "RAG evaluation metrics"
+      ],
+      "resources": [
+        {
+          "label": "LangChain Documentation",
+          "platform": "python.langchain.com",
+          "type": "docs"
+        },
+        {
+          "label": "RAG from Scratch",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Building LLM Apps",
+          "platform": "DeepLearning.AI",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a RAG system over a PDF document corpus using pgvector, implement sentence-window chunking, and evaluate retrieval quality using a set of test questions.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "vector-db-engineer-6",
+      "title": "Weaviate and Qdrant",
+      "order": 6,
+      "techs": [
+        "Weaviate",
+        "Qdrant",
+        "GraphQL",
+        "REST API"
+      ],
+      "description": "Work with Weaviate and Qdrant as alternative vector databases offering different features like native GraphQL querying and payload-based filtering.",
+      "topics": [
+        "Weaviate schema definition",
+        "Weaviate GraphQL query API",
+        "Qdrant collection creation",
+        "Qdrant payload filtering",
+        "Weaviate modules (text2vec, img2vec)",
+        "Qdrant vs Weaviate trade-offs"
+      ],
+      "resources": [
+        {
+          "label": "Weaviate Documentation",
+          "platform": "weaviate.io",
+          "type": "docs"
+        },
+        {
+          "label": "Qdrant Documentation",
+          "platform": "qdrant.tech",
+          "type": "docs"
+        },
+        {
+          "label": "Weaviate vs Qdrant Comparison",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Index the same 10k documents in both Weaviate and Qdrant, run identical semantic queries, and compare query latency, recall, and developer experience.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "vector-db-engineer-7",
+      "title": "Multi-modal and Hybrid Search",
+      "order": 7,
+      "techs": [
+        "CLIP",
+        "Weaviate",
+        "BM25",
+        "Hybrid Search"
+      ],
+      "description": "Build search systems that combine semantic vector search with traditional keyword BM25 scoring. Extend to multi-modal search combining text and image embeddings.",
+      "topics": [
+        "Hybrid search scoring (alpha weighting)",
+        "BM25 for keyword retrieval",
+        "CLIP for image-text embeddings",
+        "Multi-modal search pipelines",
+        "Re-ranking with cross-encoders",
+        "Reciprocal rank fusion"
+      ],
+      "resources": [
+        {
+          "label": "Weaviate Hybrid Search Docs",
+          "platform": "weaviate.io",
+          "type": "docs"
+        },
+        {
+          "label": "CLIP Paper and Code",
+          "platform": "openai.com",
+          "type": "docs"
+        },
+        {
+          "label": "Hybrid Search Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a multi-modal product search using CLIP embeddings for images and text, serving hybrid BM25 plus vector results ranked by reciprocal rank fusion.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "vector-db-engineer-8",
+      "title": "Scaling Vector Search",
+      "order": 8,
+      "techs": [
+        "Pinecone",
+        "Weaviate",
+        "Sharding",
+        "Distributed ANN"
+      ],
+      "description": "Scale vector search to hundreds of millions of vectors by understanding distributed indexing, sharding strategies, and serving architectures for low-latency search.",
+      "topics": [
+        "Sharding strategies for vector indexes",
+        "Distributed HNSW",
+        "Quantization for memory reduction",
+        "Serving latency vs index size trade-offs",
+        "Batch vs real-time indexing",
+        "Caching for vector search"
+      ],
+      "resources": [
+        {
+          "label": "Pinecone Architecture Blog",
+          "platform": "pinecone.io",
+          "type": "docs"
+        },
+        {
+          "label": "Scaling Vector Search",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Weaviate Scaling Guide",
+          "platform": "weaviate.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Index 10 million vectors across a sharded Qdrant cluster, benchmark QPS at p99 under 50ms, and tune quantization to reduce memory usage by at least 4x.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "vector-db-engineer-9",
+      "title": "Monitoring and Operational Best Practices",
+      "order": 9,
+      "techs": [
+        "Prometheus",
+        "Grafana",
+        "Qdrant",
+        "Recall Evaluation"
+      ],
+      "description": "Monitor vector database performance and search quality over time. Set up metrics for query latency, indexing throughput, and recall drift as embeddings evolve.",
+      "topics": [
+        "Vector DB metrics (QPS, latency, index size)",
+        "Prometheus exporter for vector DBs",
+        "Recall evaluation pipeline",
+        "Embedding drift detection",
+        "Index rebuild triggers",
+        "Canary queries for quality monitoring"
+      ],
+      "resources": [
+        {
+          "label": "Qdrant Telemetry Docs",
+          "platform": "qdrant.tech",
+          "type": "docs"
+        },
+        {
+          "label": "Vector Search Quality Monitoring",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Prometheus Documentation",
+          "platform": "prometheus.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Set up Prometheus and Grafana monitoring for a Qdrant deployment, implement a nightly recall evaluation job using a golden query set, and alert if recall drops below 0.9.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "vector-db-engineer-10",
+      "title": "Production Vector Search Platform",
+      "order": 10,
+      "techs": [
+        "Kubernetes",
+        "Weaviate",
+        "MLflow",
+        "CI/CD"
+      ],
+      "description": "Deploy a production-grade vector search platform on Kubernetes with automated embedding model versioning, index lifecycle management, and continuous quality evaluation.",
+      "topics": [
+        "Weaviate on Kubernetes",
+        "Embedding model versioning with MLflow",
+        "Index migration strategies for model upgrades",
+        "CI/CD for embedding pipelines",
+        "A/B testing for retrieval changes",
+        "Cost optimization for vector infrastructure"
+      ],
+      "resources": [
+        {
+          "label": "Weaviate Kubernetes Docs",
+          "platform": "weaviate.io",
+          "type": "docs"
+        },
+        {
+          "label": "MLflow Documentation",
+          "platform": "mlflow.org",
+          "type": "docs"
+        },
+        {
+          "label": "Production Vector Search",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Designing Machine Learning Systems",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deploy a full vector search platform on Kubernetes, automate embedding model upgrades with zero-downtime index rebuilds, and run an A/B test comparing retrieval quality between two embedding models.",
+      "estimatedTime": "4 weeks"
+    }
+  ],
+  "graph-db-engineer": [
+    {
+      "id": "graph-db-engineer-1",
+      "title": "Graph Database Fundamentals",
+      "order": 1,
+      "techs": [
+        "Neo4j",
+        "Cypher",
+        "Nodes",
+        "Relationships"
+      ],
+      "description": "Learn the property graph model used by Neo4j, including nodes, relationships, labels, and properties. Understand why graph databases excel for connected data.",
+      "topics": [
+        "Property graph model",
+        "Nodes and relationships",
+        "Labels and properties",
+        "When to use a graph database",
+        "Neo4j installation",
+        "Neo4j Browser basics"
+      ],
+      "resources": [
+        {
+          "label": "Neo4j Documentation",
+          "platform": "neo4j.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Neo4j Fundamentals Course",
+          "platform": "GraphAcademy",
+          "type": "course"
+        },
+        {
+          "label": "Graph Databases Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Graph Databases",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Model a social network in Neo4j with Person nodes and FOLLOWS and FRIENDS_WITH relationships, insert 50 nodes, and query all friends of friends for a given person.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "graph-db-engineer-2",
+      "title": "Cypher Query Language",
+      "order": 2,
+      "techs": [
+        "Neo4j",
+        "Cypher",
+        "MATCH",
+        "WITH"
+      ],
+      "description": "Master the Cypher query language for reading and writing graph data. Learn pattern matching, filtering, aggregation, and path queries.",
+      "topics": [
+        "MATCH and WHERE clauses",
+        "CREATE and MERGE",
+        "Pattern variables and relationships",
+        "WITH for query chaining",
+        "Aggregation (count, collect, sum)",
+        "OPTIONAL MATCH"
+      ],
+      "resources": [
+        {
+          "label": "Cypher Manual",
+          "platform": "neo4j.com/docs/cypher-manual",
+          "type": "docs"
+        },
+        {
+          "label": "Cypher Fundamentals",
+          "platform": "GraphAcademy",
+          "type": "course"
+        },
+        {
+          "label": "Cypher Query Language Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write 10 progressively complex Cypher queries against the social network including shortest path, mutual friends count, and recommendation of friends-of-friends not yet connected.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "graph-db-engineer-3",
+      "title": "Graph Data Modeling",
+      "order": 3,
+      "techs": [
+        "Neo4j",
+        "Graph Models",
+        "Labeled Property Graph",
+        "Intermediate Nodes"
+      ],
+      "description": "Design effective graph data models by thinking in terms of entities, relationships, and the queries you need to support. Apply common graph modeling patterns.",
+      "topics": [
+        "Modeling entities as nodes",
+        "Modeling facts as relationships",
+        "Intermediate nodes for relationship properties",
+        "Bidirectional vs directional relationships",
+        "Avoiding super-nodes",
+        "Graph model refactoring"
+      ],
+      "resources": [
+        {
+          "label": "Graph Data Modeling Guide",
+          "platform": "neo4j.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Graph Data Modeling Course",
+          "platform": "GraphAcademy",
+          "type": "course"
+        },
+        {
+          "label": "Graph Modeling Patterns",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Graph Databases",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Model an e-commerce recommendation graph with products, categories, customers, and purchase events as intermediate nodes, then write a product recommendation query.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "graph-db-engineer-4",
+      "title": "Indexes and Query Optimization",
+      "order": 4,
+      "techs": [
+        "Neo4j",
+        "Indexes",
+        "EXPLAIN",
+        "PROFILE"
+      ],
+      "description": "Create indexes on node properties to speed up lookups and use EXPLAIN and PROFILE to analyze and optimize Cypher query execution plans.",
+      "topics": [
+        "Range and text indexes",
+        "Full-text indexes",
+        "Composite indexes",
+        "EXPLAIN plan analysis",
+        "PROFILE for actual row counts",
+        "Index hints",
+        "Eager vs lazy operators"
+      ],
+      "resources": [
+        {
+          "label": "Neo4j Indexes Documentation",
+          "platform": "neo4j.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Neo4j Query Tuning",
+          "platform": "GraphAcademy",
+          "type": "course"
+        },
+        {
+          "label": "Cypher Performance Tuning",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Identify a slow Cypher query using PROFILE, add appropriate indexes, run PROFILE again, and document the reduction in db hits.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "graph-db-engineer-5",
+      "title": "Graph Algorithms",
+      "order": 5,
+      "techs": [
+        "Neo4j",
+        "Graph Data Science Library",
+        "PageRank",
+        "Community Detection"
+      ],
+      "description": "Use the Neo4j Graph Data Science (GDS) library to run graph algorithms for analytics including centrality, community detection, and path finding.",
+      "topics": [
+        "GDS library setup",
+        "PageRank for node importance",
+        "Betweenness centrality",
+        "Louvain community detection",
+        "Shortest path (Dijkstra, A*)",
+        "Similarity algorithms"
+      ],
+      "resources": [
+        {
+          "label": "Graph Data Science Docs",
+          "platform": "neo4j.com/docs/graph-data-science",
+          "type": "docs"
+        },
+        {
+          "label": "Graph Algorithms Course",
+          "platform": "GraphAcademy",
+          "type": "course"
+        },
+        {
+          "label": "Neo4j Graph Algorithms Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Graph Algorithms",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Run PageRank and Louvain community detection on a fraud detection graph, identify the top 5 most influential nodes, and visualize community clusters.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "graph-db-engineer-6",
+      "title": "Neo4j Security and Access Control",
+      "order": 6,
+      "techs": [
+        "Neo4j",
+        "RBAC",
+        "Database Privileges",
+        "TLS"
+      ],
+      "description": "Secure Neo4j with role-based access control, fine-grained database privileges, and TLS encryption. Manage users and roles using Cypher administration commands.",
+      "topics": [
+        "Creating roles and users",
+        "Granting database privileges",
+        "Fine-grained property-level privileges",
+        "Sub-graph access control",
+        "TLS configuration for Neo4j",
+        "Audit logging"
+      ],
+      "resources": [
+        {
+          "label": "Neo4j Security Documentation",
+          "platform": "neo4j.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Securing Neo4j",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Neo4j Administration Course",
+          "platform": "GraphAcademy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Create read-only analyst and read-write app roles in Neo4j, restrict the analyst role to specific labels, enable TLS, and verify privilege enforcement.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "graph-db-engineer-7",
+      "title": "Neo4j Causal Clustering",
+      "order": 7,
+      "techs": [
+        "Neo4j",
+        "Causal Cluster",
+        "Raft",
+        "Read Replicas"
+      ],
+      "description": "Deploy Neo4j in a causal cluster configuration for high availability and horizontal read scaling. Understand Raft consensus, bookmarks, and read replica usage.",
+      "topics": [
+        "Causal cluster architecture",
+        "Core members and Raft consensus",
+        "Read replicas for read scaling",
+        "Bookmarks for causal consistency",
+        "Routing policies",
+        "Cluster monitoring"
+      ],
+      "resources": [
+        {
+          "label": "Neo4j Clustering Docs",
+          "platform": "neo4j.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Neo4j Causal Clustering Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Neo4j Operations Manual",
+          "platform": "neo4j.com/docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy a 3-core Neo4j causal cluster, configure read replicas, write a test workload that uses bookmarks for causal reads, and simulate a core member failure.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "graph-db-engineer-8",
+      "title": "GQL and Graph Query Standards",
+      "order": 8,
+      "techs": [
+        "GQL",
+        "ISO GQL",
+        "Cypher",
+        "openCypher"
+      ],
+      "description": "Learn the ISO GQL standard and how it relates to Cypher. Understand openCypher compatibility and how graph query languages are converging across vendors.",
+      "topics": [
+        "GQL ISO standard overview",
+        "GQL vs Cypher syntax differences",
+        "MATCH and RETURN in GQL",
+        "Graph pattern expressions",
+        "openCypher specification",
+        "Multi-graph queries in GQL"
+      ],
+      "resources": [
+        {
+          "label": "GQL Standard Overview",
+          "platform": "gqlstandards.org",
+          "type": "docs"
+        },
+        {
+          "label": "openCypher Specification",
+          "platform": "opencypher.org",
+          "type": "docs"
+        },
+        {
+          "label": "GQL Language Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Rewrite 5 Cypher queries using GQL syntax, identify and document any behavioral differences, and write a compatibility layer that works for both Neo4j and an openCypher-compatible database.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "graph-db-engineer-9",
+      "title": "Graph Applications and Use Cases",
+      "order": 9,
+      "techs": [
+        "Neo4j",
+        "Cypher",
+        "GDS",
+        "Python Driver"
+      ],
+      "description": "Build real-world graph applications for fraud detection, knowledge graphs, and recommendation engines. Integrate Neo4j with Python using the official driver.",
+      "topics": [
+        "Fraud ring detection patterns",
+        "Knowledge graph construction",
+        "Collaborative filtering recommendations",
+        "Neo4j Python driver",
+        "Graph-backed REST API",
+        "Entity resolution in graphs"
+      ],
+      "resources": [
+        {
+          "label": "Neo4j Python Driver Docs",
+          "platform": "neo4j.com/docs/python-manual",
+          "type": "docs"
+        },
+        {
+          "label": "Building Graph Applications",
+          "platform": "GraphAcademy",
+          "type": "course"
+        },
+        {
+          "label": "Graph Application Patterns",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Graph Databases in Action",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a real-time fraud detection API backed by Neo4j that flags accounts connected to known fraudsters within 3 hops, returning results in under 100ms.",
+      "estimatedTime": "4 weeks"
+    },
+    {
+      "id": "graph-db-engineer-10",
+      "title": "Production Operations and Performance at Scale",
+      "order": 10,
+      "techs": [
+        "Neo4j",
+        "Kubernetes",
+        "Prometheus",
+        "neo4j-admin"
+      ],
+      "description": "Operate Neo4j at production scale on Kubernetes, implement backup and restore with neo4j-admin, and monitor the cluster with Prometheus and Grafana.",
+      "topics": [
+        "Neo4j Helm chart deployment",
+        "neo4j-admin backup and restore",
+        "Prometheus neo4j metrics exporter",
+        "Grafana dashboards for Neo4j",
+        "Hot backups without downtime",
+        "Tuning page cache and heap"
+      ],
+      "resources": [
+        {
+          "label": "Neo4j Kubernetes Documentation",
+          "platform": "neo4j.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "neo4j-admin Tools Docs",
+          "platform": "neo4j.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Neo4j Production Deployment",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Neo4j Operations Manual",
+          "platform": "neo4j.com/docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy a Neo4j causal cluster on Kubernetes using Helm, set up automated daily backups with neo4j-admin, create a Grafana dashboard, and perform a full restore drill.",
+      "estimatedTime": "4 weeks"
+    }
+  ]
+}

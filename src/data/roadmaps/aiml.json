@@ -1,0 +1,3864 @@
+{
+  "ml-engineer": [
+    {
+      "id": "ml-1",
+      "title": "Python & Math Foundations",
+      "order": 1,
+      "techs": [
+        "Python",
+        "NumPy",
+        "Linear Algebra",
+        "Statistics"
+      ],
+      "description": "ML is applied math in code. You need fluent Python and enough linear algebra, calculus, and statistics to understand why algorithms work — not just how to call them.",
+      "topics": [
+        "Python — functions, classes, list comprehensions, generators",
+        "NumPy — arrays, broadcasting, vectorized operations",
+        "Linear algebra — vectors, matrices, dot product, eigenvalues",
+        "Calculus — derivatives, gradients, chain rule",
+        "Statistics — mean, variance, normal distribution, Bayes' theorem",
+        "Jupyter notebooks workflow"
+      ],
+      "resources": [
+        {
+          "label": "fast.ai — Practical Deep Learning (math section)",
+          "platform": "fast.ai",
+          "type": "course"
+        },
+        {
+          "label": "3Blue1Brown — Essence of Linear Algebra",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Khan Academy — Statistics",
+          "platform": "khanacademy.org",
+          "type": "course"
+        },
+        {
+          "label": "NumPy Official Docs",
+          "platform": "numpy.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Implement gradient descent from scratch in NumPy — fit a linear regression model to a synthetic dataset without using any ML library.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "ml-2",
+      "title": "Data Manipulation & EDA",
+      "order": 2,
+      "techs": [
+        "Pandas",
+        "Matplotlib",
+        "Seaborn",
+        "Jupyter"
+      ],
+      "description": "Real-world data is messy. Learn to load, clean, transform, and visualize data with Pandas and Matplotlib — skills you'll use in every single ML project.",
+      "topics": [
+        "Pandas — DataFrames, Series, indexing, groupby, merge",
+        "Data cleaning — missing values, duplicates, outliers",
+        "Feature engineering — encoding, scaling, binning",
+        "EDA — correlation matrices, distributions, pair plots",
+        "Matplotlib & Seaborn for visualization",
+        "Data pipelines with sklearn Pipeline"
+      ],
+      "resources": [
+        {
+          "label": "Pandas Official Docs",
+          "platform": "pandas.pydata.org",
+          "type": "docs"
+        },
+        {
+          "label": "Kaggle — Pandas Course (free)",
+          "platform": "kaggle.com",
+          "type": "course"
+        },
+        {
+          "label": "Corey Schafer — Pandas Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Pick a public Kaggle dataset, perform a full EDA — handle missing values, engineer 2+ new features, and produce 5 informative visualizations that reveal insights.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ml-3",
+      "title": "Classical Machine Learning",
+      "order": 3,
+      "techs": [
+        "Scikit-learn",
+        "XGBoost",
+        "Cross-Validation",
+        "Feature Importance"
+      ],
+      "description": "Before deep learning, master the classical algorithms. Linear regression, decision trees, ensembles — these still power most production ML systems and are faster to train and explain.",
+      "topics": [
+        "Supervised learning — linear/logistic regression, decision trees, SVMs",
+        "Ensemble methods — Random Forest, Gradient Boosting, XGBoost",
+        "Model evaluation — accuracy, precision, recall, F1, ROC-AUC",
+        "Cross-validation — k-fold, stratified k-fold",
+        "Hyperparameter tuning — GridSearchCV, RandomizedSearchCV, Optuna",
+        "Feature selection & importance"
+      ],
+      "resources": [
+        {
+          "label": "Scikit-learn Official Docs & User Guide",
+          "platform": "scikit-learn.org",
+          "type": "docs"
+        },
+        {
+          "label": "Kaggle — Intro to ML (free)",
+          "platform": "kaggle.com",
+          "type": "course"
+        },
+        {
+          "label": "StatQuest — ML Fundamentals",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "XGBoost Docs",
+          "platform": "xgboost.readthedocs.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Enter a Kaggle tabular competition (e.g. Titanic or House Prices) — train at least 3 models, tune hyperparameters, and submit a solution that beats the baseline.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "ml-4",
+      "title": "Deep Learning with PyTorch",
+      "order": 4,
+      "techs": [
+        "PyTorch",
+        "Neural Networks",
+        "CNNs",
+        "GPU Training"
+      ],
+      "description": "PyTorch is the leading deep learning framework. Understand how neural networks learn, build architectures from scratch, and train models on GPU.",
+      "topics": [
+        "Tensors — creation, operations, autograd",
+        "Neural network anatomy — layers, activations, loss functions",
+        "Training loop — forward pass, loss, backward pass, optimizer step",
+        "CNNs — conv layers, pooling, feature maps",
+        "Transfer learning — torchvision pretrained models, fine-tuning",
+        "GPU training with CUDA — .to(device)"
+      ],
+      "resources": [
+        {
+          "label": "fast.ai — Practical Deep Learning for Coders",
+          "platform": "fast.ai",
+          "type": "course"
+        },
+        {
+          "label": "PyTorch Official Tutorials",
+          "platform": "pytorch.org",
+          "type": "docs"
+        },
+        {
+          "label": "Andrej Karpathy — Neural Networks: Zero to Hero",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Train a CNN image classifier on CIFAR-10 with PyTorch — implement the full training loop from scratch, achieve >85% accuracy, and visualize misclassified examples.",
+      "estimatedTime": "3–4 weeks"
+    },
+    {
+      "id": "ml-5",
+      "title": "NLP & Transformers",
+      "order": 5,
+      "techs": [
+        "HuggingFace",
+        "Transformers",
+        "BERT",
+        "Fine-tuning"
+      ],
+      "description": "NLP is one of the hottest areas in ML. Learn to work with text data, understand the Transformer architecture, and fine-tune pre-trained models with HuggingFace.",
+      "topics": [
+        "Text preprocessing — tokenization, padding, special tokens",
+        "Word embeddings — Word2Vec, GloVe, contextual embeddings",
+        "Transformer architecture — attention, positional encoding",
+        "HuggingFace Transformers — AutoModel, AutoTokenizer, pipeline",
+        "Fine-tuning BERT/DistilBERT for classification",
+        "Evaluation — BLEU, ROUGE, perplexity"
+      ],
+      "resources": [
+        {
+          "label": "HuggingFace Course (free)",
+          "platform": "huggingface.co",
+          "type": "course"
+        },
+        {
+          "label": "Andrej Karpathy — Let's Build GPT",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "HuggingFace Docs",
+          "platform": "huggingface.co",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Fine-tune DistilBERT on a sentiment analysis dataset (SST-2 or your own), evaluate with F1, and expose it as a FastAPI endpoint.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "ml-6",
+      "title": "MLOps & Experiment Tracking",
+      "order": 6,
+      "techs": [
+        "MLflow",
+        "DVC",
+        "Weights & Biases",
+        "Optuna"
+      ],
+      "description": "Production ML is 90% engineering. Track experiments, version your data and models, and build reproducible pipelines so your team can collaborate on ML projects.",
+      "topics": [
+        "MLflow — tracking, model registry, projects, artifacts",
+        "Weights & Biases — experiment tracking, hyperparameter sweeps",
+        "DVC — data versioning, pipelines, remote storage",
+        "Feature stores — Feast basics",
+        "Optuna for automated hyperparameter optimization",
+        "ML pipelines with Prefect or Airflow"
+      ],
+      "resources": [
+        {
+          "label": "MLflow Docs",
+          "platform": "mlflow.org",
+          "type": "docs"
+        },
+        {
+          "label": "Weights & Biases Docs",
+          "platform": "wandb.ai",
+          "type": "docs"
+        },
+        {
+          "label": "DVC Docs",
+          "platform": "dvc.org",
+          "type": "docs"
+        },
+        {
+          "label": "Made With ML — MLOps Course",
+          "platform": "madewithml.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Set up MLflow for your sentiment model — log all hyperparameters, metrics, and model artifacts. Use DVC to version the dataset, and run a W&B sweep to find the best learning rate.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ml-7",
+      "title": "Model Deployment",
+      "order": 7,
+      "techs": [
+        "FastAPI",
+        "Docker",
+        "ONNX",
+        "TorchServe"
+      ],
+      "description": "A model that isn't deployed doesn't deliver value. Package your model as a production REST API, optimize for inference speed, and deploy to the cloud.",
+      "topics": [
+        "Model serving with FastAPI — async inference endpoint",
+        "Model optimization — ONNX export, quantization, pruning",
+        "TorchServe or Triton Inference Server",
+        "Batch inference vs real-time inference",
+        "Containerizing ML services with Docker",
+        "A/B testing and shadow mode deployment"
+      ],
+      "resources": [
+        {
+          "label": "ONNX Runtime Docs",
+          "platform": "onnxruntime.ai",
+          "type": "docs"
+        },
+        {
+          "label": "Made With ML — Deployment Section",
+          "platform": "madewithml.com",
+          "type": "course"
+        },
+        {
+          "label": "Chip Huyen — Designing Machine Learning Systems (book)",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deploy your fine-tuned sentiment model as a Dockerized FastAPI service — optimize with ONNX for 2x inference speedup, add a /health endpoint, and deploy to Fly.io.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ml-8",
+      "title": "LLMs & Generative AI",
+      "order": 8,
+      "techs": [
+        "LangChain",
+        "RAG",
+        "Vector DBs",
+        "OpenAI API"
+      ],
+      "description": "LLMs are reshaping what's possible in software. Learn to build AI-powered applications with LangChain, implement RAG for grounded generation, and work with vector databases.",
+      "topics": [
+        "LLM APIs — OpenAI, Anthropic, Groq, HuggingFace Inference",
+        "Prompt engineering — system prompts, few-shot, chain-of-thought",
+        "LangChain — chains, agents, tools, memory",
+        "RAG — embeddings, vector databases (Chroma, Qdrant, Pinecone)",
+        "LlamaIndex for document Q&A",
+        "Evaluation — RAGAS, LLM-as-judge"
+      ],
+      "resources": [
+        {
+          "label": "LangChain Docs",
+          "platform": "python.langchain.com",
+          "type": "docs"
+        },
+        {
+          "label": "LlamaIndex Docs",
+          "platform": "docs.llamaindex.ai",
+          "type": "docs"
+        },
+        {
+          "label": "DeepLearning.AI — LangChain Short Courses",
+          "platform": "deeplearning.ai",
+          "type": "course"
+        },
+        {
+          "label": "Full Stack LLM Bootcamp",
+          "platform": "fullstackdeeplearning.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a RAG-powered Q&A system over a set of PDF documents — chunk and embed the docs, store in Chroma, and build a FastAPI endpoint that answers questions with citations.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "ml-engineer-9",
+      "title": "Large-Scale Distributed Training",
+      "order": 9,
+      "techs": [
+        "PyTorch",
+        "DeepSpeed",
+        "CUDA",
+        "Hugging Face Accelerate"
+      ],
+      "description": "Train large models efficiently across multiple GPUs and nodes using data parallelism, model parallelism, and ZeRO optimizer stages. Master mixed-precision training and gradient checkpointing to push throughput while staying within memory budgets.",
+      "topics": [
+        "Data parallelism with DistributedDataParallel and FSDP",
+        "Model parallelism and pipeline parallelism strategies",
+        "ZeRO stages 1-3 with DeepSpeed",
+        "Mixed-precision training with bfloat16 and fp16",
+        "Gradient checkpointing and activation recomputation",
+        "Multi-node training with NCCL and RDMA networking",
+        "Profiling GPU utilization with PyTorch Profiler and Nsight"
+      ],
+      "resources": [
+        {
+          "label": "PyTorch Distributed Training Docs",
+          "platform": "pytorch.org",
+          "type": "docs"
+        },
+        {
+          "label": "DeepSpeed Documentation",
+          "platform": "deepspeed.ai",
+          "type": "docs"
+        },
+        {
+          "label": "Efficient Large-Scale Training - Hugging Face Course",
+          "platform": "huggingface.co",
+          "type": "course"
+        },
+        {
+          "label": "Distributed Machine Learning Patterns by Yuan Tang",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Fine-tune a 7B parameter transformer on a multi-label classification task using DeepSpeed ZeRO-3 across two GPUs with bf16 mixed precision, log throughput (tokens per second) and peak memory usage per stage.",
+      "estimatedTime": "6-7 weeks"
+    },
+    {
+      "id": "ml-engineer-10",
+      "title": "Production ML Systems and Responsible AI",
+      "order": 10,
+      "techs": [
+        "Feast",
+        "MLflow",
+        "Great Expectations",
+        "Python"
+      ],
+      "description": "Build robust production ML pipelines that include feature stores, automated retraining triggers, model governance workflows, and bias monitoring. Apply responsible AI practices including fairness auditing, explainability, and compliance documentation.",
+      "topics": [
+        "Feature store design and online/offline serving with Feast",
+        "Model governance and approval workflows in MLflow",
+        "Automated retraining pipelines triggered by data drift",
+        "Data quality checks with Great Expectations in pipelines",
+        "Fairness metrics and bias auditing techniques",
+        "Model explainability with SHAP and LIME",
+        "ML compliance documentation and model cards"
+      ],
+      "resources": [
+        {
+          "label": "Feast Feature Store Documentation",
+          "platform": "docs.feast.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Responsible AI Practices - Google",
+          "platform": "ai.google",
+          "type": "docs"
+        },
+        {
+          "label": "Designing Machine Learning Systems by Chip Huyen",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "MLOps Specialization",
+          "platform": "Coursera",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a retraining pipeline that ingests features from Feast, detects distribution drift with Evidently, triggers a new MLflow experiment when drift exceeds a threshold, and generates a model card before promotion to production.",
+      "estimatedTime": "5-6 weeks"
+    }
+  ],
+  "data-scientist": [
+    {
+      "id": "data-scientist-1",
+      "title": "Python for Data Science",
+      "order": 1,
+      "techs": [
+        "Python",
+        "Jupyter",
+        "pip"
+      ],
+      "description": "Python is the language of data science. Get fluent in the core language and the notebook workflow you'll use daily.",
+      "topics": [
+        "Python syntax, types & functions",
+        "Lists, dicts & comprehensions",
+        "Working in Jupyter notebooks",
+        "Virtual environments & pip",
+        "File & data I/O",
+        "Pythonic idioms"
+      ],
+      "resources": [
+        {
+          "label": "Python Docs",
+          "platform": "docs.python.org",
+          "type": "docs"
+        },
+        {
+          "label": "Python Data Science Handbook",
+          "platform": "jakevdp.github.io",
+          "type": "book"
+        },
+        {
+          "label": "Kaggle — Python",
+          "platform": "kaggle.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write a notebook that loads a CSV, computes summary stats, and answers 5 questions about it.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-scientist-2",
+      "title": "NumPy & Pandas",
+      "order": 2,
+      "techs": [
+        "NumPy",
+        "Pandas",
+        "DataFrames"
+      ],
+      "description": "Master the two libraries at the heart of data work. Vectorize computations with NumPy and wrangle tables with Pandas.",
+      "topics": [
+        "NumPy arrays & broadcasting",
+        "Vectorized operations",
+        "Pandas Series & DataFrames",
+        "Indexing, filtering & selection",
+        "GroupBy & aggregation",
+        "Merging & joining data"
+      ],
+      "resources": [
+        {
+          "label": "Pandas Docs",
+          "platform": "pandas.pydata.org",
+          "type": "docs"
+        },
+        {
+          "label": "NumPy Docs",
+          "platform": "numpy.org",
+          "type": "docs"
+        },
+        {
+          "label": "Kaggle — Pandas",
+          "platform": "kaggle.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Use Pandas to clean and aggregate a real dataset into a tidy summary table.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "data-scientist-3",
+      "title": "Data Cleaning & Wrangling",
+      "order": 3,
+      "techs": [
+        "Cleaning",
+        "Missing Data",
+        "ETL"
+      ],
+      "description": "Real data is messy. Learn to handle missing values, outliers and inconsistent formats to produce analysis-ready datasets.",
+      "topics": [
+        "Handling missing values",
+        "Outlier detection & treatment",
+        "Type conversion & parsing dates",
+        "Deduplication & normalization",
+        "Reshaping — pivot, melt",
+        "Combining multiple sources"
+      ],
+      "resources": [
+        {
+          "label": "Pandas — Working with missing data",
+          "platform": "pandas.pydata.org",
+          "type": "docs"
+        },
+        {
+          "label": "Kaggle — Data Cleaning",
+          "platform": "kaggle.com",
+          "type": "course"
+        },
+        {
+          "label": "Python Data Science Handbook",
+          "platform": "jakevdp.github.io",
+          "type": "book"
+        }
+      ],
+      "challenge": "Take a messy real-world dataset and turn it into a clean, documented, analysis-ready table.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-scientist-4",
+      "title": "EDA & Visualization",
+      "order": 4,
+      "techs": [
+        "Matplotlib",
+        "Seaborn",
+        "EDA"
+      ],
+      "description": "Understand your data before modeling. Explore distributions and relationships and communicate them with clear visuals.",
+      "topics": [
+        "Exploratory data analysis workflow",
+        "Matplotlib fundamentals",
+        "Statistical plots with Seaborn",
+        "Distributions & correlations",
+        "Choosing the right chart",
+        "Interactive plots (Plotly)"
+      ],
+      "resources": [
+        {
+          "label": "Matplotlib Docs",
+          "platform": "matplotlib.org",
+          "type": "docs"
+        },
+        {
+          "label": "Seaborn Docs",
+          "platform": "seaborn.pydata.org",
+          "type": "docs"
+        },
+        {
+          "label": "Kaggle — Data Visualization",
+          "platform": "kaggle.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Produce an EDA report with visuals that surfaces three non-obvious insights from a dataset.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-scientist-5",
+      "title": "Statistics & Probability",
+      "order": 5,
+      "techs": [
+        "Statistics",
+        "Probability",
+        "Inference"
+      ],
+      "description": "Statistics is the foundation of sound conclusions. Learn the concepts that separate real signal from noise.",
+      "topics": [
+        "Descriptive statistics",
+        "Probability distributions",
+        "Sampling & the central limit theorem",
+        "Hypothesis testing & p-values",
+        "Confidence intervals",
+        "Correlation vs causation"
+      ],
+      "resources": [
+        {
+          "label": "Think Stats",
+          "platform": "greenteapress.com",
+          "type": "book"
+        },
+        {
+          "label": "StatQuest",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Khan Academy — Statistics",
+          "platform": "khanacademy.org",
+          "type": "course"
+        }
+      ],
+      "challenge": "Run an A/B test analysis: state hypotheses, test for significance, and report the conclusion.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "data-scientist-6",
+      "title": "SQL & Data Sources",
+      "order": 6,
+      "techs": [
+        "SQL",
+        "Databases",
+        "APIs"
+      ],
+      "description": "Most data lives in databases. Learn to extract and join it with SQL and pull from APIs.",
+      "topics": [
+        "SQL SELECT, JOIN & GROUP BY",
+        "Window functions for analytics",
+        "Connecting Python to databases",
+        "Pulling data from REST APIs",
+        "Web scraping basics",
+        "Working with large datasets"
+      ],
+      "resources": [
+        {
+          "label": "Mode SQL Tutorial",
+          "platform": "mode.com",
+          "type": "docs"
+        },
+        {
+          "label": "Kaggle — SQL",
+          "platform": "kaggle.com",
+          "type": "course"
+        },
+        {
+          "label": "SQLBolt",
+          "platform": "sqlbolt.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Query a database with window functions and join the result with data pulled from an API.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-scientist-7",
+      "title": "Machine Learning Foundations",
+      "order": 7,
+      "techs": [
+        "Scikit-learn",
+        "Regression",
+        "Classification"
+      ],
+      "description": "Start predicting. Learn the core supervised learning algorithms with scikit-learn and how to apply them.",
+      "topics": [
+        "Supervised vs unsupervised learning",
+        "Linear & logistic regression",
+        "Decision trees & random forests",
+        "Train/test split & cross-validation",
+        "The scikit-learn API",
+        "Clustering basics (k-means)"
+      ],
+      "resources": [
+        {
+          "label": "scikit-learn Docs",
+          "platform": "scikit-learn.org",
+          "type": "docs"
+        },
+        {
+          "label": "Kaggle — Intro to ML",
+          "platform": "kaggle.com",
+          "type": "course"
+        },
+        {
+          "label": "StatQuest — Machine Learning",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Train and compare three models on a dataset and report which performs best and why.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "data-scientist-8",
+      "title": "Model Evaluation & Features",
+      "order": 8,
+      "techs": [
+        "Metrics",
+        "Feature Engineering",
+        "Tuning"
+      ],
+      "description": "Good models come from good features and honest evaluation. Learn to measure, tune and improve performance.",
+      "topics": [
+        "Classification & regression metrics",
+        "Confusion matrix, ROC & AUC",
+        "Feature engineering & selection",
+        "Handling imbalanced data",
+        "Hyperparameter tuning",
+        "Avoiding leakage & overfitting"
+      ],
+      "resources": [
+        {
+          "label": "scikit-learn — Model evaluation",
+          "platform": "scikit-learn.org",
+          "type": "docs"
+        },
+        {
+          "label": "Kaggle — Feature Engineering",
+          "platform": "kaggle.com",
+          "type": "course"
+        },
+        {
+          "label": "StatQuest",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Improve a baseline model with feature engineering and tuning, documenting the metric gains.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "data-scientist-9",
+      "title": "Communicating Insights",
+      "order": 9,
+      "techs": [
+        "Storytelling",
+        "Dashboards",
+        "Notebooks"
+      ],
+      "description": "An insight no one understands has no value. Learn to communicate findings to stakeholders clearly.",
+      "topics": [
+        "Data storytelling",
+        "Building clear notebooks & reports",
+        "Dashboards (Streamlit / Tableau)",
+        "Choosing metrics that matter",
+        "Presenting to non-technical audiences",
+        "Reproducible analysis"
+      ],
+      "resources": [
+        {
+          "label": "Streamlit Docs",
+          "platform": "docs.streamlit.io",
+          "type": "docs"
+        },
+        {
+          "label": "Storytelling with Data",
+          "platform": "storytellingwithdata.com",
+          "type": "book"
+        },
+        {
+          "label": "Tableau Public",
+          "platform": "public.tableau.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Turn an analysis into a Streamlit dashboard and a 5-slide narrative for stakeholders.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-scientist-10",
+      "title": "Capstone & Deployment",
+      "order": 10,
+      "techs": [
+        "End-to-End",
+        "FastAPI",
+        "MLflow"
+      ],
+      "description": "Bring it together. Run a full project from question to deployed model and a reproducible pipeline.",
+      "topics": [
+        "Framing a data science problem",
+        "End-to-end project workflow",
+        "Tracking experiments with MLflow",
+        "Serving a model with FastAPI",
+        "Reproducibility & environments",
+        "Documenting & sharing results"
+      ],
+      "resources": [
+        {
+          "label": "MLflow Docs",
+          "platform": "mlflow.org",
+          "type": "docs"
+        },
+        {
+          "label": "FastAPI Docs",
+          "platform": "fastapi.tiangolo.com",
+          "type": "docs"
+        },
+        {
+          "label": "Kaggle Competitions",
+          "platform": "kaggle.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Ship an end-to-end project: clean data, train a model, track it, and serve predictions via an API.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "ai-developer": [
+    {
+      "id": "ai-developer-1",
+      "title": "Python & APIs for AI",
+      "order": 1,
+      "techs": [
+        "Python",
+        "REST",
+        "JSON"
+      ],
+      "description": "AI developers glue models to applications. Get comfortable with Python and consuming HTTP APIs.",
+      "topics": [
+        "Python essentials for AI",
+        "Async Python & httpx",
+        "Working with JSON",
+        "Environment & secrets management",
+        "Rate limits & retries",
+        "Tokens & basic cost awareness"
+      ],
+      "resources": [
+        {
+          "label": "Python Docs",
+          "platform": "docs.python.org",
+          "type": "docs"
+        },
+        {
+          "label": "OpenAI API Reference",
+          "platform": "platform.openai.com",
+          "type": "docs"
+        },
+        {
+          "label": "Real Python",
+          "platform": "realpython.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a Python script that calls an LLM API and handles errors, retries and token limits.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "ai-developer-2",
+      "title": "Working with LLM APIs",
+      "order": 2,
+      "techs": [
+        "OpenAI API",
+        "Chat",
+        "Streaming"
+      ],
+      "description": "Learn the building blocks of LLM apps. Use chat completions, system prompts and streaming responses.",
+      "topics": [
+        "Chat completions & roles",
+        "System, user & assistant messages",
+        "Temperature & sampling params",
+        "Streaming responses",
+        "Multimodal inputs",
+        "Handling context windows"
+      ],
+      "resources": [
+        {
+          "label": "OpenAI API Docs",
+          "platform": "platform.openai.com",
+          "type": "docs"
+        },
+        {
+          "label": "Anthropic API Docs",
+          "platform": "docs.anthropic.com",
+          "type": "docs"
+        },
+        {
+          "label": "OpenAI Cookbook",
+          "platform": "cookbook.openai.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a streaming chat assistant with a custom system prompt and adjustable parameters.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ai-developer-3",
+      "title": "Prompt Engineering for Developers",
+      "order": 3,
+      "techs": [
+        "Prompting",
+        "Few-shot",
+        "Structured Output"
+      ],
+      "description": "Get reliable results from models. Apply prompting techniques that make outputs accurate and parseable.",
+      "topics": [
+        "Zero-shot & few-shot prompting",
+        "Chain-of-thought reasoning",
+        "Structured outputs & JSON mode",
+        "Function/tool calling",
+        "Prompt templates",
+        "Reducing hallucination"
+      ],
+      "resources": [
+        {
+          "label": "Prompt Engineering Guide",
+          "platform": "promptingguide.ai",
+          "type": "docs"
+        },
+        {
+          "label": "OpenAI — Prompt engineering",
+          "platform": "platform.openai.com",
+          "type": "docs"
+        },
+        {
+          "label": "Anthropic — Prompt engineering",
+          "platform": "docs.anthropic.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Design prompts that reliably return valid JSON for a structured extraction task.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ai-developer-4",
+      "title": "LangChain Fundamentals",
+      "order": 4,
+      "techs": [
+        "LangChain",
+        "Chains",
+        "Memory"
+      ],
+      "description": "Compose LLM applications with LangChain. Build chains, manage prompts and add memory.",
+      "topics": [
+        "LangChain core concepts",
+        "Models, prompts & output parsers",
+        "Chains & the LCEL",
+        "Conversation memory",
+        "Document loaders",
+        "Callbacks & tracing"
+      ],
+      "resources": [
+        {
+          "label": "LangChain Docs",
+          "platform": "python.langchain.com",
+          "type": "docs"
+        },
+        {
+          "label": "LangSmith Docs",
+          "platform": "docs.smith.langchain.com",
+          "type": "docs"
+        },
+        {
+          "label": "DeepLearning.AI — LangChain",
+          "platform": "deeplearning.ai",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a multi-step chain that summarizes a document and answers follow-up questions with memory.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ai-developer-5",
+      "title": "Retrieval-Augmented Generation",
+      "order": 5,
+      "techs": [
+        "RAG",
+        "Embeddings",
+        "Chunking"
+      ],
+      "description": "Ground LLMs in your own data. Build a RAG pipeline that retrieves relevant context before answering.",
+      "topics": [
+        "Why RAG — grounding & freshness",
+        "Document chunking strategies",
+        "Embeddings & similarity search",
+        "Building the retrieval step",
+        "Context injection & prompting",
+        "Citations & source tracking"
+      ],
+      "resources": [
+        {
+          "label": "LangChain — RAG",
+          "platform": "python.langchain.com",
+          "type": "docs"
+        },
+        {
+          "label": "Pinecone — RAG Guide",
+          "platform": "pinecone.io",
+          "type": "docs"
+        },
+        {
+          "label": "OpenAI Cookbook — RAG",
+          "platform": "cookbook.openai.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a RAG chatbot over a folder of PDFs that answers with citations to the source.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "ai-developer-6",
+      "title": "Embeddings & Vector Stores",
+      "order": 6,
+      "techs": [
+        "Embeddings",
+        "Vector DBs",
+        "Search"
+      ],
+      "description": "Power semantic search and retrieval. Generate embeddings and store them in a vector database.",
+      "topics": [
+        "How embeddings work",
+        "Vector databases (Pinecone, Chroma, pgvector)",
+        "Similarity metrics",
+        "Indexing & metadata filtering",
+        "Hybrid search",
+        "Scaling & cost considerations"
+      ],
+      "resources": [
+        {
+          "label": "Chroma Docs",
+          "platform": "docs.trychroma.com",
+          "type": "docs"
+        },
+        {
+          "label": "pgvector",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Pinecone Learn",
+          "platform": "pinecone.io",
+          "type": "course"
+        }
+      ],
+      "challenge": "Index a knowledge base in a vector DB with metadata filtering and build a semantic search endpoint.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ai-developer-7",
+      "title": "Building AI Agents & Tools",
+      "order": 7,
+      "techs": [
+        "Agents",
+        "Tools",
+        "Function Calling"
+      ],
+      "description": "Let models take actions. Build agents that use tools, call functions and follow multi-step plans.",
+      "topics": [
+        "Tool/function calling",
+        "The ReAct pattern",
+        "Agent loops & planning",
+        "Connecting external APIs & databases",
+        "Multi-tool orchestration",
+        "Guarding against loops & misuse"
+      ],
+      "resources": [
+        {
+          "label": "LangGraph Docs",
+          "platform": "langchain-ai.github.io",
+          "type": "docs"
+        },
+        {
+          "label": "OpenAI — Function calling",
+          "platform": "platform.openai.com",
+          "type": "docs"
+        },
+        {
+          "label": "Anthropic — Tool use",
+          "platform": "docs.anthropic.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build an agent that can search a database and call an external API to complete a task end to end.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "ai-developer-8",
+      "title": "Serving AI with FastAPI",
+      "order": 8,
+      "techs": [
+        "FastAPI",
+        "Streaming",
+        "WebSockets"
+      ],
+      "description": "Expose your AI features as a production API. Build endpoints with FastAPI, including streaming.",
+      "topics": [
+        "FastAPI fundamentals",
+        "Request validation with Pydantic",
+        "Streaming responses (SSE)",
+        "WebSockets for chat",
+        "Background tasks & queues",
+        "Auth & rate limiting"
+      ],
+      "resources": [
+        {
+          "label": "FastAPI Docs",
+          "platform": "fastapi.tiangolo.com",
+          "type": "docs"
+        },
+        {
+          "label": "FastAPI — Streaming",
+          "platform": "fastapi.tiangolo.com",
+          "type": "docs"
+        },
+        {
+          "label": "Pydantic Docs",
+          "platform": "docs.pydantic.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Wrap your RAG agent in a FastAPI service with a streaming chat endpoint and request validation.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ai-developer-9",
+      "title": "Evaluation, Guardrails & Cost",
+      "order": 9,
+      "techs": [
+        "Evals",
+        "Guardrails",
+        "Caching"
+      ],
+      "description": "Make AI apps reliable and affordable. Evaluate quality, add safety guardrails, and control cost.",
+      "topics": [
+        "Evaluating LLM outputs",
+        "LLM-as-judge & test sets",
+        "Guardrails & content moderation",
+        "Prompt injection defense",
+        "Caching & token optimization",
+        "Monitoring quality over time"
+      ],
+      "resources": [
+        {
+          "label": "LangSmith — Evaluation",
+          "platform": "docs.smith.langchain.com",
+          "type": "docs"
+        },
+        {
+          "label": "OpenAI — Safety best practices",
+          "platform": "platform.openai.com",
+          "type": "docs"
+        },
+        {
+          "label": "Ragas Docs",
+          "platform": "docs.ragas.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build an eval set for your RAG app, add input/output guardrails, and add a response cache.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ai-developer-10",
+      "title": "Deployment & Observability",
+      "order": 10,
+      "techs": [
+        "Docker",
+        "Tracing",
+        "CI/CD"
+      ],
+      "description": "Ship and operate AI applications. Containerize, trace requests, and deploy with confidence.",
+      "topics": [
+        "Dockerizing AI services",
+        "Tracing with LangSmith / OpenTelemetry",
+        "Logging prompts & responses",
+        "Cost & latency monitoring",
+        "Deploying to the cloud",
+        "CI/CD & environment management"
+      ],
+      "resources": [
+        {
+          "label": "LangSmith Docs",
+          "platform": "docs.smith.langchain.com",
+          "type": "docs"
+        },
+        {
+          "label": "Docker Docs",
+          "platform": "docs.docker.com",
+          "type": "docs"
+        },
+        {
+          "label": "OpenTelemetry",
+          "platform": "opentelemetry.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Containerize your AI app, add request tracing and cost logging, and deploy it via CI.",
+      "estimatedTime": "1–2 weeks"
+    }
+  ],
+  "nlp-engineer": [
+    {
+      "id": "nlp-engineer-1",
+      "title": "NLP Foundations",
+      "order": 1,
+      "techs": [
+        "Python",
+        "Linguistics",
+        "NLP"
+      ],
+      "description": "Start with how machines process language. Understand the core tasks and challenges of natural language processing.",
+      "topics": [
+        "What NLP is & its applications",
+        "Tokens, types & vocabularies",
+        "Morphology & syntax basics",
+        "Common NLP tasks",
+        "Corpora & datasets",
+        "The NLP pipeline"
+      ],
+      "resources": [
+        {
+          "label": "Speech and Language Processing",
+          "platform": "Jurafsky & Martin",
+          "type": "book"
+        },
+        {
+          "label": "NLTK Book",
+          "platform": "nltk.org",
+          "type": "book"
+        },
+        {
+          "label": "Hugging Face — NLP Course",
+          "platform": "huggingface.co",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a simple text-stats tool that tokenizes a corpus and reports vocabulary and frequencies.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "nlp-engineer-2",
+      "title": "Text Preprocessing",
+      "order": 2,
+      "techs": [
+        "Tokenization",
+        "Normalization",
+        "Regex"
+      ],
+      "description": "Clean text is the foundation of NLP. Master tokenization, normalization and the preprocessing pipeline.",
+      "topics": [
+        "Tokenization approaches",
+        "Stemming & lemmatization",
+        "Stopwords & normalization",
+        "Regular expressions",
+        "Subword tokenization (BPE)",
+        "Handling multilingual text"
+      ],
+      "resources": [
+        {
+          "label": "spaCy Docs",
+          "platform": "spacy.io",
+          "type": "docs"
+        },
+        {
+          "label": "NLTK Docs",
+          "platform": "nltk.org",
+          "type": "docs"
+        },
+        {
+          "label": "Hugging Face — Tokenizers",
+          "platform": "huggingface.co",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a reusable preprocessing pipeline and compare word-level vs subword tokenization.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "nlp-engineer-3",
+      "title": "Classical NLP",
+      "order": 3,
+      "techs": [
+        "spaCy",
+        "NLTK",
+        "TF-IDF"
+      ],
+      "description": "Before transformers, classical methods solved real problems — and still do. Learn the techniques and when they shine.",
+      "topics": [
+        "Bag-of-words & TF-IDF",
+        "POS tagging & parsing",
+        "Named entity recognition with spaCy",
+        "Text classification (Naive Bayes, SVM)",
+        "Topic modeling (LDA)",
+        "Rule-based pipelines"
+      ],
+      "resources": [
+        {
+          "label": "spaCy Course",
+          "platform": "course.spacy.io",
+          "type": "course"
+        },
+        {
+          "label": "scikit-learn — Text",
+          "platform": "scikit-learn.org",
+          "type": "docs"
+        },
+        {
+          "label": "NLTK Book",
+          "platform": "nltk.org",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a TF-IDF + classifier pipeline for sentiment and compare it to a spaCy NER extractor.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "nlp-engineer-4",
+      "title": "Word Embeddings",
+      "order": 4,
+      "techs": [
+        "Word2Vec",
+        "GloVe",
+        "Embeddings"
+      ],
+      "description": "Represent meaning as vectors. Learn how embeddings capture semantic relationships between words.",
+      "topics": [
+        "From one-hot to dense vectors",
+        "Word2Vec & GloVe",
+        "Cosine similarity & analogies",
+        "Contextual vs static embeddings",
+        "Sentence embeddings",
+        "Visualizing embeddings"
+      ],
+      "resources": [
+        {
+          "label": "Illustrated Word2Vec",
+          "platform": "jalammar.github.io",
+          "type": "docs"
+        },
+        {
+          "label": "Gensim Docs",
+          "platform": "radimrehurek.com",
+          "type": "docs"
+        },
+        {
+          "label": "Stanford CS224N",
+          "platform": "web.stanford.edu",
+          "type": "course"
+        }
+      ],
+      "challenge": "Train word embeddings on a corpus and explore the nearest neighbors and analogies they learn.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "nlp-engineer-5",
+      "title": "Deep Learning for NLP",
+      "order": 5,
+      "techs": [
+        "PyTorch",
+        "RNNs",
+        "LSTMs"
+      ],
+      "description": "Add neural networks to your toolkit. Build sequence models with PyTorch for language tasks.",
+      "topics": [
+        "Neural network basics",
+        "PyTorch tensors & autograd",
+        "RNNs, LSTMs & GRUs",
+        "Sequence modeling",
+        "Training loops & loss functions",
+        "Handling variable-length sequences"
+      ],
+      "resources": [
+        {
+          "label": "PyTorch Tutorials",
+          "platform": "pytorch.org",
+          "type": "docs"
+        },
+        {
+          "label": "Stanford CS224N",
+          "platform": "web.stanford.edu",
+          "type": "course"
+        },
+        {
+          "label": "Dive into Deep Learning",
+          "platform": "d2l.ai",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build and train an LSTM text classifier in PyTorch and evaluate it against a classical baseline.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "nlp-engineer-6",
+      "title": "Transformers & Attention",
+      "order": 6,
+      "techs": [
+        "Transformers",
+        "Attention",
+        "BERT"
+      ],
+      "description": "Understand the architecture that changed NLP. Learn self-attention and the transformer that powers modern models.",
+      "topics": [
+        "The attention mechanism",
+        "Self-attention & multi-head attention",
+        "Transformer architecture",
+        "Encoder vs decoder models",
+        "BERT, GPT & T5 families",
+        "Positional encoding"
+      ],
+      "resources": [
+        {
+          "label": "The Illustrated Transformer",
+          "platform": "jalammar.github.io",
+          "type": "docs"
+        },
+        {
+          "label": "Attention Is All You Need",
+          "platform": "arxiv.org",
+          "type": "docs"
+        },
+        {
+          "label": "Hugging Face — NLP Course",
+          "platform": "huggingface.co",
+          "type": "course"
+        }
+      ],
+      "challenge": "Implement scaled dot-product attention from scratch and explain each step.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "nlp-engineer-7",
+      "title": "Hugging Face Transformers",
+      "order": 7,
+      "techs": [
+        "HuggingFace",
+        "Pipelines",
+        "Datasets"
+      ],
+      "description": "Use the de facto NLP library. Load pretrained models and run real tasks with the Transformers ecosystem.",
+      "topics": [
+        "The Transformers library",
+        "Pipelines for common tasks",
+        "Tokenizers & model classes",
+        "The Datasets library",
+        "Inference & batching",
+        "The Model Hub"
+      ],
+      "resources": [
+        {
+          "label": "Transformers Docs",
+          "platform": "huggingface.co",
+          "type": "docs"
+        },
+        {
+          "label": "Hugging Face — NLP Course",
+          "platform": "huggingface.co",
+          "type": "course"
+        },
+        {
+          "label": "Datasets Docs",
+          "platform": "huggingface.co",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Use pretrained models to build a multi-task demo: classification, NER and summarization.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "nlp-engineer-8",
+      "title": "Fine-Tuning & Transfer Learning",
+      "order": 8,
+      "techs": [
+        "Fine-tuning",
+        "LoRA",
+        "Trainer"
+      ],
+      "description": "Adapt models to your domain. Fine-tune transformers efficiently with transfer learning and PEFT.",
+      "topics": [
+        "Transfer learning concepts",
+        "Fine-tuning with the Trainer API",
+        "Parameter-efficient tuning (LoRA)",
+        "Data preparation & labeling",
+        "Evaluation metrics for NLP",
+        "Avoiding overfitting"
+      ],
+      "resources": [
+        {
+          "label": "Hugging Face — Fine-tuning",
+          "platform": "huggingface.co",
+          "type": "docs"
+        },
+        {
+          "label": "PEFT Docs",
+          "platform": "huggingface.co",
+          "type": "docs"
+        },
+        {
+          "label": "Hugging Face — NLP Course",
+          "platform": "huggingface.co",
+          "type": "course"
+        }
+      ],
+      "challenge": "Fine-tune a transformer on a domain dataset with LoRA and beat the zero-shot baseline.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "nlp-engineer-9",
+      "title": "NLP Tasks in Production",
+      "order": 9,
+      "techs": [
+        "NER",
+        "QA",
+        "Summarization"
+      ],
+      "description": "Apply NLP to real product problems. Implement the high-value tasks teams actually ship.",
+      "topics": [
+        "Named entity recognition systems",
+        "Question answering",
+        "Summarization (extractive & abstractive)",
+        "Semantic search & retrieval",
+        "Text generation & control",
+        "Multilingual & domain adaptation"
+      ],
+      "resources": [
+        {
+          "label": "Hugging Face — Tasks",
+          "platform": "huggingface.co",
+          "type": "docs"
+        },
+        {
+          "label": "spaCy — Projects",
+          "platform": "spacy.io",
+          "type": "docs"
+        },
+        {
+          "label": "Sentence Transformers",
+          "platform": "sbert.net",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a document QA system that retrieves passages and extracts precise answers.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "nlp-engineer-10",
+      "title": "Deployment & MLOps for NLP",
+      "order": 10,
+      "techs": [
+        "FastAPI",
+        "ONNX",
+        "Docker"
+      ],
+      "description": "Ship NLP models efficiently. Optimize, serve and monitor them in production.",
+      "topics": [
+        "Model optimization & quantization",
+        "Exporting with ONNX",
+        "Serving with FastAPI / Triton",
+        "Batching & latency tuning",
+        "Monitoring & drift",
+        "Containerized deployment"
+      ],
+      "resources": [
+        {
+          "label": "Optimum Docs",
+          "platform": "huggingface.co",
+          "type": "docs"
+        },
+        {
+          "label": "FastAPI Docs",
+          "platform": "fastapi.tiangolo.com",
+          "type": "docs"
+        },
+        {
+          "label": "ONNX Runtime",
+          "platform": "onnxruntime.ai",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Optimize your fine-tuned model with ONNX and serve it behind a FastAPI endpoint in Docker.",
+      "estimatedTime": "2 weeks"
+    }
+  ],
+  "cv-engineer": [
+    {
+      "id": "cv-engineer-1",
+      "title": "Image Processing Foundations",
+      "order": 1,
+      "techs": [
+        "Images",
+        "Pixels",
+        "NumPy"
+      ],
+      "description": "Computer vision starts with understanding images as data. Learn how pixels, channels and color spaces work.",
+      "topics": [
+        "Images as arrays of pixels",
+        "Color spaces — RGB, HSV, grayscale",
+        "Image I/O with NumPy",
+        "Histograms & thresholding",
+        "Resolution & sampling",
+        "Basic transformations"
+      ],
+      "resources": [
+        {
+          "label": "OpenCV Docs",
+          "platform": "docs.opencv.org",
+          "type": "docs"
+        },
+        {
+          "label": "PyImageSearch",
+          "platform": "pyimagesearch.com",
+          "type": "docs"
+        },
+        {
+          "label": "First Principles of Computer Vision",
+          "platform": "YouTube",
+          "type": "course"
+        }
+      ],
+      "challenge": "Load an image, convert color spaces, and apply thresholding to segment a simple object.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "cv-engineer-2",
+      "title": "OpenCV Essentials",
+      "order": 2,
+      "techs": [
+        "OpenCV",
+        "Filters",
+        "Contours"
+      ],
+      "description": "OpenCV is the workhorse of classical CV. Master the operations you'll use in every pipeline.",
+      "topics": [
+        "Filtering & convolution",
+        "Edge detection (Canny)",
+        "Morphological operations",
+        "Contours & shape analysis",
+        "Geometric transforms",
+        "Working with video streams"
+      ],
+      "resources": [
+        {
+          "label": "OpenCV-Python Tutorials",
+          "platform": "docs.opencv.org",
+          "type": "docs"
+        },
+        {
+          "label": "PyImageSearch",
+          "platform": "pyimagesearch.com",
+          "type": "docs"
+        },
+        {
+          "label": "LearnOpenCV",
+          "platform": "learnopencv.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a document scanner that detects edges, finds the page contour and warps it flat.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cv-engineer-3",
+      "title": "Feature Detection & Classical CV",
+      "order": 3,
+      "techs": [
+        "Features",
+        "SIFT",
+        "Matching"
+      ],
+      "description": "Learn how classical CV finds and matches structure in images — the basis of tracking and stitching.",
+      "topics": [
+        "Corner & keypoint detection",
+        "SIFT / ORB descriptors",
+        "Feature matching",
+        "Image alignment & stitching",
+        "Optical flow",
+        "Camera calibration basics"
+      ],
+      "resources": [
+        {
+          "label": "OpenCV — Feature Detection",
+          "platform": "docs.opencv.org",
+          "type": "docs"
+        },
+        {
+          "label": "LearnOpenCV",
+          "platform": "learnopencv.com",
+          "type": "docs"
+        },
+        {
+          "label": "First Principles of Computer Vision",
+          "platform": "YouTube",
+          "type": "course"
+        }
+      ],
+      "challenge": "Stitch two overlapping photos into a panorama using feature matching and homography.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cv-engineer-4",
+      "title": "Deep Learning with PyTorch",
+      "order": 4,
+      "techs": [
+        "PyTorch",
+        "Tensors",
+        "Training"
+      ],
+      "description": "Modern CV is deep learning. Build the PyTorch foundation you'll use to train vision models.",
+      "topics": [
+        "Tensors & autograd",
+        "Building models with nn.Module",
+        "Datasets & DataLoaders",
+        "Training & validation loops",
+        "Loss functions & optimizers",
+        "Using the GPU"
+      ],
+      "resources": [
+        {
+          "label": "PyTorch Tutorials",
+          "platform": "pytorch.org",
+          "type": "docs"
+        },
+        {
+          "label": "Dive into Deep Learning",
+          "platform": "d2l.ai",
+          "type": "book"
+        },
+        {
+          "label": "fast.ai",
+          "platform": "fast.ai",
+          "type": "course"
+        }
+      ],
+      "challenge": "Train a small neural network on an image dataset in PyTorch with a proper training loop.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "cv-engineer-5",
+      "title": "Convolutional Neural Networks",
+      "order": 5,
+      "techs": [
+        "CNNs",
+        "Pooling",
+        "Architectures"
+      ],
+      "description": "CNNs are the backbone of image models. Understand convolutions and the architectures that won ImageNet.",
+      "topics": [
+        "Convolution & pooling layers",
+        "Feature maps & receptive fields",
+        "Classic architectures (ResNet, VGG)",
+        "Batch norm & regularization",
+        "Transfer learning with pretrained CNNs",
+        "Visualizing what CNNs learn"
+      ],
+      "resources": [
+        {
+          "label": "CS231n",
+          "platform": "cs231n.github.io",
+          "type": "course"
+        },
+        {
+          "label": "PyTorch — Transfer Learning",
+          "platform": "pytorch.org",
+          "type": "docs"
+        },
+        {
+          "label": "Dive into Deep Learning",
+          "platform": "d2l.ai",
+          "type": "book"
+        }
+      ],
+      "challenge": "Fine-tune a pretrained ResNet on a custom image dataset and report accuracy.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "cv-engineer-6",
+      "title": "Image Classification",
+      "order": 6,
+      "techs": [
+        "Classification",
+        "Augmentation",
+        "Metrics"
+      ],
+      "description": "Master the canonical CV task. Build robust image classifiers with augmentation and solid evaluation.",
+      "topics": [
+        "Building a classification pipeline",
+        "Data augmentation",
+        "Handling class imbalance",
+        "Metrics & confusion matrices",
+        "Vision transformers (ViT) intro",
+        "Error analysis"
+      ],
+      "resources": [
+        {
+          "label": "PyTorch Image Models (timm)",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "CS231n",
+          "platform": "cs231n.github.io",
+          "type": "course"
+        },
+        {
+          "label": "Albumentations Docs",
+          "platform": "albumentations.ai",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a classifier with augmentation that generalizes well, and analyze its mistakes.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cv-engineer-7",
+      "title": "Object Detection",
+      "order": 7,
+      "techs": [
+        "YOLO",
+        "Bounding Boxes",
+        "Detection"
+      ],
+      "description": "Find and localize objects. Learn detection concepts and build real detectors with YOLO.",
+      "topics": [
+        "Detection vs classification",
+        "Bounding boxes & IoU",
+        "Anchors & non-max suppression",
+        "The YOLO family",
+        "Training YOLO on custom data",
+        "Evaluation with mAP"
+      ],
+      "resources": [
+        {
+          "label": "Ultralytics YOLO Docs",
+          "platform": "docs.ultralytics.com",
+          "type": "docs"
+        },
+        {
+          "label": "LearnOpenCV — Object Detection",
+          "platform": "learnopencv.com",
+          "type": "docs"
+        },
+        {
+          "label": "Roboflow Learn",
+          "platform": "roboflow.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Train a YOLO model on a custom dataset to detect a class of objects and measure its mAP.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "cv-engineer-8",
+      "title": "Segmentation & Advanced CV",
+      "order": 8,
+      "techs": [
+        "Segmentation",
+        "U-Net",
+        "SAM"
+      ],
+      "description": "Go beyond boxes to pixel-level understanding. Learn semantic and instance segmentation.",
+      "topics": [
+        "Semantic vs instance segmentation",
+        "U-Net & encoder-decoder models",
+        "Mask R-CNN",
+        "Segment Anything (SAM)",
+        "Pose estimation overview",
+        "3D & depth basics"
+      ],
+      "resources": [
+        {
+          "label": "Segment Anything",
+          "platform": "segment-anything.com",
+          "type": "docs"
+        },
+        {
+          "label": "PyTorch — Segmentation models",
+          "platform": "pytorch.org",
+          "type": "docs"
+        },
+        {
+          "label": "CS231n",
+          "platform": "cs231n.github.io",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a semantic segmentation model that masks a target object class in images.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "cv-engineer-9",
+      "title": "Datasets, Augmentation & Training",
+      "order": 9,
+      "techs": [
+        "Datasets",
+        "Labeling",
+        "MLOps"
+      ],
+      "description": "Great models need great data and disciplined training. Build datasets and reproducible training runs.",
+      "topics": [
+        "Collecting & labeling images",
+        "Annotation tools & formats",
+        "Advanced augmentation",
+        "Experiment tracking",
+        "Handling large datasets",
+        "Reproducible training"
+      ],
+      "resources": [
+        {
+          "label": "Roboflow Docs",
+          "platform": "docs.roboflow.com",
+          "type": "docs"
+        },
+        {
+          "label": "Albumentations",
+          "platform": "albumentations.ai",
+          "type": "docs"
+        },
+        {
+          "label": "Weights & Biases Docs",
+          "platform": "docs.wandb.ai",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build and version a labeled dataset, then run tracked training experiments comparing augmentations.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "cv-engineer-10",
+      "title": "Deployment & Edge Inference",
+      "order": 10,
+      "techs": [
+        "ONNX",
+        "TensorRT",
+        "Edge"
+      ],
+      "description": "Run vision models where they're needed. Optimize and deploy to servers and edge devices.",
+      "topics": [
+        "Model export (ONNX)",
+        "Optimization & quantization",
+        "TensorRT & acceleration",
+        "Real-time video inference",
+        "Edge deployment (Jetson, mobile)",
+        "Serving & monitoring"
+      ],
+      "resources": [
+        {
+          "label": "ONNX Runtime",
+          "platform": "onnxruntime.ai",
+          "type": "docs"
+        },
+        {
+          "label": "Ultralytics — Export",
+          "platform": "docs.ultralytics.com",
+          "type": "docs"
+        },
+        {
+          "label": "NVIDIA TensorRT",
+          "platform": "developer.nvidia.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Export your detector to ONNX and run real-time inference on a webcam stream.",
+      "estimatedTime": "2 weeks"
+    }
+  ],
+  "llm-engineer": [
+    {
+      "id": "llm-engineer-1",
+      "title": "LLM Foundations",
+      "order": 1,
+      "techs": [
+        "LLMs",
+        "Tokens",
+        "Transformers"
+      ],
+      "description": "Understand what large language models are and how they work at a practical level before building with them.",
+      "topics": [
+        "How LLMs are trained & predict tokens",
+        "Tokenization & context windows",
+        "Capabilities & limitations",
+        "Open vs closed models",
+        "Temperature & sampling",
+        "Hallucination & grounding"
+      ],
+      "resources": [
+        {
+          "label": "Hugging Face — LLM Course",
+          "platform": "huggingface.co",
+          "type": "course"
+        },
+        {
+          "label": "Andrej Karpathy — Intro to LLMs",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "The Illustrated Transformer",
+          "platform": "jalammar.github.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Compare outputs of an open and a closed model on the same prompts and document the differences.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "llm-engineer-2",
+      "title": "Prompting & Context",
+      "order": 2,
+      "techs": [
+        "Prompting",
+        "Few-shot",
+        "System Prompts"
+      ],
+      "description": "Prompting is the primary interface to LLMs. Learn to steer models reliably with context and examples.",
+      "topics": [
+        "System, user & assistant roles",
+        "Few-shot & in-context learning",
+        "Chain-of-thought prompting",
+        "Structured outputs",
+        "Context window management",
+        "Prompt templates & variables"
+      ],
+      "resources": [
+        {
+          "label": "Prompt Engineering Guide",
+          "platform": "promptingguide.ai",
+          "type": "docs"
+        },
+        {
+          "label": "Anthropic — Prompt engineering",
+          "platform": "docs.anthropic.com",
+          "type": "docs"
+        },
+        {
+          "label": "OpenAI Cookbook",
+          "platform": "cookbook.openai.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Design a prompt template with few-shot examples that produces consistent structured output.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "llm-engineer-3",
+      "title": "Embeddings & Vector Databases",
+      "order": 3,
+      "techs": [
+        "Embeddings",
+        "Vector DBs",
+        "Search"
+      ],
+      "description": "Retrieval is what makes LLMs useful on private data. Learn embeddings and vector search.",
+      "topics": [
+        "Embedding models",
+        "Vector databases (Chroma, pgvector, Pinecone)",
+        "Chunking strategies",
+        "Similarity & hybrid search",
+        "Metadata filtering",
+        "Indexing at scale"
+      ],
+      "resources": [
+        {
+          "label": "LlamaIndex Docs",
+          "platform": "docs.llamaindex.ai",
+          "type": "docs"
+        },
+        {
+          "label": "Chroma Docs",
+          "platform": "docs.trychroma.com",
+          "type": "docs"
+        },
+        {
+          "label": "Pinecone Learn",
+          "platform": "pinecone.io",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build an embedding index over a document set with chunking and metadata filtering.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "llm-engineer-4",
+      "title": "RAG Architecture",
+      "order": 4,
+      "techs": [
+        "RAG",
+        "Retrieval",
+        "Grounding"
+      ],
+      "description": "Build retrieval-augmented generation systems that answer from your data with citations.",
+      "topics": [
+        "RAG pipeline architecture",
+        "Retrieval strategies & re-ranking",
+        "Context assembly & prompting",
+        "Citations & source attribution",
+        "Handling long & multi-doc context",
+        "Evaluating retrieval quality"
+      ],
+      "resources": [
+        {
+          "label": "LlamaIndex — RAG",
+          "platform": "docs.llamaindex.ai",
+          "type": "docs"
+        },
+        {
+          "label": "LangChain — RAG",
+          "platform": "python.langchain.com",
+          "type": "docs"
+        },
+        {
+          "label": "Pinecone — RAG",
+          "platform": "pinecone.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a production-style RAG system with re-ranking and source citations over a knowledge base.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "llm-engineer-5",
+      "title": "LangChain & LlamaIndex",
+      "order": 5,
+      "techs": [
+        "LangChain",
+        "LlamaIndex",
+        "Orchestration"
+      ],
+      "description": "Use the leading frameworks to compose LLM applications without reinventing the plumbing.",
+      "topics": [
+        "LangChain core & LCEL",
+        "LlamaIndex data framework",
+        "Loaders, indices & query engines",
+        "Memory & state",
+        "When to use which framework",
+        "Tracing & debugging"
+      ],
+      "resources": [
+        {
+          "label": "LangChain Docs",
+          "platform": "python.langchain.com",
+          "type": "docs"
+        },
+        {
+          "label": "LlamaIndex Docs",
+          "platform": "docs.llamaindex.ai",
+          "type": "docs"
+        },
+        {
+          "label": "LangSmith",
+          "platform": "docs.smith.langchain.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Rebuild your RAG app with LlamaIndex query engines and trace it with LangSmith.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "llm-engineer-6",
+      "title": "Agents & Tool Use",
+      "order": 6,
+      "techs": [
+        "Agents",
+        "Tools",
+        "LangGraph"
+      ],
+      "description": "Give LLMs the ability to act. Build agents that plan, call tools and complete multi-step tasks.",
+      "topics": [
+        "Tool/function calling",
+        "ReAct & planning loops",
+        "LangGraph state machines",
+        "Multi-agent systems",
+        "Memory & long-running tasks",
+        "Safety & loop control"
+      ],
+      "resources": [
+        {
+          "label": "LangGraph Docs",
+          "platform": "langchain-ai.github.io",
+          "type": "docs"
+        },
+        {
+          "label": "Anthropic — Building agents",
+          "platform": "docs.anthropic.com",
+          "type": "docs"
+        },
+        {
+          "label": "OpenAI — Function calling",
+          "platform": "platform.openai.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a tool-using agent with LangGraph that researches a topic and writes a sourced summary.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "llm-engineer-7",
+      "title": "Fine-Tuning & PEFT",
+      "order": 7,
+      "techs": [
+        "Fine-tuning",
+        "LoRA",
+        "QLoRA"
+      ],
+      "description": "When prompting isn't enough, fine-tune. Learn efficient adaptation of open models to your needs.",
+      "topics": [
+        "When to fine-tune vs RAG",
+        "Instruction & preference data",
+        "LoRA & QLoRA",
+        "Training with PEFT & TRL",
+        "Quantization basics",
+        "Evaluating fine-tuned models"
+      ],
+      "resources": [
+        {
+          "label": "Hugging Face — PEFT",
+          "platform": "huggingface.co",
+          "type": "docs"
+        },
+        {
+          "label": "TRL Docs",
+          "platform": "huggingface.co",
+          "type": "docs"
+        },
+        {
+          "label": "Unsloth Docs",
+          "platform": "docs.unsloth.ai",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Fine-tune an open model with QLoRA on an instruction dataset and compare it to the base model.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "llm-engineer-8",
+      "title": "Evaluation & Observability",
+      "order": 8,
+      "techs": [
+        "Evals",
+        "Tracing",
+        "RAGAS"
+      ],
+      "description": "You can't improve what you can't measure. Build evaluation and observability for LLM systems.",
+      "topics": [
+        "Evaluation strategies & test sets",
+        "LLM-as-judge",
+        "RAG evaluation (RAGAS)",
+        "Tracing & logging",
+        "Regression testing prompts",
+        "Human feedback loops"
+      ],
+      "resources": [
+        {
+          "label": "Ragas Docs",
+          "platform": "docs.ragas.io",
+          "type": "docs"
+        },
+        {
+          "label": "LangSmith — Evaluation",
+          "platform": "docs.smith.langchain.com",
+          "type": "docs"
+        },
+        {
+          "label": "OpenAI Evals",
+          "platform": "GitHub",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build an automated eval suite for your RAG agent with retrieval and answer-quality metrics.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "llm-engineer-9",
+      "title": "Optimization, Caching & Cost",
+      "order": 9,
+      "techs": [
+        "Caching",
+        "Quantization",
+        "Latency"
+      ],
+      "description": "Make LLM apps fast and affordable. Optimize latency, cache aggressively and control token spend.",
+      "topics": [
+        "Prompt & response caching",
+        "Semantic caching",
+        "Streaming & latency optimization",
+        "Model routing & fallbacks",
+        "Quantization & inference servers",
+        "Token & cost budgeting"
+      ],
+      "resources": [
+        {
+          "label": "vLLM Docs",
+          "platform": "docs.vllm.ai",
+          "type": "docs"
+        },
+        {
+          "label": "LiteLLM Docs",
+          "platform": "docs.litellm.ai",
+          "type": "docs"
+        },
+        {
+          "label": "OpenAI — Production best practices",
+          "platform": "platform.openai.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add semantic caching and model routing to cut your app's latency and cost measurably.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "llm-engineer-10",
+      "title": "Production Deployment & Safety",
+      "order": 10,
+      "techs": [
+        "Deployment",
+        "Guardrails",
+        "Monitoring"
+      ],
+      "description": "Ship LLM systems responsibly. Deploy, guard against misuse, and monitor in production.",
+      "topics": [
+        "Serving open models (vLLM, TGI)",
+        "Guardrails & moderation",
+        "Prompt injection defense",
+        "Monitoring quality & cost",
+        "Versioning prompts & models",
+        "Scaling & reliability"
+      ],
+      "resources": [
+        {
+          "label": "Text Generation Inference",
+          "platform": "huggingface.co",
+          "type": "docs"
+        },
+        {
+          "label": "OWASP Top 10 for LLMs",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "NeMo Guardrails",
+          "platform": "GitHub",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy your LLM app with guardrails and monitoring, and red-team it for prompt injection.",
+      "estimatedTime": "2 weeks"
+    }
+  ],
+  "mlops": [
+    {
+      "id": "mlops-1",
+      "title": "MLOps Foundations",
+      "order": 1,
+      "techs": [
+        "MLOps",
+        "Lifecycle",
+        "Python"
+      ],
+      "description": "MLOps brings engineering discipline to machine learning. Understand the lifecycle and why models fail in production.",
+      "topics": [
+        "The ML lifecycle",
+        "Why ML projects fail in production",
+        "MLOps maturity levels",
+        "Roles & responsibilities",
+        "Technical debt in ML systems",
+        "Tooling landscape"
+      ],
+      "resources": [
+        {
+          "label": "Google — MLOps",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "Made With ML",
+          "platform": "madewithml.com",
+          "type": "course"
+        },
+        {
+          "label": "Designing ML Systems",
+          "platform": "Chip Huyen",
+          "type": "book"
+        }
+      ],
+      "challenge": "Map an existing ML notebook project to the full ML lifecycle and identify the production gaps.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "mlops-2",
+      "title": "ML Lifecycle & Reproducibility",
+      "order": 2,
+      "techs": [
+        "Git",
+        "DVC",
+        "Environments"
+      ],
+      "description": "Reproducibility is the bedrock of MLOps. Version code, data and environments so results can be recreated.",
+      "topics": [
+        "Versioning code with Git",
+        "Data versioning with DVC",
+        "Reproducible environments",
+        "Configuration management",
+        "Seeds & determinism",
+        "Project structure for ML"
+      ],
+      "resources": [
+        {
+          "label": "DVC Docs",
+          "platform": "dvc.org",
+          "type": "docs"
+        },
+        {
+          "label": "Made With ML",
+          "platform": "madewithml.com",
+          "type": "course"
+        },
+        {
+          "label": "Cookiecutter Data Science",
+          "platform": "cookiecutter-data-science",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Set up a reproducible ML project with Git + DVC where anyone can recreate your results.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mlops-3",
+      "title": "Experiment Tracking",
+      "order": 3,
+      "techs": [
+        "MLflow",
+        "Weights & Biases",
+        "Metrics"
+      ],
+      "description": "Track every experiment so you can compare and reproduce them. Make MLflow your model's source of truth.",
+      "topics": [
+        "Logging params, metrics & artifacts",
+        "MLflow tracking server",
+        "Comparing runs",
+        "The model registry",
+        "Weights & Biases alternative",
+        "Organizing experiments"
+      ],
+      "resources": [
+        {
+          "label": "MLflow Docs",
+          "platform": "mlflow.org",
+          "type": "docs"
+        },
+        {
+          "label": "Weights & Biases Docs",
+          "platform": "docs.wandb.ai",
+          "type": "docs"
+        },
+        {
+          "label": "Made With ML",
+          "platform": "madewithml.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Instrument a training script with MLflow and register the best run in the model registry.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mlops-4",
+      "title": "Data & Feature Pipelines",
+      "order": 4,
+      "techs": [
+        "Pipelines",
+        "Feature Store",
+        "Validation"
+      ],
+      "description": "Models are only as good as their data pipelines. Build reliable, validated feature pipelines.",
+      "topics": [
+        "Building data pipelines",
+        "Data validation (Great Expectations)",
+        "Feature stores (Feast)",
+        "Training/serving skew",
+        "Pipeline scheduling",
+        "Handling data drift at the source"
+      ],
+      "resources": [
+        {
+          "label": "Feast Docs",
+          "platform": "docs.feast.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Great Expectations Docs",
+          "platform": "docs.greatexpectations.io",
+          "type": "docs"
+        },
+        {
+          "label": "Designing ML Systems",
+          "platform": "Chip Huyen",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a validated feature pipeline and serve the same features for training and inference.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "mlops-5",
+      "title": "Model Packaging & Containers",
+      "order": 5,
+      "techs": [
+        "Docker",
+        "BentoML",
+        "Artifacts"
+      ],
+      "description": "Package models so they run anywhere. Containerize models and their dependencies reproducibly.",
+      "topics": [
+        "Serializing models",
+        "Dockerizing model services",
+        "Packaging with BentoML",
+        "Dependency & environment pinning",
+        "Model artifacts & metadata",
+        "Image size & security"
+      ],
+      "resources": [
+        {
+          "label": "BentoML Docs",
+          "platform": "docs.bentoml.com",
+          "type": "docs"
+        },
+        {
+          "label": "Docker Docs",
+          "platform": "docs.docker.com",
+          "type": "docs"
+        },
+        {
+          "label": "MLflow — Models",
+          "platform": "mlflow.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Package a trained model into a versioned Docker image that exposes a prediction endpoint.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mlops-6",
+      "title": "Orchestration",
+      "order": 6,
+      "techs": [
+        "Airflow",
+        "Kubeflow",
+        "DAGs"
+      ],
+      "description": "Automate ML workflows end to end. Orchestrate training and data pipelines with Airflow and Kubeflow.",
+      "topics": [
+        "Workflow orchestration concepts",
+        "Airflow DAGs",
+        "Kubeflow Pipelines",
+        "Scheduling & retries",
+        "Parameterized & triggered runs",
+        "Pipeline observability"
+      ],
+      "resources": [
+        {
+          "label": "Apache Airflow Docs",
+          "platform": "airflow.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "Kubeflow Docs",
+          "platform": "kubeflow.org",
+          "type": "docs"
+        },
+        {
+          "label": "Made With ML",
+          "platform": "madewithml.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build an Airflow DAG that runs the full pipeline: ingest, train, evaluate and register.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "mlops-7",
+      "title": "CI/CD for ML",
+      "order": 7,
+      "techs": [
+        "CI/CD",
+        "GitHub Actions",
+        "Testing"
+      ],
+      "description": "Automate testing and delivery for ML. Build pipelines that validate data, code and models on every change.",
+      "topics": [
+        "Testing ML code & data",
+        "Model validation gates",
+        "CI/CD with GitHub Actions",
+        "Continuous training (CT)",
+        "Automated retraining triggers",
+        "Promotion across environments"
+      ],
+      "resources": [
+        {
+          "label": "GitHub Actions Docs",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "CML (Continuous ML)",
+          "platform": "cml.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Google — CI/CD for ML",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a CI pipeline that tests the pipeline, validates a model, and blocks bad models from promotion.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mlops-8",
+      "title": "Model Serving & Deployment",
+      "order": 8,
+      "techs": [
+        "Serving",
+        "KServe",
+        "APIs"
+      ],
+      "description": "Get models into production. Serve predictions at scale with the right deployment pattern.",
+      "topics": [
+        "Online vs batch inference",
+        "REST & gRPC serving",
+        "KServe / Seldon on Kubernetes",
+        "Autoscaling & load balancing",
+        "Canary & shadow deployments",
+        "Latency & throughput tuning"
+      ],
+      "resources": [
+        {
+          "label": "KServe Docs",
+          "platform": "kserve.github.io",
+          "type": "docs"
+        },
+        {
+          "label": "BentoML Docs",
+          "platform": "docs.bentoml.com",
+          "type": "docs"
+        },
+        {
+          "label": "Designing ML Systems",
+          "platform": "Chip Huyen",
+          "type": "book"
+        }
+      ],
+      "challenge": "Deploy a model with autoscaling and run a canary rollout of a new version.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "mlops-9",
+      "title": "Monitoring & Drift Detection",
+      "order": 9,
+      "techs": [
+        "Monitoring",
+        "Drift",
+        "Observability"
+      ],
+      "description": "Models degrade silently. Monitor predictions, detect drift, and know when to retrain.",
+      "topics": [
+        "Monitoring metrics & predictions",
+        "Data & concept drift detection",
+        "Performance monitoring without labels",
+        "Alerting & dashboards",
+        "Logging predictions",
+        "Closing the retraining loop"
+      ],
+      "resources": [
+        {
+          "label": "Evidently AI Docs",
+          "platform": "docs.evidentlyai.com",
+          "type": "docs"
+        },
+        {
+          "label": "Prometheus & Grafana",
+          "platform": "prometheus.io",
+          "type": "docs"
+        },
+        {
+          "label": "Designing ML Systems",
+          "platform": "Chip Huyen",
+          "type": "book"
+        }
+      ],
+      "challenge": "Add drift detection and a monitoring dashboard that alerts when model inputs shift.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mlops-10",
+      "title": "Scaling & Governance",
+      "order": 10,
+      "techs": [
+        "Scaling",
+        "Governance",
+        "Cost"
+      ],
+      "description": "Operate ML responsibly at scale. Manage infrastructure, governance and cost across many models.",
+      "topics": [
+        "Scaling training & inference",
+        "GPU management & cost control",
+        "Model governance & lineage",
+        "Reproducibility & audit trails",
+        "Responsible AI & compliance",
+        "Platform thinking for ML"
+      ],
+      "resources": [
+        {
+          "label": "Google — MLOps maturity",
+          "platform": "cloud.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "Ray Docs",
+          "platform": "docs.ray.io",
+          "type": "docs"
+        },
+        {
+          "label": "Designing ML Systems",
+          "platform": "Chip Huyen",
+          "type": "book"
+        }
+      ],
+      "challenge": "Document a governance & cost plan for a multi-model platform with lineage and audit trails.",
+      "estimatedTime": "2 weeks"
+    }
+  ],
+  "data-engineer": [
+    {
+      "id": "data-engineer-1",
+      "title": "Data Engineering Foundations",
+      "order": 1,
+      "techs": [
+        "Python",
+        "Linux",
+        "Data"
+      ],
+      "description": "Data engineers build the pipelines that power analytics and ML. Start with the fundamentals and the big picture.",
+      "topics": [
+        "What data engineering is",
+        "OLTP vs OLAP",
+        "Batch vs streaming",
+        "The modern data stack",
+        "Linux & the command line",
+        "File formats — CSV, Parquet, Avro"
+      ],
+      "resources": [
+        {
+          "label": "Fundamentals of Data Engineering",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Data Engineering Zoomcamp",
+          "platform": "DataTalks.Club",
+          "type": "course"
+        },
+        {
+          "label": "Awesome Data Engineering",
+          "platform": "GitHub",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Diagram an end-to-end data platform and explain where batch and streaming each fit.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "data-engineer-2",
+      "title": "SQL & Data Modeling",
+      "order": 2,
+      "techs": [
+        "SQL",
+        "Modeling",
+        "Warehousing"
+      ],
+      "description": "SQL and data modeling are the core craft. Learn to model data for analytics at scale.",
+      "topics": [
+        "Advanced SQL & window functions",
+        "Dimensional modeling (star schema)",
+        "Normalization vs denormalization",
+        "Slowly changing dimensions",
+        "Fact & dimension tables",
+        "Query performance"
+      ],
+      "resources": [
+        {
+          "label": "The Data Warehouse Toolkit",
+          "platform": "Kimball",
+          "type": "book"
+        },
+        {
+          "label": "Mode SQL Tutorial",
+          "platform": "mode.com",
+          "type": "docs"
+        },
+        {
+          "label": "Data Engineering Zoomcamp",
+          "platform": "DataTalks.Club",
+          "type": "course"
+        }
+      ],
+      "challenge": "Design a star schema for an analytics use case and write the SQL to populate it.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "data-engineer-3",
+      "title": "Python for Data Engineering",
+      "order": 3,
+      "techs": [
+        "Python",
+        "Pandas",
+        "APIs"
+      ],
+      "description": "Python glues data systems together. Build ingestion scripts and transformations that move data reliably.",
+      "topics": [
+        "Python for ETL",
+        "Working with Pandas & Polars",
+        "Connecting to databases & APIs",
+        "Handling large files & memory",
+        "Error handling & retries",
+        "Packaging & scheduling scripts"
+      ],
+      "resources": [
+        {
+          "label": "Polars Docs",
+          "platform": "pola.rs",
+          "type": "docs"
+        },
+        {
+          "label": "Real Python",
+          "platform": "realpython.com",
+          "type": "docs"
+        },
+        {
+          "label": "Data Engineering Zoomcamp",
+          "platform": "DataTalks.Club",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a Python ingestion job that pulls from an API and loads it into a warehouse table.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-engineer-4",
+      "title": "Batch Processing with Spark",
+      "order": 4,
+      "techs": [
+        "Spark",
+        "PySpark",
+        "Distributed"
+      ],
+      "description": "Process data at scale. Learn distributed computing with Apache Spark for big batch jobs.",
+      "topics": [
+        "Distributed computing concepts",
+        "Spark architecture & RDDs",
+        "DataFrames & Spark SQL",
+        "Transformations & actions",
+        "Partitioning & shuffles",
+        "Performance tuning"
+      ],
+      "resources": [
+        {
+          "label": "Apache Spark Docs",
+          "platform": "spark.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "Learning Spark",
+          "platform": "O'Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Data Engineering Zoomcamp",
+          "platform": "DataTalks.Club",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write a PySpark job that processes a large dataset and writes partitioned Parquet output.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "data-engineer-5",
+      "title": "Streaming with Kafka",
+      "order": 5,
+      "techs": [
+        "Kafka",
+        "Streaming",
+        "Events"
+      ],
+      "description": "Handle data in motion. Build real-time pipelines with Apache Kafka and stream processing.",
+      "topics": [
+        "Kafka architecture — topics & partitions",
+        "Producers & consumers",
+        "Consumer groups & offsets",
+        "Stream processing (Kafka Streams / Flink)",
+        "Delivery guarantees",
+        "Schema registry"
+      ],
+      "resources": [
+        {
+          "label": "Apache Kafka Docs",
+          "platform": "kafka.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "Confluent Developer",
+          "platform": "developer.confluent.io",
+          "type": "course"
+        },
+        {
+          "label": "Kafka: The Definitive Guide",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a streaming pipeline that ingests events through Kafka and writes aggregates downstream.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "data-engineer-6",
+      "title": "Orchestration with Airflow",
+      "order": 6,
+      "techs": [
+        "Airflow",
+        "DAGs",
+        "Scheduling"
+      ],
+      "description": "Coordinate complex pipelines. Schedule, monitor and retry workflows with Apache Airflow.",
+      "topics": [
+        "DAGs, tasks & operators",
+        "Scheduling & backfills",
+        "Dependencies & sensors",
+        "Retries & SLAs",
+        "XComs & parameterization",
+        "Monitoring & alerting"
+      ],
+      "resources": [
+        {
+          "label": "Apache Airflow Docs",
+          "platform": "airflow.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "Astronomer Guides",
+          "platform": "astronomer.io",
+          "type": "docs"
+        },
+        {
+          "label": "Data Engineering Zoomcamp",
+          "platform": "DataTalks.Club",
+          "type": "course"
+        }
+      ],
+      "challenge": "Orchestrate ingest → transform → load as an Airflow DAG with retries and alerting.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-engineer-7",
+      "title": "Data Warehousing & dbt",
+      "order": 7,
+      "techs": [
+        "dbt",
+        "Warehouse",
+        "SQL"
+      ],
+      "description": "Transform data where it lives. Use dbt to build tested, documented, version-controlled transformations.",
+      "topics": [
+        "Cloud warehouses (Snowflake, BigQuery)",
+        "ELT vs ETL",
+        "dbt models & materializations",
+        "Tests & documentation",
+        "Incremental models",
+        "Lineage & DAGs in dbt"
+      ],
+      "resources": [
+        {
+          "label": "dbt Docs",
+          "platform": "docs.getdbt.com",
+          "type": "docs"
+        },
+        {
+          "label": "dbt Learn",
+          "platform": "courses.getdbt.com",
+          "type": "course"
+        },
+        {
+          "label": "Data Engineering Zoomcamp",
+          "platform": "DataTalks.Club",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a dbt project with staging and mart models, tests and generated documentation.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "data-engineer-8",
+      "title": "Data Lakes & Lakehouse",
+      "order": 8,
+      "techs": [
+        "S3",
+        "Delta Lake",
+        "Iceberg"
+      ],
+      "description": "Store everything affordably and query it flexibly. Learn data lake and lakehouse architectures.",
+      "topics": [
+        "Object storage & data lakes",
+        "File formats & partitioning",
+        "Table formats — Delta, Iceberg, Hudi",
+        "The lakehouse architecture",
+        "Schema evolution & time travel",
+        "Query engines (Trino, DuckDB)"
+      ],
+      "resources": [
+        {
+          "label": "Delta Lake Docs",
+          "platform": "delta.io",
+          "type": "docs"
+        },
+        {
+          "label": "Apache Iceberg Docs",
+          "platform": "iceberg.apache.org",
+          "type": "docs"
+        },
+        {
+          "label": "Trino Docs",
+          "platform": "trino.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a lakehouse table with Delta or Iceberg and demonstrate schema evolution and time travel.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-engineer-9",
+      "title": "Data Quality & Governance",
+      "order": 9,
+      "techs": [
+        "Quality",
+        "Lineage",
+        "Catalog"
+      ],
+      "description": "Trustworthy data needs quality and governance. Add validation, lineage and cataloging to your pipelines.",
+      "topics": [
+        "Data quality testing",
+        "Great Expectations / dbt tests",
+        "Data lineage & catalogs",
+        "Observability for data",
+        "Access control & PII handling",
+        "SLAs & data contracts"
+      ],
+      "resources": [
+        {
+          "label": "Great Expectations Docs",
+          "platform": "docs.greatexpectations.io",
+          "type": "docs"
+        },
+        {
+          "label": "OpenMetadata Docs",
+          "platform": "docs.open-metadata.org",
+          "type": "docs"
+        },
+        {
+          "label": "Fundamentals of Data Engineering",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Add data quality tests and a data contract to a pipeline, surfacing failures before they spread.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "data-engineer-10",
+      "title": "Deployment & Scaling",
+      "order": 10,
+      "techs": [
+        "Docker",
+        "Terraform",
+        "Cloud"
+      ],
+      "description": "Run data platforms in production. Containerize, provision infrastructure as code, and scale.",
+      "topics": [
+        "Dockerizing data jobs",
+        "Infrastructure as code (Terraform)",
+        "CI/CD for data pipelines",
+        "Cost optimization",
+        "Scaling compute & storage",
+        "Monitoring & on-call"
+      ],
+      "resources": [
+        {
+          "label": "Terraform Docs",
+          "platform": "developer.hashicorp.com",
+          "type": "docs"
+        },
+        {
+          "label": "Docker Docs",
+          "platform": "docs.docker.com",
+          "type": "docs"
+        },
+        {
+          "label": "Data Engineering Zoomcamp",
+          "platform": "DataTalks.Club",
+          "type": "course"
+        }
+      ],
+      "challenge": "Provision a cloud data pipeline with Terraform and deploy it via CI with cost monitoring.",
+      "estimatedTime": "2 weeks"
+    }
+  ],
+  "rl-engineer": [
+    {
+      "id": "rl-engineer-1",
+      "title": "RL Foundations",
+      "order": 1,
+      "techs": [
+        "RL",
+        "Agents",
+        "Rewards"
+      ],
+      "description": "Reinforcement learning teaches agents through trial and error. Learn the framework and where RL fits.",
+      "topics": [
+        "Agents, environments & rewards",
+        "The RL problem vs supervised learning",
+        "Exploration vs exploitation",
+        "Episodes, returns & discounting",
+        "On-policy vs off-policy",
+        "RL applications & limits"
+      ],
+      "resources": [
+        {
+          "label": "Sutton & Barto — RL",
+          "platform": "incompleteideas.net",
+          "type": "book"
+        },
+        {
+          "label": "Spinning Up in Deep RL",
+          "platform": "spinningup.openai.com",
+          "type": "docs"
+        },
+        {
+          "label": "Hugging Face — Deep RL Course",
+          "platform": "huggingface.co",
+          "type": "course"
+        }
+      ],
+      "challenge": "Formalize a simple game as an MDP: define its states, actions and reward function.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "rl-engineer-2",
+      "title": "Markov Decision Processes",
+      "order": 2,
+      "techs": [
+        "MDP",
+        "Value Functions",
+        "Policies"
+      ],
+      "description": "MDPs are the mathematical core of RL. Master states, actions, policies and value functions.",
+      "topics": [
+        "States, actions & transitions",
+        "Policies & value functions",
+        "The Bellman equations",
+        "Optimal policies",
+        "Discount factor & horizons",
+        "Markov property"
+      ],
+      "resources": [
+        {
+          "label": "Sutton & Barto — RL",
+          "platform": "incompleteideas.net",
+          "type": "book"
+        },
+        {
+          "label": "David Silver — RL Course",
+          "platform": "YouTube",
+          "type": "course"
+        },
+        {
+          "label": "Spinning Up",
+          "platform": "spinningup.openai.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Implement value iteration to solve a small gridworld MDP and visualize the optimal policy.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "rl-engineer-3",
+      "title": "Dynamic Programming & Monte Carlo",
+      "order": 3,
+      "techs": [
+        "DP",
+        "Monte Carlo",
+        "Estimation"
+      ],
+      "description": "Learn the classical solution methods. Use dynamic programming and Monte Carlo to estimate values.",
+      "topics": [
+        "Policy evaluation & improvement",
+        "Policy & value iteration",
+        "Monte Carlo prediction",
+        "Monte Carlo control",
+        "Exploring starts & epsilon-greedy",
+        "Bias vs variance"
+      ],
+      "resources": [
+        {
+          "label": "Sutton & Barto — RL",
+          "platform": "incompleteideas.net",
+          "type": "book"
+        },
+        {
+          "label": "David Silver — RL Course",
+          "platform": "YouTube",
+          "type": "course"
+        },
+        {
+          "label": "Hugging Face — Deep RL Course",
+          "platform": "huggingface.co",
+          "type": "course"
+        }
+      ],
+      "challenge": "Solve a gridworld with both policy iteration and Monte Carlo control and compare them.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "rl-engineer-4",
+      "title": "Temporal-Difference & Q-Learning",
+      "order": 4,
+      "techs": [
+        "TD",
+        "Q-Learning",
+        "SARSA"
+      ],
+      "description": "TD learning combines the best of DP and Monte Carlo. Build tabular Q-learning agents.",
+      "topics": [
+        "TD(0) prediction",
+        "SARSA (on-policy)",
+        "Q-learning (off-policy)",
+        "Epsilon-greedy exploration",
+        "The exploration-exploitation trade-off",
+        "Tabular limitations"
+      ],
+      "resources": [
+        {
+          "label": "Sutton & Barto — RL",
+          "platform": "incompleteideas.net",
+          "type": "book"
+        },
+        {
+          "label": "Hugging Face — Q-Learning",
+          "platform": "huggingface.co",
+          "type": "course"
+        },
+        {
+          "label": "Spinning Up",
+          "platform": "spinningup.openai.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Implement Q-learning from scratch and train it to solve the Taxi or FrozenLake environment.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "rl-engineer-5",
+      "title": "Deep Q-Networks",
+      "order": 5,
+      "techs": [
+        "DQN",
+        "PyTorch",
+        "Replay"
+      ],
+      "description": "Scale RL with neural networks. Build DQN agents that learn from high-dimensional states.",
+      "topics": [
+        "Function approximation",
+        "The DQN algorithm",
+        "Experience replay",
+        "Target networks",
+        "Double & dueling DQN",
+        "Stability tricks"
+      ],
+      "resources": [
+        {
+          "label": "Spinning Up — DQN",
+          "platform": "spinningup.openai.com",
+          "type": "docs"
+        },
+        {
+          "label": "PyTorch — DQN Tutorial",
+          "platform": "pytorch.org",
+          "type": "docs"
+        },
+        {
+          "label": "Hugging Face — Deep RL Course",
+          "platform": "huggingface.co",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a DQN in PyTorch with replay and target networks to play a classic control environment.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "rl-engineer-6",
+      "title": "Policy Gradient Methods",
+      "order": 6,
+      "techs": [
+        "Policy Gradient",
+        "REINFORCE",
+        "Baselines"
+      ],
+      "description": "Optimize policies directly. Learn policy gradient methods for continuous and stochastic control.",
+      "topics": [
+        "Policy parameterization",
+        "The policy gradient theorem",
+        "REINFORCE",
+        "Baselines & variance reduction",
+        "Continuous action spaces",
+        "Entropy & exploration"
+      ],
+      "resources": [
+        {
+          "label": "Spinning Up — Policy Gradients",
+          "platform": "spinningup.openai.com",
+          "type": "docs"
+        },
+        {
+          "label": "Sutton & Barto — RL",
+          "platform": "incompleteideas.net",
+          "type": "book"
+        },
+        {
+          "label": "Berkeley CS285",
+          "platform": "rail.eecs.berkeley.edu",
+          "type": "course"
+        }
+      ],
+      "challenge": "Implement REINFORCE with a baseline and train it on a continuous control task.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "rl-engineer-7",
+      "title": "Actor-Critic & PPO",
+      "order": 7,
+      "techs": [
+        "Actor-Critic",
+        "PPO",
+        "A2C"
+      ],
+      "description": "Combine value and policy learning. Master the actor-critic family and PPO, the modern workhorse.",
+      "topics": [
+        "Actor-critic architecture",
+        "Advantage estimation (GAE)",
+        "A2C & A3C",
+        "Proximal Policy Optimization (PPO)",
+        "Clipping & trust regions",
+        "Hyperparameter tuning"
+      ],
+      "resources": [
+        {
+          "label": "Spinning Up — PPO",
+          "platform": "spinningup.openai.com",
+          "type": "docs"
+        },
+        {
+          "label": "CleanRL",
+          "platform": "docs.cleanrl.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Berkeley CS285",
+          "platform": "rail.eecs.berkeley.edu",
+          "type": "course"
+        }
+      ],
+      "challenge": "Train a PPO agent to solve a continuous control environment and tune it to a target reward.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "rl-engineer-8",
+      "title": "Environments with Gymnasium",
+      "order": 8,
+      "techs": [
+        "Gymnasium",
+        "Environments",
+        "Wrappers"
+      ],
+      "description": "Standardize your RL workflow. Use Gymnasium environments and build custom ones for your problems.",
+      "topics": [
+        "The Gymnasium API",
+        "Observation & action spaces",
+        "Environment wrappers",
+        "Vectorized environments",
+        "Building a custom environment",
+        "Reward shaping"
+      ],
+      "resources": [
+        {
+          "label": "Gymnasium Docs",
+          "platform": "gymnasium.farama.org",
+          "type": "docs"
+        },
+        {
+          "label": "Stable-Baselines3 Docs",
+          "platform": "stable-baselines3.readthedocs.io",
+          "type": "docs"
+        },
+        {
+          "label": "Hugging Face — Deep RL Course",
+          "platform": "huggingface.co",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a custom Gymnasium environment for a toy problem and train an agent to solve it.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "rl-engineer-9",
+      "title": "Scaling RL with Ray RLlib",
+      "order": 9,
+      "techs": [
+        "Ray",
+        "RLlib",
+        "Distributed"
+      ],
+      "description": "Train serious RL at scale. Use Ray RLlib to run distributed training across many workers.",
+      "topics": [
+        "Ray & distributed computing",
+        "RLlib algorithms & config",
+        "Distributed rollouts",
+        "Hyperparameter tuning with Tune",
+        "Checkpointing & resuming",
+        "Scaling to clusters"
+      ],
+      "resources": [
+        {
+          "label": "Ray RLlib Docs",
+          "platform": "docs.ray.io",
+          "type": "docs"
+        },
+        {
+          "label": "Ray Tune Docs",
+          "platform": "docs.ray.io",
+          "type": "docs"
+        },
+        {
+          "label": "Ray Documentation",
+          "platform": "docs.ray.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Train a PPO agent with RLlib across multiple workers and tune it with Ray Tune.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "rl-engineer-10",
+      "title": "Applications & Deployment",
+      "order": 10,
+      "techs": [
+        "Deployment",
+        "Sim2Real",
+        "Serving"
+      ],
+      "description": "Take RL from notebook to product. Learn real-world applications and how to deploy trained policies.",
+      "topics": [
+        "Real-world RL applications",
+        "Offline RL",
+        "Sim-to-real transfer",
+        "Serving trained policies",
+        "Safety & constraints",
+        "Monitoring deployed agents"
+      ],
+      "resources": [
+        {
+          "label": "Spinning Up",
+          "platform": "spinningup.openai.com",
+          "type": "docs"
+        },
+        {
+          "label": "Ray Serve Docs",
+          "platform": "docs.ray.io",
+          "type": "docs"
+        },
+        {
+          "label": "Berkeley CS285",
+          "platform": "rail.eecs.berkeley.edu",
+          "type": "course"
+        }
+      ],
+      "challenge": "Export a trained policy and serve it behind an API that returns actions for given observations.",
+      "estimatedTime": "2 weeks"
+    }
+  ],
+  "prompt-engineer": [
+    {
+      "id": "prompt-engineer-1",
+      "title": "LLM & Prompting Foundations",
+      "order": 1,
+      "techs": [
+        "LLMs",
+        "Tokens",
+        "Prompts"
+      ],
+      "description": "Effective prompting starts with understanding how models work. Build the mental model behind every good prompt.",
+      "topics": [
+        "How LLMs generate text",
+        "Tokens & context windows",
+        "Temperature & sampling",
+        "Model capabilities & limits",
+        "The anatomy of a prompt",
+        "Hallucination & why it happens"
+      ],
+      "resources": [
+        {
+          "label": "Prompt Engineering Guide",
+          "platform": "promptingguide.ai",
+          "type": "docs"
+        },
+        {
+          "label": "Anthropic — Prompt engineering",
+          "platform": "docs.anthropic.com",
+          "type": "docs"
+        },
+        {
+          "label": "OpenAI — Prompt engineering",
+          "platform": "platform.openai.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Take one task and show how temperature and phrasing change the model's output quality.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "prompt-engineer-2",
+      "title": "Core Prompting Techniques",
+      "order": 2,
+      "techs": [
+        "Zero-shot",
+        "Few-shot",
+        "Roles"
+      ],
+      "description": "Learn the techniques that reliably improve outputs. These are the bread and butter of prompt engineering.",
+      "topics": [
+        "Clear instructions & specificity",
+        "Zero-shot vs few-shot",
+        "Role & persona prompting",
+        "Delimiters & formatting",
+        "Providing context & constraints",
+        "Iterative refinement"
+      ],
+      "resources": [
+        {
+          "label": "Prompt Engineering Guide",
+          "platform": "promptingguide.ai",
+          "type": "docs"
+        },
+        {
+          "label": "Anthropic — Prompt library",
+          "platform": "docs.anthropic.com",
+          "type": "docs"
+        },
+        {
+          "label": "Learn Prompting",
+          "platform": "learnprompting.org",
+          "type": "course"
+        }
+      ],
+      "challenge": "Improve a weak prompt through five iterations, documenting the gain at each step.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "prompt-engineer-3",
+      "title": "Advanced Prompting",
+      "order": 3,
+      "techs": [
+        "Chain-of-Thought",
+        "ReAct",
+        "Self-Consistency"
+      ],
+      "description": "Unlock reasoning. Apply advanced techniques that help models tackle complex, multi-step problems.",
+      "topics": [
+        "Chain-of-thought prompting",
+        "Self-consistency",
+        "ReAct (reason + act)",
+        "Tree-of-thought",
+        "Decomposition & planning",
+        "Reflection & self-critique"
+      ],
+      "resources": [
+        {
+          "label": "Prompt Engineering Guide — Techniques",
+          "platform": "promptingguide.ai",
+          "type": "docs"
+        },
+        {
+          "label": "Learn Prompting",
+          "platform": "learnprompting.org",
+          "type": "course"
+        },
+        {
+          "label": "Anthropic — Chain of thought",
+          "platform": "docs.anthropic.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Use chain-of-thought and self-consistency to boost accuracy on a reasoning task.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "prompt-engineer-4",
+      "title": "Structured Outputs & Function Calling",
+      "order": 4,
+      "techs": [
+        "JSON",
+        "Schemas",
+        "Function Calling"
+      ],
+      "description": "Make outputs machine-readable. Get reliable JSON and tool calls that integrate into real apps.",
+      "topics": [
+        "Requesting structured output",
+        "JSON mode & schemas",
+        "Function/tool calling",
+        "Validating & repairing output",
+        "Constrained decoding",
+        "Handling failures"
+      ],
+      "resources": [
+        {
+          "label": "OpenAI — Structured Outputs",
+          "platform": "platform.openai.com",
+          "type": "docs"
+        },
+        {
+          "label": "Anthropic — Tool use",
+          "platform": "docs.anthropic.com",
+          "type": "docs"
+        },
+        {
+          "label": "Instructor Docs",
+          "platform": "python.useinstructor.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Design prompts and schemas that reliably extract structured data from messy text.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "prompt-engineer-5",
+      "title": "RAG for Grounded Answers",
+      "order": 5,
+      "techs": [
+        "RAG",
+        "Retrieval",
+        "Citations"
+      ],
+      "description": "Ground responses in real data. Learn how retrieval changes prompting and how to prompt over context.",
+      "topics": [
+        "Why grounding matters",
+        "Prompting with retrieved context",
+        "Context formatting & ordering",
+        "Citations & attribution",
+        "Handling missing answers",
+        "Reducing context-induced errors"
+      ],
+      "resources": [
+        {
+          "label": "Prompt Engineering Guide — RAG",
+          "platform": "promptingguide.ai",
+          "type": "docs"
+        },
+        {
+          "label": "LangChain — RAG",
+          "platform": "python.langchain.com",
+          "type": "docs"
+        },
+        {
+          "label": "Anthropic — Long context tips",
+          "platform": "docs.anthropic.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write prompts for a RAG system that answer strictly from context and say 'I don't know' when needed.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "prompt-engineer-6",
+      "title": "Prompt Chaining & Workflows",
+      "order": 6,
+      "techs": [
+        "LangChain",
+        "Chaining",
+        "Pipelines"
+      ],
+      "description": "Compose prompts into pipelines. Break complex tasks into chained steps with LangChain.",
+      "topics": [
+        "Decomposing tasks into steps",
+        "Prompt chaining patterns",
+        "LangChain LCEL",
+        "Routing & conditional flows",
+        "Combining tools & prompts",
+        "Managing intermediate state"
+      ],
+      "resources": [
+        {
+          "label": "LangChain Docs",
+          "platform": "python.langchain.com",
+          "type": "docs"
+        },
+        {
+          "label": "Prompt Engineering Guide",
+          "platform": "promptingguide.ai",
+          "type": "docs"
+        },
+        {
+          "label": "DeepLearning.AI — LangChain",
+          "platform": "deeplearning.ai",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a multi-step prompt chain that drafts, critiques and revises a piece of writing.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "prompt-engineer-7",
+      "title": "Evaluation & Testing Prompts",
+      "order": 7,
+      "techs": [
+        "Evals",
+        "Testing",
+        "Metrics"
+      ],
+      "description": "Prompts need testing like code. Build evaluation sets and measure whether changes actually help.",
+      "topics": [
+        "Building evaluation datasets",
+        "Manual vs automated evaluation",
+        "LLM-as-judge",
+        "Regression testing prompts",
+        "Metrics for quality",
+        "A/B testing prompts"
+      ],
+      "resources": [
+        {
+          "label": "OpenAI Evals",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "LangSmith — Evaluation",
+          "platform": "docs.smith.langchain.com",
+          "type": "docs"
+        },
+        {
+          "label": "Prompt Engineering Guide",
+          "platform": "promptingguide.ai",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Create an eval set and use LLM-as-judge to compare two prompt versions objectively.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "prompt-engineer-8",
+      "title": "Guardrails & Safety",
+      "order": 8,
+      "techs": [
+        "Safety",
+        "Injection",
+        "Moderation"
+      ],
+      "description": "Make prompt systems safe. Defend against prompt injection and keep outputs within bounds.",
+      "topics": [
+        "Prompt injection & jailbreaks",
+        "Input/output guardrails",
+        "Content moderation",
+        "System prompt hardening",
+        "PII & data leakage",
+        "Refusals & safe completions"
+      ],
+      "resources": [
+        {
+          "label": "OWASP Top 10 for LLMs",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "Anthropic — Reduce jailbreaks",
+          "platform": "docs.anthropic.com",
+          "type": "docs"
+        },
+        {
+          "label": "Learn Prompting — Security",
+          "platform": "learnprompting.org",
+          "type": "course"
+        }
+      ],
+      "challenge": "Red-team your own prompt system for injection, then add guardrails that stop the attacks.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "prompt-engineer-9",
+      "title": "Optimization & Cost Control",
+      "order": 9,
+      "techs": [
+        "Cost",
+        "Caching",
+        "Compression"
+      ],
+      "description": "Great prompts are also efficient. Reduce tokens, latency and cost without losing quality.",
+      "topics": [
+        "Token counting & budgeting",
+        "Prompt compression",
+        "Caching responses",
+        "Choosing the right model per task",
+        "Batching & streaming",
+        "Quality vs cost trade-offs"
+      ],
+      "resources": [
+        {
+          "label": "OpenAI — Production best practices",
+          "platform": "platform.openai.com",
+          "type": "docs"
+        },
+        {
+          "label": "Anthropic — Prompt caching",
+          "platform": "docs.anthropic.com",
+          "type": "docs"
+        },
+        {
+          "label": "Prompt Engineering Guide",
+          "platform": "promptingguide.ai",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Cut the token cost of a working prompt system by 40% while holding quality steady on your evals.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "prompt-engineer-10",
+      "title": "Productionizing Prompt Systems",
+      "order": 10,
+      "techs": [
+        "Versioning",
+        "Monitoring",
+        "Deployment"
+      ],
+      "description": "Operate prompts at scale. Version, deploy and monitor prompt systems like real software.",
+      "topics": [
+        "Prompt versioning & management",
+        "Prompt templates in code",
+        "Monitoring quality in production",
+        "Logging & feedback loops",
+        "Rolling out prompt changes safely",
+        "Collaboration & documentation"
+      ],
+      "resources": [
+        {
+          "label": "LangSmith Docs",
+          "platform": "docs.smith.langchain.com",
+          "type": "docs"
+        },
+        {
+          "label": "Prompt Engineering Guide",
+          "platform": "promptingguide.ai",
+          "type": "docs"
+        },
+        {
+          "label": "Anthropic — Production",
+          "platform": "docs.anthropic.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Set up versioned prompts with production monitoring and a safe rollout process for changes.",
+      "estimatedTime": "2 weeks"
+    }
+  ]
+}

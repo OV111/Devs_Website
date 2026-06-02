@@ -1,0 +1,4162 @@
+{
+  "automation": [
+    {
+      "id": "automation-1",
+      "title": "Testing Fundamentals and QA Mindset",
+      "order": 1,
+      "techs": [
+        "Python",
+        "Pytest",
+        "Git",
+        "VS Code"
+      ],
+      "description": "Understand the core principles of software testing, including test types, defect lifecycle, and QA goals. Build a solid Python foundation and set up a local testing environment.",
+      "topics": [
+        "Software testing principles",
+        "Test types: unit, integration, E2E",
+        "Defect lifecycle and severity",
+        "Python basics for testers",
+        "Git version control basics",
+        "Test environment setup"
+      ],
+      "resources": [
+        {
+          "label": "Python for Everybody",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "ISTQB Foundation Level Syllabus",
+          "platform": "ISTQB",
+          "type": "docs"
+        },
+        {
+          "label": "Pytest Documentation",
+          "platform": "pytest.org",
+          "type": "docs"
+        },
+        {
+          "label": "Git and GitHub Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a Python test suite using Pytest that verifies a simple calculator module with at least 10 test cases covering edge cases.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "automation-2",
+      "title": "Selenium WebDriver Basics",
+      "order": 2,
+      "techs": [
+        "Selenium",
+        "Python",
+        "ChromeDriver",
+        "Firefox"
+      ],
+      "description": "Learn to drive browsers programmatically using Selenium WebDriver with Python bindings. Practice locating elements, interacting with forms, and handling dynamic content.",
+      "topics": [
+        "WebDriver setup and configuration",
+        "Locator strategies: ID, CSS, XPath",
+        "Browser interactions and navigation",
+        "Form filling and submission",
+        "Handling alerts and popups",
+        "Implicit vs explicit waits"
+      ],
+      "resources": [
+        {
+          "label": "Selenium with Python Documentation",
+          "platform": "selenium.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Selenium Python Beginners Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Automate the Boring Stuff with Python",
+          "platform": "automate the boring stuff",
+          "type": "book"
+        },
+        {
+          "label": "Selenium WebDriver Course",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Automate a login flow on a demo site, verify successful login, then log out - handling all waits and assertions properly.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "automation-3",
+      "title": "TestNG Framework and Test Organization",
+      "order": 3,
+      "techs": [
+        "TestNG",
+        "Java",
+        "Maven",
+        "IntelliJ IDEA"
+      ],
+      "description": "Adopt TestNG as your test framework to organize, group, and prioritize tests effectively. Learn Java fundamentals needed to write structured TestNG test classes.",
+      "topics": [
+        "Java basics for testers",
+        "TestNG annotations: @Test, @BeforeMethod, @AfterClass",
+        "Test grouping and prioritization",
+        "Data-driven testing with @DataProvider",
+        "TestNG XML suite configuration",
+        "Maven project structure"
+      ],
+      "resources": [
+        {
+          "label": "TestNG Documentation",
+          "platform": "testng.org",
+          "type": "docs"
+        },
+        {
+          "label": "Java for Testers",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "TestNG Tutorial for Beginners",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Maven Getting Started Guide",
+          "platform": "Apache Maven",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Create a TestNG project with at least 3 test groups, a shared data provider, and a suite XML that runs groups in a specific order.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "automation-4",
+      "title": "Page Object Model and Test Design Patterns",
+      "order": 4,
+      "techs": [
+        "Selenium",
+        "Python",
+        "POM",
+        "Pytest"
+      ],
+      "description": "Apply the Page Object Model pattern to make your Selenium tests maintainable and readable. Learn to separate test logic from page interaction code.",
+      "topics": [
+        "Page Object Model design pattern",
+        "BasePage class creation",
+        "Separation of concerns in test code",
+        "Reusable component objects",
+        "Test data management",
+        "Assertions and soft assertions"
+      ],
+      "resources": [
+        {
+          "label": "Page Object Models - Selenium Docs",
+          "platform": "selenium.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Design Patterns for Test Automation",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "POM Tutorial with Python and Selenium",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Refactor a spaghetti Selenium script into a full POM structure with at least 3 page classes and a shared BasePage.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "automation-5",
+      "title": "Playwright for Modern Web Automation",
+      "order": 5,
+      "techs": [
+        "Playwright",
+        "Python",
+        "TypeScript",
+        "Pytest-playwright"
+      ],
+      "description": "Adopt Playwright as a modern, fast alternative to Selenium with built-in waits and multi-browser support. Learn its API for network interception, screenshots, and tracing.",
+      "topics": [
+        "Playwright installation and configuration",
+        "Browser contexts and pages",
+        "Auto-waiting mechanisms",
+        "Network interception and mocking",
+        "Screenshots, video, and trace recording",
+        "Playwright fixtures with Pytest"
+      ],
+      "resources": [
+        {
+          "label": "Playwright Python Documentation",
+          "platform": "playwright.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Playwright Full Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Test Automation University - Playwright",
+          "platform": "Applitools",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write a Playwright test suite that covers a multi-step checkout flow, intercepts a payment API call, and records a trace on failure.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "automation-6",
+      "title": "API Testing and Integration",
+      "order": 6,
+      "techs": [
+        "Requests",
+        "Python",
+        "Pytest",
+        "JSON Schema"
+      ],
+      "description": "Test REST APIs directly using the Python Requests library and integrate API assertions into your test suites. Understand request construction, response validation, and authentication patterns.",
+      "topics": [
+        "HTTP methods and status codes",
+        "Requests library for Python",
+        "JSON response validation",
+        "JSON Schema validation",
+        "Authentication: Basic, Bearer, API keys",
+        "Combining API and UI test flows"
+      ],
+      "resources": [
+        {
+          "label": "Requests Library Documentation",
+          "platform": "docs.python-requests.org",
+          "type": "docs"
+        },
+        {
+          "label": "API Testing with Python",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "REST API Testing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Postman Learning Center",
+          "platform": "Postman",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a Pytest suite that validates all CRUD operations on a public API, including schema checks and auth token handling.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "automation-7",
+      "title": "Data-Driven Testing and Test Management",
+      "order": 7,
+      "techs": [
+        "Pytest",
+        "Python",
+        "CSV",
+        "Excel"
+      ],
+      "description": "Drive test execution from external data sources like CSV, Excel, and databases to maximize coverage without code duplication. Integrate with test management tools to track results.",
+      "topics": [
+        "Parameterization with Pytest",
+        "Reading test data from CSV and Excel",
+        "Database-driven test data",
+        "Test case tagging and filtering",
+        "TestRail integration for results",
+        "Test report generation with Allure"
+      ],
+      "resources": [
+        {
+          "label": "Pytest Parametrize Documentation",
+          "platform": "pytest.org",
+          "type": "docs"
+        },
+        {
+          "label": "Allure Framework Documentation",
+          "platform": "allure.qatools.ru",
+          "type": "docs"
+        },
+        {
+          "label": "Data-Driven Testing in Python",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Software Testing with Python",
+          "platform": "Coursera",
+          "type": "course"
+        }
+      ],
+      "challenge": "Create a data-driven Playwright test that reads 20 login scenarios from a CSV file and generates a formatted Allure report.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "automation-8",
+      "title": "Cross-Browser and Visual Testing",
+      "order": 8,
+      "techs": [
+        "Playwright",
+        "BrowserStack",
+        "Percy",
+        "Selenium Grid"
+      ],
+      "description": "Scale your tests across multiple browsers and devices using cloud grids and visual regression tools. Detect layout regressions automatically with screenshot comparison.",
+      "topics": [
+        "Playwright multi-browser configuration",
+        "Selenium Grid architecture",
+        "BrowserStack integration",
+        "Visual regression testing concepts",
+        "Percy for screenshot comparison",
+        "Responsive design testing strategies"
+      ],
+      "resources": [
+        {
+          "label": "BrowserStack Automate Documentation",
+          "platform": "BrowserStack",
+          "type": "docs"
+        },
+        {
+          "label": "Visual Testing with Percy",
+          "platform": "Percy.io",
+          "type": "docs"
+        },
+        {
+          "label": "Cross Browser Testing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Selenium Grid Setup Guide",
+          "platform": "selenium.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Configure a Playwright project to run the same suite against Chrome, Firefox, and Safari in parallel on BrowserStack.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "automation-9",
+      "title": "Advanced Patterns: Fixtures, Hooks, and Reporting",
+      "order": 9,
+      "techs": [
+        "Pytest",
+        "Python",
+        "Allure",
+        "Loguru"
+      ],
+      "description": "Master advanced Pytest features including fixtures with scope, conftest organization, and custom hooks for pre/post test logic. Build rich, stakeholder-friendly HTML reports.",
+      "topics": [
+        "Pytest fixture scopes and dependency injection",
+        "conftest.py organization strategies",
+        "Custom Pytest plugins and hooks",
+        "Structured logging in tests",
+        "Allure steps and attachments",
+        "Parallel test execution with pytest-xdist"
+      ],
+      "resources": [
+        {
+          "label": "Advanced Pytest",
+          "platform": "pytest.org",
+          "type": "docs"
+        },
+        {
+          "label": "Python Testing with pytest - Book",
+          "platform": "Pragmatic Programmers",
+          "type": "book"
+        },
+        {
+          "label": "pytest-xdist Documentation",
+          "platform": "PyPI",
+          "type": "docs"
+        },
+        {
+          "label": "Allure Framework Full Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Refactor an existing test suite to use scoped fixtures for DB setup, enable parallel execution, and produce an Allure report with attachments on failure.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "automation-10",
+      "title": "CI/CD Integration and Production Pipeline",
+      "order": 10,
+      "techs": [
+        "GitHub Actions",
+        "Docker",
+        "Jenkins",
+        "Playwright"
+      ],
+      "description": "Embed your automation suite into a CI/CD pipeline so tests run on every pull request and deployment. Containerize your test environment with Docker for consistent, reproducible runs.",
+      "topics": [
+        "GitHub Actions workflow authoring",
+        "Dockerizing Playwright test suites",
+        "Parallel test sharding in CI",
+        "Test result artifacts and notifications",
+        "Jenkins pipeline for legacy teams",
+        "Flakiness detection and quarantine strategies"
+      ],
+      "resources": [
+        {
+          "label": "GitHub Actions Documentation",
+          "platform": "GitHub Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Docker for Test Automation",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "CI/CD for QA Engineers",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Jenkins Pipeline Documentation",
+          "platform": "jenkins.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a GitHub Actions pipeline that runs your Playwright suite in Docker across 3 shards, posts results to Slack, and blocks merge on failure.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "manual": [
+    {
+      "id": "manual-1",
+      "title": "QA Foundations and Testing Principles",
+      "order": 1,
+      "techs": [
+        "Jira",
+        "Confluence",
+        "Google Docs",
+        "Spreadsheets"
+      ],
+      "description": "Establish a strong understanding of software quality assurance principles, methodologies, and the tester mindset. Learn the software development lifecycle and where QA fits in.",
+      "topics": [
+        "SDLC and STLC overview",
+        "QA vs QC vs testing",
+        "Testing principles and fallacies",
+        "Agile and Scrum for QA",
+        "Test planning and estimation",
+        "Documentation standards"
+      ],
+      "resources": [
+        {
+          "label": "ISTQB CTFL Study Guide",
+          "platform": "ISTQB",
+          "type": "book"
+        },
+        {
+          "label": "Agile Testing - Lisa Crispin",
+          "platform": "Addison Wesley",
+          "type": "book"
+        },
+        {
+          "label": "QA Fundamentals Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Software Testing Introduction",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a one-page test plan for a hypothetical login feature including scope, approach, entry/exit criteria, and risk identification.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "manual-2",
+      "title": "Test Case Design Techniques",
+      "order": 2,
+      "techs": [
+        "TestRail",
+        "Spreadsheets",
+        "Mind Maps",
+        "Confluence"
+      ],
+      "description": "Learn systematic techniques for designing test cases that maximize coverage while minimizing redundancy. Apply equivalence partitioning, boundary analysis, and decision tables to real features.",
+      "topics": [
+        "Equivalence partitioning",
+        "Boundary value analysis",
+        "Decision table testing",
+        "State transition testing",
+        "Use case testing",
+        "Exploratory testing heuristics"
+      ],
+      "resources": [
+        {
+          "label": "Test Design Techniques - ISTQB",
+          "platform": "ISTQB",
+          "type": "docs"
+        },
+        {
+          "label": "Effective Test Case Design",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Test Design Techniques Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Design a complete test case set for a registration form using at least 3 design techniques and document each case in TestRail.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "manual-3",
+      "title": "Jira for Bug Tracking and Project Management",
+      "order": 3,
+      "techs": [
+        "Jira",
+        "Confluence",
+        "Slack",
+        "Chrome DevTools"
+      ],
+      "description": "Master Jira as a bug tracker and project management tool for Agile QA workflows. Learn to write high-quality bug reports that developers can act on immediately.",
+      "topics": [
+        "Jira project setup and configuration",
+        "Writing effective bug reports",
+        "Bug severity vs priority",
+        "Jira workflows and transitions",
+        "Linking bugs to test cases",
+        "Sprint ceremonies from a QA perspective"
+      ],
+      "resources": [
+        {
+          "label": "Jira Software Documentation",
+          "platform": "Atlassian",
+          "type": "docs"
+        },
+        {
+          "label": "Jira for Beginners",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "How to Write a Good Bug Report",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Atlassian Agile Coach",
+          "platform": "Atlassian",
+          "type": "docs"
+        }
+      ],
+      "challenge": "File 5 detailed bug reports for a live demo application in Jira, each with steps to reproduce, expected vs actual results, and severity justification.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "manual-4",
+      "title": "TestRail for Test Management",
+      "order": 4,
+      "techs": [
+        "TestRail",
+        "Jira",
+        "Excel",
+        "CSV"
+      ],
+      "description": "Use TestRail to organize test suites, manage test runs, and track test coverage over time. Learn to create meaningful test execution reports for stakeholders.",
+      "topics": [
+        "TestRail structure: projects, suites, sections",
+        "Creating and organizing test cases",
+        "Test run creation and assignment",
+        "Milestones and release tracking",
+        "Jira integration for traceability",
+        "Test coverage reports and dashboards"
+      ],
+      "resources": [
+        {
+          "label": "TestRail Documentation",
+          "platform": "TestRail",
+          "type": "docs"
+        },
+        {
+          "label": "TestRail Getting Started Guide",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Test Management Best Practices",
+          "platform": "Ministry of Testing",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Set up a TestRail project for a sample application, import test cases, execute a test run, and produce a coverage report.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "manual-5",
+      "title": "API Testing with Postman",
+      "order": 5,
+      "techs": [
+        "Postman",
+        "REST",
+        "JSON",
+        "HTTP"
+      ],
+      "description": "Learn to test REST APIs manually using Postman without writing code. Understand HTTP fundamentals, request construction, and how to validate API responses.",
+      "topics": [
+        "HTTP methods, headers, and status codes",
+        "Postman workspace and collections",
+        "Environment variables in Postman",
+        "Writing Postman tests with JavaScript",
+        "Authentication testing in Postman",
+        "API documentation reading with Swagger"
+      ],
+      "resources": [
+        {
+          "label": "Postman Learning Center",
+          "platform": "Postman",
+          "type": "docs"
+        },
+        {
+          "label": "API Testing with Postman",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Postman Beginner Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "RESTful API Design Guide",
+          "platform": "restfulapi.net",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a Postman collection that covers all CRUD operations on a public API with environment variables, pre-request scripts, and test assertions.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "manual-6",
+      "title": "Database Testing with SQL",
+      "order": 6,
+      "techs": [
+        "SQL",
+        "MySQL",
+        "PostgreSQL",
+        "DBeaver"
+      ],
+      "description": "Validate application data integrity by querying databases directly using SQL. Learn to verify that front-end actions produce correct database changes.",
+      "topics": [
+        "SQL SELECT, WHERE, JOIN basics",
+        "Aggregation functions: COUNT, SUM, GROUP BY",
+        "Data integrity and constraint validation",
+        "Comparing UI data with DB records",
+        "NULL handling and edge cases",
+        "Using DBeaver as a database client"
+      ],
+      "resources": [
+        {
+          "label": "SQL for Testers",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "W3Schools SQL Tutorial",
+          "platform": "W3Schools",
+          "type": "docs"
+        },
+        {
+          "label": "Database Testing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "DBeaver Documentation",
+          "platform": "dbeaver.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Given a demo e-commerce app, write SQL queries that verify order totals, user account balances, and product inventory after a series of manual transactions.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "manual-7",
+      "title": "Regression and Smoke Testing Strategies",
+      "order": 7,
+      "techs": [
+        "TestRail",
+        "Jira",
+        "Postman",
+        "Spreadsheets"
+      ],
+      "description": "Design efficient regression and smoke test suites that protect release quality without slowing delivery. Learn prioritization techniques based on risk and change impact.",
+      "topics": [
+        "Smoke vs sanity vs regression testing",
+        "Risk-based test prioritization",
+        "Regression suite maintenance",
+        "Impact analysis for change requests",
+        "Test coverage metrics",
+        "Regression automation candidates"
+      ],
+      "resources": [
+        {
+          "label": "Regression Testing Strategies",
+          "platform": "Ministry of Testing",
+          "type": "docs"
+        },
+        {
+          "label": "Risk-Based Testing",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Regression vs Smoke Testing",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Given a 200-case test suite, identify the 30 highest-risk cases for a smoke suite using a documented risk scoring method.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "manual-8",
+      "title": "Exploratory Testing and Session-Based Testing",
+      "order": 8,
+      "techs": [
+        "Jira",
+        "Chrome DevTools",
+        "Loom",
+        "Mind Maps"
+      ],
+      "description": "Go beyond scripted tests with structured exploratory testing techniques that uncover defects traditional test cases miss. Use session-based test management to bring discipline to exploration.",
+      "topics": [
+        "Exploratory testing vs scripted testing",
+        "Test charters and session structure",
+        "Heuristics: SFDPOT, FEW HICCUPPS",
+        "Note-taking and bug capture during sessions",
+        "Chrome DevTools for exploratory QA",
+        "Reporting exploratory session results"
+      ],
+      "resources": [
+        {
+          "label": "Explore It - Elisabeth Hendrickson",
+          "platform": "Pragmatic Programmers",
+          "type": "book"
+        },
+        {
+          "label": "Exploratory Testing Course",
+          "platform": "Ministry of Testing",
+          "type": "course"
+        },
+        {
+          "label": "Session-Based Testing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Run three 45-minute exploratory testing sessions on a live app using charters, capture notes, file bugs, and write a debrief summary.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "manual-9",
+      "title": "Usability, Accessibility, and Cross-Browser Testing",
+      "order": 9,
+      "techs": [
+        "BrowserStack",
+        "WAVE",
+        "Jira",
+        "Lighthouse"
+      ],
+      "description": "Expand your testing scope beyond functionality to cover usability, accessibility compliance, and cross-browser consistency. Learn to evaluate UI experiences and identify WCAG violations manually.",
+      "topics": [
+        "Usability heuristics - Nielsen 10",
+        "WCAG 2.1 AA guidelines overview",
+        "Manual accessibility checks",
+        "Cross-browser testing strategies",
+        "Mobile responsive testing",
+        "Reporting usability and accessibility bugs"
+      ],
+      "resources": [
+        {
+          "label": "WCAG 2.1 Guidelines",
+          "platform": "W3C",
+          "type": "docs"
+        },
+        {
+          "label": "Usability Testing Course",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "Accessibility Testing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "BrowserStack Live Documentation",
+          "platform": "BrowserStack",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Audit a public website for WCAG 2.1 AA violations manually and with WAVE, then document and prioritize findings in Jira.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "manual-10",
+      "title": "Release QA, Metrics, and Process Ownership",
+      "order": 10,
+      "techs": [
+        "Jira",
+        "TestRail",
+        "Confluence",
+        "Google Sheets"
+      ],
+      "description": "Own the end-to-end quality process for a release cycle, from planning through sign-off. Build QA dashboards and metrics that communicate release health to stakeholders.",
+      "topics": [
+        "Release test planning and scheduling",
+        "Entry and exit criteria definition",
+        "QA sign-off process and checklists",
+        "Defect density and escape rate metrics",
+        "Stakeholder reporting dashboards",
+        "Continuous improvement retrospectives"
+      ],
+      "resources": [
+        {
+          "label": "QA Metrics and KPIs Guide",
+          "platform": "Ministry of Testing",
+          "type": "docs"
+        },
+        {
+          "label": "Release Management for QA",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Building QA Dashboards",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Agile Testing - Lisa Crispin",
+          "platform": "Addison Wesley",
+          "type": "book"
+        }
+      ],
+      "challenge": "Lead a simulated release cycle: create a test plan, execute tests, track defects, build a release metrics dashboard, and write a go/no-go recommendation.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "performance": [
+    {
+      "id": "performance-1",
+      "title": "Performance Testing Fundamentals",
+      "order": 1,
+      "techs": [
+        "JMeter",
+        "Java",
+        "HTTP",
+        "Browser DevTools"
+      ],
+      "description": "Understand the goals, types, and key metrics of performance testing before writing a single test. Learn to distinguish load, stress, spike, soak, and scalability tests.",
+      "topics": [
+        "Performance test types and when to use them",
+        "Key metrics: throughput, latency, error rate",
+        "Response time percentiles: p50, p90, p99",
+        "Bottleneck identification concepts",
+        "JMeter installation and UI walkthrough",
+        "HTTP protocol basics for performance testers"
+      ],
+      "resources": [
+        {
+          "label": "JMeter Documentation",
+          "platform": "Apache JMeter",
+          "type": "docs"
+        },
+        {
+          "label": "Performance Testing Fundamentals",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Introduction to Load Testing",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "The Art of Application Performance Testing",
+          "platform": "O Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Install JMeter, record a simple HTTP test plan against a demo site, and document the key metrics observed during a 10-user load test.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "performance-2",
+      "title": "JMeter Test Plan Design",
+      "order": 2,
+      "techs": [
+        "JMeter",
+        "CSV",
+        "HTTP",
+        "Java"
+      ],
+      "description": "Build structured JMeter test plans with thread groups, samplers, listeners, and timers. Learn to parameterize tests with CSV data and use assertions for correctness.",
+      "topics": [
+        "Thread groups and ramp-up configuration",
+        "HTTP Request samplers",
+        "Config elements: HTTP Header Manager, Cookie Manager",
+        "CSV Data Set Config for parameterization",
+        "Response assertions",
+        "View Results Tree and Summary Report listeners"
+      ],
+      "resources": [
+        {
+          "label": "JMeter User Manual",
+          "platform": "Apache JMeter",
+          "type": "docs"
+        },
+        {
+          "label": "JMeter from Scratch",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "JMeter Test Plan Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a JMeter test plan that simulates 50 virtual users logging in with unique credentials from a CSV and validates each response.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "performance-3",
+      "title": "k6 for Modern Load Testing",
+      "order": 3,
+      "techs": [
+        "k6",
+        "JavaScript",
+        "InfluxDB",
+        "Grafana"
+      ],
+      "description": "Adopt k6 as a developer-friendly load testing tool where tests are written as JavaScript scripts. Integrate k6 output with InfluxDB and Grafana for real-time dashboards.",
+      "topics": [
+        "k6 installation and script structure",
+        "Virtual users and stages configuration",
+        "k6 checks and thresholds",
+        "Custom metrics in k6",
+        "k6 output to InfluxDB",
+        "Grafana dashboard for k6 results"
+      ],
+      "resources": [
+        {
+          "label": "k6 Documentation",
+          "platform": "k6.io",
+          "type": "docs"
+        },
+        {
+          "label": "k6 Load Testing Course",
+          "platform": "k6.io",
+          "type": "course"
+        },
+        {
+          "label": "k6 with Grafana Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "k6 JavaScript API Reference",
+          "platform": "k6.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write a k6 script that ramps from 0 to 100 users, defines SLA thresholds for p95 latency and error rate, and streams results to a Grafana dashboard.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "performance-4",
+      "title": "Gatling for Scala-Based Load Testing",
+      "order": 4,
+      "techs": [
+        "Gatling",
+        "Scala",
+        "Maven",
+        "HTML Reports"
+      ],
+      "description": "Use Gatling to write expressive load test scenarios in Scala with a DSL designed for readability. Generate rich HTML reports automatically after each test run.",
+      "topics": [
+        "Gatling project setup with Maven",
+        "Simulation structure and scenarios",
+        "Feeders for test data injection",
+        "Gatling DSL: exec, pause, repeat",
+        "HTML report analysis",
+        "Assertions in Gatling simulations"
+      ],
+      "resources": [
+        {
+          "label": "Gatling Documentation",
+          "platform": "gatling.io",
+          "type": "docs"
+        },
+        {
+          "label": "Gatling Load Testing Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Gatling Tutorial for Beginners",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a Gatling simulation for a REST API that uses a feeder, runs a ramp-up scenario of 200 users, and includes assertions on p99 response time.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "performance-5",
+      "title": "Grafana Dashboards and Observability",
+      "order": 5,
+      "techs": [
+        "Grafana",
+        "InfluxDB",
+        "Prometheus",
+        "k6"
+      ],
+      "description": "Build Grafana dashboards that provide real-time visibility into load test runs and application performance. Learn to correlate load patterns with application metrics.",
+      "topics": [
+        "Grafana panels, queries, and variables",
+        "InfluxDB data model and queries",
+        "Prometheus metrics and exporters",
+        "Correlating load test data with app metrics",
+        "Alerting in Grafana",
+        "Exporting and sharing dashboards"
+      ],
+      "resources": [
+        {
+          "label": "Grafana Documentation",
+          "platform": "grafana.com",
+          "type": "docs"
+        },
+        {
+          "label": "Grafana and InfluxDB Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Prometheus Getting Started",
+          "platform": "prometheus.io",
+          "type": "docs"
+        },
+        {
+          "label": "Observability Engineering",
+          "platform": "O Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Create a Grafana dashboard that displays k6 throughput, error rate, p95 latency, and application CPU/memory metrics side by side during a live test.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "performance-6",
+      "title": "Profiling and Bottleneck Analysis",
+      "order": 6,
+      "techs": [
+        "JMeter",
+        "Java VisualVM",
+        "Grafana",
+        "Linux"
+      ],
+      "description": "Go beyond collecting metrics to diagnosing the root cause of performance problems. Learn to profile JVM applications, analyze slow SQL queries, and identify resource saturation.",
+      "topics": [
+        "CPU, memory, I/O bottleneck identification",
+        "JVM heap and GC analysis",
+        "Thread dump analysis",
+        "Slow query identification with EXPLAIN",
+        "USE method: utilization, saturation, errors",
+        "Flame graph interpretation basics"
+      ],
+      "resources": [
+        {
+          "label": "Java VisualVM Documentation",
+          "platform": "Oracle",
+          "type": "docs"
+        },
+        {
+          "label": "Performance Analysis and Tuning",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Bottleneck Analysis Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Systems Performance - Brendan Gregg",
+          "platform": "Addison Wesley",
+          "type": "book"
+        }
+      ],
+      "challenge": "Run a load test against a deliberately slow demo app, identify the bottleneck using profiling tools, and write a root cause analysis report.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "performance-7",
+      "title": "Stress, Spike, and Soak Testing",
+      "order": 7,
+      "techs": [
+        "k6",
+        "Grafana",
+        "JMeter",
+        "InfluxDB"
+      ],
+      "description": "Design specialized test scenarios beyond simple load tests to validate system resilience under extreme conditions. Learn what to measure and when to stop each test type.",
+      "topics": [
+        "Stress testing to find the breaking point",
+        "Spike test design and interpretation",
+        "Soak test duration and monitoring",
+        "Defining pass/fail criteria per test type",
+        "System recovery validation after stress",
+        "Capacity planning from stress test data"
+      ],
+      "resources": [
+        {
+          "label": "k6 Load Test Types Guide",
+          "platform": "k6.io",
+          "type": "docs"
+        },
+        {
+          "label": "Performance Testing Types",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Stress vs Load vs Soak Testing",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Design and execute a soak test running for 2 hours, monitor for memory leaks and error rate degradation, and document findings with Grafana screenshots.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "performance-8",
+      "title": "API and Microservices Performance Testing",
+      "order": 8,
+      "techs": [
+        "k6",
+        "Postman",
+        "Grafana",
+        "Docker"
+      ],
+      "description": "Test performance at the API and microservice layer independently of the UI to get faster, more targeted results. Learn distributed tracing concepts to follow requests across services.",
+      "topics": [
+        "API-level performance test design",
+        "Isolating microservice performance",
+        "Distributed tracing with Jaeger basics",
+        "Contract and integration performance tests",
+        "Containerized test environments",
+        "Service mesh performance considerations"
+      ],
+      "resources": [
+        {
+          "label": "k6 HTTP API Testing Docs",
+          "platform": "k6.io",
+          "type": "docs"
+        },
+        {
+          "label": "Microservices Performance Testing",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Distributed Tracing Explained",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Jaeger Tracing Documentation",
+          "platform": "jaegertracing.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write k6 tests that independently load-test 3 microservices, compare their p99 latencies, and correlate with distributed traces for the slowest endpoint.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "performance-9",
+      "title": "Performance Test Reporting and SLA Definition",
+      "order": 9,
+      "techs": [
+        "Grafana",
+        "JMeter",
+        "HTML Reports",
+        "Confluence"
+      ],
+      "description": "Translate raw performance numbers into actionable insights for development teams and management. Learn to define SLAs, write performance test reports, and track trends over releases.",
+      "topics": [
+        "Defining SLAs and SLOs for APIs",
+        "Performance baseline establishment",
+        "Trend analysis across releases",
+        "Writing executive performance reports",
+        "Grafana annotations for test events",
+        "Performance test result archiving"
+      ],
+      "resources": [
+        {
+          "label": "SLA vs SLO vs SLI Guide",
+          "platform": "Google SRE Book",
+          "type": "book"
+        },
+        {
+          "label": "Performance Report Writing",
+          "platform": "Ministry of Testing",
+          "type": "docs"
+        },
+        {
+          "label": "Performance Testing KPIs",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a complete performance test report comparing two releases, including trend charts, SLA compliance table, and a recommendation section.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "performance-10",
+      "title": "CI/CD Integration and Continuous Performance Testing",
+      "order": 10,
+      "techs": [
+        "GitHub Actions",
+        "k6",
+        "Grafana",
+        "Docker"
+      ],
+      "description": "Embed performance tests into your CI/CD pipeline so every deployment is automatically validated against performance thresholds. Block releases that violate SLA automatically.",
+      "topics": [
+        "k6 in GitHub Actions pipelines",
+        "Automated threshold-based pass/fail",
+        "Nightly performance regression runs",
+        "Performance trend dashboards for CI",
+        "Docker-based test environments for CI",
+        "Alerting on performance regressions"
+      ],
+      "resources": [
+        {
+          "label": "k6 CI/CD Integration Docs",
+          "platform": "k6.io",
+          "type": "docs"
+        },
+        {
+          "label": "GitHub Actions for Performance Testing",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Continuous Performance Testing",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "GitHub Actions Documentation",
+          "platform": "GitHub Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Configure a GitHub Actions workflow that runs k6 smoke and load tests on every PR, fails the build if p95 exceeds threshold, and posts a Grafana snapshot as a comment.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "security-qa": [
+    {
+      "id": "security-qa-1",
+      "title": "Web Security Fundamentals for Testers",
+      "order": 1,
+      "techs": [
+        "Chrome DevTools",
+        "Burp Suite Community",
+        "OWASP",
+        "HTTP"
+      ],
+      "description": "Build a mental model of web application security by studying the OWASP Top 10 and common vulnerability classes. Learn how HTTP, cookies, and sessions work from an attacker perspective.",
+      "topics": [
+        "OWASP Top 10 overview",
+        "HTTP request and response anatomy",
+        "Cookies, sessions, and tokens",
+        "Same-origin policy and CORS",
+        "TLS and certificate basics",
+        "Attacker mindset and threat modeling intro"
+      ],
+      "resources": [
+        {
+          "label": "OWASP Top 10",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "Web Security Fundamentals",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "HTTP Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "The Web Application Hackers Handbook",
+          "platform": "Wiley",
+          "type": "book"
+        }
+      ],
+      "challenge": "Map all OWASP Top 10 items to a sample application and document which attack surfaces exist for each category.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "security-qa-2",
+      "title": "Burp Suite for Manual Security Testing",
+      "order": 2,
+      "techs": [
+        "Burp Suite",
+        "HTTP",
+        "Browser",
+        "OWASP"
+      ],
+      "description": "Use Burp Suite Community Edition as an intercepting proxy to manually inspect, modify, and replay HTTP requests. Understand the Burp Suite workflow for manual vulnerability hunting.",
+      "topics": [
+        "Burp Suite proxy setup",
+        "Intercepting and modifying requests",
+        "Repeater for manual request manipulation",
+        "Intruder for parameter fuzzing",
+        "Decoder for encoding analysis",
+        "Burp target site map"
+      ],
+      "resources": [
+        {
+          "label": "Burp Suite Documentation",
+          "platform": "PortSwigger",
+          "type": "docs"
+        },
+        {
+          "label": "Burp Suite Complete Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Web Security Academy",
+          "platform": "PortSwigger",
+          "type": "course"
+        }
+      ],
+      "challenge": "Use Burp Suite Repeater to manually test for SQL injection on a deliberately vulnerable app like DVWA and document your findings.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "security-qa-3",
+      "title": "OWASP ZAP for DAST Scanning",
+      "order": 3,
+      "techs": [
+        "OWASP ZAP",
+        "Python",
+        "REST API",
+        "HTML Reports"
+      ],
+      "description": "Automate security scanning using OWASP ZAP as a Dynamic Application Security Testing tool. Learn to run passive and active scans and interpret ZAP reports.",
+      "topics": [
+        "ZAP installation and daemon mode",
+        "Spider and AJAX spider configuration",
+        "Passive vs active scanning",
+        "ZAP alerts: risk and confidence levels",
+        "ZAP HTML report generation",
+        "ZAP API for scripted scans"
+      ],
+      "resources": [
+        {
+          "label": "OWASP ZAP Documentation",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "ZAP Getting Started Guide",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "DAST with OWASP ZAP Course",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Run a full ZAP active scan against a deliberately vulnerable app, triage all high and medium alerts, and write a vulnerability report.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "security-qa-4",
+      "title": "Injection Vulnerabilities: SQL, XSS, Command",
+      "order": 4,
+      "techs": [
+        "Burp Suite",
+        "OWASP ZAP",
+        "DVWA",
+        "SQLMap"
+      ],
+      "description": "Deep-dive into the most impactful injection vulnerability classes including SQL injection, Cross-Site Scripting, and OS command injection. Practice in safe lab environments.",
+      "topics": [
+        "SQL injection types: classic, blind, time-based",
+        "XSS: reflected, stored, DOM-based",
+        "OS command injection patterns",
+        "CSRF fundamentals",
+        "Input validation and encoding defenses",
+        "Testing payloads and bypass techniques"
+      ],
+      "resources": [
+        {
+          "label": "PortSwigger SQL Injection Labs",
+          "platform": "PortSwigger",
+          "type": "course"
+        },
+        {
+          "label": "XSS Explained and Exploited",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "SQLMap Documentation",
+          "platform": "sqlmap.org",
+          "type": "docs"
+        },
+        {
+          "label": "OWASP Testing Guide",
+          "platform": "owasp.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Complete all PortSwigger Web Security Academy SQL injection and XSS labs at the apprentice level and document each exploit technique used.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "security-qa-5",
+      "title": "Authentication and Authorization Testing",
+      "order": 5,
+      "techs": [
+        "Burp Suite",
+        "Postman",
+        "JWT",
+        "OWASP"
+      ],
+      "description": "Test authentication mechanisms for weaknesses including brute force susceptibility, session fixation, and insecure token handling. Validate authorization controls to prevent privilege escalation.",
+      "topics": [
+        "Brute force and account lockout testing",
+        "Session token entropy and fixation",
+        "JWT vulnerability testing",
+        "Vertical and horizontal privilege escalation",
+        "IDOR detection techniques",
+        "OAuth and OpenID Connect security"
+      ],
+      "resources": [
+        {
+          "label": "PortSwigger Authentication Labs",
+          "platform": "PortSwigger",
+          "type": "course"
+        },
+        {
+          "label": "JWT Security Testing Guide",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "Authentication Vulnerabilities Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Test a demo app for IDOR vulnerabilities and broken authentication, document at least 3 findings with CVSS scores and remediation advice.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "security-qa-6",
+      "title": "Security Test Automation with Selenium",
+      "order": 6,
+      "techs": [
+        "Selenium",
+        "Python",
+        "OWASP ZAP",
+        "Pytest"
+      ],
+      "description": "Combine functional UI automation with security scanning by running ZAP as a proxy behind Selenium tests. Detect security issues that only appear during authenticated user flows.",
+      "topics": [
+        "ZAP as Selenium proxy setup",
+        "Authenticated scanning with session tokens",
+        "Passive scanning during functional tests",
+        "Integrating ZAP alerts into test results",
+        "Python ZAP API client",
+        "Security assertions in Pytest"
+      ],
+      "resources": [
+        {
+          "label": "ZAP + Selenium Integration Guide",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "Security Test Automation Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Selenium Security Testing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Configure Selenium to route through ZAP during a full login and checkout flow, then extract and report all medium+ alerts found during the run.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "security-qa-7",
+      "title": "API Security Testing",
+      "order": 7,
+      "techs": [
+        "Burp Suite",
+        "Postman",
+        "OWASP ZAP",
+        "REST"
+      ],
+      "description": "Apply OWASP API Security Top 10 guidance to systematically test REST APIs for vulnerabilities specific to API endpoints. Focus on broken object-level auth and mass assignment.",
+      "topics": [
+        "OWASP API Security Top 10",
+        "Broken Object Level Authorization testing",
+        "Mass assignment vulnerability testing",
+        "Rate limiting and throttling bypass",
+        "API versioning security issues",
+        "GraphQL security testing basics"
+      ],
+      "resources": [
+        {
+          "label": "OWASP API Security Top 10",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "API Security Testing Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "API Penetration Testing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Test a vulnerable API lab for all OWASP API Top 10 categories, document findings with request/response evidence and CVSS v3 scores.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "security-qa-8",
+      "title": "Security Regression and Compliance Testing",
+      "order": 8,
+      "techs": [
+        "OWASP ZAP",
+        "Selenium",
+        "GitHub Actions",
+        "HTML Reports"
+      ],
+      "description": "Ensure that previously identified and fixed vulnerabilities do not reappear by building a security regression suite. Map tests to compliance frameworks like PCI-DSS or SOC 2.",
+      "topics": [
+        "Security regression test suite design",
+        "Mapping tests to compliance requirements",
+        "PCI-DSS relevant security controls",
+        "OWASP ASVS for test coverage",
+        "Vulnerability re-test procedures",
+        "Compliance evidence documentation"
+      ],
+      "resources": [
+        {
+          "label": "OWASP ASVS",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "PCI DSS Testing Guide",
+          "platform": "PCI SSC",
+          "type": "docs"
+        },
+        {
+          "label": "Security Regression Testing",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Web Application Security Testing Guide",
+          "platform": "owasp.org",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a ZAP regression scan script that checks 10 previously fixed vulnerabilities and generates a compliance-mapped report.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "security-qa-9",
+      "title": "Threat Modeling and Security Test Planning",
+      "order": 9,
+      "techs": [
+        "STRIDE",
+        "OWASP Threat Dragon",
+        "Confluence",
+        "JIRA"
+      ],
+      "description": "Proactively identify security risks during design by applying threat modeling frameworks. Translate threat model outputs into actionable security test cases.",
+      "topics": [
+        "STRIDE threat modeling methodology",
+        "Data flow diagrams for threat modeling",
+        "OWASP Threat Dragon tool",
+        "Attack trees and abuse cases",
+        "Security test case derivation from threats",
+        "Threat model review in agile sprints"
+      ],
+      "resources": [
+        {
+          "label": "OWASP Threat Modeling",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "Threat Modeling - Adam Shostack",
+          "platform": "Wiley",
+          "type": "book"
+        },
+        {
+          "label": "STRIDE Threat Modeling Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create a STRIDE threat model for a login and payment feature using Threat Dragon and derive at least 15 security test cases from the model.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "security-qa-10",
+      "title": "CI/CD DAST Integration and Secure SDLC",
+      "order": 10,
+      "techs": [
+        "GitHub Actions",
+        "OWASP ZAP",
+        "Docker",
+        "Snyk"
+      ],
+      "description": "Embed DAST scanning into CI/CD pipelines so security tests run automatically on every deployment. Champion a shift-left security culture by integrating security gates early in the SDLC.",
+      "topics": [
+        "ZAP Docker image in CI/CD pipelines",
+        "GitHub Actions security workflows",
+        "Threshold-based security gates",
+        "SAST vs DAST in a pipeline",
+        "Dependency scanning with Snyk",
+        "Security champion program fundamentals"
+      ],
+      "resources": [
+        {
+          "label": "ZAP in CI/CD Documentation",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "DevSecOps Fundamentals",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Security in GitHub Actions",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Snyk Documentation",
+          "platform": "snyk.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a GitHub Actions pipeline that runs ZAP DAST and Snyk dependency scanning, fails on high-severity findings, and posts a security summary as a PR comment.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "mobile-qa": [
+    {
+      "id": "mobile-qa-1",
+      "title": "Mobile Testing Fundamentals",
+      "order": 1,
+      "techs": [
+        "Android Studio",
+        "Xcode",
+        "ADB",
+        "iOS Simulator"
+      ],
+      "description": "Understand the unique challenges of mobile testing across platforms, device types, and OS versions. Set up iOS and Android development environments for manual and automated testing.",
+      "topics": [
+        "Android vs iOS testing differences",
+        "Mobile SDLC and release cycles",
+        "ADB command line basics",
+        "iOS Simulator and Android Emulator setup",
+        "Device vs emulator testing tradeoffs",
+        "Mobile-specific test types: gesture, orientation, interrupt"
+      ],
+      "resources": [
+        {
+          "label": "Android Testing Documentation",
+          "platform": "developer.android.com",
+          "type": "docs"
+        },
+        {
+          "label": "iOS Testing Guide",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "Mobile Testing Fundamentals",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "ADB Command Reference",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Perform a manual test session on a demo Android app covering gestures, orientation changes, and interrupt scenarios, documenting all defects found.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mobile-qa-2",
+      "title": "Appium Setup and Basic Automation",
+      "order": 2,
+      "techs": [
+        "Appium",
+        "Python",
+        "Android SDK",
+        "Desired Capabilities"
+      ],
+      "description": "Install and configure Appium to automate mobile apps on Android using Python. Understand Desired Capabilities and how Appium communicates with devices.",
+      "topics": [
+        "Appium architecture overview",
+        "Appium server setup and configuration",
+        "Desired Capabilities for Android",
+        "Finding elements with Appium Inspector",
+        "Basic touch interactions",
+        "Python Appium client library"
+      ],
+      "resources": [
+        {
+          "label": "Appium Documentation",
+          "platform": "appium.io",
+          "type": "docs"
+        },
+        {
+          "label": "Appium Python Tutorial",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Appium Getting Started Guide",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write an Appium Python script that launches a demo Android app, fills a login form, taps submit, and asserts the home screen appears.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mobile-qa-3",
+      "title": "XCTest for iOS Native Testing",
+      "order": 3,
+      "techs": [
+        "XCTest",
+        "Swift",
+        "Xcode",
+        "iOS Simulator"
+      ],
+      "description": "Use Apple XCTest framework to write native UI tests for iOS applications in Swift. Learn how XCTest integrates with Xcode and the test runner.",
+      "topics": [
+        "XCTest framework structure",
+        "XCUIApplication and element queries",
+        "Assertions in XCTest",
+        "XCTest performance metrics",
+        "Xcode test schemes and plans",
+        "Recording UI tests in Xcode"
+      ],
+      "resources": [
+        {
+          "label": "XCTest Documentation",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "iOS UI Testing with XCTest",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "XCTest Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Testing with Xcode Guide",
+          "platform": "Apple",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write an XCTest UI test suite for a sample iOS app that covers 5 critical user flows and runs green in the Xcode test runner.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mobile-qa-4",
+      "title": "Espresso for Android Native Testing",
+      "order": 4,
+      "techs": [
+        "Espresso",
+        "Kotlin",
+        "Android Studio",
+        "JUnit"
+      ],
+      "description": "Write fast, reliable Android UI tests using Google Espresso, which runs in-process for maximum speed. Learn Espresso matchers, actions, and assertions.",
+      "topics": [
+        "Espresso architecture and synchronization",
+        "ViewMatchers, ViewActions, ViewAssertions",
+        "Handling async operations with IdlingResource",
+        "Espresso Intents for testing navigation",
+        "Espresso Web for WebView testing",
+        "Running Espresso tests on CI"
+      ],
+      "resources": [
+        {
+          "label": "Espresso Documentation",
+          "platform": "developer.android.com",
+          "type": "docs"
+        },
+        {
+          "label": "Android Testing with Espresso",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Espresso Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write an Espresso test suite for a sample Android app that tests a multi-screen flow including an async network call using IdlingResource.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mobile-qa-5",
+      "title": "BrowserStack and Real Device Testing",
+      "order": 5,
+      "techs": [
+        "BrowserStack",
+        "Appium",
+        "Python",
+        "REST API"
+      ],
+      "description": "Run your mobile automation tests on thousands of real devices in the cloud using BrowserStack App Automate. Understand the economics and tradeoffs of real device testing.",
+      "topics": [
+        "BrowserStack App Automate setup",
+        "Uploading apps to BrowserStack",
+        "Desired Capabilities for BrowserStack",
+        "Parallel test execution on real devices",
+        "BrowserStack session logs and video",
+        "Network simulation with BrowserStack"
+      ],
+      "resources": [
+        {
+          "label": "BrowserStack Appium Documentation",
+          "platform": "BrowserStack",
+          "type": "docs"
+        },
+        {
+          "label": "Real Device Testing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "BrowserStack App Automate Course",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Configure your Appium suite to run against 5 real Android devices on BrowserStack in parallel and compare results across device/OS combinations.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mobile-qa-6",
+      "title": "Mobile Test Design: Gestures and Interrupts",
+      "order": 6,
+      "techs": [
+        "Appium",
+        "Python",
+        "TouchAction",
+        "UIAutomator2"
+      ],
+      "description": "Test mobile-specific interactions including complex gestures, deep links, push notifications, and interrupt handling. Validate that apps behave correctly under real-world conditions.",
+      "topics": [
+        "Implementing swipe, scroll, pinch with Appium",
+        "Deep link testing automation",
+        "Push notification testing strategies",
+        "Incoming call and SMS interrupt testing",
+        "Background and foreground app state testing",
+        "Battery and network condition simulation"
+      ],
+      "resources": [
+        {
+          "label": "Appium W3C Actions API",
+          "platform": "appium.io",
+          "type": "docs"
+        },
+        {
+          "label": "Mobile Gesture Testing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Advanced Appium Course",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write Appium tests that validate a card-swipe onboarding flow, a deep link launch, and graceful handling of an interrupt phone call.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mobile-qa-7",
+      "title": "Mobile Performance and Battery Testing",
+      "order": 7,
+      "techs": [
+        "Android Profiler",
+        "Instruments",
+        "ADB",
+        "Appium"
+      ],
+      "description": "Evaluate mobile app performance including startup time, frame rate, memory usage, and battery drain. Use platform-native profiling tools to identify performance regressions.",
+      "topics": [
+        "App launch time measurement",
+        "Frame rate and jank detection",
+        "Memory leak identification on mobile",
+        "Battery drain testing methodology",
+        "Android Profiler usage",
+        "Xcode Instruments for iOS performance"
+      ],
+      "resources": [
+        {
+          "label": "Android Profiler Documentation",
+          "platform": "developer.android.com",
+          "type": "docs"
+        },
+        {
+          "label": "Xcode Instruments Guide",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "Mobile Performance Testing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Profile a sample Android app during a user journey, identify one memory issue and one rendering bottleneck, and document them with profiler screenshots.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mobile-qa-8",
+      "title": "Mobile Accessibility Testing",
+      "order": 8,
+      "techs": [
+        "TalkBack",
+        "VoiceOver",
+        "Accessibility Scanner",
+        "Appium"
+      ],
+      "description": "Test mobile apps for accessibility compliance using screen readers and automated scanners. Ensure all interactive elements are reachable and describable.",
+      "topics": [
+        "TalkBack and VoiceOver screen reader testing",
+        "Content descriptions and accessibility labels",
+        "Touch target size requirements",
+        "Color contrast for mobile",
+        "Android Accessibility Scanner",
+        "WCAG mobile success criteria"
+      ],
+      "resources": [
+        {
+          "label": "Android Accessibility Testing Guide",
+          "platform": "developer.android.com",
+          "type": "docs"
+        },
+        {
+          "label": "iOS Accessibility Guide",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "Mobile Accessibility Testing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Perform a TalkBack accessibility audit of a sample Android app, document all accessibility barriers found, and prioritize by WCAG criterion.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "mobile-qa-9",
+      "title": "Page Object Model for Mobile Automation",
+      "order": 9,
+      "techs": [
+        "Appium",
+        "Python",
+        "Pytest",
+        "Allure"
+      ],
+      "description": "Apply Page Object Model and screen object patterns to your Appium tests to create a maintainable and scalable mobile test framework. Add reporting and parallel execution.",
+      "topics": [
+        "Screen Object pattern for mobile",
+        "BaseScreen class design",
+        "Appium test fixtures with Pytest",
+        "Parallel execution with pytest-xdist",
+        "Allure reporting for mobile tests",
+        "Test data management for mobile"
+      ],
+      "resources": [
+        {
+          "label": "Appium Framework Design Tutorial",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Mobile POM Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Allure Framework Docs",
+          "platform": "allure.qatools.ru",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a mobile test framework with screen objects, Pytest fixtures, parallel execution on 2 emulators, and Allure reporting with screenshots on failure.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "mobile-qa-10",
+      "title": "CI/CD for Mobile and Release Automation",
+      "order": 10,
+      "techs": [
+        "GitHub Actions",
+        "BrowserStack",
+        "Fastlane",
+        "Docker"
+      ],
+      "description": "Automate mobile build, sign, and test workflows in CI/CD pipelines so every commit triggers tests on real devices. Use Fastlane to manage app signing and deployment.",
+      "topics": [
+        "Fastlane for iOS and Android automation",
+        "GitHub Actions mobile workflow",
+        "App distribution to testers with Fastlane",
+        "BrowserStack integration in CI",
+        "Parallel sharding across real devices",
+        "Mobile test result dashboards"
+      ],
+      "resources": [
+        {
+          "label": "Fastlane Documentation",
+          "platform": "fastlane.tools",
+          "type": "docs"
+        },
+        {
+          "label": "GitHub Actions for Mobile",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "CI/CD for Mobile Apps",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "BrowserStack CI Integration Docs",
+          "platform": "BrowserStack",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a GitHub Actions pipeline that builds an Android APK, uploads it to BrowserStack, runs the full Appium suite on 3 real devices, and posts results.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "api-qa": [
+    {
+      "id": "api-qa-1",
+      "title": "HTTP and REST API Fundamentals",
+      "order": 1,
+      "techs": [
+        "Postman",
+        "HTTP",
+        "JSON",
+        "REST"
+      ],
+      "description": "Build a solid understanding of how REST APIs work including HTTP methods, status codes, headers, and request/response bodies. Learn to read API documentation and send your first requests with Postman.",
+      "topics": [
+        "HTTP methods: GET, POST, PUT, DELETE, PATCH",
+        "HTTP status codes and their meaning",
+        "Request and response headers",
+        "JSON request and response bodies",
+        "REST architectural constraints",
+        "Reading Swagger and OpenAPI docs"
+      ],
+      "resources": [
+        {
+          "label": "Postman Learning Center",
+          "platform": "Postman",
+          "type": "docs"
+        },
+        {
+          "label": "RESTful API Design Guide",
+          "platform": "restfulapi.net",
+          "type": "docs"
+        },
+        {
+          "label": "HTTP Crash Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "API Testing Foundations",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Use Postman to interact with a public REST API, performing GET, POST, PUT, and DELETE operations and documenting each response.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "api-qa-2",
+      "title": "Postman Collections and Test Scripts",
+      "order": 2,
+      "techs": [
+        "Postman",
+        "JavaScript",
+        "JSON",
+        "Environment Variables"
+      ],
+      "description": "Organize API requests into Postman collections and write JavaScript test scripts that automatically validate responses. Use environment variables to manage multiple environments.",
+      "topics": [
+        "Collection and folder organization",
+        "Environment and global variables",
+        "pm.test and pm.expect assertions",
+        "Pre-request scripts for setup",
+        "Chaining requests with variable extraction",
+        "Postman test results and assertions"
+      ],
+      "resources": [
+        {
+          "label": "Postman Scripting Documentation",
+          "platform": "Postman",
+          "type": "docs"
+        },
+        {
+          "label": "Postman for API Testing",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Postman Test Scripts Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a Postman collection with pre-request auth setup, chained requests that pass tokens between calls, and assertions on all response fields.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "api-qa-3",
+      "title": "REST Assured for Java API Testing",
+      "order": 3,
+      "techs": [
+        "REST Assured",
+        "Java",
+        "TestNG",
+        "Maven"
+      ],
+      "description": "Write expressive, readable API tests in Java using REST Assured with its fluent Given-When-Then DSL. Integrate with TestNG for test organization and reporting.",
+      "topics": [
+        "REST Assured setup with Maven",
+        "Given/When/Then DSL structure",
+        "Path and query parameter testing",
+        "Response body extraction with JsonPath",
+        "Schema validation with JSON Schema",
+        "Authentication handling in REST Assured"
+      ],
+      "resources": [
+        {
+          "label": "REST Assured Documentation",
+          "platform": "rest-assured.io",
+          "type": "docs"
+        },
+        {
+          "label": "REST Assured Tutorial",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "REST Assured Full Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a REST Assured test suite covering all CRUD operations on a sample API with JSON Schema validation on every response.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "api-qa-4",
+      "title": "API Test Design and Coverage Strategies",
+      "order": 4,
+      "techs": [
+        "Postman",
+        "REST Assured",
+        "Swagger",
+        "TestRail"
+      ],
+      "description": "Apply systematic test design techniques to APIs to achieve comprehensive coverage without redundancy. Learn to derive test cases from API contracts and OpenAPI specs.",
+      "topics": [
+        "Positive and negative API test cases",
+        "Boundary value testing for API parameters",
+        "Error handling and error response validation",
+        "API contract testing concepts",
+        "Test case traceability to API spec",
+        "Edge cases: empty body, null values, large payloads"
+      ],
+      "resources": [
+        {
+          "label": "API Testing Design Techniques",
+          "platform": "Ministry of Testing",
+          "type": "docs"
+        },
+        {
+          "label": "API Test Coverage Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "API Testing Strategies Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Derive a complete test case set for a Swagger-documented API endpoint covering all HTTP methods, parameter combinations, and documented error responses.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "api-qa-5",
+      "title": "Newman for CLI and Automated Postman Runs",
+      "order": 5,
+      "techs": [
+        "Newman",
+        "Node.js",
+        "Postman",
+        "JSON"
+      ],
+      "description": "Run Postman collections from the command line using Newman so they can be executed in automated pipelines. Generate JUnit and HTML reports from Newman runs.",
+      "topics": [
+        "Newman installation and CLI usage",
+        "Running collections with environments",
+        "Newman reporters: CLI, JUnit, HTML",
+        "Newman with multiple environment files",
+        "Exit codes for CI integration",
+        "Newman custom reporters"
+      ],
+      "resources": [
+        {
+          "label": "Newman Documentation",
+          "platform": "Postman",
+          "type": "docs"
+        },
+        {
+          "label": "Newman CI Integration Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Postman and Newman Course",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Run a Postman collection against 3 environments using Newman, generate HTML and JUnit reports, and script a shell command that fails on test failure.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "api-qa-6",
+      "title": "API Authentication Testing",
+      "order": 6,
+      "techs": [
+        "Postman",
+        "REST Assured",
+        "OAuth2",
+        "JWT"
+      ],
+      "description": "Test all common authentication mechanisms used by modern APIs including API keys, JWT, OAuth2 client credentials, and session cookies. Validate token expiration and refresh flows.",
+      "topics": [
+        "API key authentication testing",
+        "Bearer token handling and validation",
+        "JWT structure and claims validation",
+        "OAuth2 authorization code and client credentials flows",
+        "Token expiration and refresh testing",
+        "MFA and two-step auth API testing"
+      ],
+      "resources": [
+        {
+          "label": "OAuth 2.0 Documentation",
+          "platform": "oauth.net",
+          "type": "docs"
+        },
+        {
+          "label": "JWT Introduction",
+          "platform": "jwt.io",
+          "type": "docs"
+        },
+        {
+          "label": "API Authentication Testing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "OAuth2 in Action",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Write a REST Assured test that obtains a JWT via OAuth2 client credentials, uses it for protected API calls, and validates behavior after token expiry.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "api-qa-7",
+      "title": "Contract Testing with Pact",
+      "order": 7,
+      "techs": [
+        "Pact",
+        "Java",
+        "REST Assured",
+        "Pact Broker"
+      ],
+      "description": "Implement consumer-driven contract testing with Pact to catch API breaking changes before they reach production. Learn the consumer-provider workflow and Pact Broker for contract sharing.",
+      "topics": [
+        "Consumer-driven contract testing concept",
+        "Pact consumer test authoring",
+        "Pact provider verification",
+        "Pact Broker for contract storage",
+        "Can-I-Deploy checks in CI",
+        "Versioning and tagging Pact contracts"
+      ],
+      "resources": [
+        {
+          "label": "Pact Documentation",
+          "platform": "pact.io",
+          "type": "docs"
+        },
+        {
+          "label": "Contract Testing with Pact",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Pact Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement a consumer Pact test for a mock service, write the provider verification, publish to Pact Broker, and run a can-I-deploy check.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "api-qa-8",
+      "title": "GraphQL API Testing",
+      "order": 8,
+      "techs": [
+        "Postman",
+        "GraphQL",
+        "REST Assured",
+        "Apollo"
+      ],
+      "description": "Extend your API testing skills to GraphQL, understanding queries, mutations, subscriptions, and schema introspection. Identify GraphQL-specific vulnerabilities and test patterns.",
+      "topics": [
+        "GraphQL query and mutation structure",
+        "Testing with introspection queries",
+        "Variable and argument validation",
+        "Error handling in GraphQL responses",
+        "GraphQL-specific issues: N+1, over-fetching",
+        "Postman for GraphQL requests"
+      ],
+      "resources": [
+        {
+          "label": "GraphQL Documentation",
+          "platform": "graphql.org",
+          "type": "docs"
+        },
+        {
+          "label": "GraphQL Testing Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "GraphQL API Testing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a Postman collection that tests queries, mutations, error cases, and introspection on a public GraphQL API with assertions on all fields.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "api-qa-9",
+      "title": "Mocking and Service Virtualization",
+      "order": 9,
+      "techs": [
+        "WireMock",
+        "Postman Mock Server",
+        "Java",
+        "REST Assured"
+      ],
+      "description": "Create API mocks and stubs to enable testing when downstream services are unavailable or unpredictable. Learn service virtualization for isolated, repeatable API testing.",
+      "topics": [
+        "WireMock setup and stub configuration",
+        "Request matching in WireMock",
+        "Response templating and dynamic responses",
+        "Postman Mock Server setup",
+        "Fault injection with WireMock",
+        "Recording and playback of API interactions"
+      ],
+      "resources": [
+        {
+          "label": "WireMock Documentation",
+          "platform": "wiremock.org",
+          "type": "docs"
+        },
+        {
+          "label": "Service Virtualization Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "API Mocking Course",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Set up WireMock stubs for 5 API endpoints, inject fault scenarios (delays, 500 errors), and run your REST Assured suite against the mock server.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "api-qa-10",
+      "title": "CI/CD Integration and API Test Pipelines",
+      "order": 10,
+      "techs": [
+        "GitHub Actions",
+        "Newman",
+        "REST Assured",
+        "Docker"
+      ],
+      "description": "Automate your API test suites in CI/CD pipelines that run on every pull request and deployment. Use Docker to package test environments for consistent execution.",
+      "topics": [
+        "GitHub Actions for API test automation",
+        "Newman in CI pipelines",
+        "REST Assured with Maven in CI",
+        "Parallel API test execution",
+        "API test result reporting in CI",
+        "Environment promotion testing strategy"
+      ],
+      "resources": [
+        {
+          "label": "GitHub Actions Documentation",
+          "platform": "GitHub Docs",
+          "type": "docs"
+        },
+        {
+          "label": "API Testing in CI/CD",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Newman in GitHub Actions Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a GitHub Actions pipeline that runs Newman tests against a staging environment and REST Assured contract tests, blocks merge on any failure.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "sdet": [
+    {
+      "id": "sdet-1",
+      "title": "Core Java for Test Engineering",
+      "order": 1,
+      "techs": [
+        "Java",
+        "IntelliJ IDEA",
+        "Maven",
+        "JUnit 5"
+      ],
+      "description": "Build a strong Java programming foundation specifically oriented toward test engineering. Learn OOP principles, collections, exception handling, and project structure with Maven.",
+      "topics": [
+        "Java OOP: classes, inheritance, interfaces",
+        "Collections: List, Map, Set usage",
+        "Exception handling in test code",
+        "Java Streams and Lambdas",
+        "Maven project structure and dependencies",
+        "JUnit 5 basics and lifecycle"
+      ],
+      "resources": [
+        {
+          "label": "Java Programming Masterclass",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Effective Java - Joshua Bloch",
+          "platform": "Addison Wesley",
+          "type": "book"
+        },
+        {
+          "label": "JUnit 5 User Guide",
+          "platform": "junit.org",
+          "type": "docs"
+        },
+        {
+          "label": "Java for Beginners Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement a Java test utility library with helper classes for data generation, HTTP client wrappers, and assertion utilities using TDD.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "sdet-2",
+      "title": "Selenium WebDriver with Java",
+      "order": 2,
+      "techs": [
+        "Selenium",
+        "Java",
+        "ChromeDriver",
+        "TestNG"
+      ],
+      "description": "Automate web browsers using Selenium WebDriver with Java bindings. Apply professional patterns like Page Object Model from day one.",
+      "topics": [
+        "WebDriver setup with WebDriverManager",
+        "Selenium locator strategies",
+        "Synchronization: explicit and fluent waits",
+        "Page Object Model with Java",
+        "TestNG integration with Selenium",
+        "Screenshot capture and logging on failure"
+      ],
+      "resources": [
+        {
+          "label": "Selenium with Java Documentation",
+          "platform": "selenium.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Selenium Java TestNG Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Selenium WebDriver Java Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a Java Selenium POM framework that tests a multi-page web app, with reusable components, explicit waits, and screenshot on failure.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "sdet-3",
+      "title": "TestNG Advanced Features and Framework Design",
+      "order": 3,
+      "techs": [
+        "TestNG",
+        "Java",
+        "Maven",
+        "Extent Reports"
+      ],
+      "description": "Master advanced TestNG features for building production-quality test frameworks. Design a framework foundation that other engineers can contribute to.",
+      "topics": [
+        "TestNG data providers and parameterization",
+        "Test grouping and dependency management",
+        "TestNG listeners for custom logging",
+        "Retry analyzer for flaky test handling",
+        "Extent Reports for rich HTML reports",
+        "Maven Surefire plugin configuration"
+      ],
+      "resources": [
+        {
+          "label": "TestNG Documentation",
+          "platform": "testng.org",
+          "type": "docs"
+        },
+        {
+          "label": "TestNG Advanced Tutorial",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Extent Reports Documentation",
+          "platform": "extentreports.com",
+          "type": "docs"
+        },
+        {
+          "label": "TestNG Framework Design Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a TestNG framework with a custom listener, retry analyzer, Extent Reports integration, and a parameterized test using an external data provider.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "sdet-4",
+      "title": "API Testing with REST Assured and Java",
+      "order": 4,
+      "techs": [
+        "REST Assured",
+        "Java",
+        "TestNG",
+        "Jackson"
+      ],
+      "description": "Write comprehensive API tests in Java using REST Assured. Use Jackson for POJO serialization and build an API test layer that integrates with your UI framework.",
+      "topics": [
+        "REST Assured DSL mastery",
+        "POJO-based request and response handling with Jackson",
+        "JSON Schema validation",
+        "API test base classes and utilities",
+        "Chaining API calls in test setup",
+        "REST Assured with OAuth2 authentication"
+      ],
+      "resources": [
+        {
+          "label": "REST Assured Documentation",
+          "platform": "rest-assured.io",
+          "type": "docs"
+        },
+        {
+          "label": "REST Assured Full Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Jackson ObjectMapper Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a Java API test layer using REST Assured and Jackson POJOs that tests all endpoints of a REST API and shares a base config with your UI tests.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "sdet-5",
+      "title": "Design Patterns in Test Automation",
+      "order": 5,
+      "techs": [
+        "Java",
+        "Selenium",
+        "TestNG",
+        "Spring"
+      ],
+      "description": "Apply software design patterns to test automation code to improve reusability, maintainability, and scalability. Learn the patterns that appear most frequently in enterprise test frameworks.",
+      "topics": [
+        "Singleton for WebDriver management",
+        "Factory pattern for browser instantiation",
+        "Builder pattern for test data",
+        "Fluent interface pattern",
+        "Strategy pattern for test environments",
+        "Dependency injection basics"
+      ],
+      "resources": [
+        {
+          "label": "Design Patterns - GoF",
+          "platform": "Addison Wesley",
+          "type": "book"
+        },
+        {
+          "label": "Design Patterns in Test Automation",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Test Automation Design Patterns Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Refactor an existing Selenium framework to use Factory for browser creation, Builder for test data, and DI for shared configuration objects.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "sdet-6",
+      "title": "Unit and Integration Testing for Production Code",
+      "order": 6,
+      "techs": [
+        "JUnit 5",
+        "Mockito",
+        "Spring Boot Test",
+        "Java"
+      ],
+      "description": "Write unit and integration tests for production Java code using JUnit 5 and Mockito. Understand the testing pyramid and how SDETs contribute to developer test coverage.",
+      "topics": [
+        "JUnit 5 parameterized tests and extensions",
+        "Mockito for dependency mocking",
+        "Testing Spring Boot controllers with MockMvc",
+        "Integration tests with Testcontainers",
+        "Test coverage measurement with JaCoCo",
+        "Mutation testing with PIT"
+      ],
+      "resources": [
+        {
+          "label": "JUnit 5 User Guide",
+          "platform": "junit.org",
+          "type": "docs"
+        },
+        {
+          "label": "Mockito Documentation",
+          "platform": "mockito.org",
+          "type": "docs"
+        },
+        {
+          "label": "Spring Boot Testing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Practical Unit Testing with JUnit and Mockito",
+          "platform": "O Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Write unit tests for a provided Java service class using Mockito mocks, integration tests using Testcontainers, and measure coverage with JaCoCo.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "sdet-7",
+      "title": "BDD with Cucumber and Gherkin",
+      "order": 7,
+      "techs": [
+        "Cucumber",
+        "Java",
+        "Gherkin",
+        "Selenium"
+      ],
+      "description": "Implement Behavior-Driven Development using Cucumber to bridge communication between business and technical teams. Write Gherkin scenarios that drive Selenium test execution.",
+      "topics": [
+        "Gherkin syntax: Feature, Scenario, Given/When/Then",
+        "Cucumber step definitions in Java",
+        "Cucumber hooks and data tables",
+        "Cucumber and Selenium integration",
+        "Cucumber reporting plugins",
+        "Living documentation with Cucumber"
+      ],
+      "resources": [
+        {
+          "label": "Cucumber Documentation",
+          "platform": "cucumber.io",
+          "type": "docs"
+        },
+        {
+          "label": "BDD with Cucumber and Java",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Cucumber Java Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a Cucumber-Selenium framework with at least 3 feature files covering a web app flow, using data tables, tags, and an HTML report plugin.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "sdet-8",
+      "title": "Test Data Management and Environments",
+      "order": 8,
+      "techs": [
+        "Java",
+        "Faker",
+        "SQL",
+        "Docker"
+      ],
+      "description": "Design a robust test data strategy that supports isolated, repeatable test execution across multiple environments. Use Docker to create ephemeral test environments on demand.",
+      "topics": [
+        "Test data strategies: static, dynamic, on-demand",
+        "Java Faker for synthetic data generation",
+        "Database seeding and teardown",
+        "Environment configuration management",
+        "Docker Compose for test environments",
+        "Data isolation between parallel tests"
+      ],
+      "resources": [
+        {
+          "label": "Java Faker Documentation",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Test Data Management Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Docker Compose Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Docker Documentation",
+          "platform": "docker.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a test data factory using Java Faker that generates unique test users for each test run and cleans up after the suite completes.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "sdet-9",
+      "title": "Performance and Security Testing Integration",
+      "order": 9,
+      "techs": [
+        "Gatling",
+        "OWASP ZAP",
+        "Java",
+        "Maven"
+      ],
+      "description": "Expand SDET scope to include performance and security test contributions. Integrate Gatling performance tests and ZAP DAST scans into the Java Maven build.",
+      "topics": [
+        "Gatling Java DSL for performance tests",
+        "Integrating Gatling with Maven lifecycle",
+        "ZAP Maven plugin for DAST scanning",
+        "Defining performance thresholds in tests",
+        "Security test gates in build pipeline",
+        "Combined test reporting"
+      ],
+      "resources": [
+        {
+          "label": "Gatling Maven Plugin Documentation",
+          "platform": "gatling.io",
+          "type": "docs"
+        },
+        {
+          "label": "ZAP Maven Plugin Documentation",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "Performance Testing with Gatling Java",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add Gatling performance tests and ZAP DAST scanning to a Maven project, configure build failure thresholds for each, and produce a combined report.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "sdet-10",
+      "title": "CI/CD Pipeline Ownership and Production Quality",
+      "order": 10,
+      "techs": [
+        "Jenkins",
+        "GitHub Actions",
+        "Docker",
+        "SonarQube"
+      ],
+      "description": "Own the CI/CD quality gates for your team, ensuring test automation runs reliably on every build and release. Use code quality tools to keep test code as maintainable as production code.",
+      "topics": [
+        "Jenkins declarative pipeline authoring",
+        "GitHub Actions for Java Maven projects",
+        "Parallel and matrix test execution in CI",
+        "SonarQube for test code quality",
+        "Test flakiness detection and quarantine",
+        "Release quality gate definition"
+      ],
+      "resources": [
+        {
+          "label": "Jenkins Pipeline Documentation",
+          "platform": "jenkins.io",
+          "type": "docs"
+        },
+        {
+          "label": "GitHub Actions for Java",
+          "platform": "GitHub Docs",
+          "type": "docs"
+        },
+        {
+          "label": "CI/CD for SDETs Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "SonarQube Documentation",
+          "platform": "sonarqube.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a Jenkins pipeline that compiles code, runs unit tests, executes Selenium tests in parallel Docker containers, scans with SonarQube, and enforces a quality gate.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "chaos-engineer": [
+    {
+      "id": "chaos-engineer-1",
+      "title": "Reliability Engineering Foundations",
+      "order": 1,
+      "techs": [
+        "Linux",
+        "Kubernetes",
+        "Prometheus",
+        "Grafana"
+      ],
+      "description": "Understand the principles of site reliability engineering and why chaos engineering exists. Learn to define and measure reliability through SLIs, SLOs, and error budgets.",
+      "topics": [
+        "SRE principles and culture",
+        "SLI, SLO, SLA definitions",
+        "Error budget concept and management",
+        "MTTR, MTBF, and availability math",
+        "Kubernetes architecture overview",
+        "Observability: metrics, logs, traces"
+      ],
+      "resources": [
+        {
+          "label": "Google SRE Book",
+          "platform": "Google SRE",
+          "type": "book"
+        },
+        {
+          "label": "SRE Fundamentals Course",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "Kubernetes Introduction",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Prometheus Documentation",
+          "platform": "prometheus.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Define SLIs and SLOs for a sample microservice application, calculate its error budget, and set up a Prometheus dashboard to track them.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "chaos-engineer-2",
+      "title": "Chaos Engineering Principles and Hypothesis",
+      "order": 2,
+      "techs": [
+        "Confluence",
+        "Grafana",
+        "Kubernetes",
+        "Postman"
+      ],
+      "description": "Study the scientific method applied to chaos engineering and learn to design rigorous experiments with clear hypotheses. Understand the steady state, blast radius, and minimal experiment concepts.",
+      "topics": [
+        "Chaos engineering principles from Netflix",
+        "Steady state hypothesis definition",
+        "Blast radius minimization",
+        "Experiment design methodology",
+        "Gameday planning and execution",
+        "Chaos maturity model"
+      ],
+      "resources": [
+        {
+          "label": "Principles of Chaos Engineering",
+          "platform": "principlesofchaos.org",
+          "type": "docs"
+        },
+        {
+          "label": "Chaos Engineering Book - Casey Rosenthal",
+          "platform": "O Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Chaos Engineering Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Netflix Chaos Monkey Blog",
+          "platform": "Netflix TechBlog",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Design a chaos experiment document for a service with hypothesis, steady state, method, rollback plan, and expected learning outcome.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "chaos-engineer-3",
+      "title": "Chaos Monkey and Simian Army",
+      "order": 3,
+      "techs": [
+        "Chaos Monkey",
+        "Spinnaker",
+        "AWS",
+        "Java"
+      ],
+      "description": "Implement Netflix-style instance termination chaos using Chaos Monkey. Understand the Simian Army family of tools and their roles in resilience engineering.",
+      "topics": [
+        "Chaos Monkey installation and configuration",
+        "Spinnaker integration requirements",
+        "Chaos Monkey scheduling and opt-in groups",
+        "Janitor Monkey for resource cleanup",
+        "Conformity Monkey for best practices",
+        "Chaos Monkey in AWS environments"
+      ],
+      "resources": [
+        {
+          "label": "Chaos Monkey Documentation",
+          "platform": "GitHub Netflix",
+          "type": "docs"
+        },
+        {
+          "label": "Simian Army Blog",
+          "platform": "Netflix TechBlog",
+          "type": "docs"
+        },
+        {
+          "label": "Chaos Monkey Setup Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy Chaos Monkey in a staging AWS environment, configure it for a test service, trigger an instance termination, and verify auto-recovery.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "chaos-engineer-4",
+      "title": "Gremlin for Targeted Chaos Experiments",
+      "order": 4,
+      "techs": [
+        "Gremlin",
+        "Kubernetes",
+        "Linux",
+        "Grafana"
+      ],
+      "description": "Use Gremlin as a enterprise-grade chaos platform to run targeted resource, network, and state attacks with safety controls. Learn Gremlin attack types and scenario composition.",
+      "topics": [
+        "Gremlin installation on Kubernetes and VMs",
+        "Resource attacks: CPU, memory, disk, IO",
+        "Network attacks: latency, packet loss, blackhole",
+        "State attacks: shutdown, process killer",
+        "Gremlin scenarios for multi-step experiments",
+        "Gremlin TeamID and safety controls"
+      ],
+      "resources": [
+        {
+          "label": "Gremlin Documentation",
+          "platform": "gremlin.com",
+          "type": "docs"
+        },
+        {
+          "label": "Gremlin Chaos Engineering Course",
+          "platform": "gremlin.com",
+          "type": "course"
+        },
+        {
+          "label": "Gremlin Kubernetes Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Use Gremlin to run a network latency attack on a staging microservice, measure impact on dependent services via Grafana, and document recovery behavior.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "chaos-engineer-5",
+      "title": "Kubernetes Chaos with LitmusChaos",
+      "order": 5,
+      "techs": [
+        "LitmusChaos",
+        "Kubernetes",
+        "Helm",
+        "Prometheus"
+      ],
+      "description": "Run cloud-native chaos experiments directly in Kubernetes using LitmusChaos. Use ChaosEngine and ChaosExperiment custom resources to declaratively define experiments.",
+      "topics": [
+        "LitmusChaos architecture and components",
+        "ChaosEngine and ChaosExperiment CRDs",
+        "Pod delete and pod CPU hog experiments",
+        "Node drain and node taint experiments",
+        "LitmusPortal for experiment management",
+        "Observability hooks in Litmus experiments"
+      ],
+      "resources": [
+        {
+          "label": "LitmusChaos Documentation",
+          "platform": "litmuschaos.io",
+          "type": "docs"
+        },
+        {
+          "label": "LitmusChaos Getting Started",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Kubernetes Chaos Engineering Course",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Deploy LitmusChaos in a Kubernetes cluster, run pod delete and network latency experiments on a sample microservice, and observe recovery via Prometheus.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "chaos-engineer-6",
+      "title": "Observability for Chaos Engineering",
+      "order": 6,
+      "techs": [
+        "Prometheus",
+        "Grafana",
+        "Jaeger",
+        "OpenTelemetry"
+      ],
+      "description": "Build the observability foundation required to measure chaos experiment impact and confirm steady state. Implement distributed tracing to see how failures propagate across services.",
+      "topics": [
+        "Prometheus metrics instrumentation",
+        "Grafana dashboard design for chaos",
+        "Distributed tracing with Jaeger",
+        "OpenTelemetry SDK instrumentation",
+        "Correlation of chaos events with traces",
+        "Alerting during chaos experiments"
+      ],
+      "resources": [
+        {
+          "label": "OpenTelemetry Documentation",
+          "platform": "opentelemetry.io",
+          "type": "docs"
+        },
+        {
+          "label": "Observability Engineering Book",
+          "platform": "O Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Distributed Tracing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Grafana Fundamentals Course",
+          "platform": "grafana.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Instrument a sample microservice with OpenTelemetry, create a Grafana dashboard showing SLI metrics, then run a Gremlin experiment and annotate the dashboard.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "chaos-engineer-7",
+      "title": "Network and Dependency Failure Testing",
+      "order": 7,
+      "techs": [
+        "Gremlin",
+        "Toxiproxy",
+        "Kubernetes",
+        "Istio"
+      ],
+      "description": "Simulate realistic network degradation and dependency failures to test service resilience patterns like circuit breakers, retries, and timeouts. Use service mesh for controlled traffic manipulation.",
+      "topics": [
+        "Toxiproxy for network fault injection",
+        "Circuit breaker pattern testing",
+        "Retry and timeout configuration testing",
+        "Istio fault injection with VirtualService",
+        "Dependency blackhole experiments",
+        "Cascading failure prevention validation"
+      ],
+      "resources": [
+        {
+          "label": "Toxiproxy Documentation",
+          "platform": "GitHub Shopify",
+          "type": "docs"
+        },
+        {
+          "label": "Istio Fault Injection Guide",
+          "platform": "istio.io",
+          "type": "docs"
+        },
+        {
+          "label": "Circuit Breaker Pattern Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Configure Toxiproxy to inject 2-second latency and 10% packet loss on a service dependency, then validate that the circuit breaker opens and recovers correctly.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "chaos-engineer-8",
+      "title": "Database and Stateful Service Chaos",
+      "order": 8,
+      "techs": [
+        "Gremlin",
+        "LitmusChaos",
+        "PostgreSQL",
+        "Redis"
+      ],
+      "description": "Test how applications handle database outages, disk failures, and stateful service disruptions. Validate data integrity and consistency after chaos events.",
+      "topics": [
+        "Database connection pool exhaustion testing",
+        "Primary/replica failover testing",
+        "Disk IO saturation experiments",
+        "Redis cache failure scenarios",
+        "Data consistency validation post-chaos",
+        "Backup and restore validation"
+      ],
+      "resources": [
+        {
+          "label": "LitmusChaos Database Experiments",
+          "platform": "litmuschaos.io",
+          "type": "docs"
+        },
+        {
+          "label": "Database Chaos Engineering Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "PostgreSQL High Availability Guide",
+          "platform": "postgresql.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Simulate a PostgreSQL primary failure during active writes, validate replica promotion, verify data integrity, and document the recovery time observed.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "chaos-engineer-9",
+      "title": "Chaos Automation and GameDay Facilitation",
+      "order": 9,
+      "techs": [
+        "LitmusChaos",
+        "GitHub Actions",
+        "Gremlin",
+        "Confluence"
+      ],
+      "description": "Automate routine chaos experiments to run on a schedule and facilitate cross-team GameDay events that build resilience culture. Document learnings and track reliability improvements.",
+      "topics": [
+        "Scheduled chaos in LitmusChaos workflows",
+        "GitHub Actions for automated chaos",
+        "GameDay planning: scope, timeline, roles",
+        "Incident simulation exercises",
+        "Post-GameDay retrospective format",
+        "Chaos experiment result tracking"
+      ],
+      "resources": [
+        {
+          "label": "Chaos GameDay Guide",
+          "platform": "gremlin.com",
+          "type": "docs"
+        },
+        {
+          "label": "Automating Chaos Experiments",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Chaos Engineering at Scale",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Plan and facilitate a 3-hour GameDay for a sample application, automate 3 scheduled experiments in GitHub Actions, and write a post-mortem document.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "chaos-engineer-10",
+      "title": "Production Chaos and Chaos Maturity",
+      "order": 10,
+      "techs": [
+        "Gremlin",
+        "Chaos Monkey",
+        "Kubernetes",
+        "PagerDuty"
+      ],
+      "description": "Graduate to running controlled chaos experiments in production environments with proper safety controls and on-call integration. Build a chaos engineering program that improves reliability over time.",
+      "topics": [
+        "Production chaos safety requirements",
+        "Automated rollback triggers",
+        "PagerDuty integration during chaos",
+        "Chaos experiment result trending",
+        "Chaos maturity model assessment",
+        "Building a chaos engineering culture"
+      ],
+      "resources": [
+        {
+          "label": "Gremlin Production Chaos Guide",
+          "platform": "gremlin.com",
+          "type": "docs"
+        },
+        {
+          "label": "Production Chaos Engineering Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Chaos Engineering in Production Talk",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Chaos Engineering Book - Casey Rosenthal",
+          "platform": "O Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Design a production chaos experiment with automated rollback triggers, PagerDuty integration, blast radius controls, and executive communication template.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "accessibility-qa": [
+    {
+      "id": "accessibility-qa-1",
+      "title": "Accessibility Fundamentals and WCAG",
+      "order": 1,
+      "techs": [
+        "WCAG",
+        "Browser",
+        "Confluence",
+        "Spreadsheets"
+      ],
+      "description": "Build a foundation in web accessibility standards by studying WCAG 2.1 and understanding the four POUR principles. Learn about assistive technologies and who benefits from accessible design.",
+      "topics": [
+        "WCAG 2.1 POUR principles: Perceivable, Operable, Understandable, Robust",
+        "WCAG conformance levels: A, AA, AAA",
+        "Disability categories and assistive technologies",
+        "Legal context: ADA, Section 508, EN 301 549",
+        "Accessibility vs usability vs inclusive design",
+        "Accessibility tree and semantics"
+      ],
+      "resources": [
+        {
+          "label": "WCAG 2.1 Guidelines",
+          "platform": "W3C",
+          "type": "docs"
+        },
+        {
+          "label": "Web Accessibility Introduction",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "Accessibility Fundamentals Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Web Accessibility in Mind - WebAIM",
+          "platform": "webaim.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Audit a public website against WCAG 2.1 AA manually, categorizing each finding by POUR principle and success criterion.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "accessibility-qa-2",
+      "title": "Screen Reader Testing with NVDA",
+      "order": 2,
+      "techs": [
+        "NVDA",
+        "Firefox",
+        "Chrome",
+        "HTML"
+      ],
+      "description": "Learn to navigate and test web applications using NVDA, the most widely used free screen reader. Understand how screen readers interpret HTML and what makes content accessible to blind users.",
+      "topics": [
+        "NVDA installation and basic usage",
+        "Browse mode vs forms mode in NVDA",
+        "Navigating by headings, landmarks, and links",
+        "Testing form field labels and error messages",
+        "ARIA roles and their screen reader behavior",
+        "NVDA speech viewer for debugging"
+      ],
+      "resources": [
+        {
+          "label": "NVDA User Guide",
+          "platform": "NVAccess",
+          "type": "docs"
+        },
+        {
+          "label": "NVDA Screen Reader Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Screen Reader Testing Course",
+          "platform": "Deque University",
+          "type": "course"
+        }
+      ],
+      "challenge": "Navigate a sample web application using only NVDA and a keyboard, completing a form submission, and document all barriers encountered.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "accessibility-qa-3",
+      "title": "Keyboard Navigation Testing",
+      "order": 3,
+      "techs": [
+        "Browser",
+        "DevTools",
+        "WCAG",
+        "Axe"
+      ],
+      "description": "Verify that all functionality is accessible using only a keyboard, which is required for both screen reader users and motor-impaired users. Test focus management, tab order, and keyboard traps.",
+      "topics": [
+        "Tab, Shift-Tab, Enter, Space, Arrow key navigation",
+        "Focus visibility requirements",
+        "Keyboard trap detection and testing",
+        "Skip navigation links",
+        "Modal dialog focus management",
+        "Custom widget keyboard patterns from ARIA Authoring Practices"
+      ],
+      "resources": [
+        {
+          "label": "ARIA Authoring Practices Guide",
+          "platform": "W3C",
+          "type": "docs"
+        },
+        {
+          "label": "Keyboard Accessibility Testing Guide",
+          "platform": "webaim.org",
+          "type": "docs"
+        },
+        {
+          "label": "Keyboard Testing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Test an entire e-commerce checkout flow using only keyboard navigation, document every focus order violation and keyboard trap found.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "accessibility-qa-4",
+      "title": "Automated Accessibility Testing with axe",
+      "order": 4,
+      "techs": [
+        "axe",
+        "axe DevTools",
+        "Chrome",
+        "JavaScript"
+      ],
+      "description": "Use the axe accessibility engine to automate detection of common WCAG violations. Understand the scope and limitations of automated accessibility testing.",
+      "topics": [
+        "axe-core rules and violation levels",
+        "axe DevTools browser extension",
+        "axe-playwright for E2E integration",
+        "Understanding axe incomplete and inapplicable results",
+        "Automated vs manual testing coverage",
+        "axe reporting and issue triage"
+      ],
+      "resources": [
+        {
+          "label": "axe-core Documentation",
+          "platform": "deque.com",
+          "type": "docs"
+        },
+        {
+          "label": "axe DevTools Guide",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Automated Accessibility Testing Course",
+          "platform": "Deque University",
+          "type": "course"
+        }
+      ],
+      "challenge": "Run axe-core on 5 pages of a web application, triage all violations by WCAG criterion, and calculate an accessibility score baseline.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "accessibility-qa-5",
+      "title": "Lighthouse Audits and Reporting",
+      "order": 5,
+      "techs": [
+        "Lighthouse",
+        "Chrome DevTools",
+        "axe",
+        "HTML Reports"
+      ],
+      "description": "Use Google Lighthouse to perform automated accessibility audits and generate reports that communicate accessibility health to development teams. Track scores over time.",
+      "topics": [
+        "Lighthouse accessibility audit configuration",
+        "Interpreting Lighthouse accessibility score",
+        "Lighthouse CLI for automated runs",
+        "Lighthouse CI for pipeline integration",
+        "Combining Lighthouse with axe results",
+        "Accessibility score trending"
+      ],
+      "resources": [
+        {
+          "label": "Lighthouse Documentation",
+          "platform": "developer.chrome.com",
+          "type": "docs"
+        },
+        {
+          "label": "Lighthouse CI Documentation",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Lighthouse Accessibility Audit Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Set up Lighthouse CLI to audit 10 pages of an application, generate a trend report comparing scores across two code versions.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "accessibility-qa-6",
+      "title": "Color, Contrast, and Visual Accessibility",
+      "order": 6,
+      "techs": [
+        "Colour Contrast Analyser",
+        "Axe",
+        "Figma",
+        "WCAG"
+      ],
+      "description": "Test visual accessibility including color contrast ratios, use of color alone to convey information, and text sizing. Validate designs before development using design tool integrations.",
+      "topics": [
+        "WCAG 1.4.3 contrast ratio requirements",
+        "Colour Contrast Analyser tool usage",
+        "Testing non-text contrast (1.4.11)",
+        "Color-only information violations",
+        "Focus indicator contrast requirements",
+        "Zoom and text resize testing to 200 percent"
+      ],
+      "resources": [
+        {
+          "label": "Colour Contrast Analyser Documentation",
+          "platform": "TPGi",
+          "type": "docs"
+        },
+        {
+          "label": "Color Accessibility Testing Guide",
+          "platform": "webaim.org",
+          "type": "docs"
+        },
+        {
+          "label": "Visual Accessibility Testing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Audit a sample application for all WCAG 1.4 contrast and visual presentation criteria, documenting fails with actual vs required contrast ratios.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "accessibility-qa-7",
+      "title": "Mobile Accessibility Testing",
+      "order": 7,
+      "techs": [
+        "TalkBack",
+        "VoiceOver",
+        "iOS",
+        "Android"
+      ],
+      "description": "Test mobile applications for accessibility using iOS VoiceOver and Android TalkBack screen readers. Understand mobile-specific accessibility patterns and gestures.",
+      "topics": [
+        "VoiceOver gestures and navigation on iOS",
+        "TalkBack gestures and navigation on Android",
+        "Mobile accessibility element grouping",
+        "Touch target size requirements (24x24 dp)",
+        "Mobile form accessibility testing",
+        "Switch access testing for motor impairments"
+      ],
+      "resources": [
+        {
+          "label": "iOS Accessibility Programming Guide",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "Android Accessibility Guide",
+          "platform": "developer.android.com",
+          "type": "docs"
+        },
+        {
+          "label": "Mobile Accessibility Testing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Test a sample iOS app using VoiceOver and an Android app using TalkBack, completing the same user journey on both and documenting all accessibility failures.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "accessibility-qa-8",
+      "title": "ARIA and Semantic HTML Validation",
+      "order": 8,
+      "techs": [
+        "NVDA",
+        "axe",
+        "DevTools",
+        "HTML"
+      ],
+      "description": "Deeply understand ARIA roles, properties, and states and how they affect the accessibility tree. Test custom widgets for correct ARIA implementation and semantic HTML usage.",
+      "topics": [
+        "ARIA roles: landmark, widget, document structure",
+        "ARIA properties: aria-label, aria-labelledby, aria-describedby",
+        "ARIA states: aria-expanded, aria-selected, aria-checked",
+        "Custom widget keyboard and ARIA patterns",
+        "Accessibility tree inspection in DevTools",
+        "Common ARIA misuse patterns"
+      ],
+      "resources": [
+        {
+          "label": "WAI-ARIA Authoring Practices 1.1",
+          "platform": "W3C",
+          "type": "docs"
+        },
+        {
+          "label": "ARIA Deep Dive Course",
+          "platform": "Deque University",
+          "type": "course"
+        },
+        {
+          "label": "ARIA Tutorial for Testers",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Test a custom dropdown, date picker, and modal dialog for correct ARIA implementation using NVDA, documenting every ARIA violation found.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "accessibility-qa-9",
+      "title": "Accessibility Test Automation Integration",
+      "order": 9,
+      "techs": [
+        "axe-playwright",
+        "Playwright",
+        "TypeScript",
+        "Allure"
+      ],
+      "description": "Integrate accessibility testing into your E2E automation suite so every page is scanned during functional test runs. Build accessibility regression prevention into the CI pipeline.",
+      "topics": [
+        "axe-playwright setup and usage",
+        "Per-page accessibility assertions in Playwright",
+        "Custom axe rule configuration",
+        "Accessibility violation reporting in Allure",
+        "Baseline comparison for accessibility",
+        "Scoping axe to specific components"
+      ],
+      "resources": [
+        {
+          "label": "axe-playwright Documentation",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Playwright Accessibility Testing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Accessibility Automation Course",
+          "platform": "Deque University",
+          "type": "course"
+        }
+      ],
+      "challenge": "Add axe-playwright assertions to an existing Playwright suite covering all pages, configure exclusions for known issues, and generate an Allure report with violation details.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "accessibility-qa-10",
+      "title": "Accessibility Program and CI/CD Integration",
+      "order": 10,
+      "techs": [
+        "Lighthouse CI",
+        "axe",
+        "GitHub Actions",
+        "Confluence"
+      ],
+      "description": "Build an accessibility program that prevents regressions at every stage of the SDLC using CI/CD gates, developer tooling, and stakeholder reporting. Champion accessibility culture in your organization.",
+      "topics": [
+        "Lighthouse CI in GitHub Actions",
+        "Accessibility score gates blocking merge",
+        "Developer accessibility tooling recommendations",
+        "Voluntary Product Accessibility Template (VPAT)",
+        "Accessibility roadmap and remediation planning",
+        "Training developers and designers on accessibility"
+      ],
+      "resources": [
+        {
+          "label": "Lighthouse CI Documentation",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "VPAT Guide",
+          "platform": "itic.org",
+          "type": "docs"
+        },
+        {
+          "label": "Building an Accessibility Program",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Accessibility for Teams",
+          "platform": "accessibility.digital.gov",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Configure Lighthouse CI in a GitHub Actions pipeline to block PRs that drop accessibility scores below 90, and write a VPAT for a sample application.",
+      "estimatedTime": "3 weeks"
+    }
+  ],
+  "qa-lead": [
+    {
+      "id": "qa-lead-1",
+      "title": "QA Leadership Foundations",
+      "order": 1,
+      "techs": [
+        "Jira",
+        "Confluence",
+        "Slack",
+        "Google Workspace"
+      ],
+      "description": "Transition from individual contributor to QA leader by understanding the responsibilities, mindset shifts, and key competencies of a QA Lead. Learn to balance technical and people-management work.",
+      "topics": [
+        "QA Lead vs Senior QA engineer role differences",
+        "Servant leadership in testing teams",
+        "Quality advocacy at the organizational level",
+        "Building credibility with development and product teams",
+        "QA lead daily responsibilities",
+        "Goal setting and OKRs for QA"
+      ],
+      "resources": [
+        {
+          "label": "Leading Quality - Ronald Cummings-John",
+          "platform": "Packt",
+          "type": "book"
+        },
+        {
+          "label": "Engineering Management for the Rest of Us",
+          "platform": "Smashwords",
+          "type": "book"
+        },
+        {
+          "label": "QA Leadership Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Transitioning to QA Lead",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a 30-60-90 day plan for a new QA Lead role, identifying key stakeholders, quick wins, and longer-term quality improvement initiatives.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "qa-lead-2",
+      "title": "Test Strategy and Planning",
+      "order": 2,
+      "techs": [
+        "Confluence",
+        "Jira",
+        "Spreadsheets",
+        "TestRail"
+      ],
+      "description": "Craft a comprehensive test strategy that aligns QA activities with business goals and technical architecture. Translate strategy into actionable test plans for individual releases.",
+      "topics": [
+        "Test strategy vs test plan differences",
+        "Risk-based testing approach",
+        "Test scope and coverage definition",
+        "Test environment strategy",
+        "Test data strategy",
+        "Entry and exit criteria definition"
+      ],
+      "resources": [
+        {
+          "label": "ISTQB Test Management",
+          "platform": "ISTQB",
+          "type": "docs"
+        },
+        {
+          "label": "Writing a Test Strategy Guide",
+          "platform": "Ministry of Testing",
+          "type": "docs"
+        },
+        {
+          "label": "Test Strategy Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Test Planning Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a complete test strategy document for a sample SaaS product covering scope, approach, environments, data, tools, risks, and resource requirements.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "qa-lead-3",
+      "title": "Building and Mentoring QA Teams",
+      "order": 3,
+      "techs": [
+        "Jira",
+        "Confluence",
+        "Slack",
+        "1-on-1 frameworks"
+      ],
+      "description": "Learn to recruit, onboard, and grow QA engineers by providing structured feedback, coaching, and career development support. Build psychological safety within your team.",
+      "topics": [
+        "QA engineer hiring: resume review, interview design",
+        "Onboarding plan for new QA engineers",
+        "Structured 1-on-1 meeting frameworks",
+        "Providing actionable feedback (SBI model)",
+        "Career laddering for QA engineers",
+        "Building a learning culture in QA"
+      ],
+      "resources": [
+        {
+          "label": "The Manager Path - Camille Fournier",
+          "platform": "O Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Radical Candor - Kim Scott",
+          "platform": "St. Martin Press",
+          "type": "book"
+        },
+        {
+          "label": "Engineering Management Course",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "Hiring QA Engineers Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Design a QA engineer interview process with a take-home exercise, technical interview rubric, and behavioral question bank aligned to your team values.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "qa-lead-4",
+      "title": "QA Metrics and Reporting",
+      "order": 4,
+      "techs": [
+        "Jira",
+        "Google Sheets",
+        "Tableau",
+        "TestRail"
+      ],
+      "description": "Define and track meaningful QA metrics that demonstrate quality health and team effectiveness to stakeholders. Build executive-friendly dashboards that tell a story.",
+      "topics": [
+        "Leading vs lagging quality indicators",
+        "Defect density and escape rate metrics",
+        "Test coverage and automation ratio",
+        "Cycle time and testing throughput",
+        "Weekly and release QA status reports",
+        "Data visualization for quality dashboards"
+      ],
+      "resources": [
+        {
+          "label": "Quality Metrics Guide",
+          "platform": "Ministry of Testing",
+          "type": "docs"
+        },
+        {
+          "label": "QA Metrics and KPIs Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Jira Dashboards Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Agile Metrics - Book",
+          "platform": "Manning",
+          "type": "book"
+        }
+      ],
+      "challenge": "Design a QA health dashboard using Jira and Google Sheets that tracks 8 metrics across 4 categories and generates a weekly automated summary.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "qa-lead-5",
+      "title": "Agile QA Processes and Ceremony Ownership",
+      "order": 5,
+      "techs": [
+        "Jira",
+        "Confluence",
+        "Miro",
+        "Slack"
+      ],
+      "description": "Optimize QA activities within Agile sprints by embedding quality earlier in the process. Facilitate QA-related ceremonies and ensure testing never becomes a sprint bottleneck.",
+      "topics": [
+        "Three Amigos sessions facilitation",
+        "Definition of Ready and Done with QA criteria",
+        "Sprint planning estimation for QA",
+        "Shift-left testing in Agile teams",
+        "Retrospective facilitation for quality improvement",
+        "Managing testing debt in backlogs"
+      ],
+      "resources": [
+        {
+          "label": "Agile Testing - Lisa Crispin",
+          "platform": "Addison Wesley",
+          "type": "book"
+        },
+        {
+          "label": "More Agile Testing - Lisa Crispin",
+          "platform": "Addison Wesley",
+          "type": "book"
+        },
+        {
+          "label": "Agile QA Practices Course",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "Three Amigos Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Design and facilitate a Three Amigos session for 3 user stories, capturing acceptance criteria, edge cases, and test scenarios as a team output.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "qa-lead-6",
+      "title": "Test Automation Strategy and Governance",
+      "order": 6,
+      "techs": [
+        "Selenium",
+        "Playwright",
+        "CI/CD",
+        "Jira"
+      ],
+      "description": "Define an automation strategy that balances ROI against maintenance cost. Govern automation quality so the framework remains reliable and grows sustainably.",
+      "topics": [
+        "Test automation pyramid and trophy strategies",
+        "Build vs buy automation tool decisions",
+        "Automation ROI calculation",
+        "Automation code review standards",
+        "Flaky test management and quarantine policy",
+        "Automation ownership across teams"
+      ],
+      "resources": [
+        {
+          "label": "Google Test Automation Strategy",
+          "platform": "Google Testing Blog",
+          "type": "docs"
+        },
+        {
+          "label": "Test Automation Strategy Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Automation ROI Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Continuous Testing - Wolfgang Platz",
+          "platform": "Tricentis",
+          "type": "book"
+        }
+      ],
+      "challenge": "Audit an existing automation suite, calculate its ROI, identify the top 10 flaky tests, and propose a governance policy document for your team.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "qa-lead-7",
+      "title": "Cross-Team Collaboration and Stakeholder Management",
+      "order": 7,
+      "techs": [
+        "Jira",
+        "Confluence",
+        "Slack",
+        "Google Slides"
+      ],
+      "description": "Develop skills to influence without authority, manage stakeholder expectations, and build quality advocacy across product, engineering, and leadership teams.",
+      "topics": [
+        "Influencing without authority techniques",
+        "Stakeholder mapping and communication plans",
+        "Negotiating release dates and quality tradeoffs",
+        "Presenting QA findings to executives",
+        "Building trust with development team leads",
+        "Escalation paths for critical quality issues"
+      ],
+      "resources": [
+        {
+          "label": "Influence Without Authority - Cohen and Bradford",
+          "platform": "Wiley",
+          "type": "book"
+        },
+        {
+          "label": "Stakeholder Management Course",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "QA Stakeholder Communication Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Prepare and deliver a 10-minute QA status presentation for a mock executive audience that communicates release risk, key metrics, and a clear recommendation.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "qa-lead-8",
+      "title": "Incident Management and Root Cause Analysis",
+      "order": 8,
+      "techs": [
+        "Jira",
+        "PagerDuty",
+        "Confluence",
+        "Grafana"
+      ],
+      "description": "Lead post-incident quality reviews to extract learning and prevent recurrence. Build a blameless post-mortem culture that improves systems and processes.",
+      "topics": [
+        "Incident severity classification",
+        "QA role during production incidents",
+        "Blameless post-mortem methodology",
+        "Root cause analysis techniques: 5 Whys, fishbone",
+        "Corrective action tracking in Jira",
+        "Detection gap analysis: why tests missed this"
+      ],
+      "resources": [
+        {
+          "label": "Google SRE Post-Mortem Culture",
+          "platform": "Google SRE Book",
+          "type": "book"
+        },
+        {
+          "label": "Post-Mortem Facilitation Guide",
+          "platform": "Atlassian",
+          "type": "docs"
+        },
+        {
+          "label": "Root Cause Analysis Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Facilitate a blameless post-mortem for a simulated production incident, identify the detection gap in your QA process, and document 3 corrective actions.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "qa-lead-9",
+      "title": "Quality Culture and Continuous Improvement",
+      "order": 9,
+      "techs": [
+        "Confluence",
+        "Jira",
+        "Miro",
+        "Retrospective Tools"
+      ],
+      "description": "Build a sustainable quality culture where quality is everyone responsibility, not just QA. Use continuous improvement frameworks to evolve your team processes over time.",
+      "topics": [
+        "Quality culture vs quality control mindset",
+        "Quality champions program design",
+        "Retrospective formats: 4Ls, start-stop-continue",
+        "PDCA cycle for process improvement",
+        "Quality OKRs and quarterly reviews",
+        "Knowledge sharing and documentation culture"
+      ],
+      "resources": [
+        {
+          "label": "Quality is Everyone Job",
+          "platform": "Ministry of Testing",
+          "type": "docs"
+        },
+        {
+          "label": "Continuous Improvement for QA",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Building Quality Culture Talk",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "The Lean Startup - Eric Ries",
+          "platform": "Crown Business",
+          "type": "book"
+        }
+      ],
+      "challenge": "Design a quality champions program for a 20-person engineering team, including selection criteria, training plan, metrics, and quarterly review cadence.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "qa-lead-10",
+      "title": "QA Program Ownership and Strategic Leadership",
+      "order": 10,
+      "techs": [
+        "Jira",
+        "OKR Frameworks",
+        "Confluence",
+        "Tableau"
+      ],
+      "description": "Own the QA program at an organizational level by setting multi-quarter strategy, managing budgets, building the team roadmap, and representing quality at the leadership table.",
+      "topics": [
+        "Annual QA roadmap planning",
+        "Headcount planning and budget management",
+        "QA tooling evaluation and procurement",
+        "Building a testing center of excellence",
+        "Reporting quality health to C-level executives",
+        "QA team brand and recognition"
+      ],
+      "resources": [
+        {
+          "label": "The Manager Path - Camille Fournier",
+          "platform": "O Reilly",
+          "type": "book"
+        },
+        {
+          "label": "Quality Engineering Leadership Course",
+          "platform": "Udemy",
+          "type": "course"
+        },
+        {
+          "label": "Building a QA Program Talk",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "OKR Framework Guide",
+          "platform": "whatmatters.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a full QA program proposal for a growing startup including team structure, tool stack, automation strategy, metrics framework, and 12-month roadmap.",
+      "estimatedTime": "3 weeks"
+    }
+  ]
+}

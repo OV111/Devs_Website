@@ -1,0 +1,3532 @@
+{
+  "react-native": [
+    {
+      "id": "rn-1",
+      "title": "JavaScript & React Prerequisites",
+      "order": 1,
+      "techs": [
+        "JavaScript",
+        "ES6+",
+        "React",
+        "Hooks"
+      ],
+      "description": "React Native is React for mobile. Before touching the mobile layer, you need solid JavaScript and React fundamentals — components, hooks, and state — everything carries over.",
+      "topics": [
+        "ES6+ — destructuring, spread, arrow functions, modules",
+        "Promises & async/await",
+        "React components & JSX",
+        "useState, useEffect, useRef, useCallback",
+        "Context API for shared state",
+        "React component lifecycle & rendering behavior"
+      ],
+      "resources": [
+        {
+          "label": "React Official Docs — react.dev",
+          "platform": "react.dev",
+          "type": "docs"
+        },
+        {
+          "label": "JavaScript.info",
+          "platform": "javascript.info",
+          "type": "docs"
+        },
+        {
+          "label": "Scrimba — React Course",
+          "platform": "Scrimba",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a small React web app (notes app) to solidify your hooks and state management knowledge before moving to mobile.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "rn-2",
+      "title": "React Native Core",
+      "order": 2,
+      "techs": [
+        "React Native",
+        "Expo",
+        "StyleSheet",
+        "Flexbox"
+      ],
+      "description": "Set up your dev environment, understand how React Native bridges JavaScript to native code, and master the core components and styling system.",
+      "topics": [
+        "Expo vs bare React Native — when to use each",
+        "Core components — View, Text, Image, TextInput, ScrollView, FlatList",
+        "StyleSheet API — style objects, platform-specific styles",
+        "Flexbox in React Native — differences from web",
+        "Metro bundler — fast refresh, module resolution",
+        "Debugging — Expo DevTools, React DevTools, Flipper"
+      ],
+      "resources": [
+        {
+          "label": "React Native Official Docs",
+          "platform": "reactnative.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Expo Docs",
+          "platform": "docs.expo.dev",
+          "type": "docs"
+        },
+        {
+          "label": "William Candillon — React Native School",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "roadmap.sh — React Native",
+          "platform": "roadmap.sh",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a cross-platform mobile UI for your notes app — recreate the layout from scratch using only RN core components and StyleSheet.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "rn-3",
+      "title": "Navigation",
+      "order": 3,
+      "techs": [
+        "React Navigation",
+        "Stack",
+        "Tabs",
+        "Drawer"
+      ],
+      "description": "Mobile apps are multi-screen experiences. React Navigation is the standard — learn stack, tab, and drawer navigators, pass data between screens, and handle deep linking.",
+      "topics": [
+        "React Navigation setup — native stack, dependencies",
+        "Stack Navigator — push, pop, goBack, params",
+        "Bottom Tabs Navigator — icons, badges",
+        "Drawer Navigator — gestures, custom drawer content",
+        "Nested navigators — tabs inside stacks",
+        "Deep linking & universal links setup"
+      ],
+      "resources": [
+        {
+          "label": "React Navigation Docs",
+          "platform": "reactnavigation.org",
+          "type": "docs"
+        },
+        {
+          "label": "Notjust.dev — React Navigation Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Extend your notes app with full navigation — a tab bar (Notes, Settings), a stack navigator inside Notes for list → detail, and params passed between screens.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "rn-4",
+      "title": "State Management",
+      "order": 4,
+      "techs": [
+        "Zustand",
+        "Redux Toolkit",
+        "AsyncStorage",
+        "MMKV"
+      ],
+      "description": "Manage app-wide state cleanly. Choose the right state solution — Zustand for simplicity, Redux Toolkit for complex flows — and persist state between app launches.",
+      "topics": [
+        "Zustand — stores, actions, selectors",
+        "Redux Toolkit — createSlice, createAsyncThunk, RTK Query",
+        "Persisting state — AsyncStorage, MMKV",
+        "Optimistic updates and loading states",
+        "Derived state and selectors",
+        "Hydration on app start"
+      ],
+      "resources": [
+        {
+          "label": "Zustand Docs",
+          "platform": "zustand-demo.pmnd.rs",
+          "type": "docs"
+        },
+        {
+          "label": "Redux Toolkit Docs",
+          "platform": "redux-toolkit.js.org",
+          "type": "docs"
+        },
+        {
+          "label": "React Native MMKV on GitHub",
+          "platform": "GitHub",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add Zustand to your notes app with MMKV persistence — notes survive app kills, and a global theme toggle (light/dark) persists across sessions.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "rn-5",
+      "title": "Networking & APIs",
+      "order": 5,
+      "techs": [
+        "Fetch",
+        "Axios",
+        "TanStack Query",
+        "WebSockets"
+      ],
+      "description": "Connect your mobile app to a backend. Fetch data efficiently, handle caching and background refresh, manage auth tokens, and build real-time features with WebSockets.",
+      "topics": [
+        "Fetch API and Axios in React Native",
+        "TanStack Query — useQuery, useMutation, prefetching",
+        "Auth token storage — SecureStore (Expo) or Keychain",
+        "Interceptors for automatic token refresh",
+        "Offline-first patterns — network state detection",
+        "WebSockets with socket.io-client"
+      ],
+      "resources": [
+        {
+          "label": "TanStack Query Docs",
+          "platform": "tanstack.com",
+          "type": "docs"
+        },
+        {
+          "label": "Expo SecureStore Docs",
+          "platform": "docs.expo.dev",
+          "type": "docs"
+        },
+        {
+          "label": "notjust.dev — API Integration",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Connect your notes app to a REST backend — fetch notes with TanStack Query, store JWT in SecureStore, and add optimistic mutations for create/delete.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "rn-6",
+      "title": "Native Device Features",
+      "order": 6,
+      "techs": [
+        "Camera",
+        "Notifications",
+        "Maps",
+        "Permissions"
+      ],
+      "description": "Leverage the hardware. Use Expo SDK and community libraries to access the camera, push notifications, location services, and other native device capabilities.",
+      "topics": [
+        "Permissions API — camera, location, notifications",
+        "expo-camera / react-native-vision-camera",
+        "Expo Notifications — local & push (FCM/APNs)",
+        "expo-location & react-native-maps",
+        "Haptics, sensors, accelerometer",
+        "Linking — opening URLs, phone numbers, maps"
+      ],
+      "resources": [
+        {
+          "label": "Expo SDK Docs",
+          "platform": "docs.expo.dev",
+          "type": "docs"
+        },
+        {
+          "label": "react-native-vision-camera Docs",
+          "platform": "mrousavy.com",
+          "type": "docs"
+        },
+        {
+          "label": "Simon Grimm — Expo Notifications",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add camera capture to your notes app — users can attach a photo to a note using the camera or gallery, with proper permissions handling on both iOS and Android.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "rn-7",
+      "title": "Animations & Performance",
+      "order": 7,
+      "techs": [
+        "Reanimated",
+        "Gesture Handler",
+        "FlashList",
+        "Profiler"
+      ],
+      "description": "Mobile users expect buttery-smooth 60fps animations. Use React Native Reanimated for worklet-based animations that run on the UI thread, and optimize lists with FlashList.",
+      "topics": [
+        "Reanimated 3 — useSharedValue, useAnimatedStyle, withTiming, withSpring",
+        "Gesture Handler — pan, pinch, tap gestures",
+        "Layout animations — entering/exiting presets",
+        "FlashList vs FlatList — performance differences",
+        "React Native Profiler — JS thread vs UI thread",
+        "Hermes engine & bundle size optimization"
+      ],
+      "resources": [
+        {
+          "label": "React Native Reanimated Docs",
+          "platform": "docs.swmansion.com",
+          "type": "docs"
+        },
+        {
+          "label": "React Native Gesture Handler Docs",
+          "platform": "docs.swmansion.com",
+          "type": "docs"
+        },
+        {
+          "label": "William Candillon — Animations Series",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add swipe-to-delete with a smooth Reanimated gesture to your notes list, with a spring animation on the note cards when they enter the list.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "rn-8",
+      "title": "Testing & Publishing",
+      "order": 8,
+      "techs": [
+        "Jest",
+        "RNTL",
+        "EAS Build",
+        "App Store"
+      ],
+      "description": "Ship your app confidently. Test components and flows with React Native Testing Library, use EAS Build for cloud builds, and publish to both the App Store and Google Play.",
+      "topics": [
+        "Jest setup for React Native",
+        "React Native Testing Library — render, fireEvent, waitFor",
+        "E2E testing with Detox or Maestro",
+        "EAS Build — managed vs bare workflow, build profiles",
+        "App signing — iOS provisioning profiles, Android keystore",
+        "OTA updates with expo-updates",
+        "App Store Connect & Google Play Console submission"
+      ],
+      "resources": [
+        {
+          "label": "React Native Testing Library Docs",
+          "platform": "callstack.github.io",
+          "type": "docs"
+        },
+        {
+          "label": "EAS Build Docs",
+          "platform": "docs.expo.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Expo — Publishing to Stores Guide",
+          "platform": "docs.expo.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write component tests for your notes app with RNTL, set up EAS Build, create a production build, and follow the App Store/Play Store submission checklist.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "react-native-9",
+      "title": "Advanced Native Integration and New Architecture",
+      "order": 9,
+      "techs": [
+        "React Native",
+        "TypeScript",
+        "JSI",
+        "C++"
+      ],
+      "description": "Write custom native modules and turbo modules using the JSI layer to eliminate the bridge bottleneck and unlock synchronous JavaScript-to-native calls. Understand the Fabric renderer and how the new React Native architecture changes component and layout pipelines.",
+      "topics": [
+        "JSI fundamentals and synchronous native calls",
+        "Turbo Modules authoring for iOS and Android",
+        "Fabric renderer and concurrent rendering on mobile",
+        "Bridging third-party native SDKs into RN",
+        "Custom Codegen type-safe specs",
+        "Hermes engine internals and bytecode optimization",
+        "Debugging native code with Xcode and Android Studio"
+      ],
+      "resources": [
+        {
+          "label": "React Native New Architecture Docs",
+          "platform": "reactnative.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Turbo Modules Deep Dive",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Advanced React Native by William Candillon",
+          "platform": "software-mansion.github.io",
+          "type": "course"
+        },
+        {
+          "label": "React Native - The Practical Guide",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Create a Turbo Module that exposes a platform-specific biometric authentication API to JavaScript, wire it through Codegen, and benchmark call latency compared to the legacy bridge module.",
+      "estimatedTime": "5-6 weeks"
+    },
+    {
+      "id": "react-native-10",
+      "title": "CI/CD, OTA Updates and Production Release Management",
+      "order": 10,
+      "techs": [
+        "Expo EAS",
+        "Fastlane",
+        "Sentry",
+        "GitHub Actions"
+      ],
+      "description": "Establish a full release pipeline for React Native apps covering automated builds, over-the-air update channels, crash monitoring, and staged rollouts. Learn how to manage multiple environments, signing configurations, and app store submissions without manual steps.",
+      "topics": [
+        "EAS Build and EAS Submit for automated store uploads",
+        "OTA update channels and rollback strategies with EAS Update",
+        "Fastlane lanes for certificate and profile management",
+        "Crash reporting and source-map upload with Sentry",
+        "GitHub Actions workflows for RN mono-repo builds",
+        "Feature flag rollout and A/B testing on mobile",
+        "App store review guidelines and rejection remediation"
+      ],
+      "resources": [
+        {
+          "label": "EAS Build Documentation",
+          "platform": "docs.expo.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Fastlane iOS and Android Automation",
+          "platform": "fastlane.tools",
+          "type": "docs"
+        },
+        {
+          "label": "React Native CI/CD with GitHub Actions",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Sentry React Native Setup Guide",
+          "platform": "docs.sentry.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Configure an EAS project with three update channels (development, staging, production), automate TestFlight and Play Internal Track uploads via GitHub Actions, and verify Sentry receives symbolicated crash reports.",
+      "estimatedTime": "4-5 weeks"
+    }
+  ],
+  "flutter": [
+    {
+      "id": "flutter-1",
+      "title": "Dart Fundamentals",
+      "order": 1,
+      "techs": [
+        "Dart",
+        "Null Safety",
+        "OOP",
+        "async/await"
+      ],
+      "description": "Flutter apps are written in Dart. Learn Dart's syntax, type system with null safety, and async programming before building your first widget.",
+      "topics": [
+        "Variables, types, null safety — ?, !, late",
+        "Functions — named params, arrow functions, closures",
+        "OOP — classes, inheritance, mixins, interfaces",
+        "Collections — List, Map, Set with generics",
+        "Async — Future, async/await, Stream",
+        "Error handling — try/catch, custom exceptions"
+      ],
+      "resources": [
+        {
+          "label": "Dart Official Docs — dart.dev",
+          "platform": "dart.dev",
+          "type": "docs"
+        },
+        {
+          "label": "dartpad.dev — Online Playground",
+          "platform": "dartpad.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Vandad Nahavandipoor — Dart Course",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "roadmap.sh — Flutter Roadmap",
+          "platform": "roadmap.sh",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a Dart CLI app that models a simple bank account — deposit, withdraw, balance history — demonstrating OOP, null safety, and async operations.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "flutter-2",
+      "title": "Flutter UI Fundamentals",
+      "order": 2,
+      "techs": [
+        "Widgets",
+        "Material 3",
+        "Flex Layout",
+        "Themes"
+      ],
+      "description": "In Flutter, everything is a widget. Learn the widget tree, layout system, and Material Design 3 to build beautiful, responsive UIs from scratch.",
+      "topics": [
+        "Widget tree — StatelessWidget vs StatefulWidget",
+        "Layout — Row, Column, Stack, Flex, Expanded, Padding",
+        "Common widgets — Text, Container, Image, Icon, AppBar",
+        "MaterialApp, Scaffold, ThemeData",
+        "ListView, GridView, SingleChildScrollView",
+        "Responsive design — MediaQuery, LayoutBuilder"
+      ],
+      "resources": [
+        {
+          "label": "Flutter Official Docs",
+          "platform": "flutter.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Flutter — Widget of the Week (playlist)",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Fireship — Flutter in 100 Seconds",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a shopping app home screen in Flutter — responsive grid of product cards, a search bar AppBar, bottom navigation, and a custom color theme.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "flutter-3",
+      "title": "State Management",
+      "order": 3,
+      "techs": [
+        "Riverpod",
+        "Provider",
+        "setState",
+        "BLoC"
+      ],
+      "description": "Flutter's reactive UI is powered by state. Learn when to use setState, Provider, and Riverpod 2.0 — the modern solution for scalable Flutter state management.",
+      "topics": [
+        "setState — when it's enough and when it's not",
+        "Provider — ChangeNotifier, Consumer, context.watch",
+        "Riverpod 2.0 — providers, notifiers, AsyncNotifier",
+        "StateNotifier vs AsyncNotifier",
+        "BLoC pattern — events, states, BlocBuilder",
+        "Shared state patterns — dependency injection with Riverpod"
+      ],
+      "resources": [
+        {
+          "label": "Riverpod Docs",
+          "platform": "riverpod.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Flutter BLoC Docs",
+          "platform": "bloclibrary.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Code with Andrea — Riverpod Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Rewrite your shopping app with Riverpod — a cart provider, a product list with async fetch state (loading/error/data), and a global theme toggle.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "flutter-4",
+      "title": "Navigation & Routing",
+      "order": 4,
+      "techs": [
+        "GoRouter",
+        "Navigator 2.0",
+        "Deep Links"
+      ],
+      "description": "Learn Flutter's navigation system from the imperative Navigator API to the modern declarative GoRouter with deep linking support.",
+      "topics": [
+        "Navigator 1.0 — push, pop, named routes",
+        "GoRouter — route definitions, path params, redirect guards",
+        "Nested navigation — ShellRoute, bottom tabs",
+        "Deep linking — Android intent filters, iOS URL schemes",
+        "Auth guards — redirect to login if not authenticated",
+        "Passing data between routes"
+      ],
+      "resources": [
+        {
+          "label": "GoRouter Docs",
+          "platform": "pub.dev/packages/go_router",
+          "type": "docs"
+        },
+        {
+          "label": "Flutter Official Navigation Docs",
+          "platform": "flutter.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Johannes Milke — GoRouter Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add GoRouter to your shopping app — product list → product detail route with path params, a protected checkout route, and a bottom tab shell.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "flutter-5",
+      "title": "Networking & Firebase",
+      "order": 5,
+      "techs": [
+        "Dio",
+        "Firebase",
+        "Firestore",
+        "Cloud Functions"
+      ],
+      "description": "Connect your Flutter app to backend services. Use Dio for typed HTTP requests, Firebase for real-time data and auth, and Firestore for a serverless database.",
+      "topics": [
+        "Dio — interceptors, timeouts, error handling",
+        "JSON serialization — json_serializable, Freezed",
+        "Firebase setup — FlutterFire CLI, platform config",
+        "Firebase Auth — email/password, Google Sign-In",
+        "Cloud Firestore — collections, queries, real-time listeners",
+        "Cloud Storage for file uploads"
+      ],
+      "resources": [
+        {
+          "label": "FlutterFire Docs",
+          "platform": "firebase.flutter.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Dio on pub.dev",
+          "platform": "pub.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Fireship — Flutter & Firebase Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Connect your shopping app to Firestore — real products from a Firestore collection, Firebase Auth for login, and a real-time cart shared across devices.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "flutter-6",
+      "title": "Local Storage & Native Features",
+      "order": 6,
+      "techs": [
+        "Hive",
+        "SharedPreferences",
+        "Camera",
+        "Notifications"
+      ],
+      "description": "Access device capabilities — store data locally, use the camera, send push notifications, and leverage platform-specific native APIs.",
+      "topics": [
+        "SharedPreferences for simple key-value storage",
+        "Hive or Isar for local structured data",
+        "image_picker — camera & gallery access",
+        "Firebase Cloud Messaging — push notifications",
+        "flutter_local_notifications",
+        "Permissions handling — permission_handler"
+      ],
+      "resources": [
+        {
+          "label": "Hive Docs",
+          "platform": "pub.dev/packages/hive",
+          "type": "docs"
+        },
+        {
+          "label": "Flutter Firebase Messaging Docs",
+          "platform": "firebase.flutter.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add offline support to your shopping app — cache the product list in Hive, add a profile photo using image_picker, and send a local notification when an order is placed.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "flutter-7",
+      "title": "Testing & Performance",
+      "order": 7,
+      "techs": [
+        "flutter_test",
+        "integration_test",
+        "DevTools"
+      ],
+      "description": "Test your widgets and user flows, then profile and optimize rendering performance using Flutter DevTools.",
+      "topics": [
+        "Unit tests — testing Riverpod providers, pure logic",
+        "Widget tests — pumpWidget, finder, tap, enter text",
+        "Integration tests with integration_test package",
+        "Golden tests — visual regression snapshots",
+        "Flutter DevTools — widget inspector, performance overlay",
+        "const constructors, RepaintBoundary, lazy loading"
+      ],
+      "resources": [
+        {
+          "label": "Flutter Testing Docs",
+          "platform": "flutter.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Very Good Ventures — Flutter Testing Guide",
+          "platform": "verygood.ventures",
+          "type": "docs"
+        },
+        {
+          "label": "Flutter DevTools Docs",
+          "platform": "flutter.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write widget tests for your shopping app's cart — add to cart, remove, and total price. Run the Flutter performance overlay and eliminate any jank on the product list scroll.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "flutter-8",
+      "title": "Publishing & CI/CD",
+      "order": 8,
+      "techs": [
+        "Fastlane",
+        "GitHub Actions",
+        "App Store",
+        "Play Store"
+      ],
+      "description": "Ship your Flutter app to both stores. Automate builds and releases with Fastlane and GitHub Actions, and navigate the App Store and Play Store submission process.",
+      "topics": [
+        "App icons, splash screens — flutter_native_splash",
+        "iOS — provisioning profiles, certificates, App Store Connect",
+        "Android — keystore, Play Console, aab build",
+        "Fastlane — match, gym, deliver, supply",
+        "GitHub Actions for Flutter — build, test, deploy",
+        "OTA updates with Shorebird"
+      ],
+      "resources": [
+        {
+          "label": "Flutter Deployment Docs",
+          "platform": "flutter.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Fastlane Docs",
+          "platform": "fastlane.tools",
+          "type": "docs"
+        },
+        {
+          "label": "Shorebird Docs",
+          "platform": "shorebird.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Set up a GitHub Actions pipeline that runs tests, builds release APK and IPA, and uses Fastlane to publish to TestFlight and the Play Store internal track.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "flutter-9",
+      "title": "Advanced Flutter - Custom Rendering and Multi-Platform Targets",
+      "order": 9,
+      "techs": [
+        "Flutter",
+        "Dart",
+        "Platform Channels",
+        "CanvasKit"
+      ],
+      "description": "Go beyond standard widgets by implementing custom render objects and painters for pixel-perfect UI needs that the widget layer cannot express. Extend Flutter to desktop and web targets while bridging platform-specific native SDKs through platform channels.",
+      "topics": [
+        "Custom RenderObject and RenderBox from scratch",
+        "CustomPainter and Canvas API for complex graphics",
+        "Platform channels and MethodChannel for native SDK bridging",
+        "Flutter Web with CanvasKit vs HTML renderer trade-offs",
+        "Desktop window management and keyboard/mouse input handling",
+        "FFI with dart:ffi for calling native C libraries",
+        "Isolate communication for CPU-intensive render work"
+      ],
+      "resources": [
+        {
+          "label": "Flutter Rendering Pipeline Internals",
+          "platform": "docs.flutter.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Advanced Flutter - Custom Widgets and Rendering",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Flutter Platform Channels Guide",
+          "platform": "docs.flutter.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Flutter Complete Developer Course - Advanced",
+          "platform": "Udemy",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a chart widget using a fully custom RenderObject with hit-testing, animate it with an AnimationController, expose it as a platform channel to swap the data source from a native SQL query on iOS and Android.",
+      "estimatedTime": "5-6 weeks"
+    },
+    {
+      "id": "flutter-10",
+      "title": "Production Flutter Apps - Analytics, A/B Testing and Store Optimization",
+      "order": 10,
+      "techs": [
+        "Flutter",
+        "Firebase",
+        "Shorebird",
+        "Dart"
+      ],
+      "description": "Operate Flutter apps in production by integrating crash reporting, event analytics, and controlled feature rollouts that let you validate changes without full store releases. Learn how to manage code-push updates, optimize store listings, and use data to drive product decisions.",
+      "topics": [
+        "Crash reporting and stack trace symbolication with Firebase Crashlytics",
+        "Event analytics schema design and funnel tracking",
+        "A/B testing experiments with Firebase Remote Config",
+        "Shorebird code-push for Dart-layer OTA updates",
+        "App Store and Play Store listing optimization (ASO)",
+        "Staged rollouts and phased releases on both stores",
+        "Compliance with store policies for data privacy and permissions"
+      ],
+      "resources": [
+        {
+          "label": "Firebase Crashlytics Flutter Setup",
+          "platform": "firebase.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "Shorebird Code Push Documentation",
+          "platform": "docs.shorebird.dev",
+          "type": "docs"
+        },
+        {
+          "label": "App Store Optimization Guide",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Flutter Production Best Practices",
+          "platform": "Very Good Ventures Blog",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Integrate Crashlytics and Firebase Analytics into an existing Flutter app, set up two Remote Config A/B test variants for an onboarding screen, deploy a Shorebird patch to fix a UI bug, and verify the fix via the Shorebird dashboard without a store update.",
+      "estimatedTime": "4-5 weeks"
+    }
+  ],
+  "ios": [
+    {
+      "id": "ios-1",
+      "title": "Swift Fundamentals",
+      "order": 1,
+      "techs": [
+        "Swift",
+        "Optionals",
+        "Closures",
+        "Protocols"
+      ],
+      "description": "Swift is Apple's powerful, type-safe language for iOS, macOS, and beyond. Learn its syntax, type system, protocol-oriented programming, and Swift concurrency.",
+      "topics": [
+        "Variables — let/var, type inference, optionals ?, !, guard let",
+        "Functions — default params, closures, trailing closure syntax",
+        "OOP — classes, structs, enums with associated values",
+        "Protocols & extensions — protocol-oriented programming",
+        "Error handling — throws, try/catch, Result type",
+        "Swift Concurrency — async/await, actors, Task"
+      ],
+      "resources": [
+        {
+          "label": "Swift Official Docs — swift.org",
+          "platform": "swift.org",
+          "type": "docs"
+        },
+        {
+          "label": "Hacking with Swift — 100 Days of Swift",
+          "platform": "hackingwithswift.com",
+          "type": "course"
+        },
+        {
+          "label": "Swift Playgrounds — Apple's app",
+          "platform": "apple.com",
+          "type": "course"
+        },
+        {
+          "label": "roadmap.sh — iOS Roadmap",
+          "platform": "roadmap.sh",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a Swift CLI app that models a social media timeline — structs for Post/User, a feed algorithm (sorted by engagement), and async fetching from a mock API.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ios-2",
+      "title": "SwiftUI Fundamentals",
+      "order": 2,
+      "techs": [
+        "SwiftUI",
+        "State",
+        "View",
+        "Modifiers"
+      ],
+      "description": "SwiftUI is Apple's declarative UI framework. Learn to think in Views, understand the state-driven rendering model, and compose interfaces with modifiers.",
+      "topics": [
+        "View protocol — body, ViewBuilder",
+        "State & data flow — @State, @Binding, @ObservedObject",
+        "Layout — HStack, VStack, ZStack, LazyVStack, Grid",
+        "Common views — Text, Image, Button, TextField, List, Form",
+        "View modifiers — padding, background, cornerRadius, overlay",
+        "Previews — #Preview macro, multiple variants"
+      ],
+      "resources": [
+        {
+          "label": "Apple SwiftUI Docs",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "Hacking with Swift — 100 Days of SwiftUI",
+          "platform": "hackingwithswift.com",
+          "type": "course"
+        },
+        {
+          "label": "Stewart Lynch — SwiftUI YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a SwiftUI contacts app — List of contacts, search bar, add contact sheet, detail view, and a custom color theme.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "ios-3",
+      "title": "Architecture — MVVM & Combine",
+      "order": 3,
+      "techs": [
+        "ObservableObject",
+        "Combine",
+        "@Observable",
+        "Clean Arch"
+      ],
+      "description": "Structure your SwiftUI apps for maintainability with MVVM, reactive data flow using Combine (or the new @Observable macro in iOS 17+), and clean separation of concerns.",
+      "topics": [
+        "ObservableObject + @StateObject / @EnvironmentObject",
+        "@Observable macro — iOS 17+ simplified model",
+        "Combine — Publisher, Subscriber, operators, AnyCancellable",
+        "Repository pattern for data sources",
+        "Dependency injection with protocols",
+        "Swift Concurrency in ViewModels — Task, MainActor"
+      ],
+      "resources": [
+        {
+          "label": "Apple Developer — Data Flow in SwiftUI",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "Combine: Asynchronous Programming with Swift (book)",
+          "platform": "raywenderlich.com",
+          "type": "book"
+        },
+        {
+          "label": "Kavsoft — MVVM SwiftUI",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Refactor your contacts app with a ViewModel using @Observable, a ContactsRepository protocol, and dependency-injected mock for previews.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ios-4",
+      "title": "Data Persistence — SwiftData & Core Data",
+      "order": 4,
+      "techs": [
+        "SwiftData",
+        "Core Data",
+        "CloudKit",
+        "UserDefaults"
+      ],
+      "description": "Persist data locally on iOS with SwiftData (iOS 17+ modern ORM), Core Data for older targets, and UserDefaults/Keychain for lightweight storage.",
+      "topics": [
+        "SwiftData — @Model, ModelContainer, @Query, relationships",
+        "Core Data — NSManagedObject, NSFetchRequest, NSPersistentContainer",
+        "Migrations — lightweight vs heavy migrations",
+        "CloudKit + Core Data for iCloud sync",
+        "UserDefaults & AppStorage for preferences",
+        "Keychain for secure credential storage"
+      ],
+      "resources": [
+        {
+          "label": "SwiftData Docs",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "Hacking with Swift — SwiftData",
+          "platform": "hackingwithswift.com",
+          "type": "docs"
+        },
+        {
+          "label": "Donny Wals — Core Data Book",
+          "platform": "donnywals.com",
+          "type": "book"
+        }
+      ],
+      "challenge": "Add SwiftData persistence to your contacts app — contacts survive app restarts, enable iCloud sync with CloudKit, and store sensitive notes in the Keychain.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ios-5",
+      "title": "Networking & Async",
+      "order": 5,
+      "techs": [
+        "URLSession",
+        "async/await",
+        "Codable",
+        "Alamofire"
+      ],
+      "description": "Fetch data from REST APIs using URLSession with Swift Concurrency. Decode with Codable, handle errors gracefully, and cache responses efficiently.",
+      "topics": [
+        "URLSession — data(from:), URLRequest, HTTPURLResponse",
+        "Codable — Encodable/Decodable, CodingKeys, custom decoding",
+        "Generic networking layer — APIClient protocol",
+        "Alamofire — request, responseDecodable, interceptors",
+        "Image loading — AsyncImage, Nuke, Kingfisher",
+        "Offline-first — combining URLSession with SwiftData"
+      ],
+      "resources": [
+        {
+          "label": "Apple URLSession Docs",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "Alamofire Docs",
+          "platform": "alamofire.org",
+          "type": "docs"
+        },
+        {
+          "label": "Donny Wals — Modern Networking in Swift",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a REST API layer to your contacts app — fetch contacts from a mock server, decode with Codable, cache with SwiftData, and show loading/error states.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ios-6",
+      "title": "Navigation & Advanced SwiftUI",
+      "order": 6,
+      "techs": [
+        "NavigationStack",
+        "NavigationSplitView",
+        "Animations",
+        "Custom Views"
+      ],
+      "description": "Navigate between views using the modern NavigationStack API, build iPad-ready split views, and add fluid animations with SwiftUI's animation system.",
+      "topics": [
+        "NavigationStack — push/pop, NavigationPath",
+        "NavigationSplitView — sidebar/detail for iPad",
+        "Sheet, fullScreenCover, popover",
+        "Custom animations — withAnimation, .animation(), matchedGeometryEffect",
+        "Custom ViewModifiers and View extensions",
+        "TabView & programmatic tab selection"
+      ],
+      "resources": [
+        {
+          "label": "Apple NavigationStack Docs",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "Hacking with Swift — Advanced SwiftUI",
+          "platform": "hackingwithswift.com",
+          "type": "docs"
+        },
+        {
+          "label": "Stewart Lynch — NavigationStack",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add NavigationStack with a contacts list → detail → edit flow, animate the card entrance with matchedGeometryEffect, and add a sidebar layout for iPad.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ios-7",
+      "title": "Testing iOS Apps",
+      "order": 7,
+      "techs": [
+        "XCTest",
+        "Swift Testing",
+        "UI Testing",
+        "XCUITest"
+      ],
+      "description": "Write unit, integration, and UI tests for your iOS app using XCTest and the new Swift Testing framework introduced in Xcode 16.",
+      "topics": [
+        "XCTest — XCTestCase, setUp/tearDown, XCTAssert",
+        "Swift Testing — @Test, @Suite, #expect, async tests",
+        "Testing ViewModels with mock repositories",
+        "XCUITest — UI testing, accessibility identifiers",
+        "Snapshot testing — SnapshotTesting library",
+        "Code coverage in Xcode — measuring and improving"
+      ],
+      "resources": [
+        {
+          "label": "Apple Testing Docs",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "Swift Testing Docs (WWDC 2024)",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "PointFree — Swift Composable Architecture Testing",
+          "platform": "pointfree.co",
+          "type": "course"
+        }
+      ],
+      "challenge": "Write unit tests for your ViewModel, mock the ContactsRepository, test a user flow end-to-end with XCUITest, and achieve >80% code coverage.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ios-8",
+      "title": "App Store Publishing",
+      "order": 8,
+      "techs": [
+        "Xcode Cloud",
+        "TestFlight",
+        "App Store Connect",
+        "Fastlane"
+      ],
+      "description": "Ship your iOS app to the App Store. Configure code signing, test with TestFlight, automate with Xcode Cloud or Fastlane, and navigate the App Review process.",
+      "topics": [
+        "Code signing — certificates, provisioning profiles, Apple Developer",
+        "App capabilities — Push Notifications, iCloud, In-App Purchases",
+        "TestFlight — internal and external beta testing",
+        "Xcode Cloud — CI/CD built into Xcode",
+        "Fastlane match + deliver + pilot",
+        "App Store metadata — screenshots, ASO, privacy labels",
+        "App Review guidelines — common rejection reasons"
+      ],
+      "resources": [
+        {
+          "label": "App Store Connect Docs",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "Xcode Cloud Docs",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "Fastlane Docs",
+          "platform": "fastlane.tools",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Set up Xcode Cloud to run your test suite on every push, build a TestFlight build on merge to main, and complete the App Store Connect submission form with screenshots.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "ios-9",
+      "title": "Advanced iOS - Extensions, Widgets and Background Tasks",
+      "order": 9,
+      "techs": [
+        "Swift",
+        "SwiftUI",
+        "WidgetKit",
+        "BackgroundTasks"
+      ],
+      "description": "Extend your iOS apps beyond the main process using WidgetKit for home and lock-screen surfaces, App Clips for instant experiences, and BGTaskScheduler for deferred background work. Implement push notifications with rich media payloads and notification service extensions.",
+      "topics": [
+        "WidgetKit timeline providers and widget families",
+        "Lock Screen widgets and StandBy mode complications",
+        "App Clips entitlements, size limits, and invocation URLs",
+        "BGAppRefreshTask and BGProcessingTask scheduling",
+        "Push notification service extensions for media attachments",
+        "Share and action extensions with App Groups data sharing",
+        "CallKit and notification content extensions"
+      ],
+      "resources": [
+        {
+          "label": "WidgetKit Documentation",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "App Clips Programming Guide",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "WWDC - Complications and Widgets Reuse with SwiftUI",
+          "platform": "developer.apple.com",
+          "type": "video"
+        },
+        {
+          "label": "iOS 17 Programming for Beginners - Advanced Chapters",
+          "platform": "Packt",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build a WidgetKit widget with three sizes that reads data from an App Group shared by the main app, schedule a BGProcessingTask to refresh that data nightly, and send a push notification with a thumbnail image using a notification service extension.",
+      "estimatedTime": "5-6 weeks"
+    },
+    {
+      "id": "ios-10",
+      "title": "Production iOS - StoreKit 2, Analytics and App Store Optimization",
+      "order": 10,
+      "techs": [
+        "Swift",
+        "StoreKit 2",
+        "Firebase",
+        "Xcode Cloud"
+      ],
+      "description": "Ship and monetize iOS apps professionally by implementing StoreKit 2 for modern in-app purchases and subscriptions, integrating crash reporting with symbolicated stack traces, and running hypothesis-driven A/B tests through Firebase. Master App Store Connect metrics and listing optimization to improve conversion and discoverability.",
+      "topics": [
+        "StoreKit 2 Transaction API and subscription lifecycle management",
+        "Server-side receipt verification with App Store Server API",
+        "Firebase Crashlytics dSYM upload and crash-free rate targets",
+        "Firebase A/B Testing with Remote Config parameters",
+        "App Store Connect analytics - impressions, conversion, retention",
+        "App Store listing optimization - keywords, screenshots, preview videos",
+        "Xcode Cloud workflows for TestFlight and phased App Store releases"
+      ],
+      "resources": [
+        {
+          "label": "StoreKit 2 Documentation",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "App Store Server API Guide",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "Firebase Crashlytics iOS Setup",
+          "platform": "firebase.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "App Store Optimization Masterclass",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement a StoreKit 2 annual subscription with a promotional offer, verify transactions server-side using the App Store Server API, upload dSYMs to Crashlytics via an Xcode Cloud post-action script, and set up a Firebase A/B test comparing two paywall layouts tracking a purchase conversion event.",
+      "estimatedTime": "4-5 weeks"
+    }
+  ],
+  "android": [
+    {
+      "id": "android-1",
+      "title": "Kotlin Fundamentals",
+      "order": 1,
+      "techs": [
+        "Kotlin",
+        "Coroutines",
+        "null safety",
+        "Extensions"
+      ],
+      "description": "Kotlin is the official language for Android development. It's concise, null-safe, and has excellent coroutine support. Master it before writing your first Activity.",
+      "topics": [
+        "Variables — val/var, type inference, null safety ?, !!",
+        "Functions — default params, extension functions, lambdas",
+        "OOP — data classes, sealed classes, objects, companion",
+        "Collections — List, Map, Set, higher-order functions",
+        "Coroutines — suspend, launch, async/await, Flow",
+        "Scope functions — let, run, apply, also, with"
+      ],
+      "resources": [
+        {
+          "label": "Kotlin Official Docs",
+          "platform": "kotlinlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Android — Kotlin Bootcamp for Programmers",
+          "platform": "developer.android.com",
+          "type": "course"
+        },
+        {
+          "label": "Kotlin in Action (book)",
+          "platform": "Manning",
+          "type": "book"
+        },
+        {
+          "label": "roadmap.sh — Android Roadmap",
+          "platform": "roadmap.sh",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a Kotlin CLI app that parses a CSV file and generates a statistical summary — mean, median, and mode — using coroutines for file I/O.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "android-2",
+      "title": "Jetpack Compose UI",
+      "order": 2,
+      "techs": [
+        "Compose",
+        "Material 3",
+        "State",
+        "Modifiers"
+      ],
+      "description": "Jetpack Compose is Android's modern declarative UI toolkit. Learn composable functions, the state-driven UI model, and Material Design 3 components.",
+      "topics": [
+        "Composable functions — @Composable, recomposition",
+        "State — remember, mutableStateOf, State hoisting",
+        "Layouts — Column, Row, Box, LazyColumn",
+        "Modifiers — padding, size, clickable, clip",
+        "Material 3 components — Scaffold, TopAppBar, Card, Button",
+        "Side effects — LaunchedEffect, SideEffect, DisposableEffect"
+      ],
+      "resources": [
+        {
+          "label": "Jetpack Compose Docs",
+          "platform": "developer.android.com",
+          "type": "docs"
+        },
+        {
+          "label": "Compose Pathway — Android Developers",
+          "platform": "developer.android.com",
+          "type": "course"
+        },
+        {
+          "label": "Stevdza-San — Compose YouTube Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a Compose UI for a to-do app — LazyColumn list, add/delete/complete tasks, a TopAppBar with a filter menu, and a FAB.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "android-3",
+      "title": "Architecture — MVVM & Clean",
+      "order": 3,
+      "techs": [
+        "ViewModel",
+        "StateFlow",
+        "Hilt",
+        "UseCases"
+      ],
+      "description": "Android apps need a clear architecture to stay maintainable. Learn MVVM with ViewModels, StateFlow, and dependency injection with Hilt.",
+      "topics": [
+        "ViewModel — surviving configuration changes, viewModelScope",
+        "StateFlow & SharedFlow — collecting in Compose",
+        "Repository pattern — data source abstraction",
+        "Use cases — single-responsibility business logic",
+        "Hilt — @HiltViewModel, @Inject, modules",
+        "Clean Architecture layers — data, domain, presentation"
+      ],
+      "resources": [
+        {
+          "label": "Android Architecture Docs",
+          "platform": "developer.android.com",
+          "type": "docs"
+        },
+        {
+          "label": "Hilt Docs",
+          "platform": "developer.android.com",
+          "type": "docs"
+        },
+        {
+          "label": "Philipp Lackner — Android Architecture Course",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Restructure your to-do app with MVVM + Hilt — a ViewModel with StateFlow, a repository interface, use cases for add/delete/filter, and proper DI.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "android-4",
+      "title": "Local Storage — Room & DataStore",
+      "order": 4,
+      "techs": [
+        "Room",
+        "DataStore",
+        "SQLite",
+        "Migrations"
+      ],
+      "description": "Persist data on the device with Room (SQLite ORM) for structured data and DataStore for preferences — both with full coroutine and Flow support.",
+      "topics": [
+        "Room — @Entity, @Dao, @Database, TypeConverters",
+        "Room with Flow — reactive queries",
+        "Database migrations — Migration, fallbackToDestructiveMigration",
+        "DataStore Preferences — typed key-value store",
+        "Proto DataStore — strongly-typed with protobuf",
+        "Encrypted SharedPreferences for sensitive data"
+      ],
+      "resources": [
+        {
+          "label": "Room Docs",
+          "platform": "developer.android.com",
+          "type": "docs"
+        },
+        {
+          "label": "DataStore Docs",
+          "platform": "developer.android.com",
+          "type": "docs"
+        },
+        {
+          "label": "Stevdza-San — Room Database Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Migrate your to-do app to Room — DAO with insert/update/delete/query, reactive Flow from queries, a DataStore preference for the selected theme.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "android-5",
+      "title": "Networking with Retrofit & Coroutines",
+      "order": 5,
+      "techs": [
+        "Retrofit",
+        "OkHttp",
+        "Kotlin Serialization",
+        "Coil"
+      ],
+      "description": "Fetch data from the internet with Retrofit, parse JSON with Kotlin Serialization, cache images with Coil, and handle errors and loading states cleanly.",
+      "topics": [
+        "Retrofit — @GET/@POST, suspend functions, interface",
+        "OkHttp interceptors — logging, auth headers",
+        "Kotlin Serialization — @Serializable, custom serializers",
+        "Sealed class Result<T> for API responses",
+        "Coil for image loading in Compose",
+        "Offline-first — combining URLSession with Room"
+      ],
+      "resources": [
+        {
+          "label": "Retrofit Docs",
+          "platform": "square.github.io/retrofit",
+          "type": "docs"
+        },
+        {
+          "label": "Kotlin Serialization Docs",
+          "platform": "github.com/Kotlin/kotlinx.serialization",
+          "type": "docs"
+        },
+        {
+          "label": "Philipp Lackner — Retrofit Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a REST API layer to your to-do app — sync tasks with a backend, load user avatars with Coil, and implement offline caching with Room as the single source of truth.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "android-6",
+      "title": "Navigation & Deep Links",
+      "order": 6,
+      "techs": [
+        "Navigation Compose",
+        "Deep Links",
+        "Bottom Nav"
+      ],
+      "description": "Navigate between screens, pass arguments, and handle deep links with Jetpack Navigation for Compose.",
+      "topics": [
+        "Navigation Compose — NavHost, composable destinations",
+        "Passing arguments — safeArgs, Parcelable, JSON",
+        "Nested navigation graphs",
+        "Bottom navigation bar with Navigation Compose",
+        "Deep links — intent filters, navigation links",
+        "Shared element transitions"
+      ],
+      "resources": [
+        {
+          "label": "Navigation Compose Docs",
+          "platform": "developer.android.com",
+          "type": "docs"
+        },
+        {
+          "label": "Stevdza-San — Navigation Compose",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add bottom navigation to your to-do app (Tasks, Stats, Settings tabs), deep link to a specific task from a notification, and animate between screens.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "android-7",
+      "title": "Testing Android Apps",
+      "order": 7,
+      "techs": [
+        "JUnit",
+        "Espresso",
+        "Compose Testing",
+        "Turbine"
+      ],
+      "description": "Test your ViewModel logic with JUnit, your Compose UI with the Compose testing APIs, and your coroutine flows with Turbine.",
+      "topics": [
+        "JUnit 4/5 — unit testing ViewModels, use cases",
+        "MockK for Kotlin mocking",
+        "Turbine — testing StateFlow and Flow emissions",
+        "Compose UI testing — composeTestRule, semantics, actions",
+        "Room in-memory database for tests",
+        "Robolectric vs instrumented tests"
+      ],
+      "resources": [
+        {
+          "label": "Android Testing Docs",
+          "platform": "developer.android.com",
+          "type": "docs"
+        },
+        {
+          "label": "Turbine on GitHub",
+          "platform": "github.com/cashapp/turbine",
+          "type": "docs"
+        },
+        {
+          "label": "Philipp Lackner — Testing in Android",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write tests covering your ViewModel state transitions, DAO queries with in-memory Room, and two Compose UI tests for adding and deleting a task.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "android-8",
+      "title": "Publishing to Google Play",
+      "order": 8,
+      "techs": [
+        "Gradle",
+        "ProGuard",
+        "Play Console",
+        "CI/CD"
+      ],
+      "description": "Ship your Android app to the world. Configure Gradle for release builds, shrink code with R8/ProGuard, and automate deployment with GitHub Actions and Fastlane.",
+      "topics": [
+        "Gradle — build variants, product flavors, signing config",
+        "R8/ProGuard — code shrinking and obfuscation",
+        "App Bundle (AAB) vs APK",
+        "Google Play Console — internal, alpha, beta, production tracks",
+        "Fastlane supply — automated Play Store deployment",
+        "GitHub Actions — build signed AAB, upload to Play"
+      ],
+      "resources": [
+        {
+          "label": "Android App Bundle Docs",
+          "platform": "developer.android.com",
+          "type": "docs"
+        },
+        {
+          "label": "Google Play Console Help",
+          "platform": "support.google.com/googleplay",
+          "type": "docs"
+        },
+        {
+          "label": "Fastlane Supply Docs",
+          "platform": "fastlane.tools",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Set up a GitHub Actions workflow that builds a signed release AAB, runs your test suite, and automatically uploads to the Play Store internal track on main branch merge.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "android-9",
+      "title": "Advanced Android - Background Processing and System Integration",
+      "order": 9,
+      "techs": [
+        "Kotlin",
+        "WorkManager",
+        "Jetpack Compose",
+        "Glance"
+      ],
+      "description": "Build rich system integrations using WorkManager for guaranteed background tasks, advanced notification channels, and app widgets powered by the Glance API. Explore Wear OS fundamentals and understand how Android manages process priority and battery restrictions.",
+      "topics": [
+        "WorkManager chains, constraints, and expedited tasks",
+        "Notification channels, rich notifications, and bubbles",
+        "Foreground services and battery optimization compliance",
+        "App widgets with Glance and RemoteViews",
+        "Wear OS tile and complication development basics",
+        "BroadcastReceiver and system event handling",
+        "Doze mode, App Standby buckets, and JobScheduler interaction"
+      ],
+      "resources": [
+        {
+          "label": "WorkManager Documentation",
+          "platform": "developer.android.com",
+          "type": "docs"
+        },
+        {
+          "label": "Glance App Widget Guide",
+          "platform": "developer.android.com",
+          "type": "docs"
+        },
+        {
+          "label": "Advanced Android Development - Udacity",
+          "platform": "Udacity",
+          "type": "course"
+        },
+        {
+          "label": "Android Internals by Jonathan Levin",
+          "platform": "Technologeeks",
+          "type": "book"
+        }
+      ],
+      "challenge": "Implement a WorkManager periodic task that syncs data in the background respecting network and charging constraints, surfaces progress via a foreground service notification, and updates a Glance widget with the last sync timestamp.",
+      "estimatedTime": "5-6 weeks"
+    },
+    {
+      "id": "android-10",
+      "title": "Production Android - Store Optimization, Billing and Feature Flags",
+      "order": 10,
+      "techs": [
+        "Kotlin",
+        "Play Billing",
+        "Firebase",
+        "Google Play"
+      ],
+      "description": "Maximize app success on the Play Store by integrating Play Billing Library for subscriptions, using Firebase to run controlled experiments, and applying crash analytics to triage regressions before they reach a wide audience. Learn listing optimization tactics and phased rollout strategies.",
+      "topics": [
+        "Play Billing Library 6 - subscriptions and one-time products",
+        "Purchase verification and server-side receipt validation",
+        "Firebase Crashlytics ANR and crash triage workflow",
+        "Remote Config feature flags and parameter hygiene",
+        "A/B testing with Firebase A/B Testing and Grow experiments",
+        "Play Store listing optimization - screenshots, short description, keywords",
+        "Phased rollouts and halt-and-resume release management"
+      ],
+      "resources": [
+        {
+          "label": "Play Billing Library Documentation",
+          "platform": "developer.android.com",
+          "type": "docs"
+        },
+        {
+          "label": "Firebase Remote Config Android Guide",
+          "platform": "firebase.google.com",
+          "type": "docs"
+        },
+        {
+          "label": "Android App Store Optimization",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Android Release Management Best Practices",
+          "platform": "Google I/O",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a monthly subscription product using Play Billing Library with server-side purchase token verification, gate the premium feature behind a Firebase Remote Config flag, run a 50/50 A/B test on the paywall copy, and monitor the conversion funnel in Firebase Analytics.",
+      "estimatedTime": "4-5 weeks"
+    }
+  ],
+  "kotlin-dev": [
+    {
+      "id": "kotlin-dev-1",
+      "title": "Kotlin Fundamentals",
+      "order": 1,
+      "techs": [
+        "Kotlin",
+        "JVM",
+        "IntelliJ"
+      ],
+      "description": "Start with Kotlin's expressive, concise syntax on the JVM. Learn the basics that make Kotlin a joy to write.",
+      "topics": [
+        "val, var & type inference",
+        "Basic types & string templates",
+        "Functions & default arguments",
+        "Control flow — if, when, ranges",
+        "Collections overview",
+        "The Kotlin toolchain & REPL"
+      ],
+      "resources": [
+        {
+          "label": "Kotlin Official Docs",
+          "platform": "kotlinlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Kotlin Koans",
+          "platform": "kotlinlang.org",
+          "type": "course"
+        },
+        {
+          "label": "JetBrains Academy — Kotlin",
+          "platform": "JetBrains",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a CLI expense tracker that reads input and prints categorized totals.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "kotlin-dev-2",
+      "title": "OOP & Null Safety",
+      "order": 2,
+      "techs": [
+        "Classes",
+        "Null Safety",
+        "Data Classes"
+      ],
+      "description": "Model your domain with Kotlin's classes and embrace null safety — the feature that kills NullPointerExceptions.",
+      "topics": [
+        "Classes, constructors & properties",
+        "Data classes & destructuring",
+        "Sealed classes & enums",
+        "Interfaces & abstract classes",
+        "Nullable types, ?., ?: & !!",
+        "Smart casts & is/as"
+      ],
+      "resources": [
+        {
+          "label": "Kotlin — Classes",
+          "platform": "kotlinlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Kotlin — Null Safety",
+          "platform": "kotlinlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Kotlin Koans",
+          "platform": "kotlinlang.org",
+          "type": "course"
+        }
+      ],
+      "challenge": "Model a domain (orders, items, customers) with data and sealed classes and zero nullable misuse.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "kotlin-dev-3",
+      "title": "Functional Kotlin & Collections",
+      "order": 3,
+      "techs": [
+        "Lambdas",
+        "Collections",
+        "Sequences"
+      ],
+      "description": "Write idiomatic, functional Kotlin. Master higher-order functions and the rich collections API.",
+      "topics": [
+        "Lambdas & higher-order functions",
+        "map, filter, reduce & fold",
+        "Scope functions — let, run, apply, also, with",
+        "Extension functions",
+        "Sequences & lazy evaluation",
+        "Immutability & collection operations"
+      ],
+      "resources": [
+        {
+          "label": "Kotlin — Collections",
+          "platform": "kotlinlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Kotlin — Lambdas",
+          "platform": "kotlinlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Kotlin — Scope Functions",
+          "platform": "kotlinlang.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Process a dataset with pure collection pipelines and write three useful extension functions.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "kotlin-dev-4",
+      "title": "Coroutines & Concurrency",
+      "order": 4,
+      "techs": [
+        "Coroutines",
+        "suspend",
+        "Dispatchers"
+      ],
+      "description": "Concurrency the Kotlin way. Write asynchronous, non-blocking code with coroutines and structured concurrency.",
+      "topics": [
+        "Coroutines & suspend functions",
+        "launch, async & await",
+        "Structured concurrency & scopes",
+        "Dispatchers & context switching",
+        "Cancellation & timeouts",
+        "Exception handling in coroutines"
+      ],
+      "resources": [
+        {
+          "label": "Kotlin Coroutines Guide",
+          "platform": "kotlinlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "KotlinConf — Coroutines",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Kotlin — Async Programming",
+          "platform": "kotlinlang.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a concurrent feed aggregator that fetches multiple sources in parallel with structured concurrency.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "kotlin-dev-5",
+      "title": "Flow & Async Streams",
+      "order": 5,
+      "techs": [
+        "Flow",
+        "StateFlow",
+        "Channels"
+      ],
+      "description": "Handle streams of values over time with Kotlin Flow — the reactive backbone of modern Kotlin apps.",
+      "topics": [
+        "Cold flows & flow builders",
+        "Operators — map, filter, transform",
+        "StateFlow & SharedFlow",
+        "Channels & producers",
+        "Backpressure & buffering",
+        "Combining & flattening flows"
+      ],
+      "resources": [
+        {
+          "label": "Kotlin Flow Docs",
+          "platform": "kotlinlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Kotlin — Channels",
+          "platform": "kotlinlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Roman Elizarov — Flow",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Model a live ticker as a Flow with operators and expose current state through a StateFlow.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "kotlin-dev-6",
+      "title": "Build Tooling with Gradle",
+      "order": 6,
+      "techs": [
+        "Gradle",
+        "Kotlin DSL",
+        "Dependencies"
+      ],
+      "description": "Every real Kotlin project is built with Gradle. Learn the build lifecycle, the Kotlin DSL and dependency management.",
+      "topics": [
+        "Gradle build lifecycle",
+        "Kotlin DSL (build.gradle.kts)",
+        "Dependencies & version catalogs",
+        "Multi-module projects",
+        "Tasks & plugins",
+        "Publishing artifacts"
+      ],
+      "resources": [
+        {
+          "label": "Gradle Docs",
+          "platform": "gradle.org",
+          "type": "docs"
+        },
+        {
+          "label": "Gradle Kotlin DSL Primer",
+          "platform": "gradle.org",
+          "type": "docs"
+        },
+        {
+          "label": "Kotlin — Gradle",
+          "platform": "kotlinlang.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Convert your project to a multi-module Gradle build using the Kotlin DSL and a version catalog.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "kotlin-dev-7",
+      "title": "Backend with Ktor",
+      "order": 7,
+      "techs": [
+        "Ktor",
+        "Routing",
+        "Serialization"
+      ],
+      "description": "Build asynchronous backend services with Ktor, JetBrains' lightweight Kotlin-first web framework.",
+      "topics": [
+        "Ktor setup & application structure",
+        "Routing & request handling",
+        "Content negotiation & kotlinx.serialization",
+        "Plugins (features) & pipelines",
+        "Client requests with Ktor Client",
+        "Configuration & environments"
+      ],
+      "resources": [
+        {
+          "label": "Ktor Docs",
+          "platform": "ktor.io",
+          "type": "docs"
+        },
+        {
+          "label": "kotlinx.serialization",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Ktor — Creating a REST API",
+          "platform": "ktor.io",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a JSON REST API with Ktor for a tasks service, with routing and serialization.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "kotlin-dev-8",
+      "title": "Data & Persistence",
+      "order": 8,
+      "techs": [
+        "Exposed",
+        "SQL",
+        "PostgreSQL"
+      ],
+      "description": "Persist data from your Ktor backend using Exposed, JetBrains' Kotlin SQL framework, against PostgreSQL.",
+      "topics": [
+        "Exposed DSL & DAO",
+        "Defining tables & schemas",
+        "CRUD & queries",
+        "Connection pooling with HikariCP",
+        "Transactions",
+        "Migrations"
+      ],
+      "resources": [
+        {
+          "label": "Exposed Wiki",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Ktor — Connecting to a database",
+          "platform": "ktor.io",
+          "type": "docs"
+        },
+        {
+          "label": "PostgreSQL Docs",
+          "platform": "postgresql.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Back your tasks API with PostgreSQL via Exposed, with a connection pool and transactional writes.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "kotlin-dev-9",
+      "title": "Testing in Kotlin",
+      "order": 9,
+      "techs": [
+        "JUnit5",
+        "MockK",
+        "Kotest"
+      ],
+      "description": "Test Kotlin code idiomatically. Use JUnit5, MockK and Kotest to cover units, coroutines and endpoints.",
+      "topics": [
+        "JUnit5 with Kotlin",
+        "Kotest assertions & specs",
+        "Mocking with MockK",
+        "Testing coroutines & flows",
+        "Ktor endpoint testing",
+        "Coverage & CI"
+      ],
+      "resources": [
+        {
+          "label": "Kotest Docs",
+          "platform": "kotest.io",
+          "type": "docs"
+        },
+        {
+          "label": "MockK",
+          "platform": "mockk.io",
+          "type": "docs"
+        },
+        {
+          "label": "Ktor — Testing",
+          "platform": "ktor.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write unit tests with MockK and Kotest plus Ktor endpoint tests for your tasks API.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "kotlin-dev-10",
+      "title": "Multiplatform & Deployment",
+      "order": 10,
+      "techs": [
+        "Kotlin Multiplatform",
+        "Docker",
+        "CI/CD"
+      ],
+      "description": "Share Kotlin across targets and ship it. Explore Kotlin Multiplatform and deploy your Ktor service.",
+      "topics": [
+        "Kotlin Multiplatform overview",
+        "Sharing logic across JVM/JS/Native",
+        "Building a fat jar / native image",
+        "Dockerizing a Ktor app",
+        "GitHub Actions CI/CD",
+        "Deploying to a cloud platform"
+      ],
+      "resources": [
+        {
+          "label": "Kotlin Multiplatform Docs",
+          "platform": "kotlinlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Ktor — Deployment",
+          "platform": "ktor.io",
+          "type": "docs"
+        },
+        {
+          "label": "Docker Docs",
+          "platform": "docs.docker.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Containerize your Ktor service, add a CI pipeline, and extract shared logic into a multiplatform module.",
+      "estimatedTime": "2 weeks"
+    }
+  ],
+  "swift-dev": [
+    {
+      "id": "swift-dev-1",
+      "title": "Swift Fundamentals",
+      "order": 1,
+      "techs": [
+        "Swift",
+        "Xcode",
+        "Playgrounds"
+      ],
+      "description": "Learn Swift, Apple's modern, safe and expressive language. Start with syntax and core types in Xcode Playgrounds.",
+      "topics": [
+        "let, var & type inference",
+        "Basic types & string interpolation",
+        "Functions & closures",
+        "Control flow — if, switch, loops",
+        "Arrays, dictionaries & sets",
+        "Xcode & Playgrounds"
+      ],
+      "resources": [
+        {
+          "label": "The Swift Programming Language",
+          "platform": "swift.org",
+          "type": "book"
+        },
+        {
+          "label": "Hacking with Swift — 100 Days",
+          "platform": "hackingwithswift.com",
+          "type": "course"
+        },
+        {
+          "label": "Swift Docs",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a Playground tip calculator that handles different bill amounts and split sizes.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "swift-dev-2",
+      "title": "Types, Optionals & Error Handling",
+      "order": 2,
+      "techs": [
+        "Optionals",
+        "Enums",
+        "Errors"
+      ],
+      "description": "Master Swift's safety features. Use optionals to model absence and handle failures with typed errors.",
+      "topics": [
+        "Optionals, binding & nil-coalescing",
+        "Structs vs classes",
+        "Enums with associated values",
+        "Pattern matching with switch",
+        "Error handling — throws, try, Result",
+        "Guard & early returns"
+      ],
+      "resources": [
+        {
+          "label": "Swift — Optionals",
+          "platform": "swift.org",
+          "type": "docs"
+        },
+        {
+          "label": "Swift — Error Handling",
+          "platform": "swift.org",
+          "type": "docs"
+        },
+        {
+          "label": "Hacking with Swift",
+          "platform": "hackingwithswift.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a parser that decodes user input into an enum model and reports failures with typed errors.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "swift-dev-3",
+      "title": "Protocols, Generics & Value Semantics",
+      "order": 3,
+      "techs": [
+        "Protocols",
+        "Generics",
+        "POP"
+      ],
+      "description": "Write flexible, reusable Swift with protocol-oriented programming, generics and an understanding of value semantics.",
+      "topics": [
+        "Protocols & protocol extensions",
+        "Protocol-oriented programming",
+        "Generics & associated types",
+        "Value vs reference semantics",
+        "Equatable, Hashable, Comparable",
+        "Opaque types (some)"
+      ],
+      "resources": [
+        {
+          "label": "Swift — Protocols",
+          "platform": "swift.org",
+          "type": "docs"
+        },
+        {
+          "label": "Swift — Generics",
+          "platform": "swift.org",
+          "type": "docs"
+        },
+        {
+          "label": "WWDC — Protocol-Oriented Programming",
+          "platform": "developer.apple.com",
+          "type": "video"
+        }
+      ],
+      "challenge": "Design a generic caching protocol with two conforming implementations and value-type models.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "swift-dev-4",
+      "title": "Memory & Modern Concurrency",
+      "order": 4,
+      "techs": [
+        "ARC",
+        "async/await",
+        "Actors"
+      ],
+      "description": "Understand how Swift manages memory and write safe concurrent code with async/await and actors.",
+      "topics": [
+        "ARC & reference counting",
+        "Strong, weak & unowned references",
+        "Retain cycles & how to break them",
+        "async/await & structured concurrency",
+        "Tasks, task groups & cancellation",
+        "Actors & data isolation"
+      ],
+      "resources": [
+        {
+          "label": "Swift Concurrency Docs",
+          "platform": "swift.org",
+          "type": "docs"
+        },
+        {
+          "label": "WWDC — Meet async/await",
+          "platform": "developer.apple.com",
+          "type": "video"
+        },
+        {
+          "label": "Hacking with Swift — Concurrency",
+          "platform": "hackingwithswift.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Refactor a callback-based downloader to async/await and isolate shared state in an actor.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "swift-dev-5",
+      "title": "SwiftUI Fundamentals",
+      "order": 5,
+      "techs": [
+        "SwiftUI",
+        "Views",
+        "Layout"
+      ],
+      "description": "Build declarative UIs with SwiftUI. Compose views, lay them out, and react to data automatically.",
+      "topics": [
+        "Views & view composition",
+        "Stacks, spacers & layout",
+        "Modifiers & styling",
+        "Lists & navigation",
+        "Images, shapes & SF Symbols",
+        "Previews & live editing"
+      ],
+      "resources": [
+        {
+          "label": "SwiftUI Tutorials",
+          "platform": "developer.apple.com",
+          "type": "course"
+        },
+        {
+          "label": "Hacking with SwiftUI",
+          "platform": "hackingwithswift.com",
+          "type": "course"
+        },
+        {
+          "label": "SwiftUI Docs",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a multi-screen recipe browser UI in SwiftUI with navigation and a detail view.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "swift-dev-6",
+      "title": "SwiftUI State & Data Flow",
+      "order": 6,
+      "techs": [
+        "@State",
+        "@Observable",
+        "Bindings"
+      ],
+      "description": "Master how data drives SwiftUI. Use the state property wrappers and the observation system to build dynamic apps.",
+      "topics": [
+        "@State & @Binding",
+        "@Observable & @Bindable",
+        "@Environment & dependency passing",
+        "Lists, forms & user input",
+        "Navigation & programmatic routing",
+        "Animations & transitions"
+      ],
+      "resources": [
+        {
+          "label": "SwiftUI — Managing State",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "Hacking with SwiftUI",
+          "platform": "hackingwithswift.com",
+          "type": "course"
+        },
+        {
+          "label": "WWDC — Observation",
+          "platform": "developer.apple.com",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add state, forms and animated transitions so users can create and edit recipes in your app.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "swift-dev-7",
+      "title": "Combine & Reactive Programming",
+      "order": 7,
+      "techs": [
+        "Combine",
+        "Publishers",
+        "Operators"
+      ],
+      "description": "Handle asynchronous events the reactive way with Combine — Apple's framework for processing values over time.",
+      "topics": [
+        "Publishers & subscribers",
+        "Operators — map, filter, combineLatest",
+        "Subjects & @Published",
+        "Error handling & retry",
+        "Scheduling & threading",
+        "Combine vs async/await — when to use which"
+      ],
+      "resources": [
+        {
+          "label": "Combine Docs",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "Using Combine",
+          "platform": "heckj.github.io",
+          "type": "book"
+        },
+        {
+          "label": "Hacking with Swift — Combine",
+          "platform": "hackingwithswift.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a live search-as-you-type feature using Combine with debouncing and cancellation.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "swift-dev-8",
+      "title": "Networking & Persistence",
+      "order": 8,
+      "techs": [
+        "URLSession",
+        "Codable",
+        "SwiftData"
+      ],
+      "description": "Connect to APIs and store data locally. Use URLSession with Codable and persist with SwiftData.",
+      "topics": [
+        "URLSession & async networking",
+        "Codable — encoding & decoding JSON",
+        "REST API clients",
+        "SwiftData models & queries",
+        "Caching & offline support",
+        "Error & loading states"
+      ],
+      "resources": [
+        {
+          "label": "URLSession Docs",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "SwiftData Docs",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "Hacking with Swift — Networking",
+          "platform": "hackingwithswift.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Fetch recipes from a REST API with Codable and persist favorites locally with SwiftData.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "swift-dev-9",
+      "title": "Testing & Debugging",
+      "order": 9,
+      "techs": [
+        "XCTest",
+        "Swift Testing",
+        "Instruments"
+      ],
+      "description": "Ship reliable Swift. Write unit and UI tests, and profile your app with Instruments.",
+      "topics": [
+        "XCTest & the Swift Testing framework",
+        "Unit testing models & logic",
+        "Testing async code",
+        "UI testing",
+        "Debugging with breakpoints & LLDB",
+        "Profiling with Instruments"
+      ],
+      "resources": [
+        {
+          "label": "Swift Testing Docs",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "XCTest Docs",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        },
+        {
+          "label": "WWDC — Meet Swift Testing",
+          "platform": "developer.apple.com",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add unit tests for your networking and persistence layers plus one UI test for the create flow.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "swift-dev-10",
+      "title": "Swift Packages & Deployment",
+      "order": 10,
+      "techs": [
+        "SwiftPM",
+        "Vapor",
+        "TestFlight"
+      ],
+      "description": "Package and ship Swift beyond a single app. Build reusable packages, try server-side Swift, and distribute.",
+      "topics": [
+        "Swift Package Manager",
+        "Building & publishing packages",
+        "Server-side Swift with Vapor",
+        "App distribution & TestFlight",
+        "CI with Xcode Cloud",
+        "Versioning & release management"
+      ],
+      "resources": [
+        {
+          "label": "Swift Package Manager Docs",
+          "platform": "swift.org",
+          "type": "docs"
+        },
+        {
+          "label": "Vapor Docs",
+          "platform": "vapor.codes",
+          "type": "docs"
+        },
+        {
+          "label": "Xcode Cloud Docs",
+          "platform": "developer.apple.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Extract reusable logic into a Swift package and stand up a small Vapor API it can share.",
+      "estimatedTime": "2 weeks"
+    }
+  ],
+  "maui": [
+    {
+      "id": "maui-1",
+      "title": "C# Fundamentals",
+      "order": 1,
+      "techs": [
+        "C#",
+        ".NET",
+        "CLR"
+      ],
+      "description": "MAUI is built on C# and .NET. Start with the language fundamentals and the .NET runtime.",
+      "topics": [
+        "Variables, types & operators",
+        "Control flow & methods",
+        "The .NET CLR & SDK",
+        "Namespaces & assemblies",
+        "Strings & collections",
+        "dotnet CLI basics"
+      ],
+      "resources": [
+        {
+          "label": "C# Docs",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "C# for Beginners",
+          "platform": "learn.microsoft.com",
+          "type": "course"
+        },
+        {
+          "label": "C# in 100 Seconds",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a CLI unit converter in C# that validates input and handles errors.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "maui-2",
+      "title": "Object-Oriented C# & .NET",
+      "order": 2,
+      "techs": [
+        "OOP",
+        "Interfaces",
+        "NuGet"
+      ],
+      "description": "Model your app with object-oriented C#. Learn classes, interfaces and how to use the .NET ecosystem.",
+      "topics": [
+        "Classes, properties & inheritance",
+        "Interfaces & abstract classes",
+        "Records & structs",
+        "Exception handling",
+        "NuGet packages",
+        "Dependency injection in .NET"
+      ],
+      "resources": [
+        {
+          "label": "C# OOP Docs",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": ".NET Dependency Injection",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "Baeldung-style — C# Corner",
+          "platform": "c-sharpcorner.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Design a small domain model with interfaces and wire it up with .NET dependency injection.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "maui-3",
+      "title": "Async & LINQ",
+      "order": 3,
+      "techs": [
+        "async/await",
+        "LINQ",
+        "Tasks"
+      ],
+      "description": "Write responsive, data-driven C#. Master async/await for non-blocking code and LINQ for querying collections.",
+      "topics": [
+        "Tasks & async/await",
+        "Cancellation & exceptions in async",
+        "LINQ query & method syntax",
+        "Deferred execution",
+        "Working with JSON (System.Text.Json)",
+        "IEnumerable vs IQueryable"
+      ],
+      "resources": [
+        {
+          "label": "Async Programming in C#",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "LINQ Docs",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "System.Text.Json",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Fetch and transform JSON from a public API asynchronously and query the results with LINQ.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "maui-4",
+      "title": ".NET MAUI Basics",
+      "order": 4,
+      "techs": [
+        ".NET MAUI",
+        "Pages",
+        "Controls"
+      ],
+      "description": "Build your first cross-platform app. Learn the MAUI project structure, pages and controls that run on iOS, Android, macOS and Windows.",
+      "topics": [
+        "MAUI project structure",
+        "Single project, multi-platform",
+        "Pages & controls",
+        "The app lifecycle",
+        "Resources & styles",
+        "Running on each platform"
+      ],
+      "resources": [
+        {
+          "label": ".NET MAUI Docs",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": ".NET MAUI Tutorials",
+          "platform": "learn.microsoft.com",
+          "type": "course"
+        },
+        {
+          "label": "James Montemagno — MAUI",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a multi-page MAUI app shell that runs on Android and Windows.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "maui-5",
+      "title": "XAML & UI Layout",
+      "order": 5,
+      "techs": [
+        "XAML",
+        "Layouts",
+        "Styles"
+      ],
+      "description": "Design polished UIs declaratively with XAML. Master layouts, styling and reusable controls.",
+      "topics": [
+        "XAML syntax & markup extensions",
+        "Layouts — Grid, StackLayout, FlexLayout",
+        "Styles & resource dictionaries",
+        "Control templates",
+        "Responsive & adaptive layout",
+        "Fonts, images & icons"
+      ],
+      "resources": [
+        {
+          "label": "MAUI XAML Docs",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "MAUI Layouts",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": ".NET MAUI Tutorials",
+          "platform": "learn.microsoft.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a responsive product detail screen in XAML with a reusable style dictionary.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "maui-6",
+      "title": "MVVM & Data Binding",
+      "order": 6,
+      "techs": [
+        "MVVM",
+        "Binding",
+        "CommunityToolkit"
+      ],
+      "description": "Structure MAUI apps the right way. Adopt the MVVM pattern with data binding and the MVVM Community Toolkit.",
+      "topics": [
+        "The MVVM pattern",
+        "Data binding & BindingContext",
+        "INotifyPropertyChanged",
+        "Commands & the CommunityToolkit.Mvvm",
+        "Value converters",
+        "Collection views & lists"
+      ],
+      "resources": [
+        {
+          "label": "MAUI Data Binding Docs",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "MVVM Community Toolkit",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "MAUI — MVVM Tutorial",
+          "platform": "learn.microsoft.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Refactor your product screen to MVVM with bound view models and commands.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "maui-7",
+      "title": "Navigation & Platform Features",
+      "order": 7,
+      "techs": [
+        "Shell",
+        "Navigation",
+        "Permissions"
+      ],
+      "description": "Build full apps with structured navigation and access to native device capabilities.",
+      "topics": [
+        "MAUI Shell & routing",
+        "Passing data between pages",
+        "Accessing device sensors & APIs",
+        "Permissions handling",
+        "Platform-specific code",
+        "Handlers & customization"
+      ],
+      "resources": [
+        {
+          "label": "MAUI Shell Docs",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "MAUI Platform Integration",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "MAUI Handlers",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add Shell-based navigation and use the device geolocation API with proper permission handling.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "maui-8",
+      "title": "Data & Networking",
+      "order": 8,
+      "techs": [
+        "HttpClient",
+        "SQLite",
+        "REST"
+      ],
+      "description": "Connect your app to the cloud and store data locally. Consume REST APIs and persist with SQLite.",
+      "topics": [
+        "HttpClient & REST consumption",
+        "Serialization & DTOs",
+        "Local storage with SQLite",
+        "Offline-first patterns",
+        "Secure storage & preferences",
+        "Error & connectivity handling"
+      ],
+      "resources": [
+        {
+          "label": "MAUI — Consume a REST API",
+          "platform": "learn.microsoft.com",
+          "type": "course"
+        },
+        {
+          "label": "MAUI Local Databases (SQLite)",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "MAUI Secure Storage",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add REST sync and local SQLite caching so your app works offline and updates when online.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "maui-9",
+      "title": "Testing & Debugging",
+      "order": 9,
+      "techs": [
+        "xUnit",
+        "Debugging",
+        "Profiling"
+      ],
+      "description": "Ship reliable MAUI apps. Unit-test your view models and debug across platforms.",
+      "topics": [
+        "Unit testing with xUnit",
+        "Testing view models",
+        "Mocking services",
+        "Debugging on devices & emulators",
+        "Hot reload",
+        "Performance profiling"
+      ],
+      "resources": [
+        {
+          "label": "Unit Testing in .NET",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "MAUI — Hot Reload",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": ".NET Profiling Tools",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write xUnit tests for your view models and mock the network layer.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "maui-10",
+      "title": "Azure, Distribution & CI/CD",
+      "order": 10,
+      "techs": [
+        "Azure",
+        "App Center",
+        "CI/CD"
+      ],
+      "description": "Take your app to production. Add cloud services, automate builds, and publish to the app stores.",
+      "topics": [
+        "Azure services for mobile (Functions, Storage)",
+        "Push notifications",
+        "Code signing for iOS & Android",
+        "CI/CD with GitHub Actions / Azure DevOps",
+        "Distributing builds",
+        "Publishing to the stores"
+      ],
+      "resources": [
+        {
+          "label": "Azure for .NET Developers",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "MAUI — Publish Apps",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        },
+        {
+          "label": "GitHub Actions for .NET",
+          "platform": "learn.microsoft.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Wire an Azure Function backend, set up CI to build signed apps, and publish a test release.",
+      "estimatedTime": "2 weeks"
+    }
+  ],
+  "pwa-dev": [
+    {
+      "id": "pwa-dev-1",
+      "title": "Web Foundations",
+      "order": 1,
+      "techs": [
+        "HTML",
+        "CSS",
+        "HTTP"
+      ],
+      "description": "A PWA is a website first. Solidify the HTML, CSS and HTTP foundations that everything else builds on.",
+      "topics": [
+        "Semantic HTML & accessibility",
+        "Modern CSS layout",
+        "HTTP, HTTPS & the request lifecycle",
+        "The browser rendering pipeline",
+        "DevTools fundamentals",
+        "Why HTTPS is required for PWAs"
+      ],
+      "resources": [
+        {
+          "label": "MDN Web Docs",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "web.dev — Learn",
+          "platform": "web.dev",
+          "type": "course"
+        },
+        {
+          "label": "MDN — Progressive Web Apps",
+          "platform": "MDN",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a fast, accessible, responsive single-page site served over HTTPS.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "pwa-dev-2",
+      "title": "Modern JavaScript",
+      "order": 2,
+      "techs": [
+        "JavaScript",
+        "ES Modules",
+        "Async"
+      ],
+      "description": "PWAs are driven by JavaScript. Master modern language features and asynchronous patterns.",
+      "topics": [
+        "ES modules & bundling",
+        "Promises & async/await",
+        "Fetch API & JSON",
+        "DOM & event handling",
+        "The event loop",
+        "Error handling"
+      ],
+      "resources": [
+        {
+          "label": "JavaScript.info",
+          "platform": "javascript.info",
+          "type": "docs"
+        },
+        {
+          "label": "MDN — JavaScript",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "web.dev",
+          "platform": "web.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a weather app that fetches live data and handles loading and error states.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "pwa-dev-3",
+      "title": "Responsive & App-Shell UI",
+      "order": 3,
+      "techs": [
+        "App Shell",
+        "Responsive",
+        "UX"
+      ],
+      "description": "Make your web app feel native. Build a responsive app shell that loads instantly and adapts to any device.",
+      "topics": [
+        "The app-shell architecture",
+        "Responsive & adaptive layout",
+        "Touch-friendly UX",
+        "Skeleton screens & perceived performance",
+        "Safe areas & viewport",
+        "Dark mode & theming"
+      ],
+      "resources": [
+        {
+          "label": "web.dev — App Shell",
+          "platform": "web.dev",
+          "type": "docs"
+        },
+        {
+          "label": "MDN — Responsive Design",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "web.dev — PWA Patterns",
+          "platform": "web.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build an app-shell layout with instant navigation and skeleton loading states.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "pwa-dev-4",
+      "title": "The Web App Manifest",
+      "order": 4,
+      "techs": [
+        "Manifest",
+        "Install",
+        "Icons"
+      ],
+      "description": "Make your app installable. Configure the web app manifest so users can add it to their home screen.",
+      "topics": [
+        "manifest.json fields",
+        "Icons & maskable icons",
+        "Display modes & theme color",
+        "The install prompt (beforeinstallprompt)",
+        "Splash screens",
+        "Installability criteria"
+      ],
+      "resources": [
+        {
+          "label": "MDN — Web App Manifest",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "web.dev — Installable",
+          "platform": "web.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Maskable.app",
+          "platform": "maskable.app",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add a complete manifest with maskable icons and a custom install prompt to your app.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "pwa-dev-5",
+      "title": "Service Workers",
+      "order": 5,
+      "techs": [
+        "Service Workers",
+        "Lifecycle",
+        "Fetch"
+      ],
+      "description": "The heart of every PWA. Master the service worker lifecycle and intercept network requests.",
+      "topics": [
+        "Registering a service worker",
+        "Install, activate & fetch events",
+        "The service worker lifecycle",
+        "Intercepting requests",
+        "Updating service workers safely",
+        "Scope & limitations"
+      ],
+      "resources": [
+        {
+          "label": "MDN — Service Worker API",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "web.dev — Service Workers",
+          "platform": "web.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Workbox Docs",
+          "platform": "developer.chrome.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Register a service worker that intercepts requests and serves a custom offline page.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "pwa-dev-6",
+      "title": "Caching Strategies & Offline",
+      "order": 6,
+      "techs": [
+        "Cache API",
+        "Workbox",
+        "IndexedDB"
+      ],
+      "description": "Make your app work offline. Apply caching strategies and store data locally for a resilient experience.",
+      "topics": [
+        "The Cache API",
+        "Cache-first, network-first & stale-while-revalidate",
+        "Precaching with Workbox",
+        "IndexedDB for structured data",
+        "Cache versioning & cleanup",
+        "Offline UX patterns"
+      ],
+      "resources": [
+        {
+          "label": "web.dev — Caching Strategies",
+          "platform": "web.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Workbox Strategies",
+          "platform": "developer.chrome.com",
+          "type": "docs"
+        },
+        {
+          "label": "MDN — IndexedDB",
+          "platform": "MDN",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Make your weather app fully usable offline with Workbox caching and IndexedDB storage.",
+      "estimatedTime": "2–3 weeks"
+    },
+    {
+      "id": "pwa-dev-7",
+      "title": "Push Notifications & Background Sync",
+      "order": 7,
+      "techs": [
+        "Push API",
+        "Notifications",
+        "Background Sync"
+      ],
+      "description": "Re-engage users like a native app. Add push notifications and sync data in the background.",
+      "topics": [
+        "The Notifications API",
+        "Push API & web-push",
+        "VAPID keys & subscriptions",
+        "Background Sync",
+        "Periodic Background Sync",
+        "Notification UX & permissions"
+      ],
+      "resources": [
+        {
+          "label": "web.dev — Push Notifications",
+          "platform": "web.dev",
+          "type": "docs"
+        },
+        {
+          "label": "MDN — Push API",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "MDN — Background Sync",
+          "platform": "MDN",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add push notifications with a VAPID-secured backend and queue failed requests with Background Sync.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "pwa-dev-8",
+      "title": "Device & Web APIs",
+      "order": 8,
+      "techs": [
+        "Web APIs",
+        "Geolocation",
+        "Capabilities"
+      ],
+      "description": "Tap into device capabilities from the browser. Use the modern web platform APIs that close the gap with native.",
+      "topics": [
+        "Geolocation & device orientation",
+        "Camera & media capture",
+        "Web Share & clipboard",
+        "File System Access",
+        "Web Bluetooth & USB (overview)",
+        "Feature detection & progressive enhancement"
+      ],
+      "resources": [
+        {
+          "label": "web.dev — Capabilities",
+          "platform": "web.dev",
+          "type": "docs"
+        },
+        {
+          "label": "MDN — Web APIs",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "What PWA Can Do Today",
+          "platform": "whatpwacando.today",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add camera capture and Web Share to your app, with graceful fallbacks where unsupported.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "pwa-dev-9",
+      "title": "Performance & Lighthouse",
+      "order": 9,
+      "techs": [
+        "Lighthouse",
+        "Core Web Vitals",
+        "Optimization"
+      ],
+      "description": "Fast is a feature. Measure and optimize your PWA against Core Web Vitals using Lighthouse.",
+      "topics": [
+        "Core Web Vitals — LCP, INP, CLS",
+        "Auditing with Lighthouse",
+        "Code splitting & lazy loading",
+        "Image & asset optimization",
+        "Preloading & resource hints",
+        "Bundle analysis"
+      ],
+      "resources": [
+        {
+          "label": "web.dev — Lighthouse",
+          "platform": "developer.chrome.com",
+          "type": "docs"
+        },
+        {
+          "label": "web.dev — Core Web Vitals",
+          "platform": "web.dev",
+          "type": "docs"
+        },
+        {
+          "label": "web.dev — Fast load times",
+          "platform": "web.dev",
+          "type": "course"
+        }
+      ],
+      "challenge": "Get your PWA to a 90+ Lighthouse score across performance, PWA and best-practices audits.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "pwa-dev-10",
+      "title": "Packaging & Deployment",
+      "order": 10,
+      "techs": [
+        "TWA",
+        "Hosting",
+        "CI/CD"
+      ],
+      "description": "Ship your PWA everywhere. Deploy it, and optionally package it for the app stores.",
+      "topics": [
+        "Deploying to a CDN / static host",
+        "HTTPS & service worker hosting rules",
+        "Packaging for stores with PWABuilder / TWA",
+        "Versioning & update strategy",
+        "Analytics & monitoring",
+        "CI/CD for web apps"
+      ],
+      "resources": [
+        {
+          "label": "PWABuilder",
+          "platform": "pwabuilder.com",
+          "type": "docs"
+        },
+        {
+          "label": "web.dev — Trusted Web Activity",
+          "platform": "developer.chrome.com",
+          "type": "docs"
+        },
+        {
+          "label": "Netlify Docs",
+          "platform": "docs.netlify.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy your PWA to a CDN and package it for the Play Store using a Trusted Web Activity.",
+      "estimatedTime": "1–2 weeks"
+    }
+  ],
+  "ionic": [
+    {
+      "id": "ionic-1",
+      "title": "Web & TypeScript Foundations",
+      "order": 1,
+      "techs": [
+        "TypeScript",
+        "HTML",
+        "CSS"
+      ],
+      "description": "Ionic builds on web tech. Get comfortable with HTML, CSS and TypeScript before adding the framework.",
+      "topics": [
+        "HTML & semantic markup",
+        "CSS & flexbox layout",
+        "TypeScript types & interfaces",
+        "Modules & tooling",
+        "npm & the CLI",
+        "The mobile web context"
+      ],
+      "resources": [
+        {
+          "label": "TypeScript Handbook",
+          "platform": "typescriptlang.org",
+          "type": "docs"
+        },
+        {
+          "label": "MDN Web Docs",
+          "platform": "MDN",
+          "type": "docs"
+        },
+        {
+          "label": "Ionic Docs",
+          "platform": "ionicframework.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a small typed to-do UI in plain TypeScript and the DOM.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "ionic-2",
+      "title": "Angular Fundamentals",
+      "order": 2,
+      "techs": [
+        "Angular",
+        "Components",
+        "RxJS"
+      ],
+      "description": "Ionic's most common companion is Angular. Learn components, services and reactive data with RxJS.",
+      "topics": [
+        "Components & templates",
+        "Services & dependency injection",
+        "Angular Router",
+        "Observables & RxJS basics",
+        "Forms — template & reactive",
+        "Modules & standalone components"
+      ],
+      "resources": [
+        {
+          "label": "Angular Docs",
+          "platform": "angular.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Angular Tutorial",
+          "platform": "angular.dev",
+          "type": "course"
+        },
+        {
+          "label": "RxJS Docs",
+          "platform": "rxjs.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build an Angular app with routing, a service, and a reactive form.",
+      "estimatedTime": "3 weeks"
+    },
+    {
+      "id": "ionic-3",
+      "title": "Ionic Framework & Components",
+      "order": 3,
+      "techs": [
+        "Ionic",
+        "UI Components",
+        "Theming"
+      ],
+      "description": "Build native-looking mobile UIs with Ionic's component library that adapts to iOS and Android.",
+      "topics": [
+        "Ionic CLI & project setup",
+        "Core UI components",
+        "Platform-adaptive styling (iOS/MD)",
+        "Theming with CSS variables",
+        "Icons & typography",
+        "Gestures & animations"
+      ],
+      "resources": [
+        {
+          "label": "Ionic Components",
+          "platform": "ionicframework.com",
+          "type": "docs"
+        },
+        {
+          "label": "Ionic Theming",
+          "platform": "ionicframework.com",
+          "type": "docs"
+        },
+        {
+          "label": "Ionic Getting Started",
+          "platform": "ionicframework.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a tabbed mobile UI using Ionic components with custom theming.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ionic-4",
+      "title": "Navigation & Routing",
+      "order": 4,
+      "techs": [
+        "Routing",
+        "Tabs",
+        "Modals"
+      ],
+      "description": "Structure your app's flows. Master Ionic navigation, tabs, modals and route parameters.",
+      "topics": [
+        "Angular Router with Ionic",
+        "Tabs & nested routes",
+        "Modals, popovers & alerts",
+        "Passing & reading route params",
+        "Navigation lifecycle hooks",
+        "Deep linking"
+      ],
+      "resources": [
+        {
+          "label": "Ionic Navigation",
+          "platform": "ionicframework.com",
+          "type": "docs"
+        },
+        {
+          "label": "Ionic — Tabs",
+          "platform": "ionicframework.com",
+          "type": "docs"
+        },
+        {
+          "label": "Ionic Lifecycle",
+          "platform": "ionicframework.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add tabbed navigation, a detail route with params, and a modal create flow.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "ionic-5",
+      "title": "State Management",
+      "order": 5,
+      "techs": [
+        "RxJS",
+        "Services",
+        "Signals"
+      ],
+      "description": "Manage app state cleanly. Use services, RxJS and signals to keep your UI in sync with data.",
+      "topics": [
+        "Service-based state",
+        "RxJS subjects & stores",
+        "Angular signals",
+        "Caching & sharing data",
+        "Loading & error state",
+        "When to add NgRx"
+      ],
+      "resources": [
+        {
+          "label": "RxJS Docs",
+          "platform": "rxjs.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Angular Signals",
+          "platform": "angular.dev",
+          "type": "docs"
+        },
+        {
+          "label": "NgRx Docs",
+          "platform": "ngrx.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a shared state service with RxJS that keeps two screens in sync.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ionic-6",
+      "title": "Native with Capacitor",
+      "order": 6,
+      "techs": [
+        "Capacitor",
+        "Native",
+        "Builds"
+      ],
+      "description": "Turn your web app into a real native app. Use Capacitor to build for iOS and Android.",
+      "topics": [
+        "Capacitor architecture",
+        "Adding iOS & Android platforms",
+        "The native project bridge",
+        "Live reload on device",
+        "App configuration & icons/splash",
+        "Building native binaries"
+      ],
+      "resources": [
+        {
+          "label": "Capacitor Docs",
+          "platform": "capacitorjs.com",
+          "type": "docs"
+        },
+        {
+          "label": "Ionic + Capacitor",
+          "platform": "ionicframework.com",
+          "type": "docs"
+        },
+        {
+          "label": "Capacitor Getting Started",
+          "platform": "capacitorjs.com",
+          "type": "course"
+        }
+      ],
+      "challenge": "Wrap your Ionic app with Capacitor and run it on an Android emulator and an iOS simulator.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ionic-7",
+      "title": "Device APIs & Plugins",
+      "order": 7,
+      "techs": [
+        "Plugins",
+        "Camera",
+        "Geolocation"
+      ],
+      "description": "Access native device features. Use Capacitor plugins for camera, geolocation, storage and more.",
+      "topics": [
+        "Core Capacitor plugins",
+        "Camera & photo gallery",
+        "Geolocation & maps",
+        "Local notifications",
+        "Filesystem & preferences",
+        "Writing a custom plugin"
+      ],
+      "resources": [
+        {
+          "label": "Capacitor Plugins",
+          "platform": "capacitorjs.com",
+          "type": "docs"
+        },
+        {
+          "label": "Capacitor — Camera",
+          "platform": "capacitorjs.com",
+          "type": "docs"
+        },
+        {
+          "label": "Awesome Capacitor",
+          "platform": "GitHub",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add photo capture and geolocation to your app using Capacitor plugins.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ionic-8",
+      "title": "Data, HTTP & Storage",
+      "order": 8,
+      "techs": [
+        "HttpClient",
+        "Storage",
+        "Auth"
+      ],
+      "description": "Connect your app to a backend and persist data. Consume APIs, store data locally, and handle auth.",
+      "topics": [
+        "Angular HttpClient & interceptors",
+        "REST API consumption",
+        "Local storage with Ionic Storage / SQLite",
+        "Authentication & token handling",
+        "Offline caching",
+        "Error & retry handling"
+      ],
+      "resources": [
+        {
+          "label": "Ionic Storage",
+          "platform": "ionicframework.com",
+          "type": "docs"
+        },
+        {
+          "label": "Angular HttpClient",
+          "platform": "angular.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Capacitor — Preferences",
+          "platform": "capacitorjs.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add token-based auth and local caching so the app loads instantly and survives offline.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "ionic-9",
+      "title": "Testing & Debugging",
+      "order": 9,
+      "techs": [
+        "Jasmine",
+        "Karma",
+        "DevTools"
+      ],
+      "description": "Keep your app reliable. Test Angular/Ionic code and debug on real devices.",
+      "topics": [
+        "Unit testing with Jasmine & Karma",
+        "Testing components & services",
+        "End-to-end testing",
+        "Debugging with Chrome DevTools",
+        "Native debugging on device",
+        "Performance profiling"
+      ],
+      "resources": [
+        {
+          "label": "Angular Testing",
+          "platform": "angular.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Ionic — Testing",
+          "platform": "ionicframework.com",
+          "type": "docs"
+        },
+        {
+          "label": "Capacitor — Debugging",
+          "platform": "capacitorjs.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write unit tests for your services and components and debug a layout issue on a device.",
+      "estimatedTime": "1–2 weeks"
+    },
+    {
+      "id": "ionic-10",
+      "title": "Building & Publishing",
+      "order": 10,
+      "techs": [
+        "App Store",
+        "Play Store",
+        "CI/CD"
+      ],
+      "description": "Release your Ionic app to the world. Build signed binaries and publish to the app stores.",
+      "topics": [
+        "Production builds & optimization",
+        "Code signing — iOS & Android",
+        "App store assets & metadata",
+        "Appflow / CI for Ionic",
+        "Over-the-air updates",
+        "Submission & review"
+      ],
+      "resources": [
+        {
+          "label": "Ionic — Deploying",
+          "platform": "ionicframework.com",
+          "type": "docs"
+        },
+        {
+          "label": "Capacitor — iOS/Android builds",
+          "platform": "capacitorjs.com",
+          "type": "docs"
+        },
+        {
+          "label": "Ionic Appflow",
+          "platform": "ionic.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Produce signed iOS and Android builds and complete a test submission to both stores.",
+      "estimatedTime": "2 weeks"
+    }
+  ]
+}

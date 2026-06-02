@@ -1,0 +1,3972 @@
+{
+  "dapp-developer": [
+    {
+      "id": "dapp-developer-1",
+      "title": "Web and Blockchain Fundamentals",
+      "order": 1,
+      "techs": [
+        "HTML",
+        "JavaScript",
+        "HTTP",
+        "Blockchain Basics"
+      ],
+      "description": "Understand how the web works and how blockchain differs from traditional client-server architecture. Learn about decentralization, consensus, and why smart contracts exist.",
+      "topics": [
+        "How HTTP and DNS work",
+        "What a blockchain is",
+        "Nodes, miners, and validators",
+        "Public vs private keys",
+        "Wallets and addresses",
+        "Transaction lifecycle"
+      ],
+      "resources": [
+        {
+          "label": "How the Web Works - MDN",
+          "platform": "MDN Web Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Blockchain Basics - Coursera",
+          "platform": "Coursera",
+          "type": "course"
+        },
+        {
+          "label": "But How Does Bitcoin Actually Work?",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Mastering Bitcoin",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Write a plain-text explanation of how a transaction goes from a user wallet to a confirmed block on Ethereum.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "dapp-developer-2",
+      "title": "Solidity Basics",
+      "order": 2,
+      "techs": [
+        "Solidity",
+        "Remix IDE",
+        "EVM",
+        "ABI"
+      ],
+      "description": "Learn the Solidity language syntax, data types, and how the EVM executes bytecode. Write and deploy your first smart contracts using Remix IDE.",
+      "topics": [
+        "State variables and functions",
+        "Value types vs reference types",
+        "Visibility modifiers",
+        "Constructor and fallback functions",
+        "Events and logs",
+        "ABI encoding"
+      ],
+      "resources": [
+        {
+          "label": "Solidity Docs",
+          "platform": "soliditylang.org",
+          "type": "docs"
+        },
+        {
+          "label": "CryptoZombies",
+          "platform": "CryptoZombies",
+          "type": "course"
+        },
+        {
+          "label": "Solidity Tutorial - freeCodeCamp",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy a simple storage contract on Remix that stores and retrieves a number, then read the emitted event log.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "dapp-developer-3",
+      "title": "Ethereum Developer Toolchain",
+      "order": 3,
+      "techs": [
+        "Hardhat",
+        "Node.js",
+        "ethers.js",
+        "dotenv"
+      ],
+      "description": "Set up a professional local Ethereum development environment using Hardhat. Learn to compile, test, and deploy contracts from the command line.",
+      "topics": [
+        "Hardhat project setup",
+        "Compiling contracts",
+        "Deploying to localhost",
+        "Writing Hardhat scripts",
+        "Using environment variables",
+        "Local forking with Hardhat Network"
+      ],
+      "resources": [
+        {
+          "label": "Hardhat Docs",
+          "platform": "hardhat.org",
+          "type": "docs"
+        },
+        {
+          "label": "Ethereum Dev Speed Run - scaffold-eth",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Full Stack Ethereum Development - Nader Dabit",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create a Hardhat project, write a deploy script for a simple counter contract, and log the deployed address to console.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "dapp-developer-4",
+      "title": "Connecting React to Ethereum with ethers.js",
+      "order": 4,
+      "techs": [
+        "React",
+        "ethers.js",
+        "MetaMask",
+        "JSON-RPC"
+      ],
+      "description": "Build a React frontend that connects to MetaMask and reads data from a deployed smart contract using ethers.js. Understand providers, signers, and contract instances.",
+      "topics": [
+        "ethers.js Provider and Signer",
+        "Connecting MetaMask via window.ethereum",
+        "Reading contract state",
+        "Sending transactions from React",
+        "Handling async state in React",
+        "Displaying wallet address and balance"
+      ],
+      "resources": [
+        {
+          "label": "ethers.js v6 Docs",
+          "platform": "docs.ethers.org",
+          "type": "docs"
+        },
+        {
+          "label": "Full Stack dApp Tutorial - Nader Dabit",
+          "platform": "Dev.to",
+          "type": "docs"
+        },
+        {
+          "label": "Build a dApp with React and Solidity",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a React page that connects to MetaMask, reads a value from your counter contract, and shows the current block number.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "dapp-developer-5",
+      "title": "Smart Contract Patterns and ERC Standards",
+      "order": 5,
+      "techs": [
+        "Solidity",
+        "OpenZeppelin",
+        "ERC-20",
+        "ERC-721"
+      ],
+      "description": "Learn widely used smart contract design patterns and ERC token standards. Use OpenZeppelin contracts as audited base implementations.",
+      "topics": [
+        "ERC-20 token standard",
+        "ERC-721 NFT standard",
+        "Ownable and access control",
+        "Pausable pattern",
+        "Reentrancy guard",
+        "Proxy and upgrade patterns"
+      ],
+      "resources": [
+        {
+          "label": "OpenZeppelin Docs",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        },
+        {
+          "label": "Solidity Patterns",
+          "platform": "solidity-patterns.com",
+          "type": "docs"
+        },
+        {
+          "label": "Smart Contract Programmer - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy an ERC-20 token using OpenZeppelin, then write a React button that transfers tokens between two test accounts.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "dapp-developer-6",
+      "title": "Testing Smart Contracts",
+      "order": 6,
+      "techs": [
+        "Hardhat",
+        "Mocha",
+        "Chai",
+        "ethers.js"
+      ],
+      "description": "Write comprehensive unit and integration tests for smart contracts using Hardhat and Chai. Understand how to simulate time, blocks, and edge cases.",
+      "topics": [
+        "Unit testing with Hardhat + Chai",
+        "Testing events and reverts",
+        "Simulating time with evm_increaseTime",
+        "Fixtures and beforeEach setup",
+        "Gas usage assertions",
+        "Coverage reports with solidity-coverage"
+      ],
+      "resources": [
+        {
+          "label": "Hardhat Testing Docs",
+          "platform": "hardhat.org",
+          "type": "docs"
+        },
+        {
+          "label": "Testing Smart Contracts - Patrick Collins",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "solidity-coverage on npm",
+          "platform": "npmjs.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Achieve 100% line coverage on your ERC-20 contract, including testing transfer-fail and allowance edge cases.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "dapp-developer-7",
+      "title": "Testnets, IPFS, and Contract Verification",
+      "order": 7,
+      "techs": [
+        "Sepolia",
+        "IPFS",
+        "Etherscan",
+        "Alchemy"
+      ],
+      "description": "Deploy contracts to a public testnet using an RPC provider and verify source code on Etherscan. Store off-chain data on IPFS using Pinata or web3.storage.",
+      "topics": [
+        "Alchemy and Infura RPC endpoints",
+        "Deploying to Sepolia testnet",
+        "Etherscan contract verification via Hardhat",
+        "IPFS content addressing",
+        "Pinning files with Pinata",
+        "Linking IPFS URIs in contracts"
+      ],
+      "resources": [
+        {
+          "label": "Alchemy Docs",
+          "platform": "docs.alchemy.com",
+          "type": "docs"
+        },
+        {
+          "label": "IPFS Docs",
+          "platform": "docs.ipfs.tech",
+          "type": "docs"
+        },
+        {
+          "label": "Deploy to Testnet - Patrick Collins",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy a contract to Sepolia, verify it on Etherscan, then store a JSON metadata file on IPFS and log its CID.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "dapp-developer-8",
+      "title": "dApp UX - Transactions, Errors, and State",
+      "order": 8,
+      "techs": [
+        "React",
+        "ethers.js",
+        "Toast notifications",
+        "Loading states"
+      ],
+      "description": "Build production-quality dApp UX that handles pending transactions, user rejections, network errors, and chain switching. Display real-time feedback to users.",
+      "topics": [
+        "Transaction lifecycle states",
+        "Handling MetaMask rejection errors",
+        "Waiting for confirmations",
+        "Chain ID detection and switching",
+        "Toast or snackbar notifications",
+        "Optimistic UI updates"
+      ],
+      "resources": [
+        {
+          "label": "MetaMask Docs - Error Handling",
+          "platform": "docs.metamask.io",
+          "type": "docs"
+        },
+        {
+          "label": "react-hot-toast Docs",
+          "platform": "react-hot-toast.com",
+          "type": "docs"
+        },
+        {
+          "label": "Web3 UX Patterns",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add full transaction lifecycle UI to your dApp: pending spinner, success message, and friendly error handling for rejected or failed transactions.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "dapp-developer-9",
+      "title": "Smart Contract Security Fundamentals",
+      "order": 9,
+      "techs": [
+        "Slither",
+        "Mythril",
+        "Solidity",
+        "Audit checklists"
+      ],
+      "description": "Learn the most common smart contract vulnerabilities and how to prevent them. Run automated security scanners and read through audit reports to build a security mindset.",
+      "topics": [
+        "Reentrancy attacks",
+        "Integer overflow and underflow",
+        "Access control flaws",
+        "Front-running and MEV",
+        "Slither static analysis",
+        "Reading audit reports"
+      ],
+      "resources": [
+        {
+          "label": "SWC Registry",
+          "platform": "swcregistry.io",
+          "type": "docs"
+        },
+        {
+          "label": "Slither Docs",
+          "platform": "github.com/crytic/slither",
+          "type": "docs"
+        },
+        {
+          "label": "Smart Contract Security - freeCodeCamp",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Trail of Bits Blog",
+          "platform": "blog.trailofbits.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Run Slither on your ERC-20 contract, fix every high and medium finding, then write a short threat model for a simple DEX.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "dapp-developer-10",
+      "title": "Mainnet Deployment and Production Readiness",
+      "order": 10,
+      "techs": [
+        "Ethereum Mainnet",
+        "Hardhat",
+        "Tenderly",
+        "Multisig"
+      ],
+      "description": "Deploy a fully tested and audited dApp to Ethereum mainnet using production-grade tooling. Set up monitoring, alerts, and a multisig for admin functions.",
+      "topics": [
+        "Mainnet deployment checklist",
+        "Gas optimization before launch",
+        "Tenderly monitoring and alerts",
+        "Gnosis Safe multisig setup",
+        "Upgrade strategy and timelocks",
+        "Post-deployment verification and incident response"
+      ],
+      "resources": [
+        {
+          "label": "Tenderly Docs",
+          "platform": "docs.tenderly.co",
+          "type": "docs"
+        },
+        {
+          "label": "Gnosis Safe Docs",
+          "platform": "docs.safe.global",
+          "type": "docs"
+        },
+        {
+          "label": "Mainnet Deployment Checklist - ConsenSys",
+          "platform": "consensys.github.io",
+          "type": "docs"
+        },
+        {
+          "label": "Ethereum Production Best Practices",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy your dApp to Ethereum mainnet (or a mainnet fork), set up a Tenderly alert for any failed transaction, and document your rollback plan.",
+      "estimatedTime": "2 weeks"
+    }
+  ],
+  "web3-frontend": [
+    {
+      "id": "web3-frontend-1",
+      "title": "Web and Ethereum Fundamentals for Frontend Devs",
+      "order": 1,
+      "techs": [
+        "JavaScript",
+        "React",
+        "Blockchain Basics",
+        "JSON-RPC"
+      ],
+      "description": "Understand the Ethereum JSON-RPC API and how browsers connect to wallets. Learn the difference between a provider, a signer, and a contract interface.",
+      "topics": [
+        "Ethereum accounts and transactions",
+        "JSON-RPC methods like eth_call and eth_sendTransaction",
+        "How injected providers work",
+        "React project setup with Vite",
+        "Wallet browser extensions",
+        "Reading on-chain data"
+      ],
+      "resources": [
+        {
+          "label": "Ethereum JSON-RPC Docs",
+          "platform": "ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "React Docs",
+          "platform": "react.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Ethereum for Frontend Devs",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Use window.ethereum directly in a plain HTML page to request accounts and display the connected address.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "web3-frontend-2",
+      "title": "viem - Low-Level Ethereum Client",
+      "order": 2,
+      "techs": [
+        "viem",
+        "TypeScript",
+        "Public Client",
+        "Wallet Client"
+      ],
+      "description": "Learn viem as a type-safe, modern alternative to ethers.js for Ethereum interactions. Build public clients for reading and wallet clients for sending transactions.",
+      "topics": [
+        "Creating a publicClient",
+        "Reading contract data with readContract",
+        "Encoding calldata",
+        "Handling BigInt in JavaScript",
+        "Chain configuration in viem",
+        "Error types in viem"
+      ],
+      "resources": [
+        {
+          "label": "viem Docs",
+          "platform": "viem.sh",
+          "type": "docs"
+        },
+        {
+          "label": "viem vs ethers.js comparison",
+          "platform": "viem.sh",
+          "type": "docs"
+        },
+        {
+          "label": "viem Introduction - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Use viem to read the total supply and name of a deployed ERC-20 token on a testnet, then display the values in a React component.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "web3-frontend-3",
+      "title": "wagmi - React Hooks for Ethereum",
+      "order": 3,
+      "techs": [
+        "wagmi",
+        "React",
+        "TypeScript",
+        "viem"
+      ],
+      "description": "Use wagmi hooks to manage wallet connections, account state, and contract reads in React applications. Understand how wagmi wraps viem under the hood.",
+      "topics": [
+        "WagmiProvider setup",
+        "useAccount and useConnect hooks",
+        "useReadContract and useWriteContract",
+        "useWaitForTransactionReceipt",
+        "Chain switching with useSwitchChain",
+        "Type generation with wagmi CLI"
+      ],
+      "resources": [
+        {
+          "label": "wagmi Docs",
+          "platform": "wagmi.sh",
+          "type": "docs"
+        },
+        {
+          "label": "wagmi v2 Migration Guide",
+          "platform": "wagmi.sh",
+          "type": "docs"
+        },
+        {
+          "label": "Building with wagmi - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a React component that uses wagmi to display wallet balance, let the user connect and disconnect, and read a contract value.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "web3-frontend-4",
+      "title": "RainbowKit - Wallet Connection UI",
+      "order": 4,
+      "techs": [
+        "RainbowKit",
+        "wagmi",
+        "React",
+        "CSS"
+      ],
+      "description": "Integrate RainbowKit to provide a polished multi-wallet connect modal with minimal configuration. Customize themes, chains, and wallet lists to match your brand.",
+      "topics": [
+        "RainbowKit ConnectButton",
+        "Custom theme with lightTheme and darkTheme",
+        "Restricting to specific chains",
+        "Adding custom wallets",
+        "Avatar and ENS display",
+        "Combining RainbowKit with TailwindCSS"
+      ],
+      "resources": [
+        {
+          "label": "RainbowKit Docs",
+          "platform": "rainbowkit.com",
+          "type": "docs"
+        },
+        {
+          "label": "RainbowKit Theming Guide",
+          "platform": "rainbowkit.com",
+          "type": "docs"
+        },
+        {
+          "label": "RainbowKit Setup Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Replace your custom connect button with RainbowKit, apply a dark theme, and restrict the app to Ethereum mainnet and Sepolia only.",
+      "estimatedTime": "3-4 days"
+    },
+    {
+      "id": "web3-frontend-5",
+      "title": "Reading and Displaying On-Chain Data",
+      "order": 5,
+      "techs": [
+        "wagmi",
+        "viem",
+        "React Query",
+        "ABI"
+      ],
+      "description": "Build data-rich dashboards that read multiple contract values, handle loading states, and refresh on block updates. Understand caching and revalidation patterns.",
+      "topics": [
+        "useReadContracts for batch reads",
+        "watchContractEvent for live updates",
+        "React Query cache and stale time",
+        "Formatting BigInt for display",
+        "ENS resolution with useEnsName",
+        "Handling reverts gracefully"
+      ],
+      "resources": [
+        {
+          "label": "wagmi useReadContracts Docs",
+          "platform": "wagmi.sh",
+          "type": "docs"
+        },
+        {
+          "label": "TanStack Query Docs",
+          "platform": "tanstack.com",
+          "type": "docs"
+        },
+        {
+          "label": "On-Chain Data Dashboard Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a token dashboard that displays name, symbol, total supply, and the connected wallet balance using a single useReadContracts call.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "web3-frontend-6",
+      "title": "Writing Transactions and User Flows",
+      "order": 6,
+      "techs": [
+        "wagmi",
+        "viem",
+        "React",
+        "Toast notifications"
+      ],
+      "description": "Implement complete write flows including form validation, transaction submission, confirmation waiting, and error handling. Build flows that feel reliable to users.",
+      "topics": [
+        "useWriteContract and simulate first",
+        "useWaitForTransactionReceipt polling",
+        "Gas estimation and limits",
+        "User rejection error handling",
+        "Multi-step transaction flows",
+        "Approvals before interactions"
+      ],
+      "resources": [
+        {
+          "label": "wagmi useWriteContract Docs",
+          "platform": "wagmi.sh",
+          "type": "docs"
+        },
+        {
+          "label": "ERC-20 Approve and Transfer Pattern",
+          "platform": "ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "Transaction UX Best Practices",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build an ERC-20 transfer form with approve, transfer, and full transaction state feedback including pending, success, and error messages.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "web3-frontend-7",
+      "title": "Multi-Chain and Network Handling",
+      "order": 7,
+      "techs": [
+        "wagmi",
+        "viem",
+        "RainbowKit",
+        "Chain configs"
+      ],
+      "description": "Build apps that work seamlessly across multiple EVM-compatible chains. Handle network detection, chain switching prompts, and chain-specific contract addresses.",
+      "topics": [
+        "Defining custom chains in viem",
+        "useSwitchChain hook",
+        "Chain-specific contract address mapping",
+        "Detecting wrong network and showing warnings",
+        "Adding custom RPC URLs",
+        "Testing against L2 networks like Arbitrum and Optimism"
+      ],
+      "resources": [
+        {
+          "label": "viem Custom Chains Docs",
+          "platform": "viem.sh",
+          "type": "docs"
+        },
+        {
+          "label": "wagmi Multi-Chain Docs",
+          "platform": "wagmi.sh",
+          "type": "docs"
+        },
+        {
+          "label": "Multi-Chain dApp Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Make your dApp work on Ethereum mainnet, Arbitrum, and Optimism with the correct contract address loaded per chain.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "web3-frontend-8",
+      "title": "Signatures, Auth, and Sign-In with Ethereum",
+      "order": 8,
+      "techs": [
+        "SIWE",
+        "wagmi",
+        "viem",
+        "JWT"
+      ],
+      "description": "Implement Sign-In with Ethereum (EIP-4361) for gasless authentication. Understand message signing, nonce-based anti-replay protection, and server-side verification.",
+      "topics": [
+        "EIP-4361 SIWE message format",
+        "useSignMessage hook",
+        "Nonce generation and storage",
+        "Server-side SIWE verification",
+        "Combining SIWE with JWT sessions",
+        "Typed data signing with EIP-712"
+      ],
+      "resources": [
+        {
+          "label": "SIWE Docs",
+          "platform": "docs.login.xyz",
+          "type": "docs"
+        },
+        {
+          "label": "EIP-712 Typed Signing",
+          "platform": "eips.ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "SIWE Implementation Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a SIWE login page that issues a JWT after signature verification and shows a gated dashboard to authenticated users only.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "web3-frontend-9",
+      "title": "Performance, Accessibility, and Testing",
+      "order": 9,
+      "techs": [
+        "Vitest",
+        "Testing Library",
+        "Lighthouse",
+        "MSW"
+      ],
+      "description": "Write unit and integration tests for Web3 React components using mocked providers. Audit performance and accessibility of your dApp and fix common issues.",
+      "topics": [
+        "Mocking wagmi hooks in Vitest",
+        "Testing wallet connect flows",
+        "Mock Service Worker for RPC calls",
+        "Lighthouse performance audit",
+        "WCAG accessibility for Web3 UIs",
+        "Snapshot testing for address display"
+      ],
+      "resources": [
+        {
+          "label": "wagmi Testing Docs",
+          "platform": "wagmi.sh",
+          "type": "docs"
+        },
+        {
+          "label": "MSW Docs",
+          "platform": "mswjs.io",
+          "type": "docs"
+        },
+        {
+          "label": "Testing Web3 React Apps - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write tests for your connect button, a contract read component, and a transfer form using mocked wagmi hooks, achieving 80% coverage.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "web3-frontend-10",
+      "title": "Production Build, Security, and Deployment",
+      "order": 10,
+      "techs": [
+        "Vercel",
+        "Next.js",
+        "CSP headers",
+        "RPC security"
+      ],
+      "description": "Harden and deploy your Web3 frontend to production with secure RPC key handling, Content Security Policy headers, and monitoring. Perform a security review of client-side code.",
+      "topics": [
+        "Hiding RPC keys via proxy API routes",
+        "Content Security Policy for dApps",
+        "Vercel deployment and environment variables",
+        "Bundle analysis with vite-bundle-visualizer",
+        "Rate limiting RPC usage",
+        "Front-end phishing and address spoofing mitigations"
+      ],
+      "resources": [
+        {
+          "label": "Vercel Deployment Docs",
+          "platform": "vercel.com",
+          "type": "docs"
+        },
+        {
+          "label": "RPC Key Security Best Practices",
+          "platform": "docs.alchemy.com",
+          "type": "docs"
+        },
+        {
+          "label": "Web3 Frontend Security Checklist",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy your dApp to Vercel with RPC calls proxied through an API route, add strict CSP headers, and verify no API keys are exposed in the client bundle.",
+      "estimatedTime": "1 week"
+    }
+  ],
+  "defi-developer": [
+    {
+      "id": "defi-developer-1",
+      "title": "Web and Blockchain Fundamentals for DeFi",
+      "order": 1,
+      "techs": [
+        "Solidity",
+        "EVM",
+        "JavaScript",
+        "Blockchain"
+      ],
+      "description": "Build the conceptual foundation needed to understand decentralized finance protocols. Learn how Ethereum transactions, gas, and smart contract state enable financial primitives.",
+      "topics": [
+        "How Ethereum transactions work",
+        "Gas and EVM execution model",
+        "Smart contract state and storage slots",
+        "ERC-20 token standard",
+        "Liquidity and AMM concepts",
+        "DeFi protocol categories"
+      ],
+      "resources": [
+        {
+          "label": "Ethereum Docs - Transactions",
+          "platform": "ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "How DeFi Works - Finematics",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Mastering Ethereum",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Write a one-page summary explaining how an AMM pricing curve differs from a traditional order book exchange.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "defi-developer-2",
+      "title": "Solidity for DeFi - Core Patterns",
+      "order": 2,
+      "techs": [
+        "Solidity",
+        "OpenZeppelin",
+        "ERC-20",
+        "Interfaces"
+      ],
+      "description": "Master Solidity patterns critical to DeFi: interfaces, low-level calls, and token handling. Understand how protocols interact with each other through shared interfaces.",
+      "topics": [
+        "Solidity interfaces and abstract contracts",
+        "Low-level call and delegatecall",
+        "ERC-20 safeTransfer pattern",
+        "Reentrancy and checks-effects-interactions",
+        "Storage layout and packing",
+        "Custom errors and revert reasons"
+      ],
+      "resources": [
+        {
+          "label": "Solidity Docs",
+          "platform": "soliditylang.org",
+          "type": "docs"
+        },
+        {
+          "label": "OpenZeppelin Contracts Docs",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        },
+        {
+          "label": "DeFi Solidity Patterns - Smart Contract Programmer",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a Solidity contract that holds ERC-20 tokens and distributes them proportionally to depositors without using floating-point math.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "defi-developer-3",
+      "title": "Foundry - Professional Smart Contract Toolchain",
+      "order": 3,
+      "techs": [
+        "Foundry",
+        "Forge",
+        "Cast",
+        "Anvil"
+      ],
+      "description": "Set up the Foundry toolkit and learn to write tests in Solidity rather than JavaScript. Use Anvil for local forks and Cast for command-line contract interaction.",
+      "topics": [
+        "forge init and project structure",
+        "Writing Foundry tests with Test and assertEq",
+        "Mainnet forking with Anvil",
+        "Fuzzing with forge test --fuzz-runs",
+        "Gas snapshots with forge snapshot",
+        "Using Cast to call and send transactions"
+      ],
+      "resources": [
+        {
+          "label": "Foundry Book",
+          "platform": "book.getfoundry.sh",
+          "type": "docs"
+        },
+        {
+          "label": "Foundry Tutorial - Patrick Collins",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Forge Fuzzing Docs",
+          "platform": "book.getfoundry.sh",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Migrate an existing Hardhat test suite to Foundry and add a fuzz test that covers at least 10,000 random input combinations.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "defi-developer-4",
+      "title": "Building Automated Market Makers",
+      "order": 4,
+      "techs": [
+        "Solidity",
+        "Foundry",
+        "AMM Math",
+        "ERC-20"
+      ],
+      "description": "Implement a simplified constant-product AMM from scratch to understand how Uniswap V2 pricing and liquidity work. Learn how LP tokens represent pool shares.",
+      "topics": [
+        "x*y=k invariant formula",
+        "Swap fee calculation",
+        "Mint and burn LP tokens",
+        "Price impact and slippage",
+        "Concentrated liquidity concepts",
+        "Protocol fee mechanisms"
+      ],
+      "resources": [
+        {
+          "label": "Uniswap V2 Whitepaper",
+          "platform": "uniswap.org",
+          "type": "docs"
+        },
+        {
+          "label": "Build Uniswap V1 from Scratch - Smart Contract Programmer",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Uniswap V3 Book",
+          "platform": "uniswapv3book.com",
+          "type": "book"
+        }
+      ],
+      "challenge": "Build and test a minimal AMM that correctly calculates output amounts including a 0.3% fee, verified with at least 5 Foundry fuzz tests.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "defi-developer-5",
+      "title": "Price Oracles and External Data",
+      "order": 5,
+      "techs": [
+        "Chainlink",
+        "Uniswap TWAP",
+        "Solidity",
+        "Oracles"
+      ],
+      "description": "Integrate price oracles into DeFi contracts for safe, manipulation-resistant on-chain pricing. Compare Chainlink push oracles vs Uniswap TWAP pull oracles.",
+      "topics": [
+        "Chainlink AggregatorV3Interface",
+        "Reading price feeds on-chain",
+        "Oracle staleness checks",
+        "Uniswap V3 TWAP calculation",
+        "Flash loan oracle manipulation attacks",
+        "Choosing oracles for different use cases"
+      ],
+      "resources": [
+        {
+          "label": "Chainlink Data Feeds Docs",
+          "platform": "docs.chain.link",
+          "type": "docs"
+        },
+        {
+          "label": "Uniswap TWAP Oracle Docs",
+          "platform": "docs.uniswap.org",
+          "type": "docs"
+        },
+        {
+          "label": "Oracle Manipulation Explained - Finematics",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a contract that reads a Chainlink price feed and reverts if the data is stale by more than 1 hour, tested on a mainnet Anvil fork.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "defi-developer-6",
+      "title": "Lending and Borrowing Protocols",
+      "order": 6,
+      "techs": [
+        "Solidity",
+        "Foundry",
+        "Collateral math",
+        "Liquidation"
+      ],
+      "description": "Build a simplified lending protocol with collateral requirements, health factor tracking, and liquidation logic. Learn how Aave and Compound manage risk.",
+      "topics": [
+        "Collateral ratio and health factor",
+        "Interest rate models",
+        "Liquidation bonus and thresholds",
+        "cToken and aToken share models",
+        "Flash loans for liquidation bots",
+        "Governance parameters for lending markets"
+      ],
+      "resources": [
+        {
+          "label": "Aave V3 Docs",
+          "platform": "docs.aave.com",
+          "type": "docs"
+        },
+        {
+          "label": "Compound Protocol Whitepaper",
+          "platform": "compound.finance",
+          "type": "docs"
+        },
+        {
+          "label": "Build a Lending Protocol - Smart Contract Programmer",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a minimal lending contract where users deposit ETH as collateral and borrow an ERC-20, with a liquidation function that becomes available below 1.2 health factor.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "defi-developer-7",
+      "title": "Flash Loans",
+      "order": 7,
+      "techs": [
+        "Solidity",
+        "Aave",
+        "Uniswap V3",
+        "Foundry"
+      ],
+      "description": "Understand flash loans as atomic, uncollateralized loans used for arbitrage, liquidations, and collateral swaps. Implement a flash loan receiver contract.",
+      "topics": [
+        "Flash loan callback pattern",
+        "Aave flash loan interface",
+        "Uniswap V3 flash swap",
+        "Arbitrage between two AMMs",
+        "Collateral swap with flash loans",
+        "Flash loan fee accounting"
+      ],
+      "resources": [
+        {
+          "label": "Aave Flash Loans Docs",
+          "platform": "docs.aave.com",
+          "type": "docs"
+        },
+        {
+          "label": "Uniswap Flash Swaps Docs",
+          "platform": "docs.uniswap.org",
+          "type": "docs"
+        },
+        {
+          "label": "Flash Loans Explained - Finematics",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a flash loan receiver that borrows USDC from Aave, performs a simulated arbitrage swap, and repays with fee - tested on a mainnet Anvil fork.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "defi-developer-8",
+      "title": "Yield Strategies and Vaults",
+      "order": 8,
+      "techs": [
+        "Solidity",
+        "ERC-4626",
+        "Foundry",
+        "Compound"
+      ],
+      "description": "Implement ERC-4626 tokenized vault contracts that automate yield strategies. Learn how yield aggregators like Yearn compose multiple protocols.",
+      "topics": [
+        "ERC-4626 vault standard",
+        "Deposit and withdraw share math",
+        "Yield strategy composition",
+        "Harvesting and compounding rewards",
+        "Slippage and vault entry/exit fees",
+        "Emergency withdrawal and pause mechanisms"
+      ],
+      "resources": [
+        {
+          "label": "ERC-4626 EIP",
+          "platform": "eips.ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "OpenZeppelin ERC-4626 Docs",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        },
+        {
+          "label": "Build a Yield Vault - Smart Contract Programmer",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build an ERC-4626 vault that deposits underlying tokens into Compound and compounds accrued COMP rewards on each deposit.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "defi-developer-9",
+      "title": "DeFi Security and Attack Vectors",
+      "order": 9,
+      "techs": [
+        "Slither",
+        "Foundry",
+        "Echidna",
+        "Audit reports"
+      ],
+      "description": "Study the most common DeFi-specific attack vectors including reentrancy, oracle manipulation, governance attacks, and sandwich attacks. Reproduce past exploits in a test environment.",
+      "topics": [
+        "Reentrancy attack variants",
+        "Price oracle manipulation",
+        "Governance attack via flash loans",
+        "Sandwich and front-running attacks",
+        "Echidna property-based fuzzing",
+        "Reading and learning from public audit reports"
+      ],
+      "resources": [
+        {
+          "label": "Rekt News - DeFi Exploits",
+          "platform": "rekt.news",
+          "type": "docs"
+        },
+        {
+          "label": "Echidna Fuzzer Docs",
+          "platform": "github.com/crytic/echidna",
+          "type": "docs"
+        },
+        {
+          "label": "DeFi Security Summit Talks",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "How to Secure Smart Contracts - Trail of Bits",
+          "platform": "blog.trailofbits.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Reproduce the reentrancy exploit from The DAO hack in a Foundry test, then patch it and show the patched version passes all tests.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "defi-developer-10",
+      "title": "Mainnet Deployment and Protocol Launch",
+      "order": 10,
+      "techs": [
+        "Foundry",
+        "Ethereum Mainnet",
+        "Tenderly",
+        "Multisig"
+      ],
+      "description": "Deploy a production DeFi protocol to Ethereum mainnet with full auditing, monitoring, and a timelocked governance multisig. Build the operational runbook for incident response.",
+      "topics": [
+        "Pre-launch audit checklist",
+        "Timelock controller for parameter changes",
+        "Gnosis Safe multisig for protocol admin",
+        "Tenderly alerts on protocol health",
+        "Mainnet fork final testing",
+        "Bug bounty setup on Immunefi"
+      ],
+      "resources": [
+        {
+          "label": "Immunefi Docs",
+          "platform": "immunefi.com",
+          "type": "docs"
+        },
+        {
+          "label": "OpenZeppelin TimelockController Docs",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        },
+        {
+          "label": "DeFi Protocol Launch Checklist",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Tenderly Monitoring Docs",
+          "platform": "docs.tenderly.co",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy your lending protocol to a mainnet Anvil fork, run the full audit checklist, set up a Tenderly alert for health factor breaches, and write an incident response plan.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "nft-developer": [
+    {
+      "id": "nft-developer-1",
+      "title": "Web and Blockchain Basics for NFT Developers",
+      "order": 1,
+      "techs": [
+        "HTML",
+        "JavaScript",
+        "Ethereum",
+        "Blockchain"
+      ],
+      "description": "Understand the basics of how blockchains work and what makes NFTs unique compared to fungible tokens. Learn about digital ownership, provenance, and on-chain vs off-chain data.",
+      "topics": [
+        "Blockchain immutability and provenance",
+        "Fungible vs non-fungible tokens",
+        "What metadata means for NFTs",
+        "How wallets own tokens",
+        "Marketplaces and royalties overview",
+        "Gas and transaction costs"
+      ],
+      "resources": [
+        {
+          "label": "NFTs Explained - ethereum.org",
+          "platform": "ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "What is an NFT? - Finematics",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Mastering Ethereum",
+          "platform": "O'Reilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Write a plain description of how owning an NFT differs from owning a JPEG file on your hard drive, referencing on-chain ownership records.",
+      "estimatedTime": "3-4 days"
+    },
+    {
+      "id": "nft-developer-2",
+      "title": "Solidity and ERC-721 Standard",
+      "order": 2,
+      "techs": [
+        "Solidity",
+        "ERC-721",
+        "OpenZeppelin",
+        "Remix"
+      ],
+      "description": "Study the ERC-721 standard interface and implement a basic NFT contract using OpenZeppelin. Understand the tokenId model, ownership mapping, and approval mechanics.",
+      "topics": [
+        "ERC-721 interface functions",
+        "ownerOf and balanceOf",
+        "mint and safeMint functions",
+        "Approval and transferFrom",
+        "OpenZeppelin ERC721 base contract",
+        "tokenURI function"
+      ],
+      "resources": [
+        {
+          "label": "EIP-721 Standard",
+          "platform": "eips.ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "OpenZeppelin ERC-721 Docs",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        },
+        {
+          "label": "Build an NFT Contract - freeCodeCamp",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy an ERC-721 contract on Remix that mints tokens with sequential IDs and stores a custom name for each token.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "nft-developer-3",
+      "title": "NFT Metadata and IPFS",
+      "order": 3,
+      "techs": [
+        "IPFS",
+        "Pinata",
+        "JSON Metadata",
+        "Solidity"
+      ],
+      "description": "Create and pin NFT metadata JSON files to IPFS and reference them in your contract via tokenURI. Understand the metadata standard used by OpenSea and other marketplaces.",
+      "topics": [
+        "NFT metadata JSON schema",
+        "Uploading images to IPFS via Pinata",
+        "Pinning metadata JSON files",
+        "Setting tokenURI in contracts",
+        "Base URI pattern for collections",
+        "On-chain vs off-chain metadata tradeoffs"
+      ],
+      "resources": [
+        {
+          "label": "OpenSea Metadata Standards",
+          "platform": "docs.opensea.io",
+          "type": "docs"
+        },
+        {
+          "label": "IPFS Docs",
+          "platform": "docs.ipfs.tech",
+          "type": "docs"
+        },
+        {
+          "label": "NFT Metadata Tutorial - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Upload 5 images and 5 metadata JSON files to IPFS, then deploy an NFT contract where each token correctly resolves to its metadata via tokenURI.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "nft-developer-4",
+      "title": "NFT Minting Mechanics",
+      "order": 4,
+      "techs": [
+        "Solidity",
+        "Hardhat",
+        "OpenZeppelin",
+        "Merkle Trees"
+      ],
+      "description": "Build NFT minting contracts with supply caps, allowlists using Merkle proofs, and public sale phases. Implement per-wallet mint limits and reveal mechanics.",
+      "topics": [
+        "Max supply and counter pattern",
+        "Allowlist with Merkle proof verification",
+        "Public and presale phases",
+        "Per-wallet mint limits with mapping",
+        "Reveal mechanic with placeholder URI",
+        "Withdraw function for minting revenue"
+      ],
+      "resources": [
+        {
+          "label": "OpenZeppelin Utilities - MerkleProof",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        },
+        {
+          "label": "NFT Allowlist with Merkle Tree",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Hardhat Docs",
+          "platform": "hardhat.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build an NFT contract with a 1,000-token supply cap, an allowlist of 100 wallets using a Merkle root, and a 2-per-wallet public mint limit.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "nft-developer-5",
+      "title": "ERC-1155 Multi-Token Standard",
+      "order": 5,
+      "techs": [
+        "ERC-1155",
+        "Solidity",
+        "OpenZeppelin",
+        "Hardhat"
+      ],
+      "description": "Learn ERC-1155 for efficient multi-token contracts that support both fungible and non-fungible tokens in a single deployment. Build a game item contract as a practical example.",
+      "topics": [
+        "ERC-1155 vs ERC-721 tradeoffs",
+        "Batch mint and batch transfer",
+        "balanceOfBatch function",
+        "Metadata URI with id substitution",
+        "Semi-fungible tokens",
+        "Approval for all operators"
+      ],
+      "resources": [
+        {
+          "label": "EIP-1155 Standard",
+          "platform": "eips.ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "OpenZeppelin ERC-1155 Docs",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        },
+        {
+          "label": "ERC-1155 Explained - Smart Contract Programmer",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build an ERC-1155 contract representing 3 types of game items with different max supplies, and batch mint a starter pack of all 3 to a test address.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "nft-developer-6",
+      "title": "NFT Royalties and Marketplace Integration",
+      "order": 6,
+      "techs": [
+        "ERC-2981",
+        "Solidity",
+        "OpenSea",
+        "Blur"
+      ],
+      "description": "Implement on-chain royalty standards using ERC-2981 and understand how NFT marketplaces enforce or bypass royalties. Learn about creator fee policies across platforms.",
+      "topics": [
+        "ERC-2981 royaltyInfo function",
+        "Royalty basis points math",
+        "OpenSea operator filter registry",
+        "Marketplace-specific royalty enforcement",
+        "Royalty recipient splitting",
+        "On-chain royalty vs off-chain policy debate"
+      ],
+      "resources": [
+        {
+          "label": "EIP-2981 Standard",
+          "platform": "eips.ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "OpenSea Creator Fees Docs",
+          "platform": "docs.opensea.io",
+          "type": "docs"
+        },
+        {
+          "label": "NFT Royalties Deep Dive - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add ERC-2981 to your NFT contract with a 5% royalty, write a test asserting the correct royalty amount for any sale price, and verify it on a testnet marketplace.",
+      "estimatedTime": "3-4 days"
+    },
+    {
+      "id": "nft-developer-7",
+      "title": "On-Chain Generative NFTs and SVG Art",
+      "order": 7,
+      "techs": [
+        "Solidity",
+        "SVG",
+        "Base64",
+        "Randomness"
+      ],
+      "description": "Generate NFT artwork entirely on-chain using Solidity-produced SVGs encoded as base64 data URIs. Understand the tradeoffs between on-chain and off-chain storage for art.",
+      "topics": [
+        "Generating SVG strings in Solidity",
+        "Base64 encoding for data URIs",
+        "On-chain attribute randomness with blockhash",
+        "Chainlink VRF for verifiable randomness",
+        "Dynamic NFTs that change state",
+        "Gas cost of on-chain data"
+      ],
+      "resources": [
+        {
+          "label": "Chainlink VRF Docs",
+          "platform": "docs.chain.link",
+          "type": "docs"
+        },
+        {
+          "label": "On-Chain SVG NFT Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "loot Project Inspiration",
+          "platform": "lootproject.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a fully on-chain NFT that generates a unique SVG based on the tokenId, with at least 3 randomized visual attributes stored in the token URI.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "nft-developer-8",
+      "title": "NFT Frontend with React and ethers.js",
+      "order": 8,
+      "techs": [
+        "React",
+        "ethers.js",
+        "wagmi",
+        "IPFS"
+      ],
+      "description": "Build a minting website that connects to MetaMask, displays collection info, and handles mint transactions with proper feedback. Fetch and render NFT metadata from IPFS.",
+      "topics": [
+        "Connecting MetaMask with wagmi",
+        "Mint button with transaction state",
+        "Fetching tokenURI and rendering metadata",
+        "Gallery view with paginated NFTs",
+        "Display owned tokens by address",
+        "Countdown timer for sale phases"
+      ],
+      "resources": [
+        {
+          "label": "wagmi Docs",
+          "platform": "wagmi.sh",
+          "type": "docs"
+        },
+        {
+          "label": "NFT Minting Site Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "RainbowKit Docs",
+          "platform": "rainbowkit.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a minting page that shows total minted vs supply, lets users mint 1-5 NFTs, and displays a gallery of their owned tokens fetched from the contract.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "nft-developer-9",
+      "title": "NFT Contract Security and Testing",
+      "order": 9,
+      "techs": [
+        "Hardhat",
+        "Foundry",
+        "Slither",
+        "Fuzzing"
+      ],
+      "description": "Audit your NFT contracts for common vulnerabilities including reentrancy on mint, supply manipulation, and metadata override attacks. Write comprehensive test suites.",
+      "topics": [
+        "Reentrancy in ERC-721 safe transfers",
+        "Supply cap bypass via batch mint",
+        "Merkle proof front-running",
+        "Metadata URI manipulation",
+        "Fuzz testing mint and transfer functions",
+        "Slither NFT-specific detectors"
+      ],
+      "resources": [
+        {
+          "label": "Slither Docs",
+          "platform": "github.com/crytic/slither",
+          "type": "docs"
+        },
+        {
+          "label": "Foundry Book - Fuzzing",
+          "platform": "book.getfoundry.sh",
+          "type": "docs"
+        },
+        {
+          "label": "NFT Smart Contract Security - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Run Slither and a 50,000-run Foundry fuzz test on your minting contract, fix all findings, and document each vulnerability and its fix.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "nft-developer-10",
+      "title": "Mainnet Launch and Collection Operations",
+      "order": 10,
+      "techs": [
+        "Ethereum Mainnet",
+        "OpenSea",
+        "Gnosis Safe",
+        "Tenderly"
+      ],
+      "description": "Launch an NFT collection on Ethereum mainnet with a verified contract, marketplace listings, and an admin multisig for revenue withdrawals. Set up post-launch monitoring.",
+      "topics": [
+        "Mainnet deployment with Hardhat",
+        "Etherscan contract verification",
+        "OpenSea collection setup and metadata",
+        "Gnosis Safe for team fund management",
+        "Tenderly mint event monitoring",
+        "Reveal transaction timing"
+      ],
+      "resources": [
+        {
+          "label": "OpenSea Collection Manager Docs",
+          "platform": "docs.opensea.io",
+          "type": "docs"
+        },
+        {
+          "label": "Gnosis Safe Docs",
+          "platform": "docs.safe.global",
+          "type": "docs"
+        },
+        {
+          "label": "NFT Launch Checklist",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy and verify your NFT contract on mainnet, set up the OpenSea collection page, and configure a Tenderly webhook alert for any mint that fails.",
+      "estimatedTime": "1-2 weeks"
+    }
+  ],
+  "web3-fullstack": [
+    {
+      "id": "web3-fullstack-1",
+      "title": "Web and Blockchain Fundamentals",
+      "order": 1,
+      "techs": [
+        "JavaScript",
+        "React",
+        "Ethereum",
+        "Next.js"
+      ],
+      "description": "Understand the full-stack architecture of a dApp, connecting smart contracts on-chain to a web frontend and an off-chain indexing layer. Learn why each layer exists.",
+      "topics": [
+        "Traditional vs decentralized architecture",
+        "Role of smart contracts as backend",
+        "What an indexer does and why it is needed",
+        "JSON-RPC and WebSocket providers",
+        "Next.js vs plain React for dApps",
+        "IPFS and Arweave for off-chain storage"
+      ],
+      "resources": [
+        {
+          "label": "Full-Stack dApp Architecture - ethereum.org",
+          "platform": "ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "Next.js Docs",
+          "platform": "nextjs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Web3 Full Stack Overview - Nader Dabit",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Draw a labeled architecture diagram for a full-stack dApp showing smart contract, frontend, indexer, and wallet interaction layers.",
+      "estimatedTime": "3-4 days"
+    },
+    {
+      "id": "web3-fullstack-2",
+      "title": "Solidity Smart Contract Development",
+      "order": 2,
+      "techs": [
+        "Solidity",
+        "OpenZeppelin",
+        "EVM",
+        "Remix"
+      ],
+      "description": "Write production-quality Solidity contracts using OpenZeppelin base classes and best practices. Understand events as the primary data emission mechanism for indexers.",
+      "topics": [
+        "Solidity data types and visibility",
+        "Events and indexed parameters",
+        "OpenZeppelin access control",
+        "Custom errors for gas efficiency",
+        "Contract interfaces",
+        "Natspec documentation"
+      ],
+      "resources": [
+        {
+          "label": "Solidity Docs",
+          "platform": "soliditylang.org",
+          "type": "docs"
+        },
+        {
+          "label": "OpenZeppelin Contracts Docs",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        },
+        {
+          "label": "Solidity Full Course - Patrick Collins",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a marketplace contract that emits a structured event for every listing and sale, with all indexed fields needed for efficient querying.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "web3-fullstack-3",
+      "title": "Hardhat - Contract Testing and Deployment",
+      "order": 3,
+      "techs": [
+        "Hardhat",
+        "ethers.js",
+        "Mocha",
+        "dotenv"
+      ],
+      "description": "Use Hardhat to write tests, run a local node, and deploy contracts to testnets. Build reusable deploy scripts that track deployed addresses per network.",
+      "topics": [
+        "Hardhat project configuration",
+        "Writing and running Mocha tests",
+        "Deploying with Hardhat Ignition or scripts",
+        "Storing deployed addresses per network",
+        "Local network and forking",
+        "Hardhat console for debugging"
+      ],
+      "resources": [
+        {
+          "label": "Hardhat Docs",
+          "platform": "hardhat.org",
+          "type": "docs"
+        },
+        {
+          "label": "Hardhat Ignition Docs",
+          "platform": "hardhat.org",
+          "type": "docs"
+        },
+        {
+          "label": "Hardhat Full Tutorial - freeCodeCamp",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a full Hardhat test suite for your marketplace contract covering all public functions and edge cases, then deploy to Sepolia.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "web3-fullstack-4",
+      "title": "Next.js Frontend with wagmi and RainbowKit",
+      "order": 4,
+      "techs": [
+        "Next.js",
+        "wagmi",
+        "RainbowKit",
+        "TypeScript"
+      ],
+      "description": "Build a Next.js dApp frontend with wagmi hooks for contract interaction and RainbowKit for wallet connection. Set up the provider tree correctly for SSR.",
+      "topics": [
+        "Next.js app router setup",
+        "Configuring WagmiProvider with Next.js",
+        "Server vs client component split",
+        "RainbowKit ConnectButton in Next.js",
+        "Reading contract data with useReadContract",
+        "Writing transactions with useWriteContract"
+      ],
+      "resources": [
+        {
+          "label": "Next.js Docs",
+          "platform": "nextjs.org",
+          "type": "docs"
+        },
+        {
+          "label": "wagmi with Next.js Guide",
+          "platform": "wagmi.sh",
+          "type": "docs"
+        },
+        {
+          "label": "Build a Full Stack dApp with Next.js",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a Next.js page that lists marketplace items from the contract using useReadContract and shows the connected wallet's listed items.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "web3-fullstack-5",
+      "title": "The Graph - Subgraph Development",
+      "order": 5,
+      "techs": [
+        "The Graph",
+        "GraphQL",
+        "AssemblyScript",
+        "YAML"
+      ],
+      "description": "Build and deploy a subgraph that indexes events from your smart contract into a queryable GraphQL API. Write entity schemas and mapping handlers in AssemblyScript.",
+      "topics": [
+        "Subgraph manifest and schema",
+        "Defining GraphQL entities",
+        "Writing event handlers in AssemblyScript",
+        "Deploying to the hosted service or Subgraph Studio",
+        "Writing GraphQL queries",
+        "Handling contract upgrades in subgraphs"
+      ],
+      "resources": [
+        {
+          "label": "The Graph Docs",
+          "platform": "thegraph.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Building Your First Subgraph",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "GraphQL Docs",
+          "platform": "graphql.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy a subgraph for your marketplace contract that indexes all listings and sales, then query the last 10 sales with GraphQL.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "web3-fullstack-6",
+      "title": "Querying Subgraphs from the Frontend",
+      "order": 6,
+      "techs": [
+        "Next.js",
+        "Apollo Client",
+        "The Graph",
+        "GraphQL"
+      ],
+      "description": "Integrate Apollo Client or urql into your Next.js app to query subgraph data. Build paginated, filterable lists of on-chain events rendered server-side.",
+      "topics": [
+        "Apollo Client setup in Next.js",
+        "Writing and executing GraphQL queries",
+        "Pagination with first and skip",
+        "Filtering and ordering in GraphQL",
+        "Server-side rendering with Apollo",
+        "Combining subgraph data with live contract reads"
+      ],
+      "resources": [
+        {
+          "label": "Apollo Client Docs",
+          "platform": "apollographql.com",
+          "type": "docs"
+        },
+        {
+          "label": "urql Docs",
+          "platform": "urql.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Query Subgraphs with Apollo - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Replace all direct contract reads in your listing page with Apollo Client queries to the subgraph, adding pagination for collections over 20 items.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "web3-fullstack-7",
+      "title": "File Storage - IPFS and Arweave",
+      "order": 7,
+      "techs": [
+        "IPFS",
+        "Arweave",
+        "Pinata",
+        "Next.js"
+      ],
+      "description": "Build file upload flows that store images and metadata on IPFS or Arweave from the browser. Learn the permanence tradeoffs between pinning services and Arweave.",
+      "topics": [
+        "Uploading files to IPFS via Pinata API",
+        "Arweave and Bundlr for permanent storage",
+        "Generating metadata JSON and pinning",
+        "Displaying IPFS content via gateways",
+        "IPFS CID determinism",
+        "Handling large files and upload progress"
+      ],
+      "resources": [
+        {
+          "label": "Pinata Docs",
+          "platform": "docs.pinata.cloud",
+          "type": "docs"
+        },
+        {
+          "label": "Arweave Docs",
+          "platform": "docs.arweave.org",
+          "type": "docs"
+        },
+        {
+          "label": "IPFS Upload from React - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a Next.js upload page that pins an image and a metadata JSON to IPFS via Pinata and displays the resulting IPFS URL on success.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "web3-fullstack-8",
+      "title": "Authentication and User Profiles",
+      "order": 8,
+      "techs": [
+        "SIWE",
+        "Next.js",
+        "Iron Session",
+        "The Graph"
+      ],
+      "description": "Implement wallet-based authentication with Sign-In with Ethereum and store per-user settings off-chain in a database. Combine on-chain identity with off-chain preferences.",
+      "topics": [
+        "SIWE message signing and verification",
+        "Iron Session for JWT-free session cookies",
+        "Next.js API routes for auth endpoints",
+        "Protecting pages with middleware",
+        "Combining SIWE identity with subgraph data",
+        "Linking wallet to off-chain profile"
+      ],
+      "resources": [
+        {
+          "label": "SIWE Docs",
+          "platform": "docs.login.xyz",
+          "type": "docs"
+        },
+        {
+          "label": "Iron Session Docs",
+          "platform": "github.com/vvo/iron-session",
+          "type": "docs"
+        },
+        {
+          "label": "SIWE with Next.js Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add SIWE auth to your app, protect a profile page with a session check, and store a display name per wallet in a Postgres database.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "web3-fullstack-9",
+      "title": "Testing, Performance, and Security",
+      "order": 9,
+      "techs": [
+        "Vitest",
+        "Playwright",
+        "Lighthouse",
+        "Slither"
+      ],
+      "description": "Test the full stack from smart contracts to frontend with unit, integration, and end-to-end tests. Audit for smart contract vulnerabilities and frontend security issues.",
+      "topics": [
+        "Playwright E2E tests for wallet flows",
+        "Mocking wagmi hooks in Vitest",
+        "Smart contract audit with Slither",
+        "Lighthouse performance and accessibility",
+        "Rate limiting API routes",
+        "CSP headers in Next.js"
+      ],
+      "resources": [
+        {
+          "label": "Playwright Docs",
+          "platform": "playwright.dev",
+          "type": "docs"
+        },
+        {
+          "label": "Slither Docs",
+          "platform": "github.com/crytic/slither",
+          "type": "docs"
+        },
+        {
+          "label": "Full Stack dApp Testing - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a Playwright test that connects a wallet, lists an item, and verifies it appears on the listings page using a Hardhat testnet.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "web3-fullstack-10",
+      "title": "Mainnet Launch and Production Operations",
+      "order": 10,
+      "techs": [
+        "Ethereum Mainnet",
+        "Vercel",
+        "The Graph Studio",
+        "Tenderly"
+      ],
+      "description": "Launch your full-stack dApp to production with verified contracts, a deployed subgraph on The Graph Network, and a Next.js frontend on Vercel. Set up monitoring across all layers.",
+      "topics": [
+        "Mainnet contract deployment and verification",
+        "Publishing subgraph to The Graph Network",
+        "Vercel production deployment with env vars",
+        "Tenderly production monitoring",
+        "GRT signal and indexer fees",
+        "Post-launch incident response plan"
+      ],
+      "resources": [
+        {
+          "label": "The Graph Studio Docs",
+          "platform": "thegraph.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Vercel Deployment Docs",
+          "platform": "vercel.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Production Web3 Full Stack - Nader Dabit",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Tenderly Monitoring Docs",
+          "platform": "docs.tenderly.co",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy all three layers to production - mainnet contract, The Graph Studio subgraph, and Vercel frontend - and document the full deployment process.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "wallet-developer": [
+    {
+      "id": "wallet-developer-1",
+      "title": "Web and Cryptography Fundamentals",
+      "order": 1,
+      "techs": [
+        "JavaScript",
+        "Cryptography",
+        "Ethereum",
+        "Browser APIs"
+      ],
+      "description": "Understand the cryptographic primitives that underpin Ethereum wallets including elliptic curve keys, hashing, and digital signatures. Learn how private keys control accounts.",
+      "topics": [
+        "Public and private key cryptography",
+        "secp256k1 elliptic curve",
+        "keccak-256 hashing",
+        "ECDSA digital signatures",
+        "How Ethereum addresses are derived",
+        "Mnemonics and HD wallets BIP-32 and BIP-39"
+      ],
+      "resources": [
+        {
+          "label": "Ethereum Accounts - ethereum.org",
+          "platform": "ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "BIP-39 Wordlist Spec",
+          "platform": "github.com/bitcoin/bips",
+          "type": "docs"
+        },
+        {
+          "label": "Cryptography Basics for Blockchain - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Using only ethers.js, generate a random mnemonic, derive the first 5 addresses from it, and verify by re-deriving from the same mnemonic.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "wallet-developer-2",
+      "title": "EIP-1193 - The Ethereum Provider API",
+      "order": 2,
+      "techs": [
+        "EIP-1193",
+        "JavaScript",
+        "JSON-RPC",
+        "Browser"
+      ],
+      "description": "Understand the EIP-1193 specification that defines how web pages communicate with Ethereum wallets through a standardized provider interface. Build a minimal provider consumer.",
+      "topics": [
+        "EIP-1193 provider interface",
+        "eth_requestAccounts and wallet_switchEthereumChain",
+        "Listening to accountsChanged and chainChanged events",
+        "eth_sendTransaction payload structure",
+        "personal_sign vs eth_sign",
+        "Provider error codes"
+      ],
+      "resources": [
+        {
+          "label": "EIP-1193 Specification",
+          "platform": "eips.ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "MetaMask Provider API Docs",
+          "platform": "docs.metamask.io",
+          "type": "docs"
+        },
+        {
+          "label": "EIP-1193 Deep Dive - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a plain HTML page with no libraries that uses window.ethereum to connect, send ETH, and display account and chain changes in real time.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "wallet-developer-3",
+      "title": "Key Management and Secure Storage",
+      "order": 3,
+      "techs": [
+        "ethers.js",
+        "Web Crypto API",
+        "Keystore",
+        "Hardware Wallets"
+      ],
+      "description": "Learn how to securely generate, encrypt, and store private keys in browser and mobile environments. Understand keystore file formats and hardware wallet integration.",
+      "topics": [
+        "ethers.js Wallet keystore encryption",
+        "Web Crypto API for browser-native crypto",
+        "Secure key storage patterns in browsers",
+        "Hardware wallet communication via U2F or HID",
+        "Key derivation with PBKDF2",
+        "Memory safety and key zeroing"
+      ],
+      "resources": [
+        {
+          "label": "ethers.js Wallet Docs",
+          "platform": "docs.ethers.org",
+          "type": "docs"
+        },
+        {
+          "label": "Web Crypto API - MDN",
+          "platform": "MDN Web Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Ethereum Keystore Explained - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a mini key manager that generates a wallet, encrypts the private key with a password using ethers.js keystore format, and decrypts it on demand.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "wallet-developer-4",
+      "title": "Transaction Construction and Signing",
+      "order": 4,
+      "techs": [
+        "ethers.js",
+        "viem",
+        "EIP-1559",
+        "TypeScript"
+      ],
+      "description": "Build the logic for constructing, signing, and broadcasting Ethereum transactions with proper nonce management, gas estimation, and EIP-1559 fee fields.",
+      "topics": [
+        "EIP-1559 transaction type 2 fields",
+        "maxFeePerGas and maxPriorityFeePerGas",
+        "Nonce management and race conditions",
+        "Gas estimation with eth_estimateGas",
+        "Signing without broadcasting",
+        "Transaction serialization and RLP encoding"
+      ],
+      "resources": [
+        {
+          "label": "EIP-1559 Specification",
+          "platform": "eips.ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "ethers.js Transaction Docs",
+          "platform": "docs.ethers.org",
+          "type": "docs"
+        },
+        {
+          "label": "EIP-1559 Gas Explained - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a function that constructs and signs an EIP-1559 transaction offline, logs the raw hex, and then broadcasts it separately using a provider.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "wallet-developer-5",
+      "title": "WalletConnect Protocol",
+      "order": 5,
+      "techs": [
+        "WalletConnect",
+        "Web3Modal",
+        "React",
+        "TypeScript"
+      ],
+      "description": "Integrate WalletConnect v2 to allow users to connect mobile wallets to desktop dApps via QR code or deep link. Understand the relay server and session lifecycle.",
+      "topics": [
+        "WalletConnect v2 protocol overview",
+        "AppKit setup and configuration",
+        "Session proposal and approval flow",
+        "Sending requests over WalletConnect sessions",
+        "Pairing URI and QR code generation",
+        "Session persistence and restoration"
+      ],
+      "resources": [
+        {
+          "label": "WalletConnect AppKit Docs",
+          "platform": "docs.walletconnect.com",
+          "type": "docs"
+        },
+        {
+          "label": "WalletConnect v2 Migration Guide",
+          "platform": "docs.walletconnect.com",
+          "type": "docs"
+        },
+        {
+          "label": "WalletConnect Integration Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a React app that uses WalletConnect AppKit to connect a mobile wallet via QR code, send a test transaction, and display the confirmation.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "wallet-developer-6",
+      "title": "Message Signing - EIP-712 Typed Data",
+      "order": 6,
+      "techs": [
+        "EIP-712",
+        "ethers.js",
+        "MetaMask",
+        "Solidity"
+      ],
+      "description": "Implement EIP-712 typed structured data signing for human-readable signing prompts. Build permit-style approvals and off-chain authorization flows.",
+      "topics": [
+        "EIP-712 domain and type definitions",
+        "Typed data hashing and signing",
+        "MetaMask eth_signTypedData_v4",
+        "Permit EIP-2612 for gasless approvals",
+        "Signature recovery and verification in Solidity",
+        "Replay protection with nonces"
+      ],
+      "resources": [
+        {
+          "label": "EIP-712 Specification",
+          "platform": "eips.ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "ethers.js signTypedData Docs",
+          "platform": "docs.ethers.org",
+          "type": "docs"
+        },
+        {
+          "label": "EIP-712 Typed Signing Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement an EIP-712 signed permit flow where a user signs off-chain approval and a relayer submits the transaction on their behalf.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "wallet-developer-7",
+      "title": "Account Abstraction - ERC-4337",
+      "order": 7,
+      "techs": [
+        "ERC-4337",
+        "Bundler",
+        "Paymaster",
+        "viem"
+      ],
+      "description": "Learn ERC-4337 account abstraction to build smart contract wallets with social recovery, gas sponsorship, and batch transactions. Understand UserOperation and bundler flow.",
+      "topics": [
+        "UserOperation structure and fields",
+        "EntryPoint contract interface",
+        "Bundler and mempool for 4337",
+        "Paymaster for gas sponsorship",
+        "Smart account factory deployment",
+        "Permissioned and social recovery modules"
+      ],
+      "resources": [
+        {
+          "label": "ERC-4337 Specification",
+          "platform": "eips.ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "StackUp Bundler Docs",
+          "platform": "docs.stackup.sh",
+          "type": "docs"
+        },
+        {
+          "label": "Account Abstraction Explained - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy a simple ERC-4337 smart account on a testnet and send a UserOperation that is sponsored by a paymaster covering gas fees.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "wallet-developer-8",
+      "title": "Phishing Prevention and User Security",
+      "order": 8,
+      "techs": [
+        "JavaScript",
+        "React",
+        "MetaMask Snaps",
+        "Security"
+      ],
+      "description": "Build wallet features that protect users from phishing, transaction simulation previews, and malicious contract interactions. Study common wallet attack vectors.",
+      "topics": [
+        "Address poisoning attacks",
+        "Transaction simulation before signing",
+        "Allowance risk warnings",
+        "MetaMask Snaps for custom security",
+        "Domain verification in signing prompts",
+        "Revoke.cash style allowance management"
+      ],
+      "resources": [
+        {
+          "label": "MetaMask Snaps Docs",
+          "platform": "docs.metamask.io",
+          "type": "docs"
+        },
+        {
+          "label": "Wallet Security Best Practices - ethereum.org",
+          "platform": "ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "Wallet Phishing Attacks Explained",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a React component that simulates a transaction using Tenderly before presenting it to the user, displaying token changes and warnings for high-risk functions.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "wallet-developer-9",
+      "title": "Multi-Chain and Cross-Chain Wallet Support",
+      "order": 9,
+      "techs": [
+        "viem",
+        "wagmi",
+        "CCIP",
+        "Chain configs"
+      ],
+      "description": "Extend your wallet to support multiple EVM-compatible chains and implement basic cross-chain asset bridging flows. Manage chain-specific RPCs and network switching.",
+      "topics": [
+        "EVM chain ID registry",
+        "Custom chain configuration in viem",
+        "Detecting and switching chains",
+        "Cross-chain bridge integration patterns",
+        "Chainlink CCIP for token transfers",
+        "Multi-chain address book UX"
+      ],
+      "resources": [
+        {
+          "label": "chainlist.org Chain Registry",
+          "platform": "chainlist.org",
+          "type": "docs"
+        },
+        {
+          "label": "Chainlink CCIP Docs",
+          "platform": "docs.chain.link",
+          "type": "docs"
+        },
+        {
+          "label": "Multi-Chain Wallet Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Extend your wallet UI to support Ethereum, Arbitrum, and Polygon simultaneously, displaying balances on all three chains with a single wallet connection.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "wallet-developer-10",
+      "title": "Production Wallet Security Audit and Launch",
+      "order": 10,
+      "techs": [
+        "Security",
+        "Penetration Testing",
+        "CSP",
+        "Key Storage"
+      ],
+      "description": "Perform a security audit of your wallet covering key storage, signing flows, network communication, and phishing surface area. Apply mitigations and launch with a bug bounty.",
+      "topics": [
+        "Browser extension security model",
+        "Content script and background page isolation",
+        "Secure context and HTTPS requirements",
+        "Key extraction threat modeling",
+        "OWASP top 10 for wallet apps",
+        "Bug bounty program setup"
+      ],
+      "resources": [
+        {
+          "label": "MetaMask Security Architecture Docs",
+          "platform": "docs.metamask.io",
+          "type": "docs"
+        },
+        {
+          "label": "OWASP Web Security Testing Guide",
+          "platform": "owasp.org",
+          "type": "docs"
+        },
+        {
+          "label": "Wallet Security Audit Walkthrough",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Immunefi Bug Bounty Docs",
+          "platform": "immunefi.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Complete a full threat model for your wallet using STRIDE, fix all critical and high findings, document mitigations, and publish a responsible disclosure policy.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "gamefi-developer": [
+    {
+      "id": "gamefi-developer-1",
+      "title": "Web, Blockchain, and Game Design Fundamentals",
+      "order": 1,
+      "techs": [
+        "JavaScript",
+        "Unity Basics",
+        "Ethereum",
+        "NFTs"
+      ],
+      "description": "Understand the GameFi model combining blockchain ownership with game mechanics. Learn how on-chain assets, play-to-earn economics, and NFT ownership work in games.",
+      "topics": [
+        "GameFi and play-to-earn model",
+        "On-chain vs off-chain game state",
+        "NFT items and characters",
+        "Token economics in games",
+        "Unity engine overview",
+        "Game loop and state management"
+      ],
+      "resources": [
+        {
+          "label": "GameFi Explained - Finematics",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Unity Learn Beginner Paths",
+          "platform": "learn.unity.com",
+          "type": "course"
+        },
+        {
+          "label": "Play-to-Earn Game Design - Blockchain Game Alliance",
+          "platform": "blockchaingamealliance.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Design a simple GameFi concept with a token economy: define what players earn, how they spend, and what assets are NFTs vs regular game data.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "gamefi-developer-2",
+      "title": "Solidity Basics for Game Contracts",
+      "order": 2,
+      "techs": [
+        "Solidity",
+        "Remix",
+        "ERC-20",
+        "ERC-721"
+      ],
+      "description": "Learn Solidity fundamentals with a game focus, writing contracts for in-game tokens and character NFTs. Understand how game logic can live on-chain.",
+      "topics": [
+        "Solidity data types and structs",
+        "ERC-20 for in-game currency",
+        "ERC-721 for unique characters or items",
+        "Mappings for player state",
+        "Events for game actions",
+        "Access control for game admin functions"
+      ],
+      "resources": [
+        {
+          "label": "CryptoZombies",
+          "platform": "CryptoZombies",
+          "type": "course"
+        },
+        {
+          "label": "Solidity Docs",
+          "platform": "soliditylang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Blockchain Game Contract Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy an ERC-721 character contract with on-chain stats (level, attack, defense) and an ERC-20 reward token that the game admin can mint.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "gamefi-developer-3",
+      "title": "Unity and web3.js Integration",
+      "order": 3,
+      "techs": [
+        "Unity",
+        "web3.js",
+        "MetaMask",
+        "WebGL"
+      ],
+      "description": "Connect a Unity WebGL game to Ethereum using web3.js and the MetaMask browser extension. Read and write contract data from within a running game session.",
+      "topics": [
+        "Unity WebGL build configuration",
+        "Calling JavaScript from Unity with jslib",
+        "Connecting MetaMask from Unity WebGL",
+        "Reading NFT ownership in game",
+        "Sending transactions from game events",
+        "web3.js provider setup"
+      ],
+      "resources": [
+        {
+          "label": "Unity WebGL Docs",
+          "platform": "docs.unity3d.com",
+          "type": "docs"
+        },
+        {
+          "label": "web3.js Docs",
+          "platform": "docs.web3js.org",
+          "type": "docs"
+        },
+        {
+          "label": "Connect Unity to Ethereum - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a Unity WebGL game that reads the player NFT stats from the contract and displays them on a HUD overlay inside the game.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "gamefi-developer-4",
+      "title": "NFT Game Assets - ERC-1155 and Metadata",
+      "order": 4,
+      "techs": [
+        "ERC-1155",
+        "IPFS",
+        "Solidity",
+        "OpenZeppelin"
+      ],
+      "description": "Use ERC-1155 for efficient batch minting of game items, weapons, and consumables. Store item metadata on IPFS and render attributes inside the game.",
+      "topics": [
+        "ERC-1155 for game items",
+        "Batch mint for loot drops",
+        "Item metadata with attributes",
+        "IPFS metadata storage via Pinata",
+        "In-game item balance queries",
+        "Burning items for crafting mechanics"
+      ],
+      "resources": [
+        {
+          "label": "EIP-1155 Standard",
+          "platform": "eips.ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "OpenZeppelin ERC-1155 Docs",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        },
+        {
+          "label": "NFT Game Items Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create an ERC-1155 game item contract with 5 item types, mint a starter pack for a test player, and render the item attributes in a Unity inventory screen.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "gamefi-developer-5",
+      "title": "Randomness and Loot Generation",
+      "order": 5,
+      "techs": [
+        "Chainlink VRF",
+        "Solidity",
+        "Hardhat",
+        "Unity"
+      ],
+      "description": "Implement verifiable random number generation using Chainlink VRF for fair loot drops and procedural game content. Understand why on-chain randomness from blockhash is unsafe.",
+      "topics": [
+        "Why blockhash randomness is exploitable",
+        "Chainlink VRF v2 and v2.5",
+        "VRF subscription management",
+        "Requesting and fulfilling randomness",
+        "Mapping random words to loot tables",
+        "VRF callback and game state update"
+      ],
+      "resources": [
+        {
+          "label": "Chainlink VRF Docs",
+          "platform": "docs.chain.link",
+          "type": "docs"
+        },
+        {
+          "label": "Verifiable Randomness for NFT Games",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Chainlink VRF Examples on GitHub",
+          "platform": "github.com/smartcontractkit",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a loot box contract that uses Chainlink VRF to determine which ERC-1155 item a player receives when they open a box.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "gamefi-developer-6",
+      "title": "Play-to-Earn Reward Mechanics",
+      "order": 6,
+      "techs": [
+        "Solidity",
+        "ERC-20",
+        "Hardhat",
+        "Tokenomics"
+      ],
+      "description": "Design and implement smart contract reward systems where players earn tokens through gameplay. Build staking mechanics for NFT characters and anti-bot protections.",
+      "topics": [
+        "On-chain score submission",
+        "Per-block reward emission",
+        "NFT staking for passive rewards",
+        "Anti-bot cooldowns and commit-reveal",
+        "Reward halving and emission schedules",
+        "Treasury management for rewards pool"
+      ],
+      "resources": [
+        {
+          "label": "Play-to-Earn Tokenomics Guide",
+          "platform": "medium.com",
+          "type": "docs"
+        },
+        {
+          "label": "Staking Contract Tutorial - Smart Contract Programmer",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "OpenZeppelin ERC-20 Docs",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a staking contract where players stake NFT characters to earn ERC-20 tokens per block, with a 24-hour unstaking cooldown.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "gamefi-developer-7",
+      "title": "On-Chain Marketplace for Game Items",
+      "order": 7,
+      "techs": [
+        "Solidity",
+        "ERC-1155",
+        "ERC-20",
+        "Hardhat"
+      ],
+      "description": "Build a peer-to-peer marketplace for game items where players list, buy, and trade ERC-1155 assets using the in-game ERC-20 token. Implement royalties for creators.",
+      "topics": [
+        "Marketplace listing and order struct",
+        "ERC-1155 setApprovalForAll",
+        "Order matching and escrow",
+        "ERC-2981 royalty on game item sales",
+        "Cancel and expire listings",
+        "Marketplace fee distribution"
+      ],
+      "resources": [
+        {
+          "label": "OpenZeppelin ERC-1155 Docs",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        },
+        {
+          "label": "Build an NFT Marketplace - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Hardhat Testing Docs",
+          "platform": "hardhat.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a game item marketplace where players can list items for a fixed price in game token, and the contract takes a 2.5% fee on each sale.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "gamefi-developer-8",
+      "title": "Layer 2 for GameFi - Low Gas and Fast Finality",
+      "order": 8,
+      "techs": [
+        "Polygon",
+        "Arbitrum",
+        "wagmi",
+        "Bridging"
+      ],
+      "description": "Deploy game contracts on a Layer 2 network to reduce gas costs for high-frequency game transactions. Implement asset bridging between mainnet and L2.",
+      "topics": [
+        "Why L2 matters for games",
+        "Deploying to Polygon and Arbitrum",
+        "Official bridge contracts and UI",
+        "Gas cost comparison L1 vs L2",
+        "L2 transaction finality and sequencer trust",
+        "Handling cross-chain NFT ownership"
+      ],
+      "resources": [
+        {
+          "label": "Polygon Docs",
+          "platform": "docs.polygon.technology",
+          "type": "docs"
+        },
+        {
+          "label": "Arbitrum Docs",
+          "platform": "docs.arbitrum.io",
+          "type": "docs"
+        },
+        {
+          "label": "L2 for GameFi - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Redeploy your game contracts to Polygon Mumbai, test all game flows, and implement a UI showing gas cost savings compared to Ethereum mainnet.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "gamefi-developer-9",
+      "title": "GameFi Security and Anti-Cheat",
+      "order": 9,
+      "techs": [
+        "Solidity",
+        "Slither",
+        "Commit-Reveal",
+        "Signature verification"
+      ],
+      "description": "Audit GameFi contracts for exploits including reward manipulation, NFT duplication bugs, and oracle gaming. Implement server-signed score submission for anti-cheat.",
+      "topics": [
+        "Score submission with server signature",
+        "Sybil attack resistance with per-wallet limits",
+        "Reentrancy in reward claims",
+        "Flash loan attacks on staking rewards",
+        "Slither analysis of game contracts",
+        "Upgradeability risks in live games"
+      ],
+      "resources": [
+        {
+          "label": "SWC Registry - Smart Contract Weaknesses",
+          "platform": "swcregistry.io",
+          "type": "docs"
+        },
+        {
+          "label": "GameFi Security Report - Immunefi",
+          "platform": "immunefi.com",
+          "type": "docs"
+        },
+        {
+          "label": "Anti-Cheat in Blockchain Games - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement server-signed score submission so only scores approved by the game server can trigger token rewards, and write a Foundry test demonstrating replay protection.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "gamefi-developer-10",
+      "title": "Mainnet Launch and Live Game Operations",
+      "order": 10,
+      "techs": [
+        "Polygon Mainnet",
+        "Unity WebGL",
+        "Tenderly",
+        "Multisig"
+      ],
+      "description": "Launch your GameFi project to mainnet with verified contracts, a production Unity WebGL build, and operational tooling for monitoring player activity and protocol health.",
+      "topics": [
+        "Mainnet deployment checklist for games",
+        "Unity WebGL production build optimization",
+        "Tenderly alerts for reward contract events",
+        "Gnosis Safe for treasury management",
+        "In-game analytics and on-chain metrics",
+        "Community communication and patch strategy"
+      ],
+      "resources": [
+        {
+          "label": "Polygon Mainnet Deployment Docs",
+          "platform": "docs.polygon.technology",
+          "type": "docs"
+        },
+        {
+          "label": "Unity WebGL Optimization Guide",
+          "platform": "docs.unity3d.com",
+          "type": "docs"
+        },
+        {
+          "label": "Launching a GameFi Project - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Gnosis Safe Docs",
+          "platform": "docs.safe.global",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Ship a playable GameFi demo on Polygon mainnet with at least one NFT asset, one earn mechanic, and a Tenderly alert monitoring the reward pool balance.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "dao-developer": [
+    {
+      "id": "dao-developer-1",
+      "title": "Web, Blockchain, and DAO Fundamentals",
+      "order": 1,
+      "techs": [
+        "JavaScript",
+        "Ethereum",
+        "Governance",
+        "Tokens"
+      ],
+      "description": "Understand what a DAO is, how on-chain governance works, and why token-weighted voting enables decentralized decision-making. Survey major DAO platforms and patterns.",
+      "topics": [
+        "What is a DAO and why it exists",
+        "On-chain vs off-chain governance",
+        "Token-weighted voting mechanics",
+        "Quorum and proposal thresholds",
+        "Timelock and execution delay",
+        "Major DAO platforms - Compound, Uniswap, MakerDAO"
+      ],
+      "resources": [
+        {
+          "label": "DAOs - ethereum.org",
+          "platform": "ethereum.org",
+          "type": "docs"
+        },
+        {
+          "label": "How DAO Governance Works - Finematics",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "The DAO Handbook",
+          "platform": "daohandbook.xyz",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Compare the governance parameters of Compound, Uniswap, and one other DAO: quorum, proposal threshold, voting period, and timelock delay.",
+      "estimatedTime": "3-4 days"
+    },
+    {
+      "id": "dao-developer-2",
+      "title": "Governance Tokens - ERC-20 with Voting",
+      "order": 2,
+      "techs": [
+        "Solidity",
+        "ERC-20Votes",
+        "OpenZeppelin",
+        "Hardhat"
+      ],
+      "description": "Implement an ERC-20 governance token with vote delegation using OpenZeppelin ERC20Votes. Understand checkpointing and why vote snapshots prevent double voting.",
+      "topics": [
+        "ERC-20Votes and ERC-20Permit extensions",
+        "Delegation and self-delegation",
+        "Historical vote balance checkpointing",
+        "getPastVotes for proposal snapshots",
+        "Token distribution strategies",
+        "Governance token vs utility token tradeoffs"
+      ],
+      "resources": [
+        {
+          "label": "OpenZeppelin ERC20Votes Docs",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        },
+        {
+          "label": "Governance Token Tutorial - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Hardhat Docs",
+          "platform": "hardhat.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy an ERC-20Votes token, test delegation between 3 accounts, and assert that getPastVotes returns correct historical balances at specific block numbers.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "dao-developer-3",
+      "title": "OpenZeppelin Governor Framework",
+      "order": 3,
+      "techs": [
+        "Solidity",
+        "OpenZeppelin Governor",
+        "Hardhat",
+        "TimelockController"
+      ],
+      "description": "Build a complete on-chain governance system using OpenZeppelin Governor with quorum, voting period, and a timelock controller for delayed execution.",
+      "topics": [
+        "OpenZeppelin Governor modules",
+        "GovernorVotes and GovernorQuorum",
+        "Proposal lifecycle - Pending, Active, Succeeded, Queued, Executed",
+        "TimelockController configuration",
+        "Proposing and voting in Hardhat tests",
+        "Proposal description hash"
+      ],
+      "resources": [
+        {
+          "label": "OpenZeppelin Governor Docs",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        },
+        {
+          "label": "Build an On-Chain DAO - Patrick Collins",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "OpenZeppelin Contracts Wizard",
+          "platform": "wizard.openzeppelin.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy a Governor and TimelockController, write a full test that creates a proposal, passes it through voting, queues it, and executes a parameter change.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "dao-developer-4",
+      "title": "Snapshot - Off-Chain Voting",
+      "order": 4,
+      "techs": [
+        "Snapshot",
+        "EIP-712",
+        "IPFS",
+        "JavaScript"
+      ],
+      "description": "Integrate Snapshot for gasless off-chain voting using signed messages stored on IPFS. Understand when off-chain voting is appropriate and how to build a custom Snapshot strategy.",
+      "topics": [
+        "Snapshot space configuration",
+        "Voting strategies - token, delegation, NFT",
+        "How Snapshot stores votes on IPFS",
+        "EIP-712 signature in Snapshot votes",
+        "Custom voting strategy development",
+        "Snapshot and on-chain execution via SafeSnap"
+      ],
+      "resources": [
+        {
+          "label": "Snapshot Docs",
+          "platform": "docs.snapshot.org",
+          "type": "docs"
+        },
+        {
+          "label": "Snapshot Strategy Development Guide",
+          "platform": "docs.snapshot.org",
+          "type": "docs"
+        },
+        {
+          "label": "How Snapshot Works - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create a Snapshot space for a test DAO, configure a custom token strategy, and simulate a proposal vote using the Snapshot SDK.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "dao-developer-5",
+      "title": "DAO Treasury Management",
+      "order": 5,
+      "techs": [
+        "Solidity",
+        "Gnosis Safe",
+        "ERC-20",
+        "TimelockController"
+      ],
+      "description": "Build and manage a DAO treasury contract that holds ETH and tokens, executes expenditures only through governance votes, and reports on allocations.",
+      "topics": [
+        "Treasury contract patterns",
+        "Gnosis Safe as DAO treasury",
+        "Governance-gated fund releases",
+        "Multi-sig approval thresholds",
+        "Budget proposals and spending categories",
+        "On-chain reporting of treasury balances"
+      ],
+      "resources": [
+        {
+          "label": "Gnosis Safe Docs",
+          "platform": "docs.safe.global",
+          "type": "docs"
+        },
+        {
+          "label": "DAO Treasury Best Practices - DeepDAO",
+          "platform": "deepdao.io",
+          "type": "docs"
+        },
+        {
+          "label": "DAO Treasury Management - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Set up a Gnosis Safe as a DAO treasury, configure a 3-of-5 multisig, and execute a test fund transfer via a passed Governor proposal.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "dao-developer-6",
+      "title": "Aragon Framework",
+      "order": 6,
+      "techs": [
+        "Aragon OSx",
+        "Solidity",
+        "JavaScript",
+        "Plugins"
+      ],
+      "description": "Build a DAO using the Aragon OSx framework with modular plugins for voting, permissions, and treasury. Understand how Aragon separates DAO core from governance logic.",
+      "topics": [
+        "Aragon OSx architecture",
+        "DAO and plugin structure",
+        "TokenVoting plugin setup",
+        "Permission management with ACL",
+        "Installing and upgrading plugins",
+        "Aragon App for no-code DAO management"
+      ],
+      "resources": [
+        {
+          "label": "Aragon OSx Docs",
+          "platform": "devs.aragon.org",
+          "type": "docs"
+        },
+        {
+          "label": "Build a DAO with Aragon - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Aragon SDK Docs",
+          "platform": "devs.aragon.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy an Aragon OSx DAO on a testnet with the TokenVoting plugin, create a proposal via SDK, and execute it through the governance flow.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "dao-developer-7",
+      "title": "DAO Frontend and Governance UI",
+      "order": 7,
+      "techs": [
+        "React",
+        "wagmi",
+        "The Graph",
+        "Next.js"
+      ],
+      "description": "Build a governance dashboard that shows proposals, voting power, delegation status, and treasury balances. Query on-chain governance data from a subgraph.",
+      "topics": [
+        "Displaying active and past proposals",
+        "Voting power and delegation UI",
+        "Proposal creation form",
+        "Transaction feedback for vote and delegate",
+        "Subgraph for governance event indexing",
+        "Treasury balance display"
+      ],
+      "resources": [
+        {
+          "label": "Tally Governance App Architecture",
+          "platform": "docs.tally.xyz",
+          "type": "docs"
+        },
+        {
+          "label": "The Graph Docs",
+          "platform": "thegraph.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Build a DAO Dashboard - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a governance dashboard showing all active proposals with vote counts, a delegate button, and a treasury balance panel, sourcing data from a subgraph.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "dao-developer-8",
+      "title": "Advanced Voting Mechanisms",
+      "order": 8,
+      "techs": [
+        "Solidity",
+        "Quadratic Voting",
+        "Conviction Voting",
+        "OpenZeppelin"
+      ],
+      "description": "Explore advanced voting mechanisms beyond token-weighted majority voting. Implement quadratic voting to reduce plutocracy and conviction voting for continuous preference expression.",
+      "topics": [
+        "Quadratic voting math and implementation",
+        "Sybil resistance for quadratic voting",
+        "Conviction voting curve",
+        "Optimistic approval patterns",
+        "Rage quit mechanics",
+        "Vote delegation trees"
+      ],
+      "resources": [
+        {
+          "label": "Quadratic Voting Whitepaper",
+          "platform": "radicalxchange.org",
+          "type": "docs"
+        },
+        {
+          "label": "1Hive Gardens - Conviction Voting Docs",
+          "platform": "gardens.1hive.org",
+          "type": "docs"
+        },
+        {
+          "label": "Advanced DAO Voting Mechanisms - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement a quadratic voting contract where votes cost the square of the voting power spent, and write a test showing it reduces large-token-holder dominance.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "dao-developer-9",
+      "title": "DAO Security and Attack Vectors",
+      "order": 9,
+      "techs": [
+        "Solidity",
+        "Slither",
+        "Foundry",
+        "Governance attacks"
+      ],
+      "description": "Study governance-specific attack vectors including flash loan governance takeovers, proposal front-running, and timelock bypasses. Harden your DAO contracts against each.",
+      "topics": [
+        "Flash loan governance attacks",
+        "Proposal front-running and griefing",
+        "Timelock bypass scenarios",
+        "Quorum and threshold manipulation",
+        "Proxy upgrade via governance attack",
+        "Slither and Foundry fuzzing for governance"
+      ],
+      "resources": [
+        {
+          "label": "Governance Attack Case Studies - Rekt News",
+          "platform": "rekt.news",
+          "type": "docs"
+        },
+        {
+          "label": "Secure DAO Governance - Trail of Bits",
+          "platform": "blog.trailofbits.com",
+          "type": "docs"
+        },
+        {
+          "label": "DAO Governance Security - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a Foundry test that demonstrates a flash loan governance attack on a vulnerable Governor, then patch the contract and prove the attack fails.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "dao-developer-10",
+      "title": "Mainnet DAO Launch and Operations",
+      "order": 10,
+      "techs": [
+        "Ethereum Mainnet",
+        "Tally",
+        "Snapshot",
+        "Gnosis Safe"
+      ],
+      "description": "Launch your DAO on Ethereum mainnet with token distribution, governance parameters, treasury setup, and community onboarding. Establish operational workflows for proposals and execution.",
+      "topics": [
+        "Token distribution and genesis event",
+        "Mainnet Governor and timelock deployment",
+        "Tally or Boardroom integration",
+        "Community proposal process documentation",
+        "Treasury diversification strategy",
+        "DAO legal and jurisdictional considerations"
+      ],
+      "resources": [
+        {
+          "label": "Tally Docs - Launching a DAO",
+          "platform": "docs.tally.xyz",
+          "type": "docs"
+        },
+        {
+          "label": "DAO Legal Wrapper Guide - a16z",
+          "platform": "a16zcrypto.com",
+          "type": "docs"
+        },
+        {
+          "label": "DAO Launch Best Practices - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "OpenZeppelin Governor Deployment Guide",
+          "platform": "docs.openzeppelin.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy your complete DAO to mainnet with token distribution to 5 test delegates, pass a real proposal through full governance flow, and write an operational runbook.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "zk-developer": [
+    {
+      "id": "zk-developer-1",
+      "title": "Web, Math, and ZK Fundamentals",
+      "order": 1,
+      "techs": [
+        "Mathematics",
+        "JavaScript",
+        "Cryptography",
+        "ZK Concepts"
+      ],
+      "description": "Build the mathematical and conceptual foundation for zero-knowledge proofs. Understand finite fields, polynomial commitments, and the intuition behind what ZK proofs prove.",
+      "topics": [
+        "What a zero-knowledge proof proves",
+        "Completeness, soundness, and zero-knowledge properties",
+        "Finite fields and modular arithmetic",
+        "Polynomial representations of computation",
+        "Interactive vs non-interactive proofs",
+        "Trusted setup and toxic waste"
+      ],
+      "resources": [
+        {
+          "label": "ZKProof.org Community Reference",
+          "platform": "zkproof.org",
+          "type": "docs"
+        },
+        {
+          "label": "Introduction to ZK Proofs - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Proofs, Arguments, and Zero Knowledge - Justin Thaler",
+          "platform": "people.cs.georgetown.edu",
+          "type": "book"
+        }
+      ],
+      "challenge": "Write a plain-language explanation of how a ZK-SNARK allows proving knowledge of a secret without revealing it, using an analogy of your choice.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "zk-developer-2",
+      "title": "Circom - Arithmetic Circuit Language",
+      "order": 2,
+      "techs": [
+        "Circom",
+        "Node.js",
+        "snarkjs",
+        "Constraints"
+      ],
+      "description": "Learn Circom to express computation as arithmetic circuits with rank-1 constraint systems. Write your first circuits and compile them to witness computation artifacts.",
+      "topics": [
+        "Circom syntax and signal types",
+        "Constraints with <==, --> and ===",
+        "Template and component model",
+        "Multiplier and comparator circuits",
+        "circom compile command",
+        "witness generation with snarkjs"
+      ],
+      "resources": [
+        {
+          "label": "Circom Docs",
+          "platform": "docs.circom.io",
+          "type": "docs"
+        },
+        {
+          "label": "Circom and snarkjs Tutorial - iden3",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Circom Zero to Hero - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a Circom circuit that proves knowledge of two numbers a and b such that a * b = c without revealing a or b, and generate a valid proof.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "zk-developer-3",
+      "title": "snarkjs - Groth16 Proof Generation",
+      "order": 3,
+      "techs": [
+        "snarkjs",
+        "Groth16",
+        "Node.js",
+        "Powers of Tau"
+      ],
+      "description": "Use snarkjs to run a trusted setup, generate Groth16 proofs, and verify them both in JavaScript and on Ethereum. Understand the proving and verifying key structure.",
+      "topics": [
+        "Powers of Tau ceremony",
+        "Phase 2 circuit-specific setup",
+        "Generating proving and verification keys",
+        "Creating proofs with snarkjs groth16 prove",
+        "Verifying proofs locally with snarkjs",
+        "Exporting Solidity verifier"
+      ],
+      "resources": [
+        {
+          "label": "snarkjs Docs",
+          "platform": "github.com/iden3/snarkjs",
+          "type": "docs"
+        },
+        {
+          "label": "Groth16 Setup Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "ZK Learning Resources - 0xparc.org",
+          "platform": "0xparc.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Complete a full Groth16 workflow: compile a Circom circuit, run trusted setup, generate a proof, and export the Solidity verifier contract.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "zk-developer-4",
+      "title": "On-Chain Proof Verification with Solidity",
+      "order": 4,
+      "techs": [
+        "Solidity",
+        "Hardhat",
+        "snarkjs",
+        "Verifier contracts"
+      ],
+      "description": "Deploy a Groth16 verifier contract to Ethereum and build a Solidity contract that gates functionality behind successful proof verification.",
+      "topics": [
+        "Auto-generated Groth16 Verifier.sol",
+        "Calling verifyProof from Solidity",
+        "Encoding proof as uint256 array",
+        "Nullifier hashes for double-spend prevention",
+        "Integrating verifier into application contract",
+        "Gas cost of on-chain verification"
+      ],
+      "resources": [
+        {
+          "label": "snarkjs Solidity Verifier Export Docs",
+          "platform": "github.com/iden3/snarkjs",
+          "type": "docs"
+        },
+        {
+          "label": "ZK On-Chain Verification - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Hardhat Docs",
+          "platform": "hardhat.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy a verifier contract and build an application contract that mints an ERC-20 token only when a valid ZK proof is submitted, preventing double minting via nullifiers.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "zk-developer-5",
+      "title": "Noir - Rust-Like ZK Language",
+      "order": 5,
+      "techs": [
+        "Noir",
+        "Nargo",
+        "Barretenberg",
+        "TypeScript"
+      ],
+      "description": "Learn Noir as a developer-friendly language for writing ZK circuits with Rust-like syntax. Use Nargo to compile and test circuits and Barretenberg as the proving backend.",
+      "topics": [
+        "Noir syntax and types",
+        "Private and public inputs in Noir",
+        "Writing and running Nargo tests",
+        "Noir standard library functions",
+        "Generating proofs with Barretenberg",
+        "Comparing Noir vs Circom tradeoffs"
+      ],
+      "resources": [
+        {
+          "label": "Noir Docs",
+          "platform": "noir-lang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Nargo CLI Reference",
+          "platform": "noir-lang.org",
+          "type": "docs"
+        },
+        {
+          "label": "Noir Language Tutorial - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Rewrite your multiplier circuit in Noir, write 3 Nargo unit tests, and generate a proof using the Barretenberg prover.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "zk-developer-6",
+      "title": "ZK Identity and Private Credentials",
+      "order": 6,
+      "techs": [
+        "Circom",
+        "Semaphore",
+        "Merkle Trees",
+        "Nullifiers"
+      ],
+      "description": "Build ZK identity systems where users prove membership in a set or possession of credentials without revealing which member they are. Study the Semaphore protocol.",
+      "topics": [
+        "Merkle tree membership proofs",
+        "Semaphore identity and commitment scheme",
+        "Nullifier hash for anonymous actions",
+        "Group membership without revealing identity",
+        "Signal broadcasting in Semaphore",
+        "Semaphore on-chain verifier"
+      ],
+      "resources": [
+        {
+          "label": "Semaphore Docs",
+          "platform": "semaphore.pse.dev",
+          "type": "docs"
+        },
+        {
+          "label": "ZK Identity Systems - 0xparc",
+          "platform": "0xparc.org",
+          "type": "docs"
+        },
+        {
+          "label": "Semaphore Tutorial - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build an anonymous voting app using Semaphore where 5 registered members can each vote once without revealing their identity.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "zk-developer-7",
+      "title": "PLONK and Universal Trusted Setup",
+      "order": 7,
+      "techs": [
+        "PLONK",
+        "snarkjs",
+        "Circom",
+        "KZG commitments"
+      ],
+      "description": "Understand PLONK as an improvement over Groth16 with a universal trusted setup. Generate PLONK proofs using snarkjs and compare proving time and verifier gas with Groth16.",
+      "topics": [
+        "PLONK constraint system",
+        "Universal vs circuit-specific trusted setup",
+        "KZG polynomial commitments",
+        "PLONK proof generation with snarkjs",
+        "FFLONK for smaller proof sizes",
+        "When to choose PLONK vs Groth16"
+      ],
+      "resources": [
+        {
+          "label": "PLONK Paper",
+          "platform": "eprint.iacr.org",
+          "type": "docs"
+        },
+        {
+          "label": "snarkjs PLONK Workflow Docs",
+          "platform": "github.com/iden3/snarkjs",
+          "type": "docs"
+        },
+        {
+          "label": "PLONK Explained - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Generate both a Groth16 and a PLONK proof for the same Circom circuit and compare proof size, generation time, and on-chain verification gas cost.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "zk-developer-8",
+      "title": "ZK Rollup Concepts and zkEVM",
+      "order": 8,
+      "techs": [
+        "zkEVM",
+        "Polygon zkEVM",
+        "ZK Rollups",
+        "Solidity"
+      ],
+      "description": "Study how ZK rollups use validity proofs to scale Ethereum. Deploy contracts to a zkEVM rollup and understand how EVM execution is proven with ZK-SNARKs.",
+      "topics": [
+        "ZK rollup architecture",
+        "Validity proof vs fraud proof rollups",
+        "zkEVM types - bytecode compatible, language compatible",
+        "Deploying to Polygon zkEVM testnet",
+        "State diff and calldata publishing",
+        "Prover and sequencer roles"
+      ],
+      "resources": [
+        {
+          "label": "Polygon zkEVM Docs",
+          "platform": "docs.polygon.technology",
+          "type": "docs"
+        },
+        {
+          "label": "ZK Rollups Explained - Finematics",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "An Incomplete Guide to Rollups - Vitalik Buterin",
+          "platform": "vitalik.eth.limo",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Deploy your ZK voting contract to Polygon zkEVM testnet, verify it works identically to the L1 version, and measure the cost difference.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "zk-developer-9",
+      "title": "Circuit Security and Soundness Testing",
+      "order": 9,
+      "techs": [
+        "Circom",
+        "Noir",
+        "circomspect",
+        "Formal verification"
+      ],
+      "description": "Audit ZK circuits for under-constrained signals, unused inputs, and soundness bugs that allow invalid proofs to pass. Use static analysis tools specific to ZK circuits.",
+      "topics": [
+        "Under-constrained signal vulnerabilities",
+        "Unchecked arithmetic overflow in circuits",
+        "circomspect static analyzer",
+        "Groth16 trusted setup security assumptions",
+        "Simulating invalid proof attacks",
+        "Reading ZK circuit audit reports"
+      ],
+      "resources": [
+        {
+          "label": "circomspect Docs",
+          "platform": "github.com/trailofbits/circomspect",
+          "type": "docs"
+        },
+        {
+          "label": "ZK Bug Tracker",
+          "platform": "github.com/0xPARC/zk-bug-tracker",
+          "type": "docs"
+        },
+        {
+          "label": "ZK Circuit Auditing - Trail of Bits",
+          "platform": "blog.trailofbits.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Run circomspect on your Semaphore circuit, fix all warnings, then manually attempt to forge a proof by submitting under-constrained witness values and confirm it fails.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "zk-developer-10",
+      "title": "Mainnet Deployment and ZK Application Launch",
+      "order": 10,
+      "techs": [
+        "Ethereum Mainnet",
+        "Solidity",
+        "Hardhat",
+        "Ceremony tools"
+      ],
+      "description": "Deploy a production ZK application to Ethereum mainnet with a public trusted setup ceremony, verified on-chain verifier, and documentation for external proof generation.",
+      "topics": [
+        "Organizing a public Powers of Tau ceremony",
+        "Verifying ceremony contributions",
+        "Mainnet verifier and application contract deployment",
+        "Proof generation SDK for end users",
+        "Circuit versioning and upgrade strategy",
+        "Gas optimization of verifier contracts"
+      ],
+      "resources": [
+        {
+          "label": "Powers of Tau Ceremony Guide - Hermez",
+          "platform": "github.com/hermeznetwork",
+          "type": "docs"
+        },
+        {
+          "label": "ZK Application Deployment Best Practices",
+          "platform": "0xparc.org",
+          "type": "docs"
+        },
+        {
+          "label": "ZK Production Deployment - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy your ZK voting system to Ethereum mainnet with a verifiable trusted setup, publish a proof generation guide, and document the ceremony participant list.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "web3-indexer": [
+    {
+      "id": "web3-indexer-1",
+      "title": "Web, Blockchain, and Data Fundamentals",
+      "order": 1,
+      "techs": [
+        "JavaScript",
+        "GraphQL",
+        "Ethereum",
+        "Events"
+      ],
+      "description": "Understand why blockchain data requires specialized indexing and how smart contract events serve as structured data emission. Learn the basics of GraphQL as a query language.",
+      "topics": [
+        "Why on-chain data needs indexing",
+        "Smart contract events and logs",
+        "Log topics and data encoding",
+        "GraphQL vs REST for blockchain data",
+        "The Graph protocol overview",
+        "Centralized vs decentralized indexing"
+      ],
+      "resources": [
+        {
+          "label": "The Graph Protocol Docs",
+          "platform": "thegraph.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "GraphQL Docs",
+          "platform": "graphql.org",
+          "type": "docs"
+        },
+        {
+          "label": "Web3 Data Indexing Explained - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Use the Ethereum JSON-RPC eth_getLogs method to manually fetch all Transfer events from an ERC-20 contract and display sender, receiver, and amount.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "web3-indexer-2",
+      "title": "GraphQL Schema Design for Blockchain Data",
+      "order": 2,
+      "techs": [
+        "GraphQL",
+        "The Graph",
+        "Schema",
+        "Entities"
+      ],
+      "description": "Design well-structured GraphQL schemas for on-chain data with proper entity relationships, indexed fields, and derived fields. Learn schema best practices for The Graph.",
+      "topics": [
+        "GraphQL type definitions and scalars",
+        "Entity relationships with @derivedFrom",
+        "BigInt and Bytes types in The Graph",
+        "Indexed vs non-indexed query fields",
+        "Interface and union types",
+        "Schema versioning patterns"
+      ],
+      "resources": [
+        {
+          "label": "The Graph Schema Docs",
+          "platform": "thegraph.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "GraphQL Schema Design - Apollo Docs",
+          "platform": "apollographql.com",
+          "type": "docs"
+        },
+        {
+          "label": "Subgraph Schema Tutorial - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Design a GraphQL schema for a DEX that models Token, Pool, Swap, Liquidity, and User entities with all necessary relationships.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "web3-indexer-3",
+      "title": "Building Your First Subgraph",
+      "order": 3,
+      "techs": [
+        "The Graph CLI",
+        "AssemblyScript",
+        "YAML",
+        "IPFS"
+      ],
+      "description": "Create a subgraph from scratch using the Graph CLI, write AssemblyScript event handlers, and deploy to Subgraph Studio for testing. Index a simple ERC-20 or NFT contract.",
+      "topics": [
+        "graph init and project scaffold",
+        "subgraph.yaml manifest configuration",
+        "Writing handlers in AssemblyScript",
+        "Entity store operations - save, load, remove",
+        "Deploying to Subgraph Studio",
+        "Using Graph Explorer for queries"
+      ],
+      "resources": [
+        {
+          "label": "The Graph Quick Start Docs",
+          "platform": "thegraph.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Build a Subgraph - The Graph Academy",
+          "platform": "thegraph.academy",
+          "type": "course"
+        },
+        {
+          "label": "First Subgraph Tutorial - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build and deploy a subgraph for an ERC-20 token that indexes all Transfer events and exposes a query for top 10 holders by balance.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "web3-indexer-4",
+      "title": "Advanced Subgraph Patterns",
+      "order": 4,
+      "techs": [
+        "The Graph",
+        "AssemblyScript",
+        "Call handlers",
+        "Block handlers"
+      ],
+      "description": "Go beyond event handlers with call handlers, block handlers, and data source templates for factory contracts. Handle complex protocols with dynamic contract tracking.",
+      "topics": [
+        "Call handlers for non-event contract calls",
+        "Block handlers for per-block aggregation",
+        "Data source templates for factory contracts",
+        "Dynamic data source instantiation",
+        "Aggregating time-series data",
+        "Handling contract upgrades in subgraphs"
+      ],
+      "resources": [
+        {
+          "label": "The Graph Advanced Features Docs",
+          "platform": "thegraph.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Data Source Templates Tutorial - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Uniswap V3 Subgraph Source Code",
+          "platform": "GitHub",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a subgraph for a Uniswap V2 style factory that dynamically tracks each newly created pair using data source templates.",
+      "estimatedTime": "2 weeks"
+    },
+    {
+      "id": "web3-indexer-5",
+      "title": "Ponder - TypeScript-Native Indexing",
+      "order": 5,
+      "techs": [
+        "Ponder",
+        "TypeScript",
+        "Viem",
+        "SQLite"
+      ],
+      "description": "Use Ponder as a modern TypeScript-first alternative to The Graph for local and self-hosted indexing. Write type-safe event handlers with hot reload and a built-in GraphQL API.",
+      "topics": [
+        "Ponder project setup and config",
+        "Writing event handlers in TypeScript",
+        "Schema definition with Ponder schema",
+        "Local development with hot reload",
+        "ponder.schema.ts entity types",
+        "Querying the built-in GraphQL API"
+      ],
+      "resources": [
+        {
+          "label": "Ponder Docs",
+          "platform": "ponder.sh",
+          "type": "docs"
+        },
+        {
+          "label": "Ponder vs The Graph Comparison",
+          "platform": "ponder.sh",
+          "type": "docs"
+        },
+        {
+          "label": "Ponder Getting Started - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Index the same ERC-20 contract with Ponder, compare the developer experience and query latency vs your The Graph subgraph.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "web3-indexer-6",
+      "title": "Querying and Optimizing GraphQL APIs",
+      "order": 6,
+      "techs": [
+        "GraphQL",
+        "Apollo Client",
+        "The Graph",
+        "Query optimization"
+      ],
+      "description": "Write efficient GraphQL queries for large on-chain datasets with pagination, filtering, and ordering. Understand query complexity limits and caching strategies.",
+      "topics": [
+        "Pagination with first, skip, and cursor",
+        "Filtering with where clauses",
+        "Sorting with orderBy and orderDirection",
+        "Query complexity and depth limits",
+        "Client-side caching with Apollo",
+        "Combining multiple subgraph queries"
+      ],
+      "resources": [
+        {
+          "label": "The Graph Query API Docs",
+          "platform": "thegraph.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Apollo Client Docs",
+          "platform": "apollographql.com",
+          "type": "docs"
+        },
+        {
+          "label": "GraphQL Performance Tips - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write 5 optimized GraphQL queries for your DEX subgraph: top pools by volume, recent swaps, user history, 24h price change, and TVL over time.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "web3-indexer-7",
+      "title": "Real-Time Data - Subscriptions and WebSockets",
+      "order": 7,
+      "techs": [
+        "GraphQL Subscriptions",
+        "The Graph",
+        "WebSockets",
+        "React"
+      ],
+      "description": "Add real-time on-chain data to your frontend using GraphQL subscriptions and WebSocket providers. Subscribe to new events and update the UI instantly.",
+      "topics": [
+        "GraphQL subscription syntax",
+        "WebSocket transport for subscriptions",
+        "The Graph subscription support",
+        "Combining subscriptions with initial query",
+        "Event-driven UI updates in React",
+        "Polling as a fallback for subscription-limited APIs"
+      ],
+      "resources": [
+        {
+          "label": "The Graph Subscriptions Docs",
+          "platform": "thegraph.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Apollo Subscriptions Docs",
+          "platform": "apollographql.com",
+          "type": "docs"
+        },
+        {
+          "label": "Real-Time dApp Data - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a GraphQL subscription to your DEX dashboard so that new swaps appear live in a feed without page refresh.",
+      "estimatedTime": "1 week"
+    },
+    {
+      "id": "web3-indexer-8",
+      "title": "Multi-Chain Indexing",
+      "order": 8,
+      "techs": [
+        "The Graph",
+        "Ponder",
+        "Arbitrum",
+        "Polygon"
+      ],
+      "description": "Extend your indexing infrastructure to cover multiple EVM-compatible chains with chain-specific subgraphs and a unified query layer. Handle cross-chain data aggregation.",
+      "topics": [
+        "Deploying subgraphs to multiple networks",
+        "Chain ID filtering in schema and queries",
+        "Cross-chain entity aggregation patterns",
+        "Separate vs unified subgraph for multi-chain",
+        "Network-specific RPC configuration",
+        "Handling chain reorganizations per network"
+      ],
+      "resources": [
+        {
+          "label": "The Graph Supported Networks Docs",
+          "platform": "thegraph.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Ponder Multi-Chain Config Docs",
+          "platform": "ponder.sh",
+          "type": "docs"
+        },
+        {
+          "label": "Multi-Chain Subgraph Tutorial - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Deploy your ERC-20 subgraph to both Ethereum mainnet and Arbitrum One, then write a combined query that aggregates total transfers across both chains.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "web3-indexer-9",
+      "title": "Subgraph Testing and Performance",
+      "order": 9,
+      "techs": [
+        "Matchstick",
+        "The Graph",
+        "AssemblyScript",
+        "Load testing"
+      ],
+      "description": "Write unit tests for subgraph handlers using Matchstick, profile slow queries, and optimize entity updates that touch hot code paths in high-volume protocols.",
+      "topics": [
+        "Matchstick test framework setup",
+        "Mocking events and contract calls in tests",
+        "Asserting entity field values in Matchstick",
+        "Query latency profiling",
+        "Reducing entity saves in hot handlers",
+        "Derived field vs stored field tradeoffs"
+      ],
+      "resources": [
+        {
+          "label": "Matchstick Docs",
+          "platform": "thegraph.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Subgraph Unit Testing Tutorial - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "The Graph Performance Optimization Guide",
+          "platform": "thegraph.com/docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write Matchstick tests covering all event handlers in your DEX subgraph with at least 90% handler coverage, and optimize the slowest query to under 200ms.",
+      "estimatedTime": "1-2 weeks"
+    },
+    {
+      "id": "web3-indexer-10",
+      "title": "Production Deployment on The Graph Network",
+      "order": 10,
+      "techs": [
+        "The Graph Network",
+        "GRT",
+        "Subgraph Studio",
+        "Monitoring"
+      ],
+      "description": "Publish your subgraph to The Graph decentralized network, add GRT signal to attract indexers, and set up monitoring and alerts for sync status and query errors.",
+      "topics": [
+        "Publishing to The Graph Network vs hosted service",
+        "GRT curation signal mechanics",
+        "Indexer selection and query routing",
+        "Subgraph versioning and migration",
+        "Monitoring sync status and indexing errors",
+        "Query fee estimation and billing"
+      ],
+      "resources": [
+        {
+          "label": "The Graph Network Publishing Docs",
+          "platform": "thegraph.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "GRT Curation Guide",
+          "platform": "thegraph.com/docs",
+          "type": "docs"
+        },
+        {
+          "label": "Deploying to The Graph Network - YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Subgraph Studio Docs",
+          "platform": "thegraph.com/docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Publish your DEX subgraph to The Graph Network, add curation signal, confirm at least one indexer is serving it, and set up a dashboard monitoring query success rate.",
+      "estimatedTime": "1-2 weeks"
+    }
+  ]
+}

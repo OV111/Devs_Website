@@ -1,0 +1,4204 @@
+{
+  "unity": [
+    {
+      "id": "unity-1",
+      "title": "C# and Editor Fundamentals",
+      "order": 1,
+      "techs": [
+        "C#",
+        "Unity",
+        "Visual Studio"
+      ],
+      "description": "This layer introduces the Unity editor interface and the C# language basics needed to script behavior. Mastering these foundations is essential before touching any game systems.",
+      "topics": [
+        "Unity editor layout and panels",
+        "GameObjects and components",
+        "C# variables and data types",
+        "MonoBehaviour lifecycle methods",
+        "Scenes and the hierarchy",
+        "Prefabs and the inspector"
+      ],
+      "resources": [
+        {
+          "label": "Unity Manual",
+          "platform": "Unity Documentation",
+          "type": "docs"
+        },
+        {
+          "label": "Unity Learn Pathways",
+          "platform": "Unity Learn",
+          "type": "course"
+        },
+        {
+          "label": "Brackeys How to Make a Game",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a scene with a player cube that moves with keyboard input.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "unity-2",
+      "title": "Input and Movement",
+      "order": 2,
+      "techs": [
+        "C#",
+        "Unity",
+        "Input System"
+      ],
+      "description": "This layer covers capturing player input and translating it into smooth character movement. Solid input handling is the backbone of any responsive game.",
+      "topics": [
+        "Legacy input versus new Input System",
+        "Transform manipulation",
+        "Frame rate independent movement",
+        "Time.deltaTime usage",
+        "Action maps and bindings",
+        "Camera follow behavior"
+      ],
+      "resources": [
+        {
+          "label": "Input System Manual",
+          "platform": "Unity Documentation",
+          "type": "docs"
+        },
+        {
+          "label": "Unity Learn Input Tutorials",
+          "platform": "Unity Learn",
+          "type": "course"
+        },
+        {
+          "label": "Brackeys Movement Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add gamepad and keyboard support to the player with a follow camera.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "unity-3",
+      "title": "Physics and Collisions",
+      "order": 3,
+      "techs": [
+        "C#",
+        "Unity",
+        "Physics"
+      ],
+      "description": "This layer explores the built-in physics engine for rigidbodies, colliders, and triggers. Understanding physics lets you create believable interactions and detection.",
+      "topics": [
+        "Rigidbody and forces",
+        "Colliders and triggers",
+        "Layer collision matrix",
+        "Raycasting and overlap queries",
+        "Physics materials and friction",
+        "FixedUpdate and physics timing"
+      ],
+      "resources": [
+        {
+          "label": "Physics Manual",
+          "platform": "Unity Documentation",
+          "type": "docs"
+        },
+        {
+          "label": "Unity Learn Physics",
+          "platform": "Unity Learn",
+          "type": "course"
+        },
+        {
+          "label": "Code Monkey Physics Guide",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add jumping, gravity, and collectible pickups using triggers to the player.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "unity-4",
+      "title": "UI and Game State",
+      "order": 4,
+      "techs": [
+        "C#",
+        "Unity",
+        "UI Toolkit"
+      ],
+      "description": "This layer teaches building menus, HUDs, and managing game state across scenes. Clear UI and state flow turn mechanics into an actual playable game.",
+      "topics": [
+        "Canvas and anchoring",
+        "Buttons sliders and text",
+        "Score and health displays",
+        "Scene loading and transitions",
+        "Singletons and game managers",
+        "Pause and restart logic"
+      ],
+      "resources": [
+        {
+          "label": "UI Toolkit Manual",
+          "platform": "Unity Documentation",
+          "type": "docs"
+        },
+        {
+          "label": "Unity Learn UI",
+          "platform": "Unity Learn",
+          "type": "course"
+        },
+        {
+          "label": "Brackeys UI Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a main menu, score HUD, and game over screen to the project.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "unity-5",
+      "title": "Animation and State Machines",
+      "order": 5,
+      "techs": [
+        "C#",
+        "Unity",
+        "Animator"
+      ],
+      "description": "This layer covers the Animator controller, blend trees, and event-driven animation. Animation brings characters and feedback to life and signals state to the player.",
+      "topics": [
+        "Animation clips and keyframes",
+        "Animator controllers and parameters",
+        "Blend trees for movement",
+        "Animation events and callbacks",
+        "Root motion basics",
+        "Transitions and conditions"
+      ],
+      "resources": [
+        {
+          "label": "Animation Manual",
+          "platform": "Unity Documentation",
+          "type": "docs"
+        },
+        {
+          "label": "Unity Learn Animation",
+          "platform": "Unity Learn",
+          "type": "course"
+        },
+        {
+          "label": "iHeartGameDev Animator Series",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Animate the player with idle, run, and jump states driven by movement.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "unity-6",
+      "title": "Audio and Visual Effects",
+      "order": 6,
+      "techs": [
+        "C#",
+        "Unity",
+        "Particle System"
+      ],
+      "description": "This layer adds sound, music, and particle effects to deepen immersion. Polished feedback through audio and effects makes mechanics feel satisfying.",
+      "topics": [
+        "AudioSource and AudioListener",
+        "Mixers and volume groups",
+        "Spatial 3D audio",
+        "Particle System modules",
+        "Trail and line renderers",
+        "Effect pooling for performance"
+      ],
+      "resources": [
+        {
+          "label": "Audio Manual",
+          "platform": "Unity Documentation",
+          "type": "docs"
+        },
+        {
+          "label": "Unity Learn VFX",
+          "platform": "Unity Learn",
+          "type": "course"
+        },
+        {
+          "label": "Gabriel Aguiar VFX",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add footstep sounds, background music, and a particle burst on pickups.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "unity-7",
+      "title": "Shader Graph and Materials",
+      "order": 7,
+      "techs": [
+        "Shader Graph",
+        "Unity",
+        "URP"
+      ],
+      "description": "This layer introduces node-based shaders and the rendering pipeline for custom visuals. Shaders let you craft a unique look without writing low-level code first.",
+      "topics": [
+        "Universal Render Pipeline setup",
+        "Materials and properties",
+        "Shader Graph nodes",
+        "Dissolve and fresnel effects",
+        "Vertex displacement",
+        "Texture sampling and UVs"
+      ],
+      "resources": [
+        {
+          "label": "Shader Graph Manual",
+          "platform": "Unity Documentation",
+          "type": "docs"
+        },
+        {
+          "label": "Unity Learn Shader Graph",
+          "platform": "Unity Learn",
+          "type": "course"
+        },
+        {
+          "label": "Brackeys Shader Graph",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create a dissolve shader for enemies and a glowing material for pickups.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "unity-8",
+      "title": "Data, Saving, and Scriptable Objects",
+      "order": 8,
+      "techs": [
+        "C#",
+        "Unity",
+        "ScriptableObject"
+      ],
+      "description": "This layer covers persisting player progress and architecting data with Scriptable Objects. Clean data design keeps larger projects maintainable and decoupled.",
+      "topics": [
+        "ScriptableObject assets",
+        "JSON serialization",
+        "PlayerPrefs and save files",
+        "Event channels with assets",
+        "Inventory and item data",
+        "Loading and validating saves"
+      ],
+      "resources": [
+        {
+          "label": "ScriptableObject Manual",
+          "platform": "Unity Documentation",
+          "type": "docs"
+        },
+        {
+          "label": "Unite Scriptable Objects Talk",
+          "platform": "Unity Learn",
+          "type": "course"
+        },
+        {
+          "label": "Tarodev Save System",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a save and load system that persists score and unlocked levels.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "unity-9",
+      "title": "AI and Navigation",
+      "order": 9,
+      "techs": [
+        "C#",
+        "Unity",
+        "NavMesh"
+      ],
+      "description": "This layer builds enemy behavior using the NavMesh pathfinding and simple state machines. Believable AI raises challenge and makes the world feel reactive.",
+      "topics": [
+        "NavMesh baking",
+        "NavMeshAgent movement",
+        "Patrol and chase states",
+        "Line of sight detection",
+        "Finite state machines",
+        "Spawning and waves"
+      ],
+      "resources": [
+        {
+          "label": "Navigation Manual",
+          "platform": "Unity Documentation",
+          "type": "docs"
+        },
+        {
+          "label": "Unity Learn AI",
+          "platform": "Unity Learn",
+          "type": "course"
+        },
+        {
+          "label": "Code Monkey Enemy AI",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add patrolling enemies that chase the player when spotted using NavMesh.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "unity-10",
+      "title": "Optimization and Publishing",
+      "order": 10,
+      "techs": [
+        "C#",
+        "Unity",
+        "Profiler"
+      ],
+      "description": "This layer focuses on profiling, optimizing, and building for target platforms. Shipping a stable performant build is the final step that turns a project into a product.",
+      "topics": [
+        "Unity Profiler and frame debugger",
+        "Draw call batching",
+        "Object pooling and memory",
+        "Build settings per platform",
+        "Quality and graphics tiers",
+        "Store submission basics"
+      ],
+      "resources": [
+        {
+          "label": "Optimization Manual",
+          "platform": "Unity Documentation",
+          "type": "docs"
+        },
+        {
+          "label": "Unity Learn Performance",
+          "platform": "Unity Learn",
+          "type": "course"
+        },
+        {
+          "label": "GDC Unity Optimization Talk",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Profile and optimize the game, then produce a shippable Windows build.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "unreal": [
+    {
+      "id": "unreal-1",
+      "title": "Editor and Blueprint Basics",
+      "order": 1,
+      "techs": [
+        "Unreal Engine",
+        "Blueprints",
+        "Editor"
+      ],
+      "description": "This layer introduces the Unreal editor and visual scripting with Blueprints. These fundamentals let you prototype gameplay before writing any C++.",
+      "topics": [
+        "Editor viewport and panels",
+        "Actors and components",
+        "Blueprint event graphs",
+        "Variables and functions",
+        "Levels and the world outliner",
+        "Play in editor workflow"
+      ],
+      "resources": [
+        {
+          "label": "Unreal Engine Documentation",
+          "platform": "Epic Games",
+          "type": "docs"
+        },
+        {
+          "label": "Unreal Online Learning",
+          "platform": "Epic Games",
+          "type": "course"
+        },
+        {
+          "label": "Unreal Sensei Beginner Guide",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create a level with a Blueprint actor that rotates and reacts to overlap.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "unreal-2",
+      "title": "Player Input and Characters",
+      "order": 2,
+      "techs": [
+        "Unreal Engine",
+        "Blueprints",
+        "Enhanced Input"
+      ],
+      "description": "This layer covers the Character class, possession, and the Enhanced Input system. Responsive character control is the core of any Unreal game.",
+      "topics": [
+        "Pawns and Characters",
+        "Player controller and possession",
+        "Enhanced Input actions",
+        "Character movement component",
+        "Camera and spring arm",
+        "Input mapping contexts"
+      ],
+      "resources": [
+        {
+          "label": "Enhanced Input Docs",
+          "platform": "Epic Games",
+          "type": "docs"
+        },
+        {
+          "label": "Unreal Online Learning",
+          "platform": "Epic Games",
+          "type": "course"
+        },
+        {
+          "label": "Mathew Wadstein WTF Series",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a third person character with movement, jumping, and a follow camera.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "unreal-3",
+      "title": "C++ Gameplay Fundamentals",
+      "order": 3,
+      "techs": [
+        "C++",
+        "Unreal Engine",
+        "Visual Studio"
+      ],
+      "description": "This layer transitions from Blueprints into Unreal C++ and the reflection system. C++ unlocks performance and control needed for serious gameplay code.",
+      "topics": [
+        "UCLASS UPROPERTY and UFUNCTION",
+        "Actor lifecycle in C++",
+        "Exposing variables to Blueprints",
+        "Garbage collection and pointers",
+        "Modules and build files",
+        "Mixing C++ and Blueprints"
+      ],
+      "resources": [
+        {
+          "label": "Programming with C++ Docs",
+          "platform": "Epic Games",
+          "type": "docs"
+        },
+        {
+          "label": "Tom Looman Unreal C++ Course",
+          "platform": "Epic Games",
+          "type": "course"
+        },
+        {
+          "label": "Unreal C++ Quick Start",
+          "platform": "Epic Games",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Rewrite the character base class in C++ and expose tunable values to Blueprints.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "unreal-4",
+      "title": "Collisions and Physics",
+      "order": 4,
+      "techs": [
+        "C++",
+        "Unreal Engine",
+        "Chaos"
+      ],
+      "description": "This layer explores collision channels, traces, and the Chaos physics system. Reliable collision and physics drive combat, interaction, and destruction.",
+      "topics": [
+        "Collision presets and channels",
+        "Line and sphere traces",
+        "Overlap and hit events",
+        "Physics simulation on actors",
+        "Chaos destruction basics",
+        "Damage and apply force"
+      ],
+      "resources": [
+        {
+          "label": "Collision Docs",
+          "platform": "Epic Games",
+          "type": "docs"
+        },
+        {
+          "label": "Unreal Online Learning",
+          "platform": "Epic Games",
+          "type": "course"
+        },
+        {
+          "label": "Ryan Laley Physics Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a projectile that traces hits and applies damage to physics actors.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "unreal-5",
+      "title": "UI with UMG",
+      "order": 5,
+      "techs": [
+        "Unreal Engine",
+        "UMG",
+        "Blueprints"
+      ],
+      "description": "This layer teaches building menus and HUDs with the Unreal Motion Graphics system. Strong UI communicates state and ties mechanics into a full game loop.",
+      "topics": [
+        "Widget Blueprints",
+        "Anchors and layout panels",
+        "Health and ammo bars",
+        "Binding data to widgets",
+        "Menus and button events",
+        "HUD class and viewport"
+      ],
+      "resources": [
+        {
+          "label": "UMG Documentation",
+          "platform": "Epic Games",
+          "type": "docs"
+        },
+        {
+          "label": "Unreal Online Learning",
+          "platform": "Epic Games",
+          "type": "course"
+        },
+        {
+          "label": "Ryan Laley UMG Series",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a health bar, main menu, and game over widget to the project.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "unreal-6",
+      "title": "Animation and Skeletal Meshes",
+      "order": 6,
+      "techs": [
+        "Unreal Engine",
+        "Animation Blueprint",
+        "Control Rig"
+      ],
+      "description": "This layer covers animation blueprints, blend spaces, and state machines for characters. Quality animation sells movement and gives combat its impact.",
+      "topics": [
+        "Skeletal meshes and skeletons",
+        "Animation blueprints",
+        "Blend spaces",
+        "State machines for locomotion",
+        "Montages and notifies",
+        "Retargeting animations"
+      ],
+      "resources": [
+        {
+          "label": "Animation Docs",
+          "platform": "Epic Games",
+          "type": "docs"
+        },
+        {
+          "label": "Unreal Online Learning",
+          "platform": "Epic Games",
+          "type": "course"
+        },
+        {
+          "label": "Cobra Code Animation Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Set up a locomotion state machine and an attack montage for the character.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "unreal-7",
+      "title": "Materials and Nanite",
+      "order": 7,
+      "techs": [
+        "Unreal Engine",
+        "Nanite",
+        "Lumen"
+      ],
+      "description": "This layer dives into the material editor plus Nanite geometry and Lumen lighting. Modern rendering features deliver high fidelity scenes efficiently.",
+      "topics": [
+        "Material editor nodes",
+        "Material instances and parameters",
+        "Nanite virtualized geometry",
+        "Lumen global illumination",
+        "Texture maps and PBR",
+        "Post process volumes"
+      ],
+      "resources": [
+        {
+          "label": "Nanite Documentation",
+          "platform": "Epic Games",
+          "type": "docs"
+        },
+        {
+          "label": "Unreal Online Learning",
+          "platform": "Epic Games",
+          "type": "course"
+        },
+        {
+          "label": "William Faucher Lighting Talks",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a Nanite environment with Lumen lighting and a custom material instance.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "unreal-8",
+      "title": "Gameplay Ability System",
+      "order": 8,
+      "techs": [
+        "C++",
+        "Unreal Engine",
+        "GAS"
+      ],
+      "description": "This layer introduces the Gameplay Ability System for abilities, attributes, and effects. GAS provides a scalable framework for complex combat and RPG mechanics.",
+      "topics": [
+        "Ability system component",
+        "Gameplay abilities",
+        "Attribute sets",
+        "Gameplay effects and tags",
+        "Cooldowns and costs",
+        "Replication awareness"
+      ],
+      "resources": [
+        {
+          "label": "Gameplay Ability System Docs",
+          "platform": "Epic Games",
+          "type": "docs"
+        },
+        {
+          "label": "Tom Looman GAS Guide",
+          "platform": "Epic Games",
+          "type": "course"
+        },
+        {
+          "label": "Tranek GAS Documentation",
+          "platform": "GitHub",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Implement a dash ability and a health attribute using the ability system.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "unreal-9",
+      "title": "Multiplayer and Replication",
+      "order": 9,
+      "techs": [
+        "C++",
+        "Unreal Engine",
+        "Replication"
+      ],
+      "description": "This layer covers the Unreal networking model, replication, and RPCs. Networked play is a defining strength of Unreal for multiplayer titles.",
+      "topics": [
+        "Client server model",
+        "Replicated properties",
+        "Remote procedure calls",
+        "Authority and roles",
+        "Replication of movement",
+        "Listen and dedicated servers"
+      ],
+      "resources": [
+        {
+          "label": "Networking Overview Docs",
+          "platform": "Epic Games",
+          "type": "docs"
+        },
+        {
+          "label": "Unreal Online Learning",
+          "platform": "Epic Games",
+          "type": "course"
+        },
+        {
+          "label": "Cedric Neukirchen Networking Compendium",
+          "platform": "GitHub",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Make the character and projectile replicate correctly in a listen server session.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "unreal-10",
+      "title": "Packaging and Optimization",
+      "order": 10,
+      "techs": [
+        "Unreal Engine",
+        "Insights",
+        "Packaging"
+      ],
+      "description": "This layer focuses on profiling with Unreal Insights and packaging shippable builds. Optimizing and packaging is the last mile that delivers a playable product.",
+      "topics": [
+        "Unreal Insights profiling",
+        "Stat commands and GPU profiling",
+        "Level of detail and culling",
+        "Cooking and packaging",
+        "Platform target settings",
+        "Build configurations"
+      ],
+      "resources": [
+        {
+          "label": "Performance and Profiling Docs",
+          "platform": "Epic Games",
+          "type": "docs"
+        },
+        {
+          "label": "Unreal Online Learning",
+          "platform": "Epic Games",
+          "type": "course"
+        },
+        {
+          "label": "GDC Unreal Optimization Talk",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Profile the game with Insights and produce an optimized packaged build.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "web-game": [
+    {
+      "id": "web-game-1",
+      "title": "JavaScript and Canvas Basics",
+      "order": 1,
+      "techs": [
+        "JavaScript",
+        "HTML5 Canvas",
+        "DOM"
+      ],
+      "description": "This layer establishes JavaScript fundamentals and drawing to the HTML5 canvas. These basics underpin every browser-based game you will build.",
+      "topics": [
+        "JavaScript syntax and functions",
+        "Canvas 2D context",
+        "The game loop and requestAnimationFrame",
+        "Drawing shapes and images",
+        "Keyboard and mouse events",
+        "Coordinate systems"
+      ],
+      "resources": [
+        {
+          "label": "MDN Canvas Tutorial",
+          "platform": "MDN Web Docs",
+          "type": "docs"
+        },
+        {
+          "label": "MDN Game Development Guide",
+          "platform": "MDN Web Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Chris Courses Game Loop",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Draw a player sprite on canvas that moves with arrow keys in a game loop.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "web-game-2",
+      "title": "Phaser Game Framework",
+      "order": 2,
+      "techs": [
+        "Phaser.js",
+        "JavaScript",
+        "Webpack"
+      ],
+      "description": "This layer introduces Phaser for scenes, sprites, and arcade physics. A framework speeds up development and handles common 2D game plumbing.",
+      "topics": [
+        "Phaser scene structure",
+        "Loading and displaying sprites",
+        "Arcade physics bodies",
+        "Sprite groups",
+        "Tilemaps",
+        "Scene transitions"
+      ],
+      "resources": [
+        {
+          "label": "Phaser Documentation",
+          "platform": "Phaser.io",
+          "type": "docs"
+        },
+        {
+          "label": "Phaser Examples",
+          "platform": "Phaser.io",
+          "type": "docs"
+        },
+        {
+          "label": "Ourcade Phaser Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a 2D platformer prototype with a tilemap level and arcade physics.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "web-game-3",
+      "title": "Sprites, Animation, and Audio",
+      "order": 3,
+      "techs": [
+        "Phaser.js",
+        "JavaScript",
+        "Web Audio"
+      ],
+      "description": "This layer covers sprite sheets, animations, and sound for richer 2D games. Animation and audio give a web game its feel and feedback.",
+      "topics": [
+        "Sprite sheets and atlases",
+        "Animation frames and keys",
+        "Sound effects and music",
+        "Web Audio basics",
+        "Particle emitters",
+        "Tweening movement"
+      ],
+      "resources": [
+        {
+          "label": "Phaser Animation Docs",
+          "platform": "Phaser.io",
+          "type": "docs"
+        },
+        {
+          "label": "MDN Web Audio API",
+          "platform": "MDN Web Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Ourcade Animation Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add animated walk and jump cycles plus sound effects to the platformer.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "web-game-4",
+      "title": "Game State and UI",
+      "order": 4,
+      "techs": [
+        "Phaser.js",
+        "JavaScript",
+        "HTML"
+      ],
+      "description": "This layer manages score, lives, and menus across multiple scenes. Clear UI and state flow turn a prototype into a complete game loop.",
+      "topics": [
+        "Scene management and data passing",
+        "Score and lives tracking",
+        "Text and bitmap fonts",
+        "Menu and pause scenes",
+        "Local storage for high scores",
+        "Restart and game over flow"
+      ],
+      "resources": [
+        {
+          "label": "Phaser Scenes Docs",
+          "platform": "Phaser.io",
+          "type": "docs"
+        },
+        {
+          "label": "MDN Web Storage",
+          "platform": "MDN Web Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Ourcade UI Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a menu, score HUD, and high score saving to the platformer.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "web-game-5",
+      "title": "WebGL and 3D with Three.js",
+      "order": 5,
+      "techs": [
+        "Three.js",
+        "WebGL",
+        "JavaScript"
+      ],
+      "description": "This layer introduces 3D rendering in the browser using Three.js over WebGL. Moving to 3D opens a new dimension of web game possibilities.",
+      "topics": [
+        "Scene camera and renderer",
+        "Meshes and geometries",
+        "Materials and lights",
+        "Loading 3D models",
+        "Animation loop in 3D",
+        "Orbit and follow cameras"
+      ],
+      "resources": [
+        {
+          "label": "Three.js Documentation",
+          "platform": "threejs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Three.js Journey",
+          "platform": "threejs-journey.com",
+          "type": "course"
+        },
+        {
+          "label": "Three.js Fundamentals",
+          "platform": "threejsfundamentals.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a simple 3D scene with a controllable model and a follow camera.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "web-game-6",
+      "title": "3D Physics and Interaction",
+      "order": 6,
+      "techs": [
+        "Three.js",
+        "Cannon-es",
+        "JavaScript"
+      ],
+      "description": "This layer adds a physics engine and raycasting for 3D interaction. Physics and picking make 3D web games tangible and playable.",
+      "topics": [
+        "Physics world and bodies",
+        "Syncing physics to meshes",
+        "Collision detection",
+        "Raycasting for selection",
+        "Forces and impulses",
+        "Character controllers"
+      ],
+      "resources": [
+        {
+          "label": "Cannon-es Docs",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "Three.js Journey",
+          "platform": "threejs-journey.com",
+          "type": "course"
+        },
+        {
+          "label": "SimonDev Three.js Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add gravity, collisions, and clickable objects to the 3D scene.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "web-game-7",
+      "title": "Shaders and Visual Effects",
+      "order": 7,
+      "techs": [
+        "GLSL",
+        "Three.js",
+        "WebGL"
+      ],
+      "description": "This layer introduces GLSL shaders and post processing for custom visuals. Shaders give web games a distinct and polished look.",
+      "topics": [
+        "Vertex and fragment shaders",
+        "Uniforms and attributes",
+        "Shader materials in Three.js",
+        "Post processing passes",
+        "Procedural patterns",
+        "Performance of shaders"
+      ],
+      "resources": [
+        {
+          "label": "The Book of Shaders",
+          "platform": "thebookofshaders.com",
+          "type": "docs"
+        },
+        {
+          "label": "Three.js Journey Shaders",
+          "platform": "threejs-journey.com",
+          "type": "course"
+        },
+        {
+          "label": "ShaderToy Examples",
+          "platform": "ShaderToy",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Write a custom shader material and add a bloom post processing effect.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "web-game-8",
+      "title": "Networking and Multiplayer",
+      "order": 8,
+      "techs": [
+        "WebSockets",
+        "Node.js",
+        "JavaScript"
+      ],
+      "description": "This layer connects browsers to a server for real-time multiplayer. Networking enables shared sessions and competitive web games.",
+      "topics": [
+        "WebSocket connections",
+        "Server authoritative state",
+        "Client side prediction",
+        "Broadcasting updates",
+        "Room and lobby systems",
+        "Latency and interpolation"
+      ],
+      "resources": [
+        {
+          "label": "MDN WebSockets API",
+          "platform": "MDN Web Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Socket.io Documentation",
+          "platform": "socket.io",
+          "type": "docs"
+        },
+        {
+          "label": "Gabriel Gambetta Netcode Articles",
+          "platform": "gabrielgambetta.com",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add real-time multiplayer movement to a game using WebSockets.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "web-game-9",
+      "title": "Asset Pipeline and Tooling",
+      "order": 9,
+      "techs": [
+        "Vite",
+        "JavaScript",
+        "Webpack"
+      ],
+      "description": "This layer covers bundling, asset loading, and build tooling for web games. A solid pipeline keeps load times low and the project maintainable.",
+      "topics": [
+        "Bundlers and modules",
+        "Texture and model compression",
+        "Asset preloading strategies",
+        "Code splitting",
+        "Sprite atlas generation",
+        "Source control of assets"
+      ],
+      "resources": [
+        {
+          "label": "Vite Documentation",
+          "platform": "vitejs.dev",
+          "type": "docs"
+        },
+        {
+          "label": "MDN Performance Guide",
+          "platform": "MDN Web Docs",
+          "type": "docs"
+        },
+        {
+          "label": "web.dev Performance",
+          "platform": "web.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Set up a Vite build with optimized asset loading for the game project.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "web-game-10",
+      "title": "Optimization and Deployment",
+      "order": 10,
+      "techs": [
+        "JavaScript",
+        "WebGL",
+        "Netlify"
+      ],
+      "description": "This layer focuses on performance profiling and deploying a web game to the public. Shipping a fast loading playable build completes the journey.",
+      "topics": [
+        "Browser performance profiling",
+        "Frame budget and draw calls",
+        "Memory and garbage collection",
+        "Progressive loading",
+        "Hosting and CDNs",
+        "itch.io and web deployment"
+      ],
+      "resources": [
+        {
+          "label": "web.dev Performance",
+          "platform": "web.dev",
+          "type": "docs"
+        },
+        {
+          "label": "MDN Performance Tools",
+          "platform": "MDN Web Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Netlify Documentation",
+          "platform": "Netlify",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Profile, optimize, and deploy the finished game to itch.io or a host.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "game-designer": [
+    {
+      "id": "game-designer-1",
+      "title": "Design Fundamentals",
+      "order": 1,
+      "techs": [
+        "GDD",
+        "Figma",
+        "Notion"
+      ],
+      "description": "This layer introduces core design vocabulary, player motivation, and the role of a designer. A shared foundation in theory frames every decision that follows.",
+      "topics": [
+        "What game design is",
+        "Player types and motivation",
+        "Core loops and pillars",
+        "Mechanics dynamics aesthetics",
+        "Game feel and juice",
+        "Design vocabulary"
+      ],
+      "resources": [
+        {
+          "label": "The Art of Game Design",
+          "platform": "OReilly",
+          "type": "book"
+        },
+        {
+          "label": "Game Maker's Toolkit",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "Extra Credits Design Series",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a one page concept defining the core loop and pillars of a small game.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-designer-2",
+      "title": "The Game Design Document",
+      "order": 2,
+      "techs": [
+        "GDD",
+        "Notion",
+        "Google Docs"
+      ],
+      "description": "This layer teaches structuring a clear and living game design document. A good GDD aligns the team and turns ideas into actionable plans.",
+      "topics": [
+        "GDD structure and sections",
+        "Scope and feature lists",
+        "One page and full design docs",
+        "Reference and mood boards",
+        "Living documentation",
+        "Communicating intent"
+      ],
+      "resources": [
+        {
+          "label": "GDD Templates",
+          "platform": "Notion",
+          "type": "docs"
+        },
+        {
+          "label": "Game Design Document Guide",
+          "platform": "Gamasutra",
+          "type": "docs"
+        },
+        {
+          "label": "Game Maker's Toolkit",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Expand the concept into a structured GDD with scope and feature list.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-designer-3",
+      "title": "Systems and Mechanics",
+      "order": 3,
+      "techs": [
+        "GDD",
+        "Machinations",
+        "Spreadsheets"
+      ],
+      "description": "This layer explores designing interlocking systems and the rules that govern them. Strong systems thinking creates depth and emergent play.",
+      "topics": [
+        "Game systems and feedback loops",
+        "Resources and economies",
+        "Progression systems",
+        "Risk and reward",
+        "Emergent versus scripted",
+        "Rule clarity"
+      ],
+      "resources": [
+        {
+          "label": "Machinations Documentation",
+          "platform": "Machinations.io",
+          "type": "docs"
+        },
+        {
+          "label": "Designing Games",
+          "platform": "OReilly",
+          "type": "book"
+        },
+        {
+          "label": "GDC Systems Design Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Design a core mechanic and a supporting progression system for your game.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-designer-4",
+      "title": "Level and Encounter Design",
+      "order": 4,
+      "techs": [
+        "Unity",
+        "Figma",
+        "Tiled"
+      ],
+      "description": "This layer covers pacing, layout, and guiding players through space. Level design shapes the moment to moment experience of a game.",
+      "topics": [
+        "Pacing and difficulty curves",
+        "Spatial layout and flow",
+        "Guiding the player",
+        "Teaching through levels",
+        "Encounter composition",
+        "Critical path and secrets"
+      ],
+      "resources": [
+        {
+          "label": "Unity Documentation",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Game Maker's Toolkit Level Design",
+          "platform": "YouTube",
+          "type": "video"
+        },
+        {
+          "label": "GDC Level Design Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Block out a tutorial level that teaches your core mechanic without text.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-designer-5",
+      "title": "Prototyping in Unity",
+      "order": 5,
+      "techs": [
+        "Unity",
+        "C#",
+        "ProBuilder"
+      ],
+      "description": "This layer gets designers building playable prototypes in Unity. Prototyping turns paper ideas into testable interactive experiences.",
+      "topics": [
+        "Unity editor basics",
+        "Gray box prototyping",
+        "Simple scripting for designers",
+        "Rapid iteration",
+        "Placeholder art",
+        "Playable builds"
+      ],
+      "resources": [
+        {
+          "label": "Unity Learn Pathways",
+          "platform": "Unity Learn",
+          "type": "course"
+        },
+        {
+          "label": "Unity Manual",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Brackeys Unity Basics",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a gray box playable prototype of your core mechanic in Unity.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-designer-6",
+      "title": "Narrative and Branching",
+      "order": 6,
+      "techs": [
+        "Twine",
+        "Ink",
+        "GDD"
+      ],
+      "description": "This layer covers story structure and branching narrative using Twine. Narrative design weaves meaning and choice into the player journey.",
+      "topics": [
+        "Story structure",
+        "Branching and choices",
+        "Twine passages and links",
+        "Worldbuilding",
+        "Character and dialogue",
+        "Environmental storytelling"
+      ],
+      "resources": [
+        {
+          "label": "Twine Documentation",
+          "platform": "twinery.org",
+          "type": "docs"
+        },
+        {
+          "label": "Ink by Inkle Docs",
+          "platform": "inkle",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Narrative Design Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create a short branching narrative for your game world in Twine.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-designer-7",
+      "title": "Balancing and Economy",
+      "order": 7,
+      "techs": [
+        "Spreadsheets",
+        "Machinations",
+        "GDD"
+      ],
+      "description": "This layer teaches numerical balancing of stats, costs, and rewards. Balance keeps a game fair, challenging, and satisfying over time.",
+      "topics": [
+        "Balancing curves",
+        "Spreadsheet modeling",
+        "Currency and sinks",
+        "Power and progression curves",
+        "Difficulty tuning",
+        "Tuning through data"
+      ],
+      "resources": [
+        {
+          "label": "Machinations Documentation",
+          "platform": "Machinations.io",
+          "type": "docs"
+        },
+        {
+          "label": "Game Balance Book",
+          "platform": "OReilly",
+          "type": "book"
+        },
+        {
+          "label": "GDC Balancing Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a spreadsheet that balances your game economy and progression.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-designer-8",
+      "title": "UX and Interface Design",
+      "order": 8,
+      "techs": [
+        "Figma",
+        "Unity",
+        "GDD"
+      ],
+      "description": "This layer covers usability, menus, and clear feedback for players. Good UX removes friction so players engage with the design directly.",
+      "topics": [
+        "Player onboarding",
+        "Menu and HUD layout",
+        "Feedback and affordances",
+        "Accessibility options",
+        "Wireframing in Figma",
+        "Information hierarchy"
+      ],
+      "resources": [
+        {
+          "label": "Figma Documentation",
+          "platform": "Figma",
+          "type": "docs"
+        },
+        {
+          "label": "Game UX Patterns",
+          "platform": "Game UI Database",
+          "type": "docs"
+        },
+        {
+          "label": "GDC UX Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Design HUD and menu wireframes for your prototype in Figma.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-designer-9",
+      "title": "Playtesting and Iteration",
+      "order": 9,
+      "techs": [
+        "Notion",
+        "Forms",
+        "Analytics"
+      ],
+      "description": "This layer focuses on running playtests and iterating from feedback. Disciplined testing exposes problems no amount of theory can predict.",
+      "topics": [
+        "Playtest planning",
+        "Observing players",
+        "Surveys and metrics",
+        "Synthesizing feedback",
+        "Iteration loops",
+        "Avoiding designer bias"
+      ],
+      "resources": [
+        {
+          "label": "Playtesting Guide",
+          "platform": "Gamasutra",
+          "type": "docs"
+        },
+        {
+          "label": "The Art of Game Design",
+          "platform": "OReilly",
+          "type": "book"
+        },
+        {
+          "label": "GDC Playtesting Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Run a structured playtest of your prototype and document changes to make.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-designer-10",
+      "title": "Pitching and Shipping",
+      "order": 10,
+      "techs": [
+        "Figma",
+        "GDD",
+        "Slides"
+      ],
+      "description": "This layer covers pitching, vertical slices, and preparing a design for release. Communicating and finalizing the vision is what gets a game made and shipped.",
+      "topics": [
+        "Pitch decks",
+        "Vertical slice",
+        "Marketing and hooks",
+        "Production planning",
+        "Final scope cuts",
+        "Postmortems"
+      ],
+      "resources": [
+        {
+          "label": "Pitch Deck Guide",
+          "platform": "Gamasutra",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Pitching Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        },
+        {
+          "label": "The Art of Game Design",
+          "platform": "OReilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Produce a polished pitch deck and vertical slice plan for your game.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "godot": [
+    {
+      "id": "godot-1",
+      "title": "Godot and GDScript Basics",
+      "order": 1,
+      "techs": [
+        "Godot",
+        "GDScript",
+        "Editor"
+      ],
+      "description": "This layer introduces the Godot editor and the GDScript language. These fundamentals let you build and script nodes for any game.",
+      "topics": [
+        "Editor interface and docks",
+        "Nodes and scenes",
+        "GDScript syntax",
+        "The scene tree",
+        "Signals basics",
+        "Running and debugging"
+      ],
+      "resources": [
+        {
+          "label": "Godot Documentation",
+          "platform": "Godot Engine",
+          "type": "docs"
+        },
+        {
+          "label": "GDScript Basics Docs",
+          "platform": "Godot Engine",
+          "type": "docs"
+        },
+        {
+          "label": "Brackeys Godot Tutorial",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a scene with a sprite node that moves using keyboard input.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "godot-2",
+      "title": "Nodes, Scenes, and Signals",
+      "order": 2,
+      "techs": [
+        "Godot",
+        "GDScript",
+        "Signals"
+      ],
+      "description": "This layer explores composing reusable scenes and connecting them with signals. The node and signal model is the heart of Godot architecture.",
+      "topics": [
+        "Scene composition",
+        "Instancing scenes",
+        "Custom signals",
+        "Node references and groups",
+        "Autoload singletons",
+        "Scene inheritance"
+      ],
+      "resources": [
+        {
+          "label": "Nodes and Scenes Docs",
+          "platform": "Godot Engine",
+          "type": "docs"
+        },
+        {
+          "label": "Signals Documentation",
+          "platform": "Godot Engine",
+          "type": "docs"
+        },
+        {
+          "label": "GDQuest Godot Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create reusable enemy and coin scenes that emit signals when collected.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "godot-3",
+      "title": "2D Physics and Movement",
+      "order": 3,
+      "techs": [
+        "Godot",
+        "GDScript",
+        "Physics2D"
+      ],
+      "description": "This layer covers the 2D physics bodies and building a character controller. Reliable movement and collision drive a satisfying platformer.",
+      "topics": [
+        "CharacterBody2D",
+        "RigidBody and StaticBody",
+        "Collision shapes and layers",
+        "move_and_slide",
+        "Area2D detection",
+        "Gravity and jumping"
+      ],
+      "resources": [
+        {
+          "label": "Physics2D Docs",
+          "platform": "Godot Engine",
+          "type": "docs"
+        },
+        {
+          "label": "Godot 2D Tutorials",
+          "platform": "Godot Engine",
+          "type": "docs"
+        },
+        {
+          "label": "HeartBeast Godot Series",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a platformer character with gravity, jumping, and coin pickups.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "godot-4",
+      "title": "UI and Game Flow",
+      "order": 4,
+      "techs": [
+        "Godot",
+        "GDScript",
+        "Control"
+      ],
+      "description": "This layer teaches building menus and HUDs using Control nodes. UI and scene switching turn mechanics into a full game loop.",
+      "topics": [
+        "Control nodes and containers",
+        "Anchors and layout",
+        "Labels buttons and bars",
+        "Scene switching",
+        "Score and health UI",
+        "Pause and game over"
+      ],
+      "resources": [
+        {
+          "label": "GUI Documentation",
+          "platform": "Godot Engine",
+          "type": "docs"
+        },
+        {
+          "label": "Godot UI Tutorials",
+          "platform": "Godot Engine",
+          "type": "docs"
+        },
+        {
+          "label": "GDQuest UI Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a main menu, score HUD, and game over screen to the platformer.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "godot-5",
+      "title": "Animation and Tweens",
+      "order": 5,
+      "techs": [
+        "Godot",
+        "GDScript",
+        "AnimationPlayer"
+      ],
+      "description": "This layer covers AnimationPlayer, AnimatedSprite, and tweening for motion. Animation adds polish and clear feedback to gameplay.",
+      "topics": [
+        "AnimationPlayer tracks",
+        "AnimatedSprite2D",
+        "AnimationTree state machines",
+        "Tweens for movement",
+        "Animation callbacks",
+        "Sprite frames"
+      ],
+      "resources": [
+        {
+          "label": "Animation Docs",
+          "platform": "Godot Engine",
+          "type": "docs"
+        },
+        {
+          "label": "Godot Animation Tutorials",
+          "platform": "Godot Engine",
+          "type": "docs"
+        },
+        {
+          "label": "HeartBeast Animation Series",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Animate the character with idle run and jump states and tweened pickups.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "godot-6",
+      "title": "Audio and Particles",
+      "order": 6,
+      "techs": [
+        "Godot",
+        "GDScript",
+        "GPUParticles"
+      ],
+      "description": "This layer adds sound, music, and particle effects for immersion. Audio and effects make interactions feel responsive and alive.",
+      "topics": [
+        "AudioStreamPlayer nodes",
+        "Audio buses and effects",
+        "Positional 2D audio",
+        "GPUParticles2D",
+        "Effect timing",
+        "Volume and music management"
+      ],
+      "resources": [
+        {
+          "label": "Audio Docs",
+          "platform": "Godot Engine",
+          "type": "docs"
+        },
+        {
+          "label": "Particles Documentation",
+          "platform": "Godot Engine",
+          "type": "docs"
+        },
+        {
+          "label": "GDQuest VFX Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add jump and pickup sounds, music, and a particle burst to the game.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "godot-7",
+      "title": "Shaders in Godot",
+      "order": 7,
+      "techs": [
+        "Shaders",
+        "Godot",
+        "GDScript"
+      ],
+      "description": "This layer introduces the Godot shading language for custom 2D effects. Shaders let you craft a distinctive visual identity.",
+      "topics": [
+        "Godot shading language",
+        "Canvas item shaders",
+        "Uniforms and parameters",
+        "Screen and texture effects",
+        "Dissolve and outline shaders",
+        "Shader performance"
+      ],
+      "resources": [
+        {
+          "label": "Shading Language Docs",
+          "platform": "Godot Engine",
+          "type": "docs"
+        },
+        {
+          "label": "Godot Shaders Library",
+          "platform": "godotshaders.com",
+          "type": "docs"
+        },
+        {
+          "label": "GDQuest Shader Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a hit flash and outline shader for enemies in the game.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "godot-8",
+      "title": "C# in Godot and Architecture",
+      "order": 8,
+      "techs": [
+        "C#",
+        "Godot",
+        "Mono"
+      ],
+      "description": "This layer adds C# scripting and clean project architecture in Godot. C# brings strong typing and tooling for larger codebases.",
+      "topics": [
+        "C# setup and bindings",
+        "Calling engine APIs from C#",
+        "State machines",
+        "Resource files for data",
+        "Saving and loading",
+        "Project structure"
+      ],
+      "resources": [
+        {
+          "label": "C# in Godot Docs",
+          "platform": "Godot Engine",
+          "type": "docs"
+        },
+        {
+          "label": "Resources Documentation",
+          "platform": "Godot Engine",
+          "type": "docs"
+        },
+        {
+          "label": "Godot C# Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Rewrite a core system in C# and add a save and load feature.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "godot-9",
+      "title": "Enemy AI and Levels",
+      "order": 9,
+      "techs": [
+        "Godot",
+        "GDScript",
+        "Navigation2D"
+      ],
+      "description": "This layer builds enemy AI with navigation and assembles full levels. Reactive enemies and varied levels make a complete experience.",
+      "topics": [
+        "State based enemy AI",
+        "Navigation2D pathfinding",
+        "Player detection",
+        "TileMap level building",
+        "Spawning systems",
+        "Level transitions"
+      ],
+      "resources": [
+        {
+          "label": "Navigation Docs",
+          "platform": "Godot Engine",
+          "type": "docs"
+        },
+        {
+          "label": "TileMap Documentation",
+          "platform": "Godot Engine",
+          "type": "docs"
+        },
+        {
+          "label": "HeartBeast AI Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add patrolling and chasing enemies and build a multi-level world.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "godot-10",
+      "title": "Exporting and Optimization",
+      "order": 10,
+      "techs": [
+        "Godot",
+        "GDScript",
+        "Export Templates"
+      ],
+      "description": "This layer covers profiling, optimizing, and exporting to platforms. Producing a shippable build is the final step to release.",
+      "topics": [
+        "Godot profiler",
+        "Reducing draw calls",
+        "Object pooling",
+        "Export templates and presets",
+        "Platform export settings",
+        "itch.io publishing"
+      ],
+      "resources": [
+        {
+          "label": "Exporting Docs",
+          "platform": "Godot Engine",
+          "type": "docs"
+        },
+        {
+          "label": "Optimization Documentation",
+          "platform": "Godot Engine",
+          "type": "docs"
+        },
+        {
+          "label": "GDQuest Export Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Profile and optimize the game then export a build for desktop and web.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "game-ai": [
+    {
+      "id": "game-ai-1",
+      "title": "AI Foundations",
+      "order": 1,
+      "techs": [
+        "C++",
+        "Algorithms",
+        "Math"
+      ],
+      "description": "This layer introduces game AI concepts and the math behind agent behavior. A grounding in fundamentals prepares you for advanced techniques.",
+      "topics": [
+        "What game AI is",
+        "Agents and perception",
+        "Vectors and steering basics",
+        "Decision making overview",
+        "Update loops for AI",
+        "Determinism and randomness"
+      ],
+      "resources": [
+        {
+          "label": "AI for Games",
+          "platform": "OReilly",
+          "type": "book"
+        },
+        {
+          "label": "Red Blob Games",
+          "platform": "redblobgames.com",
+          "type": "docs"
+        },
+        {
+          "label": "GDC AI Summit Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement a simple agent that moves toward a target each frame.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-ai-2",
+      "title": "Finite State Machines",
+      "order": 2,
+      "techs": [
+        "C++",
+        "FSM",
+        "Algorithms"
+      ],
+      "description": "This layer covers finite state machines for structuring agent behavior. FSMs are the most common and approachable AI architecture.",
+      "topics": [
+        "States and transitions",
+        "FSM implementation patterns",
+        "Hierarchical state machines",
+        "Enter update and exit",
+        "Guard conditions",
+        "Debugging state flow"
+      ],
+      "resources": [
+        {
+          "label": "AI for Games",
+          "platform": "OReilly",
+          "type": "book"
+        },
+        {
+          "label": "Game Programming Patterns State",
+          "platform": "gameprogrammingpatterns.com",
+          "type": "docs"
+        },
+        {
+          "label": "GDC AI Architecture Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build an enemy with idle patrol and chase states using an FSM.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-ai-3",
+      "title": "Pathfinding and Navigation",
+      "order": 3,
+      "techs": [
+        "C++",
+        "A Star",
+        "NavMesh"
+      ],
+      "description": "This layer teaches grid and navmesh pathfinding with the A star algorithm. Pathfinding lets agents move intelligently through the world.",
+      "topics": [
+        "Graphs and grids",
+        "A star algorithm",
+        "Dijkstra and heuristics",
+        "Navigation meshes",
+        "Path smoothing",
+        "Dynamic obstacles"
+      ],
+      "resources": [
+        {
+          "label": "Red Blob Pathfinding",
+          "platform": "redblobgames.com",
+          "type": "docs"
+        },
+        {
+          "label": "AI for Games",
+          "platform": "OReilly",
+          "type": "book"
+        },
+        {
+          "label": "GDC Pathfinding Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement A star pathfinding so enemies navigate around obstacles to the player.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-ai-4",
+      "title": "Steering Behaviors",
+      "order": 4,
+      "techs": [
+        "C++",
+        "Steering",
+        "Vectors"
+      ],
+      "description": "This layer covers steering behaviors like seek, flee, and flocking. Steering produces smooth lifelike movement that pathfinding alone lacks.",
+      "topics": [
+        "Seek and flee",
+        "Arrive and pursue",
+        "Wander behavior",
+        "Obstacle avoidance",
+        "Flocking and separation",
+        "Combining steering forces"
+      ],
+      "resources": [
+        {
+          "label": "Craig Reynolds Steering Paper",
+          "platform": "red3d.com",
+          "type": "docs"
+        },
+        {
+          "label": "Nature of Code Autonomous Agents",
+          "platform": "natureofcode.com",
+          "type": "book"
+        },
+        {
+          "label": "GDC Movement AI Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add flocking and obstacle avoidance to a group of patrolling enemies.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-ai-5",
+      "title": "Behavior Trees",
+      "order": 5,
+      "techs": [
+        "C++",
+        "Behavior Trees",
+        "Algorithms"
+      ],
+      "description": "This layer introduces behavior trees as a scalable decision architecture. Behavior trees handle complex AI more cleanly than large state machines.",
+      "topics": [
+        "Nodes selectors and sequences",
+        "Composite and decorator nodes",
+        "Blackboards",
+        "Tick and node status",
+        "Reactive behavior",
+        "Tree design patterns"
+      ],
+      "resources": [
+        {
+          "label": "Behavior Trees in Robotics and AI",
+          "platform": "OReilly",
+          "type": "book"
+        },
+        {
+          "label": "GDC Behavior Tree Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        },
+        {
+          "label": "AI and Games YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Replace the enemy FSM with a behavior tree controlling patrol and combat.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-ai-6",
+      "title": "Perception and Sensing",
+      "order": 6,
+      "techs": [
+        "C++",
+        "Raycasting",
+        "Algorithms"
+      ],
+      "description": "This layer covers giving agents sight, hearing, and memory of the world. Perception systems make AI react believably to the player.",
+      "topics": [
+        "Vision cones and line of sight",
+        "Hearing and sound events",
+        "Raycasting for sensing",
+        "Memory and last known position",
+        "Stimulus and awareness",
+        "Spatial queries"
+      ],
+      "resources": [
+        {
+          "label": "AI for Games",
+          "platform": "OReilly",
+          "type": "book"
+        },
+        {
+          "label": "GDC Perception Systems Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        },
+        {
+          "label": "AI and Games YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add a vision cone and sound detection so enemies investigate the player.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-ai-7",
+      "title": "GOAP and Planning",
+      "order": 7,
+      "techs": [
+        "C++",
+        "GOAP",
+        "Planning"
+      ],
+      "description": "This layer introduces Goal Oriented Action Planning for flexible behavior. Planning lets agents choose actions dynamically to reach goals.",
+      "topics": [
+        "Goals and actions",
+        "Preconditions and effects",
+        "Planning search",
+        "World state representation",
+        "Cost based action selection",
+        "Replanning"
+      ],
+      "resources": [
+        {
+          "label": "Jeff Orkin GOAP Papers",
+          "platform": "alumni.media.mit.edu",
+          "type": "docs"
+        },
+        {
+          "label": "GDC GOAP Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        },
+        {
+          "label": "AI and Games GOAP",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement a GOAP agent that plans actions to hunt and ambush the player.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-ai-8",
+      "title": "Utility AI and Tactics",
+      "order": 8,
+      "techs": [
+        "C++",
+        "Utility AI",
+        "Algorithms"
+      ],
+      "description": "This layer covers utility based decision making and tactical reasoning. Utility AI scores options for nuanced and adaptive behavior.",
+      "topics": [
+        "Utility scoring",
+        "Response curves",
+        "Weighing competing actions",
+        "Influence maps",
+        "Tactical positioning",
+        "Cover selection"
+      ],
+      "resources": [
+        {
+          "label": "Game AI Pro Articles",
+          "platform": "gameaipro.com",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Utility AI Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        },
+        {
+          "label": "AI and Games Utility AI",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Add utility scoring so enemies choose between attacking fleeing and taking cover.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-ai-9",
+      "title": "Group and Coordinated AI",
+      "order": 9,
+      "techs": [
+        "C++",
+        "Influence Maps",
+        "Algorithms"
+      ],
+      "description": "This layer teaches coordinating multiple agents for squad and crowd behavior. Coordinated AI creates emergent and memorable encounters.",
+      "topics": [
+        "Squad coordination",
+        "Role assignment",
+        "Flanking and formations",
+        "Shared blackboards",
+        "Crowd simulation",
+        "Communication between agents"
+      ],
+      "resources": [
+        {
+          "label": "Game AI Pro Articles",
+          "platform": "gameaipro.com",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Squad AI Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        },
+        {
+          "label": "AI and Games Coordination",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Coordinate a squad of enemies to flank and surround the player.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-ai-10",
+      "title": "Profiling and Shipping AI",
+      "order": 10,
+      "techs": [
+        "C++",
+        "Profiling",
+        "Optimization"
+      ],
+      "description": "This layer focuses on profiling, optimizing, and debugging AI at scale. Performant and tunable AI is what ships in a real game.",
+      "topics": [
+        "Profiling AI cost",
+        "Time slicing and budgets",
+        "Level of detail for AI",
+        "Debug visualization",
+        "Tuning and designer tools",
+        "Shipping considerations"
+      ],
+      "resources": [
+        {
+          "label": "Game AI Pro Articles",
+          "platform": "gameaipro.com",
+          "type": "docs"
+        },
+        {
+          "label": "GDC AI Optimization Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        },
+        {
+          "label": "AI for Games",
+          "platform": "OReilly",
+          "type": "book"
+        }
+      ],
+      "challenge": "Profile and time slice the AI then add debug visualization for a shippable build.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "shader-dev": [
+    {
+      "id": "shader-dev-1",
+      "title": "Graphics and Math Foundations",
+      "order": 1,
+      "techs": [
+        "HLSL",
+        "GLSL",
+        "Linear Algebra"
+      ],
+      "description": "This layer covers the rendering pipeline and the math shaders rely on. A solid foundation in vectors and matrices is essential for graphics work.",
+      "topics": [
+        "Rendering pipeline overview",
+        "Vectors and matrices",
+        "Coordinate spaces",
+        "Vertex and fragment stages",
+        "Color and gamma",
+        "Rasterization basics"
+      ],
+      "resources": [
+        {
+          "label": "LearnOpenGL",
+          "platform": "learnopengl.com",
+          "type": "docs"
+        },
+        {
+          "label": "The Book of Shaders",
+          "platform": "thebookofshaders.com",
+          "type": "docs"
+        },
+        {
+          "label": "Freya Holmer Math Videos",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a fragment shader that outputs a gradient based on screen coordinates.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "shader-dev-2",
+      "title": "Fragment Shader Fundamentals",
+      "order": 2,
+      "techs": [
+        "GLSL",
+        "HLSL",
+        "Shaders"
+      ],
+      "description": "This layer dives into fragment shaders, uniforms, and procedural color. Fragment shaders are where most visual magic happens.",
+      "topics": [
+        "Uniforms and varyings",
+        "UV coordinates",
+        "Math functions in shaders",
+        "Mixing and stepping",
+        "Procedural shapes",
+        "Time based animation"
+      ],
+      "resources": [
+        {
+          "label": "The Book of Shaders",
+          "platform": "thebookofshaders.com",
+          "type": "docs"
+        },
+        {
+          "label": "ShaderToy",
+          "platform": "ShaderToy",
+          "type": "docs"
+        },
+        {
+          "label": "The Art of Code YouTube",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create an animated procedural pattern using UVs and time in a fragment shader.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "shader-dev-3",
+      "title": "Texturing and Sampling",
+      "order": 3,
+      "techs": [
+        "HLSL",
+        "GLSL",
+        "Textures"
+      ],
+      "description": "This layer covers sampling textures, blending, and UV manipulation. Texturing brings detail and material variety to surfaces.",
+      "topics": [
+        "Texture sampling",
+        "UV transforms and tiling",
+        "Texture blending",
+        "Normal maps",
+        "Mipmaps and filtering",
+        "Triplanar mapping"
+      ],
+      "resources": [
+        {
+          "label": "LearnOpenGL Textures",
+          "platform": "learnopengl.com",
+          "type": "docs"
+        },
+        {
+          "label": "The Book of Shaders",
+          "platform": "thebookofshaders.com",
+          "type": "docs"
+        },
+        {
+          "label": "Ben Cloward Shader Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a material that blends two textures and applies a normal map.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "shader-dev-4",
+      "title": "Lighting Models",
+      "order": 4,
+      "techs": [
+        "HLSL",
+        "GLSL",
+        "PBR"
+      ],
+      "description": "This layer teaches lighting from diffuse and specular to physically based rendering. Lighting determines how believable a surface appears.",
+      "topics": [
+        "Diffuse and specular",
+        "Normals and lighting math",
+        "Phong and Blinn-Phong",
+        "Physically based rendering",
+        "Metalness and roughness",
+        "Ambient and environment light"
+      ],
+      "resources": [
+        {
+          "label": "LearnOpenGL PBR",
+          "platform": "learnopengl.com",
+          "type": "docs"
+        },
+        {
+          "label": "Real-Time Rendering",
+          "platform": "OReilly",
+          "type": "book"
+        },
+        {
+          "label": "Ben Cloward Lighting Series",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement a PBR lit material with metalness and roughness inputs.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "shader-dev-5",
+      "title": "Unity URP Shaders",
+      "order": 5,
+      "techs": [
+        "Unity URP",
+        "HLSL",
+        "Shader Graph"
+      ],
+      "description": "This layer covers writing shaders for the Universal Render Pipeline in Unity. URP is a common target for stylized and performant game visuals.",
+      "topics": [
+        "URP shader structure",
+        "Shader Graph and code",
+        "Lit and unlit shaders",
+        "Custom lighting in URP",
+        "Render features",
+        "Keywords and variants"
+      ],
+      "resources": [
+        {
+          "label": "URP Shaders Documentation",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Unity Learn Shader Graph",
+          "platform": "Unity Learn",
+          "type": "course"
+        },
+        {
+          "label": "Cyanilux URP Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a custom URP lit shader with a stylized toon lighting ramp.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "shader-dev-6",
+      "title": "Vertex Shaders and Deformation",
+      "order": 6,
+      "techs": [
+        "HLSL",
+        "GLSL",
+        "Shaders"
+      ],
+      "description": "This layer explores vertex shaders for animation and mesh deformation. Vertex work enables waves, wind, and dynamic geometry effects.",
+      "topics": [
+        "Vertex position manipulation",
+        "Wave and wind effects",
+        "Vertex colors",
+        "World and object space",
+        "Billboarding",
+        "GPU vertex animation"
+      ],
+      "resources": [
+        {
+          "label": "Catlike Coding Shaders",
+          "platform": "catlikecoding.com",
+          "type": "docs"
+        },
+        {
+          "label": "LearnOpenGL",
+          "platform": "learnopengl.com",
+          "type": "docs"
+        },
+        {
+          "label": "Ben Cloward Vertex Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Create a wind animated foliage shader using vertex displacement.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "shader-dev-7",
+      "title": "Post Processing Effects",
+      "order": 7,
+      "techs": [
+        "HLSL",
+        "GLSL",
+        "Unity URP"
+      ],
+      "description": "This layer covers full screen post processing like bloom and color grading. Post effects unify and elevate the overall look of a scene.",
+      "topics": [
+        "Full screen shaders",
+        "Bloom and glow",
+        "Color grading",
+        "Vignette and chromatic aberration",
+        "Depth and normal buffers",
+        "Edge detection outlines"
+      ],
+      "resources": [
+        {
+          "label": "LearnOpenGL Post Processing",
+          "platform": "learnopengl.com",
+          "type": "docs"
+        },
+        {
+          "label": "URP Post Processing Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Cyanilux Post Process Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a post process stack with bloom color grading and edge outlines.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "shader-dev-8",
+      "title": "Compute and GPU Programming",
+      "order": 8,
+      "techs": [
+        "HLSL",
+        "Compute Shaders",
+        "GPU"
+      ],
+      "description": "This layer introduces compute shaders for general GPU computation. Compute unlocks particles, simulations, and heavy parallel work.",
+      "topics": [
+        "Compute shader basics",
+        "Thread groups",
+        "Structured buffers",
+        "GPU particle systems",
+        "Parallel algorithms",
+        "Reading back results"
+      ],
+      "resources": [
+        {
+          "label": "Compute Shader Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Microsoft HLSL Compute Docs",
+          "platform": "Microsoft Learn",
+          "type": "docs"
+        },
+        {
+          "label": "Sebastian Lague Compute Series",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement a GPU particle system driven by a compute shader.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "shader-dev-9",
+      "title": "Vulkan and Modern APIs",
+      "order": 9,
+      "techs": [
+        "Vulkan",
+        "GLSL",
+        "SPIR-V"
+      ],
+      "description": "This layer covers the explicit Vulkan API and modern graphics pipelines. Low level APIs give maximum control over rendering performance.",
+      "topics": [
+        "Vulkan pipeline objects",
+        "Command buffers",
+        "Descriptor sets",
+        "SPIR-V shader compilation",
+        "Render passes",
+        "Synchronization"
+      ],
+      "resources": [
+        {
+          "label": "Vulkan Tutorial",
+          "platform": "vulkan-tutorial.com",
+          "type": "docs"
+        },
+        {
+          "label": "Vulkan Specification",
+          "platform": "Khronos",
+          "type": "docs"
+        },
+        {
+          "label": "Brendan Galea Vulkan Series",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Render a textured lit triangle with a custom SPIR-V shader in Vulkan.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "shader-dev-10",
+      "title": "Optimization and Profiling",
+      "order": 10,
+      "techs": [
+        "HLSL",
+        "RenderDoc",
+        "GPU"
+      ],
+      "description": "This layer focuses on profiling and optimizing shaders for shipping. Efficient shaders are what allow rich visuals to run at target frame rates.",
+      "topics": [
+        "GPU profiling with RenderDoc",
+        "Shader instruction cost",
+        "Reducing overdraw",
+        "Branching and precision",
+        "LOD and shader variants",
+        "Platform considerations"
+      ],
+      "resources": [
+        {
+          "label": "RenderDoc Documentation",
+          "platform": "renderdoc.org",
+          "type": "docs"
+        },
+        {
+          "label": "Real-Time Rendering",
+          "platform": "OReilly",
+          "type": "book"
+        },
+        {
+          "label": "GDC Shader Optimization Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Profile your shaders with RenderDoc and optimize them for a target platform.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "game-backend": [
+    {
+      "id": "game-backend-1",
+      "title": "Node.js and Server Basics",
+      "order": 1,
+      "techs": [
+        "Node.js",
+        "JavaScript",
+        "Express"
+      ],
+      "description": "This layer establishes Node.js and HTTP server fundamentals for game services. Backend basics are the foundation for all online game features.",
+      "topics": [
+        "Node.js runtime and modules",
+        "HTTP and REST",
+        "Express routing",
+        "JSON request handling",
+        "Environment configuration",
+        "Async and promises"
+      ],
+      "resources": [
+        {
+          "label": "Node.js Documentation",
+          "platform": "Node.js",
+          "type": "docs"
+        },
+        {
+          "label": "Express Documentation",
+          "platform": "expressjs.com",
+          "type": "docs"
+        },
+        {
+          "label": "MDN Server Side",
+          "platform": "MDN Web Docs",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a REST API that creates and fetches player profiles.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-backend-2",
+      "title": "Real-Time with WebSockets",
+      "order": 2,
+      "techs": [
+        "WebSockets",
+        "Node.js",
+        "Socket.io"
+      ],
+      "description": "This layer covers real-time bidirectional communication using WebSockets. Real-time messaging is essential for multiplayer game backends.",
+      "topics": [
+        "WebSocket protocol",
+        "Socket.io rooms",
+        "Broadcasting events",
+        "Connection lifecycle",
+        "Message serialization",
+        "Heartbeats and reconnection"
+      ],
+      "resources": [
+        {
+          "label": "Socket.io Documentation",
+          "platform": "socket.io",
+          "type": "docs"
+        },
+        {
+          "label": "MDN WebSockets API",
+          "platform": "MDN Web Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Node WebSocket Guide",
+          "platform": "Node.js",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a chat and lobby server where players join rooms in real time.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-backend-3",
+      "title": "Authentication and Accounts",
+      "order": 3,
+      "techs": [
+        "Node.js",
+        "JWT",
+        "OAuth"
+      ],
+      "description": "This layer teaches secure player authentication and account management. Trustworthy auth protects player identity and progress.",
+      "topics": [
+        "Password hashing",
+        "JWT tokens",
+        "OAuth and social login",
+        "Sessions and refresh tokens",
+        "Account linking",
+        "Rate limiting"
+      ],
+      "resources": [
+        {
+          "label": "JWT Introduction",
+          "platform": "jwt.io",
+          "type": "docs"
+        },
+        {
+          "label": "OWASP Auth Cheat Sheet",
+          "platform": "OWASP",
+          "type": "docs"
+        },
+        {
+          "label": "Node Auth Best Practices",
+          "platform": "Node.js",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add account registration and JWT login to the game backend.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-backend-4",
+      "title": "Databases and Persistence",
+      "order": 4,
+      "techs": [
+        "PostgreSQL",
+        "MongoDB",
+        "Node.js"
+      ],
+      "description": "This layer covers storing player data in SQL and NoSQL databases. Reliable persistence keeps progress and game state safe.",
+      "topics": [
+        "Relational versus document stores",
+        "Schema design for games",
+        "CRUD operations",
+        "Indexes and queries",
+        "Transactions",
+        "Migrations"
+      ],
+      "resources": [
+        {
+          "label": "PostgreSQL Documentation",
+          "platform": "PostgreSQL",
+          "type": "docs"
+        },
+        {
+          "label": "MongoDB Manual",
+          "platform": "MongoDB",
+          "type": "docs"
+        },
+        {
+          "label": "Prisma Documentation",
+          "platform": "prisma.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Persist player profiles inventory and stats to a database.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-backend-5",
+      "title": "Caching with Redis",
+      "order": 5,
+      "techs": [
+        "Redis",
+        "Node.js",
+        "Caching"
+      ],
+      "description": "This layer introduces Redis for caching, sessions, and fast shared state. In memory data stores power leaderboards and matchmaking speed.",
+      "topics": [
+        "Redis data structures",
+        "Caching strategies",
+        "Sorted sets for leaderboards",
+        "Pub sub messaging",
+        "Session storage",
+        "Expiry and eviction"
+      ],
+      "resources": [
+        {
+          "label": "Redis Documentation",
+          "platform": "redis.io",
+          "type": "docs"
+        },
+        {
+          "label": "Redis University",
+          "platform": "Redis",
+          "type": "course"
+        },
+        {
+          "label": "Node Redis Client Docs",
+          "platform": "redis.io",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a real-time leaderboard using Redis sorted sets.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-backend-6",
+      "title": "Game State and Authority",
+      "order": 6,
+      "techs": [
+        "Node.js",
+        "WebSockets",
+        "Redis"
+      ],
+      "description": "This layer covers authoritative server state and synchronization. Server authority prevents cheating and keeps players in sync.",
+      "topics": [
+        "Authoritative game loop",
+        "State synchronization",
+        "Tick rate and updates",
+        "Input validation",
+        "Lag compensation",
+        "Snapshot and delta updates"
+      ],
+      "resources": [
+        {
+          "label": "Gabriel Gambetta Netcode",
+          "platform": "gabrielgambetta.com",
+          "type": "docs"
+        },
+        {
+          "label": "Valve Source Multiplayer Networking",
+          "platform": "Valve Developer",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Netcode Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build an authoritative server loop that syncs player positions to clients.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-backend-7",
+      "title": "Matchmaking and Lobbies",
+      "order": 7,
+      "techs": [
+        "Node.js",
+        "Redis",
+        "WebSockets"
+      ],
+      "description": "This layer teaches building matchmaking, lobbies, and party systems. Matchmaking pairs players fairly and forms the social layer.",
+      "topics": [
+        "Matchmaking queues",
+        "Skill based matching",
+        "Party and lobby systems",
+        "Server allocation",
+        "Region and latency",
+        "Match lifecycle"
+      ],
+      "resources": [
+        {
+          "label": "Game Server Architecture Guides",
+          "platform": "gafferongames.com",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Matchmaking Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        },
+        {
+          "label": "Agones Documentation",
+          "platform": "agones.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add a matchmaking queue that groups players into game sessions.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-backend-8",
+      "title": "Managed Services with PlayFab",
+      "order": 8,
+      "techs": [
+        "PlayFab",
+        "Node.js",
+        "Azure"
+      ],
+      "description": "This layer covers managed backend platforms like PlayFab for live games. Managed services accelerate features like economy and analytics.",
+      "topics": [
+        "PlayFab player accounts",
+        "Virtual economy and items",
+        "Cloud script functions",
+        "Leaderboards and stats",
+        "Live events",
+        "Player data storage"
+      ],
+      "resources": [
+        {
+          "label": "PlayFab Documentation",
+          "platform": "Microsoft Learn",
+          "type": "docs"
+        },
+        {
+          "label": "PlayFab Quickstarts",
+          "platform": "Microsoft Learn",
+          "type": "docs"
+        },
+        {
+          "label": "PlayFab Economy Guide",
+          "platform": "Microsoft Learn",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Integrate PlayFab for player accounts a virtual economy and leaderboards.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-backend-9",
+      "title": "Scaling and Infrastructure",
+      "order": 9,
+      "techs": [
+        "Docker",
+        "Kubernetes",
+        "Node.js"
+      ],
+      "description": "This layer covers containerization, load balancing, and horizontal scaling. Scalable infrastructure keeps a game online under heavy load.",
+      "topics": [
+        "Containerizing with Docker",
+        "Load balancing",
+        "Horizontal scaling",
+        "Game server orchestration",
+        "Stateless versus stateful",
+        "Health checks and autoscaling"
+      ],
+      "resources": [
+        {
+          "label": "Docker Documentation",
+          "platform": "Docker",
+          "type": "docs"
+        },
+        {
+          "label": "Kubernetes Documentation",
+          "platform": "Kubernetes",
+          "type": "docs"
+        },
+        {
+          "label": "Agones Documentation",
+          "platform": "agones.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Containerize the backend and run multiple game server instances behind a balancer.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "game-backend-10",
+      "title": "Security, Monitoring, and Launch",
+      "order": 10,
+      "techs": [
+        "Node.js",
+        "Prometheus",
+        "Grafana"
+      ],
+      "description": "This layer focuses on hardening, monitoring, and launching the backend. Observability and security are what keep a live service healthy.",
+      "topics": [
+        "Anti cheat and validation",
+        "DDoS and rate limiting",
+        "Logging and metrics",
+        "Dashboards and alerts",
+        "Backups and recovery",
+        "Deployment pipelines"
+      ],
+      "resources": [
+        {
+          "label": "OWASP Top Ten",
+          "platform": "OWASP",
+          "type": "docs"
+        },
+        {
+          "label": "Prometheus Documentation",
+          "platform": "Prometheus",
+          "type": "docs"
+        },
+        {
+          "label": "Grafana Documentation",
+          "platform": "Grafana",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add monitoring rate limiting and logging then deploy the backend to production.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "xr-dev": [
+    {
+      "id": "xr-dev-1",
+      "title": "XR Foundations",
+      "order": 1,
+      "techs": [
+        "Unity XR",
+        "C#",
+        "OpenXR"
+      ],
+      "description": "This layer introduces XR concepts, hardware, and the Unity XR toolkit. Understanding the landscape prepares you to build for AR and VR.",
+      "topics": [
+        "AR VR and MR concepts",
+        "XR hardware and headsets",
+        "Unity XR plugin setup",
+        "OpenXR overview",
+        "Tracking spaces",
+        "Comfort and safety"
+      ],
+      "resources": [
+        {
+          "label": "Unity XR Documentation",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "OpenXR Specification",
+          "platform": "Khronos",
+          "type": "docs"
+        },
+        {
+          "label": "Unity Learn XR",
+          "platform": "Unity Learn",
+          "type": "course"
+        }
+      ],
+      "challenge": "Set up an XR project and display a tracked headset view in the editor.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "xr-dev-2",
+      "title": "VR Interaction Basics",
+      "order": 2,
+      "techs": [
+        "Unity XR",
+        "C#",
+        "XR Interaction Toolkit"
+      ],
+      "description": "This layer covers controllers, grabbing, and interaction in VR. Natural interaction is what makes virtual reality feel real.",
+      "topics": [
+        "XR Interaction Toolkit",
+        "Controller input",
+        "Grab and throw interactables",
+        "Rays and pointers",
+        "Hand presence",
+        "Teleport locomotion"
+      ],
+      "resources": [
+        {
+          "label": "XR Interaction Toolkit Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Unity Learn VR",
+          "platform": "Unity Learn",
+          "type": "course"
+        },
+        {
+          "label": "Valem VR Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a VR scene where you can grab throw and teleport between objects.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "xr-dev-3",
+      "title": "Locomotion and Comfort",
+      "order": 3,
+      "techs": [
+        "Unity XR",
+        "C#",
+        "XR Interaction Toolkit"
+      ],
+      "description": "This layer covers movement schemes and reducing motion sickness in VR. Comfortable locomotion keeps players immersed and well.",
+      "topics": [
+        "Continuous and teleport movement",
+        "Snap and smooth turning",
+        "Vignette comfort",
+        "Climbing and grab movement",
+        "Play area and boundaries",
+        "Reducing nausea"
+      ],
+      "resources": [
+        {
+          "label": "XR Interaction Toolkit Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Oculus Developer Comfort Guide",
+          "platform": "Meta",
+          "type": "docs"
+        },
+        {
+          "label": "Valem Locomotion Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Implement multiple locomotion options with a comfort vignette in your VR scene.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "xr-dev-4",
+      "title": "AR with ARKit and ARFoundation",
+      "order": 4,
+      "techs": [
+        "ARKit",
+        "ARFoundation",
+        "Unity"
+      ],
+      "description": "This layer introduces mobile AR using ARFoundation, ARKit, and ARCore. AR places virtual content into the real world through the camera.",
+      "topics": [
+        "ARFoundation setup",
+        "Plane and surface detection",
+        "Placing virtual objects",
+        "Light estimation",
+        "Anchors",
+        "ARKit and ARCore differences"
+      ],
+      "resources": [
+        {
+          "label": "AR Foundation Documentation",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Apple ARKit Documentation",
+          "platform": "Apple Developer",
+          "type": "docs"
+        },
+        {
+          "label": "Unity Learn AR",
+          "platform": "Unity Learn",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build an AR app that detects surfaces and places a virtual model on them.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "xr-dev-5",
+      "title": "Hand and Body Tracking",
+      "order": 5,
+      "techs": [
+        "Unity XR",
+        "Hand Tracking",
+        "OpenXR"
+      ],
+      "description": "This layer covers hand tracking, gestures, and body input. Hands free interaction deepens presence and accessibility.",
+      "topics": [
+        "Hand tracking setup",
+        "Joint and pose data",
+        "Gesture recognition",
+        "Pinch and poke interactions",
+        "Body and head tracking",
+        "Hand interaction profiles"
+      ],
+      "resources": [
+        {
+          "label": "OpenXR Hand Tracking Docs",
+          "platform": "Khronos",
+          "type": "docs"
+        },
+        {
+          "label": "Unity XR Hands Documentation",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Meta Hand Tracking Guide",
+          "platform": "Meta",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add hand tracking with pinch gestures to interact with objects in VR.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "xr-dev-6",
+      "title": "Spatial UI and Audio",
+      "order": 6,
+      "techs": [
+        "Unity XR",
+        "C#",
+        "Spatial Audio"
+      ],
+      "description": "This layer covers designing UI and audio that live in 3D space. Spatial UI and sound are key to comfortable and immersive XR.",
+      "topics": [
+        "World space canvases",
+        "Diegetic UI",
+        "Gaze and pointer UI",
+        "Spatial 3D audio",
+        "Readable text in XR",
+        "Feedback and haptics"
+      ],
+      "resources": [
+        {
+          "label": "Unity XR UI Documentation",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Oculus Spatial Audio Guide",
+          "platform": "Meta",
+          "type": "docs"
+        },
+        {
+          "label": "Unity Learn XR",
+          "platform": "Unity Learn",
+          "type": "course"
+        }
+      ],
+      "challenge": "Build a spatial menu with pointer interaction and spatialized audio cues.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "xr-dev-7",
+      "title": "WebXR and Cross Platform",
+      "order": 7,
+      "techs": [
+        "WebXR",
+        "Three.js",
+        "JavaScript"
+      ],
+      "description": "This layer introduces browser based XR with the WebXR API. WebXR reaches users without app installs across many devices.",
+      "topics": [
+        "WebXR Device API",
+        "VR and AR sessions",
+        "Three.js XR integration",
+        "Controller input on web",
+        "Performance on web",
+        "Cross device support"
+      ],
+      "resources": [
+        {
+          "label": "WebXR Device API",
+          "platform": "MDN Web Docs",
+          "type": "docs"
+        },
+        {
+          "label": "Three.js WebXR Docs",
+          "platform": "threejs.org",
+          "type": "docs"
+        },
+        {
+          "label": "Immersive Web Samples",
+          "platform": "immersiveweb.dev",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a WebXR scene viewable in a browser based VR headset session.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "xr-dev-8",
+      "title": "Multiplayer and Social XR",
+      "order": 8,
+      "techs": [
+        "Unity XR",
+        "Netcode",
+        "Photon"
+      ],
+      "description": "This layer covers shared XR spaces with avatars and voice. Social presence transforms XR into a connected experience.",
+      "topics": [
+        "Networked avatars",
+        "Synchronizing head and hands",
+        "Voice chat",
+        "Shared object interaction",
+        "Spatial anchors sharing",
+        "Presence and avatars"
+      ],
+      "resources": [
+        {
+          "label": "Unity Netcode Documentation",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Photon Fusion Docs",
+          "platform": "Photon Engine",
+          "type": "docs"
+        },
+        {
+          "label": "Normcore Documentation",
+          "platform": "Normcore",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a shared VR room where two networked avatars can interact together.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "xr-dev-9",
+      "title": "Performance and Optimization",
+      "order": 9,
+      "techs": [
+        "Unity XR",
+        "Profiler",
+        "URP"
+      ],
+      "description": "This layer focuses on hitting strict XR frame rate and rendering budgets. Performance is critical for comfort and avoiding sickness in XR.",
+      "topics": [
+        "Frame rate targets",
+        "Single pass stereo rendering",
+        "Draw call reduction",
+        "Foveated rendering",
+        "Mobile XR constraints",
+        "Profiling on device"
+      ],
+      "resources": [
+        {
+          "label": "Unity XR Optimization Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Oculus Performance Guidelines",
+          "platform": "Meta",
+          "type": "docs"
+        },
+        {
+          "label": "Unity Learn Performance",
+          "platform": "Unity Learn",
+          "type": "course"
+        }
+      ],
+      "challenge": "Profile and optimize your XR app to hold the target frame rate on a headset.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "xr-dev-10",
+      "title": "Publishing XR Apps",
+      "order": 10,
+      "techs": [
+        "Unity XR",
+        "Meta Quest",
+        "App Stores"
+      ],
+      "description": "This layer covers building, testing, and publishing to XR stores. Shipping through store review is the final step for an XR title.",
+      "topics": [
+        "Build settings per device",
+        "Meta Quest store requirements",
+        "App Lab and sideloading",
+        "App store submission",
+        "Privacy and permissions",
+        "Testing on hardware"
+      ],
+      "resources": [
+        {
+          "label": "Meta Quest Developer Docs",
+          "platform": "Meta",
+          "type": "docs"
+        },
+        {
+          "label": "Apple App Store Guidelines",
+          "platform": "Apple Developer",
+          "type": "docs"
+        },
+        {
+          "label": "Unity XR Build Docs",
+          "platform": "Unity",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Produce a signed XR build and prepare a store submission package.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "gameplay-engineer": [
+    {
+      "id": "gameplay-engineer-1",
+      "title": "Programming Foundations",
+      "order": 1,
+      "techs": [
+        "C++",
+        "C#",
+        "Algorithms"
+      ],
+      "description": "This layer solidifies core programming and the languages of game engines. Strong fundamentals are the bedrock of gameplay engineering.",
+      "topics": [
+        "C++ and C# basics",
+        "Memory and references",
+        "Object oriented design",
+        "Data structures",
+        "Debugging techniques",
+        "Version control with Git"
+      ],
+      "resources": [
+        {
+          "label": "Game Programming Patterns",
+          "platform": "gameprogrammingpatterns.com",
+          "type": "book"
+        },
+        {
+          "label": "C++ Reference",
+          "platform": "cppreference.com",
+          "type": "docs"
+        },
+        {
+          "label": "Microsoft C# Docs",
+          "platform": "Microsoft Learn",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a small console game loop that updates and renders entities each tick.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "gameplay-engineer-2",
+      "title": "Game Loops and Architecture",
+      "order": 2,
+      "techs": [
+        "C++",
+        "Unity",
+        "Patterns"
+      ],
+      "description": "This layer covers the core game loop and common architectural patterns. Clean architecture keeps gameplay code scalable and testable.",
+      "topics": [
+        "Update and render loops",
+        "Fixed and variable timestep",
+        "Component patterns",
+        "Game state management",
+        "Event systems",
+        "Decoupling with messaging"
+      ],
+      "resources": [
+        {
+          "label": "Game Programming Patterns",
+          "platform": "gameprogrammingpatterns.com",
+          "type": "book"
+        },
+        {
+          "label": "Unity Architecture Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Architecture Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a component based entity system with an event driven game loop.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "gameplay-engineer-3",
+      "title": "Character Controllers",
+      "order": 3,
+      "techs": [
+        "C#",
+        "Unity",
+        "Physics"
+      ],
+      "description": "This layer focuses on building responsive character movement and controllers. The character controller is the player primary connection to the game.",
+      "topics": [
+        "Kinematic and physics controllers",
+        "Ground detection",
+        "Jumping and coyote time",
+        "Slopes and steps",
+        "Acceleration and friction",
+        "Input buffering"
+      ],
+      "resources": [
+        {
+          "label": "Unity Character Controller Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Game Feel Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        },
+        {
+          "label": "Tarodev Controller Tutorials",
+          "platform": "YouTube",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a polished character controller with jumping coyote time and input buffering.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "gameplay-engineer-4",
+      "title": "Combat and Abilities",
+      "order": 4,
+      "techs": [
+        "C#",
+        "Unity",
+        "C++"
+      ],
+      "description": "This layer covers building combat systems, abilities, and damage. Combat systems are a core expression of gameplay engineering.",
+      "topics": [
+        "Hitboxes and hurtboxes",
+        "Damage and health systems",
+        "Ability cooldowns",
+        "Combos and timing",
+        "Status effects",
+        "Data driven abilities"
+      ],
+      "resources": [
+        {
+          "label": "Unreal Gameplay Ability System Docs",
+          "platform": "Epic Games",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Combat Design Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        },
+        {
+          "label": "Game Programming Patterns",
+          "platform": "gameprogrammingpatterns.com",
+          "type": "book"
+        }
+      ],
+      "challenge": "Implement a melee and ranged combat system with cooldowns and damage.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "gameplay-engineer-5",
+      "title": "Animation Programming",
+      "order": 5,
+      "techs": [
+        "C#",
+        "Unity",
+        "C++"
+      ],
+      "description": "This layer covers driving animation from gameplay code and state machines. Animation programming ties player intent to visible motion.",
+      "topics": [
+        "Animation state machines",
+        "Blend trees",
+        "Animation events",
+        "Procedural animation",
+        "Inverse kinematics",
+        "Root motion"
+      ],
+      "resources": [
+        {
+          "label": "Unity Animation Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Unreal Animation Docs",
+          "platform": "Epic Games",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Animation Programming Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Drive a full locomotion and attack animation set from gameplay state.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "gameplay-engineer-6",
+      "title": "Gameplay Systems and Data",
+      "order": 6,
+      "techs": [
+        "C#",
+        "Unity",
+        "ScriptableObject"
+      ],
+      "description": "This layer covers data driven systems for inventory, quests, and progression. Data driven design lets designers build content without code changes.",
+      "topics": [
+        "Inventory systems",
+        "Quest and dialogue systems",
+        "Progression and leveling",
+        "Data driven configuration",
+        "Save and load",
+        "Designer friendly tools"
+      ],
+      "resources": [
+        {
+          "label": "Unity ScriptableObject Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Game Programming Patterns",
+          "platform": "gameprogrammingpatterns.com",
+          "type": "book"
+        },
+        {
+          "label": "GDC Systems Design Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a data driven inventory and simple quest system with saving.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "gameplay-engineer-7",
+      "title": "Multiplayer Gameplay",
+      "order": 7,
+      "techs": [
+        "C++",
+        "Unreal",
+        "Netcode"
+      ],
+      "description": "This layer covers replicating gameplay and handling networked play. Networked gameplay is a demanding and valuable engineering skill.",
+      "topics": [
+        "Client server model",
+        "Replication of state",
+        "Remote procedure calls",
+        "Prediction and reconciliation",
+        "Lag compensation",
+        "Authority and ownership"
+      ],
+      "resources": [
+        {
+          "label": "Unreal Networking Docs",
+          "platform": "Epic Games",
+          "type": "docs"
+        },
+        {
+          "label": "Gabriel Gambetta Netcode",
+          "platform": "gabrielgambetta.com",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Networking Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Replicate the character and combat system for two networked players.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "gameplay-engineer-8",
+      "title": "Tools and Workflow",
+      "order": 8,
+      "techs": [
+        "C#",
+        "Unity Editor",
+        "C++"
+      ],
+      "description": "This layer covers building editor tools and debugging aids for the team. Good tooling multiplies the productivity of an entire studio.",
+      "topics": [
+        "Custom editor windows",
+        "Inspectors and gizmos",
+        "Debug visualization",
+        "Cheat and test commands",
+        "Automated workflows",
+        "Designer facing tools"
+      ],
+      "resources": [
+        {
+          "label": "Unity Editor Scripting Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Unreal Editor Tools Docs",
+          "platform": "Epic Games",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Tools Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build an editor tool and debug overlay for tuning your gameplay systems.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "gameplay-engineer-9",
+      "title": "Performance and Memory",
+      "order": 9,
+      "techs": [
+        "C++",
+        "Profiler",
+        "C#"
+      ],
+      "description": "This layer covers profiling, optimizing, and managing memory in gameplay code. Performance work ensures gameplay runs smoothly at scale.",
+      "topics": [
+        "Profiling tools",
+        "CPU and memory hotspots",
+        "Object pooling",
+        "Cache friendly data",
+        "Garbage collection control",
+        "Multithreading basics"
+      ],
+      "resources": [
+        {
+          "label": "Unity Profiler Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Unreal Insights Docs",
+          "platform": "Epic Games",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Performance Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Profile and optimize your gameplay systems to remove frame time spikes.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "gameplay-engineer-10",
+      "title": "Polish and Shipping",
+      "order": 10,
+      "techs": [
+        "C++",
+        "Unity",
+        "Unreal"
+      ],
+      "description": "This layer focuses on game feel polish, bug fixing, and shipping. The final pass is what separates a prototype from a finished game.",
+      "topics": [
+        "Game feel and juice",
+        "Screen shake and feedback",
+        "Bug triage and fixing",
+        "Build pipelines",
+        "Platform certification",
+        "Postlaunch support"
+      ],
+      "resources": [
+        {
+          "label": "GDC Juice Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        },
+        {
+          "label": "Game Programming Patterns",
+          "platform": "gameprogrammingpatterns.com",
+          "type": "book"
+        },
+        {
+          "label": "Unity Build Docs",
+          "platform": "Unity",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Add game feel polish fix priority bugs and produce a shippable build.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ],
+  "tools-dev": [
+    {
+      "id": "tools-dev-1",
+      "title": "Tools Programming Foundations",
+      "order": 1,
+      "techs": [
+        "C#",
+        "Python",
+        "Git"
+      ],
+      "description": "This layer introduces the mindset and languages of game tools development. Tools engineers build the software that lets teams make games faster.",
+      "topics": [
+        "Role of tools programming",
+        "C# and Python basics",
+        "Scripting versus compiled",
+        "Reading and writing files",
+        "Command line tools",
+        "Version control"
+      ],
+      "resources": [
+        {
+          "label": "Microsoft C# Docs",
+          "platform": "Microsoft Learn",
+          "type": "docs"
+        },
+        {
+          "label": "Python Documentation",
+          "platform": "Python.org",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Tools Programming Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Write a command line script that batch renames and organizes asset files.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "tools-dev-2",
+      "title": "Unity Editor Scripting",
+      "order": 2,
+      "techs": [
+        "C#",
+        "Unity Editor",
+        "UI Toolkit"
+      ],
+      "description": "This layer covers extending the Unity editor with custom inspectors and windows. Editor scripting is the core of tools work inside Unity.",
+      "topics": [
+        "Custom inspectors",
+        "Editor windows",
+        "Property drawers",
+        "Gizmos and handles",
+        "UI Toolkit for editor",
+        "Menu items and shortcuts"
+      ],
+      "resources": [
+        {
+          "label": "Unity Editor Scripting Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Unity Learn Editor Tools",
+          "platform": "Unity Learn",
+          "type": "course"
+        },
+        {
+          "label": "Unity UI Toolkit Docs",
+          "platform": "Unity",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a custom inspector and editor window for configuring a game component.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "tools-dev-3",
+      "title": "Asset Pipelines and Importers",
+      "order": 3,
+      "techs": [
+        "C#",
+        "Python",
+        "Unity Editor"
+      ],
+      "description": "This layer covers automating asset import, processing, and validation. Reliable pipelines keep large asset libraries consistent and clean.",
+      "topics": [
+        "Asset import settings",
+        "Scripted importers",
+        "Asset postprocessors",
+        "Naming and validation rules",
+        "Batch processing",
+        "Asset dependency tracking"
+      ],
+      "resources": [
+        {
+          "label": "Unity AssetPostprocessor Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Unity AssetDatabase Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Asset Pipeline Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build an import pipeline that validates and configures textures automatically.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "tools-dev-4",
+      "title": "Standalone Tools with Qt",
+      "order": 4,
+      "techs": [
+        "Python",
+        "Qt",
+        "PySide"
+      ],
+      "description": "This layer covers building desktop tools with Qt outside the engine. Standalone tools serve pipelines that span multiple applications.",
+      "topics": [
+        "Qt and PySide basics",
+        "Widgets and layouts",
+        "Signals and slots",
+        "File dialogs and trees",
+        "Packaging desktop apps",
+        "Cross platform considerations"
+      ],
+      "resources": [
+        {
+          "label": "Qt Documentation",
+          "platform": "Qt",
+          "type": "docs"
+        },
+        {
+          "label": "PySide Documentation",
+          "platform": "Qt",
+          "type": "docs"
+        },
+        {
+          "label": "Python Qt Tutorials",
+          "platform": "Python.org",
+          "type": "docs"
+        }
+      ],
+      "challenge": "Build a standalone Qt tool that previews and batch converts asset files.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "tools-dev-5",
+      "title": "Data Driven Tooling",
+      "order": 5,
+      "techs": [
+        "C#",
+        "Python",
+        "JSON"
+      ],
+      "description": "This layer covers building data formats, editors, and serialization for content. Data driven tools empower designers to author without programmers.",
+      "topics": [
+        "JSON and YAML formats",
+        "Serialization and parsing",
+        "ScriptableObject data",
+        "Spreadsheet import",
+        "Schema and validation",
+        "Data editors"
+      ],
+      "resources": [
+        {
+          "label": "Unity Serialization Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Python JSON Docs",
+          "platform": "Python.org",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Data Driven Tools Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a data editor that imports a spreadsheet into validated game data.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "tools-dev-6",
+      "title": "Level and Content Editors",
+      "order": 6,
+      "techs": [
+        "C#",
+        "Unity Editor",
+        "Handles"
+      ],
+      "description": "This layer covers building in editor level and content authoring tools. Custom editors let designers craft content efficiently and safely.",
+      "topics": [
+        "Scene editing tools",
+        "Custom handles and gizmos",
+        "Brush and placement tools",
+        "Procedural placement",
+        "Undo and redo support",
+        "Snapping and grids"
+      ],
+      "resources": [
+        {
+          "label": "Unity Handles Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Unity SceneView Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Level Editor Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a scene tool for painting and placing props with undo support.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "tools-dev-7",
+      "title": "Automation and Build Tools",
+      "order": 7,
+      "techs": [
+        "Python",
+        "C#",
+        "CI"
+      ],
+      "description": "This layer covers automating builds, tests, and repetitive tasks. Automation removes toil and keeps builds reproducible and reliable.",
+      "topics": [
+        "Automated build scripts",
+        "Command line builds",
+        "Continuous integration",
+        "Test automation",
+        "Asset bundling",
+        "Reporting and notifications"
+      ],
+      "resources": [
+        {
+          "label": "Unity Command Line Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "GitHub Actions Documentation",
+          "platform": "GitHub",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Build Automation Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Set up an automated build pipeline that produces and reports a game build.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "tools-dev-8",
+      "title": "Debugging and Profiling Tools",
+      "order": 8,
+      "techs": [
+        "C#",
+        "Unity Editor",
+        "Profiler"
+      ],
+      "description": "This layer covers building debug overlays, profilers, and diagnostic tools. Diagnostic tools help the whole team find and fix problems fast.",
+      "topics": [
+        "Debug overlays and HUDs",
+        "In game consoles",
+        "Custom profiler markers",
+        "Logging frameworks",
+        "Cheat and test menus",
+        "Crash reporting"
+      ],
+      "resources": [
+        {
+          "label": "Unity Profiler Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Unity Debug Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Debugging Tools Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build an in game debug console and overlay with custom profiler markers.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "tools-dev-9",
+      "title": "Pipeline Integration",
+      "order": 9,
+      "techs": [
+        "Python",
+        "C#",
+        "DCC Tools"
+      ],
+      "description": "This layer covers integrating tools across DCC apps, source control, and engines. Connected pipelines move content smoothly from artist to game.",
+      "topics": [
+        "Blender and Maya scripting",
+        "Export and import bridges",
+        "Source control integration",
+        "Naming conventions",
+        "Metadata and tagging",
+        "Pipeline orchestration"
+      ],
+      "resources": [
+        {
+          "label": "Blender Python API Docs",
+          "platform": "Blender",
+          "type": "docs"
+        },
+        {
+          "label": "Python Documentation",
+          "platform": "Python.org",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Pipeline Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Build a bridge that exports assets from a DCC tool into the engine automatically.",
+      "estimatedTime": "2-3 weeks"
+    },
+    {
+      "id": "tools-dev-10",
+      "title": "Distribution and Maintenance",
+      "order": 10,
+      "techs": [
+        "C#",
+        "Python",
+        "Packaging"
+      ],
+      "description": "This layer covers packaging, versioning, and maintaining tools for a team. Well maintained tools stay useful and trusted across a studio.",
+      "topics": [
+        "Packaging and distribution",
+        "Versioning tools",
+        "Documentation",
+        "User feedback loops",
+        "Backward compatibility",
+        "Deprecation and support"
+      ],
+      "resources": [
+        {
+          "label": "Unity Package Manager Docs",
+          "platform": "Unity",
+          "type": "docs"
+        },
+        {
+          "label": "Python Packaging Guide",
+          "platform": "Python.org",
+          "type": "docs"
+        },
+        {
+          "label": "GDC Tools Maintenance Talks",
+          "platform": "GDC Vault",
+          "type": "video"
+        }
+      ],
+      "challenge": "Package your tools as a versioned distributable with documentation for the team.",
+      "estimatedTime": "2-3 weeks"
+    }
+  ]
+}
