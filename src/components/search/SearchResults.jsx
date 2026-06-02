@@ -86,7 +86,7 @@ export default function SearchResults({ query = "", onSelect, boundaryRef }) {
   const categories = items.filter((item) => item.type === "category");
 
   if (!open) return null;
-
+  
   return (
     <div className="absolute top-[calc(100%+8px)] w-full max-w-[400px] z-50 overflow-hidden rounded-2xl border border-white/10 bg-[#0d0d18]/95 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.7)] backdrop-blur-2xl ring-1 ring-white/5">
       <div className="max-h-80 overflow-y-auto overflow-x-hidden scrollbar-thin">
@@ -98,36 +98,6 @@ export default function SearchResults({ query = "", onSelect, boundaryRef }) {
           </div>
         ) : (
           <div className="p-1.5">
-            {categories.length > 0 && (
-              <div>
-                <SectionLabel>Categories</SectionLabel>
-                {categories.map((category) => (
-                  <button
-                    key={`${category.type}-${category.id || category.title}`}
-                    type="button"
-                    onClick={() => { setOpen(false); onSelect?.(category); }}
-                    className="group flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left transition-all duration-150 hover:bg-white/[0.07] focus-visible:bg-white/[0.07] focus:outline-none"
-                  >
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-400 ring-1 ring-violet-400/20 transition-colors duration-150 group-hover:bg-violet-500/25 group-hover:ring-violet-400/40">
-                      <TagIcon />
-                    </span>
-                    <span className="flex-1 min-w-0">
-                      <span className="block truncate text-sm font-medium text-white/80 transition-colors group-hover:text-white">
-                        {category.title}
-                      </span>
-                    </span>
-                    <svg className="shrink-0 text-white/20 opacity-0 transition-opacity group-hover:opacity-100" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M9 18l6-6-6-6"/>
-                    </svg>
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {categories.length > 0 && users.length > 0 && (
-              <div className="my-1.5 mx-2 h-px bg-white/[0.06]" />
-            )}
-
             {users.length > 0 && (
               <div>
                 <SectionLabel>Users</SectionLabel>
@@ -154,8 +124,38 @@ export default function SearchResults({ query = "", onSelect, boundaryRef }) {
                     </svg>
                   </button>
                 ))}
+                {categories.length > 0 && (
+                  <div>
+                    <SectionLabel>Categories</SectionLabel>
+                    {categories.map((category) => (
+                      <button
+                      key={`${category.type}-${category.id || category.title}`}
+                      type="button"
+                      onClick={() => { setOpen(false); onSelect?.(category); }}
+                      className="group flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left transition-all duration-150 hover:bg-white/[0.07] focus-visible:bg-white/[0.07] focus:outline-none"
+                      >
+                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-400 ring-1 ring-violet-400/20 transition-colors duration-150 group-hover:bg-violet-500/25 group-hover:ring-violet-400/40">
+                          <TagIcon />
+                        </span>
+                        <span className="flex-1 min-w-0">
+                          <span className="block truncate text-sm font-medium text-white/80 transition-colors group-hover:text-white">
+                            {category.title}
+                          </span>
+                        </span>
+                        <svg className="shrink-0 text-white/20 opacity-0 transition-opacity group-hover:opacity-100" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
+
+            {categories.length > 0 && users.length > 0 && (
+              <div className="my-1.5 mx-2 h-px bg-white/[0.06]" />
+            )}
+
 
             {items.length === 0 && (
               <div className="flex flex-col items-center gap-2 py-8 px-4 text-center">

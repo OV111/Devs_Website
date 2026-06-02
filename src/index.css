@@ -17,6 +17,8 @@ body {
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
+    --color-gray-1000: var(--ds-gray-1000);
+    --color-background-100: var(--ds-background-100);
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
     --radius-lg: var(--radius);
@@ -59,6 +61,13 @@ body {
 }
 
 :root {
+    --ds-gray-100: hsla(0, 0%, 95%, 1);
+    --ds-gray-200: hsla(0, 0%, 92%, 1);
+    --ds-gray-500: hsla(0, 0%, 79%, 1);
+    --ds-gray-600: hsla(0, 0%, 66%, 1);
+    --ds-gray-700: hsla(0, 0%, 56%, 1);
+    --ds-gray-1000: hsla(0, 0%, 9%, 1);
+    --ds-background-100: hsla(0, 0%, 100%, 1);
     --radius: 0.625rem;
     --background: oklch(1 0 0);
     --foreground: oklch(0.141 0.005 285.823);
@@ -96,6 +105,13 @@ body {
 }
 
 .dark {
+    --ds-gray-100: hsla(0, 0%, 10%, 1);
+    --ds-gray-200: hsla(0, 0%, 12%, 1);
+    --ds-gray-500: hsla(0, 0%, 27%, 1);
+    --ds-gray-600: hsla(0, 0%, 53%, 1);
+    --ds-gray-700: hsla(0, 0%, 56%, 1);
+    --ds-gray-1000: hsla(0, 0%, 93%, 1);
+    --ds-background-100: hsla(0, 0%, 4%, 1);
     --background: oklch(0.141 0.005 285.823);
     --foreground: oklch(0.985 0 0);
     --card: oklch(0.21 0.006 285.885);

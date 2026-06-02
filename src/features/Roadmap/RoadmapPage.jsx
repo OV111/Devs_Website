@@ -23,14 +23,15 @@ export default function RoadmapPage() {
       <div className="pointer-events-none fixed top-10 right-10 h-72 w-72 rounded-full bg-fuchsia-300/20 blur-3xl dark:bg-purple-900/6" />
       <Motion.div
         className="mb-10 text-center"
-        initial={{ opacity: 0, y: -16 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <h2
           className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight tracking-wide bg-clip-text text-transparent"
           style={{
-            backgroundImage: "linear-gradient(to right, #7c3aed, #a855f7, #6d28d9, #c084fc, #7c3aed)",
+            backgroundImage:
+              "linear-gradient(to right, #7c3aed, #a855f7, #6d28d9, #c084fc, #7c3aed)",
             backgroundSize: "300% 100%",
             WebkitBackgroundClip: "text",
           }}
@@ -46,10 +47,8 @@ export default function RoadmapPage() {
         </p>
       </Motion.div>
 
-      {/* Zone 1 — CategoryBar */}
       <CategoryBar />
 
-      {/* Zone 2 — TrackSelector or idle prompt */}
       <AnimatePresence mode="wait">
         {selectedCategory ? (
           <TrackSelector key={selectedCategory.id} />
@@ -58,23 +57,26 @@ export default function RoadmapPage() {
         )}
       </AnimatePresence>
 
-      {/* Zone 3 — RoadmapTree */}
       <AnimatePresence mode="wait">
         {selectedTrack && <RoadmapTree key={selectedTrack.id} />}
       </AnimatePresence>
 
-      {/* Floating trigger — right side */}
       {selectedTrack && !panelOpen && (
         <button
           onClick={() => setPanelOpen(true)}
-          className="fixed right-0 top-1/2 -translate-y-1/2 z-40 flex items-center gap-2 px-3 py-2.5 rounded-l-xl text-[12px] font-semibold text-white cursor-pointer transition-all hover:px-4"
-          style={{ backgroundColor: "#9333ea", writingMode: "vertical-rl" }}
+          // bg-fuchsia-500
+          className=" fixed right-0 top-1/4 -translate-y-1/2 z-4
+          bg-purple-500 glow-pulse
+          flex items-center gap-2
+          px-3 py-2.5 rounded-l-xl
+          text-[13px] font-semibold text-white
+          cursor-pointer transition-all hover:px-4"
+          // className="fixed right-0 top-1/4 -translate-y-1/2 z-4 bg-purple-500 flex items-center gap-2 px-3 py-2.5 rounded-l-xl text-[13px] font-semibold text-white cursor-pointer transition-all hover:px-4"
         >
-          Start path
+          Start Path
         </button>
       )}
 
-      {/* Onboarding panel */}
       <AnimatePresence>
         {panelOpen && (
           <TrackOnboardingPanel

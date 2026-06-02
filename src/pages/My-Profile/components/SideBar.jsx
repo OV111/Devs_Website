@@ -46,14 +46,14 @@ export default function SideBar() {
     }
   };
 
-   
+
   useEffect(() => {
     if (!user) fetchProfile();
   }, [fetchProfile]);
 
   return (
     <>
-      <aside className="flex min-h-screen w-10 flex-col overflow-hidden border-r border-gray-100 bg-white transition-all duration-300 dark:border-gray-800 dark:bg-gray-950 lg:w-56 lg:static lg:sticky  lg:top-0">
+      <aside className="flex min-h-screen w-10 flex-col overflow-hidden border-r border-gray-100 bg-white transition-all duration-300 dark:border-gray-800 dark:bg-gray-950 lg:w-56 lg:sticky lg:top-0">
         <div className="py-3  border-b  border-gray-100 dark:border-gray-800 px-0  lg:px-3">
           <div className="flex items-center justify-center gap-3 mx-auto">
             <button

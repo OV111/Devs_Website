@@ -50,7 +50,7 @@ const Home = () => {
             showBorder={false}
             className="flex text-start justify-start max-w-xl px-0 py-1 w-full font-medium text-xl sm:text-2xl md:text-3xl lg:text-[30px]"
           >
-            Read, write, and grow guided by an AI that knows your journey.
+            Where developers learn, code, and grow powered by AI that knows your journey.
           </GradientText>
 
           <div className="flex gap-4 items-center mt-2">

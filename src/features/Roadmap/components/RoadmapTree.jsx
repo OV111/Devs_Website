@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
-import { useRef } from "react";
-import { ROADMAPS } from "../../../../constants/roadmapPaths";
+import { useRef, useState, useEffect } from "react";
 import useRoadmapStore from "@/stores/useRoadmapStore";
 import LayerNode from "./LayerNode";
 import LayerDetail from "./LayerDetail";
@@ -211,8 +210,36 @@ const SpineRow = ({ layer, index, isLast }) => {
 };
 
 const RoadmapTree = () => {
-  const { selectedTrack, isPanelOpen, layerProgress } = useRoadmapStore();
-  const layers = ROADMAPS[selectedTrack?.id];
+  const { selectedTrack, selectedCategory, isPanelOpen, layerProgress } = useRoadmapStore();
+  const [categoryData, setCategoryData] = useState({});
+  const [loadingCategory, setLoadingCategory] = useState(false);
+
+  useEffect(() => {
+    if (!selectedCategory) return;
+    setLoadingCategory(true);
+    import(`../../../data/roadmaps/${selectedCategory.id}.json`)
+      .then((mod) => {
+        setCategoryData(mod.default);
+        setLoadingCategory(false);
+      })
+      .catch(() => setLoadingCategory(false));
+  }, [selectedCategory?.id]);
+
+  const layers = selectedTrack ? categoryData[selectedTrack.id] : null;
+
+  if (loadingCategory) {
+    return (
+      <motion.div
+        className="mt-20 flex flex-col items-center gap-3 text-neutral-500"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.1 }}
+      >
+        <div className="w-6 h-6 rounded-full border-2 border-purple-500 border-t-transparent animate-spin" />
+        <p className="text-xs text-neutral-600">Loading roadmap...</p>
+      </motion.div>
+    );
+  }
 
   if (!layers) {
     return (
@@ -268,7 +295,7 @@ const RoadmapTree = () => {
               <h2 className="text-2xl sm:text-3xl font-bold text-neutral-100 leading-tight">
                 {selectedTrack.title}
               </h2>
-              {/* <div className="flex flex-wrap gap-2 mt-3">
+              <div className="flex flex-wrap gap-2 mt-3">
                 {selectedTrack.techs.map((t) => (
                   <span
                     key={t}
@@ -277,7 +304,7 @@ const RoadmapTree = () => {
                     {t}
                   </span>
                 ))}
-              </div> */}
+              </div>
             </div>
             <div className="shrink-0 text-right">
               <p className="text-sm text-neutral-400 font-mono">

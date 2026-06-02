@@ -1,4 +1,4 @@
-import { CATEGORY_OPTIONS } from "../../../../constants/Categories";
+import { CATEGORY_OPTIONS2 } from "../../../../constants/Categories";
 import useRoadmapStore from "../../../stores/useRoadmapStore";
 
 const CategoryBar = () => {
@@ -6,16 +6,16 @@ const CategoryBar = () => {
 
   return (
     <>
-      <style>{`
+      {/* <style>{`
         @keyframes glow-pulse {
           0%, 100% { box-shadow: 0 0 10px rgba(147,51,234,0.6); }
           50% { box-shadow: 0 0 22px rgba(147,51,234,0.85); }
         }
         .glow-pulse { animation: glow-pulse 2.5s ease-in-out infinite; }
-      `}</style>
+      `}</style> */}
 
       <div className="flex flex-wrap gap-3 justify-center items-center mx-auto">
-        {CATEGORY_OPTIONS.map((category) => {
+        {CATEGORY_OPTIONS2.map((category) => {
           const isSelected = selectedCategory?.id === category.id;
           return (
             <button

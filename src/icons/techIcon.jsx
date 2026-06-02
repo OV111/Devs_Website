@@ -573,7 +573,8 @@ export function PostgreSqlIcon(className) {
   );
 }
 
-export function KubernetesIcon(className) {
+// eslint-disable-next-line no-unused-vars
+export function KubernetesIcon({ className }) {
   return (
     <svg
       role="img"
@@ -942,6 +943,7 @@ export function TypeScriptIcon(className) {
         </svg> */
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const techIconsByCategory = {
   aiml: {
     LangChain,
@@ -1027,6 +1029,7 @@ export const techIconsByCategory = {
   },
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const techIconRegistry = {
   // AI & ML
   LangChain,
@@ -1075,6 +1078,7 @@ export const techIconRegistry = {
   XcodeIcon,
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const floatingIconsLayoutByCategory = {
   // AI & ML
   aiml: [

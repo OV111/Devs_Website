@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { TRACKS } from "../../../../constants/roadmapPaths.js";
 import useRoadmapStore from "../../../stores/useRoadmapStore.js";
@@ -9,13 +10,13 @@ const TrackSelector = () => {
 
   return (
     <>
-      <style>{`
+      {/* <style>{`
         @keyframes teal-glow-pulse {
           0%, 100% { box-shadow: 0 0 10px rgba(20,184,166,0.4); }
           50% { box-shadow: 0 0 22px rgba(20,184,166,0.6); }
         }
         .teal-glow-pulse { animation: teal-glow-pulse 2.5s ease-in-out infinite; }
-      `}</style>
+      `}</style> */}
       <motion.div
         className="mt-8"
         initial={{ opacity: 0, y: 20 }}

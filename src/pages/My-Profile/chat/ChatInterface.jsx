@@ -10,6 +10,7 @@ import Skeleton from "react-loading-skeleton";
 import useThemeStore from "../../../stores/useThemeStore";
 // import StartChatSvg from "../../../assets/StartChat.svg";
 // import VoiceChatSvg from "../../../assets/Voice chat-amico.svg";
+// eslint-disable-next-line react-refresh/only-export-components
 export function formatTimeAgo(dateString) {
   if (!dateString) return "recently";
   const date = new Date(dateString);
