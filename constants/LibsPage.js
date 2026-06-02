@@ -44,11 +44,12 @@ export const RECOMMENDED = [
 ];
 
 export const TABS = [
-  { key: "all",    label: "all",          count: 312 },
-  { key: "books",  label: "books",        count: 49 },
-  { key: "docs",   label: "docs",         count: 88 },
-  { key: "guides", label: "guides",       count: 124 },
-  { key: "sheets", label: "cheat sheets", count: 54 },
+  { key: "all",       label: "all",          count: 312 },
+  { key: "libraries", label: "libraries",    count: 38  },
+  { key: "books",     label: "books",        count: 49  },
+  { key: "docs",      label: "docs",         count: 88  },
+  { key: "guides",    label: "guides",       count: 124 },
+  { key: "sheets",    label: "cheat sheets", count: 54  },
 ];
 
 export const BOOKS = [

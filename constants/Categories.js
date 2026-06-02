@@ -146,13 +146,16 @@ export const FUNDAMENTALS_CONCEPTS = [
 ];
 
 export const CATEGORY_OPTIONS2 = [
+  { id: "languages", title: "Languages", slug: "languages" },
   { id: "fullstack", title: "Full Stack", slug: "fullstack" },
   { id: "backend", title: "Backend", slug: "backend" },
   { id: "mobile", title: "Mobile", slug: "mobile" },
   { id: "aiml", title: "AI & ML", slug: "ai&ml" },
-  { id: "qa", title: "QA", slug: "qa" },
+  { id: "web3", title: "Web3", slug: "web3" },
   { id: "devops", title: "DevOps", slug: "devops" },
+  { id: "qa", title: "QA", slug: "qa" },
   { id: "gamedev", title: "Game Dev", slug: "gamedev" },
+  { id: "blockchain", title: "Blockchain", slug: "blockchain" },
   { id: "datascience", title: "Data Science", slug: "datascience" },
   { id: "cybersecurity", title: "Cybersecurity", slug: "cybersecurity" },
   { id: "cloud", title: "Cloud Computing", slug: "cloud" },
