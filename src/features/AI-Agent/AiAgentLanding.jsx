@@ -71,7 +71,7 @@ export default function AiAgentLanding() {
             className="w-9 h-9 sm:w-11 sm:h-11 object-contain"
           />
           <h1 className="text-xl sm:text-2xl lg:text-4xl font-semibold tracking-tight truncate min-w-0 text-white">
-            {greeting}djenjdnejjenfjnrjcnrjncjrnef.erwnjrknsj.fnjn
+            {greeting}
           </h1>
         </div>
         <p className="text-base sm:text-lg text-white/40 tracking-tight text-center">

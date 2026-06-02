@@ -249,9 +249,11 @@ export default function CodingChallenges() {
           `,
           backgroundSize: "48px 48px",
           maskImage:
-            "linear-gradient(to bottom, transparent, black 25%, black 75%, transparent)",
+            "linear-gradient(to bottom, transparent, black 25%, black 75%, transparent), linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+          maskComposite: "intersect",
           WebkitMaskImage:
-            "linear-gradient(to bottom, transparent, black 25%, black 75%, transparent)",
+            "linear-gradient(to bottom, transparent, black 25%, black 75%, transparent), linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+          WebkitMaskComposite: "destination-in",
         }}
       />
 
