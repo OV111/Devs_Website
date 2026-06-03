@@ -246,7 +246,8 @@ export default function LibsPage() {
               </button>
             ))}
           </div>
-          <div className="flex position-end">
+
+          <div className="flex position-end mb-2">
             {!isStaticTab && (
               <div
                 className="flex items-center gap-2"
@@ -264,7 +265,7 @@ export default function LibsPage() {
                       transition={{ duration: 0.25, ease: "easeOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="flex items-center gap-2 rounded-md bg-[#111] border border-[#222] px-3 py-1">
+                      <div className="flex items-center gap-2 rounded-md bg-[#111] border border-[#222] px-3 py-0.5">
                         <Search className="h-3 w-3 shrink-0 text-[#555]" />
                         <input
                           ref={searchInputRef}

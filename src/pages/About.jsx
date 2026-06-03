@@ -5,7 +5,6 @@ import ShinyText from "../components/effects/ShinyText";
 import { CATEGORY_OPTIONS2 } from "../../constants/Categories";
 import { motion as Motion } from "framer-motion";
 
-// ── Animated counter ──────────────────────────────────────────────────────────
 function useCounter(target, duration = 2000, active = false) {
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -238,13 +237,7 @@ const socials = [
 const About = () => {
   return (
     <div className="relative overflow-hidden">
-      {/* Background blobs — same as Home */}
-      <div className="pointer-events-none absolute -top-20 -left-20 h-72 w-72 rounded-full bg-fuchsia-200/50 blur-3xl dark:bg-fuchsia-900/20" />
-      <div className="pointer-events-none absolute top-10 right-10 h-72 w-72 rounded-full bg-violet-200/40 blur-3xl dark:bg-violet-900/20" />
-      <div className="pointer-events-none absolute bottom-0 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-purple-100/60 blur-3xl dark:bg-purple-900/10" />
-
       <div className="mx-auto max-w-5xl px-6 sm:px-10 md:px-16 py-16 flex flex-col gap-28">
-        {/* ── 1. Hero ────────────────────────────────────────────────────────── */}
         <section className="flex flex-col items-center text-center gap-6">
           <Motion.div {...fadeUp(0)}>
             <ShinyText
@@ -300,7 +293,6 @@ const About = () => {
           </Motion.div>
         </section>
 
-        {/* ── 2. What We Offer ───────────────────────────────────────────────── */}
         <section className="flex flex-col gap-10">
           <Motion.h2
             className="text-2xl sm:text-3xl font-bold text-center text-purple-800 dark:text-purple-300"
@@ -343,7 +335,6 @@ const About = () => {
           </div>
         </section>
 
-        {/* ── 3. Stats ───────────────────────────────────────────────────────── */}
         <section className="flex flex-col gap-10">
           <Motion.h2
             className="text-2xl sm:text-3xl font-bold text-center text-purple-800 dark:text-purple-300"
@@ -364,7 +355,6 @@ const About = () => {
           </div>
         </section>
 
-        {/* ── 4. Categories ──────────────────────────────────────────────────── */}
         <section className="flex flex-col gap-10">
           <Motion.h2
             className="text-2xl sm:text-3xl font-bold text-center text-purple-800 dark:text-purple-300"
@@ -404,7 +394,6 @@ const About = () => {
           </div>
         </section>
 
-        {/* ── 5. Roadmap ─────────────────────────────────────────────────────── */}
         <section className="flex flex-col gap-10">
           <Motion.h2
             className="text-2xl sm:text-3xl font-bold text-center text-purple-800 dark:text-purple-300"
@@ -414,7 +403,6 @@ const About = () => {
           </Motion.h2>
 
           <div className="relative flex flex-col pl-8">
-            {/* vertical line */}
             <div className="absolute left-3 top-2 bottom-2 w-0.5 rounded-full bg-gradient-to-b from-fuchsia-400 via-purple-400 to-violet-300 dark:from-fuchsia-700 dark:via-purple-700 dark:to-violet-600" />
 
             {roadmap.map((item, i) => (
@@ -477,9 +465,7 @@ const About = () => {
           </div>
         </section>
 
-        {/* ── 6. Stay Connected ──────────────────────────────────────────────── */}
         <section className="flex flex-col gap-10">
-          {/* Header */}
           <div className="flex flex-col items-center gap-3 text-center">
             <Motion.div {...fadeUp(0)}>
               <ShinyText
@@ -505,8 +491,6 @@ const About = () => {
               behind-the-scenes development, and community highlights.
             </Motion.p>
           </div>
-
-          {/* Social cards */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             {socials.map((s, i) => (
               <Motion.a
@@ -525,12 +509,10 @@ const About = () => {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 whileHover={{ y: -6 }}
               >
-                {/* Gradient glow on hover */}
                 <div
                   className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 bg-gradient-to-br ${s.color}`}
                 />
 
-                {/* Icon circle */}
                 <div
                   className={`w-12 h-12 rounded-xl flex items-center justify-center text-white bg-gradient-to-br ${s.color} shadow-md`}
                 >
@@ -549,7 +531,6 @@ const About = () => {
                   </p>
                 </div>
 
-                {/* Arrow */}
                 <div className="mt-auto flex items-center gap-1 text-xs font-semibold text-gray-400 dark:text-gray-500 group-hover:text-fuchsia-600 dark:group-hover:text-fuchsia-400 transition-colors">
                   Follow
                   <svg
@@ -570,7 +551,6 @@ const About = () => {
             ))}
           </div>
 
-          {/* Bottom CTA banner */}
           <Motion.div
             className="relative overflow-hidden flex flex-col sm:flex-row items-center justify-between gap-6
               p-8 rounded-3xl
@@ -578,7 +558,6 @@ const About = () => {
               shadow-xl shadow-fuchsia-500/20 dark:shadow-fuchsia-900/40"
             {...fadeUp(0.3)}
           >
-            {/* Background shimmer */}
             <div className="pointer-events-none absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/10 blur-2xl" />
             <div className="pointer-events-none absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-white/10 blur-2xl" />
 

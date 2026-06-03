@@ -5,8 +5,6 @@ import { FUNDAMENTALS_CONCEPTS } from "../../../constants/Categories";
 export default function Fundamentals() {
   return (
     <div className="min-h-screen px-6 sm:px-10 md:px-20 lg:px-28 py-12 bg-linear-to-br from-amber-50/50 via-white to-orange-50/40 dark:bg-none">
-      <div className="pointer-events-none fixed -top-20 -left-20 h-72 w-72 rounded-full bg-amber-300/30 blur-3xl dark:bg-amber-900/14" />
-      <div className="pointer-events-none fixed top-10 -right-8 h-72 w-72 rounded-full bg-orange-300/30 blur-3xl dark:bg-orange-900/12" />
 
       <div className="mb-10">
         <h1 className="text-4xl sm:text-6xl font-bold leading-tight tracking-wide bg-linear-to-r from-amber-600 via-orange-500 to-amber-700 dark:from-amber-400 dark:via-orange-400 dark:to-amber-500 bg-clip-text text-transparent">

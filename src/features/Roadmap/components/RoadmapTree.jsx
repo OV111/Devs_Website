@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { memo, useState, useEffect, useMemo } from "react";
 import useRoadmapStore from "@/stores/useRoadmapStore";
 import LayerNode from "./LayerNode";
 import LayerDetail from "./LayerDetail";
@@ -17,7 +17,7 @@ const CHILD_H = 36;
 const getNodeH = (node) =>
   node.children?.length ? Math.max(node.children.length * CHILD_H, NODE_H) : NODE_H;
 
-const ChildNode = ({ title, tags, side }) => (
+const ChildNode = ({ title, side }) => (
   <div className={`
     inline-flex flex-col gap-1 px-2.5 py-1.5 rounded-lg
     bg-neutral-950 border border-neutral-800/60
@@ -25,32 +25,28 @@ const ChildNode = ({ title, tags, side }) => (
     ${side === "left" ? "text-right items-end" : "text-left items-start"}
   `}>
     <span className="text-[11px] font-medium text-neutral-400 leading-tight">{title}</span>
-    <div className={`flex flex-wrap gap-1 ${side === "left" ? "justify-end" : "justify-start"}`}>
-      {tags.map((tag) => (
-        <span key={tag} className="text-[9px] text-neutral-600">{tag}</span>
-      ))}
-    </div>
   </div>
 );
 
-const SubTopicNode = ({ title, tags, side, children = [], isDone }) => {
+const SubTopicNode = ({ title, side, children = [], isDone }) => {
   const hasChildren = children.length > 0;
   const totalH = Math.max(children.length * CHILD_H, NODE_H);
   const parentCenterY = totalH / 2;
 
+  // child Y centres — centre of each equal slot
+  const childCenters = children.map((_, i) => (CHILD_H * i) + CHILD_H / 2);
+
   const parentNode = (
-    <div className={`
-      inline-flex flex-col gap-1.5 px-3 py-2.5 rounded-xl
-      bg-neutral-900 border border-neutral-800
-      min-w-[130px] max-w-[170px] shrink-0
-      ${side === "left" ? "text-right items-end" : "text-left items-start"}
-    `}>
-      <span className="text-[12px] font-medium text-neutral-200 leading-tight">{title}</span>
-      <div className={`flex flex-wrap gap-1 ${side === "left" ? "justify-end" : "justify-start"}`}>
-        {tags.map((tag) => (
-          <span key={tag} className="text-[10px] text-neutral-500 leading-none">{tag}</span>
-        ))}
-      </div>
+    <div
+      className={`
+        flex flex-col justify-center px-3 rounded-xl shrink-0
+        bg-neutral-900 border border-neutral-800
+        min-w-[130px] max-w-[170px]
+        ${side === "left" ? "text-right items-end" : "text-left items-start"}
+      `}
+      style={{ height: totalH }}
+    >
+      <span className="text-[12px] font-medium text-neutral-200 leading-snug line-clamp-3">{title}</span>
     </div>
   );
 
@@ -58,8 +54,7 @@ const SubTopicNode = ({ title, tags, side, children = [], isDone }) => {
 
   const childSvg = (
     <svg width={CHILD_W} height={totalH} className="shrink-0 overflow-visible">
-      {children.map((_, i) => {
-        const childY = CHILD_H * i + CHILD_H / 2;
+      {childCenters.map((childY, i) => {
         const x1 = side === "left" ? CHILD_W : 0;
         const x2 = side === "left" ? 0 : CHILD_W;
         return (
@@ -76,17 +71,23 @@ const SubTopicNode = ({ title, tags, side, children = [], isDone }) => {
     </svg>
   );
 
+  // each child gets an exact CHILD_H slot; ChildNode is centred inside it
   const childrenCol = (
-    <div className={`flex flex-col ${side === "left" ? "items-end" : "items-start"}`}
-      style={{ gap: `${CHILD_H - 28}px` }}>
+    <div className="flex flex-col shrink-0" style={{ height: totalH }}>
       {children.map((c) => (
-        <ChildNode key={c.title} title={c.title} tags={c.tags} side={side} />
+        <div
+          key={c.title}
+          style={{ height: CHILD_H, display: "flex", alignItems: "center",
+            justifyContent: side === "left" ? "flex-end" : "flex-start" }}
+        >
+          <ChildNode title={c.title} side={side} />
+        </div>
       ))}
     </div>
   );
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center" style={{ height: totalH }}>
       {side === "left"
         ? <>{childrenCol}{childSvg}{parentNode}</>
         : <>{parentNode}{childSvg}{childrenCol}</>
@@ -95,76 +96,71 @@ const SubTopicNode = ({ title, tags, side, children = [], isDone }) => {
   );
 };
 
-const SpineRow = ({ layer, index, isLast }) => {
-  const { layerProgress } = useRoadmapStore();
-  const leftRef   = useRef(null);
-  const rightRef  = useRef(null);
-  const centerRef = useRef(null);
+const SpineRow = memo(({ layer, index, isLast, isDone }) => {
+  const leftNodes  = useMemo(() => layer.sideLeft  ?? [], [layer.sideLeft]);
+  const rightNodes = useMemo(() => layer.sideRight ?? [], [layer.sideRight]);
 
-  const resolvedStatus = layerProgress[layer.id] ?? layer.status ?? "locked";
-  const isDone = resolvedStatus === "done";
-  const leftNodes  = layer.sideLeft  ?? [];
-  const rightNodes = layer.sideRight ?? [];
-
-  // calculate cumulative Y centers for main SVG connections
-  const buildPositions = (nodes) => {
+  const leftPositions = useMemo(() => {
     let offset = 0;
-    return nodes.map((n) => {
-      const h = getNodeH(n);
-      const y = offset + h / 2;
-      offset += h;
-      return y;
-    });
-  };
+    return leftNodes.map((n) => { const h = getNodeH(n); const y = offset + h / 2; offset += h; return y; });
+  }, [leftNodes]);
 
-  const leftPositions  = buildPositions(leftNodes);
-  const rightPositions = buildPositions(rightNodes);
+  const rightPositions = useMemo(() => {
+    let offset = 0;
+    return rightNodes.map((n) => { const h = getNodeH(n); const y = offset + h / 2; offset += h; return y; });
+  }, [rightNodes]);
+
   const leftTotalH  = Math.max(leftNodes.reduce((s, n)  => s + getNodeH(n), 0), NODE_H);
   const rightTotalH = Math.max(rightNodes.reduce((s, n) => s + getNodeH(n), 0), NODE_H);
   const leftCenterY  = leftTotalH  / 2;
   const rightCenterY = rightTotalH / 2;
 
+  const SIDE_W = 420;
+
   return (
     <motion.div
-      className="relative flex items-center justify-center gap-0"
+      className="relative flex items-center justify-center"
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, delay: index * 0.07 }}
+      transition={{ duration: 0.35, delay: Math.min(index * 0.07, 0.3) }}
     >
-      {/* Left nodes */}
-      <div className="flex flex-col items-end" ref={leftRef}
-        style={{ gap: 0 }}>
-        {leftNodes.map((node) => (
-          <SubTopicNode
-            key={node.title}
-            title={node.title}
-            tags={node.tags}
-            side="left"
-            children={node.children ?? []}
-            isDone={isDone}
-          />
-        ))}
+      {/* Left panel — fixed width, content right-aligned */}
+      <div
+        className="shrink-0 flex items-center justify-end"
+        style={{ width: SIDE_W, minHeight: NODE_H }}
+      >
+        <div className="flex flex-col items-end" style={{ gap: 0 }}>
+          {leftNodes.map((node) => (
+            <div key={node.title} style={{ height: getNodeH(node), display: "flex", alignItems: "center" }}>
+              <SubTopicNode
+                title={node.title}
+                side="left"
+                children={node.children ?? []}
+                isDone={isDone}
+              />
+            </div>
+          ))}
+        </div>
+
+        <svg width={MAIN_W} height={leftTotalH} className="shrink-0 overflow-visible" style={{ minHeight: NODE_H }}>
+          {leftNodes.map((_, i) => (
+            <path
+              key={i}
+              d={`M ${MAIN_W} ${leftCenterY} C ${MAIN_W * 0.4} ${leftCenterY}, ${MAIN_W * 0.6} ${leftPositions[i]}, 0 ${leftPositions[i]}`}
+              fill="none"
+              stroke={isDone ? "#7c3aed" : "#404040"}
+              strokeWidth="1.5"
+              strokeDasharray={isDone ? "none" : "5 4"}
+              opacity="0.7"
+            />
+          ))}
+          {leftNodes.length === 0 && <line x1={MAIN_W} y1="28" x2="0" y2="28" stroke="transparent" />}
+        </svg>
       </div>
 
-      {/* Main connector — left */}
-      <svg width={MAIN_W} height={leftTotalH} className="shrink-0 overflow-visible" style={{ minHeight: NODE_H }}>
-        {leftNodes.map((_, i) => (
-          <path
-            key={i}
-            d={`M ${MAIN_W} ${leftCenterY} C ${MAIN_W * 0.4} ${leftCenterY}, ${MAIN_W * 0.6} ${leftPositions[i]}, 0 ${leftPositions[i]}`}
-            fill="none"
-            stroke={isDone ? "#7c3aed" : "#404040"}
-            strokeWidth="1.5"
-            strokeDasharray={isDone ? "none" : "5 4"}
-            opacity="0.7"
-          />
-        ))}
-        {leftNodes.length === 0 && <line x1={MAIN_W} y1="28" x2="0" y2="28" stroke="transparent" />}
-      </svg>
-
-      {/* Center */}
-      <div ref={centerRef} style={{ width: 280 }} className="shrink-0">
-        <LayerNode layer={layer} index={index} />
+      {/* Center — fixed width, always pinned */}
+      <div style={{ width: 280 }} className="shrink-0">
+        <LayerNode layer={layer} index={index} resolvedStatus={isDone ? "done" : (layer.status ?? "locked")} />
         {!isLast && (
           <div className="flex justify-center">
             <div className="w-px mt-1" style={{
@@ -176,38 +172,42 @@ const SpineRow = ({ layer, index, isLast }) => {
         )}
       </div>
 
-      {/* Main connector — right */}
-      <svg width={MAIN_W} height={rightTotalH} className="shrink-0 overflow-visible" style={{ minHeight: NODE_H }}>
-        {rightNodes.map((_, i) => (
-          <path
-            key={i}
-            d={`M 0 ${rightCenterY} C ${MAIN_W * 0.4} ${rightCenterY}, ${MAIN_W * 0.6} ${rightPositions[i]}, ${MAIN_W} ${rightPositions[i]}`}
-            fill="none"
-            stroke={isDone ? "#7c3aed" : "#404040"}
-            strokeWidth="1.5"
-            strokeDasharray={isDone ? "none" : "5 4"}
-            opacity="0.7"
-          />
-        ))}
-        {rightNodes.length === 0 && <line x1="0" y1="28" x2={MAIN_W} y2="28" stroke="transparent" />}
-      </svg>
+      {/* Right panel — fixed width, content left-aligned */}
+      <div
+        className="shrink-0 flex items-center justify-start"
+        style={{ width: SIDE_W, minHeight: NODE_H }}
+      >
+        <svg width={MAIN_W} height={rightTotalH} className="shrink-0 overflow-visible" style={{ minHeight: NODE_H }}>
+          {rightNodes.map((_, i) => (
+            <path
+              key={i}
+              d={`M 0 ${rightCenterY} C ${MAIN_W * 0.4} ${rightCenterY}, ${MAIN_W * 0.6} ${rightPositions[i]}, ${MAIN_W} ${rightPositions[i]}`}
+              fill="none"
+              stroke={isDone ? "#7c3aed" : "#404040"}
+              strokeWidth="1.5"
+              strokeDasharray={isDone ? "none" : "5 4"}
+              opacity="0.7"
+            />
+          ))}
+          {rightNodes.length === 0 && <line x1="0" y1="28" x2={MAIN_W} y2="28" stroke="transparent" />}
+        </svg>
 
-      {/* Right nodes */}
-      <div className="flex flex-col items-start" ref={rightRef} style={{ gap: 0 }}>
-        {rightNodes.map((node) => (
-          <SubTopicNode
-            key={node.title}
-            title={node.title}
-            tags={node.tags}
-            side="right"
-            children={node.children ?? []}
-            isDone={isDone}
-          />
-        ))}
+        <div className="flex flex-col items-start" style={{ gap: 0 }}>
+          {rightNodes.map((node) => (
+            <div key={node.title} style={{ height: getNodeH(node), display: "flex", alignItems: "center" }}>
+              <SubTopicNode
+                title={node.title}
+                side="right"
+                children={node.children ?? []}
+                isDone={isDone}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </motion.div>
   );
-};
+});
 
 const RoadmapTree = () => {
   const { selectedTrack, selectedCategory, isPanelOpen, layerProgress } = useRoadmapStore();
@@ -223,7 +223,7 @@ const RoadmapTree = () => {
         setLoadingCategory(false);
       })
       .catch(() => setLoadingCategory(false));
-  }, [selectedCategory?.id]);
+  }, [selectedCategory]);
 
   const layers = selectedTrack ? categoryData[selectedTrack.id] : null;
 
@@ -352,6 +352,7 @@ const RoadmapTree = () => {
               layer={layer}
               index={index}
               isLast={index === layers.length - 1}
+              isDone={(layerProgress[layer.id] ?? layer.status) === "done"}
             />
           ))}
         </div>

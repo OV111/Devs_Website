@@ -179,6 +179,7 @@ const GetStarted = () => {
                         },
                         setValueAs: (v) => sanitizeInput(v),
                       })}
+                      placeholder="John"
                       className={`${inputBase} ${errors.firstName ? inputError : inputNormal}`}
                     />
                     {errors.firstName && (
@@ -204,6 +205,7 @@ const GetStarted = () => {
                         },
                         setValueAs: (v) => sanitizeInput(v),
                       })}
+                      placeholder="Doe"
                       className={`${inputBase} ${errors.lastName ? inputError : inputNormal}`}
                     />
                     {errors.lastName && (
@@ -228,6 +230,7 @@ const GetStarted = () => {
                     },
                     setValueAs: (v) => sanitizeInput(v),
                   })}
+                  placeholder="johndoe@example.com"
                   className={`${inputBase} ${errors.email ? inputError : inputNormal}`}
                 />
                 {errors.email && (
@@ -267,6 +270,7 @@ const GetStarted = () => {
                         message: "Must include at least one symbol (!@#$%^&*).",
                       },
                     })}
+                    placeholder="••••••••"
                     className={`${inputBase} pr-10 ${errors.password ? inputError : inputNormal}`}
                   />
                   <button
@@ -301,6 +305,7 @@ const GetStarted = () => {
                           value === getValues("password") ||
                           "Passwords don't match.",
                       })}
+                      placeholder="••••••••"
                       className={`${inputBase} pr-10 ${errors.confirmPassword ? inputError : inputNormal}`}
                     />
                     <button

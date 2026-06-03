@@ -91,9 +91,6 @@ const Languages = () => {
             className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold"
           >
             <div className="grid justify-center items-center">
-              <span className="mx-auto mb-1 bg-linear-to-l from-purple-500 to-purple-800 bg-clip-text text-transparent">
-                Programming
-              </span>
               <span className="bg-linear-to-r from-purple-800 to-purple-400 bg-clip-text text-transparent">
                 Languages
               </span>
@@ -120,7 +117,7 @@ const Languages = () => {
             </p>
             <p className="bg-linear-to-r from-slate-400 via-purple-600 to-indigo-400 text-transparent bg-clip-text mx-auto mt-3 lg:w-md lg:max-w-2xl text-center text-base font-medium sm:text-lg">
               Explore syntax, patterns, and real-world usage across the most
-              in-demand programming languages
+              in-demand languages
             </p>
             <div className="mt-6 flex flex-wrap lg:mx-20 justify-center gap-3">
               {languageTags.map((tag) => (

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   ArrowRight,
   DollarSign,
@@ -204,6 +205,7 @@ function ChallengeCard({ c }) {
 // ── Main component ─────────────────────────────────────────────
 
 export default function CodingChallenges() {
+  const navigate = useNavigate();
   const [activePath, setActivePath] = useState("all");
   const [activeLayer, setActiveLayer] = useState("3");
   const [activeType, setActiveType] = useState("all");
@@ -239,7 +241,7 @@ export default function CodingChallenges() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-950 text-[#e5e5e5] relative">
+    <div className="min-h-screen text-[#e5e5e5] relative">
       <div
         className="pointer-events-none absolute top-0 left-0 right-0 h-[400px] z-0"
         style={{
@@ -352,7 +354,7 @@ export default function CodingChallenges() {
               {DAILY.tags.map((t) => (
                 <span
                   key={t}
-                  className="text-[9px] font-bold px-2 pt-1 bg-black/25 text-white rounded-xl"
+                  className="text-[9px] font-bold px-2 bg-black/25 text-white rounded-xl"
                 >
                   {t}
                 </span>
@@ -455,7 +457,9 @@ export default function CodingChallenges() {
       <div className="flex gap-6 px-6 sm:px-10 lg:px-14 py-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {filteredChallenges.map((c) => (
-            <ChallengeCard key={c.id} c={c} />
+            <div key={c.id} onClick={() => navigate(`/coding-challenges/${c.id}`)} className="cursor-pointer">
+              <ChallengeCard c={c} />
+            </div>
           ))}
         </div>
 

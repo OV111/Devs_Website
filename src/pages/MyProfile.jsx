@@ -66,7 +66,7 @@ const MyProfile = () => {
   if (isLoading) return <LoadingSuspense />;
 
   return (
-    <div className="flex bg-gray-50 dark:bg-gray-950">
+    <div className="flex">
       <SideBar isOpen={isSideBarOpened} onClose={() => setIsSideBarOpened(false)} />
 
       <div className="flex-1 min-w-0">

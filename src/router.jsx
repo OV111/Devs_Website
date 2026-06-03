@@ -35,6 +35,9 @@ const LibsPage = lazy(() => import("./features/CodingLibs/LibsPage"));
 const CodingChallenges = lazy(
   () => import("./features/CodingChallenges/CodingChallenges"),
 );
+const ChallengeArena = lazy(
+  () => import("./features/CodingChallenges/ChallengeArena"),
+);
 const AiAgent = lazy(() => import("./features/AI-Agent/AiAgent"));
 const AiAgentLanding = lazy(() => import("./features/AI-Agent/AiAgentLanding"));
 
@@ -83,6 +86,7 @@ const router = createBrowserRouter([
           { path: "datascience", element: <DataScience /> },
           { path: "gamedev", element: <GameDev /> },
           { path: "qa", element: <QA /> },
+          { path: "languages", element: <Languages /> },
         ],
       },
       // ✅ All protected routes grouped here — one wrapper for all
@@ -93,6 +97,7 @@ const router = createBrowserRouter([
           { path: "roadmaps", element: <RoadmapPage /> },
           { path: "libs", element: <LibsPage /> },
           { path: "coding-challenges", element: <CodingChallenges /> },
+          { path: "coding-challenges/:id", element: <ChallengeArena /> },
           { path: "ai-agent", element: <AiAgentLanding /> },
           { path: "ai-agent/chat", element: <AiAgent /> },
           { path: "users/:username", element: <UserProfile /> },

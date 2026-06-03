@@ -1,0 +1,222 @@
+{
+  "go-1": {
+    "sideLeft": [
+      {"title":"Go's Design Philosophy","children":[
+        {"title":"Simplicity over features","description":"Go deliberately omits generics (until 1.18), exceptions, and inheritance — forcing explicit, readable code over clever abstractions.","resources":[{"label":"Go FAQ — Design","url":"https://go.dev/doc/faq","type":"docs"},{"label":"Go Proverbs","url":"https://go-proverbs.github.io","type":"article"}]},
+        {"title":"Compilation model","description":"Go compiles to a single static binary with no runtime dependencies — fast compilation and trivial deployment are first-class design goals.","resources":[{"label":"How Go Compilation Works","url":"https://go.dev/blog/compile","type":"article"},{"label":"Go Build Docs","url":"https://pkg.go.dev/cmd/go#hdr-Compile_packages_and_dependencies","type":"docs"}]}
+      ]},
+      {"title":"Type System","children":[
+        {"title":"Static typing and zero values","description":"Every Go variable has a zero value (0, '', false, nil) — no undefined, no null pointer on uninitialized struct fields, which eliminates a whole class of bugs.","resources":[{"label":"Go Tour — Zero values","url":"https://go.dev/tour/basics/12","type":"docs"},{"label":"Go Spec — Zero value","url":"https://go.dev/ref/spec#The_zero_value","type":"docs"}]},
+        {"title":"Type inference with :=","description":"The := short variable declaration infers the type from the right-hand side — reducing verbosity without sacrificing static typing safety.","resources":[{"label":"Go Tour — Short variable declarations","url":"https://go.dev/tour/basics/10","type":"docs"},{"label":"Effective Go — Declarations","url":"https://go.dev/doc/effective_go#declarations_and_assignments","type":"docs"}]}
+      ]}
+    ],
+    "sideRight": [
+      {"title":"Toolchain","children":[
+        {"title":"go tool commands","description":"go build, go run, go test, go fmt, and go vet are all you need for most tasks — one unified tool with no external task runner required.","resources":[{"label":"Go Command Documentation","url":"https://pkg.go.dev/cmd/go","type":"docs"},{"label":"Go Tools Tour","url":"https://go.dev/doc/code","type":"docs"}]},
+        {"title":"gopls language server","description":"gopls provides autocomplete, go-to-definition, and refactoring in any LSP-compatible editor — install it once and it works everywhere.","resources":[{"label":"gopls GitHub","url":"https://github.com/golang/tools/tree/master/gopls","type":"docs"},{"label":"VS Code Go extension","url":"https://marketplace.visualstudio.com/items?itemName=golang.Go","type":"docs"}]}
+      ]},
+      {"title":"Project Setup","children":[
+        {"title":"go mod init","description":"go mod init module/path initializes a module with a go.mod file — the module path is the import path prefix for all packages in the project.","resources":[{"label":"Go Modules Reference","url":"https://go.dev/ref/mod","type":"docs"},{"label":"Using Go Modules","url":"https://go.dev/blog/using-go-modules","type":"article"}]},
+        {"title":"Standard workspace layout","description":"Go projects conventionally put cmd/ for executables and internal/ for private packages — internal/ is enforced by the compiler to prevent external imports.","resources":[{"label":"Go Project Layout","url":"https://github.com/golang-standards/project-layout","type":"article"},{"label":"Go Workspace Mode","url":"https://go.dev/blog/get-familiar-with-workspaces","type":"docs"}]}
+      ]}
+    ]
+  },
+  "go-2": {
+    "sideLeft": [
+      {"title":"Slice Internals","children":[
+        {"title":"Length vs capacity","description":"A slice has a pointer, length, and capacity — append grows within capacity without allocation; exceeding it allocates a new backing array and copies.","resources":[{"label":"Go Blog — Arrays, slices, strings","url":"https://go.dev/blog/slices-intro","type":"article"},{"label":"Go Spec — Slice types","url":"https://go.dev/ref/spec#Slice_types","type":"docs"}]},
+        {"title":"Underlying array sharing","description":"Slicing a slice creates a new header pointing into the same backing array — mutations through one slice affect the other until an append triggers a copy.","resources":[{"label":"Go Blog — Slice tricks","url":"https://go.dev/wiki/SliceTricks","type":"article"},{"label":"Go Data Structures — Slices","url":"https://research.swtch.com/godata","type":"article"}]}
+      ]},
+      {"title":"Map Internals","children":[
+        {"title":"Hash map implementation","description":"Go maps are hash tables with O(1) average lookup — the zero value of a map is nil (not empty), and writing to a nil map panics.","resources":[{"label":"Go Blog — Go maps in action","url":"https://go.dev/blog/maps","type":"article"},{"label":"Go Spec — Map types","url":"https://go.dev/ref/spec#Map_types","type":"docs"}]},
+        {"title":"Map concurrency","description":"Go maps are not safe for concurrent reads+writes — use sync.RWMutex or sync.Map when accessing a map from multiple goroutines.","resources":[{"label":"sync.Map documentation","url":"https://pkg.go.dev/sync#Map","type":"docs"},{"label":"Go Race Detector","url":"https://go.dev/doc/articles/race_detector","type":"docs"}]}
+      ]}
+    ],
+    "sideRight": [
+      {"title":"Patterns","children":[
+        {"title":"append patterns","description":"Common patterns: append(s, x), append(s, other...), and the copy idiom for removing an element — all avoid re-allocating by pre-computing capacity.","resources":[{"label":"Go Wiki — Slice Tricks","url":"https://go.dev/wiki/SliceTricks","type":"article"},{"label":"Go Tour — Slices","url":"https://go.dev/tour/moretypes/7","type":"docs"}]},
+        {"title":"Struct embedding","description":"Embedding a struct promotes its methods to the outer type — Go's composition mechanism that replaces inheritance without the complexity of class hierarchies.","resources":[{"label":"Effective Go — Embedding","url":"https://go.dev/doc/effective_go#embedding","type":"docs"},{"label":"Go Composition vs Inheritance","url":"https://www.ardanlabs.com/blog/2015/09/composition-with-go.html","type":"article"}]}
+      ]},
+      {"title":"JSON Handling","children":[
+        {"title":"encoding/json and struct tags","description":"json:\"field_name\" tags control JSON key names; omitempty skips zero-value fields — no external library needed for most JSON work.","resources":[{"label":"encoding/json docs","url":"https://pkg.go.dev/encoding/json","type":"docs"},{"label":"JSON and Go","url":"https://go.dev/blog/json","type":"article"}]},
+        {"title":"Custom marshaling","description":"Implementing json.Marshaler and json.Unmarshaler interfaces gives full control over JSON serialization for types that don't map cleanly to JSON primitives.","resources":[{"label":"Custom JSON in Go","url":"https://choly.ca/post/go-json-marshalling/","type":"article"},{"label":"Go JSON Marshaler","url":"https://pkg.go.dev/encoding/json#Marshaler","type":"docs"}]}
+      ]}
+    ]
+  },
+  "go-3": {
+    "sideLeft": [
+      {"title":"Implicit Interfaces","children":[
+        {"title":"Structural typing in Go","description":"A type implements an interface by having the right methods — no explicit implements keyword. This decouples interface definitions from implementations across packages.","resources":[{"label":"Go Tour — Interfaces","url":"https://go.dev/tour/methods/9","type":"docs"},{"label":"How Go Interfaces Work","url":"https://research.swtch.com/interfaces","type":"article"}]},
+        {"title":"Interface internals — nil pitfall","description":"Interface values are (type, value) pairs — an interface holding a nil pointer is not nil itself. This is the source of the 'nil interface' bug many Go beginners hit.","resources":[{"label":"Go FAQ — Nil interface","url":"https://go.dev/doc/faq#nil_error","type":"docs"},{"label":"Understanding Go's nil","url":"https://www.calhoun.io/when-is-nil-not-nil/","type":"article"}]}
+      ]},
+      {"title":"Method Sets","children":[
+        {"title":"Pointer vs value receivers","description":"Value receivers work on copies; pointer receivers modify the original. A type's method set with pointer receivers is a superset — you can call pointer methods on addressable values.","resources":[{"label":"Effective Go — Pointers vs Values","url":"https://go.dev/doc/effective_go#pointers_vs_values","type":"docs"},{"label":"Go Method Sets","url":"https://go.dev/ref/spec#Method_sets","type":"docs"}]},
+        {"title":"Interface embedding","description":"Interfaces can embed other interfaces to compose them — io.ReadWriter embeds io.Reader and io.Writer, giving a combined contract in one type.","resources":[{"label":"Go Tour — Interface embedding","url":"https://go.dev/tour/methods/14","type":"docs"},{"label":"Effective Go — Interfaces","url":"https://go.dev/doc/effective_go#interfaces","type":"docs"}]}
+      ]}
+    ],
+    "sideRight": [
+      {"title":"Common Interfaces","children":[
+        {"title":"io.Reader and io.Writer","description":"Most Go I/O is built around these two interfaces — any type that reads bytes implements io.Reader, enabling composable pipelines like gzip.NewReader(file).","resources":[{"label":"io package docs","url":"https://pkg.go.dev/io","type":"docs"},{"label":"Streaming IO in Go","url":"https://medium.com/learning-the-go-programming-language/streaming-io-in-go-d93507931185","type":"article"}]},
+        {"title":"fmt.Stringer","description":"Implementing the Stringer interface (String() string) gives your type a readable representation in fmt.Println — the Go equivalent of toString().","resources":[{"label":"fmt.Stringer docs","url":"https://pkg.go.dev/fmt#Stringer","type":"docs"},{"label":"Go Tour — Stringer","url":"https://go.dev/tour/methods/17","type":"docs"}]}
+      ]},
+      {"title":"Interface Patterns","children":[
+        {"title":"Small interfaces","description":"Prefer single-method or two-method interfaces — io.Reader, io.Writer, error. Small interfaces are easier to implement, mock, and compose.","resources":[{"label":"Go Proverbs","url":"https://go-proverbs.github.io","type":"article"},{"label":"Avoid Interface Pollution","url":"https://www.ardanlabs.com/blog/2016/10/avoid-interface-pollution.html","type":"article"}]},
+        {"title":"Mocking with interfaces","description":"Defining your dependencies as interfaces lets you swap in test doubles — the standard Go approach to testable code without mocking frameworks.","resources":[{"label":"gomock GitHub","url":"https://github.com/golang/mock","type":"docs"},{"label":"Mocking in Go","url":"https://blog.codecentric.de/2019/07/golang-mock/","type":"article"}]}
+      ]}
+    ]
+  },
+  "go-4": {
+    "sideLeft": [
+      {"title":"Error Design","children":[
+        {"title":"Errors as values","description":"In Go, errors are just values that implement the error interface — returning them from functions makes error handling explicit at every call site.","resources":[{"label":"Go Blog — Errors are values","url":"https://go.dev/blog/errors-are-values","type":"article"},{"label":"Effective Go — Errors","url":"https://go.dev/doc/effective_go#errors","type":"docs"}]},
+        {"title":"Sentinel errors","description":"Sentinel errors are package-level error variables (var ErrNotFound = errors.New(...)) that callers compare against — the Go equivalent of typed exception classes.","resources":[{"label":"Dave Cheney — Handle errors gracefully","url":"https://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully","type":"article"},{"label":"errors package docs","url":"https://pkg.go.dev/errors","type":"docs"}]}
+      ]},
+      {"title":"Error Wrapping","children":[
+        {"title":"fmt.Errorf %w for wrapping","description":"fmt.Errorf(\"context: %w\", err) wraps an error with context while preserving the original — unwrap the chain with errors.Is or errors.As.","resources":[{"label":"Go Blog — Working with Errors","url":"https://go.dev/blog/go1.13-errors","type":"article"},{"label":"fmt.Errorf docs","url":"https://pkg.go.dev/fmt#Errorf","type":"docs"}]},
+        {"title":"errors.Is and errors.As","description":"errors.Is checks if any error in the chain matches a target; errors.As extracts a specific error type from the chain — both unwrap automatically.","resources":[{"label":"errors.Is docs","url":"https://pkg.go.dev/errors#Is","type":"docs"},{"label":"errors.As docs","url":"https://pkg.go.dev/errors#As","type":"docs"}]}
+      ]}
+    ],
+    "sideRight": [
+      {"title":"Custom Errors","children":[
+        {"title":"Custom error types","description":"Implementing the error interface on a struct lets you attach structured data (HTTP status code, field name) that callers can extract with errors.As.","resources":[{"label":"Go Blog — Go 1.13 errors","url":"https://go.dev/blog/go1.13-errors","type":"article"},{"label":"Custom Errors in Go","url":"https://www.digitalocean.com/community/tutorials/creating-custom-errors-in-go","type":"article"}]},
+        {"title":"Panic vs error","description":"Use errors for expected failure cases; panic for programming errors and invariant violations — recover() catches panics in a deferred function.","resources":[{"label":"Effective Go — Panic","url":"https://go.dev/doc/effective_go#panic","type":"docs"},{"label":"Why Go gets exceptions right","url":"https://dave.cheney.net/2012/01/18/why-go-gets-exceptions-right","type":"article"}]}
+      ]},
+      {"title":"Error Patterns","children":[
+        {"title":"Error handling in HTTP handlers","description":"A common pattern wraps http.HandlerFunc to return an error, with middleware that maps errors to HTTP status codes — keeping handlers clean.","resources":[{"label":"HTTP Error Handling in Go","url":"https://www.joeshaw.org/error-handling-in-go-http-applications/","type":"article"},{"label":"Go HTTP Error Patterns","url":"https://blog.golang.org/error-handling-and-go","type":"article"}]},
+        {"title":"errors.Join — Go 1.20","description":"errors.Join combines multiple errors into one — useful when a function encounters several independent failures that should all be reported.","resources":[{"label":"errors.Join docs","url":"https://pkg.go.dev/errors#Join","type":"docs"},{"label":"pkg/errors GitHub","url":"https://github.com/pkg/errors","type":"docs"}]}
+      ]}
+    ]
+  },
+  "go-5": {
+    "sideLeft": [
+      {"title":"Go Scheduler","children":[
+        {"title":"M:N threading model","description":"Go's scheduler multiplexes M goroutines over N OS threads — thousands of goroutines can run concurrently with minimal overhead compared to OS threads.","resources":[{"label":"Go Scheduler Internals","url":"https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part1.html","type":"article"},{"label":"Go Concurrency Model","url":"https://go.dev/blog/waza-talk","type":"article"}]},
+        {"title":"GOMAXPROCS","description":"GOMAXPROCS controls how many OS threads run Go code simultaneously — defaults to the number of CPUs, which is usually optimal.","resources":[{"label":"runtime.GOMAXPROCS docs","url":"https://pkg.go.dev/runtime#GOMAXPROCS","type":"docs"},{"label":"GOMAXPROCS and Go scheduler","url":"https://go.dev/blog/go11sched","type":"article"}]}
+      ]},
+      {"title":"Channel Internals","children":[
+        {"title":"Buffered vs unbuffered","description":"Unbuffered channels synchronize sender and receiver; buffered channels decouple them up to the buffer size — choosing correctly avoids deadlocks.","resources":[{"label":"Go Tour — Channels","url":"https://go.dev/tour/concurrency/2","type":"docs"},{"label":"The Nature of Channels in Go","url":"https://www.ardanlabs.com/blog/2014/02/the-nature-of-channels-in-go.html","type":"article"}]},
+        {"title":"Channel direction in types","description":"chan<- T (send-only) and <-chan T (receive-only) in function signatures make data flow explicit and prevent misuse at compile time.","resources":[{"label":"Go Spec — Channel direction","url":"https://go.dev/ref/spec#Channel_types","type":"docs"},{"label":"Effective Go — Channels","url":"https://go.dev/doc/effective_go#channels","type":"docs"}]}
+      ]}
+    ],
+    "sideRight": [
+      {"title":"Concurrency Patterns","children":[
+        {"title":"Fan-out and fan-in","description":"Fan-out distributes work across multiple goroutines; fan-in merges their results through a shared channel — the foundation of Go's pipeline pattern.","resources":[{"label":"Go Blog — Pipelines and cancellation","url":"https://go.dev/blog/pipelines","type":"article"},{"label":"Go Concurrency Patterns talk","url":"https://go.dev/talks/2012/concurrency.slide","type":"article"}]},
+        {"title":"Worker pools","description":"A fixed-size pool of goroutines reading from a jobs channel limits concurrency and resource usage — the standard pattern for CPU-bound parallel work.","resources":[{"label":"Worker Pools in Go","url":"https://gobyexample.com/worker-pools","type":"article"},{"label":"Thread Pooling in Go","url":"https://www.ardanlabs.com/blog/2013/05/thread-pooling-in-go-programming.html","type":"article"}]}
+      ]},
+      {"title":"Sync Primitives","children":[
+        {"title":"sync.WaitGroup","description":"WaitGroup.Add(n) before launching goroutines and Done() in each one lets the main goroutine wait with Wait() — the standard pattern for parallel workloads.","resources":[{"label":"sync.WaitGroup docs","url":"https://pkg.go.dev/sync#WaitGroup","type":"docs"},{"label":"WaitGroup tutorial","url":"https://gobyexample.com/waitgroups","type":"article"}]},
+        {"title":"sync.Mutex","description":"Mutex protects shared state from concurrent access — Lock() before reading/writing and Unlock() after, ideally deferred to prevent forgetting.","resources":[{"label":"sync.Mutex docs","url":"https://pkg.go.dev/sync#Mutex","type":"docs"},{"label":"Go Mutex tutorial","url":"https://gobyexample.com/mutexes","type":"article"}]}
+      ]}
+    ]
+  },
+  "go-6": {
+    "sideLeft": [
+      {"title":"Stdlib Philosophy","children":[
+        {"title":"Batteries included design","description":"Go's standard library covers HTTP, JSON, crypto, templating, and testing without external dependencies — reducing supply-chain risk and keeping binaries small.","resources":[{"label":"Go Standard Library","url":"https://pkg.go.dev/std","type":"docs"},{"label":"Effective Go","url":"https://go.dev/doc/effective_go","type":"docs"}]},
+        {"title":"Interface-driven design","description":"The stdlib uses small interfaces (io.Reader, http.Handler, sort.Interface) throughout — your code composes naturally with stdlib by implementing these.","resources":[{"label":"io package docs","url":"https://pkg.go.dev/io","type":"docs"},{"label":"Go stdlib interfaces","url":"https://go.dev/blog/io2010","type":"article"}]}
+      ]},
+      {"title":"net/http Internals","children":[
+        {"title":"Handler interface","description":"http.Handler is just ServeHTTP(ResponseWriter, *Request) — any type implementing it can be mounted on a server, making middleware trivial to compose.","resources":[{"label":"net/http docs","url":"https://pkg.go.dev/net/http","type":"docs"},{"label":"Writing a Go HTTP server","url":"https://gobyexample.com/http-servers","type":"article"}]},
+        {"title":"ServeMux routing","description":"Go 1.22 added method+path patterns to ServeMux — more expressive routing without external libraries like gorilla/mux.","resources":[{"label":"net/http.ServeMux","url":"https://pkg.go.dev/net/http#ServeMux","type":"docs"},{"label":"Go 1.22 routing improvements","url":"https://go.dev/blog/routing-enhancements","type":"article"}]}
+      ]}
+    ],
+    "sideRight": [
+      {"title":"Key Packages","children":[
+        {"title":"context package","description":"context.Context carries deadlines, cancellations, and request-scoped values across API boundaries — pass it as the first argument to any function that does I/O.","resources":[{"label":"Go Blog — context package","url":"https://go.dev/blog/context","type":"article"},{"label":"context package docs","url":"https://pkg.go.dev/context","type":"docs"}]},
+        {"title":"time package","description":"time.Duration, time.Now(), and time.After() are the building blocks for timeouts, rate limiting, and scheduled work — all with nanosecond precision.","resources":[{"label":"time package docs","url":"https://pkg.go.dev/time","type":"docs"},{"label":"Go time package tutorial","url":"https://gobyexample.com/time","type":"article"}]}
+      ]},
+      {"title":"IO Utilities","children":[
+        {"title":"bufio for buffered I/O","description":"bufio.Scanner and bufio.Writer add buffering to any io.Reader/Writer — critical for line-by-line file reading and reducing syscall overhead.","resources":[{"label":"bufio package docs","url":"https://pkg.go.dev/bufio","type":"docs"},{"label":"Reading files in Go","url":"https://gobyexample.com/reading-files","type":"article"}]},
+        {"title":"io utilities","description":"io.TeeReader, io.MultiWriter, and io.LimitReader compose readers and writers without copying data — the plumbing of Go's I/O model.","resources":[{"label":"io package docs","url":"https://pkg.go.dev/io","type":"docs"},{"label":"Streaming IO in Go","url":"https://medium.com/learning-the-go-programming-language/streaming-io-in-go-d93507931185","type":"article"}]}
+      ]}
+    ]
+  },
+  "go-7": {
+    "sideLeft": [
+      {"title":"Testing Philosophy","children":[
+        {"title":"Table-driven tests","description":"Table-driven tests define input/expected pairs in a slice and loop — adding a test case is one line, and a failing case names itself via the test name.","resources":[{"label":"Go Wiki — Table-driven tests","url":"https://go.dev/wiki/TableDrivenTests","type":"docs"},{"label":"Go Testing Tutorial","url":"https://go.dev/doc/tutorial/add-a-test","type":"docs"}]},
+        {"title":"Tests as documentation","description":"Go test names describe behaviour — TestUserService_CreateUser_ReturnsErrOnDuplicate reads like a spec. Readable test names replace comments.","resources":[{"label":"Prefer table-driven tests","url":"https://dave.cheney.net/2019/05/07/prefer-table-driven-tests","type":"article"},{"label":"Go Testing Best Practices","url":"https://go.dev/doc/effective_go","type":"docs"}]}
+      ]},
+      {"title":"Benchmark Tests","children":[
+        {"title":"testing.B and go test -bench","description":"Functions starting with Benchmark receive testing.B — run with go test -bench=. to measure nanoseconds per operation and allocations.","resources":[{"label":"Go testing.B docs","url":"https://pkg.go.dev/testing#B","type":"docs"},{"label":"How to write benchmarks in Go","url":"https://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go","type":"article"}]},
+        {"title":"pprof profiling","description":"go test -cpuprofile generates a CPU profile you visualise with go tool pprof — the standard way to identify hot spots before optimising.","resources":[{"label":"Profiling Go Programs","url":"https://go.dev/blog/pprof","type":"article"},{"label":"pprof tool docs","url":"https://pkg.go.dev/runtime/pprof","type":"docs"}]}
+      ]}
+    ],
+    "sideRight": [
+      {"title":"Test Tools","children":[
+        {"title":"testify/assert","description":"testify/assert provides expressive assertions (assert.Equal, assert.NoError) that print clear diffs on failure — the most popular Go test helper library.","resources":[{"label":"testify GitHub","url":"https://github.com/stretchr/testify","type":"docs"},{"label":"testify assert docs","url":"https://pkg.go.dev/github.com/stretchr/testify/assert","type":"docs"}]},
+        {"title":"httptest package","description":"httptest.NewRecorder() captures HTTP responses in tests; httptest.NewServer() starts a real test HTTP server — both are in the stdlib with no setup needed.","resources":[{"label":"net/http/httptest docs","url":"https://pkg.go.dev/net/http/httptest","type":"docs"},{"label":"Testing HTTP handlers in Go","url":"https://pkg.go.dev/net/http/httptest#example-NewRecorder","type":"docs"}]}
+      ]},
+      {"title":"Test Patterns","children":[
+        {"title":"Subtests with t.Run","description":"t.Run(name, func) creates named subtests that can be run selectively with -run — table-driven tests use t.Run to give each case its own name and failure output.","resources":[{"label":"Go testing — subtests","url":"https://go.dev/blog/subtests","type":"article"},{"label":"t.Run docs","url":"https://pkg.go.dev/testing#T.Run","type":"docs"}]},
+        {"title":"testdata/ directory","description":"The testdata/ directory is reserved for test input files and is excluded from builds — the convention for storing JSON fixtures, golden files, and test configs.","resources":[{"label":"Go testing conventions","url":"https://pkg.go.dev/testing","type":"docs"},{"label":"Go testdata directory","url":"https://go.dev/cmd/go/#hdr-Test_packages","type":"docs"}]}
+      ]}
+    ]
+  },
+  "go-8": {
+    "sideLeft": [
+      {"title":"Module System","children":[
+        {"title":"go.mod and go.sum","description":"go.mod declares the module path and dependencies; go.sum records cryptographic hashes — both must be committed and go.sum prevents supply-chain attacks.","resources":[{"label":"Go Modules Reference","url":"https://go.dev/ref/mod","type":"docs"},{"label":"Using Go Modules","url":"https://go.dev/blog/using-go-modules","type":"article"}]},
+        {"title":"Semantic import versioning","description":"Go requires major version suffixes (/v2) in import paths for v2+ modules — this makes it possible to use multiple major versions simultaneously.","resources":[{"label":"Go Blog — Major versions","url":"https://go.dev/blog/v2-go-modules","type":"article"},{"label":"Semantic Import Versioning","url":"https://research.swtch.com/vgo-import","type":"article"}]}
+      ]},
+      {"title":"Proxy and Cache","children":[
+        {"title":"GOPROXY","description":"GOPROXY (default: proxy.golang.org) caches module versions — this ensures reproducible builds even if the original source disappears from VCS.","resources":[{"label":"GOPROXY docs","url":"https://go.dev/ref/mod#module-proxy","type":"docs"},{"label":"Go Module Proxy","url":"https://proxy.golang.org","type":"docs"}]},
+        {"title":"Module cache","description":"Downloaded modules are stored in $GOPATH/pkg/mod — go clean -modcache clears it; GOFLAGS=-mod=vendor forces vendor mode.","resources":[{"label":"Go module cache","url":"https://go.dev/ref/mod#module-cache","type":"docs"},{"label":"go env GOPATH","url":"https://pkg.go.dev/cmd/go#hdr-Environment_variables","type":"docs"}]}
+      ]}
+    ],
+    "sideRight": [
+      {"title":"Dependency Hygiene","children":[
+        {"title":"go mod tidy","description":"go mod tidy adds missing and removes unused dependencies from go.mod and go.sum — run it before committing after adding or removing imports.","resources":[{"label":"go mod tidy docs","url":"https://go.dev/ref/mod#go-mod-tidy","type":"docs"},{"label":"Go Mod Tidy tutorial","url":"https://go.dev/blog/using-go-modules","type":"article"}]},
+        {"title":"go mod vendor","description":"go mod vendor copies all dependencies into a vendor/ directory — useful for air-gapped builds and ensuring no network access is needed in CI.","resources":[{"label":"go mod vendor docs","url":"https://go.dev/ref/mod#go-mod-vendor","type":"docs"},{"label":"Vendoring in Go Modules","url":"https://go.dev/ref/mod#go-mod-vendor","type":"docs"}]}
+      ]},
+      {"title":"Private Modules","children":[
+        {"title":"GONOSUMCHECK","description":"Set GONOSUMCHECK=*.internal.corp to skip checksum verification for private modules not in the public sum database.","resources":[{"label":"Go — Private module privacy","url":"https://go.dev/ref/mod#private-module-privacy","type":"docs"},{"label":"Private Modules in Go","url":"https://go.dev/doc/module/private","type":"article"}]},
+        {"title":"GOFLAGS for persistent flags","description":"GOFLAGS sets default flags for all go commands — useful for consistently enabling -mod=vendor or build tags across a project.","resources":[{"label":"GOFLAGS docs","url":"https://pkg.go.dev/cmd/go#hdr-Environment_variables","type":"docs"},{"label":"Go Environment Variables Reference","url":"https://go.dev/ref/mod#environment-variables","type":"docs"}]}
+      ]}
+    ]
+  },
+  "go-9": {
+    "sideLeft": [
+      {"title":"Generics Design","children":[
+        {"title":"Type parameters in Go 1.18+","description":"Go generics use type parameters with constraints — func Map[T, U any](s []T, f func(T) U) []U replaces repetitive slice transformation functions.","resources":[{"label":"Go Blog — Introduction to Generics","url":"https://go.dev/blog/intro-generics","type":"article"},{"label":"Go Generics Tutorial","url":"https://go.dev/doc/tutorial/generics","type":"docs"}]},
+        {"title":"Type constraints","description":"Constraints are interfaces that restrict what types can be used as type parameters — the comparable constraint enables == in generic functions.","resources":[{"label":"Go — Constraints package","url":"https://pkg.go.dev/golang.org/x/exp/constraints","type":"docs"},{"label":"Go Generics Constraints spec","url":"https://go.dev/ref/spec#Type_parameter_declarations","type":"docs"}]}
+      ]},
+      {"title":"Context Pattern","children":[
+        {"title":"Context propagation","description":"Pass context.Context as the first argument through every function that does I/O — this lets callers cancel in-flight operations across goroutine boundaries.","resources":[{"label":"Go Blog — context package","url":"https://go.dev/blog/context","type":"article"},{"label":"context.WithCancel docs","url":"https://pkg.go.dev/context#WithCancel","type":"docs"}]},
+        {"title":"Context values — use sparingly","description":"context.WithValue stores request-scoped values (trace IDs, auth tokens) — never use it for required function inputs that belong in the function signature.","resources":[{"label":"Go Context Best Practices","url":"https://www.digitalocean.com/community/tutorials/how-to-use-contexts-in-go","type":"article"},{"label":"Go Blog — context and cancellation","url":"https://go.dev/blog/context","type":"article"}]}
+      ]}
+    ],
+    "sideRight": [
+      {"title":"Sync Package","children":[
+        {"title":"sync.Once","description":"sync.Once guarantees a function runs exactly once across all goroutines — the standard pattern for lazy initialisation of expensive resources.","resources":[{"label":"sync.Once docs","url":"https://pkg.go.dev/sync#Once","type":"docs"},{"label":"sync.Once tutorial","url":"https://gobyexample.com/once","type":"article"}]},
+        {"title":"sync.Pool","description":"sync.Pool recycles temporary objects to reduce GC pressure — used extensively in encoding/json and net/http internally for buffer reuse.","resources":[{"label":"sync.Pool docs","url":"https://pkg.go.dev/sync#Pool","type":"docs"},{"label":"Using sync.Pool in Go","url":"https://www.ardanlabs.com/blog/2017/06/design-philosophy-on-data-and-semantics.html","type":"article"}]}
+      ]},
+      {"title":"Advanced Patterns","children":[
+        {"title":"Functional options pattern","description":"Accept ...Option variadic arguments to configure a struct — each Option is a function that mutates a config struct, avoiding boolean parameter proliferation.","resources":[{"label":"Functional Options for Friendly APIs","url":"https://dave.cheney.net/2014/10/17/functional-options-for-friendly-apis","type":"article"},{"label":"Go API Design","url":"https://dave.cheney.net/practical-go/presentations/qcon-china.html","type":"article"}]},
+        {"title":"sync.Map for concurrent access","description":"sync.Map is optimised for write-once, read-many workloads — use it when you know the access pattern; otherwise a plain map+mutex is clearer.","resources":[{"label":"sync.Map docs","url":"https://pkg.go.dev/sync#Map","type":"docs"},{"label":"sync.Map vs map+mutex","url":"https://www.percona.com/blog/go-sync-map-for-concurrent-operations/","type":"article"}]}
+      ]}
+    ]
+  },
+  "go-10": {
+    "sideLeft": [
+      {"title":"Build System","children":[
+        {"title":"go build flags","description":"go build -ldflags='-X main.Version=1.0' injects version info at link time; -trimpath removes local paths from stack traces — both are standard for production binaries.","resources":[{"label":"go build docs","url":"https://pkg.go.dev/cmd/go#hdr-Compile_packages_and_dependencies","type":"docs"},{"label":"Injecting version with ldflags","url":"https://www.digitalocean.com/community/tutorials/using-ldflags-to-set-version-information-for-go-applications","type":"article"}]},
+        {"title":"CGO_ENABLED=0 for static binaries","description":"CGO_ENABLED=0 produces a fully static binary with no libc dependency — required for scratch Docker images and Alpine Linux deployments.","resources":[{"label":"CGO_ENABLED docs","url":"https://pkg.go.dev/cmd/cgo","type":"docs"},{"label":"Static Go Binaries","url":"https://www.arp242.net/static-go.html","type":"article"}]}
+      ]},
+      {"title":"Performance","children":[
+        {"title":"pprof CPU and memory profiling","description":"go tool pprof visualises CPU and memory profiles from running applications — attach to a live server with net/http/pprof for production profiling.","resources":[{"label":"Profiling Go Programs","url":"https://go.dev/blog/pprof","type":"article"},{"label":"pprof tool docs","url":"https://pkg.go.dev/runtime/pprof","type":"docs"}]},
+        {"title":"Escape analysis","description":"go build -gcflags='-m' prints which variables escape to the heap — heap allocations are GC pressure; keeping hot data on the stack improves throughput.","resources":[{"label":"Go Escape Analysis","url":"https://www.ardanlabs.com/blog/2017/05/language-mechanics-on-escape-analysis.html","type":"article"},{"label":"Go Memory Model","url":"https://go.dev/ref/mem","type":"docs"}]}
+      ]}
+    ],
+    "sideRight": [
+      {"title":"Deployment","children":[
+        {"title":"Multi-stage Docker builds","description":"FROM golang:1.22 as builder then FROM scratch COPY binary produces images under 20MB with no shell, OS utilities, or attack surface.","resources":[{"label":"Docker multi-stage builds","url":"https://docs.docker.com/build/building/multi-stage/","type":"docs"},{"label":"Dockerizing a Go app","url":"https://docs.docker.com/language/golang/build-images/","type":"docs"}]},
+        {"title":"Cross-compilation","description":"GOOS=linux GOARCH=amd64 go build cross-compiles to any platform from any platform — no build server needed for different targets.","resources":[{"label":"Go Cross Compilation","url":"https://pkg.go.dev/cmd/go#hdr-Compile_and_run_Go_program","type":"docs"},{"label":"Go Cross Compile Guide","url":"https://www.digitalocean.com/community/tutorials/how-to-build-go-executables-for-multiple-platforms","type":"article"}]}
+      ]},
+      {"title":"Observability","children":[
+        {"title":"OpenTelemetry for Go","description":"OpenTelemetry provides standardised tracing and metrics APIs — instrument once and export to Jaeger, Prometheus, or any OTEL-compatible backend.","resources":[{"label":"OpenTelemetry Go","url":"https://opentelemetry.io/docs/instrumentation/go/","type":"docs"},{"label":"Go Distributed Tracing","url":"https://uptrace.dev/opentelemetry/golang-tracing.html","type":"article"}]},
+        {"title":"Prometheus metrics","description":"github.com/prometheus/client_golang provides counters, gauges, and histograms — expose them on /metrics and Prometheus scrapes them automatically.","resources":[{"label":"Prometheus Go client","url":"https://pkg.go.dev/github.com/prometheus/client_golang/prometheus","type":"docs"},{"label":"Instrumenting Go with Prometheus","url":"https://prometheus.io/docs/guides/go-application/","type":"article"}]}
+      ]}
+    ]
+  }
+}

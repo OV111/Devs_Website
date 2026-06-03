@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
+import { memo } from "react";
 import { Clock, Lock, Check, Play } from "lucide-react";
 import useRoadmapStore from "@/stores/useRoadmapStore";
 
@@ -33,10 +32,9 @@ const STATUS_CONFIG = {
   },
 };
 
-const LayerNode = ({ layer, index }) => {
-  const { activeLayer, setActiveLayer, layerProgress } = useRoadmapStore();
+const LayerNode = memo(({ layer, index, resolvedStatus }) => {
+  const { activeLayer, setActiveLayer } = useRoadmapStore();
   const isActive = activeLayer?.id === layer.id;
-  const resolvedStatus = layerProgress[layer.id] ?? layer.status ?? "locked";
   const cfg = STATUS_CONFIG[resolvedStatus] ?? STATUS_CONFIG.locked;
   const isLocked = resolvedStatus === "locked";
 
@@ -96,6 +94,6 @@ const LayerNode = ({ layer, index }) => {
       </div>
     </motion.button>
   );
-};
+});
 
 export default LayerNode;

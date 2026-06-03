@@ -45,8 +45,6 @@ const sections = [
 const Privacy = () => {
   return (
     <div className="relative overflow-hidden">
-      <div className="pointer-events-none absolute -top-20 -left-20 h-72 w-72 rounded-full bg-fuchsia-200/50 blur-3xl dark:bg-fuchsia-900/20" />
-      <div className="pointer-events-none absolute top-10 right-10 h-72 w-72 rounded-full bg-violet-200/40 blur-3xl dark:bg-violet-900/20" />
 
       <div className="mx-auto max-w-3xl px-6 sm:px-10 py-16 flex flex-col gap-10">
 
