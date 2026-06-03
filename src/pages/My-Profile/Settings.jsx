@@ -98,7 +98,7 @@ const Settings = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50 dark:bg-gray-950">
+    <div className="flex min-h-screen">
       <Toaster position="top-center" reverseOrder />
       <SideBar />
 

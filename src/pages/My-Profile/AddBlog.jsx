@@ -115,7 +115,7 @@ export default function AddBlog() {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50 dark:bg-gray-950">
+    <div className="flex min-h-screen">
       <SideBar />
 
       <div className="flex-1 overflow-auto">
