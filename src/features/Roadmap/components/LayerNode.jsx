@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { motion } from "framer-motion"; // eslint-disable-line no-unused-vars
 import { Clock, Lock, Check, Play } from "lucide-react";
 import useRoadmapStore from "@/stores/useRoadmapStore";
 

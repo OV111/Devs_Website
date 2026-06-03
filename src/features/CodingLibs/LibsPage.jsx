@@ -170,7 +170,7 @@ export default function LibsPage() {
           </div>
 
           <div>
-            <h1 className="text-3xl sm:text-4xl font-bold leading-tight tracking-tight">
+            <h1 className="text-3xl sm:text-5xl font-bold leading-tight tracking-tight">
               The Coding Library.{" "}
               <span className="bg-gradient-to-r from-purple-600 to-purple-500 bg-clip-text text-transparent">
                 Everything you need,

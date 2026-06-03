@@ -190,6 +190,9 @@ const Navbar = () => {
               <NavLink to="coding-challenges">Challenges</NavLink>
             </li>
             <li className="hidden md:block font-medium text-sm lg:text-sm px-1 hover:text-purple-500 transition">
+              <NavLink to="capstone">Capstone</NavLink>
+            </li>
+            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 hover:text-purple-500 transition">
               <NavLink to="ai-agent">AI-Agent</NavLink>
             </li>
 
@@ -369,6 +372,7 @@ const Navbar = () => {
                 <MobileNavLink to="libs">Coding Libs</MobileNavLink>
                 <MobileNavLink to="coding-challenges">Challenges</MobileNavLink>
                 <MobileNavLink to="ai-agent">AI-Agent</MobileNavLink>
+                <MobileNavLink to="capstone">Capstone</MobileNavLink>
 
                 {MOBILE_EXTRA_LINKS.map(({ label, to }) => (
                   <MobileNavLink key={to} to={to}>
