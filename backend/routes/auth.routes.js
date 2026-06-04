@@ -11,17 +11,38 @@ import {
   resetPassword,
 } from "../controllers/authController.js";
 import { verifyToken } from "../utils/jwtToken.js";
+import { redisConnection } from "../config/redis.js";
 
 const router = Router();
 
-const failedLoginByIp = new Map();
-const MAX_FAILED_LOGINS = 5;
+const LOGIN_MAX_ATTEMPTS = 5;
+const LOGIN_WINDOW_SECONDS = 15 * 60; // 15 minutes
+const SIGNUP_MAX_ATTEMPTS = 10;
+const SIGNUP_WINDOW_SECONDS = 60 * 60; // 1 hour
 
 const getClientIp = (req) =>
   (req.headers["x-forwarded-for"] || req.socket.remoteAddress || "")
     .toString()
     .split(",")[0]
     .trim();
+
+/**
+ * Increment a Redis counter and set TTL on first increment.
+ * Returns the new count.
+ */
+const redisIncr = async (key, windowSeconds) => {
+  const count = await redisConnection.incr(key);
+  if (count === 1) await redisConnection.expire(key, windowSeconds);
+  return count;
+};
+
+/**
+ * Returns seconds remaining until the key expires, or 0.
+ */
+const redisTtl = async (key) => {
+  const ttl = await redisConnection.ttl(key);
+  return ttl > 0 ? ttl : 0;
+};
 
 /**
  * @openapi
@@ -98,7 +119,21 @@ router.post("/accept-cookies", (req, res) => {
  */
 router.post("/get-started", async (req, res) => {
   try {
+    const ip = getClientIp(req);
+    const signupKey = `signup:ip:${ip}`;
+    const count = await redisConnection.get(signupKey);
+    if (Number(count) >= SIGNUP_MAX_ATTEMPTS) {
+      const ttl = await redisTtl(signupKey);
+      return res.status(429).set("Retry-After", ttl).json({
+        message: "Too many sign-up attempts. Try again later.",
+        retryAfter: ttl,
+        code: 429,
+      });
+    }
     const result = await signUp(req.body);
+    if (result.status !== 201) {
+      await redisIncr(signupKey, SIGNUP_WINDOW_SECONDS);
+    }
     res.status(result.status ?? result.code ?? 500).json(result);
   } catch (err) {
     res
@@ -138,16 +173,36 @@ router.post("/get-started", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const ip = getClientIp(req);
-    const failedCount = failedLoginByIp.get(ip) || 0;
-    if (failedCount >= MAX_FAILED_LOGINS) {
-      return res.status(429).json({
-        message: "Too many login attempts. Please try again later.",
+    const email = (req.body.email || "").toLowerCase().trim();
+    const ipKey = `login:ip:${ip}`;
+    const emailKey = `login:email:${email}`;
+
+    const [ipCount, emailCount] = await Promise.all([
+      redisConnection.get(ipKey),
+      redisConnection.get(emailKey),
+    ]);
+
+    if (
+      Number(ipCount) >= LOGIN_MAX_ATTEMPTS ||
+      Number(emailCount) >= LOGIN_MAX_ATTEMPTS
+    ) {
+      const ttl = await redisTtl(
+        Number(emailCount) >= LOGIN_MAX_ATTEMPTS ? emailKey : ipKey,
+      );
+      return res.status(429).set("Retry-After", ttl).json({
+        message: `Too many login attempts. Try again in ${Math.ceil(ttl / 60)} minute(s).`,
+        retryAfter: ttl,
         code: 429,
       });
     }
+
     const result = await login(req.body);
+
     if (result.status === 200) {
-      failedLoginByIp.delete(ip);
+      await Promise.all([
+        redisConnection.del(ipKey),
+        redisConnection.del(emailKey),
+      ]);
       res.cookie("session", String(result.userId), {
         httpOnly: true,
         secure: false,
@@ -156,8 +211,12 @@ router.post("/login", async (req, res) => {
         path: "/",
       });
     } else if ([401, 404].includes(result.status)) {
-      failedLoginByIp.set(ip, failedCount + 1);
+      await Promise.all([
+        redisIncr(ipKey, LOGIN_WINDOW_SECONDS),
+        redisIncr(emailKey, LOGIN_WINDOW_SECONDS),
+      ]);
     }
+
     res.status(result.status).json(result);
   } catch (err) {
     res
