@@ -1,7 +1,7 @@
 # DevsFlow — Vision & Product Roadmap
 
 > Living document — update this as the vision evolves.
-> Last updated: 2026-05-20
+> Last updated: 2026-06-04
 
 ---
 
@@ -57,19 +57,22 @@ Every developer who joins gets a personal AI mentor that knows them, a structure
 
 ## Current State — Honest Snapshot
 
-| Feature                                          | Status                                       |
-| ------------------------------------------------ | -------------------------------------------- |
-| Community Platform (blogs, profiles, chat, auth) | ✅ Built                                     |
-| Roadmap UI                                       | 🔧 Frontend shell built — no backend         |
-| Dev Library                                      | 🔧 Page shells exist — no content or backend |
-| Admin Panel                                      | ❌ Not started                               |
-| AI Agent                                         | ❌ Not started — design spec only            |
-| Problem Solving Arena                            | ❌ Not started                               |
-| Exam Engine                                      | ❌ Not started                               |
-| Public Progress Profiles                         | ❌ Not started                               |
-| Weekly Challenges                                | ❌ Not started                               |
-| Ship It Capstone                                 | ❌ Not started                               |
-| Platform Intelligence                            | ❌ Not started                               |
+| Feature                                          | Status                                                                          |
+| ------------------------------------------------ | ------------------------------------------------------------------------------- |
+| Community Platform (blogs, profiles, chat, auth) | ✅ Built                                                                        |
+| Roadmap UI                                       | 🔧 Frontend shell built — backend services built, routes not yet wired          |
+| User Progress Tracking                           | 🔧 `userProgressService.js` fully built — no route exposes it yet               |
+| Exam History & Weak Spots                        | 🔧 `examHistoryService.js` + `weakSpotService.js` fully built — not yet wired   |
+| Challenge Results                                | 🔧 `challengeResultService.js` fully built — not yet wired                      |
+| Dev Library                                      | 🔧 `libraryService.js` fully built — route exists, needs seed content           |
+| Admin Panel                                      | ❌ Not started                                                                  |
+| AI Agent                                         | ❌ Not started — design spec only, service file is empty                        |
+| Problem Solving Arena                            | ❌ Not started                                                                  |
+| Exam Engine                                      | ❌ Not started — history/weak spot services ready, needs AI call layer          |
+| Public Progress Profiles                         | ❌ Not started — `userProgressService` ready, needs frontend display            |
+| Weekly Challenges                                | ❌ Not started                                                                  |
+| Ship It Capstone                                 | ❌ Not started                                                                  |
+| Platform Intelligence                            | ❌ Not started                                                                  |
 
 ---
 
@@ -503,29 +506,40 @@ capstone_projects
 
 Blogs, profiles, follow system, real-time chat, notifications, auth (email + Google + GitHub), search.
 
-### Phase 1 — Admin Panel — ❌ NOT STARTED
+### Phase 1 — Learning Layer (Backend) — 🔧 SERVICES BUILT, WIRING NEEDED
 
-Manage users, posts, reports. Approve community problem submissions and curriculum content. Required before community contributions can be trusted.
+> **Services are already written. This phase is routing and seed data, not new logic.**
 
-### Phase 2 — Learning Layer (Backend) — ❌ NOT STARTED
+- Seed one path (Backend Developer, 3 layers) into MongoDB via `backend/seeders/roadmapSeeder.js`
+- Wire `userProgressService.js` to new routes: `GET /roadmaps`, `GET /roadmaps/:pathId/layers`, `GET /roadmaps/progress`, `POST /roadmaps/progress`
+- Mount routes in `app.js` behind `authenticate` middleware
+- Store exam pass threshold in `platformConfig` collection (default 80, configurable without deploy)
 
-- Roadmap data seeded into MongoDB (paths, layers, content links)
-- User progress tracking: active path, current layer, unlocked layers
-- API: `GET /roadmaps`, `GET /roadmaps/:path/layers`, `POST /roadmaps/progress`
+**Estimated effort:** 1–2 days.
 
-### Phase 3 — Roadmap UI (Frontend) — 🔧 IN PROGRESS
+### Phase 2 — Roadmap UI (Frontend) — 🔧 IN PROGRESS
 
-- Wire the existing UI shell to the Phase 2 backend
+- Wire the existing UI shell (`RoadmapPage.jsx`, `useRoadmapStore`) to the Phase 1 routes
 - Locked/unlocked node rendering based on user progress
 - Animated unlock effects (GSAP + Framer Motion — already in the stack)
 - Progress indicators per path on profile
 
-### Phase 4 — AI Agent Per User — ❌ NOT STARTED
+**Estimated effort:** 1 day.
 
-- Anthropic API integration with tool-use architecture
+### Phase 3 — AI Agent Per User — ❌ NOT STARTED
+
+> **Routes exist but are empty. Architecture is fully designed below. This is implementation work, not design work.**
+
+- Start with streaming chat only (no tools) — wire `aiAgent.routes.js` to Anthropic SSE
+- Add tool-use loop in second pass: `get_user_progress`, `get_layer_content`, `get_exam_history`, `log_weak_spot`
 - Per-user agent context in MongoDB
-- SSE streaming from Express backend
 - Full chat UI implementation (design spec already written in `AiAgent.jsx` comments)
+
+**Estimated effort:** 2–3 days for MVP streaming chat; 1 additional week for full tool-use loop.
+
+### Phase 4 — Admin Panel — ❌ NOT STARTED
+
+Manage users, posts, reports. Approve community problem submissions and curriculum content. **Build this after the learning loop is live and real users exist — not before.**
 
 ### Phase 5 — Dev Library — 🔧 IN PROGRESS
 
@@ -542,12 +556,17 @@ Manage users, posts, reports. Approve community problem submissions and curricul
 - Community problem submissions + admin review queue
 - Exam readiness score derived from problems solved
 
-### Phase 7 — Exam Engine — ❌ NOT STARTED
+### Phase 7 — Exam Engine — 🔧 SERVICES BUILT, AI LAYER NEEDED
 
-- AI-generated exam questions per layer
-- Grading system: 90/100 to pass
-- Fail flow: agent identifies weak topics, targeted review, retry
-- Unlock next layer on pass
+> **`examHistoryService.js` and `weakSpotService.js` are fully built. This phase adds the AI call layer on top.**
+
+- `POST /exams/generate` — AI generates MCQ questions for a given path + layer
+- `POST /exams/submit` — grades submission, saves via `examHistoryService`, calls `weakSpotService` for missed topics
+- On pass: calls `userProgressService` to unlock next layer
+- On fail: agent surfaces weak topics for targeted review
+- Pass threshold stored in `platformConfig` (configurable, default 80 — tune with real user data)
+
+**Estimated effort:** 2 days for MVP MCQ engine.
 
 ### Phase 8 — Agent Gets Smarter — ❌ NOT STARTED
 
