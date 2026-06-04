@@ -15,9 +15,9 @@ export default function SearchBar({
       onSubmit={handleSubmit}
       role="search"
       aria-label="Site search"
-      className="w-full max-w-[400px]"
+      className="w-full max-w-[480px]"
     >
-      <div className="relative flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-[4px] text-white/10 backdrop-blur">
+      <div className="relative flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-1 text-white/10 backdrop-blur">
         <SearchIcon className="text-white/75" sx={{ fontSize: 20 }} />
         <input
           type="search"
@@ -26,7 +26,7 @@ export default function SearchBar({
           placeholder={placeholder}
           autoComplete="off"
           spellCheck={false}
-          className="min-w-0 flex-1 text-sm appearance-none  bg-transparent text-sm text-white outline-none transition-all duration-300 placeholder:text-white/55 placeholder:opacity-100 focus:placeholder:opacity-0 [&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none"
+          className="min-w-0 flex-1 appearance-none bg-transparent text-sm text-white outline-none transition-all duration-300 placeholder:text-white/55 placeholder:opacity-100 focus:placeholder:opacity-0 [&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none"
         />
 
         {value?.length > 0 && (

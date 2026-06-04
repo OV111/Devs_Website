@@ -13,7 +13,6 @@ export default function RoadmapPage() {
 
   const handleStart = (answers) => {
     console.log("User answers:", answers);
-    // TODO: call createUserProgress() API with answers
     setPanelOpen(false);
   };
 

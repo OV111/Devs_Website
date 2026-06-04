@@ -5,7 +5,6 @@ import {
   COIN_EARN_WAYS,
 } from "./profileData";
 
-// ── Helper components ──────────────────────────────────────────
 
 export function SectionHeader({ title, right }) {
   return (

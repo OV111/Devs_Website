@@ -32,6 +32,7 @@ const ConnectedAccounts = lazy(
 const Blogs = lazy(() => import("./features/Blogs/Blogs"));
 const RoadmapPage = lazy(() => import("./features/Roadmap/RoadmapPage"));
 const LibsPage = lazy(() => import("./features/CodingLibs/LibsPage"));
+const BookDetailPage = lazy(() => import("./features/CodingLibs/BookDetailPage"));
 const CodingChallenges = lazy(
   () => import("./features/CodingChallenges/CodingChallenges"),
 );
@@ -97,6 +98,7 @@ const router = createBrowserRouter([
           { path: "blogs", element: <Blogs /> },
           { path: "roadmaps", element: <RoadmapPage /> },
           { path: "libs", element: <LibsPage /> },
+          { path: "libs/:id", element: <BookDetailPage /> },
           { path: "coding-challenges", element: <CodingChallenges /> },
           { path: "coding-challenges/:id", element: <ChallengeArena /> },
           { path: "ai-agent", element: <AiAgentLanding /> },

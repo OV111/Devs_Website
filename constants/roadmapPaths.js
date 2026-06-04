@@ -57,7 +57,7 @@ export const TRACKS = {
     {
       id: "laravel-vue",
       title: "Laravel + Vue Dev",
-      available: false,
+      available: true,
       techs: ["PHP", "Laravel", "Vue 3", "MySQL"],
     },
     {
@@ -81,7 +81,7 @@ export const TRACKS = {
     {
       id: "remix-dev",
       title: "Remix Developer",
-      available: false,
+      available: true,
       techs: ["Remix", "React", "TypeScript", "Vite"],
     },
   ],
@@ -155,7 +155,7 @@ export const TRACKS = {
     {
       id: "node-dev",
       title: "Node.js Developer",
-      available: false,
+      available: true,
       techs: ["Node.js", "TypeScript", "Fastify", "Prisma"],
     },
   ],
@@ -211,7 +211,7 @@ export const TRACKS = {
     {
       id: "ionic",
       title: "Ionic Developer",
-      available: false,
+      available: true,
       techs: ["Ionic", "Angular", "Capacitor", "TypeScript"],
     },
   ],
@@ -273,7 +273,7 @@ export const TRACKS = {
     {
       id: "prompt-engineer",
       title: "Prompt Engineer",
-      available: false,
+      available: true,
       techs: ["LLMs", "LangChain", "Python", "RAG"],
     },
   ],
@@ -335,7 +335,7 @@ export const TRACKS = {
     {
       id: "platform-engineer",
       title: "Platform Engineer",
-      available: false,
+      available: true,
       techs: ["Backstage", "Kubernetes", "Terraform", "ArgoCD"],
     },
   ],
@@ -385,7 +385,7 @@ export const TRACKS = {
     {
       id: "statistician",
       title: "Statistician",
-      available: false,
+      available: true,
       techs: ["R", "Python", "SPSS", "SAS"],
     },
   ],
@@ -453,7 +453,7 @@ export const TRACKS = {
     {
       id: "tools-dev",
       title: "Game Tools Developer",
-      available: false,
+      available: true,
       techs: ["C#", "Python", "Unity Editor", "Qt"],
     },
   ],
@@ -515,7 +515,7 @@ export const TRACKS = {
     {
       id: "qa-lead",
       title: "QA Lead",
-      available: false,
+      available: true,
       techs: ["Jira", "TestRail", "Agile", "CI/CD"],
     },
   ],
@@ -571,13 +571,13 @@ export const TRACKS = {
     {
       id: "ruby",
       title: "Ruby",
-      available: false,
+      available: true,
       techs: ["Ruby", "Gems", "Blocks", "Metaprogramming"],
     },
     {
       id: "php",
       title: "PHP",
-      available: false,
+      available: true,
       techs: ["PHP", "Composer", "PSR", "OOP"],
     },
     {
@@ -613,20 +613,80 @@ export const TRACKS = {
     {
       id: "scala",
       title: "Scala",
-      available: false,
+      available: true,
       techs: ["Scala", "FP", "sbt", "Akka"],
     },
     {
       id: "haskell",
       title: "Haskell",
-      available: false,
+      available: true,
       techs: ["Haskell", "Monads", "Cabal", "Type Classes"],
     },
     {
       id: "lua",
       title: "Lua",
-      available: false,
+      available: true,
       techs: ["Lua", "Tables", "Coroutines", "LuaJIT"],
+    },
+    {
+      id: "r",
+      title: "R",
+      available: true,
+      techs: ["R", "tidyverse", "ggplot2", "Shiny"],
+    },
+    {
+      id: "julia",
+      title: "Julia",
+      available: true,
+      techs: ["Julia", "Flux.jl", "DataFrames.jl", "SciML"],
+    },
+    {
+      id: "zig",
+      title: "Zig",
+      available: true,
+      techs: ["Zig", "Allocators", "Comptime", "WASM"],
+    },
+    {
+      id: "bash",
+      title: "Bash",
+      available: true,
+      techs: ["Bash", "grep/sed/awk", "cron", "ShellCheck"],
+    },
+    {
+      id: "perl",
+      title: "Perl",
+      available: true,
+      techs: ["Perl", "CPAN", "Regex", "Mojolicious"],
+    },
+    {
+      id: "clojure",
+      title: "Clojure",
+      available: true,
+      techs: ["Clojure", "core.async", "Reagent", "Ring"],
+    },
+    {
+      id: "fsharp",
+      title: "F#",
+      available: true,
+      techs: ["F#", ".NET", "Discriminated Unions", "SAFE Stack"],
+    },
+    {
+      id: "groovy",
+      title: "Groovy",
+      available: true,
+      techs: ["Groovy", "Spock", "Gradle", "Grails"],
+    },
+    {
+      id: "ocaml",
+      title: "OCaml",
+      available: true,
+      techs: ["OCaml", "Dune", "Lwt", "Functors"],
+    },
+    {
+      id: "assembly",
+      title: "Assembly",
+      available: true,
+      techs: ["x86-64", "NASM", "ARM64", "SIMD"],
     },
   ],
   web3: [
@@ -663,7 +723,7 @@ export const TRACKS = {
     {
       id: "wallet-developer",
       title: "Wallet Developer",
-      available: false,
+      available: true,
       techs: ["EIP-1193", "WalletConnect", "Keys", "Security"],
     },
     {
@@ -687,7 +747,7 @@ export const TRACKS = {
     {
       id: "web3-indexer",
       title: "Web3 Data / Indexer",
-      available: false,
+      available: true,
       techs: ["The Graph", "GraphQL", "Subgraphs", "Ponder"],
     },
   ],
@@ -725,7 +785,7 @@ export const TRACKS = {
     {
       id: "chain-architect",
       title: "Chain Architect",
-      available: false,
+      available: true,
       techs: ["Cosmos SDK", "Substrate", "Tendermint", "Consensus"],
     },
     {
@@ -749,7 +809,7 @@ export const TRACKS = {
     {
       id: "layer2-dev",
       title: "Layer 2 Developer",
-      available: false,
+      available: true,
       techs: ["Optimism", "zkSync", "Rollups", "Solidity"],
     },
   ],
@@ -793,13 +853,13 @@ export const TRACKS = {
     {
       id: "malware-analyst",
       title: "Malware Analyst",
-      available: false,
+      available: true,
       techs: ["Reverse Engineering", "Ghidra", "Assembly", "Sandboxing"],
     },
     {
       id: "grc-analyst",
       title: "GRC Analyst",
-      available: false,
+      available: true,
       techs: ["ISO 27001", "SOC 2", "NIST", "Risk"],
     },
     {
@@ -823,7 +883,7 @@ export const TRACKS = {
     {
       id: "bug-bounty-hunter",
       title: "Bug Bounty Hunter",
-      available: false,
+      available: true,
       techs: ["Burp Suite", "Recon", "OWASP", "Fuzzing"],
     },
   ],
@@ -861,7 +921,7 @@ export const TRACKS = {
     {
       id: "finops-engineer",
       title: "FinOps Engineer",
-      available: false,
+      available: true,
       techs: ["Cost Management", "Tagging", "Budgets", "Optimization"],
     },
     {
@@ -885,7 +945,7 @@ export const TRACKS = {
     {
       id: "observability-engineer",
       title: "Observability Engineer",
-      available: false,
+      available: true,
       techs: ["Prometheus", "Grafana", "OpenTelemetry", "Datadog"],
     },
   ],
@@ -923,7 +983,7 @@ export const TRACKS = {
     {
       id: "db-reliability",
       title: "Database Reliability Eng",
-      available: false,
+      available: true,
       techs: ["HA", "Replication", "Monitoring", "Backup"],
     },
     {
@@ -947,7 +1007,7 @@ export const TRACKS = {
     {
       id: "graph-db-engineer",
       title: "Graph DB Engineer",
-      available: false,
+      available: true,
       techs: ["Neo4j", "Cypher", "Graph Models", "GQL"],
     },
   ],
@@ -973,13 +1033,13 @@ export const TRACKS = {
     {
       id: "quantum-crypto",
       title: "Quantum Cryptography",
-      available: false,
+      available: true,
       techs: ["QKD", "Post-Quantum", "BB84", "Lattices"],
     },
     {
       id: "quantum-researcher",
       title: "Quantum Researcher",
-      available: false,
+      available: true,
       techs: ["Q#", "Cirq", "Hamiltonians", "Error Correction"],
     },
     {
@@ -997,7 +1057,7 @@ export const TRACKS = {
     {
       id: "quantum-simulation",
       title: "Quantum Simulation",
-      available: false,
+      available: true,
       techs: ["VQE", "Chemistry", "Hamiltonians", "Qiskit"],
     },
   ],
@@ -1016,3 +1076,4 @@ export const TRACKS = {
 //   estimatedTime: string
 // }
 // ─────────────────────────────────────────────────────────────────────────────
+

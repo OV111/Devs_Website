@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { motion as Motion, AnimatePresence } from "framer-motion";
 import GradientText from "@/components/effects/GradientText";
+import EyebrowBadge from "@/components/ui/EyebrowBadge";
 import TextType from "@/components/effects/TextType";
 import {
   TYPE_STYLE,
@@ -202,7 +203,6 @@ function ChallengeCard({ c }) {
   );
 }
 
-// ── Main component ─────────────────────────────────────────────
 
 export default function CodingChallenges() {
   const navigate = useNavigate();
@@ -262,14 +262,8 @@ export default function CodingChallenges() {
       <div className="px-6 sm:px-10 lg:px-14 pt-10 pb-8">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 items-start">
           <div className="flex-1 min-w-0">
-            <Motion.div
-              {...FadeUp(0)}
-              className="inline-flex items-center gap-2 text-[11px] mb-6 px-2 py-1.5 rounded-2xl border border-[#2d1b4e] bg-[#0f0b1a] text-[#888]"
-            >
-              <span className="text-[10px] font-bold justify-center items-center px-1.5 py-0.5 rounded-lg bg-purple-600 text-white">
-                v0.1
-              </span>
-              <span>problems · path-specific · agent-guided</span>
+            <Motion.div {...FadeUp(0)} className="mb-6">
+              <EyebrowBadge label="v0.1" text="problems · path-specific · agent-guided" color="purple" />
             </Motion.div>
 
             <Motion.div {...FadeUp(0.08)} className="mb-4">

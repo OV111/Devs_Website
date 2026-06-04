@@ -48,7 +48,6 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: wire up real submission
     setSent(true);
   };
 

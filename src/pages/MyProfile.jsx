@@ -29,7 +29,6 @@ import {
   DevsCoinSection,
 } from "./My-Profile/components/ProfileSections";
 
-// ── Main component ─────────────────────────────────────────────
 
 const MyProfile = () => {
   const navigate = useNavigate();

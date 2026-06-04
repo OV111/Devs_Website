@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import * as Si from "react-icons/si";
 
 export default function LibCard({ lib }) {
   const IconComponent = Si[lib.icon];
+  const [hovered, setHovered] = useState(false);
   return (
     <div
       className="flex flex-col justify-between p-4 cursor-pointer transition-colors"
       style={{
-        backgroundColor: "#111",
+        backgroundColor: hovered ? "#181818" : "#111",
         border: "1px solid #1f1f1f",
         borderTop: `3px solid ${lib.iconColor}`,
       }}
-      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#181818")}
-      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#111")}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
       <div>
         <div className="flex items-center justify-between mb-3">

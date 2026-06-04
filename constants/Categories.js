@@ -11,7 +11,7 @@ export const CATEGORY_OPTIONS = [
   { id: "qa", title: "QA", slug: "qa" },
   // { id: "cybersecurity", title: "Cybersecurity", slug: "cybersecurity" },
   // { id: "cloud", title: "Cloud Computing", slug: "cloud" },
-  // { id: "database", title: "Database Managment", slug: "database" },
+  // { id: "database", title: "Database Management", slug: "database" },
   // { id: "quantum", title: "Quantum Computing", slug: "quantum" },
 ];
 
@@ -159,6 +159,6 @@ export const CATEGORY_OPTIONS2 = [
   { id: "datascience", title: "Data Science", slug: "datascience" },
   { id: "cybersecurity", title: "Cybersecurity", slug: "cybersecurity" },
   { id: "cloud", title: "Cloud Computing", slug: "cloud" },
-  { id: "database", title: "Database Managment", slug: "database" },
+  { id: "database", title: "Database Management", slug: "database" },
   { id: "quantum", title: "Quantum Computing", slug: "quantum" },
 ];

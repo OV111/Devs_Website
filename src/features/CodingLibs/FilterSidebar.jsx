@@ -2,7 +2,6 @@ import React from "react";
 import { LIBS_CATEGORIES } from "../../../constants/libs";
 import SectionHeader from "./SectionHeader";
 import FilterCheckbox from "./FilterCheckbox";
-import { Checkbox } from "@/components/ui/checkbox";
 
 const PATHS = [
   { value: "Backend Developer",    label: "backend" },
@@ -38,14 +37,12 @@ export default function FilterSidebar({
           <SectionHeader title="category" />
           <ul className="space-y-1.5">
             {LIBS_CATEGORIES.map((c) => (
-              <li key={c.id} className="py-0.5">
-                <Checkbox
-                  checked={activeCategory === c.id}
-                  onChange={() => setActiveCategory(c.id)}
-                >
-                  {c.title}
-                </Checkbox>
-              </li>
+              <FilterCheckbox
+                key={c.id}
+                label={c.title}
+                active={activeCategory === c.id}
+                onClick={() => setActiveCategory(c.id)}
+              />
             ))}
           </ul>
         </div>

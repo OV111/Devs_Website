@@ -8,7 +8,9 @@ import { PanelLeft, Search, X } from "lucide-react";
 import FilterSidebar from "./FilterSidebar";
 import LibCard from "./LibCard";
 import ResourceCard from "./ResourceCard";
+import BookCard from "./BookCard";
 import SectionHeader from "./SectionHeader";
+import EyebrowBadge from "@/components/ui/EyebrowBadge";
 import {
   fetchLibraryResources,
   fetchLibraryResourceCounts,
@@ -140,6 +142,8 @@ export default function LibsPage() {
           width: sidebarOpen ? 220 : 0,
           overflow: sidebarOpen ? "auto" : "hidden",
         }}
+        aria-hidden={!sidebarOpen}
+        inert={!sidebarOpen ? "" : undefined}
       >
         <FilterSidebar
           activeTab={activeTab}
@@ -157,22 +161,25 @@ export default function LibsPage() {
               <button
                 onClick={() => setSidebarOpen((v) => !v)}
                 title={sidebarOpen ? "Collapse filters" : "Expand filters"}
-                className={`cursor-pointer flex items-center justify-center p-1 rounded-md transition-colors hover:text-purple-600 hover:bg-purple-600/10 ${
+                className={`relative cursor-pointer flex items-center justify-center p-1 rounded-md transition-colors hover:text-purple-600 hover:bg-purple-600/10 ${
                   sidebarOpen ? "text-[#e5e5e5]" : "text-[#555]"
                 }`}
               >
                 <PanelLeft size={18} />
+                {activeFiltersCount > 0 && (
+                  <span className="absolute -top-1 -right-1 w-3.5 h-3.5 text-[8px] flex items-center justify-center rounded-full bg-purple-600 text-white">
+                    {activeFiltersCount}
+                  </span>
+                )}
               </button>
-              <span className="text-[10px] font-bold tracking-widest uppercase px-2 py-1 text-[#888] border border-purple-600/20 bg-purple-600/5 rounded-2xl">
-                AI-POWERED - CODING LIBRARY
-              </span>
+              <EyebrowBadge dot text="ai-powered · curated · roadmap-linked" color="purple" />
             </div>
           </div>
 
           <div>
             <h1 className="text-3xl sm:text-5xl font-bold leading-tight tracking-tight">
               The Coding Library.{" "}
-              <span className="bg-gradient-to-r from-purple-600 to-purple-500 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-purple-600 to-purple-500 bg-clip-text text-transparent">
                 Everything you need,
               </span>
               <br />
@@ -253,7 +260,7 @@ export default function LibsPage() {
                 className="flex items-center gap-2"
                 onMouseEnter={() => setSearchOpen(true)}
                 onMouseLeave={() => {
-                  if (!search) setSearchOpen(false);
+                  if (!search && document.activeElement !== searchInputRef.current) setSearchOpen(false);
                 }}
               >
                 <AnimatePresence>
@@ -363,47 +370,139 @@ export default function LibsPage() {
                 </button>
               </div>
             )}
-            {!loading &&
-              !error &&
-              resources.length === 0 &&
-              activeTab !== "all" && (
-                <div className="py-8 text-[#555]">
-                  <p className="text-sm">No resources match your filters.</p>
-                  <button
-                    onClick={() =>
-                      setFilters({
-                        path: null,
-                        difficulty: null,
-                        is_free: null,
-                      })
-                    }
-                    className="mt-2 text-xs underline text-purple-600"
-                  >
-                    clear filters
-                  </button>
-                </div>
-              )}
-            {!loading && !error && resources.length > 0 && (
-              <div className="mb-10">
-                <SectionHeader
-                  title={`${activeTab === "all" ? "curated resources" : activeTab} · ${resources.length} results`}
-                />
-                <div
-                  className="grid gap-4"
-                  style={{
-                    gridTemplateColumns:
-                      "repeat(auto-fill, minmax(300px, 1fr))",
-                  }}
+            {!loading && !error && resources.length === 0 && activeTab !== "all" && (
+              <div className="py-8 text-[#555]">
+                <p className="text-sm">No resources match your filters.</p>
+                <button
+                  onClick={() => setFilters({ path: null, difficulty: null, is_free: null })}
+                  className="mt-2 text-xs underline text-purple-600"
                 >
-                  {resources.map((r) => (
-                    <ResourceCard
-                      key={r._id}
-                      resource={r}
-                      isSaved={savedIds.has(r._id.toString())}
-                      onToggleSave={handleToggleSave}
-                    />
-                  ))}
-                </div>
+                  clear filters
+                </button>
+              </div>
+            )}
+
+            {/* ── "all" tab — one section per type ── */}
+            {!loading && !error && activeTab === "all" && (() => {
+              const books = resources.filter((r) => r.type === "book");
+              const docs  = resources.filter((r) => r.type === "documentation");
+              const guides = resources.filter((r) => r.type === "guide");
+              const sheets = resources.filter((r) => r.type === "cheatsheet");
+
+              return (
+                <>
+                  {books.length > 0 && (
+                    <div className="mb-12">
+                      <SectionHeader title={`books · ${books.length}`} />
+                      <div
+                        className="grid gap-6"
+                        style={{ gridTemplateColumns: "repeat(auto-fill, minmax(170px, 1fr))" }}
+                      >
+                        {books.map((r) => (
+                          <BookCard
+                            key={r._id}
+                            resource={r}
+                            isSaved={savedIds.has(r._id.toString())}
+                            onToggleSave={handleToggleSave}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {docs.length > 0 && (
+                    <div className="mb-12">
+                      <SectionHeader title={`documentation · ${docs.length}`} />
+                      <div
+                        className="grid gap-4"
+                        style={{ gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))" }}
+                      >
+                        {docs.map((r) => (
+                          <ResourceCard
+                            key={r._id}
+                            resource={r}
+                            isSaved={savedIds.has(r._id.toString())}
+                            onToggleSave={handleToggleSave}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {guides.length > 0 && (
+                    <div className="mb-12">
+                      <SectionHeader title={`guides · ${guides.length}`} />
+                      <div
+                        className="grid gap-4"
+                        style={{ gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))" }}
+                      >
+                        {guides.map((r) => (
+                          <ResourceCard
+                            key={r._id}
+                            resource={r}
+                            isSaved={savedIds.has(r._id.toString())}
+                            onToggleSave={handleToggleSave}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {sheets.length > 0 && (
+                    <div className="mb-12">
+                      <SectionHeader title={`cheatsheets · ${sheets.length}`} />
+                      <div
+                        className="grid gap-4"
+                        style={{ gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))" }}
+                      >
+                        {sheets.map((r) => (
+                          <ResourceCard
+                            key={r._id}
+                            resource={r}
+                            isSaved={savedIds.has(r._id.toString())}
+                            onToggleSave={handleToggleSave}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </>
+              );
+            })()}
+
+            {/* ── single-type tabs (books / docs / guides / sheets) ── */}
+            {!loading && !error && resources.length > 0 && activeTab !== "all" && (
+              <div className="mb-10">
+                <SectionHeader title={`${activeTab} · ${resources.length}`} />
+                {activeTab === "books" ? (
+                  <div
+                    className="grid gap-6"
+                    style={{ gridTemplateColumns: "repeat(auto-fill, minmax(170px, 1fr))" }}
+                  >
+                    {resources.map((r) => (
+                      <BookCard
+                        key={r._id}
+                        resource={r}
+                        isSaved={savedIds.has(r._id.toString())}
+                        onToggleSave={handleToggleSave}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div
+                    className="grid gap-4"
+                    style={{ gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))" }}
+                  >
+                    {resources.map((r) => (
+                      <ResourceCard
+                        key={r._id}
+                        resource={r}
+                        isSaved={savedIds.has(r._id.toString())}
+                        onToggleSave={handleToggleSave}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
             )}
           </>

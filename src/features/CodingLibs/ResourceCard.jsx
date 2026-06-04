@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Bookmark } from "lucide-react";
 
 const TYPE_COLORS = {
@@ -28,6 +28,9 @@ function Badge({ label, color }) {
 export default function ResourceCard({ resource, isSaved = false, onToggleSave }) {
   const [saved, setSaved] = useState(isSaved);
   const [saving, setSaving] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
+  useEffect(() => { setSaved(isSaved); }, [isSaved]);
 
   const typeColor = TYPE_COLORS[resource.type] ?? "#666";
   const diffColor = DIFFICULTY_COLORS[resource.difficulty] ?? "#666";
@@ -50,12 +53,12 @@ export default function ResourceCard({ resource, isSaved = false, onToggleSave }
     <div
       className="flex flex-col justify-between p-4 cursor-pointer transition-colors"
       style={{
-        backgroundColor: "#111",
+        backgroundColor: hovered ? "#181818" : "#111",
         border: "1px solid #1f1f1f",
         borderTop: `3px solid ${typeColor}`,
       }}
-      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#181818")}
-      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#111")}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
       <div>
         <div className="flex items-start justify-between gap-2 mb-2">
