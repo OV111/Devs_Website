@@ -31,6 +31,7 @@ const getClientIp = (req) =>
  * Returns the new count.
  */
 const redisIncr = async (key, windowSeconds) => {
+  if (!redisConnection) return 0;
   const count = await redisConnection.incr(key);
   if (count === 1) await redisConnection.expire(key, windowSeconds);
   return count;
@@ -40,6 +41,7 @@ const redisIncr = async (key, windowSeconds) => {
  * Returns seconds remaining until the key expires, or 0.
  */
 const redisTtl = async (key) => {
+  if (!redisConnection) return 0;
   const ttl = await redisConnection.ttl(key);
   return ttl > 0 ? ttl : 0;
 };
