@@ -5,6 +5,7 @@ import useProfileStore from "@/stores/useProfileStore";
 import hexLogo from "@/assets/devswebs_mark_transparent.png";
 import TextType from "@/components/effects/TextType";
 import { CHIPS, DROPDOWN_ITEMS } from "../../../constants/AiAgent";
+import { JWT_KEY } from "../../../constants/api";
 
 function getGreeting() {
   const h = new Date().getHours();
@@ -37,7 +38,14 @@ export default function AiAgentLanding() {
 
   const handleSend = () => {
     if (!message.trim()) return;
-    navigate("/ai-agent/chat");
+    const token = localStorage.getItem(JWT_KEY);
+    if (!token) {
+      navigate("/login", {
+        state: { redirectTo: "/ai-agent/chat", initialMessage: message.trim() },
+      });
+      return;
+    }
+    navigate("/ai-agent/chat", { state: { initialMessage: message.trim() } });
   };
 
   const handleKeyDown = (e) => {
