@@ -67,3 +67,33 @@ export const fetchFavourites = async () => {
   if (!data.success) throw new Error("Failed to fetch favourites");
   return data.data;
 };
+
+export const fetchMyBlogs = async () => {
+  const res = await fetch(`${API_BASE_URL}/blogs/my-blogs`, {
+    headers: authHeaders(),
+  });
+  const data = await res.json();
+  if (!data.success) throw new Error("Failed to fetch your blogs");
+  return data.data;
+};
+
+export const updateBlog = async (id, formData) => {
+  const res = await fetch(`${API_BASE_URL}/blogs/${id}`, {
+    method: "PUT",
+    headers: authHeaders(),
+    body: formData,
+  });
+  const data = await res.json();
+  if (!data.success) throw new Error(data.message || "Failed to update blog");
+  return data.data;
+};
+
+export const deleteBlog = async (id) => {
+  const res = await fetch(`${API_BASE_URL}/blogs/${id}`, {
+    method: "DELETE",
+    headers: authHeaders(),
+  });
+  const data = await res.json();
+  if (!data.success) throw new Error(data.message || "Failed to delete blog");
+  return data;
+};

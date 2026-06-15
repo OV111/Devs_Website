@@ -3,6 +3,7 @@ import { Send, Eye, Pencil } from "lucide-react";
 import SaveAsOutlinedIcon from "@mui/icons-material/SaveAsOutlined";
 import { toast } from "react-hot-toast";
 import ReactMarkdown from "react-markdown";
+import { useParams, useNavigate } from "react-router-dom";
 import SideBar from "./components/SideBar";
 import ImageDropZone from "./components/ImageDropZone";
 import {
@@ -11,11 +12,11 @@ import {
   RECOMMENDED_TAGS,
 } from "../../../constants/addBlog.js";
 import { authHeaders } from "../../../constants/api.js";
+import { updateBlog } from "../../services/blogsApi.js";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const AUTOSAVE_KEY = "blog-draft-autosave";
 
-const INITIAL_FIELDS = {
+const EMPTY = {
   title: "",
   description: "",
   content: "",
@@ -28,11 +29,9 @@ const INITIAL_FIELDS = {
 
 function useForm(initial) {
   const [fields, setFields] = useState(initial);
-  const set = useCallback((key, value) => {
-    setFields((prev) => ({ ...prev, [key]: value }));
-  }, []);
-  const reset = useCallback(() => setFields(initial), [initial]);
-  return { fields, set, reset, setFields };
+  const set = useCallback((key, value) =>
+    setFields((prev) => ({ ...prev, [key]: value })), []);
+  return { fields, set, setFields };
 }
 
 const inputCls =
@@ -41,74 +40,63 @@ const inputCls =
 const selectCls =
   "w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-gray-400 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100";
 
-export default function AddBlog() {
-  const { fields, set, reset, setFields } = useForm(INITIAL_FIELDS);
+export default function EditBlog() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { fields, set, setFields } = useForm(EMPTY);
+  const [isFetching, setIsFetching] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [tagInput, setTagInput] = useState("");
   const [contentTab, setContentTab] = useState("write");
   const tagInputRef = useRef(null);
-  const autoSaveTimerRef = useRef(null);
 
-  // Restore autosave on mount
+  // Load existing blog
   useEffect(() => {
-    const saved = localStorage.getItem(AUTOSAVE_KEY);
-    if (!saved) return;
-    try {
-      const parsed = JSON.parse(saved);
-      if (parsed.title || parsed.content) {
-        setFields((prev) => ({
-          ...prev,
-          title: parsed.title || prev.title,
-          description: parsed.description || prev.description,
-          content: parsed.content || prev.content,
-          tags: parsed.tags || prev.tags,
-          category: parsed.category || prev.category,
-          difficulty: parsed.difficulty || prev.difficulty,
-        }));
-        toast("Draft restored from auto-save", { icon: "💾", duration: 3000 });
+    const load = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/blogs/id/${id}`, {
+          headers: authHeaders(),
+        });
+        const data = await res.json();
+        if (!data.success) throw new Error("Not found");
+        const b = data.data;
+        setFields({
+          title: b.title ?? "",
+          description: b.description ?? "",
+          content: b.content ?? "",
+          tags: Array.isArray(b.tags) ? b.tags : [],
+          category: b.category ?? "",
+          difficulty: b.difficulty ?? "",
+          cover: null,
+          preview: b.coverImage ?? null,
+        });
+      } catch {
+        toast.error("Could not load blog");
+        navigate("/my-profile/my-blogs");
+      } finally {
+        setIsFetching(false);
       }
-    } catch { /* non-fatal */ }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
+    load();
+  }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Auto-save to localStorage whenever text fields change
-  useEffect(() => {
-    clearTimeout(autoSaveTimerRef.current);
-    autoSaveTimerRef.current = setTimeout(() => {
-      if (!fields.title && !fields.content) return;
-      localStorage.setItem(
-        AUTOSAVE_KEY,
-        JSON.stringify({
-          title: fields.title,
-          description: fields.description,
-          content: fields.content,
-          tags: fields.tags,
-          category: fields.category,
-          difficulty: fields.difficulty,
-        })
-      );
-    }, 1500);
-    return () => clearTimeout(autoSaveTimerRef.current);
-  }, [fields.title, fields.description, fields.content, fields.tags, fields.category, fields.difficulty]);
-
-  const wordCount = useMemo(() => {
-    return fields.content.trim().split(/\s+/).filter(Boolean).length;
-  }, [fields.content]);
-
+  const wordCount = useMemo(
+    () => fields.content.trim().split(/\s+/).filter(Boolean).length,
+    [fields.content]
+  );
   const readTime = useMemo(() => Math.max(1, Math.ceil(wordCount / 200)), [wordCount]);
 
   const suggestedTags = useMemo(() => {
-    const text =
-      `${fields.title} ${fields.description} ${fields.content}`.toLowerCase();
+    const text = `${fields.title} ${fields.description} ${fields.content}`.toLowerCase();
     return RECOMMENDED_TAGS.filter(
-      (tag) => text.includes(tag.toLowerCase()) && !fields.tags.includes(tag),
+      (tag) => text.includes(tag.toLowerCase()) && !fields.tags.includes(tag)
     ).slice(0, 8);
   }, [fields.title, fields.description, fields.content, fields.tags]);
 
   const addTag = (tag) => {
     const clean = tag.trim();
-    if (clean && !fields.tags.includes(clean) && fields.tags.length < 10) {
+    if (clean && !fields.tags.includes(clean) && fields.tags.length < 10)
       set("tags", [...fields.tags, clean]);
-    }
   };
 
   const removeTag = (tag) =>
@@ -141,22 +129,26 @@ export default function AddBlog() {
       formData.append("status", status);
       if (fields.cover) formData.append("cover", fields.cover);
 
-      const res = await fetch(`${API_BASE_URL}/blogs`, {
-        method: "POST",
-        headers: authHeaders(),
-        body: formData,
-      });
-
-      if (!res.ok) throw new Error("Failed");
-      localStorage.removeItem(AUTOSAVE_KEY);
-      toast.success(status === "draft" ? "Draft saved" : "Blog published!");
-      if (status === "published") reset();
+      await updateBlog(id, formData);
+      toast.success(status === "draft" ? "Draft updated" : "Blog published!");
+      navigate("/my-profile/my-blogs");
     } catch {
       toast.error("Something went wrong");
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  if (isFetching) {
+    return (
+      <div className="flex min-h-screen">
+        <SideBar />
+        <div className="flex flex-1 items-center justify-center">
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-fuchsia-500 border-t-transparent" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -167,7 +159,7 @@ export default function AddBlog() {
         <div className="sticky top-0 z-10 flex items-center justify-between bg-gray-50 px-6 py-1.5 dark:border-gray-800 dark:bg-gray-950">
           <div>
             <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 lg:text-2xl">
-              New Post
+              Edit Post
             </h1>
             <p className="text-xs text-gray-400">
               {readTime} min read · {wordCount} words
@@ -237,7 +229,7 @@ export default function AddBlog() {
                   Content <span className="text-red-400">*</span>
                   <span className="ml-1 font-normal text-gray-400">(Markdown supported)</span>
                 </label>
-                <div className="flex rounded-lg border border-gray-200 overflow-hidden dark:border-gray-700">
+                <div className="flex overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
                   <button
                     type="button"
                     onClick={() => setContentTab("write")}
@@ -280,7 +272,9 @@ export default function AddBlog() {
                       <ReactMarkdown>{fields.content}</ReactMarkdown>
                     </div>
                   ) : (
-                    <p className="text-sm text-gray-400 italic">Nothing to preview yet. Switch to Write tab and add some content.</p>
+                    <p className="text-sm italic text-gray-400">
+                      Nothing to preview yet.
+                    </p>
                   )}
                 </div>
               )}
@@ -289,7 +283,6 @@ export default function AddBlog() {
 
           {/* Sidebar */}
           <div className="flex w-full flex-col gap-5 lg:w-72 lg:shrink-0">
-            {/* Cover image */}
             <div>
               <label className="mb-1 block text-xs font-medium text-gray-500 dark:text-gray-400">
                 Cover Image
@@ -305,7 +298,6 @@ export default function AddBlog() {
               />
             </div>
 
-            {/* Category */}
             <div>
               <label className="mb-1 block text-xs font-medium text-gray-500 dark:text-gray-400">
                 Category
@@ -317,14 +309,11 @@ export default function AddBlog() {
               >
                 <option value="">Select category</option>
                 {CATEGORIES.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
-                  </option>
+                  <option key={cat} value={cat}>{cat}</option>
                 ))}
               </select>
             </div>
 
-            {/* Difficulty */}
             <div>
               <label className="mb-1 block text-xs font-medium text-gray-500 dark:text-gray-400">
                 Difficulty
@@ -347,15 +336,12 @@ export default function AddBlog() {
               </div>
             </div>
 
-            {/* Tags */}
             <div>
               <div className="mb-1 flex items-center justify-between">
                 <label className="text-xs font-medium text-gray-500 dark:text-gray-400">
                   Tags
                 </label>
-                <span className="text-xs text-gray-400">
-                  {fields.tags.length}/10
-                </span>
+                <span className="text-xs text-gray-400">{fields.tags.length}/10</span>
               </div>
 
               <div
@@ -370,10 +356,7 @@ export default function AddBlog() {
                     #{tag}
                     <button
                       type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        removeTag(tag);
-                      }}
+                      onClick={(e) => { e.stopPropagation(); removeTag(tag); }}
                       className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 cursor-pointer"
                     >
                       ×
@@ -390,9 +373,7 @@ export default function AddBlog() {
                   className="min-w-[60px] flex-1 bg-transparent text-xs text-gray-900 outline-none placeholder:text-gray-400 dark:text-gray-100 dark:placeholder:text-gray-600"
                 />
               </div>
-              <p className="mt-1 text-[10px] text-gray-400">
-                Press Enter or comma to add
-              </p>
+              <p className="mt-1 text-[10px] text-gray-400">Press Enter or comma to add</p>
 
               {suggestedTags.length > 0 && (
                 <div className="mt-2">

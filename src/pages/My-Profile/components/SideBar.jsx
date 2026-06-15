@@ -7,18 +7,18 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useThemeStore from "../../../stores/useThemeStore.js";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-import { LogOut } from "lucide-react";
+import { LogOut, Sun, Moon } from "lucide-react";
 import useProfileStore from "@/stores/useProfileStore.js";
-export default function SideBar() {
-  const { user, stats, isLoading, fetchProfile } =
-    useProfileStore();
 
+export default function SideBar() {
+  const { user, stats, isLoading, fetchProfile } = useProfileStore();
   const { theme } = useThemeStore();
   const isDarkMode = theme === "dark";
   const navigate = useNavigate();
   const location = useLocation();
   const { logout } = useAuthStore();
   const [openImage, setOpenImage] = useState(false);
+
   const fullName =
     `${user?.firstName ?? ""} ${user?.lastName ?? ""}`.trim() || "Name Surname";
   const email = user?.email ?? "example@.com";
@@ -29,7 +29,7 @@ export default function SideBar() {
       const request = await fetch(`${API_BASE_URL}/log-out`, {
         method: "DELETE",
         headers: { "content-type": "application/json" },
-        credentials: "include", // sending cookie
+        credentials: "include",
       });
       let response = await request.json();
       if (request.ok) {
@@ -46,21 +46,20 @@ export default function SideBar() {
     }
   };
 
-
   useEffect(() => {
     if (!user) fetchProfile();
-  }, [fetchProfile]);
+  }, [fetchProfile]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
-      <aside className="flex min-h-screen w-10 flex-col overflow-hidden border-r border-gray-100 bg-white transition-all duration-300 dark:border-gray-800 dark:bg-gray-950 lg:w-56 lg:sticky lg:top-0">
-        <div className="py-3  border-b  border-gray-100 dark:border-gray-800 px-0  lg:px-3">
+      <aside className="flex min-h-screen w-10 flex-col overflow-hidden border-r border-gray-800 bg-gray-950 transition-all duration-300 lg:w-56 lg:sticky lg:top-0">
+        <div className="py-3 border-b border-gray-100 dark:border-gray-800 px-0 lg:px-3">
           <div className="flex items-center justify-center gap-3 mx-auto">
             <button
               onClick={() => {
                 if (avatarSrc) setOpenImage(true);
               }}
-              className={isLoading ? "cursor-default" : "cursor-pointer"}
+              className={`relative shrink-0 ${isLoading ? "cursor-default" : "cursor-pointer"}`}
               disabled={isLoading}
             >
               {isLoading ? (
@@ -77,7 +76,10 @@ export default function SideBar() {
                   {user?.lastName?.[0]?.toUpperCase()}
                 </div>
               )}
+              {/* Online status dot */}
+              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-green-500 border-2 border-gray-950" />
             </button>
+
             <div className="hidden lg:block min-w-0 overflow-hidden">
               {isLoading ? (
                 <div className="space-y-1">
@@ -109,6 +111,7 @@ export default function SideBar() {
             </div>
           </div>
         </div>
+
         {openImage && (
           <div
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
@@ -118,14 +121,12 @@ export default function SideBar() {
               src={avatarSrc}
               alt="Profile"
               className="max-w-[70vw] max-h-[70vh] rounded-2xl transition duration-200 scale-100"
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
+              onClick={(e) => e.stopPropagation()}
             />
           </div>
         )}
 
-        <nav className="flex min-h-0 flex-1  flex-col  mt-2 lg:mt-0 gap-3 lg:gap-0 py-0 lg:px-2 lg:py-2">
+        <nav className="flex min-h-0 flex-1 flex-col mt-2 lg:mt-0 gap-3 lg:gap-0 py-0 lg:px-2 lg:py-2">
           {sidebarArr.map((group) => (
             <div
               key={group.section}
@@ -134,7 +135,6 @@ export default function SideBar() {
               <p className="hidden px-2 py-0 text-[9px] uppercase tracking-wider text-gray-400 font-semibold dark:text-gray-400 lg:block lg:py-0.5">
                 {group.section}
               </p>
-
               {group.items.map((item) => (
                 <NavLink
                   key={`${item.to}-${item.label}`}
@@ -146,9 +146,9 @@ export default function SideBar() {
                         location.pathname,
                       );
                       const active = isActive || isAliasActive;
-                      return `flex w-10 items-center justify-center gap-0 rounded-none py-0 px-0 text-gray-700 transition-colors lg:hover:bg-purple-100 dark:text-gray-100 lg:dark:hover:bg-fuchsia-950/30  lg:mx-auto lg:w-full lg:justify-start lg:gap-2 lg:rounded-lg lg:py-2 lg:px-3 ${
+                      return `flex w-10 items-center justify-center gap-0 rounded-none py-0 px-0 text-gray-700 transition-colors lg:hover:bg-purple-100 dark:text-gray-100 lg:dark:hover:bg-fuchsia-950/30 lg:mx-auto lg:w-full lg:justify-start lg:gap-2 lg:rounded-lg lg:py-2 lg:px-3 ${
                         active
-                          ? "lg:bg-purple-50 text-purple-600 lg:dark:bg-fuchsia-950/30 dark:text-purple-600 "
+                          ? "lg:bg-purple-50 text-purple-600 lg:dark:bg-fuchsia-950/30 dark:text-purple-600"
                           : ""
                       }`;
                     })()
@@ -162,24 +162,27 @@ export default function SideBar() {
           ))}
         </nav>
 
-        <div
-          onClick={() => {
-            handleLogOut();
-          }}
-          className=" mt-auto flex items-center justify-center
-    w-10 py-2
-    text-gray-100 cursor-pointer transition-colors
+        <div className="mt-auto flex flex-col lg:mx-2 lg:mb-2">
+          {/* Theme toggle */}
+          <div className="flex items-center justify-center w-10 py-2 lg:mb-2 opacity-30 cursor-not-allowed lg:w-auto lg:justify-between lg:px-3 lg:rounded-lg">
+            <p className="hidden text-[14px] font-medium text-gray-100 dark:text-gray-100 lg:block">
+              {isDarkMode ? "Light mode" : "Dark mode"}
+            </p>
+            {isDarkMode ? (
+              <Sun size={16} className="text-gray-100" />
+            ) : (
+              <Moon size={16} className="text-gray-100" />
+            )}
+          </div>
 
-    hover:bg-red-500/20
-
-    lg:mx-2 lg:w-auto lg:justify-between
-    lg:px-3 lg:rounded-lg
-    lg:bg-fuchsia-950/30 lg:hover:bg-red-600"
-        >
-          <p className="hidden text-[14px] text-sx font-medium lg:block">
-            Logout
-          </p>
-          <LogOut size={16} />
+          {/* Logout */}
+          <div
+            onClick={handleLogOut}
+            className="flex items-center justify-center w-10 py-2 text-gray-100 cursor-pointer transition-colors hover:bg-red-500/20 lg:w-auto lg:justify-between lg:px-3 lg:rounded-lg lg:bg-fuchsia-950/30 lg:hover:bg-red-600"
+          >
+            <p className="hidden text-[14px] font-medium lg:block">Logout</p>
+            <LogOut size={16} />
+          </div>
         </div>
       </aside>
     </>

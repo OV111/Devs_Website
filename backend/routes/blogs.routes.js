@@ -9,6 +9,9 @@ import {
   getFavourites,
   getSavedIds,
   getLikedIds,
+  updateBlog,
+  getMyBlogs,
+  deleteBlog,
 } from "../controllers/blogController.js";
 import {
   getComments,
@@ -282,8 +285,11 @@ router.post("/", authenticate, createBlog);
 router.get("/favourites", authenticate, getFavourites);
 router.get("/saved-ids", authenticate, getSavedIds);
 router.get("/liked-ids", authenticate, getLikedIds);
+router.get("/my-blogs", authenticate, getMyBlogs);
 router.get("/id/:id", getBlogById);
 router.get("/user/:userId", getUserBlogs);
+router.put("/:id", authenticate, updateBlog);
+router.delete("/:id", authenticate, deleteBlog);
 router.post("/:id/like", authenticate, toggleLike);
 router.get("/:id/comments", getComments);
 router.post("/:id/comments", authenticate, postComment);

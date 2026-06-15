@@ -76,6 +76,8 @@ const MyProfile = () => {
             alt="Banner"
             className="w-full h-40 sm:h-56 object-cover"
           />
+          <div className="absolute inset-x-0 top-0 h-16 bg-linear-to-b from-gray-950 to-transparent pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-20 bg-linear-to-t from-gray-950 to-transparent pointer-events-none" />
           <div className="absolute -bottom-10 sm:-bottom-13 lg:-bottom-14 left-14 sm:left-16 lg:left-10 -translate-x-1/2 lg:translate-x-0 z-1">
             <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden border-3 border-white dark:border-gray-900 shadow-sm">
               {stats?.profileImage ? (
@@ -162,10 +164,7 @@ const MyProfile = () => {
             {/* ACTIVITY */}
             <div>
               <SectionHeader title="activity · last 12 months" right={`${TOTAL_CONTRIBUTIONS} contributions`} />
-              <div
-                className="px-4 py-4 rounded-sm overflow-x-auto"
-                style={{ border: "1px solid #1a1a1a", backgroundColor: "#0d0d0d" }}
-              >
+              <div className="px-4 py-4 rounded-sm overflow-x-auto border border-gray-800">
                 <div className="flex gap-[3px]">
                   {ACTIVITY_GRID.map((week, wi) => (
                     <div key={wi} className="flex flex-col gap-[3px]">
@@ -274,18 +273,15 @@ const MyProfile = () => {
             {/* DEVSCOIN */}
             <div>
               <SectionHeader title="devscoin" />
-              <div
-                className="px-4 py-4 rounded-sm"
-                style={{ border: "1px solid #2d1b4e", backgroundColor: "#0f0b1a" }}
-              >
+              <div className="px-4 py-4 rounded-sm border border-gray-800">
                 {/* Balance */}
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-xl font-bold" style={{ color: ACCENT }}>◈</span>
                   <div>
-                    <p className="text-[10px]" style={{ color: "#444" }}>balance</p>
+                    <p className="text-[10px] text-gray-600">balance</p>
                     <p className="text-lg font-bold leading-tight" style={{ color: ACCENT }}>
                       {DEVSCOIN_BALANCE.toLocaleString()}
-                      <span className="text-[11px] font-normal ml-1" style={{ color: "#555" }}>DC</span>
+                      <span className="text-[11px] font-normal ml-1 text-gray-600">DC</span>
                     </p>
                   </div>
                 </div>
@@ -295,8 +291,8 @@ const MyProfile = () => {
                     { label: "earned", value: `+${DEVSCOIN_TXN.filter(t => t.type === "earn").reduce((s, t) => s + t.amount, 0)}`, color: "#4ade80" },
                     { label: "spent",  value: `−${DEVSCOIN_TXN.filter(t => t.type === "spend").reduce((s, t) => s + t.amount, 0)}`, color: "#f87171" },
                   ].map(({ label, value, color }) => (
-                    <div key={label} className="flex-1 px-2 py-1.5 rounded-sm text-center" style={{ backgroundColor: "#111", border: "1px solid #1a1a1a" }}>
-                      <p className="text-[9px]" style={{ color: "#444" }}>{label}</p>
+                    <div key={label} className="flex-1 px-2 py-1.5 rounded-sm text-center border border-gray-800">
+                      <p className="text-[9px] text-gray-600">{label}</p>
                       <p className="text-[12px] font-semibold" style={{ color }}>{value}</p>
                     </div>
                   ))}
@@ -305,7 +301,7 @@ const MyProfile = () => {
                 <div className="space-y-1.5">
                   {DEVSCOIN_TXN.slice(0, 3).map((txn, i) => (
                     <div key={i} className="flex items-center justify-between text-[11px]">
-                      <span className="truncate mr-2" style={{ color: "#555" }}>{txn.reason}</span>
+                      <span className="truncate mr-2 text-gray-500">{txn.reason}</span>
                       <span className="shrink-0 font-semibold tabular-nums" style={{ color: txn.type === "earn" ? "#4ade80" : "#f87171" }}>
                         {txn.type === "earn" ? "+" : "−"}{txn.amount}
                       </span>
@@ -316,20 +312,17 @@ const MyProfile = () => {
             </div>
 
             {/* FOR HIRING */}
-            <div
-              className="px-4 py-4 rounded-sm"
-              style={{ border: `1px solid #2d1b4e`, backgroundColor: "#0f0b1a" }}
-            >
+            <div className="px-4 py-4 rounded-sm border border-gray-800">
               <p className="text-[11px] font-bold tracking-widest mb-2" style={{ color: ACCENT }}>
                 // FOR HIRING
               </p>
-              <p className="text-[11px] mb-4" style={{ color: "#555" }}>
+              <p className="text-[11px] mb-4 text-gray-600">
                 Every score is verified by DevsWebs. Capstones are agent-reviewed. Nothing on this profile is
                 self-reported.
               </p>
               <button
-                className="w-full text-[12px] py-2 rounded-sm transition-opacity hover:opacity-80"
-                style={{ border: `1px solid ${ACCENT}`, color: ACCENT, backgroundColor: "transparent" }}
+                className="w-full text-[12px] py-2 rounded-sm transition-opacity hover:opacity-80 border"
+                style={{ borderColor: ACCENT, color: ACCENT }}
               >
                 contact about hiring →
               </button>

@@ -12,6 +12,9 @@ import {
   getFavouritesService,
   getSavedIdsService,
   getLikedIdsService,
+  updateBlogService,
+  getUserAllBlogsService,
+  deleteBlogService,
 } from "../services/blogService.js";
 
 export const createBlog = async (req, res) => {
@@ -167,6 +170,73 @@ export const toggleFavourite = async (req, res) => {
     res.json({ success: true, ...result });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+export const updateBlog = async (req, res) => {
+  const busboy = Busboy({ headers: req.headers });
+  let body = {};
+  let fileUploadPromise = null;
+
+  busboy.on("field", (name, value) => { body[name] = value; });
+  busboy.on("file", (name, file, info) => {
+    const { filename } = info;
+    if (!filename) { file.resume(); return; }
+    fileUploadPromise = uploadImage(file, "blogs");
+  });
+
+  busboy.on("finish", async () => {
+    try {
+      const { id } = req.params;
+      if (!ObjectId.isValid(id))
+        return res.status(400).json({ success: false, message: "Invalid blog id" });
+
+      const db = req.app.locals.db;
+      let coverImage = null;
+      if (fileUploadPromise) coverImage = await fileUploadPromise;
+
+      const blog = await updateBlogService(db, id, req.user._id, body, {
+        path: coverImage?.url ?? null,
+      });
+      res.json({ success: true, data: blog });
+    } catch (err) {
+      const status =
+        err.message === "Forbidden" ? 403 :
+        err.message === "Blog not found" ? 404 : 500;
+      res.status(status).json({ success: false, message: err.message });
+    }
+  });
+
+  busboy.on("error", (err) => {
+    res.status(400).json({ success: false, message: err.message });
+  });
+
+  req.pipe(busboy);
+};
+
+export const getMyBlogs = async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const blogs = await getUserAllBlogsService(db, req.user._id);
+    res.json({ success: true, data: blogs });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+export const deleteBlog = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!ObjectId.isValid(id))
+      return res.status(400).json({ success: false, message: "Invalid blog id" });
+    const db = req.app.locals.db;
+    await deleteBlogService(db, id, req.user._id);
+    res.json({ success: true });
+  } catch (err) {
+    const status =
+      err.message === "Forbidden" ? 403 :
+      err.message === "Blog not found" ? 404 : 500;
+    res.status(status).json({ success: false, message: err.message });
   }
 };
 

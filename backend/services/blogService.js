@@ -318,6 +318,73 @@ export const toggleFavouriteService = async (db, blogId, userId) => {
   }
 };
 
+export const updateBlogService = async (db, blogId, userId, body, file) => {
+  const blogs = db.collection("blogs");
+  const id = new ObjectId(blogId);
+  const uid = userId instanceof ObjectId ? userId : new ObjectId(String(userId));
+
+  const existing = await blogs.findOne({ _id: id });
+  if (!existing) throw new Error("Blog not found");
+  if (existing.author.toString() !== uid.toString()) throw new Error("Forbidden");
+
+  let parsedTags = existing.tags;
+  if (body.tags !== undefined) {
+    try {
+      parsedTags = Array.isArray(body.tags) ? body.tags : JSON.parse(body.tags || "[]");
+    } catch { parsedTags = []; }
+  }
+
+  const content = body.content ?? existing.content;
+  const words = content.trim().split(/\s+/).filter(Boolean).length;
+
+  let slug = existing.slug;
+  if (body.title && body.title !== existing.title) {
+    const baseSlug = body.title.toLowerCase().trim().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
+    slug = baseSlug;
+    let counter = 1;
+    while (await blogs.findOne({ slug, _id: { $ne: id } })) {
+      slug = `${baseSlug}-${counter++}`;
+    }
+  }
+
+  const setFields = {
+    title: body.title ?? existing.title,
+    slug,
+    description: body.description ?? existing.description,
+    content,
+    tags: parsedTags,
+    category: body.category ?? existing.category,
+    difficulty: body.difficulty ?? existing.difficulty,
+    status: body.status ?? existing.status,
+    readTime: Math.max(1, Math.ceil(words / 200)),
+    wordCount: words,
+    updatedAt: new Date(),
+  };
+  if (file?.path) setFields.coverImage = file.path;
+
+  await blogs.updateOne({ _id: id }, { $set: setFields });
+  return { ...existing, ...setFields, _id: id };
+};
+
+export const getUserAllBlogsService = async (db, userId) => {
+  const blogsCollection = db.collection("blogs");
+  const uid = userId instanceof ObjectId ? userId : new ObjectId(String(userId));
+  return blogsCollection.find({ author: uid }).sort({ createdAt: -1 }).toArray();
+};
+
+export const deleteBlogService = async (db, blogId, userId) => {
+  const blogs = db.collection("blogs");
+  const id = new ObjectId(blogId);
+  const uid = userId instanceof ObjectId ? userId : new ObjectId(String(userId));
+
+  const existing = await blogs.findOne({ _id: id });
+  if (!existing) throw new Error("Blog not found");
+  if (existing.author.toString() !== uid.toString()) throw new Error("Forbidden");
+
+  await blogs.deleteOne({ _id: id });
+  return { deleted: true };
+};
+
 export const getFavouritesService = async (db, userId) => {
   const favourites = db.collection("favouriteBlogs");
   const uid = new ObjectId(userId);
