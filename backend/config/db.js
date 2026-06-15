@@ -19,11 +19,7 @@ const connectDB = async () => {
     return db;
   } catch (err) {
     console.error("MongoDB connection error", err);
-    return {
-      code: 500,
-      message: "Failed to Connect DB",
-      err: err,
-    };
+    throw err;
   }
 };
 // let x = await connectDB()

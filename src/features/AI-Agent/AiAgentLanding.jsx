@@ -140,9 +140,15 @@ export default function AiAgentLanding() {
                           key={item.label}
                           className="w-full flex items-center rounded-lg gap-3 px-3 py-2.5 text-[14px] text-white hover:bg-white/8 transition-colors cursor-pointer"
                         >
-                          <ItemIcon size={17} strokeWidth={1.5} className="shrink-0 text-white/60" />
+                          <ItemIcon
+                            size={17}
+                            strokeWidth={1.5}
+                            className="shrink-0 text-white/60"
+                          />
                           <span className="flex-1 text-left">{item.label}</span>
-                          {item.arrow && <ChevronRight size={14} className="text-white/30" />}
+                          {item.arrow && (
+                            <ChevronRight size={14} className="text-white/30" />
+                          )}
                         </button>
                       );
                     })}

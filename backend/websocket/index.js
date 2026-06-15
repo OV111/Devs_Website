@@ -1,5 +1,5 @@
 import { WebSocketServer } from "ws";
-import { joinRoom, loadLastMessages, sendMessage } from "./chatHandler.js";
+import { joinRoom, loadLastMessages, sendMessage, removeFromRooms } from "./chatHandler.js";
 import { verifyToken } from "../utils/jwtToken.js";
 
 let wss;
@@ -36,7 +36,7 @@ export default function initWebSocketServer(server) {
       }
     });
     ws.on("close", () => {
-      console.log("connection closed");
+      removeFromRooms(ws);
     });
   });
 }

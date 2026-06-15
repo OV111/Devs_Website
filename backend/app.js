@@ -13,6 +13,9 @@ import searchRoutes from "./routes/search.routes.js";
 import accountRoutes from "./routes/account.routes.js";
 import blogRoutes from "./routes/blogs.routes.js";
 import libraryRoutes from "./routes/library.routes.js";
+import aiAgentRoutes from "./routes/aiAgent.routes.js";
+import roadmapRoutes from "./routes/roadmap.routes.js";
+import examRoutes from "./routes/exam.routes.js";
 import { notFound } from "./middleware/notFound.js";
 
 export function createApp(db) {
@@ -51,7 +54,9 @@ export function createApp(db) {
   app.use(userRoutes);
   app.use("/search", searchRoutes);
   app.use(accountRoutes);
-
+  app.use("/api/ai-agent", aiAgentRoutes);
+  app.use("/api/roadmaps", roadmapRoutes);
+  app.use("/api/exams", examRoutes);
 
   app.use(notFound)
   return app;

@@ -29,21 +29,18 @@ export const joinRoom = async (ws, data) => {
       await roomCollection.insertOne({
         _id: roomId.toString(),
         members: [receiverId, senderId],
-        type: "direct", // for future will be added to group | channel
-        createdBy: "", // this also about channel/group-owner | creator
+        type: "direct",
+        createdBy: "",
         createdAt: new Date(),
         updatedAt: new Date(),
       });
     } else {
-      // Keep membership in sync, but do not update updatedAt on room open.
-      await roomCollection.updateOne(
-        { _id: roomId.toString() },
-        {
-          $set: {
-            members: [receiverId, senderId],
-          },
-        },
-      );
+      // verify the sender is actually a member of this room
+      if (!roomCollExisting.members.includes(senderId.toString())) {
+        ws.send(JSON.stringify({ type: "error", message: "Access denied" }));
+        return;
+      }
+      // never overwrite members — the DB is the source of truth
     }
   } catch (err) {
     console.log(err);
@@ -129,7 +126,14 @@ export const sendMessage = async (ws, data) => {
   }
 };
 
-const loadMessages = async (roomId, limitNum = 50, cursor = null) => {
+export const removeFromRooms = (ws) => {
+  for (const [roomId, sockets] of rooms.entries()) {
+    sockets.delete(ws);
+    if (sockets.size === 0) rooms.delete(roomId);
+  }
+};
+
+const loadMessages = async (roomId, limitNum = 50) => {
   let db = await connectDB();
   const messagesCollection = db.collection("messages");
   if (!roomId.trim()) {
