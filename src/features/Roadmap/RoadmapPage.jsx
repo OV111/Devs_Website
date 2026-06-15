@@ -6,6 +6,7 @@ import RoadmapTree from "./components/RoadmapTree";
 import useRoadmapStore from "../../stores/useRoadmapStore";
 import FloatingLoad from "./components/FloatingLoad";
 import TrackOnboardingPanel from "./components/TrackOnboardingPanel";
+import RoadmapSearch from "./components/RoadmapSearch";
 
 export default function RoadmapPage() {
   const { selectedCategory, selectedTrack } = useRoadmapStore();
@@ -43,6 +44,8 @@ export default function RoadmapPage() {
           layer.
         </p>
       </Motion.div>
+
+      <RoadmapSearch />
 
       <CategoryBar />
 

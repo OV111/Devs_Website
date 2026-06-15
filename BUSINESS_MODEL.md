@@ -72,9 +72,9 @@ A company that hires 5 junior developers and puts them all on the Backend path h
 
 ---
 
-### Employer Access — $299/month (future phase)
+### Employer Access — $299/month (future phase, Phase 13)
 
-A read-only employer dashboard to search and filter verified DevsFlow profiles.
+A company-facing portal with separate login. Companies get their own accounts, their own dashboard, and access to a searchable pool of verified developers. This is not a job board — it is a talent intelligence layer built on top of real, system-verified progression data.
 
 **Search filters:**
 - Completed paths (e.g. "show me everyone who finished the Backend Developer path")
@@ -86,8 +86,22 @@ A read-only employer dashboard to search and filter verified DevsFlow profiles.
 **Why this is the revenue ceiling:**
 A single engineering hire costs a company $15,000–$30,000 in recruiting fees. Charging $299/month for verified access to a pool of developers who have provably earned their skills is an easy sale. The profile is not a claim — it is a record. Every layer passed, every exam score, every capstone reviewed by an AI agent and approved. That is a different product from LinkedIn or a job board.
 
+**Company portal tiers:**
+
+| Tier | Price | What It Includes |
+|---|---|---|
+| Employer Access | $299/month | Search verified profiles, view full progression + exam data, contact opted-in developers |
+| Featured Company | $599/month | All above + company profile visible to developers, "We're hiring" badge on relevant path pages |
+| Placement Partner | Custom | Dedicated sourcing, bulk access, ATS integration (Greenhouse, Lever) |
+
+**Developer-first design constraint:**
+Developers opt in to being discoverable (off by default). Companies can only contact developers who have opted in. Developers see which companies viewed their profile. This is non-negotiable — if developers feel the platform exposes them without consent, they leave, and the supply side collapses.
+
+**Separate authentication:**
+Companies log in via a completely separate portal and auth flow. Company accounts are never mixed with developer accounts at any layer — different collections, different JWT claims, different middleware. This is an architectural decision that must be made before Phase 13 begins, not during it.
+
 **When to build it:**
-Not at launch. The employer tier only has value when there are enough verified profiles to make the search worth opening. Target building this after 2,000–3,000 Pro users have completed at least one full path.
+Not at launch. Not until 500+ developers have completed at least one full path and have verified public profiles. The employer product has zero value without supply. Build the supply first.
 
 ---
 
@@ -95,10 +109,11 @@ Not at launch. The employer tier only has value when there are enough verified p
 
 | Tier | Price | Who It's For | Key Value |
 |---|---|---|---|
-| Free | $0 | Students, curious developers | Community, first 2 roadmap layers |
-| Pro | $15/month | Developers actively learning | AI agent, full roadmap, certificates |
-| Teams | $60/seat/month | Companies onboarding devs | Progress tracking, reports, bulk certs |
-| Employer Access | $299/month | Hiring managers, recruiters | Search verified developer profiles |
+| Free | $0 | Students, curious developers | Community, first 2 roadmap layers, basic awards |
+| Pro | $15/month | Developers actively learning | AI agent, full roadmap, certificates, all awards |
+| Teams | $60/seat/month | Companies onboarding devs | Progress tracking, reports, bulk certs, awards dashboard |
+| Employer Access | $299/month | Hiring managers, recruiters | Search verified developer profiles + awards history |
+| Featured Company | $599/month | Active hiring companies | All above + visibility to developers on platform |
 
 ---
 
@@ -183,12 +198,15 @@ Heavy users of the AI agent could cost $10–15/month in API calls alone, erasin
 1. Developer signs up free, uses the community, starts the roadmap
 2. Hits the paywall at Layer 3, converts to Pro
 3. Progresses through the roadmap with AI guidance
-4. Completes a path — earns a certificate and a verified public profile
-5. Shares the profile on LinkedIn or GitHub bio
-6. An employer or recruiter sees it, asks "what is DevsFlow?"
-7. Other developers see the profile, sign up for free, and the loop restarts
+4. Earns awards along the way — shares them on LinkedIn/X as they happen
+5. Completes a path — earns a certificate, a verified public profile, and path completion award
+6. Shares the profile on LinkedIn or GitHub bio
+7. An employer or recruiter sees it, searches the Company Portal, finds more developers like them
+8. Other developers see the profile or the award share, sign up for free, and the loop restarts
 
-**The public profile is the distribution channel.** This is why Phase 9 (Public Progress Profiles) is strategically critical even though it is not a direct revenue feature. Every verified profile is a piece of marketing that never expires.
+**The public profile is the distribution channel. Awards are the trigger that makes developers share before they finish.**
+
+Every award is a natural share moment — "I just earned the Perfectionist award on DevsFlow (100/100 on the Node.js exam)." That post reaches developers and hiring managers simultaneously. It is the most efficient marketing surface in the product. This is why Phase 9 (Public Progress Profiles) is strategically critical even though it is not a direct revenue feature. Every verified profile is a piece of marketing that never expires.
 
 ---
 
