@@ -22,6 +22,8 @@ const UserProfile = lazy(() => import("./pages/Users/UserProfile"));
 const Followers = lazy(() => import("./pages/My-Profile/Followers"));
 const Favorites = lazy(() => import("./pages/My-Profile/Favorites"));
 const AddBlog = lazy(() => import("./pages/My-Profile/AddBlog"));
+const EditBlog = lazy(() => import("./pages/My-Profile/EditBlog"));
+const MyBlogs = lazy(() => import("./pages/My-Profile/MyBlogs"));
 const Chats = lazy(() => import("./pages/My-Profile/chat/Chats"));
 const Notifications = lazy(() => import("./pages/My-Profile/Notifications"));
 const Settings = lazy(() => import("./pages/My-Profile/Settings"));
@@ -31,6 +33,7 @@ const ConnectedAccounts = lazy(
 
 const Blogs = lazy(() => import("./features/Blogs/Blogs"));
 const RoadmapPage = lazy(() => import("./features/Roadmap/RoadmapPage"));
+const ExamPage = lazy(() => import("./features/Roadmap/ExamPage"));
 const LibsPage = lazy(() => import("./features/CodingLibs/LibsPage"));
 const BookDetailPage = lazy(() => import("./features/CodingLibs/BookDetailPage"));
 const CodingChallenges = lazy(
@@ -97,6 +100,7 @@ const router = createBrowserRouter([
         children: [
           { path: "blogs", element: <Blogs /> },
           { path: "roadmaps", element: <RoadmapPage /> },
+          { path: "roadmaps/exam/:layerId", element: <ExamPage /> },
           { path: "libs", element: <LibsPage /> },
           { path: "libs/:id", element: <BookDetailPage /> },
           { path: "coding-challenges", element: <CodingChallenges /> },
@@ -113,6 +117,8 @@ const router = createBrowserRouter([
               { path: "followers", element: <Followers /> },
               { path: "following", element: <Followers /> },
               { path: "add-blog", element: <AddBlog /> },
+              { path: "edit-blog/:id", element: <EditBlog /> },
+              { path: "my-blogs", element: <MyBlogs /> },
               { path: "chats", element: <Chats /> },
               { path: "notifications", element: <Notifications /> },
               { path: "favourites", element: <Favorites /> },

@@ -2,12 +2,8 @@ import { Worker } from "bullmq";
 import { ObjectId } from "mongodb";
 import connectDB from "../config/db.js";
 import { getWss } from "../websocket/index.js";
+import { redisConnection } from "../config/redis.js";
 import process from "process";
-
-const connection = {
-  host: process.env.REDIS_HOST || "127.0.0.1",
-  port: Number(process.env.REDIS_PORT) || 6379,
-};
 
 // REDIS_ENABLED=false disables the worker without removing code
 const REDIS_ENABLED = process.env.REDIS_ENABLED !== "false";
@@ -55,7 +51,7 @@ const NotificationWorker = REDIS_ENABLED ? new Worker(
       throw err;
     }
   },
-  { connection },
+  { connection: redisConnection },
 ) : null;
 
 if (NotificationWorker) {
