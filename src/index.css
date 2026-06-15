@@ -9,6 +9,15 @@
 
 @import "tailwindcss";
 
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.thin-scrollbar { scrollbar-width: thin; scrollbar-color: #2a2a2a transparent; }
+.thin-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+.thin-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.thin-scrollbar::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 3px; }
+.thin-scrollbar::-webkit-scrollbar-thumb:hover { background: #3a3a3a; }
+
 body {
     font-family: "DM Sans", system-ui, sans-serif;
 

@@ -232,10 +232,10 @@ function SubmitPanel() {
   const allDone = done === REQUIREMENTS.length;
 
   return (
-    <Motion.div {...FadeUp(0.06)} className="rounded-2xl border border-neutral-800 bg-neutral-900/30 flex flex-col divide-y divide-neutral-800">
+    <Motion.div {...FadeUp(0.06)} className="rounded-2xl border border-neutral-800 bg-neutral-900/30 flex flex-col divide-y  divide-neutral-800">
 
       {/* header */}
-      <div className="p-6 flex items-center justify-between gap-4 flex-wrap">
+      <div className="p-6 flex items-center justify-between gap-4  flex-wrap">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-lg border border-neutral-700 bg-neutral-800 flex items-center justify-center shrink-0">
             <Send size={15} className="text-purple-400" />
@@ -553,7 +553,7 @@ export default function CapstonePage() {
     <div className="min-h-screen text-white">
 
       {/* ── Top: hero + reviewing card ── */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-14 pb-0">
+      <div className="max-w-7xl mx-auto px-6  lg:px-12 pt-14 pb-0">
         <Motion.div {...FadeUp(0)} className="flex items-center gap-1.5 text-[11px] text-neutral-600 mb-8 font-mono">
           <span>capstone</span><ChevronRight size={11} /><span>backend</span><ChevronRight size={11} />
           <span className="text-neutral-300 font-semibold">submission</span>
@@ -601,7 +601,7 @@ export default function CapstonePage() {
         </div>
       </div>
 
-      <div className="border-t border-neutral-800/60 mt-12" />
+      <div className="border-t  border-neutral-800/60 mt-30" />
 
       {/* ── Assignment + On Approval ── */}
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-10">

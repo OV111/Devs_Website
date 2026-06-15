@@ -4,6 +4,7 @@ import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import GroupOffOutlinedIcon from "@mui/icons-material/GroupOffOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LinkIcon from "@mui/icons-material/Link";
@@ -43,8 +44,14 @@ export const sidebarArr = [
     items: [
       {
         to: "/my-profile/add-blog",
+        activePaths: ["/my-profile/add-blog"],
         icon: <EditOutlinedIcon sx={{ fontSize: 22, color: "currentColor" }} />,
         label: "Add Blog",
+      },
+      {
+        to: "/my-profile/my-blogs",
+        icon: <ArticleOutlinedIcon sx={{ fontSize: 22, color: "currentColor" }} />,
+        label: "My Blogs",
       },
       {
         to: "/my-profile/chats",

@@ -23,38 +23,6 @@ export const DAILY = {
 
 export const CHALLENGES = [
   {
-    id: "P_03_09", path: "backend", layer: "3", level: "easy",
-    type: "CODE",
-    title: "Implement an async error wrapper for Express",
-    desc: "Build a helper that wraps async route handlers so rejections reach Express's error middleware. Five tests including arity preservation.",
-    tags: ["async", "errors", "middleware"],
-    time: "24m", solves: "612", xp: 45, hot: true, done: false,
-  },
-  {
-    id: "P_03_07", path: "backend", layer: "3", level: "easy",
-    type: "CODE",
-    title: "Token-bucket rate-limit middleware",
-    desc: "Implement an in-memory token bucket that allows N requests per minute per IP. Handle the refill arithmetic correctly under burst load.",
-    tags: ["middleware", "concurrency"],
-    time: "26m", solves: "2.4k", xp: 40, hot: false, done: true,
-  },
-  {
-    id: "P_03_08", path: "backend", layer: "3", level: "med",
-    type: "DEBUG",
-    title: "Why is my middleware order breaking auth?",
-    desc: "A broken Express app crashes on protected routes. Find the off-by-one bug in middleware ordering. Subtle — don't trust the comments.",
-    tags: ["middleware", "debug"],
-    time: "33m", solves: "1.1k", xp: 50, hot: false, done: false,
-  },
-  {
-    id: "P_03_10", path: "backend", layer: "3", level: "hard",
-    type: "DESIGN",
-    title: "Design a versioned REST API for a blog",
-    desc: "Write the resource model, URL scheme, and versioning strategy. AI-graded for clarity, consistency, and how you handle breaking changes.",
-    tags: ["rest", "design", "ai-graded"],
-    time: "45m", solves: "612", xp: 60, hot: false, done: false,
-  },
-  {
     id: "P_03_11", path: "backend", layer: "3", level: "med",
     type: "BUILD",
     title: "Streaming file-upload endpoint",

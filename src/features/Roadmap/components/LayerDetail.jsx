@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { X, Clock, BookOpen, Code2, Layers, Check, ChevronRight } from "lucide-react";
 import useRoadmapStore from "@/stores/useRoadmapStore";
 
@@ -13,7 +14,8 @@ const resourceTypeColor = {
 };
 
 const LayerDetail = () => {
-  const { activeLayer, closePanel, layerProgress, setLayerStatus } = useRoadmapStore();
+  const navigate = useNavigate();
+  const { activeLayer, closePanel, layerProgress, setLayerStatus, selectedCategory } = useRoadmapStore();
 
   if (!activeLayer) return null;
 
@@ -154,9 +156,10 @@ const LayerDetail = () => {
           </button>
 
           <button
+            onClick={() => { closePanel(); navigate(`/roadmaps/exam/${activeLayer.id}?path=${selectedCategory?.id ?? "backend"}`); }}
             className="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white transition-colors duration-200"
           >
-            Enter layer
+            Take Exam
             <ChevronRight size={14} />
           </button>
         </div>

@@ -214,7 +214,18 @@ export default function CodingChallenges() {
   const [activeTopic, setActiveTopic] = useState("all topics");
   const [searchQuery, setSearchQuery] = useState("");
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [_filterVisible, setFilterVisible] = useState(false);  
   const searchInputRef = useRef(null);
+  const heroRef = useRef(null);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const threshold = heroRef.current ? heroRef.current.offsetHeight : 300;
+      setFilterVisible(window.scrollY > threshold);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const openMenu = (name) => setOpenDropdown(name);
   const closeMenu = () => setOpenDropdown(null);
@@ -241,7 +252,7 @@ export default function CodingChallenges() {
   });
 
   return (
-    <div className="min-h-screen text-[#e5e5e5] relative">
+    <div className="min-h-screen text-[#e5e5e5] relative mt-8">
       <div
         className="pointer-events-none absolute top-0 left-0 right-0 h-[400px] z-0"
         style={{
@@ -259,8 +270,8 @@ export default function CodingChallenges() {
         }}
       />
 
-      <div className="px-6 sm:px-10 lg:px-14 pt-10 pb-8">
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 items-start">
+      <div ref={heroRef} className="px-6 sm:px-10 lg:px-14 pt-10 pb-8 lg:mb-14">
+        <div className="flex flex-col mr-10 lg:flex-row items-start">
           <div className="flex-1 min-w-0">
             <Motion.div {...FadeUp(0)} className="mb-6">
               <EyebrowBadge label="v0.1" text="problems · path-specific · agent-guided" color="purple" />
@@ -374,7 +385,7 @@ export default function CodingChallenges() {
         </div>
       </div>
 
-      <div className="px-6 sm:px-10 lg:px-14 py-5 flex items-center gap-3">
+      <div className="sticky top-[var(--navbar-h)] z-20 px-6 sm:px-10 lg:px-14 py-3 flex items-center gap-3 overflow-x-auto">
         <FilterGroup
           label="Path"
           options={["backend", "frontend", "ai/ml", "devops", "all"]}

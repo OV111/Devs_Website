@@ -137,10 +137,11 @@ export default function LibsPage() {
   return (
     <div className="flex bg-gray-950 text-[#e5e5e5]">
       <div
-        className={`shrink-0 overflow-y-auto transition-[width] duration-200 ease-linear ${sidebarOpen ? "border-r border-gray-800" : ""}`}
+        className={`no-scrollbar shrink-0 min-h-screen lg:sticky lg:top-0 lg:max-h-screen transition-[width] duration-200 ease-linear ${sidebarOpen ? "border-r border-gray-800" : ""}`}
         style={{
           width: sidebarOpen ? 220 : 0,
-          overflow: sidebarOpen ? "auto" : "hidden",
+          overflowY: sidebarOpen ? "auto" : "hidden",
+          overflowX: "hidden",
         }}
         aria-hidden={!sidebarOpen}
         inert={!sidebarOpen ? "" : undefined}
@@ -154,7 +155,7 @@ export default function LibsPage() {
         />
       </div>
 
-      <main className="flex-1 px-8 py-7 overflow-y-auto min-w-0">
+      <main className="flex-1 px-8 py-7 overflow-y-auto min-w-0" style={{ scrollbarWidth: "none" }}>
         <div className="grid items-start justify-between gap-6 mb-10">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">

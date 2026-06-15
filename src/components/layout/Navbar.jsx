@@ -13,6 +13,7 @@ import {
 } from "../../../constants/Navbar";
 import useProfileStore from "@/stores/useProfileStore";
 import GradientText from "@/components/effects/GradientText";
+import CatPawButton from "@/components/effects/CatPawButton";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -246,15 +247,12 @@ const Navbar = () => {
                 Capstone
               </NavLink>
             </li>
-            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 hover:text-cyan-300 transition">
-              <NavLink
-                to="ai-agent"
+            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 transition">
+              <CatPawButton
                 className={({ isActive }) =>
                   isActive ? "text-emerald-500" : "text-cyan-500/80"
                 }
-              >
-                AI-Agent
-              </NavLink>
+              />
             </li>
           </>
         ) : (
@@ -493,7 +491,9 @@ const Navbar = () => {
             <>
               <MobileNavLink to="libs">Coding Libs</MobileNavLink>
               <MobileNavLink to="coding-challenges">Challenges</MobileNavLink>
-              <MobileNavLink to="ai-agent">AI-Agent</MobileNavLink>
+              <li className="font-medium text-base transition">
+                <CatPawButton />
+              </li>
               <MobileNavLink to="capstone">Capstone</MobileNavLink>
 
               {MOBILE_EXTRA_LINKS.map(({ label, to }) => (

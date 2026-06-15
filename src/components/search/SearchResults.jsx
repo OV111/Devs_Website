@@ -89,7 +89,7 @@ export default function SearchResults({ query = "", onSelect, boundaryRef }) {
   
   return (
     <div className="absolute top-[calc(100%+8px)] w-full max-w-[400px] z-50 overflow-hidden rounded-2xl border border-white/10 bg-[#0d0d18]/95 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.7)] backdrop-blur-2xl ring-1 ring-white/5">
-      <div className="max-h-80 overflow-y-auto overflow-x-hidden scrollbar-thin">
+      <div className="max-h-80 overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:w-[7px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-thumb]:rounded-full">
         {isLoading ? (
           <div className="space-y-0.5 p-2">
             <SkeletonRow />

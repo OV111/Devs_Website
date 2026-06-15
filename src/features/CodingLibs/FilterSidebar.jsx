@@ -30,7 +30,7 @@ export default function FilterSidebar({
   const isApiTab = activeTab !== "libraries";
 
   return (
-    <div className="space-y-7 px-5 py-7" style={{ minWidth: 184 }}>
+    <div className="space-y-7 px-5 py-7 min-h-screen" style={{ minWidth: 184 }}>
       {/* Category filter */}
       {isLibrariesTab && (
         <div>
