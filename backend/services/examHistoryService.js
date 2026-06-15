@@ -4,7 +4,7 @@ export const getExamHistory = async (db, userId, limit = 10) => {
   const collection = db.collection("examHistory");
   return collection
     .find({ userId: new ObjectId(userId) })
-    .sort({ passedAt: -1 })
+    .sort({ takenAt: -1 })
     .limit(limit)
     .toArray();
 };
@@ -13,7 +13,7 @@ export const getLastExam = async (db, userId) => {
   const collection = db.collection("examHistory");
   return collection.findOne(
     { userId: new ObjectId(userId) },
-    { sort: { passedAt: -1 } },
+    { sort: { takenAt: -1 } },
   );
 };
 
@@ -24,6 +24,7 @@ export const saveExamResult = async (
     path,
     layer,
     score,
+    passed,
     totalQuestions,
     correctAnswers,
     missedTopics,
@@ -36,11 +37,12 @@ export const saveExamResult = async (
     path,
     layer,
     score,
+    passed: Boolean(passed),
     totalQuestions,
     correctAnswers,
     missedTopics: missedTopics || [],
     timeTakenSecs,
-    passedAt: new Date(),
+    takenAt: new Date(),
   };
   const result = await collection.insertOne(doc);
   return { ...doc, _id: result.insertedId };
