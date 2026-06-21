@@ -1,6 +1,15 @@
 import Busboy from "busboy";
 import { ObjectId } from "mongodb";
 import { uploadImage } from "../utils/uploadImage.js";
+
+const ALLOWED_IMAGE_MIME_TYPES = new Set([
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/gif",
+  "image/webp",
+]);
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5 MB
 import {
   createBlogService,
   getBlogsService,
@@ -18,25 +27,40 @@ import {
 } from "../services/blogService.js";
 
 export const createBlog = async (req, res) => {
-  const busboy = Busboy({ headers: req.headers });
+  const busboy = Busboy({ headers: req.headers, limits: { fileSize: MAX_IMAGE_SIZE } });
 
   let body = {};
   let fileUploadPromise = null;
+  let fileTooLarge = false;
+  let invalidMime = false;
 
   busboy.on("field", (name, value) => {
     body[name] = value;
   });
 
   busboy.on("file", (name, file, info) => {
-    const { filename } = info;
+    const { filename, mimeType } = info;
     if (!filename) {
       file.resume();
       return;
     }
+    if (!ALLOWED_IMAGE_MIME_TYPES.has(mimeType)) {
+      invalidMime = true;
+      file.resume();
+      return;
+    }
+    file.on("limit", () => {
+      fileTooLarge = true;
+      file.resume();
+    });
     fileUploadPromise = uploadImage(file, "blogs");
   });
 
   busboy.on("finish", async () => {
+    if (invalidMime)
+      return res.status(400).json({ success: false, message: "Invalid file type. Allowed: JPEG, PNG, GIF, WebP." });
+    if (fileTooLarge)
+      return res.status(400).json({ success: false, message: "Image exceeds the 5 MB size limit." });
     try {
       const db = req.app.locals.db;
       const user = req.user;
@@ -174,18 +198,30 @@ export const toggleFavourite = async (req, res) => {
 };
 
 export const updateBlog = async (req, res) => {
-  const busboy = Busboy({ headers: req.headers });
+  const busboy = Busboy({ headers: req.headers, limits: { fileSize: MAX_IMAGE_SIZE } });
   let body = {};
   let fileUploadPromise = null;
+  let fileTooLarge = false;
+  let invalidMime = false;
 
   busboy.on("field", (name, value) => { body[name] = value; });
   busboy.on("file", (name, file, info) => {
-    const { filename } = info;
+    const { filename, mimeType } = info;
     if (!filename) { file.resume(); return; }
+    if (!ALLOWED_IMAGE_MIME_TYPES.has(mimeType)) {
+      invalidMime = true;
+      file.resume();
+      return;
+    }
+    file.on("limit", () => { fileTooLarge = true; file.resume(); });
     fileUploadPromise = uploadImage(file, "blogs");
   });
 
   busboy.on("finish", async () => {
+    if (invalidMime)
+      return res.status(400).json({ success: false, message: "Invalid file type. Allowed: JPEG, PNG, GIF, WebP." });
+    if (fileTooLarge)
+      return res.status(400).json({ success: false, message: "Image exceeds the 5 MB size limit." });
     try {
       const { id } = req.params;
       if (!ObjectId.isValid(id))

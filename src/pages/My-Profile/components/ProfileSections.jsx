@@ -4,6 +4,7 @@ import {
   DEVSCOIN_TXN,
   COIN_EARN_WAYS,
 } from "./profileData";
+import CvFileCard from "./CvFileCard";
 
 export function SectionHeader({ title, right }) {
   return (
@@ -191,6 +192,44 @@ export function DevsCoinSection() {
           ))}
         </div>
       </div>
+    </div>
+  );
+}
+
+export function ForHiringPanel({ editable = false, cvUrl = null, onCvUpload }) {
+  return (
+    <div className="px-4 py-4 rounded-sm border border-gray-800">
+      <p className="text-[11px] font-bold tracking-widest uppercase mb-1 text-gray-600">
+        for hiring
+      </p>
+      <p className="text-[11px] mb-4 text-gray-600">
+        Every score is verified by DevsWebs. Capstones are agent-reviewed. Nothing on this profile is
+        self-reported.
+      </p>
+
+      <p className="text-[10px] font-bold tracking-widest uppercase mb-2 text-gray-600">cv</p>
+      <CvFileCard editable={editable} cvUrl={cvUrl} onUpload={onCvUpload ?? (() => {})} />
+
+      {!editable && cvUrl && (
+        <a
+          href={cvUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-3 flex w-full items-center justify-center text-[12px] py-2 rounded-sm transition-opacity hover:opacity-80 border"
+          style={{ borderColor: ACCENT, color: ACCENT }}
+        >
+          ↗ download cv
+        </a>
+      )}
+
+      {editable && (
+        <button
+          className="mt-3 w-full text-[12px] py-2 rounded-sm transition-opacity hover:opacity-80 border"
+          style={{ borderColor: ACCENT, color: ACCENT }}
+        >
+          contact about hiring →
+        </button>
+      )}
     </div>
   );
 }

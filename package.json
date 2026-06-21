@@ -43,6 +43,7 @@
     "@react-oauth/google": "^0.13.5",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.11",
+    "@xyflow/react": "^12.11.0",
     "bcrypt": "^6.0.0",
     "bullmq": "^5.71.1",
     "busboy": "^1.6.0",

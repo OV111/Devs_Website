@@ -34,14 +34,16 @@ export const followUserService = async (db, userName, currentUserId) => {
   const targetUser = await users.findOne({ username: userName });
   if (!targetUser) throw { status: 404, message: "User Not Found!" };
 
-  const existing = await follows.findOne({ followerId: currentUserId, followingId: targetUser._id });
-  if (existing) return;
-
-  await follows.insertOne({
-    followerId: currentUserId,
-    followingId: targetUser._id,
-    createdAt: new Date(),
-  });
+  try {
+    await follows.insertOne({
+      followerId: currentUserId,
+      followingId: targetUser._id,
+      createdAt: new Date(),
+    });
+  } catch (err) {
+    if (err.code === 11000) return; // already following — idempotent
+    throw err;
+  }
 
   notificationQueue.add("follow", {
     type: "follow",

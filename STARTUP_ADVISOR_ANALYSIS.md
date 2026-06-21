@@ -1,4 +1,4 @@
-# DevsFlow — Startup Advisor Analysis
+# DevsWebs — Startup Advisor Analysis
 
 > **Classification:** Founder-Only Strategic Document
 > **Date:** 2026-06-11
@@ -27,7 +27,7 @@
 The AI agent — your most compelling feature — is Phase 3. The verified credential employers actually trust is Phase 9+. You could spend 18 months building before you have something a user would pay for and an employer would care about. Most startups do not die from bad ideas. They die from building the right thing for the wrong user, or building the right thing 18 months after someone else did.
 
 **2. The credential has no market yet.**
-The entire long-term revenue thesis — employer access tier at $299/month, placement fees, verified credentials — depends on employers trusting a DevsFlow profile. Right now no employer has heard of DevsFlow. You are betting that you can build supply (verified developers) before demand (employers who care), and do it alone. LinkedIn Skill Badges, HackerRank, and Triplebyte all tried this. Most pivoted or failed.
+The entire long-term revenue thesis — employer access tier at $299/month, placement fees, verified credentials — depends on employers trusting a DevsWebs profile. Right now no employer has heard of DevsWebs. You are betting that you can build supply (verified developers) before demand (employers who care), and do it alone. LinkedIn Skill Badges, HackerRank, and Triplebyte all tried this. Most pivoted or failed.
 
 **3. Content is the real moat — and you have none.**
 Eight paths × multiple layers × curated content = hundreds of hours of curriculum design. That is not engineering work. You are a solo engineer. The engineering is partially built. The content is entirely absent. This is the actual blocker, not the code.
@@ -69,7 +69,7 @@ None of these have all four of your pillars together. But each is better on one 
 1. Self-taught developers will pay $15/month for a structured system when free alternatives exist
 2. Developers will accept a 90/100 pass threshold and not quit in frustration
 3. The AI agent will be genuinely good enough to justify $15/month on its own
-4. Employers will eventually trust a DevsFlow credential — without any employer-side sales
+4. Employers will eventually trust a DevsWebs credential — without any employer-side sales
 5. A solo engineer can build and maintain a quality curriculum for 8 paths while building all 12 phases
 6. Organic/community-driven growth reaches paying users before runway runs out
 
@@ -109,15 +109,15 @@ Secondary risk: timing. AI tutoring is hot right now. Khan Academy, Duolingo, Co
 
 ### Value Proposition (1 Sentence)
 
-> **DevsFlow tells you exactly what you don't know, forces you to prove you've learned it before moving on, and provides an AI mentor that guides you through the process — so you exit with a verified record employers can trust, not a certificate you bought.**
+> **DevsWebs tells you exactly what you don't know, forces you to prove you've learned it before moving on, and provides an AI mentor that guides you through the process — so you exit with a verified record employers can trust, not a certificate you bought.**
 
 ---
 
 ### What Makes This Different from Existing Solutions
 
-Everything else is content delivery. DevsFlow is the first platform where the **progression itself is the product**. You don't get to the next layer by watching a video. You get there by demonstrating mastery. That accountability mechanic, combined with a persistent AI mentor that knows your full history, is genuinely new.
+Everything else is content delivery. DevsWebs is the first platform where the **progression itself is the product**. You don't get to the next layer by watching a video. You get there by demonstrating mastery. That accountability mechanic, combined with a persistent AI mentor that knows your full history, is genuinely new.
 
-| Competitor | What They Do | DevsFlow's Edge |
+| Competitor | What They Do | DevsWebs's Edge |
 |---|---|---|
 | roadmap.sh | Static visual map | Gated path you earn by passing real exams |
 | Generic AI chatbots | Give answers | Personal agent with persistent memory of your journey |
@@ -255,10 +255,10 @@ Write *"Why I built a developer platform where you can't skip levels."* 1,000 wo
 ### Growth Hacks Specific to This Product
 
 **1. The public profile share is your viral loop.**
-Every developer who completes a layer shares a LinkedIn post: *"I just passed Layer 2 of the Backend Developer path on DevsFlow."* That post reaches every hiring manager and developer in their network. Build the share button before the profile is even complete.
+Every developer who completes a layer shares a LinkedIn post: *"I just passed Layer 2 of the Backend Developer path on DevsWebs."* That post reaches every hiring manager and developer in their network. Build the share button before the profile is even complete.
 
 **2. The exam failure story goes viral.**
-When a developer fails an exam, the AI gives them a specific breakdown. Screenshots of this get shared: *"DevsFlow just told me I don't actually understand HTTP caching. It was right."* Failure content converts better than success content.
+When a developer fails an exam, the AI gives them a specific breakdown. Screenshots of this get shared: *"DevsWebs just told me I don't actually understand HTTP caching. It was right."* Failure content converts better than success content.
 
 **3. Post your own journey.**
 You are building this platform. Go through your own Backend path as a user. Post every layer completion. Show what the AI taught you. This is not fake — it is you eating your own cooking in public.
@@ -275,13 +275,13 @@ The public progress profile. Every time someone passes a layer, they want extern
 
 ### Investor Pitch
 
-> 600M developers globally are actively learning, but 80% of online learning is passive content with no accountability. DevsFlow is the first platform where progression is gated — you must pass a real AI-generated exam to unlock the next layer, guided by a personal AI mentor that knows your entire history. We are building the verified credential layer the developer hiring market is missing. Current state: full community platform live, learning loop in final development, targeting 500 verified profiles before launching employer access. Business model: $15/month individual, $60/seat teams, $299/month employer access — 70%+ gross margins at scale. Solo founder, clean architecture, real differentiation, building in public.
+> 600M developers globally are actively learning, but 80% of online learning is passive content with no accountability. DevsWebs is the first platform where progression is gated — you must pass a real AI-generated exam to unlock the next layer, guided by a personal AI mentor that knows your entire history. We are building the verified credential layer the developer hiring market is missing. Current state: full community platform live, learning loop in final development, targeting 500 verified profiles before launching employer access. Business model: $15/month individual, $60/seat teams, $299/month employer access — 70%+ gross margins at scale. Solo founder, clean architecture, real differentiation, building in public.
 
 ---
 
 ### User-Facing Simple Explanation
 
-> DevsFlow is the learning platform that won't let you skip. You pick a path, study the material, and ask your personal AI mentor when you're stuck. When you're ready, you take an exam. If you pass, the next layer unlocks. If you fail, the AI tells you exactly what to go back and study. No random grinding. No passive content. Just a clear path from where you are to where you want to be — and proof you earned every step.
+> DevsWebs is the learning platform that won't let you skip. You pick a path, study the material, and ask your personal AI mentor when you're stuck. When you're ready, you take an exam. If you pass, the next layer unlocks. If you fail, the AI tells you exactly what to go back and study. No random grinding. No passive content. Just a clear path from where you are to where you want to be — and proof you earned every step.
 
 ---
 
@@ -291,13 +291,13 @@ The public progress profile. Every time someone passes a layer, they want extern
 
 **Sub-headline:** Pick a path. Study the layer. Pass the exam. Or don't move on.
 
-**Description:** DevsFlow is a gated roadmap with a personal AI mentor. Every layer is locked until you prove you understood the previous one. When you're done, your public profile shows exactly what you earned — not what you claim.
+**Description:** DevsWebs is a gated roadmap with a personal AI mentor. Every layer is locked until you prove you understood the previous one. When you're done, your public profile shows exactly what you earned — not what you claim.
 
 ---
 
 ### "Why Now" Argument
 
-AI is everywhere, but no one has used it to enforce accountability in learning — only to reduce effort. Every other platform uses AI to make it easier to get a certificate. DevsFlow uses AI to make the certificate actually mean something.
+AI is everywhere, but no one has used it to enforce accountability in learning — only to reduce effort. Every other platform uses AI to make it easier to get a certificate. DevsWebs uses AI to make the certificate actually mean something.
 
 The developer hiring market is broken. Companies cannot tell which junior developers are ready. Verified progression records solve a $15B recruiting problem. The AI infrastructure to build this at scale now exists and is affordable. The developer job market contraction means more people are actively upskilling than at any point in the last decade.
 
@@ -335,7 +335,7 @@ Instead of 8 paths, go all-in on Backend Developer only. Own that ICP completely
 The Teams tier ($60/seat, min 3 seats) is actually easier to sell than individual Pro. One engineering manager at a company hiring 3 junior developers signs a $180/month contract. That one sale equals 12 individual Pro subscriptions. You could flip the go-to-market entirely: direct outreach to engineering managers at companies known to hire junior developers. No SEO needed. No community building. Just 10 sales calls.
 
 **Pivot 3 — Become the exam layer for existing platforms.**
-The Odin Project has millions of users but no accountability layer. freeCodeCamp has 10M+ users but no verified credential mechanism. What if DevsFlow was the exam engine other platforms embed? B2B SaaS. No curriculum to write. No community to build. Just sell the gated exam + AI tutor infrastructure to platforms that already have the audience.
+The Odin Project has millions of users but no accountability layer. freeCodeCamp has 10M+ users but no verified credential mechanism. What if DevsWebs was the exam engine other platforms embed? B2B SaaS. No curriculum to write. No community to build. Just sell the gated exam + AI tutor infrastructure to platforms that already have the audience.
 
 ---
 
@@ -365,7 +365,7 @@ The curriculum does not exist. Quality content per layer, exam questions, librar
 
 ### The Honest Comparison
 
-| Factor | DevsFlow Today | What a Real Startup Needs |
+| Factor | DevsWebs Today | What a Real Startup Needs |
 |---|---|---|
 | Problem | ✅ Real and validated by market | ✅ |
 | Solution | 🔧 Partially built, core loop missing | Core loop working with real users |
@@ -393,7 +393,7 @@ Sell the platform directly to 3 companies as a developer onboarding tool at $500
 
 ### Final Verdict
 
-**DevsFlow can be a startup. It cannot be all of VISION.md right now.**
+**DevsWebs can be a startup. It cannot be all of VISION.md right now.**
 
 The idea deserves to exist. The execution risk is real. The path forward is simple: build the core loop in 7 days, get 50 real users through it, and let the data tell you which direction to go next.
 
@@ -402,9 +402,9 @@ The idea deserves to exist. The execution risk is real. The path forward is simp
 
 **The idea is not the risk. The scope is the risk.**
 
-The version of DevsFlow in VISION.md — 12 phases, 8 paths, AI agent, exam engine, capstone, employer access, platform intelligence — that is a Series A company. That requires a team, time, and capital.
+The version of DevsWebs in VISION.md — 12 phases, 8 paths, AI agent, exam engine, capstone, employer access, platform intelligence — that is a Series A company. That requires a team, time, and capital.
 
-The version of DevsFlow that is one path, three layers, a working AI agent, and a $15/month paywall — that is a bootstrapped startup one person can build. And that version, if it gets 200 paying users, is either self-sustaining or fundable.
+The version of DevsWebs that is one path, three layers, a working AI agent, and a $15/month paywall — that is a bootstrapped startup one person can build. And that version, if it gets 200 paying users, is either self-sustaining or fundable.
 
 **Build the loop. Get 50 users through it. Then decide if Phase 4 is worth building.**
 

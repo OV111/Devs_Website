@@ -170,22 +170,24 @@ const SubTopicNode = ({ title, side, children = [], isDone }) => {
   );
 };
 
-const SpineRow = memo(({ layer, index, isLast, isDone }) => {
+const SpineRow = memo(({ layer, index, isLast, isDone, isPrevDone }) => {
   const leftNodes  = useMemo(() => layer.sideLeft  ?? [], [layer.sideLeft]);
   const rightNodes = useMemo(() => layer.sideRight ?? [], [layer.sideRight]);
 
+  const NODE_GAP = 4;
+
   const leftPositions = useMemo(() => {
     let offset = 0;
-    return leftNodes.map((n) => { const h = getNodeH(n); const y = offset + h / 2; offset += h; return y; });
+    return leftNodes.map((n, i) => { const h = getNodeH(n); const y = offset + h / 2; offset += h + (i < leftNodes.length - 1 ? NODE_GAP : 0); return y; });
   }, [leftNodes]);
 
   const rightPositions = useMemo(() => {
     let offset = 0;
-    return rightNodes.map((n) => { const h = getNodeH(n); const y = offset + h / 2; offset += h; return y; });
+    return rightNodes.map((n, i) => { const h = getNodeH(n); const y = offset + h / 2; offset += h + (i < rightNodes.length - 1 ? NODE_GAP : 0); return y; });
   }, [rightNodes]);
 
-  const leftTotalH  = Math.max(leftNodes.reduce((s, n) => s + getNodeH(n), 0), NODE_H);
-  const rightTotalH = Math.max(rightNodes.reduce((s, n) => s + getNodeH(n), 0), NODE_H);
+  const leftTotalH  = Math.max(leftNodes.reduce((s, n, i) => s + getNodeH(n) + (i < leftNodes.length - 1 ? NODE_GAP : 0), 0), NODE_H);
+  const rightTotalH = Math.max(rightNodes.reduce((s, n, i) => s + getNodeH(n) + (i < rightNodes.length - 1 ? NODE_GAP : 0), 0), NODE_H);
   const leftCenterY  = leftTotalH  / 2;
   const rightCenterY = rightTotalH / 2;
 
@@ -194,17 +196,17 @@ const SpineRow = memo(({ layer, index, isLast, isDone }) => {
 
   return (
     <motion.div
-      className="relative flex items-center justify-center"
+      className="relative flex items-stretch justify-center"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: Math.min(index * 0.06, 0.35), ease: "easeOut" }}
     >
       {/* Left panel */}
       <div
-        className="shrink-0 flex items-center justify-end"
+        className="shrink-0 flex items-center justify-end self-center"
         style={{ width: SIDE_W, minHeight: NODE_H }}
       >
-        <div className="flex flex-col items-end" style={{ gap: 0 }}>
+        <div className="flex flex-col items-end" style={{ gap: NODE_GAP }}>
           {leftNodes.map((node) => (
             <div key={node.title} style={{ height: getNodeH(node), display: "flex", alignItems: "center" }}>
               <SubTopicNode
@@ -234,25 +236,39 @@ const SpineRow = memo(({ layer, index, isLast, isDone }) => {
       </div>
 
       {/* Center */}
-      <div style={{ width: 300 }} className="shrink-0">
-        <LayerNode layer={layer} index={index} resolvedStatus={isDone ? "done" : (layer.status ?? "locked")} />
-        {!isLast && (
-          <div className="flex justify-center">
+      <div style={{ width: 300 }} className="shrink-0 flex flex-col items-center">
+        {/* top spacer — always present to keep LayerNode centered; shows line if there's a previous layer */}
+        <div className="flex-1 flex justify-center" style={{ minHeight: 18 }}>
+          {index > 0 && (
             <div
-              className="w-px mt-1"
+              className="w-px h-full"
               style={{
-                height: 36,
+                background: isPrevDone ? "linear-gradient(to bottom, #7c3aed, #5b21b6)" : undefined,
+                borderLeft: !isPrevDone ? "1px dashed #333333" : undefined,
+              }}
+            />
+          )}
+        </div>
+
+        <LayerNode layer={layer} index={index} resolvedStatus={isDone ? "done" : (layer.status ?? "locked")} />
+
+        {/* bottom spacer — always present; shows line if there's a next layer */}
+        <div className="flex-1 flex justify-center" style={{ minHeight: 18 }}>
+          {!isLast && (
+            <div
+              className="w-px h-full"
+              style={{
                 background: isDone ? "linear-gradient(to bottom, #7c3aed, #5b21b6)" : undefined,
                 borderLeft: !isDone ? "1px dashed #333333" : undefined,
               }}
             />
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
       {/* Right panel */}
       <div
-        className="shrink-0 flex items-center justify-start"
+        className="shrink-0 flex items-center justify-start self-center"
         style={{ width: SIDE_W, minHeight: NODE_H }}
       >
         <svg width={MAIN_W} height={rightTotalH} className="shrink-0 overflow-visible" style={{ minHeight: NODE_H }}>
@@ -270,7 +286,7 @@ const SpineRow = memo(({ layer, index, isLast, isDone }) => {
           {rightNodes.length === 0 && <line x1="0" y1="30" x2={MAIN_W} y2="30" stroke="transparent" />}
         </svg>
 
-        <div className="flex flex-col items-start" style={{ gap: 0 }}>
+        <div className="flex flex-col items-start" style={{ gap: NODE_GAP }}>
           {rightNodes.map((node) => (
             <div key={node.title} style={{ height: getNodeH(node), display: "flex", alignItems: "center" }}>
               <SubTopicNode
@@ -421,7 +437,8 @@ const RoadmapTree = () => {
           </p>
         </div>
 
-        <div className="relative flex flex-col items-center gap-0 overflow-x-auto pb-10">
+        <div className="overflow-x-auto pb-10">
+        <div className="relative flex flex-col items-center gap-0" style={{ minWidth: "max-content" }}>
           {layers.map((layer, index) => (
             <SpineRow
               key={layer.id}
@@ -429,8 +446,10 @@ const RoadmapTree = () => {
               index={index}
               isLast={index === layers.length - 1}
               isDone={(layerProgress[layer.id] ?? layer.status) === "done"}
+              isPrevDone={index > 0 && (layerProgress[layers[index - 1].id] ?? layers[index - 1].status) === "done"}
             />
           ))}
+        </div>
         </div>
       </motion.div>
 

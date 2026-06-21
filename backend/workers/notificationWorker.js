@@ -4,6 +4,9 @@ import connectDB from "../config/db.js";
 import { getWss } from "../websocket/index.js";
 import { redisConnection } from "../config/redis.js";
 import process from "process";
+import dotenv from "dotenv";
+dotenv.config({ path: "./backend/.env.local" });
+dotenv.config({ path: "./backend/.env" });
 
 // REDIS_ENABLED=false disables the worker without removing code
 const REDIS_ENABLED = process.env.REDIS_ENABLED !== "false";

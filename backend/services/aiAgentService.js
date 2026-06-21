@@ -4,7 +4,7 @@ import { toolDefinitions, executeTool } from "../tools/agentTools.js";
 const MODEL = "llama-3.3-70b-versatile";
 const MAX_TOOL_ROUNDS = 5;
 
-const SYSTEM_PROMPT = `You are DevBot, an AI assistant for DevsFlow — a social platform built for developers.
+const SYSTEM_PROMPT = `You are DevBot, an AI assistant for DevsWebs — a social platform built for developers.
 You help users find posts, library resources, and developer profiles on the platform.
 Keep answers concise and developer-friendly. When referencing platform content, cite titles.`;
 

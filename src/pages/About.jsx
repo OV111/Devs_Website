@@ -116,11 +116,11 @@ const features = [
   {
     icon: "📝",
     title: "Exams",
-    desc: "Test your knowledge with topic-based exams curated by the community. Track your score, review mistakes, and level up your understanding across every specialisation.",
+    desc: "Test your knowledge with topic-based exams tied to your roadmap. Track your score, review missed topics, and let the AI agent guide what to study next.",
     gradient:
       "from-rose-500/10 to-pink-500/10 dark:from-rose-900/20 dark:to-pink-900/20",
     border: "border-rose-200 dark:border-rose-800/40",
-    badge: "Coming soon",
+    badge: "Available now",
   },
   {
     icon: "💻",
@@ -129,16 +129,16 @@ const features = [
     gradient:
       "from-cyan-500/10 to-sky-500/10 dark:from-cyan-900/20 dark:to-sky-900/20",
     border: "border-cyan-200 dark:border-cyan-800/40",
-    badge: "Coming soon",
+    badge: "Available now",
   },
   {
     icon: "🗺️",
     title: "Roadmaps",
-    desc: "Follow structured, community-built learning paths for every specialisation. Know exactly what to learn next and track your progress from beginner to expert.",
+    desc: "Follow structured learning paths for every specialisation. Know exactly what to learn next, track your progress layer by layer, and unlock the AI agent as you advance.",
     gradient:
       "from-lime-500/10 to-green-500/10 dark:from-lime-900/20 dark:to-green-900/20",
     border: "border-lime-200 dark:border-lime-800/40",
-    badge: "Coming soon",
+    badge: "Available now",
   },
 ];
 
@@ -179,6 +179,26 @@ const roadmap = [
     desc: "Instant messaging with mutual connections via WebSocket.",
   },
   {
+    done: true,
+    label: "Learning Roadmaps",
+    desc: "Structured paths for 15 specialisations with layer-by-layer progress tracking.",
+  },
+  {
+    done: true,
+    label: "Exams & Weak Spot Tracking",
+    desc: "Topic exams per roadmap layer, with automatic weak spot detection and AI-powered review.",
+  },
+  {
+    done: true,
+    label: "Coding Challenges",
+    desc: "In-browser coding problems with a challenge arena.",
+  },
+  {
+    done: true,
+    label: "AI Agent",
+    desc: "Personalised AI assistant that knows your progress, weak spots, and learning path.",
+  },
+  {
     done: false,
     label: "Code Playground",
     desc: "Run and share code snippets directly inside articles.",
@@ -198,7 +218,7 @@ const roadmap = [
 const socials = [
   {
     label: "GitHub",
-    handle: "@devsflow",
+    handle: "@devswebs",
     desc: "Star us, fork us, contribute.",
     href: "#",
     color: "from-gray-800 to-gray-600 dark:from-gray-700 dark:to-gray-500",
@@ -210,7 +230,7 @@ const socials = [
   },
   {
     label: "Twitter / X",
-    handle: "@devsflow_dev",
+    handle: "@devswebs_dev",
     desc: "Updates, tips and community highlights.",
     href: "#",
     color: "from-sky-500 to-blue-600 dark:from-sky-600 dark:to-blue-700",
@@ -375,7 +395,7 @@ const About = () => {
               >
                 <Link
                   to={`/categories/${cat.slug}`}
-                  className="flex flex-col items-center gap-2 p-4 rounded-2xl
+                  className="flex flex-col items-center justify-center gap-2 p-4 rounded-2xl h-24
                     bg-white/70 dark:bg-white/5
                     border border-fuchsia-100 dark:border-fuchsia-900/40
                     shadow-sm hover:shadow-md

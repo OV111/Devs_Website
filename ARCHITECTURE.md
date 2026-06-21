@@ -1,16 +1,16 @@
-# DevsFlow — Architecture Review
+# DevsWebs — Architecture Review
 
 > Last updated: 2026-06-11 — verified against actual codebase.
 
 ---
 
-## How to Explain DevsFlow
+## How to Explain DevsWebs
 
 ### What problem it solves and for whom
 
 Developer learning is fragmented. You follow a YouTube tutorial, read a Medium article, practice on LeetCode, check Stack Overflow — but nothing ties it together. You don't know when you're actually ready to move on, and there's no feedback loop telling you what you're weak at.
 
-DevsFlow solves this for self-taught developers and early-career engineers: it combines a structured roadmap (layered, with locked progression), an integrated exam engine that gates each layer, a curated resource library, a community blog, and an AI mentor that specifically targets your weak spots — in a single product. The core bet is that *gated, measurable progression* is more valuable than more content.
+DevsWebs solves this for self-taught developers and early-career engineers: it combines a structured roadmap (layered, with locked progression), an integrated exam engine that gates each layer, a curated resource library, a community blog, and an AI mentor that specifically targets your weak spots — in a single product. The core bet is that *gated, measurable progression* is more valuable than more content.
 
 ### How the architecture supports scale
 

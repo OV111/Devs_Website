@@ -3,7 +3,7 @@
 > **Classification:** Founder-Only Strategic Document
 > **Date:** 2026-06-03
 > **Prepared by:** Virtual C-Suite Advisory Board
-> **Project:** DevsFlow — AI-Integrated Developer Learning Platform
+> **Project:** DevsWebs — AI-Integrated Developer Learning Platform
 > **Codebase:** `C:\Users\Default\Documents\GitHub\main\Devs_Website`
 
 ---
@@ -71,15 +71,15 @@ This is critical. There is a trust gap between your two primary documents:
 
 ### Strategic Position Assessment
 
-**What DevsFlow is doing that no one else is:**
+**What DevsWebs is doing that no one else is:**
 
-| Competitor | What They Do | DevsFlow's Edge |
+| Competitor | What They Do | DevsWebs's Edge |
 |---|---|---|
 | roadmap.sh | Static visual map, no accountability | Gated layers — you must pass to progress |
 | LeetCode | Random algorithm grinding | Path-specific challenges tied to your actual learning layer |
 | Coursera / Udemy | Passive video content | Active learning with measurement and AI mentorship |
 | ChatGPT / Gemini | Generic AI chatbot | Per-user agent with persistent memory of your entire journey |
-| Khan Academy (Khanmigo) | AI tutoring for students | DevsFlow targets working developers, not students |
+| Khan Academy (Khanmigo) | AI tutoring for students | DevsWebs targets working developers, not students |
 
 The moat is not any single feature — it is the **combination**: gated roadmap + path-specific problems + per-user AI agent + verified public profile. Each piece alone is replicable. All four together, connected, is defensible.
 
@@ -443,7 +443,7 @@ Every design decision, every exam difficulty, every AI agent prompt — ask: "Wo
 
 ### The One-Sentence Positioning
 
-> **DevsFlow is the first learning platform that tells you exactly what you don't know, makes you prove you know it before moving on, and is with you when you get stuck at 2am.**
+> **DevsWebs is the first learning platform that tells you exactly what you don't know, makes you prove you know it before moving on, and is with you when you get stuck at 2am.**
 
 This is what you should be saying everywhere. It is not about the tech. It is about the user's felt experience.
 
@@ -473,7 +473,7 @@ Do not wait until the product is "ready." The build-in-public audience becomes y
 
 - r/learnprogramming (3.2M members) — post when the roadmap + one exam is live
 - r/webdev — post about the technical architecture
-- r/cscareerquestions — post when progress profiles are live ("here's what a verified DevsFlow profile looks like")
+- r/cscareerquestions — post when progress profiles are live ("here's what a verified DevsWebs profile looks like")
 
 **Do not post on Reddit before you have something real to show.** A "check out my learning platform" post with no working product gets downvoted and blocked. A "I built a gated learning roadmap with AI exams, here's how it works" post with a working demo gets traction.
 
@@ -721,7 +721,7 @@ The services are built. The UI shells exist. The missing piece is connection.
 Create a seeder script (`backend/seeders/roadmapSeeder.js`) that inserts:
 - 1 path: "Backend Developer"
 - 3 layers: "Programming Fundamentals", "How the Web Works", "Node.js Basics"
-- Each layer with: title, description, 3–5 content links (DevsFlow blog posts by category), topics list
+- Each layer with: title, description, 3–5 content links (DevsWebs blog posts by category), topics list
 
 ```bash
 node backend/seeders/roadmapSeeder.js

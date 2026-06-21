@@ -54,6 +54,36 @@ export const MOCK_BADGES = [
   { label: "PATH\nMASTER", color: "#555", bg: "#111", char: "M", earned: false },
 ];
 
+export const MOCK_CERTIFICATES = [
+  {
+    id: 1,
+    title: "Frontend Fundamentals",
+    issued: "Apr 2025",
+    score: "94 / 100",
+    color: "#9333ea",
+    bg: "#0f0b1a",
+    char: "FE",
+  },
+  {
+    id: 2,
+    title: "How the Web Works",
+    issued: "Apr 2025",
+    score: "92 / 100",
+    color: "#2dd4bf",
+    bg: "#001a1a",
+    char: "WW",
+  },
+  {
+    id: 3,
+    title: "Programming Fundamentals",
+    issued: "Mar 2025",
+    score: "96 / 100",
+    color: "#f59e0b",
+    bg: "#1a1000",
+    char: "PF",
+  },
+];
+
 export const GLANCE_STATS = [
   { label: "posts written", value: "12" },
   { label: "posts read", value: "128" },

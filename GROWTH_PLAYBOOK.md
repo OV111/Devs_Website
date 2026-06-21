@@ -1,4 +1,4 @@
-# DevsFlow — Growth Playbook
+# DevsWebs — Growth Playbook
 
 > **Classification:** Founder-Only Strategic Document
 > **Date:** 2026-06-11
@@ -181,7 +181,7 @@ The thing founders get wrong: they look for *scalable* channels before they have
 
 People use these words loosely. They are different disciplines with different timing:
 
-| Term | What It Means | DevsFlow Examples |
+| Term | What It Means | DevsWebs Examples |
 |---|---|---|
 | **Marketing** | Broad awareness — making people know and want the product | Build in public on X, Reddit story post, TikTok videos, SEO blog posts |
 | **Sales** | Direct 1-on-1 conversations to convert a specific person | DMing Reddit users who describe the problem, talking to engineering managers for the Teams tier |
@@ -193,7 +193,7 @@ People use these words loosely. They are different disciplines with different ti
 - **Sales** doesn't scale but works from day one (that's why the first 20 users come from DMs)
 - **Growth** only works once you *have* users (a share button with zero users shares nothing)
 
-### The Correct Sequence for DevsFlow
+### The Correct Sequence for DevsWebs
 
 ```
 SALES first        →  hand-recruit the first 20 users via DMs

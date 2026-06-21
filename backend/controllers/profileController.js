@@ -31,9 +31,13 @@ export const getProfile = async (req, res) => {
 
 export const updateLastActive = async (req, res) => {
   try {
-    const { id, lastActive } = req.body;
-    const result = await updateLastActiveService(req.app.locals.db, id, lastActive);
-    res.status(200).json({ message: "stat", result });
+    const token = req.headers.authorization?.split(" ")[1];
+    const verified = verifyToken(token);
+    if (!verified) return res.status(401).json({ message: "Unauthorized" });
+
+    const userId = new ObjectId(verified.id);
+    await updateLastActiveService(req.app.locals.db, userId, new Date());
+    res.status(200).json({ message: "Updated" });
   } catch (err) {
     res.status(500).json({ message: "Server Error", error: err.message });
   }
@@ -43,7 +47,7 @@ export const updateSettings = (req, res) => {
   const token = req.headers.authorization?.replace("Bearer ", "");
   if (!token) return res.status(401).json({ message: "Unauthorized: Invalid Token!" });
 
-  const bb = busboy({ headers: req.headers, limits: { fileSize: 5 * 1024 * 1024 } });
+  const bb = busboy({ headers: req.headers, limits: { fileSize: 10 * 1024 * 1024 } });
   const fields = {};
   const fileUploads = {};
   let fileTooLarge = false;
@@ -64,12 +68,15 @@ export const updateSettings = (req, res) => {
   bb.on("finish", async () => {
     if (fileTooLarge) return;
     try {
+      const verified = verifyToken(token);
+      if (!verified) return res.status(401).json({ message: "Unauthorized: Invalid Token!" });
+
       const resolved = {};
       for (const [key, promise] of Object.entries(fileUploads)) {
         resolved[key] = await promise;
       }
 
-      const userId = new ObjectId(verifyToken(token).id);
+      const userId = new ObjectId(verified.id);
       const result = await updateSettingsService(req.app.locals.db, userId, fields, resolved);
       res.status(200).json({ message: "Changes Saved", ...result });
     } catch (err) {

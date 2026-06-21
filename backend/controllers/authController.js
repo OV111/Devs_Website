@@ -10,6 +10,28 @@ import { OAuth2Client } from "google-auth-library";
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
+// In-memory CSRF nonce store for GitHub OAuth sign-in flow.
+// Use Redis in production for multi-instance deployments.
+const pendingOAuthNonces = new Map();
+const NONCE_TTL_MS = 10 * 60 * 1000; // 10 minutes
+
+const createOAuthNonce = () => {
+  const nonce = crypto.randomBytes(16).toString("hex");
+  pendingOAuthNonces.set(nonce, Date.now() + NONCE_TTL_MS);
+  return nonce;
+};
+
+const consumeOAuthNonce = (nonce) => {
+  if (!nonce) return false;
+  const expiresAt = pendingOAuthNonces.get(nonce);
+  if (!expiresAt || Date.now() > expiresAt) {
+    pendingOAuthNonces.delete(nonce);
+    return false;
+  }
+  pendingOAuthNonces.delete(nonce);
+  return true;
+};
+
 const sanitizeUsername = (value = "") =>
   value
     .toLowerCase()
@@ -189,7 +211,8 @@ const googleAuth = async (data) => {
 };
 
 const githubRedirect = (req, res) => {
-  const url = `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&scope=user:email`;
+  const nonce = createOAuthNonce();
+  const url = `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&scope=user:email&state=${nonce}`;
   res.redirect(url);
 };
 
@@ -263,23 +286,31 @@ const githubCallback = async (req, res) => {
     const users = db.collection("users");
     const usersStats = db.collection("usersStats");
 
-    // Link mode: state is a base64-encoded JWT from an already-logged-in user
+    // Link mode: state is a base64-encoded JWT from an already-logged-in user.
+    // Sign-in mode: state is a CSRF nonce created by githubRedirect.
     if (state) {
-      try {
-        const existingToken = Buffer.from(state, "base64").toString();
-        const verified = verifyToken(existingToken);
-        if (verified) {
-          await users.updateOne(
-            { _id: new ObjectId(verified.id) },
-            { $set: { githubId, githubLogin } },
-          );
-          return res.redirect(
-            `${process.env.FRONTEND_URL}/oauth-success?token=${existingToken}&linked=github`,
-          );
-        }
-      } catch {
-        // fall through to sign-in mode
+      // Check if it is a link-mode base64 JWT (link states are longer than 32 hex chars)
+      const decodedState = (() => { try { return Buffer.from(state, "base64").toString(); } catch { return null; } })();
+      const linkedToken = decodedState ? verifyToken(decodedState) : null;
+
+      if (linkedToken) {
+        // Link mode — no nonce validation needed; the JWT itself proves identity
+        await users.updateOne(
+          { _id: new ObjectId(linkedToken.id) },
+          { $set: { githubId, githubLogin } },
+        );
+        return res.redirect(
+          `${process.env.FRONTEND_URL}/oauth-success?token=${decodedState}&linked=github`,
+        );
       }
+
+      // Sign-in mode — state must be a valid CSRF nonce
+      if (!consumeOAuthNonce(state)) {
+        return res.redirect(`${process.env.FRONTEND_URL}/oauth-failure?reason=csrf`);
+      }
+    } else {
+      // No state at all — reject to prevent CSRF
+      return res.redirect(`${process.env.FRONTEND_URL}/oauth-failure?reason=csrf`);
     }
 
     // Sign-in mode

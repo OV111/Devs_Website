@@ -12,9 +12,11 @@ const QuickLinks = [
 ];
 const AuthLinks = [
   { title: "My Profile", href: "/my-profile" },
+  { title: "Blogs", href: "/blogs" },
   { title: "Roadmaps", href: "/roadmaps" },
   { title: "Coding Libs", href: "/libs" },
   { title: "Challenges", href: "/coding-challenges" },
+  { title: "Capstone", href: "/capstone" },
   { title: "About", href: "/about" },
   { title: "Contact", href: "/contact" },
   { title: "Privacy Policy", href: "/privacy" },

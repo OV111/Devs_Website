@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import process from 'process';
 
 test.describe('User Profile Page', () => {
   test('shows "User not found" for a non-existent username', async ({ page }) => {
@@ -26,7 +27,7 @@ test.describe('User Profile Page', () => {
 
   test('navbar is present on profile page', async ({ page }) => {
     await page.goto('/users/anyuser');
-    await expect(page.getByRole('link', { name: /devsflow/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /devswebs/i })).toBeVisible();
   });
 
   test('footer is present on profile page', async ({ page }) => {

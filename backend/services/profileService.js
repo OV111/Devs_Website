@@ -21,7 +21,7 @@ export const getProfileService = async (db, userId) => {
     { $set: { lastActive: new Date() } },
   );
 
-  const { password, ...userWithoutPassword } = user;
+  const { _password, ...userWithoutPassword } = user;
   return { userWithoutPassword, stats };
 };
 
@@ -51,6 +51,7 @@ export const updateSettingsService = async (db, userId, fields, files) => {
   if (fields.timezone !== undefined) statsUpdate.timezone = fields.timezone;
   if (files.profileImage) statsUpdate.profileImage = files.profileImage;
   if (files.bannerImage) statsUpdate.bannerImage = files.bannerImage;
+  if (files.cvFile) statsUpdate.cvUrl = files.cvFile;
 
   let updatedUser;
   if (Object.keys(userUpdate).length > 0) {

@@ -8,7 +8,7 @@ export const toolDefinitions = [
     type: "function",
     function: {
       name: "search_posts",
-      description: "Search community posts by keyword on DevsFlow. Use when the user asks about a topic and you want to surface relevant platform content.",
+      description: "Search community posts by keyword on DevsWebs. Use when the user asks about a topic and you want to surface relevant platform content.",
       parameters: {
         type: "object",
         properties: {
@@ -24,7 +24,7 @@ export const toolDefinitions = [
     type: "function",
     function: {
       name: "search_library",
-      description: "Search the DevsFlow learning library for books, docs, and guides. Use when the user needs resources to study a topic.",
+      description: "Search the DevsWebs learning library for books, docs, and guides. Use when the user needs resources to study a topic.",
       parameters: {
         type: "object",
         properties: {
@@ -39,7 +39,7 @@ export const toolDefinitions = [
     type: "function",
     function: {
       name: "get_user_profile",
-      description: "Look up a DevsFlow user's public profile by username.",
+      description: "Look up a DevsWebs user's public profile by username.",
       parameters: {
         type: "object",
         properties: {

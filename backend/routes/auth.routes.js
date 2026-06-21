@@ -1,4 +1,5 @@
 import { Router } from "express";
+import rateLimit from "express-rate-limit";
 import {
   signUp,
   login,
@@ -19,6 +20,32 @@ const LOGIN_MAX_ATTEMPTS = 5;
 const LOGIN_WINDOW_SECONDS = 15 * 60; // 15 minutes
 const SIGNUP_MAX_ATTEMPTS = 10;
 const SIGNUP_WINDOW_SECONDS = 60 * 60; // 1 hour
+
+// express-rate-limit acts as a guaranteed fallback when Redis is disabled.
+// When Redis is active the per-IP/per-email Redis counters below take precedence.
+const loginLimiter = rateLimit({
+  windowMs: LOGIN_WINDOW_SECONDS * 1000,
+  max: LOGIN_MAX_ATTEMPTS,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: "Too many login attempts. Try again later.", code: 429 },
+});
+
+const signupLimiter = rateLimit({
+  windowMs: SIGNUP_WINDOW_SECONDS * 1000,
+  max: SIGNUP_MAX_ATTEMPTS,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: "Too many sign-up attempts. Try again later.", code: 429 },
+});
+
+const passwordResetLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: "Too many password reset requests. Try again later.", code: 429 },
+});
 
 const getClientIp = (req) =>
   (req.headers["x-forwarded-for"] || req.socket.remoteAddress || "")
@@ -119,11 +146,11 @@ router.post("/accept-cookies", (req, res) => {
  *       500:
  *         description: Server error
  */
-router.post("/get-started", async (req, res) => {
+router.post("/get-started", signupLimiter, async (req, res) => {
   try {
     const ip = getClientIp(req);
     const signupKey = `signup:ip:${ip}`;
-    const count = await redisConnection.get(signupKey);
+    const count = redisConnection ? await redisConnection.get(signupKey) : null;
     if (Number(count) >= SIGNUP_MAX_ATTEMPTS) {
       const ttl = await redisTtl(signupKey);
       return res.status(429).set("Retry-After", ttl).json({
@@ -172,17 +199,16 @@ router.post("/get-started", async (req, res) => {
  *       429:
  *         description: Too many failed attempts
  */
-router.post("/login", async (req, res) => {
+router.post("/login", loginLimiter, async (req, res) => {
   try {
     const ip = getClientIp(req);
     const email = (req.body.email || "").toLowerCase().trim();
     const ipKey = `login:ip:${ip}`;
     const emailKey = `login:email:${email}`;
 
-    const [ipCount, emailCount] = await Promise.all([
-      redisConnection.get(ipKey),
-      redisConnection.get(emailKey),
-    ]);
+    const [ipCount, emailCount] = redisConnection
+      ? await Promise.all([redisConnection.get(ipKey), redisConnection.get(emailKey)])
+      : [null, null];
 
     if (
       Number(ipCount) >= LOGIN_MAX_ATTEMPTS ||
@@ -201,7 +227,7 @@ router.post("/login", async (req, res) => {
     const result = await login(req.body);
 
     if (result.status === 200) {
-      await Promise.all([
+      if (redisConnection) await Promise.all([
         redisConnection.del(ipKey),
         redisConnection.del(emailKey),
       ]);
@@ -348,11 +374,11 @@ router.get("/auth/github", githubRedirect);
 router.get("/auth/github/link", githubLinkRedirect);
 router.delete("/auth/github/disconnect", githubDisconnect);
 router.get("/auth/github/callback", githubCallback);
-router.post("/forgot-password", async (req, res) => {
+router.post("/forgot-password", passwordResetLimiter, async (req, res) => {
   const result = await forgotPassword(req.body);
   res.status(result.status).json(result);
 });
-router.post("/reset-password", async (req, res) => {
+router.post("/reset-password", passwordResetLimiter, async (req, res) => {
   const result = await resetPassword(req.body);
   res.status(result.status).json(result);
 });

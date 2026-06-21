@@ -1,4 +1,4 @@
-# DevsFlow — Vision & Product Roadmap
+# DevsWebs — Vision & Product Roadmap
 
 > Living document — update this as the vision evolves.
 > Last updated: 2026-06-11 — full code audit performed; every status below was verified against the actual codebase, not memory.
@@ -35,17 +35,17 @@ YOU CAN VAHE
 
 ## The Big Vision
 
-Most developers learn by bouncing between YouTube, Stack Overflow, and random tutorials hoping something sticks. DevsFlow ends that.
+Most developers learn by bouncing between YouTube, Stack Overflow, and random tutorials hoping something sticks. DevsWebs ends that.
 
 Every developer who joins gets a personal AI mentor that knows them, a structured roadmap they earn layer by layer, and only can pass with exams and coding challenges built for where they actually are — not random DSA grinding.
 
-**DevsFlow will become the platform serious developers use to go from zero to production-ready.**
+**DevsWebs will become the platform serious developers use to go from zero to production-ready.**
 
 ---
 
 ## What Makes This Genuinely Different
 
-| What exists today                     | What DevsFlow does                                             |
+| What exists today                     | What DevsWebs does                                             |
 | ------------------------------------- | -------------------------------------------------------------- |
 | roadmap.sh — a static map you look at | A gated path you earn by passing real exams                    |
 | Generic AI chatbots (ChatGPT, Gemini) | A per-user agent with persistent memory of your entire journey |
@@ -102,7 +102,7 @@ Sign up → pick Backend path → study Layer 1 (posts + library resources)
    → FAIL → weak spots recorded → ask the AI agent → targeted review → retry
 ```
 
-When one real user can do that on production, DevsFlow exists. Until then, it's a community blog with ambitions.
+When one real user can do that on production, DevsWebs exists. Until then, it's a community blog with ambitions.
 
 **In scope (Phases A–E below, ~4–6 weeks of focused work, 3 months with buffer):**
 critical bug fixes → roadmap backend → roadmap UI wiring → exam engine → AI agent backend.
@@ -178,7 +178,7 @@ Also: `mongoose` is installed but the app is 100% native-driver. **Remove it** �
 **9. Auth hardening → YES helmet now; httpOnly refresh tokens before the credential launch, not before MVP.**
 
 - `helmet` is a one-line `app.use()` — do it in Phase A, no excuse.
-- The full migration (15-min access tokens + httpOnly-cookie refresh + revocation) is required **before DevsFlow asks employers to trust its profiles** (Phase 9), because XSS + localStorage JWT = stolen credentialed identity. It is not required to test the learning loop with early users. Schedule it as the entry ticket to Phase 9.
+- The full migration (15-min access tokens + httpOnly-cookie refresh + revocation) is required **before DevsWebs asks employers to trust its profiles** (Phase 9), because XSS + localStorage JWT = stolen credentialed identity. It is not required to test the learning loop with early users. Schedule it as the entry ticket to Phase 9.
 
 **10. Route namespace → YES: adopt `/api/...` for all new routes, starting now.**
 This stopped being cosmetic: the already-built agent frontend calls `/api/ai-agent/*`, which matches nothing on the backend. New routes (roadmaps, exams, agent) mount under `/api/` from day one. Migrate the legacy bare-mounted routes (`auth`, `post`, `user`, `account`) opportunistically — it requires coordinated frontend changes, so don't block MVP on it.
@@ -206,7 +206,7 @@ The foundation the rest of the platform is built on.
 
 ### 2. The Roadmap — 🔧 IN PROGRESS
 
-This is the core innovation. roadmap.sh shows you a map. **DevsFlow makes you earn it.**
+This is the core innovation. roadmap.sh shows you a map. **DevsWebs makes you earn it.**
 
 Every node is locked until you pass the exam for the previous layer. The journey is the product.
 
@@ -281,7 +281,7 @@ Agent receives: cached system prompt (persona, Socratic rules)
 Agent decides which tools to call:
   get_user_progress()      → current path, layer, exam scores
   get_layer_content()      → what the user is studying right now
-  search_platform_posts()  → relevant DevsFlow posts by topic
+  search_platform_posts()  → relevant DevsWebs posts by topic
   get_exam_history()       → past scores, failed topics
   log_weak_spot(topic)     → persist struggles to MongoDB
    ↓
@@ -335,12 +335,12 @@ backend/
 
 > Audited: not a "coming soon" placeholder — `CodingChallenges.jsx` renders a full mock-data-driven UI and `ChallengeArena.jsx` exists at `/coding-challenges/:id`. No backend of any kind.
 
-LeetCode gives you random problems. DevsFlow gives you problems that match your path — every problem tied to a roadmap path and layer.
+LeetCode gives you random problems. DevsWebs gives you problems that match your path — every problem tied to a roadmap path and layer.
 
 **Problem types:** code challenges (run/validate in-browser) · debug challenges · system design (AI-graded) · build challenges.
 **Agent connection:** progressive hints, post-solve explanation, contribution to exam-readiness score.
 
-| LeetCode                        | DevsFlow Problems           |
+| LeetCode                        | DevsWebs Problems           |
 | ------------------------------- | --------------------------- |
 | Generic algorithms for everyone | Path-relevant problems      |
 | Disconnected from learning      | Tied to your current layer  |
@@ -590,7 +590,7 @@ Internal systems that make everything else measurably better: per-user learning 
 - [ ] Can users contribute posts that become official curriculum content?
 - [ ] Peer review system for practical exam submissions?
 - [ ] Cohort feature — go through a path with a group at the same time?
-- [ ] Public API for roadmap data — let others build on top of DevsFlow paths?
+- [ ] Public API for roadmap data — let others build on top of DevsWebs paths?
 - [ ] ATS integration for the Company Portal (export verified profiles to Greenhouse, Lever, etc.)?
 - [ ] Developer referral system — earn XP or subscription credit for referring a developer who converts to Pro?
 
@@ -598,7 +598,7 @@ Internal systems that make everything else measurably better: per-user learning 
 
 ## Collaborative Build Teams (New Feature Idea — 2026-06-11)
 
-**Concept:** Developers on DevsFlow group together socially, pick a real project they want to build, and the AI assigns tasks to each member based on their known skill level and learning progress. The team ships a real product together.
+**Concept:** Developers on DevsWebs group together socially, pick a real project they want to build, and the AI assigns tasks to each member based on their known skill level and learning progress. The team ships a real product together.
 
 **How it works:**
 
@@ -622,7 +622,7 @@ No existing platform combines: social team formation + AI-aware task splitting b
 
 - [ ] How does the AI verify task completion? (PR review? Demo video? Peer review?)
 - [ ] What's the minimum team size? (2–5 devs seems right for a first version)
-- [ ] Do completed Build Team projects get a public profile page on DevsFlow?
+- [ ] Do completed Build Team projects get a public profile page on DevsWebs?
 - [ ] Can a Build Team project become a portfolio piece linked to each member's profile?
 
 ---
@@ -631,21 +631,21 @@ No existing platform combines: social team formation + AI-aware task splitting b
 
 > Builds directly on Collaborative Build Teams. This is the revenue endgame for that feature.
 
-**Concept:** A company pays DevsFlow ($2–5K) to have a Build Team deliver a real small product — an internal tool, an MVP, a dashboard. DevsFlow takes a 15–20% platform fee; the rest is split among the team members based on completed tasks.
+**Concept:** A company pays DevsWebs ($2–5K) to have a Build Team deliver a real small product — an internal tool, an MVP, a dashboard. DevsWebs takes a 15–20% platform fee; the rest is split among the team members based on completed tasks.
 
 **Why everyone wins:**
 
 - **Developers** — get paid real money, gain real work experience, and ship a verified portfolio piece ("built for an actual client" beats any tutorial project)
 - **Company** — gets cheap delivery on small projects AND a recruiting preview: they watch a team work for weeks before deciding to hire anyone (better signal than any interview)
-- **DevsFlow** — earns the platform fee, and every sponsored project generates verified work-history data that makes the hiring marketplace more valuable
+- **DevsWebs** — earns the platform fee, and every sponsored project generates verified work-history data that makes the hiring marketplace more valuable
 
 **How it works:**
 
-1. Company posts a project with budget and scope; DevsFlow (AI-assisted) validates the scope is junior-team-sized
+1. Company posts a project with budget and scope; DevsWebs (AI-assisted) validates the scope is junior-team-sized
 2. Money goes into escrow (Stripe — NOT crypto, see web3 notes)
 3. AI matches a Build Team whose verified skills fit the project, splits it into tasks, assigns by skill level
 4. AI + milestones track progress; company sees demo checkpoints
-5. On delivery and acceptance: escrow releases, split by contribution, DevsFlow takes its cut
+5. On delivery and acceptance: escrow releases, split by contribution, DevsWebs takes its cut
 6. The project becomes a verified portfolio piece on every member's profile
 
 **Why this is the most unique revenue stream:**
@@ -660,8 +660,8 @@ No existing platform combines: social team formation + AI-aware task splitting b
 
 **Open questions:**
 
-- [ ] Who handles scope disputes between company and team? (DevsFlow arbitration? AI-assisted?)
-- [ ] Quality guarantee — does DevsFlow refund if the team fails to deliver? (Probably yes, from escrow — never deliver = company pays nothing)
+- [ ] Who handles scope disputes between company and team? (DevsWebs arbitration? AI-assisted?)
+- [ ] Quality guarantee — does DevsWebs refund if the team fails to deliver? (Probably yes, from escrow — never deliver = company pays nothing)
 - [ ] Legal: contractor relationships, taxes per country, liability for delivered code
 - [ ] Minimum platform maturity before charging real companies (reputation risk if early projects fail)
 
@@ -671,29 +671,29 @@ No existing platform combines: social team formation + AI-aware task splitting b
 
 > Reuses the Exam Engine. Near-zero extra cost per sale — the infrastructure is being built anyway for the roadmap gating.
 
-**Concept:** Companies send their **own job candidates** through DevsFlow's exam engine as a hiring screen, and pay **$30–50 per assessment**. The candidate doesn't need to be a DevsFlow user — the company just sends them a link.
+**Concept:** Companies send their **own job candidates** through DevsWebs's exam engine as a hiring screen, and pay **$30–50 per assessment**. The candidate doesn't need to be a DevsWebs user — the company just sends them a link.
 
 **Why it works:**
 
 - The exam engine already exists for roadmap gating — same AI-generated, skill-targeted exams, just pointed at an external candidate
 - Marginal cost per assessment is almost zero (one AI exam generation + grading run)
 - Companies already pay for this elsewhere (HackerRank, Codility, TestGorilla) — proven market, proven willingness to pay
-- Every external candidate who takes a screen discovers DevsFlow → free user acquisition funnel
+- Every external candidate who takes a screen discovers DevsWebs → free user acquisition funnel
 
 **How it works:**
 
 1. Company creates a screening request: role, stack, seniority level
-2. DevsFlow generates a tailored exam (theory + practical coding challenge) from the same engine that powers roadmap layer exams
+2. DevsWebs generates a tailored exam (theory + practical coding challenge) from the same engine that powers roadmap layer exams
 3. Company sends the link to candidates; they take it (proctoring/anti-cheat measures needed)
-4. Company gets a structured report: score, strengths, weak spots, comparison against DevsFlow's verified user base ("scores better than 70% of devs who passed Backend Layer 3")
+4. Company gets a structured report: score, strengths, weak spots, comparison against DevsWebs's verified user base ("scores better than 70% of devs who passed Backend Layer 3")
 5. Billed per assessment, or monthly bundles (e.g. 20 assessments/month)
 
 **The hidden advantage over HackerRank/Codility:**
-DevsFlow's comparison baseline is real — thousands of verified developers with known skill levels took these same exam types while actually learning. "Better than 70% of our verified Layer 3 devs" is a benchmark competitors can't fake, because their test-takers are anonymous one-time strangers.
+DevsWebs's comparison baseline is real — thousands of verified developers with known skill levels took these same exam types while actually learning. "Better than 70% of our verified Layer 3 devs" is a benchmark competitors can't fake, because their test-takers are anonymous one-time strangers.
 
 **Prerequisites:**
 
-1. Exam engine live and proven on DevsFlow's own users first
+1. Exam engine live and proven on DevsWebs's own users first
 2. Enough verified users that the comparison benchmark is statistically meaningful
 3. Anti-cheat / proctoring strategy (AI-assisted code review for plagiarism, time analysis, etc.)
 4. Simple company-facing dashboard (can start as a manual/email process for the first customers)
@@ -701,7 +701,7 @@ DevsFlow's comparison baseline is real — thousands of verified developers with
 **Open questions:**
 
 - [ ] Per-assessment pricing vs monthly subscription bundles — or both?
-- [ ] Do screened candidates get an offer to join DevsFlow with their results pre-loaded as a starting profile?
+- [ ] Do screened candidates get an offer to join DevsWebs with their results pre-loaded as a starting profile?
 - [ ] White-label option (company's branding on the exam) at a higher price tier?
 - [ ] How to handle cheating/AI-assistance during remote assessments?
 
@@ -711,12 +711,12 @@ DevsFlow's comparison baseline is real — thousands of verified developers with
 
 > The same platform, sold per-seat to institutions. One deal = hundreds of users at once.
 
-**Concept:** Universities and coding bootcamps license DevsFlow per student per semester. Their students get the roadmaps, exam engine, and AI mentor; their instructors get a dashboard showing each student's real progress, exam results, and weak spots.
+**Concept:** Universities and coding bootcamps license DevsWebs per student per semester. Their students get the roadmaps, exam engine, and AI mentor; their instructors get a dashboard showing each student's real progress, exam results, and weak spots.
 
 **Why institutions would pay:**
 
-- **Bootcamps** — their entire sales pitch is job outcomes. DevsFlow's verified-skill data *proves* outcomes ("94% of our grads passed Backend Layer 3") in a way no bootcamp can fake today. That proof is worth real money to their marketing
-- **Universities** — CS programs are theory-heavy; DevsFlow adds the practical, measured track without faculty needing to build anything
+- **Bootcamps** — their entire sales pitch is job outcomes. DevsWebs's verified-skill data *proves* outcomes ("94% of our grads passed Backend Layer 3") in a way no bootcamp can fake today. That proof is worth real money to their marketing
+- **Universities** — CS programs are theory-heavy; DevsWebs adds the practical, measured track without faculty needing to build anything
 - **Both** — instructor dashboards replace gut feeling with data: who's falling behind, on what exactly, before exams reveal it too late
 
 **Business model:**
@@ -731,7 +731,7 @@ This is the same product already being built — roadmaps, exams, AI agent, prog
 **Strategic side effects:**
 
 - Hundreds of students onboarded per deal → solves the cold-start problem institutionally instead of one user at a time
-- Students who graduate keep their DevsFlow profile → flow straight into the hiring marketplace funnel
+- Students who graduate keep their DevsWebs profile → flow straight into the hiring marketplace funnel
 - Institutional credibility ("used by X university") makes every other B2B sale easier
 
 **Prerequisites:**

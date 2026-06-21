@@ -14,7 +14,7 @@ node_modules
 dist
 dist-ssr
 
-# Environment variables
+# Environment variables — never commit any .env file with real values
 .env
 .env.local
 .env.development
@@ -24,6 +24,11 @@ dist-ssr
 backend/.env
 backend/.env.local
 backend/.env.staging
+backend/.env.production
+backend/.env.development
+.env.development.local
+.env.staging.local
+.env.production.local
 
 # User uploads
 uploads/

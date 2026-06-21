@@ -32,10 +32,10 @@ export const getPostsByCategory = async (req, res) => {
 export const createPost = async (req, res) => {
   try {
     const token = req.headers.authorization?.replace("Bearer ", "");
-    if (!verifyToken(token))
-      return res.status(401).json({ message: "Unauthorized", code: 401 });
+    const verified = verifyToken(token);
+    if (!verified) return res.status(401).json({ message: "Unauthorized", code: 401 });
 
-    await createPostService(req.app.locals.db, req.body);
+    await createPostService(req.app.locals.db, req.body, verified.id);
     res.status(201).json({ code: 201, message: "Created Blog" });
   } catch (err) {
     res.status(500).json({ message: "Server Error.", code: 500, error: err.message });

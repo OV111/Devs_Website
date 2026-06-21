@@ -4,7 +4,7 @@ export default function ChatTopBar({ activeSessionId, isStreaming }) {
       <div className="flex flex-col">
         <div className="flex items-center gap-2">
           <span className="text-[14px] font-semibold tracking-tight" style={{ color: "#e5e5e5" }}>
-            DevsFlow Agent
+            DevsWebs Agent
           </span>
           {activeSessionId && (
             <span

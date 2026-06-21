@@ -1,13 +1,13 @@
-# DevsFlow — Business Model & Monetization Strategy
+# DevsWebs — Business Model & Monetization Strategy
 
-> This document outlines how DevsFlow generates revenue, where business logic lives in the codebase, and the strategic reasoning behind every monetization decision. It is written across three lenses: Business Investment, Financial Analysis, and SaaS Metrics.
+> This document outlines how DevsWebs generates revenue, where business logic lives in the codebase, and the strategic reasoning behind every monetization decision. It is written across three lenses: Business Investment, Financial Analysis, and SaaS Metrics.
 > Last updated: 2026-06-03
 
 ---
 
 ## The Core Idea
 
-DevsFlow is not a course platform. It is a **structured progression system** — developers earn their way through a roadmap by passing real exams, guided by a personal AI mentor, and exit with a verified public profile that employers can trust.
+DevsWebs is not a course platform. It is a **structured progression system** — developers earn their way through a roadmap by passing real exams, guided by a personal AI mentor, and exit with a verified public profile that employers can trust.
 
 That structure is what makes monetization natural. The free tier gets users in the door. The paid tier unlocks the part that actually changes careers.
 
@@ -68,7 +68,7 @@ For companies onboarding junior developers or running internal upskilling progra
 - Priority support with a 24-hour response SLA
 
 **Why this matters:**
-A company that hires 5 junior developers and puts them all on the Backend path has a real business problem DevsFlow solves — they cannot tell who is actually progressing and who is stuck. DevsFlow gives them data. At $60/seat with a minimum 3-seat purchase, the floor is $180/month per company. That is a trivially easy budget approval for an engineering manager.
+A company that hires 5 junior developers and puts them all on the Backend path has a real business problem DevsWebs solves — they cannot tell who is actually progressing and who is stuck. DevsWebs gives them data. At $60/seat with a minimum 3-seat purchase, the floor is $180/month per company. That is a trivially easy budget approval for an engineering manager.
 
 ---
 
@@ -206,23 +206,23 @@ Heavy users of the AI agent could cost $10–15/month in API calls alone, erasin
 
 **The public profile is the distribution channel. Awards are the trigger that makes developers share before they finish.**
 
-Every award is a natural share moment — "I just earned the Perfectionist award on DevsFlow (100/100 on the Node.js exam)." That post reaches developers and hiring managers simultaneously. It is the most efficient marketing surface in the product. This is why Phase 9 (Public Progress Profiles) is strategically critical even though it is not a direct revenue feature. Every verified profile is a piece of marketing that never expires.
+Every award is a natural share moment — "I just earned the Perfectionist award on DevsWebs (100/100 on the Node.js exam)." That post reaches developers and hiring managers simultaneously. It is the most efficient marketing surface in the product. This is why Phase 9 (Public Progress Profiles) is strategically critical even though it is not a direct revenue feature. Every verified profile is a piece of marketing that never expires.
 
 ---
 
 ## Opportunity Cost Analysis
 
-Before committing to DevsFlow as a revenue-generating product, it is worth being honest about what else the same time could produce:
+Before committing to DevsWebs as a revenue-generating product, it is worth being honest about what else the same time could produce:
 
 | Alternative | Revenue Potential | Time to First Dollar | Risk |
 |---|---|---|---|
 | Freelance development | $3,000–8,000/month | Days | Low — skills already proven |
 | Open source + sponsorships | $500–2,000/month | 6–18 months | Medium |
 | SaaS tool (simpler, smaller scope) | $1,000–5,000/month | 3–6 months | Medium |
-| DevsFlow (this platform) | $15,000–75,000+/month | 6–12 months to first revenue | High — complex, multi-phase |
+| DevsWebs (this platform) | $15,000–75,000+/month | 6–12 months to first revenue | High — complex, multi-phase |
 
-**The honest case for DevsFlow anyway:**
-The ceiling is vastly higher. Freelance caps at your hours. DevsFlow does not. The platform you are building is genuinely differentiated — no one has combined a gated progression roadmap, a personal AI mentor, and verified public profiles in one product. That combination is defensible. Simple SaaS tools can be copied in a weekend. This cannot.
+**The honest case for DevsWebs anyway:**
+The ceiling is vastly higher. Freelance caps at your hours. DevsWebs does not. The platform you are building is genuinely differentiated — no one has combined a gated progression roadmap, a personal AI mentor, and verified public profiles in one product. That combination is defensible. Simple SaaS tools can be copied in a weekend. This cannot.
 
 The risk is time-to-revenue. The mitigation is launching with Free + Pro as early as possible — even before every phase is built — to get real users, real feedback, and real conversion data before you are deep into Phase 6 or 7.
 
@@ -334,14 +334,14 @@ The frontend reads the `upgrade_required` error code and shows the upgrade modal
 | Users share exam answers publicly | MEDIUM | AI-generated exams are unique per session — no static question bank to leak or memorize |
 | Certificate credibility with employers | MEDIUM | Credibility is earned over time through employer adoption. Not a launch problem, but needs active effort: LinkedIn integration, employer outreach at ~2,000 verified profiles |
 | Churn spike when AI agent underdelivers | HIGH | The agent must be genuinely useful before it is gated behind Pro. A mediocre AI agent at launch will destroy the conversion story permanently |
-| Competing with freeCodeCamp / The Odin Project | LOW | Both are passive content. DevsFlow has a gated progression system and a personal AI mentor. Different product category, not the same competitor |
+| Competing with freeCodeCamp / The Odin Project | LOW | Both are passive content. DevsWebs has a gated progression system and a personal AI mentor. Different product category, not the same competitor |
 | Solo-founder execution risk | MEDIUM | The build order is designed to get to revenue as fast as possible. Do not build all 12 phases before charging anyone. Get Pro live, get 50 paying users, validate, then continue |
 
 ---
 
 ## What is NOT the Business Model
 
-To stay focused, it is worth being explicit about what DevsFlow must not become:
+To stay focused, it is worth being explicit about what DevsWebs must not become:
 
 - **Not a marketplace** — No freelance job boards or gig listings. It dilutes the brand and the mission.
 - **Not a content mill** — The curriculum is curated. Quality over volume. A roadmap layer with 3 excellent posts is better than 20 mediocre ones.
@@ -353,11 +353,11 @@ To stay focused, it is worth being explicit about what DevsFlow must not become:
 
 ## Long-Term Vision for Revenue
 
-The platform DevsFlow is building toward is this:
+The platform DevsWebs is building toward is this:
 
-> A developer completes the Backend path on DevsFlow. They pass every exam, ship a capstone project, and earn a certificate. They put their DevsFlow profile link on their resume. The hiring manager at a company clicks it, sees the verified progression, the exam scores, the live capstone demo — and schedules the interview without a technical screen.
+> A developer completes the Backend path on DevsWebs. They pass every exam, ship a capstone project, and earn a certificate. They put their DevsWebs profile link on their resume. The hiring manager at a company clicks it, sees the verified progression, the exam scores, the live capstone demo — and schedules the interview without a technical screen.
 
-When that loop is working, DevsFlow becomes infrastructure for developer hiring. The employer-side revenue (Employer Access tier, eventually a placement fee model) becomes the primary business. The individual subscriptions become the supply-side acquisition engine — the mechanism that builds the pool of verified developers that employers pay to access.
+When that loop is working, DevsWebs becomes infrastructure for developer hiring. The employer-side revenue (Employer Access tier, eventually a placement fee model) becomes the primary business. The individual subscriptions become the supply-side acquisition engine — the mechanism that builds the pool of verified developers that employers pay to access.
 
 That is a two-sided marketplace. But it is earned through the learning product first. Build the learning product until developers trust it. Measure that trust through NRR, churn, and completion rates. When those numbers are strong, the employer-side sell is easy. When those numbers are weak, no employer feature saves it.
 

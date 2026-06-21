@@ -146,7 +146,7 @@ const GetStarted = () => {
             </h1>
             <p className="text-[13.5px] text-[#697386] dark:text-zinc-400 mb-7">
               {isSignedUp
-                ? "Join DevsFlow and start building today."
+                ? "Join DevsWebs and start building today."
                 : "Welcome back! Enter your details below."}
             </p>
 

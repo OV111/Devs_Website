@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://devsflow.com/sitemap.xml
+Sitemap: https://devswebs.com/sitemap.xml
