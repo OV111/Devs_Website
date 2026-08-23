@@ -5,19 +5,25 @@ import useAuthStore from "../../stores/useAuthStore";
 const OAuthSuccess = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { login } = useAuthStore();
+  const { init } = useAuthStore();
 
   useEffect(() => {
-    const token = searchParams.get("token");
+    // GitHub OAuth sets the httpOnly refresh cookie server-side (see
+    // githubCallback in authController.js) and redirects here with no token
+    // in the URL. init() exchanges that cookie for an access token the same
+    // way a normal page-load does.
     const linked = searchParams.get("linked");
 
-    if (token) {
-      login(token);
-      navigate(linked ? "/my-profile/connected-accounts" : "/");
-    } else {
-      navigate("/get-started");
-    }
-  }, [searchParams, navigate, login]);
+    (async () => {
+      await init();
+      const { auth } = useAuthStore.getState();
+      if (auth) {
+        navigate(linked ? "/my-profile/connected-accounts" : "/");
+      } else {
+        navigate("/get-started");
+      }
+    })();
+  }, [searchParams, navigate, init]);
 
   return <p>Logging you in...</p>;
 };

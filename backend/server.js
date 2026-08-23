@@ -10,6 +10,10 @@ import connectDB from "./config/db.js";
 import { createApp } from "./app.js";
 import initWebSocketServer from "./websocket/index.js";
 import NotificationWorker from "./workers/notificationWorker.js";
+import { assertJwtSecrets } from "./utils/jwtToken.js";
+
+// Fail fast at boot instead of the first login attempt hitting a missing-secret error.
+assertJwtSecrets();
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,

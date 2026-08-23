@@ -3,3 +3,4 @@
 // in its own beforeAll so each file gets an isolated in-memory instance.
 import process from 'node:process'
 process.env.JWT_Secret = 'test-secret-key-for-integration-tests-only'
+process.env.JWT_REFRESH_SECRET = 'test-refresh-secret-key-for-integration-tests-only'

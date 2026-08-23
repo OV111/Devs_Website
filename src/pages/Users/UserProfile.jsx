@@ -10,13 +10,11 @@ import BlogCard from "@/components/blog/BlogCard";
 import useProfileStore from "@/stores/useProfileStore";
 import ProfileSkeleton from "./ProfileSkeleton";
 import SOCIAL_LINKS from "../../../constants/SocialLinks";
-import { SectionHeader, PathCard, CapstoneCard, ExamRow, ForHiringPanel } from "../My-Profile/components/ProfileSections";
+import { SectionHeader, CapstoneCard, ExamRow, ForHiringPanel } from "../My-Profile/components/ProfileSections";
 import {
   MOCK_BADGES,
   MOCK_CERTIFICATES,
-  MOCK_PATHS,
   MOCK_CAPSTONES,
-  MOCK_EXAMS,
   ACTIVITY_GRID,
   ACTIVITY_COLORS,
   TOTAL_CONTRIBUTIONS,
@@ -63,6 +61,8 @@ export default function UserProfile() {
   const isOwnProfile = loggedInUser?.username === username;
   const [user, setUser] = useState(null);
   const [stats, setStats] = useState({});
+  const [progress, setProgress] = useState(null);
+  const [examHistory, setExamHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
@@ -94,6 +94,8 @@ export default function UserProfile() {
         const fetchedStats = response.stats ?? {};
         setUser(response.targetUser ?? null);
         setStats(fetchedStats);
+        setProgress(response.progress ?? null);
+        setExamHistory(response.examHistory ?? []);
         setIsFollowing(Boolean(response.isFollowing));
         setIsFollower(Boolean(response.isFollower));
         if (fetchedStats.userId) {
@@ -378,9 +380,30 @@ export default function UserProfile() {
             {/* Paths */}
             <div>
               <SectionHeader title="paths" right="verified by devswebs" />
-              <div className="space-y-3">
-                {MOCK_PATHS.map((p) => <PathCard key={p.id} path={p} />)}
-              </div>
+              {progress?.activePath ? (
+                <div className="px-5 py-4 rounded-sm border border-gray-800">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-sm flex items-center justify-center text-sm shrink-0 bg-gray-900 border border-gray-800 text-gray-500">
+                        ▤
+                      </div>
+                      <div>
+                        <p className="text-[14px] font-semibold text-gray-100">{progress.activePath}</p>
+                        <p className="text-[10px] mt-0.5 font-mono text-gray-600">
+                          layer {progress.currentLayer ?? 1} · {(progress.completedLayers ?? []).length} layer{(progress.completedLayers ?? []).length === 1 ? "" : "s"} passed
+                        </p>
+                      </div>
+                    </div>
+                    <span className="text-[11px] shrink-0 text-amber-500">in progress</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center py-10 text-center rounded-sm border border-dashed border-gray-200 dark:border-gray-800">
+                  <p className="text-sm text-gray-400 dark:text-gray-500">
+                    {isOwnProfile ? "You haven't" : `${user?.firstName ?? "This user"} hasn't`} started a roadmap path yet.
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Capstones */}
@@ -393,10 +416,28 @@ export default function UserProfile() {
 
             {/* Exam history */}
             <div>
-              <SectionHeader title="exam history · verified" right="scores cryptographically signed" />
-              <div className="space-y-2">
-                {MOCK_EXAMS.map((e) => <ExamRow key={e.id} exam={e} />)}
-              </div>
+              <SectionHeader title="exam history · verified" right={examHistory.length > 0 ? `${examHistory.length} attempts` : undefined} />
+              {examHistory.length > 0 ? (
+                <div className="space-y-2">
+                  {examHistory.map((e) => (
+                    <ExamRow
+                      key={String(e._id)}
+                      exam={{
+                        id: e.layer,
+                        title: `${e.path} — ${e.layer}`,
+                        score: e.correctAnswers,
+                        total: e.totalQuestions,
+                        status: e.passed ? "passed" : "failed",
+                        date: new Date(e.takenAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+                      }}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center py-10 text-center rounded-sm border border-dashed border-gray-200 dark:border-gray-800">
+                  <p className="text-sm text-gray-400 dark:text-gray-500">No exams taken yet.</p>
+                </div>
+              )}
             </div>
 
             {/* Posts */}

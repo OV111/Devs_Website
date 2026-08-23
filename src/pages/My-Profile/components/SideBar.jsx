@@ -6,7 +6,6 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useThemeStore from "../../../stores/useThemeStore.js";
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import { LogOut, Sun, Moon } from "lucide-react";
 import useProfileStore from "@/stores/useProfileStore.js";
 
@@ -25,25 +24,12 @@ export default function SideBar() {
   const avatarSrc = stats?.profileImage ?? "";
 
   const handleLogOut = async () => {
-    try {
-      const request = await fetch(`${API_BASE_URL}/log-out`, {
-        method: "DELETE",
-        headers: { "content-type": "application/json" },
-        credentials: "include",
-      });
-      let response = await request.json();
-      if (request.ok) {
-        toast.success(response.message, { duration: 1500 });
-        logout();
-        navigate("/get-started");
-      } else {
-        toast.error("Log Out Failed!");
-        console.error("Log Out failed!");
-      }
-    } catch (err) {
-      console.log(err);
-      toast.error("Log Out Failed", { position: "top-center" });
-    }
+    // useAuthStore.logout() now owns the DELETE /log-out call (it revokes
+    // the refresh token) — calling it here too would just double-fire the
+    // request, so this only handles the UI feedback around it.
+    await logout();
+    toast.success("Logged out", { duration: 1500 });
+    navigate("/get-started");
   };
 
   useEffect(() => {

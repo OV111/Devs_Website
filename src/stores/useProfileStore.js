@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { API_BASE_URL, JWT_KEY, authHeaders } from "../../constants/api";
+import { API_BASE_URL, getAccessToken, authHeaders } from "../../constants/api";
 
 const useProfileStore = create((set) => ({
   user: null,
@@ -8,7 +8,7 @@ const useProfileStore = create((set) => ({
   isLoading: false,
   isBlogsLoading: false,
   fetchProfile: async () => {
-    const token = localStorage.getItem(JWT_KEY);
+    const token = getAccessToken();
     if (!token) return "unauthorized";
     set({ isLoading: true });
     try {

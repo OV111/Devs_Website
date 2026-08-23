@@ -3,3 +3,4 @@
 import process from 'node:process'
 
 process.env.JWT_Secret = 'test-secret-for-websocket-tests'
+process.env.JWT_REFRESH_SECRET = 'test-refresh-secret-for-websocket-tests'

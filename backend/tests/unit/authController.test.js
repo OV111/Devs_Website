@@ -39,6 +39,13 @@ const makeDb = ({
       insertOne: vi.fn().mockResolvedValue({}),
       updateOne: vi.fn().mockResolvedValue({}),
     },
+    // signUp/login now issue a refresh token pair, which persists a jti here.
+    refreshTokens: {
+      insertOne: vi.fn().mockResolvedValue({}),
+      findOneAndDelete: vi.fn().mockResolvedValue(null),
+      deleteOne: vi.fn().mockResolvedValue({}),
+      deleteMany: vi.fn().mockResolvedValue({}),
+    },
   }
   return { collection: vi.fn((name) => collections[name]) }
 }
@@ -85,8 +92,10 @@ describe('signUp', () => {
 
     expect(result.status).toBe(201)
     expect(result.message).toMatch(/created/i)
-    expect(typeof result.token).toBe('string')
-    expect(result.token.split('.')).toHaveLength(3)
+    expect(typeof result.accessToken).toBe('string')
+    expect(result.accessToken.split('.')).toHaveLength(3)
+    expect(typeof result.refreshToken).toBe('string')
+    expect(result.refreshToken.split('.')).toHaveLength(3)
   })
 
   it('hashes the password before saving', async () => {
@@ -173,7 +182,8 @@ describe('login', () => {
 
     expect(result.status).toBe(200)
     expect(result.message).toMatch(/login successful/i)
-    expect(typeof result.token).toBe('string')
+    expect(typeof result.accessToken).toBe('string')
+    expect(typeof result.refreshToken).toBe('string')
     expect(result.userId).toBe(MOCK_OID)
   })
 

@@ -10,6 +10,7 @@ import ChatInterface from "./ChatInterface";
 import { formatTimeAgo } from "./ChatInterface";
 import Skeleton from "react-loading-skeleton";
 import useThemeStore from "../../../stores/useThemeStore";
+import { getAccessToken } from "../../../../constants/api";
 
 // import VoiceChatSvg from "../../../assets/Voice chat-amico.svg";
 const getUserIdFromJWT = (token) => {
@@ -69,7 +70,7 @@ const Chats = () => {
   const skeletonHighlightColor = isDarkMode ? "#374151" : "#f5f5f5";
 
   // ws implementation //////////////////////////////////////////////
-  const token = localStorage.getItem("JWT");
+  const token = getAccessToken();
   const [socket, setSocket] = useState(null);
   const senderId = getUserIdFromJWT(token);
   const receiverId = userSelected?._id;
@@ -169,7 +170,7 @@ const Chats = () => {
           method: "GET",
           headers: {
             "Content-type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("JWT")}`,
+            Authorization: `Bearer ${getAccessToken()}`,
           },
         },
       );
@@ -201,7 +202,7 @@ const Chats = () => {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("JWT")}`,
+              Authorization: `Bearer ${getAccessToken()}`,
             },
           },
         );

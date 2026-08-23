@@ -747,3 +747,45 @@ This is the same product already being built — roadmaps, exams, AI agent, prog
 - [ ] Can instructors create custom roadmap paths / private exam sets for their curriculum?
 - [ ] Data ownership & privacy — what does the institution see vs what stays the student's (FERPA/GDPR considerations)?
 - [ ] Pilot strategy: offer one local Armenian bootcamp/university a free semester in exchange for feedback and a case study?
+
+---
+
+## Voice AI Progress Review (New Feature Idea — 2026-08-07)
+
+> An alternate, spoken front end onto the same exam/assessment engine that already exists — not a new grading system.
+
+**Concept:** Instead of (or in addition to) a written MCQ exam, a developer talks out loud to explain what they just learned on a topic — in their own words, like explaining it to a colleague. A voice AI listens, follows up with clarifying questions the way a mentor would, and then reviews the explanation for correctness, gaps, and confused concepts — producing the same kind of pass/fail + weak-topic breakdown the exam engine already gives, just sourced from spoken explanation instead of multiple choice.
+
+**How it works:**
+
+1. At the end of a layer (or on demand), the user starts a voice session: "Explain what you learned about [topic]."
+2. The user talks freely — no script, no multiple choice. The AI can interrupt with a follow-up ("you said X causes Y — why?") the way a real technical interviewer would, to catch memorized-but-not-understood answers.
+3. The session is transcribed and run through the same LLM-grading approach the exam engine uses today, but scoring free-form explanation instead of MCQ answers: correctness, completeness, and specific gaps.
+4. Result surfaces in the same place exam results do today: pass/fail-style verdict + a breakdown of what was solid vs. shaky, tied to the layer's weak-topic system already in `examHistoryService`.
+
+**Why this is different from the existing exam engine:**
+MCQ exams test recognition ("which of these is correct") — they're gameable by pattern-matching answers. Explaining a concept out loud, under follow-up questioning, tests recall and actual understanding, which is much closer to what a technical interview or a senior code review actually demands. It's also a completely different, more defensible content format for marketing (a viral clip of someone getting caught not actually understanding a concept, from the "exam failure story" growth hack in GROWTH_PLAYBOOK.md, is stronger on video/audio than a screenshot of a failed quiz).
+
+**Why this is risky right now (be honest about it):**
+
+- This is Phase 4+ scope on top of an MVP loop (roadmap + exam engine + Stripe) that is not yet fully validated with real users — per STARTUP_ADVISOR_ANALYSIS.md, the current mandate is "build the loop, get 50 users through it, then decide what's next." This does not belong in the 7-day plan.
+- Real-time voice (speech-to-text, streaming LLM grading, text-to-speech or live follow-up) adds a new cost axis on top of the AI agent cost model already flagged as dangerous at free-tier scale ($3K/month at 500 free users, current text-only agent). Voice models are meaningfully more expensive per session than chat completions.
+- Adds real infra: a speech-to-text pipeline (e.g. Whisper or a realtime API), turn-taking/interruption logic, and either a TTS voice or a "listen only" mode — none of which exists in the codebase today.
+
+**Where this fits in the roadmap:**
+Treat this as a Pro-tier or higher differentiator to build *after* the core exam-based loop has proven the Layer 1 → Layer 2 return rate is healthy (>50%, per GROWTH_PLAYBOOK.md's north-star metric) — not a replacement for the MCQ exam, an upgrade path once there's revenue to justify the added AI cost.
+
+**Prerequisites (in order):**
+
+1. Core MCQ exam loop live, validated with real users, Stripe paywall working
+2. Confirm the AI agent's grading/review logic (already used for exam weak-topic breakdown) generalizes to free-form transcript input — this is mostly a prompt/schema problem, not new infra
+3. For the free tier, use the browser's built-in Web Speech API (client-side, $0 marginal cost) instead of a paid STT vendor — the backend only ever receives a text transcript, never raw audio, for free users. Reserve a paid STT vendor (Whisper/Deepgram/AssemblyAI) as a possible Pro-tier fallback for accuracy/browser-support, and prototype its cost-per-session before committing to that tier
+4. Decide sync (live follow-up questions, higher cost) vs. async (record explanation, review after) for v1 — async is far cheaper and easier to ship first
+
+**Open questions:**
+
+- [ ] Sync (live AI follow-up mid-explanation) or async (record then review)? Async is the realistic v1.
+- [ ] Which tier does this live behind — Pro, or a separate add-on given the extra AI cost?
+- [ ] Does a passed voice review count the same as a passed MCQ exam for layer unlock, or is it a separate "verified deep understanding" badge on top?
+- [ ] Transcript storage/privacy — users are speaking, not just clicking; needs clear consent and data-handling language
+- [ ] Accessibility: must remain fully optional — mic access, accents, non-native English speakers, and users who prefer not to be recorded should never be blocked from progressing

@@ -1,35 +1,67 @@
 import process from "node:process";
 import crypto from "node:crypto";
-import { Buffer } from "node:buffer";
 import bcrypt from "bcrypt";
 import { ObjectId } from "mongodb";
 import { sendPasswordResetEmail } from "../utils/emailService.js";
 import connectDB from "../config/db.js";
-import { createToken, verifyToken } from "../utils/jwtToken.js";
+import { verifyToken, verifyRefreshToken } from "../utils/jwtToken.js";
+import {
+  issueTokenPair,
+  rotateRefreshToken,
+  revokeRefreshToken,
+  revokeAllRefreshTokens,
+} from "../services/refreshTokenService.js";
 import { OAuth2Client } from "google-auth-library";
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-// In-memory CSRF nonce store for GitHub OAuth sign-in flow.
+const REFRESH_COOKIE_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000; // 7 days — matches REFRESH_TOKEN_TTL_MS
+
+// Single source of truth for refresh-cookie options — auth.routes.js reuses
+// this for the initial login/signup cookie and for clearing it on logout,
+// so the flags can never drift between "set" and "clear".
+export const REFRESH_COOKIE_NAME = "refreshToken";
+// SameSite=None requires Secure on every modern browser — there is no
+// "insecure None" mode, so this cannot be conditional on NODE_ENV the way
+// the old `secure: false` session cookie was. Chrome/Edge treat
+// http://localhost as a secure context, so `Secure` cookies still work in
+// local dev; this does NOT work over a plain http:// LAN/tunnel URL.
+export const REFRESH_COOKIE_OPTIONS = {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  path: "/",
+};
+
+const setRefreshCookie = (res, refreshToken) => {
+  res.cookie(REFRESH_COOKIE_NAME, refreshToken, {
+    ...REFRESH_COOKIE_OPTIONS,
+    maxAge: REFRESH_COOKIE_MAX_AGE_MS,
+  });
+};
+
+// In-memory CSRF nonce store for the GitHub OAuth redirect round-trip.
+// Doubles as the identity carrier for "link GitHub to my existing account":
+// linkUserId is set only when the redirect was initiated by an already
+// logged-in user (proven via their refresh cookie, not a client-supplied
+// token) — this replaces putting a JWT in the query string / state param.
 // Use Redis in production for multi-instance deployments.
 const pendingOAuthNonces = new Map();
 const NONCE_TTL_MS = 10 * 60 * 1000; // 10 minutes
 
-const createOAuthNonce = () => {
+const createOAuthNonce = (linkUserId = null) => {
   const nonce = crypto.randomBytes(16).toString("hex");
-  pendingOAuthNonces.set(nonce, Date.now() + NONCE_TTL_MS);
+  pendingOAuthNonces.set(nonce, { expiresAt: Date.now() + NONCE_TTL_MS, linkUserId });
   return nonce;
 };
 
+/** Returns the nonce record ({ linkUserId }) if valid, or null. */
 const consumeOAuthNonce = (nonce) => {
-  if (!nonce) return false;
-  const expiresAt = pendingOAuthNonces.get(nonce);
-  if (!expiresAt || Date.now() > expiresAt) {
-    pendingOAuthNonces.delete(nonce);
-    return false;
-  }
+  if (!nonce) return null;
+  const record = pendingOAuthNonces.get(nonce);
   pendingOAuthNonces.delete(nonce);
-  return true;
+  if (!record || Date.now() > record.expiresAt) return null;
+  return record;
 };
 
 const sanitizeUsername = (value = "") =>
@@ -107,12 +139,13 @@ const signUp = async (data) => {
     // here also insert userStats (with default starting values )
     await usersStats.insertOne(buildDefaultUserStats(result.insertedId));
 
-    const token = createToken({ id: result.insertedId });
+    const { accessToken, refreshToken } = await issueTokenPair(db, result.insertedId);
 
     return {
       status: 201,
       message: "Account created Successfully",
-      token,
+      accessToken,
+      refreshToken,
     };
   } catch (err) {
     console.error(err);
@@ -152,12 +185,12 @@ const login = async (data) => {
     },
     { upsert: true },
   );
-  // localStorage.setItem("user", user);
-  const token = createToken({ id: user._id });
+  const { accessToken, refreshToken } = await issueTokenPair(db, user._id);
   return {
     status: 200,
     message: "Login Successful",
-    token,
+    accessToken,
+    refreshToken,
     userId: user._id,
   };
 };
@@ -195,11 +228,12 @@ const googleAuth = async (data) => {
       user = await users.findOne({ _id: result.insertedId });
     }
 
-    const token = createToken({ id: user._id });
+    const { accessToken, refreshToken } = await issueTokenPair(db, user._id);
     return {
       status: 200,
       message: "Google Authentication Successful",
-      token,
+      accessToken,
+      refreshToken,
       userId: user._id,
     };
   } catch {
@@ -217,9 +251,16 @@ const githubRedirect = (req, res) => {
 };
 
 const githubLinkRedirect = (req, res) => {
-  const { token } = req.query;
-  const state = Buffer.from(token || "").toString("base64");
-  const url = `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&scope=user:email&state=${state}`;
+  // Identity comes from the httpOnly refresh cookie (sent automatically on
+  // this same-site top-level navigation) — never from a client-supplied
+  // token in the URL, which would leak into logs/history/Referer headers.
+  const decoded = verifyRefreshToken(req.cookies?.refreshToken);
+  if (!decoded) {
+    return res.redirect(`${process.env.FRONTEND_URL}/oauth-failure?reason=unauthenticated`);
+  }
+
+  const nonce = createOAuthNonce(decoded.id);
+  const url = `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&scope=user:email&state=${nonce}`;
   res.redirect(url);
 };
 
@@ -286,31 +327,21 @@ const githubCallback = async (req, res) => {
     const users = db.collection("users");
     const usersStats = db.collection("usersStats");
 
-    // Link mode: state is a base64-encoded JWT from an already-logged-in user.
-    // Sign-in mode: state is a CSRF nonce created by githubRedirect.
-    if (state) {
-      // Check if it is a link-mode base64 JWT (link states are longer than 32 hex chars)
-      const decodedState = (() => { try { return Buffer.from(state, "base64").toString(); } catch { return null; } })();
-      const linkedToken = decodedState ? verifyToken(decodedState) : null;
-
-      if (linkedToken) {
-        // Link mode — no nonce validation needed; the JWT itself proves identity
-        await users.updateOne(
-          { _id: new ObjectId(linkedToken.id) },
-          { $set: { githubId, githubLogin } },
-        );
-        return res.redirect(
-          `${process.env.FRONTEND_URL}/oauth-success?token=${decodedState}&linked=github`,
-        );
-      }
-
-      // Sign-in mode — state must be a valid CSRF nonce
-      if (!consumeOAuthNonce(state)) {
-        return res.redirect(`${process.env.FRONTEND_URL}/oauth-failure?reason=csrf`);
-      }
-    } else {
-      // No state at all — reject to prevent CSRF
+    // state is always a nonce from createOAuthNonce — link mode and sign-in
+    // mode differ only in whether that nonce carries a linkUserId (proven
+    // earlier via the requester's own refresh cookie in githubLinkRedirect).
+    const nonceRecord = consumeOAuthNonce(state);
+    if (!nonceRecord) {
       return res.redirect(`${process.env.FRONTEND_URL}/oauth-failure?reason=csrf`);
+    }
+
+    if (nonceRecord.linkUserId) {
+      await users.updateOne(
+        { _id: new ObjectId(nonceRecord.linkUserId) },
+        { $set: { githubId, githubLogin } },
+      );
+      setRefreshCookie(res, (await issueTokenPair(db, nonceRecord.linkUserId)).refreshToken);
+      return res.redirect(`${process.env.FRONTEND_URL}/oauth-success?linked=github`);
     }
 
     // Sign-in mode
@@ -331,8 +362,9 @@ const githubCallback = async (req, res) => {
       await usersStats.insertOne(buildDefaultUserStats(result.insertedId));
       user = { _id: result.insertedId };
     }
-    const jwt = createToken({ id: user._id });
-    res.redirect(`${process.env.FRONTEND_URL}/oauth-success?token=${jwt}`);
+    const { refreshToken } = await issueTokenPair(db, user._id);
+    setRefreshCookie(res, refreshToken);
+    res.redirect(`${process.env.FRONTEND_URL}/oauth-success`);
   } catch (err) {
     console.log(err);
     res.redirect(`${process.env.FRONTEND_URL}/oauth-failure`);
@@ -399,6 +431,11 @@ const resetPassword = async (data) => {
       { $set: { password: await hashPassword(newPassword) } },
     );
     await passwordResets.deleteOne({ tokenHash });
+    // A password reset means the user believes their credentials — or an
+    // active session — may be compromised. Kill every outstanding refresh
+    // token so a stolen one stops working immediately instead of surviving
+    // up to its remaining lifetime.
+    await revokeAllRefreshTokens(db, record.userId);
     return { status: 200, message: "Password updated successfully." };
   } catch (err) {
     console.log(err);
@@ -406,9 +443,40 @@ const resetPassword = async (data) => {
   }
 };
 
+/**
+ * Exchanges a valid, unused refresh token (from the httpOnly cookie) for a
+ * new access + refresh token pair, rotating the refresh token in the
+ * process. Route handler is responsible for reading/writing the cookie.
+ */
+const refreshAccessToken = async (refreshTokenValue) => {
+  const decoded = verifyRefreshToken(refreshTokenValue);
+  if (!decoded) return { status: 401, message: "Invalid or expired refresh token" };
+
+  const db = await connectDB();
+  const pair = await rotateRefreshToken(db, decoded.id, decoded.jti);
+  if (!pair) return { status: 401, message: "Refresh token was already used or revoked" };
+
+  return { status: 200, accessToken: pair.accessToken, refreshToken: pair.refreshToken };
+};
+
+/** Revokes the refresh token tied to the presented cookie, if any. */
+const logoutUser = async (refreshTokenValue) => {
+  if (!refreshTokenValue) return { status: 200, message: "Logged out successfully" };
+
+  const decoded = verifyRefreshToken(refreshTokenValue);
+  if (decoded) {
+    const db = await connectDB();
+    await revokeRefreshToken(db, decoded.jti);
+  }
+  return { status: 200, message: "Logged out successfully" };
+};
+
 export {
   signUp,
   login,
+  refreshAccessToken,
+  logoutUser,
+  setRefreshCookie,
   googleAuth,
   githubRedirect,
   githubLinkRedirect,

@@ -87,7 +87,7 @@ const registerN = async (n, offset = 0) => {
   const responses = await Promise.all(
     payloads.map((p) => request.post('/get-started').send(p)),
   )
-  return responses.map((r) => r.body.token).filter(Boolean)
+  return responses.map((r) => r.body.accessToken).filter(Boolean)
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -125,8 +125,8 @@ describe('Performance — concurrent registrations', () => {
 
     responses.forEach((r) => {
       expect(r.status).toBe(201)
-      expect(r.body.token).toBeTruthy()
-      expect(r.body.token.split('.')).toHaveLength(3)
+      expect(r.body.accessToken).toBeTruthy()
+      expect(r.body.accessToken.split('.')).toHaveLength(3)
     })
   }, 30_000)
 })
@@ -169,7 +169,7 @@ describe('Performance — concurrent logins', () => {
       ),
     )
 
-    const tokens = responses.map((r) => r.body.token)
+    const tokens = responses.map((r) => r.body.accessToken)
     const uniqueTokens = new Set(tokens)
     expect(uniqueTokens.size).toBe(N)
   }, 30_000)
@@ -268,7 +268,7 @@ describe('Performance — mixed read/write load', () => {
         const r = await request
           .post('/login')
           .send({ email: p.email, password: p.password })
-        return r.body.token
+        return r.body.accessToken
       }),
     )
 

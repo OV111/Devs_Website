@@ -18,7 +18,7 @@ import { MongoClient } from 'mongodb'
 import process from 'node:process'
 import { createApp } from './testApp.js'
 import connectDB from '../../config/db.js'
-import { createToken } from '../../utils/jwtToken.js'
+// import { createToken } from '../../utils/jwtToken.js'
 import { signUp } from '../../controllers/authController.js'
 
 let mongod
@@ -70,10 +70,10 @@ const BASE_USER = {
 }
 
 /** Register a user and return the token */
-const seedUser = async (overrides = {}) => {
-  const result = await signUp({ ...BASE_USER, ...overrides })
-  return { token: result.token, userId: result.token }
-}
+// const seedUser = async (overrides = {}) => {
+//   const result = await signUp({ ...BASE_USER, ...overrides })
+//   return { token: result.accessToken, userId: result.token }
+// }
 
 /** Auth header for a given token */
 const bearer = (token) => `Bearer ${token}`
@@ -90,9 +90,9 @@ describe('POST /get-started', () => {
     expect(res.body).toMatchObject({
       status: 201,
       message: expect.stringMatching(/created/i),
-      token: expect.any(String),
+      accessToken: expect.any(String),
     })
-    expect(res.body.token.split('.')).toHaveLength(3)
+    expect(res.body.accessToken.split('.')).toHaveLength(3)
   })
 
   it('returns 409 for a duplicate email', async () => {
@@ -114,10 +114,8 @@ describe('POST /get-started', () => {
 
   it('token in 201 response is verifiable', async () => {
     const res = await request.post('/get-started').send(BASE_USER)
-    const { createToken: _, verifyToken } = await import('../../utils/jwtToken.js')
-    // import verifyToken directly to check
-    const { verifyToken: verify } = await import('../../utils/jwtToken.js')
-    const payload = verify(res.body.token)
+    const { verifyToken } = await import('../../utils/jwtToken.js')
+    const payload = verifyToken(res.body.accessToken)
     expect(payload).not.toBeNull()
     expect(payload.id).toBeTruthy()
   })
@@ -141,9 +139,9 @@ describe('POST /login', () => {
     expect(res.body).toMatchObject({
       status: 200,
       message: expect.stringMatching(/successful/i),
-      token: expect.any(String),
+      accessToken: expect.any(String),
     })
-    expect(res.body.token.split('.')).toHaveLength(3)
+    expect(res.body.accessToken.split('.')).toHaveLength(3)
     expect(res.body.userId).toBeTruthy()
   })
 
@@ -184,7 +182,7 @@ describe('POST /login', () => {
 // ─────────────────────────────────────────────────────────────────────────────
 describe('GET /verify-token', () => {
   it('returns { valid: true } for a valid token', async () => {
-    const { token } = await signUp(BASE_USER)
+    const { accessToken: token } = await signUp(BASE_USER)
     const res = await request
       .get('/verify-token')
       .set('Authorization', bearer(token))
@@ -262,7 +260,7 @@ describe('GET /my-profile', () => {
   })
 
   it('returns 200 with userWithoutPassword and stats for a valid token', async () => {
-    const { token } = await signUp(BASE_USER)
+    const { accessToken: token } = await signUp(BASE_USER)
     const res = await request
       .get('/my-profile')
       .set('Authorization', bearer(token))
@@ -276,7 +274,7 @@ describe('GET /my-profile', () => {
   })
 
   it('never leaks the password field in the profile response', async () => {
-    const { token } = await signUp(BASE_USER)
+    const { accessToken: token } = await signUp(BASE_USER)
     const res = await request
       .get('/my-profile')
       .set('Authorization', bearer(token))
@@ -286,7 +284,7 @@ describe('GET /my-profile', () => {
   })
 
   it('stats contains expected default fields', async () => {
-    const { token } = await signUp(BASE_USER)
+    const { accessToken: token } = await signUp(BASE_USER)
     const res = await request
       .get('/my-profile')
       .set('Authorization', bearer(token))
@@ -320,7 +318,7 @@ describe('GET /my-profile/followers', () => {
   })
 
   it('returns 200 with the correct response shape for a valid token', async () => {
-    const { token } = await signUp(BASE_USER)
+    const { accessToken: token } = await signUp(BASE_USER)
     const res = await request
       .get('/my-profile/followers')
       .set('Authorization', bearer(token))
@@ -339,7 +337,7 @@ describe('GET /my-profile/followers', () => {
   })
 
   it('returns empty followers list for a new user with no followers', async () => {
-    const { token } = await signUp(BASE_USER)
+    const { accessToken: token } = await signUp(BASE_USER)
     const res = await request
       .get('/my-profile/followers')
       .set('Authorization', bearer(token))
@@ -350,7 +348,7 @@ describe('GET /my-profile/followers', () => {
   })
 
   it('followers list never contains password fields', async () => {
-    const { token } = await signUp(BASE_USER)
+    const { accessToken: token } = await signUp(BASE_USER)
     const res = await request
       .get('/my-profile/followers')
       .set('Authorization', bearer(token))
@@ -371,7 +369,7 @@ describe('GET /my-profile/following', () => {
   })
 
   it('returns 200 with the correct response shape for a valid token', async () => {
-    const { token } = await signUp(BASE_USER)
+    const { accessToken: token } = await signUp(BASE_USER)
     const res = await request
       .get('/my-profile/following')
       .set('Authorization', bearer(token))
@@ -389,7 +387,7 @@ describe('GET /my-profile/following', () => {
   })
 
   it('supports page and limit query parameters', async () => {
-    const { token } = await signUp(BASE_USER)
+    const { accessToken: token } = await signUp(BASE_USER)
     const res = await request
       .get('/my-profile/following?page=2&limit=5')
       .set('Authorization', bearer(token))
@@ -411,7 +409,7 @@ describe('GET /my-profile/notifications', () => {
   })
 
   it('returns 200 with an array of notifications for a valid token', async () => {
-    const { token } = await signUp(BASE_USER)
+    const { accessToken: token } = await signUp(BASE_USER)
     const res = await request
       .get('/my-profile/notifications')
       .set('Authorization', bearer(token))

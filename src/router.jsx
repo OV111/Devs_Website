@@ -45,6 +45,8 @@ const ChallengeArena = lazy(
 const AiAgent = lazy(() => import("./features/AI-Agent/AiAgent"));
 const AiAgentLanding = lazy(() => import("./features/AI-Agent/AiAgentLanding"));
 const CapstonePage = lazy(() => import("./features/Capstone/CapstonePage"));
+const VoiceReviewPage = lazy(() => import("./features/VoiceReview/VoiceReviewPage"));
+const PricingPage = lazy(() => import("./features/Billing/PricingPage"));
 
 const Fundamentals = lazy(() => import("./pages/CategoryPages/Fundamentals"));
 const FullStack = lazy(() => import("./pages/CategoryPages/FullStack"));
@@ -67,6 +69,7 @@ const router = createBrowserRouter([
       { path: "about", element: <About /> },
       { path: "contact", element: <Contact /> },
       { path: "privacy", element: <Privacy /> },
+      { path: "pricing", element: <PricingPage /> },
       { path: "oauth-success", element: <OAuthSuccess /> },
       {
         path: "get-started",
@@ -108,6 +111,7 @@ const router = createBrowserRouter([
           { path: "ai-agent", element: <AiAgentLanding /> },
           { path: "ai-agent/chat", element: <AiAgent /> },
           { path: "capstone", element: <CapstonePage /> },
+          { path: "voice-review", element: <VoiceReviewPage /> },
           { path: "users/:username", element: <UserProfile /> },
           {
             path: "my-profile",

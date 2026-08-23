@@ -12,7 +12,7 @@ const OTHER_OID = '507f1f77bcf86cd799439022'
 // ─── helpers ────────────────────────────────────────────────────────────────
 
 const makeValidToken = (id = VALID_OID) =>
-  jwt.sign({ id }, SECRET, { expiresIn: '1h' })
+  jwt.sign({ id, type: 'access' }, SECRET, { expiresIn: '1h' })
 
 /**
  * Build a mock DB whose collections return the provided data.

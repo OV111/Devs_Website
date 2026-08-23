@@ -5,6 +5,8 @@ export const getUserProfileService = async (db, userName, currentUserId) => {
   const users = db.collection("users");
   const userStats = db.collection("usersStats");
   const follows = db.collection("follows");
+  const userProgress = db.collection("userProgress");
+  const examHistory = db.collection("examHistory");
 
   const targetUser = await users.findOne(
     { username: userName },
@@ -12,15 +14,23 @@ export const getUserProfileService = async (db, userName, currentUserId) => {
   );
   if (!targetUser) throw { status: 404, message: "Not Found" };
 
-  const [followDoc, reverseDoc, stats] = await Promise.all([
+  const [followDoc, reverseDoc, stats, progress, exams] = await Promise.all([
     follows.findOne({ followerId: currentUserId, followingId: targetUser._id }),
     follows.findOne({ followerId: targetUser._id, followingId: currentUserId }),
     userStats.findOne({ userId: targetUser._id }),
+    userProgress.findOne({ userId: targetUser._id }),
+    examHistory
+      .find({ userId: targetUser._id })
+      .sort({ takenAt: -1 })
+      .limit(10)
+      .toArray(),
   ]);
 
   return {
     targetUser,
     stats,
+    progress: progress ?? null,
+    examHistory: exams,
     isFollowing: !!followDoc,
     isFollower: !!reverseDoc,
   };

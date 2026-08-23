@@ -7,6 +7,7 @@ import XIcon from "@mui/icons-material/X";
 import toast from "react-hot-toast";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { getAccessToken } from "../../../constants/api";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -69,7 +70,7 @@ const ConnectedAccounts = () => {
   const saveLinks = async () => {
     setSaving(true);
     try {
-      const token = localStorage.getItem("JWT");
+      const token = getAccessToken();
       const formData = new FormData();
       Object.entries(links).forEach(([k, v]) => formData.append(k, v));
       const res = await fetch(`${API_BASE_URL}/my-profile/settings`, {
@@ -92,14 +93,16 @@ const ConnectedAccounts = () => {
   };
 
   const connectGitHub = () => {
-    const token = localStorage.getItem("JWT");
-    window.location.href = `${API_BASE_URL}/auth/github/link?token=${token}`;
+    // Identity for this redirect is proven server-side via the httpOnly
+    // refresh cookie (sent automatically on this same-site navigation),
+    // not a token in the URL — see githubLinkRedirect in authController.js.
+    window.location.href = `${API_BASE_URL}/auth/github/link`;
   };
 
   const disconnectGitHub = async () => {
     setDisconnecting(true);
     try {
-      const token = localStorage.getItem("JWT");
+      const token = getAccessToken();
       const res = await fetch(`${API_BASE_URL}/auth/github/disconnect`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },

@@ -3,6 +3,11 @@ import rateLimit from "express-rate-limit";
 import {
   signUp,
   login,
+  refreshAccessToken,
+  logoutUser,
+  setRefreshCookie,
+  REFRESH_COOKIE_NAME,
+  REFRESH_COOKIE_OPTIONS,
   googleAuth,
   githubRedirect,
   githubLinkRedirect,
@@ -13,6 +18,15 @@ import {
 } from "../controllers/authController.js";
 import { verifyToken } from "../utils/jwtToken.js";
 import { redisConnection } from "../config/redis.js";
+
+// Sends the controller's result as JSON but strips the refresh token first —
+// it must only ever leave the server as the httpOnly cookie already set by
+// the caller, never in a body a script on the page could read.
+const respondWithoutRefreshToken = (res, result) => {
+  // eslint-disable-next-line no-unused-vars -- intentionally discarded
+  const { refreshToken, ...safeResult } = result;
+  res.status(result.status ?? result.code ?? 500).json(safeResult);
+};
 
 const router = Router();
 
@@ -162,8 +176,10 @@ router.post("/get-started", signupLimiter, async (req, res) => {
     const result = await signUp(req.body);
     if (result.status !== 201) {
       await redisIncr(signupKey, SIGNUP_WINDOW_SECONDS);
+    } else {
+      setRefreshCookie(res, result.refreshToken);
     }
-    res.status(result.status ?? result.code ?? 500).json(result);
+    respondWithoutRefreshToken(res, result);
   } catch (err) {
     res
       .status(500)
@@ -231,13 +247,7 @@ router.post("/login", loginLimiter, async (req, res) => {
         redisConnection.del(ipKey),
         redisConnection.del(emailKey),
       ]);
-      res.cookie("session", String(result.userId), {
-        httpOnly: true,
-        secure: false,
-        sameSite: "strict",
-        maxAge: 60 * 60 * 1000,
-        path: "/",
-      });
+      setRefreshCookie(res, result.refreshToken);
     } else if ([401, 404].includes(result.status)) {
       await Promise.all([
         redisIncr(ipKey, LOGIN_WINDOW_SECONDS),
@@ -245,7 +255,7 @@ router.post("/login", loginLimiter, async (req, res) => {
       ]);
     }
 
-    res.status(result.status).json(result);
+    respondWithoutRefreshToken(res, result);
   } catch (err) {
     res
       .status(500)
@@ -258,25 +268,51 @@ router.post("/login", loginLimiter, async (req, res) => {
  * /log-out:
  *   delete:
  *     tags: [Auth]
- *     summary: Logout and clear session cookie
+ *     summary: Logout — revokes the refresh token and clears the cookie
  *     responses:
  *       200:
  *         description: Logged out successfully
  */
-router.delete("/log-out", (req, res) => {
+router.delete("/log-out", async (req, res) => {
   try {
-    res.clearCookie("session", {
-      httpOnly: true,
-      secure: false,
-      sameSite: "strict",
-      path: "/",
-    });
+    await logoutUser(req.cookies?.[REFRESH_COOKIE_NAME]);
+    res.clearCookie(REFRESH_COOKIE_NAME, REFRESH_COOKIE_OPTIONS);
     res.status(200).json({ message: "Logged out succesfully", code: 200 });
   } catch (err) {
     res
       .status(500)
       .json({ message: "Logout Error", code: 500, error: err.message });
   }
+});
+
+/**
+ * @openapi
+ * /refresh:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Exchange the refresh cookie for a new short-lived access token
+ *     responses:
+ *       200:
+ *         description: Returns a new access token
+ *       401:
+ *         description: Missing, invalid, expired, or already-used refresh token
+ */
+router.post("/refresh", async (req, res) => {
+  const refreshTokenValue = req.cookies?.[REFRESH_COOKIE_NAME];
+  if (!refreshTokenValue) {
+    return res.status(401).json({ message: "No refresh token", code: 401 });
+  }
+
+  const result = await refreshAccessToken(refreshTokenValue);
+  if (result.status !== 200) {
+    // Refresh token was invalid/expired/reused — clear it so the client
+    // doesn't keep retrying with a cookie that will never work again.
+    res.clearCookie(REFRESH_COOKIE_NAME, REFRESH_COOKIE_OPTIONS);
+    return res.status(result.status).json({ message: result.message, code: result.status });
+  }
+
+  setRefreshCookie(res, result.refreshToken);
+  res.status(200).json({ accessToken: result.accessToken });
 });
 
 /**
@@ -329,7 +365,10 @@ router.get("/verify-token", (req, res) => {
 router.post("/google/auth", async (req, res) => {
   try {
     const result = await googleAuth(req.body);
-    res.status(result.status).json(result);
+    if (result.status === 200) {
+      setRefreshCookie(res, result.refreshToken);
+    }
+    respondWithoutRefreshToken(res, result);
   } catch (err) {
     res.status(500).json({
       message: "Google Authentication Error",

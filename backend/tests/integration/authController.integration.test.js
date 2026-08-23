@@ -54,7 +54,8 @@ describe('signUp — integration', () => {
     const result = await signUp(BASE_USER)
     expect(result.status).toBe(201)
     expect(result.message).toMatch(/created/i)
-    expect(typeof result.token).toBe('string')
+    expect(typeof result.accessToken).toBe('string')
+    expect(typeof result.refreshToken).toBe('string')
   })
 
   it('actually persists the user document in MongoDB', async () => {
@@ -95,7 +96,7 @@ describe('signUp — integration', () => {
   it('returns a JWT whose payload contains the new user id', async () => {
     const result = await signUp(BASE_USER)
 
-    const payload = verifyToken(result.token)
+    const payload = verifyToken(result.accessToken)
     expect(payload).not.toBeNull()
     expect(payload.id).toBeTruthy()
 
@@ -173,13 +174,14 @@ describe('login — integration', () => {
     const result = await login({ email: BASE_USER.email, password: BASE_USER.password })
     expect(result.status).toBe(200)
     expect(result.message).toMatch(/successful/i)
-    expect(typeof result.token).toBe('string')
+    expect(typeof result.accessToken).toBe('string')
+    expect(typeof result.refreshToken).toBe('string')
     expect(result.userId).toBeTruthy()
   })
 
   it('returns a verifiable JWT on successful login', async () => {
     const result = await login({ email: BASE_USER.email, password: BASE_USER.password })
-    const payload = verifyToken(result.token)
+    const payload = verifyToken(result.accessToken)
     expect(payload).not.toBeNull()
     expect(payload.id).toBeTruthy()
   })
@@ -219,8 +221,8 @@ describe('login — integration', () => {
     const loginResult = await login({ email: 'bob@test.com', password: 'bobspass' })
     expect(loginResult.status).toBe(200)
 
-    const signUpPayload = verifyToken(signUpResult.token)
-    const loginPayload = verifyToken(loginResult.token)
+    const signUpPayload = verifyToken(signUpResult.accessToken)
+    const loginPayload = verifyToken(loginResult.accessToken)
     expect(signUpPayload.id).toBe(loginPayload.id)
   })
 })

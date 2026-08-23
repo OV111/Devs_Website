@@ -63,7 +63,7 @@ import initWebSocketServer from '../../websocket/index.js'
  * Mint a valid JWT for the given user id (defaults to a realistic ObjectId string).
  */
 const makeToken = (id = '507f1f77bcf86cd799439011') =>
-  jwt.sign({ id }, process.env.JWT_Secret, { expiresIn: '1h' })
+  jwt.sign({ id, type: 'access' }, process.env.JWT_Secret, { expiresIn: '1h' })
 
 /**
  * Build a mock DB whose collections support the operations used by chatHandler.

@@ -90,7 +90,7 @@ describe('signUp — concurrent unique-email requests', () => {
     const payloads = Array.from({ length: N }, (_, i) => makePayload(i))
 
     const results = await Promise.all(payloads.map((p) => signUp(p)))
-    const tokens = results.map((r) => r.token)
+    const tokens = results.map((r) => r.accessToken)
     const uniqueTokens = new Set(tokens)
 
     expect(uniqueTokens.size).toBe(N)

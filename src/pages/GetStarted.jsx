@@ -40,10 +40,12 @@ const GetStarted = () => {
   } = useForm({ mode: "onBlur" });
 
   const generateUsername = (firstName = "", lastName = "") => {
-    return `${firstName}${lastName}`
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, "")
-      .slice(0, 20) || "dev";
+    return (
+      `${firstName}${lastName}`
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "")
+        .slice(0, 20) || "dev"
+    );
   };
 
   const onSubmit = async (data) => {
@@ -65,13 +67,14 @@ const GetStarted = () => {
       const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(payload),
       });
       const result = await response.json();
 
       if (response.ok) {
         toast.success(`${result.message}`, { duration: 900 });
-        login(result.token);
+        login(result.accessToken);
         reset();
         navigate("/");
       } else if (response.status === 409) {
@@ -116,12 +119,13 @@ const GetStarted = () => {
       const res = await fetch(`${API_BASE_URL}/google/auth`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ tokenId: credentialResponse.credential }),
       });
       const result = await res.json();
       if (res.ok) {
         toast.success("Google login successful");
-        login(result.token);
+        login(result.accessToken);
         navigate("/");
       } else {
         toast.error(result.message || "Google auth failed");
@@ -141,10 +145,10 @@ const GetStarted = () => {
           {/* Card */}
           <div className="bg-white dark:bg-neutral-800/60 dark:backdrop-blur-sm rounded-xl px-8 py-10">
             {/* Heading */}
-            <h1 className="text-[22px] sm:text-[24px] font-semibold leading-tight text-[#1a1f36] dark:text-white mb-1">
+            <h1 className="flex justify-center text-[22px] sm:text-[24px] font-semibold leading-tight text-[#1a1f36] dark:text-white mb-1">
               {isSignedUp ? "Create your account" : "Sign in to your account"}
             </h1>
-            <p className="text-[13.5px] text-[#697386] dark:text-zinc-400 mb-7">
+            <p className="flex justify-center text-[13.5px] text-[#697386] dark:text-zinc-400 mb-7">
               {isSignedUp
                 ? "Join DevsWebs and start building today."
                 : "Welcome back! Enter your details below."}
@@ -367,7 +371,6 @@ const GetStarted = () => {
               {/* Hidden real Google button */}
               <div ref={googleBtnRef} className="hidden">
                 <GoogleLogin
-                
                   onSuccess={handleGoogleLogin}
                   onError={() => toast.error("Google Sign-In failed")}
                 />

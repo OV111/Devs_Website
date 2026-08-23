@@ -8,7 +8,7 @@ import ChatTopBar from "./components/ChatTopBar";
 import MessageList from "./components/MessageList";
 import ChatInput from "./components/ChatInput";
 import AgentContextPanel from "./components/AgentContextPanel";
-import { JWT_KEY, API_BASE_URL, authHeaders } from "../../../constants/api";
+import { getAccessToken, API_BASE_URL, authHeaders } from "../../../constants/api";
 
 const AGENT_TOOLS = [
   { name: "search_posts", description: "Search platform posts" },
@@ -88,7 +88,7 @@ export default function AiAgent() {
 
     navigate(location.pathname, { replace: true, state: {} });
 
-    const token = localStorage.getItem(JWT_KEY);
+    const token = getAccessToken();
 
     async function bootstrap() {
       try {
@@ -144,7 +144,7 @@ export default function AiAgent() {
     sendMessage({
       sessionId: storeActiveSessionId,
       content: text,
-      token: localStorage.getItem(JWT_KEY),
+      token: getAccessToken(),
     });
   };
 

@@ -1,12 +1,12 @@
 import { create } from "zustand";
-import { JWT_KEY } from "../../constants/api";
+import { getAccessToken } from "../../constants/api";
 
 const useNotificationStore = create((set, get) => ({
     notifications: [],
     unreadCount: 0,
     ws: null,
     connectWs: () => {
-        const token = localStorage.getItem(JWT_KEY);
+        const token = getAccessToken();
         if (!token) return;
         const ws = new WebSocket(import.meta.env.VITE_WS_URL);
         ws.onopen = () => {

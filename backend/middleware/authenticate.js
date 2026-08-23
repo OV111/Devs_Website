@@ -1,7 +1,6 @@
 // authenticate.js
-import jwt from "jsonwebtoken";
-import process from "node:process";
 import { ObjectId } from "mongodb";
+import { verifyAccessToken } from "../utils/jwtToken.js";
 
 export const authenticate = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -10,20 +9,22 @@ export const authenticate = (req, res, next) => {
   }
   const token = authHeader.split(" ")[1];
 
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_Secret); // ✅ same casing as createToken
-    
-    const rawId = decoded.id ?? decoded._id; // ✅ handle both old and new tokens
-    if (!rawId) {
-      return res.status(401).json({ message: "Invalid token payload" });
-    }
-
-    req.user = {
-      ...decoded,
-      _id: new ObjectId(rawId), // ✅ id → _id as ObjectId
-    };
-    next();
-  } catch {
+  // verifyAccessToken (single source of truth, shared with the manual
+  // verifyToken() calls in the controllers) also rejects a refresh token
+  // presented here — refresh tokens are cookie-only and carry type:"refresh".
+  const decoded = verifyAccessToken(token);
+  if (!decoded) {
     return res.status(401).json({ message: "Invalid or expired token" });
   }
+
+  const rawId = decoded.id ?? decoded._id; // ✅ handle both old and new tokens
+  if (!rawId) {
+    return res.status(401).json({ message: "Invalid token payload" });
+  }
+
+  req.user = {
+    ...decoded,
+    _id: new ObjectId(rawId), // ✅ id → _id as ObjectId
+  };
+  next();
 };

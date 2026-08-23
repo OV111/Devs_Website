@@ -21,7 +21,7 @@
  * - No test in this suite asserts that an injection "worked" — every test
  *   asserts the server correctly refused or sanitised the input.
  */
-
+import Buffer from 'node:buffer'
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest'
 import supertest from 'supertest'
 import { MongoMemoryServer } from 'mongodb-memory-server'
@@ -82,7 +82,9 @@ const bearer = (token) => `Bearer ${token}`
 
 const seedUser = async (overrides = {}) => {
   const result = await signUp({ ...BASE_USER, ...overrides })
-  return result
+  // Back-compat alias: existing tests destructure `{ token }` — accessToken
+  // is what's actually returned now that signUp issues an access/refresh pair.
+  return { ...result, token: result.accessToken }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -477,7 +479,7 @@ describe('Security — brute-force signal', () => {
       .send({ email: BASE_USER.email, password: BASE_USER.password })
 
     expect(res.status).toBe(200)
-    expect(res.body.token).toBeTruthy()
+    expect(res.body.accessToken).toBeTruthy()
   })
 })
 
