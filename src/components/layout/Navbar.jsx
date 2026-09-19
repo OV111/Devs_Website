@@ -159,7 +159,7 @@ const Navbar = () => {
           el.offsetHeight + "px",
         )
       }
-      className="sticky top-0 flex items-center px-4 lg:px-6 py-2 z-50 w-full bg-gray-950/80 backdrop-blur-md"
+      className="sticky top-0 flex items-center px-4 lg:px-6 py-2 z-50 w-full bg-[#09090b] backdrop-blur-md"
     >
       {/* Left: Logo */}
       <div className="flex-1">

@@ -1,4 +1,4 @@
-import React, { useEffect,  useState } from "react";
+import React, { useEffect, useState } from "react";
 import DeleteAccount from "@/features/profile/components/DeleteAccount";
 import { Toaster, toast } from "react-hot-toast";
 import SideBar from "./components/SideBar";
@@ -8,7 +8,6 @@ import "react-loading-skeleton/dist/skeleton.css";
 import useThemeStore from "@/stores/useThemeStore";
 import ImageDropZone from "./components/ImageDropZone";
 import { saveSettings } from "@/services/profileApi";
-
 
 const Settings = () => {
   const { user, stats, isLoading, fetchProfile, updateStats } =
@@ -35,7 +34,6 @@ const Settings = () => {
   const [profileImage, setProfileImage] = useState(null);
   const [bannerImage, setBannerImage] = useState(null);
 
-   
   useEffect(() => {
     if (!user && !stats) fetchProfile();
   }, []);
@@ -104,18 +102,17 @@ const Settings = () => {
 
       <div className="flex-1 p-4 sm:p-6 lg:p-8">
         <div className="flex justify-between items-center lg:gap-50">
+          <h1 className="mb-2 font-semibold text-xl text-gray-900 dark:text-gray-100 lg:text-2xl">
+            Settings
+          </h1>
 
-        <h1 className="mb-2 font-semibold text-xl text-gray-900 dark:text-gray-100 lg:text-2xl">
-          Settings
-        </h1>
-
-        <button
+          <button
             onClick={SaveChanges}
             className="flex items-center gap-1.5 rounded-lg bg-fuchsia-600 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-fuchsia-700 disabled:opacity-50 cursor-pointer"
-            >
+          >
             Save Changes
           </button>
-            </div>
+        </div>
         <p className="max-w-xl pb-8 text-sm text-gray-700 dark:text-gray-300 lg:text-lg">
           Manage your account settings and preferences
         </p>
@@ -159,8 +156,12 @@ const Settings = () => {
           <div className="flex gap-6 max-w-[880px]">
             {isLoading ? (
               <>
-                <div className="flex-1"><Skeleton height={120} {...skeletonProps} /></div>
-                <div className="flex-1"><Skeleton height={120} {...skeletonProps} /></div>
+                <div className="flex-1">
+                  <Skeleton height={120} {...skeletonProps} />
+                </div>
+                <div className="flex-1">
+                  <Skeleton height={120} {...skeletonProps} />
+                </div>
               </>
             ) : (
               <>
@@ -289,8 +290,13 @@ const Settings = () => {
             </div>
           </div>
 
-          
           <DeleteAccount />
+       <button
+            onClick={SaveChanges}
+            className="flex items-center gap-1.5 rounded-lg bg-fuchsia-600 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-fuchsia-700 disabled:opacity-50 cursor-pointer"
+            >
+            Save Changes
+          </button>
         </div>
       </div>
     </div>
