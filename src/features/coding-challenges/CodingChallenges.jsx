@@ -15,11 +15,9 @@ import TextType from "@/components/effects/TextType";
 import {
   TYPE_STYLE,
   MOCK_STATS,
-  DAILY,
-  CHALLENGES,
-  TOPICS,
   LEADERBOARD,
 } from "../../../constants/CodingChallenges";
+import useChallengeStore from "./store/useChallengeStore";
 
 const FadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 16 },
@@ -45,6 +43,31 @@ function useCounter(target, duration = 1800, active = false) {
     return () => clearInterval(timer);
   }, [target, duration, active]);
   return count;
+}
+
+function useUtcMidnightCountdown() {
+  const [label, setLabel] = useState("--:--:--");
+  useEffect(() => {
+    const tick = () => {
+      const now = new Date();
+      const next = Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate() + 1,
+      );
+      const left = Math.max(0, next - now.getTime());
+      const pad = (n) => String(n).padStart(2, "0");
+      setLabel(
+        `${pad(Math.floor(left / 3600000))}:${pad(
+          Math.floor(left / 60000) % 60,
+        )}:${pad(Math.floor(left / 1000) % 60)}`,
+      );
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return label;
 }
 
 function StatCell({ value, unit, label, sub, index }) {
@@ -150,7 +173,7 @@ function ChallengeCard({ c }) {
       )}
 
       <div className="flex items-center gap-2">
-        <span className="text-[10px] font-mono text-[#333]">{c.id}</span>
+        <span className="text-[10px] font-mono text-[#333]">{c.slug}</span>
         <span
           className="text-[9px] font-bold px-1.5 py-0.5"
           style={{ border: `1px solid ${ts.border}`, color: ts.color }}
@@ -165,11 +188,11 @@ function ChallengeCard({ c }) {
       </p>
 
       {/* Description */}
-      <p className="text-[12px] leading-relaxed text-[#555]">{c.desc}</p>
+      <p className="text-[12px] leading-relaxed text-[#555]">{c.summary}</p>
 
       {/* Tags */}
       <div className="flex flex-wrap gap-1.5">
-        {c.tags.map((t) => (
+        {(c.tags ?? []).map((t) => (
           <span
             key={t}
             className="text-[10px] px-1.5 py-0.5 border border-[#1f1f1f] text-[#444]"
@@ -182,8 +205,8 @@ function ChallengeCard({ c }) {
       {/* Footer */}
       <div className="flex items-center justify-between mt-1 pt-2 border-t border-[#1a1a1a]">
         <div className="flex items-center gap-3 text-[11px] text-[#444]">
-          <span>{c.time}</span>
-          <span>{c.solves} solves</span>
+          <span>{c.estimatedMins}m</span>
+          <span>{c.stats?.solves ?? 0} solves</span>
           {/* difficulty bars */}
           <span className="flex items-end gap-0.5">
             {[1, 2, 3].map((level) => (
@@ -230,21 +253,34 @@ export default function CodingChallenges() {
   const openMenu = (name) => setOpenDropdown(name);
   const closeMenu = () => setOpenDropdown(null);
 
-  const filteredChallenges = CHALLENGES.filter((c) => {
-    if (activePath !== "all" && c.path !== activePath) return false;
+  const { challenges, topics, daily, loading, error, loadList } =
+    useChallengeStore();
+  const countdown = useUtcMidnightCountdown();
+
+  useEffect(() => {
+    loadList();
+  }, [loadList]);
+
+  // The filter UI speaks in layer numbers ("3", "4+"); the API stores layer
+  // slugs ("api-dev-3"). Pull the trailing number off the slug to compare.
+  const layerNumber = (layerId) => parseInt(layerId?.split("-").pop(), 10);
+
+  const filteredChallenges = challenges.filter((c) => {
+    if (activePath !== "all" && c.trackId !== activePath) return false;
+    const n = layerNumber(c.layerId);
     if (activeLayer === "4+") {
-      if (parseInt(c.layer) < 4) return false;
-    } else if (c.layer !== activeLayer) return false;
+      if (!(n >= 4)) return false;
+    } else if (String(n) !== activeLayer) return false;
     if (activeType !== "all" && c.type.toLowerCase() !== activeType)
       return false;
-    if (activeLevel !== "all" && c.level !== activeLevel) return false;
+    if (activeLevel !== "all" && c.difficulty !== activeLevel) return false;
     if (recommended && !c.hot) return false;
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
       if (
         !c.title.toLowerCase().includes(q) &&
-        !c.desc.toLowerCase().includes(q) &&
-        !c.tags.some((t) => t.toLowerCase().includes(q))
+        !(c.summary ?? "").toLowerCase().includes(q) &&
+        !(c.tags ?? []).some((t) => t.toLowerCase().includes(q))
       )
         return false;
     }
@@ -343,20 +379,20 @@ export default function CodingChallenges() {
                 </span>
               </div>
               {/* <span className="text-[11px] text-white/60">
-                {DAILY.id} · {DAILY.date}
+                {daily?.slug}
               </span> */}
             </div>
 
             <p className="text-[16px] font-bold text-white leading-snug">
-              {DAILY.title}
+              {daily?.title ?? "Loading today's challenge…"}
             </p>
 
             <p className="text-[12px] leading-relaxed text-white/75">
-              {DAILY.desc}
+              {daily?.summary ?? ""}
             </p>
 
             <div className="flex flex-wrap gap-1.5">
-              {DAILY.tags.map((t) => (
+              {(daily?.tags ?? []).map((t) => (
                 <span
                   key={t}
                   className="text-[9px] font-bold px-2 bg-black/25 text-white rounded-xl"
@@ -367,7 +403,14 @@ export default function CodingChallenges() {
             </div>
 
             <div className="flex items-center gap-3 mt-1">
-              <button className="flex justify-center items-center gap-1.5 flex-1 py-2 text-[13px] font-bold rounded-sm transition-opacity hover:opacity-90 cursor-pointer bg-white text-purple-600">
+              <button
+                type="button"
+                disabled={!daily}
+                onClick={() =>
+                  daily && navigate(`/coding-challenges/${daily.slug}`)
+                }
+                className="flex justify-center items-center gap-1.5 flex-1 py-2 text-[13px] font-bold rounded-sm transition-opacity hover:opacity-90 cursor-pointer bg-white text-purple-600"
+              >
                 <p>$ start solving</p>
                 <ArrowRight size={14} />
               </button>
@@ -377,7 +420,7 @@ export default function CodingChallenges() {
                   // RESETS IN
                 </p>
                 <p className="text-[15px] font-bold font-mono text-white">
-                  {DAILY.countdown}
+                  {countdown}
                 </p>
               </div>
             </div>
@@ -461,8 +504,23 @@ export default function CodingChallenges() {
 
       <div className="flex gap-6 px-6 sm:px-10 lg:px-14 py-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {error && (
+            <p className="col-span-full text-[12px] text-red-400">
+              Couldn&apos;t load challenges — {error}
+            </p>
+          )}
+          {!error && loading && filteredChallenges.length === 0 && (
+            <p className="col-span-full text-[12px] text-[#444]">
+              Loading challenges…
+            </p>
+          )}
+          {!error && !loading && filteredChallenges.length === 0 && (
+            <p className="col-span-full text-[12px] text-[#444]">
+              No challenges match these filters yet.
+            </p>
+          )}
           {filteredChallenges.map((c) => (
-            <div key={c.id} onClick={() => navigate(`/coding-challenges/${c.id}`)} className="cursor-pointer">
+            <div key={c.slug} onClick={() => navigate(`/coding-challenges/${c.slug}`)} className="cursor-pointer">
               <ChallengeCard c={c} />
             </div>
           ))}
@@ -510,7 +568,7 @@ export default function CodingChallenges() {
               <span className="text-[10px] text-[#2a2a2a]">layer 3</span>
             </div>
             <div className="flex flex-col gap-0.5">
-              {TOPICS.map(({ label, count }) => (
+              {topics.map(({ label, count }) => (
                 <button
                   key={label}
                   onClick={() => setActiveTopic(label)}

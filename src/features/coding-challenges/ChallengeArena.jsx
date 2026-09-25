@@ -1,4 +1,4 @@
-import { useState, createElement } from "react";
+import { useState, useEffect, useMemo, useCallback, useRef, createElement } from "react";
 import { useParams, useNavigate, NavLink } from "react-router-dom";
 import {
   ChevronLeft, ChevronRight, Play, RotateCcw, Eye, Lock,
@@ -7,6 +7,9 @@ import {
 } from "lucide-react";
 import useAuthStore from "../../stores/useAuthStore";
 import useProfileStore from "@/stores/useProfileStore";
+import useChallengeStore from "./store/useChallengeStore";
+import CodeEditor from "./components/arena/CodeEditor";
+import useCodeRunner from "./hooks/useCodeRunner";
 import { CATEGORY_OPTIONS } from "../../../constants/Categories";
 import { AVATAR_MENU_ITEMS } from "../../../constants/Navbar";
 
@@ -25,212 +28,6 @@ const C = {
 
 const FONT_SANS = "'Geist', 'Inter', system-ui, sans-serif";
 const FONT_MONO = "'Geist Mono', 'Fira Code', 'JetBrains Mono', monospace";
-
-const MOCK_CHALLENGE = {
-  id: "P_03_09",
-  type: "CODE",
-  difficulty: "MEDIUM",
-  xp: 45,
-  weakTopic: true,
-  title: "Async error wrapper for Express",
-  breadcrumb: ["arena", "backend", "layer 3"],
-  pager: { current: 9, total: 17 },
-  description: `You're building an Express API where every route handler is <code>async</code>. Right now, any error thrown inside an async handler escapes the framework's error pipeline and crashes silently.`,
-  task: `Write a function <code>asyncHandler(fn)</code> that takes an async route handler and returns a wrapped handler that catches any rejection and forwards it to Express's <code>next()</code>.`,
-  constraints: [
-    "Must work with both async functions and functions returning Promises.",
-    "Must not change the original function's signature.",
-    "Synchronous handlers should still work if accidentally wrapped.",
-    "No external libraries (the standard library is fine).",
-  ],
-  example: `const safeGet = asyncHandler(async (req, res) => {
-  const data = await fetchData(req.params.id);
-  res.json(data);
-});
-app.get('/data/:id', safeGet);`,
-  files: [
-    {
-      name: "asyncHandler.js",
-      lang: "js",
-      code: `// asyncHandler.js
-// Wrap an async express handler so rejections reach next()
-
-function asyncHandler(fn) {
-  return function (req, res, next) {
-    try {
-      const result = fn(req, res, next);
-      if (result && typeof result.catch === 'function') {
-        result.catch(next);
-      }
-    } catch (err) {
-      next(err);
-    }
-  };
-}
-
-module.exports = asyncHandler;`,
-    },
-    {
-      name: "asyncHandler_test.js",
-      lang: "test",
-      code: `// asyncHandler_test.js
-const asyncHandler = require('./asyncHandler');
-
-test('resolved_promise_passes', async () => {
-  const fn = jest.fn().mockResolvedValue(undefined);
-  const handler = asyncHandler(fn);
-  const req = {}, res = {}, next = jest.fn();
-  await handler(req, res, next);
-  expect(next).not.toHaveBeenCalled();
-});
-
-test('rejection_calls_next', async () => {
-  const err = new Error('boom');
-  const fn = jest.fn().mockRejectedValue(err);
-  const handler = asyncHandler(fn);
-  const next = jest.fn();
-  await handler({}, {}, next);
-  expect(next).toHaveBeenCalledWith(err);
-});
-
-test('sync_throw_calls_next', () => {
-  const err = new Error('sync');
-  const fn = () => { throw err; };
-  const handler = asyncHandler(fn);
-  const next = jest.fn();
-  handler({}, {}, next);
-  expect(next).toHaveBeenCalledWith(err);
-});
-
-test('does_not_mutate_fn', () => {
-  const fn = async () => {};
-  asyncHandler(fn);
-  expect(fn.length).toBe(0);
-});
-
-test('preserves_arity', () => {
-  const errorHandler = async (err, req, res, next) => {};
-  const wrapped = asyncHandler(errorHandler);
-  expect(wrapped.length).toBe(4);
-});`,
-    },
-  ],
-  hints: [
-    {
-      id: 1,
-      revealed: true,
-      cost: 0,
-      text: `You're close — 4/5 tests pass. The failing one is <code>preserves_arity</code>. Re-read what Express decides with <code>fn.length</code> to decide if a function is an error handler vs a normal handler.`,
-    },
-    {
-      id: 2,
-      revealed: false,
-      cost: 5,
-      text: `Use <code>Object.defineProperty</code> on the wrapper to set its <code>length</code> to match <code>fn.length</code> before returning it.`,
-    },
-    {
-      id: 3,
-      revealed: false,
-      cost: 15,
-      text: `Here's the key line: <code>Object.defineProperty(wrapper, 'length', { value: fn.length });</code>`,
-    },
-  ],
-  testResults: [
-    { name: "resolved_promise_passes", passed: true, ms: 3 },
-    { name: "rejection_calls_next",    passed: true, ms: 2 },
-    { name: "sync_throw_calls_next",   passed: true, ms: 1 },
-    { name: "does_not_mutate_fn",      passed: true, ms: 1 },
-    { name: "preserves_arity",         passed: false, ms: 4 },
-  ],
-};
-
-const JS_KEYWORDS = new Set([
-  "function","return","const","let","var","if","else","try","catch",
-  "async","await","new","this","null","undefined","true","false",
-  "typeof","instanceof","import","export","from","require","module",
-  "class","extends","super","throw","for","while","do","switch",
-  "case","break","continue","default","of","in","delete","void",
-]);
-
-const TOKEN_COLORS = {
-  keyword:  C.purple,
-  func:     "#60a5fa",
-  string:   C.green,
-  comment:  "#4a4a5c",
-  number:   C.amber,
-  plain:    "#c9c9d8",
-};
-
-function tokenizeLine(line) {
-  const trimmed = line.trimStart();
-  if (trimmed.startsWith("//")) return [{ text: line, t: "comment" }];
-
-  const tokens = [];
-  let i = 0;
-  while (i < line.length) {
-    const ch = line[i];
-
-    if (ch === "/" && line[i + 1] === "/") {
-      tokens.push({ text: line.slice(i), t: "comment" });
-      break;
-    }
-
-    if (ch === '"' || ch === "'" || ch === "`") {
-      let j = i + 1;
-      while (j < line.length && line[j] !== ch) {
-        if (line[j] === "\\") j++;
-        j++;
-      }
-      j++;
-      tokens.push({ text: line.slice(i, j), t: "string" });
-      i = j;
-      continue;
-    }
-
-    if (/[a-zA-Z_$]/.test(ch)) {
-      let j = i;
-      while (j < line.length && /[a-zA-Z0-9_$]/.test(line[j])) j++;
-      const word = line.slice(i, j);
-      const after = line.slice(j).trimStart();
-      const type = JS_KEYWORDS.has(word) ? "keyword" : after.startsWith("(") ? "func" : "plain";
-      tokens.push({ text: word, t: type });
-      i = j;
-      continue;
-    }
-
-    if (/[0-9]/.test(ch)) {
-      let j = i;
-      while (j < line.length && /[0-9.]/.test(line[j])) j++;
-      tokens.push({ text: line.slice(i, j), t: "number" });
-      i = j;
-      continue;
-    }
-
-    tokens.push({ text: ch, t: "plain" });
-    i++;
-  }
-  return tokens;
-}
-
-function HighlightedLine({ line }) {
-  if (line.trim() === "") return <span>&nbsp;</span>;
-  const tokens = tokenizeLine(line);
-  return (
-    <>
-      {tokens.map((tok, i) => (
-        <span
-          key={i}
-          style={{
-            color: TOKEN_COLORS[tok.t],
-            fontStyle: tok.t === "comment" ? "italic" : "normal",
-          }}
-        >
-          {tok.text}
-        </span>
-      ))}
-    </>
-  );
-}
 
 function Badge({ children, color, bg, border }) {
   return (
@@ -272,7 +69,7 @@ function ProblemPanel({ challenge }) {
     >
       {/* Badges */}
       <div className="flex flex-wrap gap-1.5">
-        <Badge color={C.text}      bg="#18181f"  border={C.faint}>{challenge.id}</Badge>
+        <Badge color={C.text}      bg="#18181f"  border={C.faint}>{challenge.slug}</Badge>
         <Badge color={C.green}     bg="#06190f"  border="#0e3d1e">{challenge.type}</Badge>
         <Badge color={C.amber}     bg="#190f00"  border="#3d2700">{challenge.difficulty}</Badge>
         <Badge color={C.purple}    bg="#160828"  border="#3b1e6e">+{challenge.xp} XP</Badge>
@@ -348,10 +145,11 @@ const FILE_META = {
   test: { dot: C.purple, label: "Jest Test · UTF-8"  },
 };
 
-function CodePanel({ files }) {
+function CodePanel({ files, onChangeFile }) {
   const [active, setActive] = useState(0);
   const file = files[active];
-  const lines = file.code.split("\n");
+
+  if (!file) return <div className="h-full" style={{ background: C.bg }} />;
 
   return (
     <div className="flex flex-col h-full" style={{ background: C.bg }}>
@@ -385,53 +183,33 @@ function CodePanel({ files }) {
         </span>
       </div>
 
-      {/* Gutter + code */}
-      <div
-        className="flex-1 overflow-y-auto overflow-x-auto"
-        style={{ scrollbarWidth: "thin", scrollbarColor: `${C.faint} transparent` }}
-      >
-        <table className="w-full border-collapse" style={{ fontFamily: FONT_MONO, fontSize: "13px" }}>
-          <tbody>
-            {lines.map((line, i) => (
-              <tr key={i} className="group">
-                <td
-                  className="select-none text-right pr-4 pl-4 align-top leading-6"
-                  style={{
-                    color: "#3a3a52",
-                    background: "#0c0c11",
-                    borderRight: `1px solid ${C.border}`,
-                    minWidth: "48px",
-                    userSelect: "none",
-                    fontSize: "11px",
-                    paddingTop: "1px",
-                    paddingBottom: "1px",
-                  }}
-                >
-                  {i + 1}
-                </td>
-                <td
-                  className="pl-5 pr-4 align-top leading-6 whitespace-pre group-hover:bg-white/[0.018]"
-                  style={{ color: TOKEN_COLORS.plain, paddingTop: "1px", paddingBottom: "1px" }}
-                >
-                  <HighlightedLine line={line} />
-                </td>
-              </tr>
-            ))}
-            {/* bottom padding row */}
-            <tr>
-              <td style={{ background: "#0c0c11", borderRight: `1px solid ${C.border}` }}>&nbsp;</td>
-              <td className="pb-10" />
-            </tr>
-          </tbody>
-        </table>
+      {/* Editor */}
+      <div className="flex-1 min-h-0 overflow-hidden">
+        <CodeEditor
+          key={file.name}
+          value={file.code}
+          readOnly={file.lang === "test"}
+          onChange={(code) => onChangeFile?.(file.name, code)}
+        />
       </div>
+
     </div>
   );
 }
 
-function HintsPanel({ hints: init }) {
-  const [hints, setHints] = useState(init);
-  const reveal = (id) => setHints(prev => prev.map(h => h.id === id ? { ...h, revealed: true } : h));
+function HintsPanel({ hints, onReveal }) {
+  // Reveal state lives in the parent now — a hint is only "revealed" once the
+  // server has charged for it and handed back the text.
+  const [pending, setPending] = useState(null);
+
+  const reveal = async (id) => {
+    setPending(id);
+    try {
+      await onReveal?.(id);
+    } finally {
+      setPending(null);
+    }
+  };
 
   const descHtml = (html) =>
     html.replace(/<code>/g, `<code style="background:#1e0a3c;border:1px solid #3b1e6e;border-radius:3px;padding:0 4px;color:${C.purple};font-family:${FONT_MONO};font-size:0.85em">`).replace(/<\/code>/g, "</code>");
@@ -507,10 +285,11 @@ function HintsPanel({ hints: init }) {
               ) : (
                 <button
                   onClick={() => reveal(hint.id)}
+                  disabled={pending === hint.id}
                   className="flex items-center gap-1.5 text-[11px] px-3 py-1 rounded transition-colors cursor-pointer"
                   style={{
-                    border: `1px solid ${C.faint}`,
-                    color: "#9a9aaa",
+                    border: `1px solid ${pending === hint.id ? C.purple : C.faint}`,
+                    color: pending === hint.id ? C.purple : "#9a9aaa",
                   }}
                   onMouseEnter={e => { e.currentTarget.style.borderColor = C.purple; e.currentTarget.style.color = C.purple; }}
                   onMouseLeave={e => { e.currentTarget.style.borderColor = C.faint; e.currentTarget.style.color = "#9a9aaa"; }}
@@ -527,7 +306,7 @@ function HintsPanel({ hints: init }) {
   );
 }
 
-function ActionBar({ testResults }) {
+function ActionBar({ testResults, onRun, running, onSubmit, submitting, lastRunAt, verdict }) {
   const passed = testResults.filter(r => r.passed).length;
   const total  = testResults.length;
 
@@ -549,33 +328,46 @@ function ActionBar({ testResults }) {
           ))}
         </div>
         <span className="text-[12px]" style={{ color: C.muted, fontFamily: FONT_MONO }}>
-          <span style={{ color: C.green }}>{passed}/{total} tests pass</span>
-          {" · last run 2s ago"}
+          <span style={{ color: total > 0 && passed === total ? C.green : C.muted }}>
+            {passed}/{total} tests pass
+          </span>
+          {lastRunAt ? ` · last run ${lastRunAt}` : ""}
         </span>
       </div>
 
       {/* Right: autosaved + buttons */}
       <div className="flex items-center gap-2">
         <span className="text-[11px] mr-1" style={{ color: C.faint, fontFamily: FONT_MONO }}>
-          autosaved
+          {verdict?.error
+            ? verdict.error
+            : verdict?.passed
+              ? `solved · +${verdict.xpEarned} xp`
+              : "autosaved"}
         </span>
         <button
+          onClick={onRun}
+          disabled={running}
           className="flex items-center gap-1.5 text-[12px] px-3 py-1.5 rounded transition-colors cursor-pointer"
-          style={{ border: `1px solid ${C.faint}`, color: C.muted }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = "#4a4a5a"; e.currentTarget.style.color = C.text; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = C.faint; e.currentTarget.style.color = C.muted; }}
+          style={{
+            border: `1px solid ${running ? C.purple : C.faint}`,
+            color: running ? C.purple : C.muted,
+          }}
+          onMouseEnter={e => { if (running) return; e.currentTarget.style.borderColor = "#4a4a5a"; e.currentTarget.style.color = C.text; }}
+          onMouseLeave={e => { if (running) return; e.currentTarget.style.borderColor = C.faint; e.currentTarget.style.color = C.muted; }}
         >
           <RotateCcw size={11} />
           Run tests
         </button>
         <button
+          onClick={onSubmit}
+          disabled={submitting}
           className="flex items-center gap-1.5 text-[12px] px-4 py-1.5 rounded font-semibold transition-colors cursor-pointer"
-          style={{ background: C.purple, color: "#fff" }}
-          onMouseEnter={e => { e.currentTarget.style.background = "#9333ea"; }}
-          onMouseLeave={e => { e.currentTarget.style.background = C.purple; }}
+          style={{ background: submitting ? "#7e22ce" : C.purple, color: "#fff" }}
+          onMouseEnter={e => { if (submitting) return; e.currentTarget.style.background = "#9333ea"; }}
+          onMouseLeave={e => { if (submitting) return; e.currentTarget.style.background = C.purple; }}
         >
           <Play size={11} fill="#fff" />
-          Submit
+          {submitting ? "Grading…" : "Submit"}
         </button>
       </div>
     </div>
@@ -774,9 +566,9 @@ function SubBar({ breadcrumb, challengeId, pager, onBack }) {
           <ChevronLeft size={11} /> Prev
         </button>
         <span className="px-2" style={{ color: C.text }}>
-          <span style={{ color: C.amber }}>{pager.current}</span>
+          <span style={{ color: C.amber }}>{pager?.current ?? "-"}</span>
           <span style={{ color: C.faint }}> / </span>
-          {pager.total}
+          {pager?.total ?? "-"}
         </span>
         <button className="flex items-center gap-0.5 px-2 py-0.5 rounded transition-colors cursor-pointer"
           style={{ border: `1px solid ${C.faint}` }}
@@ -790,9 +582,143 @@ function SubBar({ breadcrumb, challengeId, pager, onBack }) {
 }
 
 export default function ChallengeArena() {
-  const { id: _id } = useParams();
-  const navigate    = useNavigate();
-  const challenge   = MOCK_CHALLENGE;
+  const { id: slug } = useParams();
+  const navigate     = useNavigate();
+
+  const {
+    challenge, attempt, loading, error,
+    loadChallenge, clearChallenge, startAttempt, saveDraft, revealHint, submitAttempt,
+  } = useChallengeStore();
+
+  // Stage 3: the files are executed in a throwaway Web Worker, off the UI
+  // thread, so a bad solution can't freeze the Arena.
+  const { run, running, results } = useCodeRunner();
+
+  useEffect(() => {
+    loadChallenge(slug);
+    startAttempt(slug);
+    return clearChallenge;
+  }, [slug, loadChallenge, clearChallenge, startAttempt]);
+
+  // The editor holds its own copy of the files so typing is local and instant.
+  // Seeded from the saved draft when there is one, otherwise from the starter
+  // files; the read-only test file is always appended from the challenge.
+  const [files, setFiles] = useState([]);
+
+  useEffect(() => {
+    if (!challenge) return;
+    const draft = attempt?.code?.length ? attempt.code : challenge.starterFiles;
+    const byName = new Map((draft ?? []).map((f) => [f.name, f.code]));
+    setFiles(
+      [
+        ...(challenge.starterFiles ?? []).map((f) => ({
+          ...f,
+          code: byName.get(f.name) ?? f.code,
+        })),
+        challenge.testFile,
+      ].filter(Boolean),
+    );
+  }, [challenge, attempt]);
+
+  // Server-side grading. Distinct from the in-browser Run: this one is
+  // authoritative, pays XP, and returns the solution on a pass.
+  const [submitting, setSubmitting] = useState(false);
+  const [verdict, setVerdict] = useState(null);
+
+  const submit = useCallback(async () => {
+    setSubmitting(true);
+    try {
+      setVerdict(await submitAttempt());
+    } catch (err) {
+      setVerdict({
+        passed: false, results: [], total: 0, passedCount: 0, error: err.message,
+      });
+    } finally {
+      setSubmitting(false);
+    }
+  }, [submitAttempt]);
+
+  const updateFile = useCallback((name, code) => {
+    // Editing invalidates the previous verdict — showing a stale "passed"
+    // next to changed code would be a lie.
+    setVerdict(null);
+    setFiles((prev) =>
+      prev.map((f) => (f.name === name ? { ...f, code } : f)),
+    );
+  }, []);
+
+  // Autosave the editable files 1.5s after typing stops. Debounced rather than
+  // per-keystroke so a fast typist doesn't generate a request per character.
+  const savedRef = useRef("");
+  useEffect(() => {
+    const editable = files.filter((f) => f.lang !== "test");
+    if (!attempt || editable.length === 0) return;
+
+    const payload = JSON.stringify(
+      editable.map(({ name, code }) => ({ name, code })),
+    );
+    if (payload === savedRef.current) return;
+
+    const id = setTimeout(() => {
+      savedRef.current = payload;
+      saveDraft(JSON.parse(payload));
+    }, 1500);
+    return () => clearTimeout(id);
+  }, [files, attempt, saveDraft]);
+
+  // Hint bodies are never shipped with the challenge — they're bought one at a
+  // time and cached here once the server hands the text over.
+  const [hintTexts, setHintTexts] = useState({});
+
+  const hints = useMemo(
+    () =>
+      (challenge?.hints ?? []).map((h) => ({
+        id: h.order,
+        cost: h.cost,
+        revealed: Boolean(hintTexts[h.order]),
+        text: hintTexts[h.order] ?? "",
+      })),
+    [challenge, hintTexts],
+  );
+
+  const buyHint = useCallback(
+    async (order) => {
+      try {
+        const result = await revealHint(order);
+        if (result?.text) {
+          setHintTexts((prev) => ({ ...prev, [order]: result.text }));
+        }
+      } catch (err) {
+        // 402 = not enough XP. Surface it on the card rather than silently
+        // doing nothing, which would read as a broken button.
+        setHintTexts((prev) => ({ ...prev, [order]: `⚠ ${err.message}` }));
+      }
+    },
+    [revealHint],
+  );
+
+  const breadcrumb = useMemo(
+    () =>
+      challenge ? ["arena", challenge.trackId, challenge.layerId] : ["arena"],
+    [challenge],
+  );
+
+  if (!challenge) {
+    return (
+      <div
+        className="fixed left-0 right-0 bottom-0 z-40 flex items-center justify-center"
+        style={{ top: "var(--navbar-h, 48px)", background: C.bg, fontFamily: FONT_MONO, color: C.muted }}
+      >
+        <p className="text-[12px]" style={{ color: error ? C.rose : C.muted }}>
+          {error
+            ? `Couldn't load this challenge — ${error}`
+            : loading
+              ? "Loading challenge…"
+              : "Challenge not found."}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -801,9 +727,9 @@ export default function ChallengeArena() {
     >
       {/* Band 2: Sub-bar */}
       <SubBar
-        breadcrumb={challenge.breadcrumb}
-        challengeId={challenge.id}
-        pager={challenge.pager}
+        breadcrumb={breadcrumb}
+        challengeId={challenge.slug}
+        pager={null}
         onBack={() => navigate("/coding-challenges")}
       />
 
@@ -822,17 +748,25 @@ export default function ChallengeArena() {
 
         {/* Center: editor */}
         <div className="h-full overflow-hidden flex flex-col" style={{ borderRight: `1px solid ${C.border}` }}>
-          <CodePanel files={challenge.files} />
+          <CodePanel key={challenge.slug} files={files} onChangeFile={updateFile} />
         </div>
 
         {/* Right: hints */}
         <div className="h-full overflow-hidden flex flex-col">
-          <HintsPanel hints={challenge.hints} />
+          <HintsPanel key={challenge.slug} hints={hints} onReveal={buyHint} />
         </div>
       </div>
 
       {/* Band 4: Action bar */}
-      <ActionBar testResults={challenge.testResults} />
+      <ActionBar
+        testResults={verdict?.results?.length ? verdict.results : results}
+        running={running}
+        onRun={() => { setVerdict(null); run(files); }}
+        onSubmit={submit}
+        submitting={submitting}
+        lastRunAt={verdict ? "graded" : results.length ? "just now" : null}
+        verdict={verdict}
+      />
 
       {/* Responsive: below 1100px allow scroll */}
       <style>{`
