@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "vite",
     "start": "node backend/server.js",
+    "seed:roadmap": "node backend/seeders/roadmapSeeder.js",
+    "seed:challenges": "node backend/seeders/challengeSeeder.js",
+    "admin:grant": "node backend/scripts/grantAdmin.js",
     "build": "vite build",
     "build:staging": "vite build --mode staging",
     "server": "nodemon ./server.js",
@@ -27,12 +30,18 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@codemirror/commands": "^6.11.1",
+    "@codemirror/lang-javascript": "^6.2.5",
+    "@codemirror/language": "^6.12.4",
+    "@codemirror/state": "^6.7.6",
+    "@codemirror/view": "^6.43.13",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
     "@fortawesome/react-fontawesome": "^3.1.1",
     "@google/generative-ai": "^0.24.1",
+    "@lezer/highlight": "^1.2.4",
     "@mui/icons-material": "^7.3.2",
     "@mui/material": "^7.3.2",
     "@radix-ui/react-dialog": "^1.1.15",
