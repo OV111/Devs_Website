@@ -42,6 +42,12 @@ const CodingChallenges = lazy(
 const ChallengeArena = lazy(
   () => import("./features/coding-challenges/ChallengeArena"),
 );
+const ProposeChallenge = lazy(
+  () => import("./features/coding-challenges/pages/ProposeChallenge"),
+);
+const ReviewProposals = lazy(
+  () => import("./features/coding-challenges/pages/ReviewProposals"),
+);
 const AiAgent = lazy(() => import("./features/AI-Agent/AiAgent"));
 const AiAgentLanding = lazy(() => import("./features/AI-Agent/AiAgentLanding"));
 const CapstonePage = lazy(() => import("./features/capstone/CapstonePage"));
@@ -107,6 +113,8 @@ const router = createBrowserRouter([
           { path: "libs", element: <LibsPage /> },
           { path: "libs/:id", element: <BookDetailPage /> },
           { path: "coding-challenges", element: <CodingChallenges /> },
+          { path: "coding-challenges/propose", element: <ProposeChallenge /> },
+          { path: "coding-challenges/review", element: <ReviewProposals /> },
           { path: "coding-challenges/:id", element: <ChallengeArena /> },
           { path: "ai-agent", element: <AiAgentLanding /> },
           { path: "ai-agent/chat", element: <AiAgent /> },
