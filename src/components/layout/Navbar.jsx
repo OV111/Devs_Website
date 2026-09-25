@@ -135,10 +135,10 @@ const Navbar = () => {
               to={`/categories/${slug}`}
               onClick={onClose}
               className={({ isActive }) =>
-                `flex items-center px-4 py-2 text-sm transition ${
+                `flex items-center px-4 py-2 text-sm transition-colors duration-150 ${
                   isActive
-                    ? "bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300"
-                    : "text-gray-700 dark:text-gray-200 hover:bg-purple-50 hover:text-purple-700 dark:hover:bg-purple-950/40 dark:hover:text-purple-300"
+                    ? "font-medium text-purple-500"
+                    : "text-gray-700 dark:text-gray-200 hover:text-purple-500"
                 }`
               }
             >
@@ -390,7 +390,13 @@ const Navbar = () => {
                       key={to}
                       to={to}
                       onClick={closeMenu}
-                      className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-purple-50 hover:text-purple-700 dark:hover:bg-purple-950/40 dark:hover:text-purple-300 transition"
+                      className={({ isActive }) =>
+                        `flex items-center gap-3 px-4 py-2 text-sm transition-colors duration-150 ${
+                          isActive
+                            ? "font-medium text-purple-500"
+                            : "text-gray-700 dark:text-gray-200 hover:text-purple-500"
+                        }`
+                      }
                     >
                       {React.createElement(icon, { size: 15 })}
                       {label}
@@ -401,7 +407,7 @@ const Navbar = () => {
 
                   <button
                     onClick={handleLogout}
-                    className="flex items-center gap-3 w-full px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition cursor-pointer"
+                    className="flex items-center gap-3 w-full px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:text-red-500 transition-colors duration-150 cursor-pointer"
                   >
                     <LogOut size={15} />
                     Logout
