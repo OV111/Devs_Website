@@ -38,7 +38,7 @@ export default function SideBar() {
 
   return (
     <>
-      <aside className="flex min-h-screen w-10 flex-col overflow-hidden border-r border-gray-800 bg-[#09090b] transition-all duration-300 lg:w-56 lg:sticky lg:top-0">
+      <aside className="flex min-h-screen w-10 flex-col overflow-hidden border-r border-gray-800 bg-black transition-all duration-300 lg:w-56 lg:sticky lg:top-0">
         <div className="py-3 border-b border-gray-100 dark:border-gray-800 px-0 lg:px-3">
           <div className="flex items-center justify-center gap-3 mx-auto">
             <button

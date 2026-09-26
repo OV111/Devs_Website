@@ -10,7 +10,7 @@ const MainLayout = () => {
   // const isMyProfile = pathname.startsWith("/my-profile");
 
   return (
-    <div className="relative bg-[#09090b] min-h-screen overflow-x-hidden">
+    <div className="relative bg-black min-h-screen overflow-x-hidden">
       {/* {!isAgentChat && !isMyProfile && (
         <>
           <div className="pointer-events-none fixed top-30 -left-20 h-72 w-72 rounded-full bg-purple-900/20 blur-3xl" />

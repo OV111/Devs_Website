@@ -159,7 +159,7 @@ const Navbar = () => {
           el.offsetHeight + "px",
         )
       }
-      className="sticky top-0 flex items-center px-4 lg:px-6 py-2 z-50 w-full bg-[#09090b] backdrop-blur-md"
+      className="sticky top-0 flex items-center px-4 lg:px-6 py-2 z-50 w-full bg-black backdrop-blur-md"
     >
       {/* Left: Logo */}
       <div className="flex-1">
@@ -439,7 +439,7 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {isOpen && (
-        <ul className="flex flex-col gap-1 p-4 border-t border-white/10 absolute top-full left-0 w-full bg-gray-950 md:hidden z-50 shadow-xl text-gray-100">
+        <ul className="flex flex-col gap-1 p-4 border-t border-white/10 absolute top-full left-0 w-full bg-black md:hidden z-50 shadow-xl text-gray-100">
           {showSearch && (
             <li className="mb-1">
               <div className="relative">
