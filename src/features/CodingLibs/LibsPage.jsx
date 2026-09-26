@@ -135,7 +135,7 @@ export default function LibsPage() {
   };
 
   return (
-    <div className="flex bg-gray-950 text-[#e5e5e5]">
+    <div className="flex bg-black text-[#e5e5e5]">
       <div
         className={`no-scrollbar shrink-0 min-h-screen lg:sticky lg:top-0 lg:max-h-screen transition-[width] duration-200 ease-linear ${sidebarOpen ? "border-r border-gray-800" : ""}`}
         style={{

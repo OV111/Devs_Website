@@ -150,7 +150,7 @@ export default function AiAgent() {
 
   return (
     <div
-      className="flex bg-gray-950 text-[#e5e5e5]"
+      className="flex bg-black text-[#e5e5e5]"
       style={{ height: "calc(100vh - 44px)" }}
     >
       <SessionsSidebar
