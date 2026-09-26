@@ -1,7 +1,9 @@
 import { ObjectId } from "mongodb";
 
-const MAX_TURNS = 20;
-const DAILY_MESSAGE_CAP = 30;
+// Exported so /context can report the real caps instead of hardcoding them in
+// the UI — the old context panel drifted into fiction exactly that way.
+export const MAX_TURNS = 20;
+export const DAILY_MESSAGE_CAP = 30;
 
 // ── Sessions ──────────────────────────────────────────────────
 
@@ -22,7 +24,10 @@ export const listSessions = async (db, userId, limit = 20) => {
   const col = db.collection("agent_sessions");
   return col
     .find({ userId: new ObjectId(userId) })
-    .sort({ updatedAt: -1 })
+    // Pinned first, then most recent. Documents created before pinning existed
+    // have no `pinned` field; missing sorts below true under -1, which is the
+    // behaviour we want without needing a migration.
+    .sort({ pinned: -1, updatedAt: -1 })
     .limit(limit)
     .project({ messages: 0 })
     .toArray();
@@ -34,6 +39,40 @@ export const getSession = async (db, userId, sessionId) => {
     _id: new ObjectId(sessionId),
     userId: new ObjectId(userId),
   });
+};
+
+/**
+ * Partial update of a session — title and/or pinned.
+ *
+ * The filter includes userId deliberately: matching on _id alone would let any
+ * authenticated user rename, pin or delete another user's conversation by
+ * guessing an id. Returns null when the session doesn't exist OR isn't theirs —
+ * the caller turns both into a 404, so the endpoint never reveals that an id
+ * exists.
+ */
+export const updateSession = async (db, userId, sessionId, { title, pinned }) => {
+  const col = db.collection("agent_sessions");
+
+  const $set = { updatedAt: new Date() };
+  if (title !== undefined) $set.title = title.slice(0, 80);
+  if (pinned !== undefined) $set.pinned = pinned;
+
+  const result = await col.findOneAndUpdate(
+    { _id: new ObjectId(sessionId), userId: new ObjectId(userId) },
+    { $set },
+    { returnDocument: "after", projection: { messages: 0 } },
+  );
+  return result?.value ?? result ?? null;
+};
+
+/** Delete a session. Scoped by userId for the same reason as renameSession. */
+export const deleteSession = async (db, userId, sessionId) => {
+  const col = db.collection("agent_sessions");
+  const { deletedCount } = await col.deleteOne({
+    _id: new ObjectId(sessionId),
+    userId: new ObjectId(userId),
+  });
+  return deletedCount > 0;
 };
 
 // Append user + assistant messages, enforce 20-turn sliding window
@@ -75,6 +114,19 @@ export const checkDailyLimit = async (db, userId) => {
   }
 
   return { allowed: true, count };
+};
+
+/** Messages used today, for /context. Mirrors checkDailyLimit's day boundary. */
+export const getUsageToday = async (db, userId) => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const doc = await db
+    .collection("agent_usage")
+    .findOne({ userId: new ObjectId(userId), date: today });
+
+  const used = doc?.count ?? 0;
+  return { used, cap: DAILY_MESSAGE_CAP, remaining: Math.max(0, DAILY_MESSAGE_CAP - used) };
 };
 
 export const incrementUsage = async (db, userId) => {

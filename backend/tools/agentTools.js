@@ -103,7 +103,7 @@ export async function executeTool(name, args, ctx = {}) {
 
   if (name === "search_posts") {
     const { category, keyword, limit = 5 } = args;
-    const posts = db.collection("defaultPosts");
+    const posts = db.collection("posts-default");
     return posts
       .find({
         category: { $regex: category, $options: "i" },
@@ -143,7 +143,10 @@ export async function executeTool(name, args, ctx = {}) {
     if (!user) return { error: "User not found" };
     const stats = await db.collection("usersStats").findOne(
       { userId: user._id },
-      { projection: { bio: 1, location: 1, githubLink: 1, followersCount: 1, postsCount: 1 } },
+      // _id: 0 — without it the stats document's own _id overwrites the user's
+      // _id in the spread below, handing the model the wrong identifier.
+      // The field list stays a whitelist so private stats never reach the model.
+      { projection: { _id: 0, bio: 1, location: 1, githubLink: 1, followersCount: 1, postsCount: 1 } },
     );
     return { ...user, ...stats };
   }

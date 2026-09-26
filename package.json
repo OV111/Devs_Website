@@ -70,6 +70,7 @@
     "google-auth-library": "^10.6.2",
     "groq-sdk": "^1.2.1",
     "gsap": "^3.13.0",
+    "highlight.js": "^11.12.0",
     "jsonwebtoken": "^9.0.2",
     "ldrs": "^1.1.9",
     "lottie-react": "^2.4.1",
@@ -89,6 +90,8 @@
     "react-router-dom": "^7.7.1",
     "react-simplemde-editor": "^5.2.0",
     "redis": "^5.11.0",
+    "rehype-highlight": "^7.0.2",
+    "remark-gfm": "^4.0.1",
     "resend": "^6.12.3",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
@@ -96,6 +99,7 @@
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.182.0",
     "ws": "^8.19.0",
+    "zod": "^3.25.76",
     "zustand": "^5.0.8"
   },
   "lint-staged": {
