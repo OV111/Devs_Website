@@ -26,6 +26,7 @@ const Navbar = () => {
   const [showDropdownMobile, setShowDropdownMobile] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const searchRef = useRef(null);
+  const navRef = useRef(null);
 
   const { pathname } = useLocation();
   const { auth, logout } = useAuthStore();
@@ -56,6 +57,21 @@ const Navbar = () => {
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [isOpen]);
+
+  // --navbar-h drives every "sit right below the navbar" layout (the Arena's
+  // fixed panel, its mobile overlay, sticky toolbars). A one-shot read on
+  // mount goes stale the moment the navbar's real height changes — a
+  // dropdown opening, the mobile menu, a font swap — so keep it live instead.
+  useEffect(() => {
+    const el = navRef.current;
+    if (!el) return;
+    const setVar = () =>
+      document.documentElement.style.setProperty("--navbar-h", `${el.offsetHeight}px`);
+    setVar();
+    const observer = new ResizeObserver(setVar);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const closeDropdownMobile = () => {
     setShowDropdownMobile(false);
@@ -152,13 +168,7 @@ const Navbar = () => {
 
   return (
     <nav
-      ref={(el) =>
-        el &&
-        document.documentElement.style.setProperty(
-          "--navbar-h",
-          el.offsetHeight + "px",
-        )
-      }
+      ref={navRef}
       className="sticky top-0 flex items-center px-4 lg:px-6 py-2 z-50 w-full bg-black backdrop-blur-md"
     >
       {/* Left: Logo */}
@@ -170,7 +180,7 @@ const Navbar = () => {
               animationSpeed={6}
               className="font-bold text-base sm:text-xl"
             >
-              DevsWebs
+              Vahoha
             </GradientText>
           </NavLink>
         </h2>

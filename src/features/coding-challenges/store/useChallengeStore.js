@@ -36,6 +36,9 @@ const useChallengeStore = create((set, get) => ({
   topics: [],
   daily: null,
   challenge: null,
+  stats: null,
+  readiness: null,
+  leaderboard: null,
 
   // The live attempt session: the user's saved draft, the hints they've paid
   // for, and what it cost them.
@@ -47,15 +50,30 @@ const useChallengeStore = create((set, get) => ({
   loadList: async () => {
     set({ loading: true, error: null });
     try {
-      const [list, topics, daily] = await Promise.all([
+      // The list is the page; everything else decorates it. Only the list is
+      // allowed to fail the whole load — a 500 from the leaderboard must not
+      // blank out the challenges, which is exactly what a single Promise.all
+      // across all six would do.
+      const [list, ...extras] = await Promise.all([
         request("?limit=100"),
-        request("/topics"),
-        request("/daily"),
+        ...[
+          "/topics",
+          "/daily",
+          "/stats/me",
+          "/readiness",
+          "/leaderboard?scope=layer&range=7d&limit=5",
+        ].map((path) => request(path).catch(() => null)),
       ]);
+
+      const [topics, daily, stats, readiness, leaderboard] = extras;
+
       set({
         challenges: list.items ?? [],
-        topics: topics.tags ?? [],
-        daily: daily.data ?? null,
+        topics: topics?.tags ?? [],
+        daily: daily?.data ?? null,
+        stats: stats?.data ?? null,
+        readiness: readiness?.data ?? null,
+        leaderboard: leaderboard?.data ?? null,
         loading: false,
       });
     } catch (err) {
