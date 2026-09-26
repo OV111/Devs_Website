@@ -9,7 +9,7 @@ const LoadingSuspense = () => {
   return (
     <div
       className={`flex items-center justify-center min-h-screen ${
-        isDark ? "bg-gray-950" : "bg-zinc-100"
+        isDark ? "bg-black" : "bg-zinc-100"
       }`}
     >
       <TailChase size="44" speed="1.75" color={isDark ? "#a855f7" : "#7c3aed"} />
