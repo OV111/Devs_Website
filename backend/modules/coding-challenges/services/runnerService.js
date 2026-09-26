@@ -77,10 +77,17 @@ const buildProgram = (userCode, exportName, hiddenTests) => `
       ${JSON.stringify(`'use strict';\n${userCode}`)}
     );
     __load(__module, __module.exports);
-    __exported =
-      typeof __module.exports === "function"
-        ? __module.exports
-        : __module.exports && __module.exports.${exportName};
+    if (typeof __module.exports === "function") {
+      __exported = __module.exports;
+    } else if (__module.exports && typeof __module.exports === "object") {
+      // A multi-export module (e.g. { trackRequest, completeRequest }) — bind
+      // the whole object under the file's name AND spread its own keys as
+      // bare identifiers, so hidden tests can call either
+      // ${exportName}.trackRequest(...) or plain trackRequest(...), matching
+      // however the challenge's tests were written.
+      __exported = __module.exports;
+      Object.assign(globalThis, __module.exports);
+    }
   } catch (err) {
     __results.push({
       name: "module_loads",
@@ -97,12 +104,12 @@ const buildProgram = (userCode, exportName, hiddenTests) => `
   // \`function ${exportName}\` declaration and left this undefined.
   const ${exportName} = __exported;
 
-  if (typeof ${exportName} !== "function") {
+  if (typeof ${exportName} !== "function" && typeof ${exportName} !== "object") {
     __results.push({
-      name: "module_exports_a_function",
+      name: "module_exports_something_usable",
       passed: false,
       ms: 0,
-      message: "Expected module.exports to be a function named ${exportName}.",
+      message: "Expected module.exports to be a function or an object, got " + typeof ${exportName} + ".",
     });
     __REPORT(JSON.stringify({ results: __results, fatal: true }));
     return;
@@ -110,7 +117,14 @@ const buildProgram = (userCode, exportName, hiddenTests) => `
 
   const __tests = ${JSON.stringify(hiddenTests.map((t) => t.name))};
   const __bodies = [
-    ${hiddenTests.map((t) => `async () => { ${t.code} }`).join(", ")}
+    ${hiddenTests
+      // A test whose code ends in a trailing "//" comment would otherwise
+      // swallow the closing brace below into that comment, since it's
+      // appended on the same line with no newline in between — this newline
+      // is what makes that a syntax error in the test author's own code
+      // instead of a silently broken script.
+      .map((t) => `async () => {\n${t.code}\n}`)
+      .join(", ")}
   ];
 
   for (let i = 0; i < __bodies.length; i++) {
