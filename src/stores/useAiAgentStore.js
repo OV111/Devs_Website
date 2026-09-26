@@ -5,9 +5,14 @@ const useAiAgentStore = create((set) => ({
   activeSessionId: null,
   messages: [],
   isStreaming: false,
+  // True while an existing session's history is being fetched. Without this the
+  // transcript is cleared first and the empty-state ("start a conversation")
+  // flashes, making a conversation with history look empty while it loads.
+  isLoadingSession: false,
   streamingContent: "",
   error: null,
   setActiveSession: (sessionId) => set({ activeSessionId: sessionId }),
+  setLoadingSession: (isLoadingSession) => set({ isLoadingSession }),
   setSessions: (sessions) => set({ sessions }),
   setMessages: (messages) => set({ messages }),
   appendMessage: (message) =>
@@ -23,6 +28,7 @@ const useAiAgentStore = create((set) => ({
       activeSessionId: null,
       messages: [],
       isStreaming: false,
+      isLoadingSession: false,
       streamingContent: "",
       error: null,
     }),

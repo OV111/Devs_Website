@@ -1,5 +1,5 @@
 import React, { lazy } from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import MainLayout from "./layouts/MainLayout";
 import ProtectedLayout from "./layouts/ProtectedLayout";
@@ -49,7 +49,6 @@ const ReviewProposals = lazy(
   () => import("./features/coding-challenges/pages/ReviewProposals"),
 );
 const AiAgent = lazy(() => import("./features/AI-Agent/AiAgent"));
-const AiAgentLanding = lazy(() => import("./features/AI-Agent/AiAgentLanding"));
 const CapstonePage = lazy(() => import("./features/capstone/CapstonePage"));
 const VoiceReviewPage = lazy(() => import("./features/voiceReview/VoiceReviewPage"));
 const PricingPage = lazy(() => import("./features/billing/PricingPage"));
@@ -116,8 +115,11 @@ const router = createBrowserRouter([
           { path: "coding-challenges/propose", element: <ProposeChallenge /> },
           { path: "coding-challenges/review", element: <ReviewProposals /> },
           { path: "coding-challenges/:id", element: <ChallengeArena /> },
-          { path: "ai-agent", element: <AiAgentLanding /> },
-          { path: "ai-agent/chat", element: <AiAgent /> },
+          // One shell for both: "new chat" is a state of AiAgent (the hero),
+          // not a separate route. /ai-agent/chat is kept as a redirect so
+          // existing links and bookmarks don't 404.
+          { path: "ai-agent", element: <AiAgent /> },
+          { path: "ai-agent/chat", element: <Navigate to="/ai-agent" replace /> },
           { path: "capstone", element: <CapstonePage /> },
           { path: "voice-review", element: <VoiceReviewPage /> },
           { path: "users/:username", element: <UserProfile /> },

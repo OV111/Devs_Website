@@ -6,7 +6,7 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "";
 export default function useAgentStream() {
   const abortRef = useRef(null);
 
-  const sendMessage = useCallback(async ({ sessionId, content, token }) => {
+  const sendMessage = useCallback(async ({ sessionId, content, token, attachments = [] }) => {
     // Cancel any in-flight stream
     abortRef.current?.abort();
     const controller = new AbortController();
@@ -20,8 +20,14 @@ export default function useAgentStream() {
       setError,
     } = useAiAgentStore.getState();
 
-    // Optimistically add user message
-    append({ role: "user", content });
+    // Optimistically add user message. We show the typed text plus the file
+    // chips — NOT the composed prompt the server builds, which would dump the
+    // whole file into the transcript.
+    append({
+      role: "user",
+      content,
+      attachments: attachments.map((a) => ({ name: a.name, bytes: a.bytes })),
+    });
 
     setStreaming(true);
     clearStream();
@@ -34,7 +40,14 @@ export default function useAgentStream() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ sessionId, message: content }),
+        body: JSON.stringify({
+          sessionId,
+          message: content,
+          // strip UI-only fields (bytes/truncated) — the server schema is strict
+          ...(attachments.length
+            ? { attachments: attachments.map((a) => ({ name: a.name, content: a.content })) }
+            : {}),
+        }),
         signal: controller.signal,
       });
 

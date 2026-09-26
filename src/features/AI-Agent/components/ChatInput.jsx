@@ -1,32 +1,103 @@
 import { useState, useRef, useEffect } from "react";
-import { Plus, ArrowUp, Mic, AudioLines, ChevronRight } from "lucide-react";
-import { DROPDOWN_ITEMS } from "../../../../constants/AiAgent";
+import { ArrowUp, Mic, AudioLines, FileText, X } from "lucide-react";
+import { DROPDOWN_ITEMS, ATTACHMENT_ACCEPTED_EXTENSIONS } from "../../../../constants/AiAgent";
+import { readAttachments, formatBytes } from "../lib/readAttachment";
+import AgentMenu from "./AgentMenu";
 
-export default function ChatInput({ isStreaming, onSend }) {
-  const [input, setInput] = useState("");
+const ACCEPT_ATTR = ATTACHMENT_ACCEPTED_EXTENSIONS.map((e) => `.${e}`).join(",");
+
+/**
+ * The single composer for the agent shell.
+ *
+ * `value`/`onValueChange` are controlled by the parent because the hero's
+ * prompt chips live OUTSIDE this component and need to fill the box. Keeping
+ * the draft here would mean two sources of truth for the same text.
+ */
+export default function ChatInput({ isStreaming, onSend, value, onValueChange, focusToken = 0 }) {
+  const input = value;
+  const setInput = onValueChange;
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [attachments, setAttachments] = useState([]);
+  const [attachErrors, setAttachErrors] = useState([]);
   const inputRef = useRef(null);
-  const dropdownRef = useRef(null);
+  const fileInputRef = useRef(null);
 
+  // The parent can now set the text (prompt chips, menu shortcuts), so the
+  // auto-resize has to react to `value` rather than only to typing.
   useEffect(() => {
-    if (!dropdownOpen) return;
-    const handler = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, [dropdownOpen]);
+    const el = inputRef.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = Math.min(el.scrollHeight, 160) + "px";
+  }, [value]);
+
+  // Parent bumps focusToken when it injects a prompt, so the caret lands at the
+  // end of the inserted text ready for the user to keep typing.
+  useEffect(() => {
+    if (!focusToken) return;
+    const el = inputRef.current;
+    if (!el) return;
+    el.focus();
+    el.setSelectionRange(el.value.length, el.value.length);
+  }, [focusToken]);
+
+  const handleFilesPicked = async (e) => {
+    const files = e.target.files;
+    if (!files?.length) return;
+
+    const { attachments: read, errors } = await readAttachments(files, attachments.length);
+    if (read.length) setAttachments((prev) => [...prev, ...read]);
+    setAttachErrors(errors);
+
+    // Reset so picking the same file again still fires onChange.
+    e.target.value = "";
+  };
+
+  const removeAttachment = (name) => {
+    setAttachments((prev) => prev.filter((a) => a.name !== name));
+    setAttachErrors([]);
+  };
 
   const handleSend = () => {
     if (!input.trim() || isStreaming) return;
-    onSend(input.trim());
+    onSend(input.trim(), attachments);
     setInput("");
+    setAttachments([]);
+    setAttachErrors([]);
     if (inputRef.current) inputRef.current.style.height = "auto";
   };
 
+  const handleDropdownItem = (label) => {
+    setDropdownOpen(false);
+
+    if (label === "Attach file") {
+      fileInputRef.current?.click();
+      return;
+    }
+
+    // Everything else is a prompt shortcut: drop the question into the composer
+    // and focus it, so the user can edit before sending rather than firing blind.
+    const item = DROPDOWN_ITEMS.flatMap((g) => g.items).find((i) => i.label === label);
+    if (!item?.prompt) return;
+
+    setInput(item.prompt);
+    // Resize is handled by the effect on `value`; just place the caret at the
+    // end — "Find me platform posts about " expects typing to continue there.
+    requestAnimationFrame(() => {
+      const el = inputRef.current;
+      if (!el) return;
+      el.focus();
+      el.setSelectionRange(el.value.length, el.value.length);
+    });
+  };
+
   const handleKeyDown = (e) => {
+    // Ctrl+U opens the file picker — the shortcut advertised in the menu.
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "u") {
+      e.preventDefault();
+      fileInputRef.current?.click();
+      return;
+    }
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSend();
@@ -36,19 +107,57 @@ export default function ChatInput({ isStreaming, onSend }) {
 
   return (
     <div className="px-4 pb-4 pt-2 shrink-0">
+      <input
+        ref={fileInputRef}
+        type="file"
+        multiple
+        accept={ACCEPT_ATTR}
+        onChange={handleFilesPicked}
+        className="hidden"
+      />
+
+      {attachErrors.length > 0 && (
+        <div className="mb-2 space-y-1">
+          {attachErrors.map((err, i) => (
+            <p key={i} className="text-[12px] text-amber-400/90 px-1">
+              {err}
+            </p>
+          ))}
+        </div>
+      )}
+
       <div className="rounded-2xl px-4 pt-3 pb-3 space-y-3 border border-white/5 bg-white/3">
+        {attachments.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {attachments.map((a) => (
+              <div
+                key={a.name}
+                className="flex items-center gap-2 pl-2 pr-1 py-1 rounded-lg border border-white/10 bg-white/5 max-w-[220px]"
+                title={a.truncated ? `${a.name} (truncated to fit)` : a.name}
+              >
+                <FileText size={13} className="shrink-0 text-purple-400" />
+                <span className="text-[12px] text-white/80 truncate">{a.name}</span>
+                <span className="text-[11px] text-white/30 shrink-0">
+                  {formatBytes(a.bytes)}
+                  {a.truncated ? " ·cut" : ""}
+                </span>
+                <button
+                  onClick={() => removeAttachment(a.name)}
+                  className="w-5 h-5 rounded flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 shrink-0 cursor-pointer"
+                  title="Remove"
+                >
+                  <X size={12} />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+
         <textarea
           ref={inputRef}
           rows={1}
           value={input}
-          onChange={(e) => {
-            setInput(e.target.value);
-            const el = inputRef.current;
-            if (el) {
-              el.style.height = "auto";
-              el.style.height = Math.min(el.scrollHeight, 160) + "px";
-            }
-          }}
+          onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Write a message..."
           disabled={isStreaming}
@@ -57,44 +166,12 @@ export default function ChatInput({ isStreaming, onSend }) {
         />
 
         <div className="flex items-center justify-between">
-          <div className="relative" ref={dropdownRef}>
-            <button
-              onClick={() => setDropdownOpen((v) => !v)}
-              className={`${dropdownOpen ? "bg-white/10" : ""} w-8 h-8 rounded-md flex items-center justify-center text-white transition-colors hover:bg-white/5 cursor-pointer`}
-              title="More options"
-            >
-              <Plus size={20} strokeWidth={1.5} />
-            </button>
-
-            {dropdownOpen && (
-              <div className="absolute bottom-11 left-0 w-60 rounded-xl overflow-hidden py-1 z-50 border border-white/15 bg-[#222] backdrop-blur-xl">
-                {DROPDOWN_ITEMS.map((group, gi) => (
-                  <div key={gi} className="px-1">
-                    {gi > 0 && <div className="h-px bg-white/8 mx-2 my-1" />}
-                    {group.items.map((item) => {
-                      const ItemIcon = item.icon;
-                      return (
-                        <button
-                          key={item.label}
-                          className="w-full flex items-center rounded-lg gap-3 px-3 py-2.5 text-[14px] text-white hover:bg-white/8 transition-colors cursor-pointer"
-                        >
-                          <ItemIcon
-                            size={17}
-                            strokeWidth={1.5}
-                            className="shrink-0 text-white/60"
-                          />
-                          <span className="flex-1 text-left">{item.label}</span>
-                          {item.arrow && (
-                            <ChevronRight size={14} className="text-white/30" />
-                          )}
-                        </button>
-                      );
-                    })}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          <AgentMenu
+            open={dropdownOpen}
+            onOpenChange={setDropdownOpen}
+            onSelect={handleDropdownItem}
+            isEnabled={() => true}
+          />
           <div className="flex items-center gap-2">
           <div className="flex items-center gap-2 select-none">
             <span className="text-[12px] font-xs text-white/30">DevsWebs agent</span>
@@ -124,7 +201,8 @@ export default function ChatInput({ isStreaming, onSend }) {
         </div>
       </div>
       <p className="text-[11px] mt-2 text-center" style={{ color: "#333" }}>
-        Agent can make mistakes. Double-check important answers.
+        Agent can make mistakes. Double-check important answers. Type{" "}
+        <span className="font-mono text-white/30">/context</span> to see limits and tools.
       </p>
     </div>
   );
