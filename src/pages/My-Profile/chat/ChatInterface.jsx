@@ -99,7 +99,7 @@ const ChatInterface = ({
   }, [userSelected?._id]);
 
   return (
-    <div className="min-w-0 flex-1 bg-white dark:bg-gray-950">
+    <div className="min-w-0 flex-1 bg-white dark:bg-black">
       <div className="flex h-screen flex-col justify-between overflow-hidden">
         <div className="flex items-center justify-between border-b border-gray-100 bg-white px-2 lg:px-3 py-2.5 dark:border-gray-800 dark:bg-gray-900">
           <div className="flex justify-center items-center">
@@ -224,7 +224,7 @@ const ChatInterface = ({
 
         <div
           ref={messagesContainerRef}
-          className="grid flex-1 items-end overflow-y-auto  bg-gray-50 p-4 dark:bg-gray-950"
+          className="grid flex-1 items-end overflow-y-auto  bg-gray-50 p-4 dark:bg-black"
         >
           <div className="flex max-w-full flex-col gap-2">
             {isLoadingHistory ? (

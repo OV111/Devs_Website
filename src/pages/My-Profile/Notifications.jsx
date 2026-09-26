@@ -65,7 +65,7 @@ const Notifications = () => {
   }, []);
 
   return (
-    <div className="flex min-h-screen bg-gray-50 dark:bg-gray-950">
+    <div className="flex min-h-screen bg-gray-50 dark:bg-black">
       <SideBar />
 
       <div className="flex-1 min-w-0 px-4 sm:px-8 lg:px-12 py-10">

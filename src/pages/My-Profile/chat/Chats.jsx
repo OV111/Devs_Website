@@ -240,7 +240,7 @@ const Chats = () => {
       <Sidebar />
       {!userSelected ? (
         <>
-          <div className="border-r w-full border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950 lg:w-70 lg:pt-4  lg:px-0 lg:text-lg">
+          <div className="border-r w-full border-gray-200 bg-white dark:border-gray-800 dark:bg-black lg:w-70 lg:pt-4  lg:px-0 lg:text-lg">
             <div className="flex items-center justify-between px-3">
               <h1 className="mt-3 lg:mt-0 text-lg font-semibold text-gray-900 dark:text-gray-100">
                 Messages
@@ -313,7 +313,7 @@ const Chats = () => {
               </div>
             </div>
 
-            <div className="max-h-[calc(100vh-180px)] overflow-y-auto bg-white dark:bg-gray-950">
+            <div className="max-h-[calc(100vh-180px)] overflow-y-auto bg-white dark:bg-black">
               {isLoadingChats ? (
                 <div className="flex justify-center items-center px-3 py-6 text-sm text-gray-500 dark:text-gray-100">
                   <LoadingChatSuspense />
