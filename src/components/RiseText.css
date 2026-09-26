@@ -1,0 +1,98 @@
+.rt-line {
+  display: block;
+  perspective: 400px;
+}
+
+.rt-word {
+  display: inline-block;
+  color: #777;
+  opacity: 0;
+  transform-origin: 50% 100%;
+  transform: translateY(1.6em) rotateX(-85deg) skewX(-16deg);
+  animation-name: rt-rise;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: forwards;
+  will-change: transform, opacity, color;
+}
+
+@keyframes rt-rise {
+  0% {
+    opacity: 0;
+    color: #777;
+    transform: translateY(1.6em) rotateX(-85deg) skewX(-16deg);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    color: inherit;
+    transform: none;
+  }
+}
+
+.rt-highlight {
+  position: relative;
+}
+
+.rt-highlight::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.08em;
+  height: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, #fff3, #ff8a3d, #c86bff, #4f7cff, #fff3);
+  background-size: 300% 100%;
+  animation-name: rt-underline-in, rt-underline-slide;
+  animation-duration: 0.6s, 3s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1), linear;
+  animation-delay: var(--rt-underline-delay, 0ms), var(--rt-underline-delay, 0ms);
+  animation-iteration-count: 1, infinite;
+  animation-fill-mode: forwards, none;
+}
+
+@keyframes rt-underline-in {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes rt-underline-slide {
+  0% {
+    background-position: 0% 0;
+  }
+  100% {
+    background-position: 300% 0;
+  }
+}
+
+.rt-fade {
+  opacity: 0;
+  transform: translateY(10px);
+  filter: blur(4px);
+  animation: rt-fade-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes rt-fade-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rt-word,
+  .rt-highlight::after,
+  .rt-fade {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    color: inherit !important;
+  }
+}
