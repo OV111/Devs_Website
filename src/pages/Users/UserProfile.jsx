@@ -22,7 +22,7 @@ import {
 } from "../My-Profile/components/profileData";
 
 const UserNotFound = () => (
-  <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center text-center px-4">
+  <div className="min-h-screen bg-black flex flex-col items-center justify-center text-center px-4">
     <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-violet-950/40">
       <svg className="h-9 w-9 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
@@ -143,7 +143,7 @@ export default function UserProfile() {
     `${user?.firstName ?? ""}${user?.lastName ?? ""}`.charAt(0).toUpperCase() || "?";
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+    <div className="min-h-screen bg-gray-50 dark:bg-black">
       <Toaster position="top-center" reverseOrder />
 
       <div className="max-w-6xl mx-auto">
