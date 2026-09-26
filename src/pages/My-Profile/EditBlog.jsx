@@ -156,7 +156,7 @@ export default function EditBlog() {
 
       <div className="flex-1 overflow-auto thin-scrollbar">
         {/* Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between bg-gray-50 px-6 py-1.5 dark:border-gray-800 dark:bg-gray-950">
+        <div className="sticky top-0 z-10 flex items-center justify-between bg-gray-50 px-6 py-1.5 dark:border-gray-800 dark:bg-black">
           <div>
             <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 lg:text-2xl">
               Edit Post
