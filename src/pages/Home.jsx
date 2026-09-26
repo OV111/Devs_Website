@@ -1,9 +1,18 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import useAuthStore from "../stores/useAuthStore";
 import RiseText from "../components/RiseText";
 
 const Home = () => {
   const { auth } = useAuthStore();
+
+  // React Router keeps the window scroll position across navigations, so
+  // arriving here from a scrolled page (e.g. the Google button on
+  // GetStarted, via a client-side redirect after login) would drop you into
+  // this page already scrolled down. Same fix AiAgent.jsx/ChallengeArena.jsx use.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <section className="flex min-h-[85vh] flex-col items-center justify-center px-6 text-center">

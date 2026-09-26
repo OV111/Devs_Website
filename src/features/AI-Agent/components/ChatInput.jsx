@@ -58,6 +58,8 @@ export default function ChatInput({ isStreaming, onSend, value, onValueChange, f
     setAttachErrors([]);
   };
 
+  const canSend = Boolean(input.trim()) && !isStreaming;
+
   const handleSend = () => {
     if (!input.trim() || isStreaming) return;
     onSend(input.trim(), attachments);
@@ -106,7 +108,9 @@ export default function ChatInput({ isStreaming, onSend, value, onValueChange, f
 
 
   return (
-    <div className="px-4 pb-4 pt-2 shrink-0">
+    /* max-w-3xl matches the transcript column so the composer lines up with the
+       messages instead of spanning the full pane. */
+    <div className="px-4 pb-4 pt-2 shrink-0 w-full max-w-3xl mx-auto">
       <input
         ref={fileInputRef}
         type="file"
@@ -126,9 +130,9 @@ export default function ChatInput({ isStreaming, onSend, value, onValueChange, f
         </div>
       )}
 
-      <div className="rounded-2xl px-4 pt-3 pb-3 space-y-3 border border-white/5 bg-white/3">
+      <div className="rounded-2xl px-2.5 py-2 border border-white/10 bg-white/3">
         {attachments.length > 0 && (
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 px-1 pt-1 pb-2">
             {attachments.map((a) => (
               <div
                 key={a.name}
@@ -153,57 +157,76 @@ export default function ChatInput({ isStreaming, onSend, value, onValueChange, f
           </div>
         )}
 
-        <textarea
-          ref={inputRef}
-          rows={1}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder="Write a message..."
-          disabled={isStreaming}
-          className="w-full bg-transparent outline-none resize-none text-[14px] leading-relaxed placeholder:text-[#555] disabled:opacity-40 max-h-40 overflow-y-auto"
-          style={{ color: "#e5e5e5" }}
-        />
-
-        <div className="flex items-center justify-between">
+        {/* Single row: menu, input and actions inline. items-end keeps the
+            buttons anchored to the bottom as the textarea grows. */}
+        <div className="flex items-end gap-1.5">
           <AgentMenu
             open={dropdownOpen}
             onOpenChange={setDropdownOpen}
             onSelect={handleDropdownItem}
             isEnabled={() => true}
           />
-          <div className="flex items-center gap-2">
-          <div className="flex items-center gap-2 select-none">
-            <span className="text-[12px] font-xs text-white/30">DevsWebs agent</span>
-            <span className="h-3.5 w-px bg-white/15" />
-          </div>
+
+          <textarea
+            ref={inputRef}
+            rows={1}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Write a message..."
+            disabled={isStreaming}
+            className="flex-1 min-w-0 bg-transparent outline-none resize-none text-[14px] leading-6 py-1 text-white placeholder:text-[#555] disabled:opacity-40 max-h-40 overflow-y-auto"
+          />
+
+          <div className="flex items-center gap-0.5 shrink-0">
+            {/* Voice is UI-only for now.
+                aria-disabled rather than the `disabled` attribute: a disabled
+                button suppresses pointer events in most browsers, which kills
+                BOTH the hover state and the native tooltip — so the control
+                would look dead and never explain why. This keeps it hoverable
+                and discoverable while still being announced as disabled, and
+                the click handler is the thing that actually blocks the action. */}
             <button
-              className="w-8 h-8 rounded-md flex items-center justify-center text-white hover:bg-white/5 transition-colors cursor-pointer"
-              title="Speaker"
+              aria-disabled="true"
+              onClick={(e) => e.preventDefault()}
+              title="Voice input — coming soon"
+              aria-label="Voice input"
+              className="w-8 h-8 rounded-md flex items-center justify-center text-white/25 hover:text-white/50 hover:bg-white/5 transition-colors cursor-not-allowed"
             >
-              <AudioLines size={20} strokeWidth={1.5} />
+              <Mic size={18} strokeWidth={1.5} />
             </button>
             <button
-              className="w-8 h-8 rounded-md flex items-center justify-center text-white hover:bg-white/5 transition-colors cursor-pointer"
-              title="Microphone"
+              aria-disabled="true"
+              onClick={(e) => e.preventDefault()}
+              title="Voice conversation — coming soon"
+              aria-label="Voice conversation"
+              className="w-8 h-8 rounded-md flex items-center justify-center text-white/25 hover:text-white/50 hover:bg-white/5 transition-colors cursor-not-allowed"
             >
-              <Mic size={20} strokeWidth={1.5} />
+              <AudioLines size={18} strokeWidth={1.5} />
             </button>
-            <button
-              onClick={handleSend}
-              disabled={!input.trim()}
-              className={`w-8 h-8 rounded-md flex items-center justify-center transition-colors
-                  ${input.trim() ? "bg-purple-600 text-white cursor-pointer" : "bg-[#222] text-white cursor-default"}`}
-            >
-              <ArrowUp size={18} strokeWidth={1.5} />
-            </button>
+
+            {/* Send only appears once there's something to send, so the resting
+                state stays uncluttered. */}
+            {canSend && (
+              <button
+                onClick={handleSend}
+                aria-label="Send message"
+                title="Send"
+                className="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-600 hover:bg-purple-500 text-white transition-colors cursor-pointer ml-0.5"
+              >
+                <ArrowUp size={17} strokeWidth={2} />
+              </button>
+            )}
           </div>
         </div>
       </div>
-      <p className="text-[11px] mt-2 text-center" style={{ color: "#333" }}>
-        Agent can make mistakes. Double-check important answers. Type{" "}
-        <span className="font-mono text-white/30">/context</span> to see limits and tools.
-      </p>
+
+      <div className="flex items-center justify-center mt-2 px-1">
+        <p className="text-[11px]" style={{ color: "#333" }}>
+          Agent can make mistakes. Double-check important answers.
+        </p>
+        
+      </div>
     </div>
   );
 }

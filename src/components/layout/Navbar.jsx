@@ -143,7 +143,7 @@ const Navbar = () => {
         exit={{ opacity: 0, y: -6, scale: 0.97 }}
         transition={{ duration: 0.18, ease: "easeOut" }}
         id="categories-dropdown"
-        className="absolute top-full mt-0 left-0 w-44 overflow-hidden rounded-md bg-white shadow-lg shadow-black/5 dark:bg-gray-900 dark:shadow-black/30 z-40"
+        className="absolute top-full mt-0 left-0 w-44 overflow-hidden rounded-md border border-white/10 bg-neutral-900 shadow-lg shadow-black/40 z-40"
       >
         {CATEGORY_OPTIONS.map(({ title, slug }) => (
           <li key={slug}>
@@ -175,13 +175,14 @@ const Navbar = () => {
       <div className="flex-1">
         <h2 className="text-base font-bold cursor-pointer sm:text-xl md:text-xl lg:text-xl">
           <NavLink to="/" aria-label="DevsWebs - Go to homepage">
-            <GradientText
+            {/* <GradientText
               colors={["#a855f7", "#7c3aed", "#c084fc", "#7c3aed", "#a855f7"]}
               animationSpeed={6}
               className="font-bold text-base sm:text-xl"
             >
               Vahoha
-            </GradientText>
+            </GradientText> */}
+            <h2 className="text-white">Vahoha</h2>
           </NavLink>
         </h2>
       </div>
@@ -376,17 +377,17 @@ const Navbar = () => {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -6, scale: 0.97 }}
                   transition={{ duration: 0.18, ease: "easeOut" }}
-                  className="absolute right-0 top-full mt-0 w-52 overflow-hidden rounded-md bg-white shadow-lg shadow-black/5 dark:bg-gray-900 dark:shadow-black/30 z-40"
+                  className="absolute right-0 top-full mt-0 w-52 overflow-hidden rounded-md border border-white/10 bg-neutral-900 shadow-lg shadow-black/40 z-40"
                 >
-                  <div className="flex items-center gap-3 px-4 py-2 border-b border-gray-100 dark:border-gray-700">
+                  <div className="flex items-center gap-3 px-4 py-2 border-b border-white/10">
                     <AvatarImage inDropdown />
                     <div className="min-w-0">
-                      <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">
+                      <p className="text-sm font-semibold text-gray-100 truncate">
                         {user?.firstName} {user?.lastName}
                       </p>
                       {user?.username && (
                         <p
-                          className="text-xs text-gray-500 dark:text-gray-400 truncate"
+                          className="text-xs text-gray-400 truncate"
                           title={`@${user.username}`}
                         >
                           @{user.username}
@@ -404,7 +405,7 @@ const Navbar = () => {
                         `flex items-center gap-3 px-4 py-2 text-sm transition-colors duration-150 ${
                           isActive
                             ? "font-medium text-purple-500"
-                            : "text-gray-700 dark:text-gray-200 hover:text-purple-500"
+                            : "text-gray-200 hover:text-purple-500"
                         }`
                       }
                     >
@@ -413,11 +414,11 @@ const Navbar = () => {
                     </NavLink>
                   ))}
 
-                  <div className="border-t border-gray-100 dark:border-gray-700" />
+                  <div className="border-t border-white/10" />
 
                   <button
                     onClick={handleLogout}
-                    className="flex items-center gap-3 w-full px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:text-red-500 transition-colors duration-150 cursor-pointer"
+                    className="flex items-center gap-3 w-full px-4 py-2 text-sm text-red-400 hover:bg-red-500/20 hover:text-red-300 transition-colors duration-150 cursor-pointer"
                   >
                     <LogOut size={15} />
                     Logout
