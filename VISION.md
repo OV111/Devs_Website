@@ -1,7 +1,8 @@
 # DevsWebs — Vision & Product Roadmap
 
 > Living document — update this as the vision evolves.
-> Last updated: 2026-06-11 — full code audit performed; every status below was verified against the actual codebase, not memory.
+> Last updated: 2026-09-26 — Phase E verification pass. The AI agent backend, the three "Critical" bugs, and the Architecture Health section were re-verified by running the code, not by reading it. See "Phase E — Verification Pass (2026-09-26)" below.
+> Previous audit: 2026-06-11.
 
 ---
 
@@ -59,14 +60,14 @@ Every developer who joins gets a personal AI mentor that knows them, a structure
 
 | Feature                                          | Status                                                                                                                                                                                                                                |
 | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Community Platform (blogs, profiles, chat, auth) | ✅ Built — but chat has a live security hole (Architecture Health #1)                                                                                                                                                                 |
+| Community Platform (blogs, profiles, chat, auth) | ✅ Built — the chat room-join hole is **fixed** (re-verified 2026-09-26)                                                                                                                                                              |
 | Roadmap UI                                       | 🔧 Frontend shell built; 15 path JSONs in `src/data/roadmaps/`; progress is **localStorage-only** — no backend wiring                                                                                                                 |
 | User Progress Tracking                           | 🔧 `userProgressService.js` built — no route exposes it                                                                                                                                                                               |
 | Exam History & Weak Spots                        | 🔧 `examHistoryService.js` + `weakSpotService.js` built — not wired                                                                                                                                                                   |
 | Challenge Results                                | 🔧 `challengeResultService.js` built — not wired                                                                                                                                                                                      |
 | Dev Library                                      | 🔧 **Further along than previously documented**: route mounted at `/library` with 6 endpoints, UI on master, seeder exists with real content — needs seeder run + `layer_ids` linking                                                 |
 | AI Agent — frontend                              | 🔧 **Substantially built** (previously documented as "not started"): `AiAgent.jsx` + `AiAgentLanding.jsx` + `useAgentStream` SSE hook + 6 child components + Zustand store, routes mounted in router — currently running on mock data |
-| AI Agent — backend                               | ❌ `aiAgentService.js`, `aiAgentController.js`, `aiAgent.routes.js` are **empty files**, not mounted in `app.js`. Frontend calls `/api/ai-agent/*` → 404                                                                              |
+| AI Agent — backend                               | ✅ **Built and verified 2026-09-26** — routes mounted at `/api/ai-agent`, sessions CRUD, SSE streaming, 7-tool tool-use loop, 20-turn window, 30/day cap, Zod-validated. One blocker: the `GROQ_API_KEY` is invalid, and the provider decision (Groq vs Anthropic) is still open |
 | Problem Solving Arena                            | 🔧 Mock-data UI exists (`CodingChallenges.jsx` + `ChallengeArena.jsx`, routes mounted) — no backend                                                                                                                                   |
 | Exam Engine                                      | ❌ Not started — history/weak-spot services ready, needs AI call layer                                                                                                                                                                |
 | Ship It Capstone                                 | 🔧 `CapstonePage.jsx` exists with `/capstone` route — UI shell only, no backend                                                                                                                                                       |
@@ -86,6 +87,7 @@ Every developer who joins gets a personal AI mentor that knows them, a structure
 7. **All four "fully built" services are confirmed real** (clean MongoDB CRUD with proper `ObjectId` handling, upserts, timestamps) — but none has input validation. `weakSpotService.addWeakSpot` calls `topic.toUpperCase()` and will throw on any non-string body. "Fully built" should read "built, unvalidated, unwired."
 8. **All three critical bugs confirmed in code** — see Architecture Health below. None has been fixed yet.
 9. **Dependency audit confirmed:** `@google/generative-ai` and `groq-sdk` are installed; `@anthropic-ai/sdk` is not; `helmet` is not; no Zod/Joi/express-validator; `mongoose` is installed but the app uses the native `mongodb` driver everywhere.
+   _Update 2026-09-26:_ `zod` is now installed and used on the `/api/ai-agent` routes. `groq-sdk` is the committed provider (Rec #5 superseded). `helmet` and the `@google/generative-ai` + `mongoose` removals are still outstanding.
 
 ---
 
@@ -116,10 +118,24 @@ Admin Panel, Problem Solving Arena, Weekly Challenges, Capstone, Awards, Public 
 
 ## Architecture Health — Known Issues & Decisions
 
-> Surfaced via architectural review (2026-06-10), re-verified against code (2026-06-11). All Critical items confirmed still present.
-> Fix the **Critical** items before any new feature work. The former "open decisions" are now **recommendations** — say yes or no to each and move on.
+> Surfaced via architectural review (2026-06-10), re-verified against code (2026-06-11), **re-verified again 2026-09-26**.
+> **All three Critical items below are now FIXED.** They are kept for history — do not "fix" them again. The only Phase A item still outstanding is `helmet`.
 
-### 🔴 Critical — Fix Before Next Feature (confirmed in code 2026-06-11)
+### ✅ Critical — ALL RESOLVED (re-verified in code 2026-09-26)
+
+**1. WebSocket room-join authorization hole — ✅ FIXED**
+`chatHandler.js` now checks `roomCollExisting.members.includes(senderId.toString())` before allowing entry, and the client-dictated `members` overwrite is gone (the code carries the comment "never overwrite members — the DB is the source of truth"). Socket cleanup is also in place: `websocket/index.js` calls `removeFromRooms(ws)` on close.
+
+**2. NotificationWorker missing Redis password — ✅ FIXED**
+`workers/notificationWorker.js` now imports the shared `redisConnection` from `config/redis.js` instead of rebuilding the connection without a password.
+
+**3. `connectDB` swallows connection failure — ✅ FIXED**
+`config/db.js` now `throw err`s. Verified at runtime: the server fails fast at boot rather than surfacing a downstream `TypeError`.
+
+**Still outstanding from Phase A:** `helmet` is not installed and not mounted in `app.js`. `@google/generative-ai`, `groq-sdk`, and `mongoose` are all still in `package.json`.
+
+<details>
+<summary>Original (2026-06-11) descriptions of the three bugs — historical</summary>
 
 **1. WebSocket room-join authorization hole — CONFIRMED**
 Any authenticated user can join any room, read its full message history, and overwrite its `members` array by sending a crafted `join_room` message. Live privacy breach on chat.
@@ -138,6 +154,8 @@ Any authenticated user can join any room, read its full message history, and ove
 
 - Fix: replace the `return { code: 500, ... }` with `throw err`.
 
+</details>
+
 ---
 
 ### 🟡 Recommendations — Say Yes/No and Move On
@@ -148,13 +166,22 @@ Each former "decision required" is now a concrete recommendation with reasoning.
 HTTP, WebSocket, and the BullMQ worker share one process; the `rooms` Map and `getWss()` are in-memory. Two instances = silently split rooms and dropped notifications. Redis pub/sub fan-out is the correct multi-instance answer, but it's a week of work that buys nothing until you have enough traffic to need a second instance — which, for a pre-MVP product, you don't.
 _Revisit when:_ sustained concurrent WebSocket connections approach what one Railway instance handles, or notifications start lagging.
 
-**5. AI provider → YES: commit to Anthropic. Install `@anthropic-ai/sdk`; remove `@google/generative-ai`; remove `groq-sdk` unless given an explicit job.**
+**5. AI provider → ⛔ SUPERSEDED 2026-09-26 — the decision is GROQ, not Anthropic.**
+
+> **Read this before acting on anything in this item.** The agent ships on Groq `llama-3.3-70b-versatile` because Groq has a free tier and the Anthropic API does not — cost is the binding constraint for a solo pre-revenue project. **Keep `groq-sdk`. Do not install `@anthropic-ai/sdk`.** The `@google/generative-ai` and `mongoose` removals below are still valid. The original text is kept for reasoning history only.
+
+<details>
+<summary>Original (2026-06-11) recommendation — superseded</summary>
+
+**AI provider → YES: commit to Anthropic. Install `@anthropic-ai/sdk`; remove `@google/generative-ai`; remove `groq-sdk` unless given an explicit job.**
 The agent design (tool use loop, SSE streaming, prompt caching of the static system prompt) is written around the Anthropic API, and the SDK supports all of it natively. Concrete model choices:
 
 - **Agent conversations:** `claude-sonnet-4-6` — $3 / $15 per MTok, native tool use, 1M context.
 - **Cheap structured calls** (exam MCQ generation, grading short answers, classification): `claude-haiku-4-5` — $1 / $5 per MTok. This replaces any job Groq was hypothetically for.
 - **Prompt caching:** cache reads cost ~0.1× input price (~90% savings on the static system prompt). One caveat the old doc missed: Sonnet 4.6's minimum cacheable prefix is **2048 tokens** — a short system prompt silently won't cache, so the agent's static prefix (persona + Socratic rules + tool definitions) should be written to exceed that.
   Carrying three AI SDKs as a solo dev is pure liability. Delete the unused ones the day the agent backend starts.
+
+</details>
 
 **6. Exam integrity → YES: reviewed question bank per layer + AI-generated variation, all state server-side.**
 Pure per-attempt generation has two fatal flaws: question-quality variance makes a 90/100 threshold unfair, and you can't calibrate difficulty you've never seen. The recommended design:
@@ -254,9 +281,13 @@ Videos live **inside the layer, not on a separate page** — the layer is the un
 
 ---
 
-### 3. AI Agent Per User — 🔧 FRONTEND BUILT, BACKEND EMPTY
+### 3. AI Agent Per User — ✅ BUILT (one blocker: provider/API key)
 
-> Audited: the chat UI is real — `AiAgent.jsx`, `AiAgentLanding.jsx`, `useAgentStream.js` (SSE), `SessionsSidebar`, `MessageList`, `ChatInput`, `ChatTopBar`, `AgentContextPanel`, `ToolUseBlock`, `useAiAgentStore` — all on master with routes mounted. It runs on `agentMockData.js`. The backend three files (`aiAgentService.js`, `aiAgentController.js`, `aiAgent.routes.js`) are empty and unmounted. The work remaining is exactly the backend half of the original design.
+> **Re-audited 2026-09-26 by running it.** The June claim that the backend was "three empty files" was stale. Reality: `routes/aiAgent.routes.js` is mounted at `/api/ai-agent` with 4 authenticated routes; `controllers/aiAgentController.js` implements sessions CRUD + SSE streaming + the 429 cap; `services/agent/sessionService.js` implements sessions, the 20-turn sliding window and the 30/day cap; `services/agent/streamService.js` implements the full streaming tool-use loop; `tools/agentTools.js` implements all 7 tools against real services. The frontend is already off mock data (`agentMockData.js` was unreferenced and has been deleted).
+>
+> **Verified working (2026-09-26, live against production Groq):** sessions create/list/fetch, Zod rejection of every malformed payload, the 30/day cap returning 429 + `resetAt`, all 7 tools returning real data from MongoDB, **live token streaming**, the **multi-round tool-use loop** (one message drove `get_user_progress` → `get_weak_spots` → `search_library` and answered from the user's real roadmap state), **session persistence**, and the **Socratic refusal guardrail**.
+>
+> _Note for future testing:_ the controller writes the message pair to Mongo **after** `res.end()`, so a client that reads the session the instant the stream closes can briefly see the previous turn count. The write does land — allow a moment before asserting on it.
 
 Every user gets a personal AI mentor that **knows them**: skill level, active path, what they've read, where they struggled. The agent is not there to give answers — it's there to make you earn them.
 
@@ -445,7 +476,7 @@ Blogs, profiles, follows, chat, notifications, auth, search.
 
 ### Phase A — Critical Fixes & Hygiene — 🔴 FIRST, NON-NEGOTIABLE
 
-**Work:** the three Critical fixes (chat auth hole + socket cleanup, worker Redis password, `connectDB` throw) · `app.use(helmet())` · install `@anthropic-ai/sdk`, remove `@google/generative-ai` and `mongoose` (and `groq-sdk` unless given a job) · decide `/api` prefix convention in writing (Recommendation #10).
+**Work:** ~~the three Critical fixes~~ (✅ all three done — verified 2026-09-26) · `app.use(helmet())` ← **the only item left** · remove `@google/generative-ai` and `mongoose`. **Keep `groq-sdk` — it is the live AI provider (see Rec #5, superseded).** Do not install `@anthropic-ai/sdk` · decide `/api` prefix convention in writing (Recommendation #10).
 
 **Done means:**
 
@@ -454,7 +485,7 @@ Blogs, profiles, follows, chat, notifications, auth, search.
 - A notification fires end-to-end on Railway production (proves the worker authenticates to Redis).
 - `MONGO_URI` unset → server crashes at startup with the real error, not a downstream `TypeError`.
 - `helmet` headers visible in any response.
-- `package.json` has `@anthropic-ai/sdk` and lacks the removed SDKs.
+- `package.json` keeps `groq-sdk` (the live provider) and lacks `@google/generative-ai` and `mongoose`.
 
 **Risks:** the chat fix touches live behavior — existing rooms whose `members` arrays were corrupted by the overwrite bug may need a data migration. Check production data before deploying the fix.
 **Invalidates the approach if:** nothing — this phase has no approach risk, only the risk of skipping it.
@@ -517,9 +548,34 @@ Blogs, profiles, follows, chat, notifications, auth, search.
 
 ---
 
-### Phase E — AI Agent Backend
+### Phase E — AI Agent Backend — ✅ BUILT, PENDING PROVIDER DECISION
 
-**Work** (frontend already exists — this is the backend half only):
+> **Status 2026-09-26:** Pass 1 *and* Pass 2 below are both implemented (streaming, sessions, cost caps, the tool-use loop, context, and the 20-turn window). What the original plan described as ~2 weeks of work already exists in the tree.
+>
+> **Verification pass done 2026-09-26:**
+>
+> - Fixed: `agentTools.js` queried a non-existent `defaultPosts` collection (real name `posts-default`) — `search_posts` silently returned nothing for every user.
+> - Fixed: `get_user_profile` returned the `usersStats._id` instead of the user's `_id` (spread-order bug), while keeping the field whitelist so private stats never reach the model.
+> - Added: Zod validation on all 4 routes (Recommendation #8) — malformed `sessionId` used to return a 500 with a BSON stack trace, now a clean 400.
+> - Added: `backend/tests/unit/aiAgent.test.js` — 21 tests covering validation, the sliding window, the daily cap, and tool auth guards.
+> - Removed: `services/aiAgentService.js` (dead duplicate of `streamService.js`) and `src/features/AI-Agent/mock/agentMockData.js` (unreferenced).
+>
+> **Provider decision — ✅ DECIDED 2026-09-26: STAY ON GROQ.**
+> The agent runs on **Groq `llama-3.3-70b-versatile`** and will keep running on Groq. **This overrides Recommendation #5's "commit to Anthropic" — do not migrate to the Anthropic SDK, and do not remove `groq-sdk` from `package.json`.**
+>
+> _Reasoning:_ Groq has a free tier; the Anthropic API has none. For a solo, pre-revenue project the running cost of the agent is the deciding constraint, and a free inference tier is worth more right now than the quality margin. (For the record, had cost not been the constraint the pick would have been `claude-sonnet-5` — $2/$10 per MTok, cheaper and newer than the `claude-sonnet-4-6` Rec #5 originally named.)
+>
+> **✅ VERIFIED END-TO-END 2026-09-26 on production Groq.** Real streaming, real tool calls, real persistence — see the verification log below.
+>
+> _Model:_ **`openai/gpt-oss-120b`** (131K context). The previous `llama-3.3-70b-versatile` was **retired by Groq** and returned `404 model_not_found`; every Llama model is now gone from the Groq catalogue. Candidates tested for streaming *and* tool-calling: `openai/gpt-oss-120b`, `openai/gpt-oss-20b`, `qwen/qwen3.8-27b` — all three work; the 120b was chosen as the most capable.
+>
+> _Groq retires models periodically._ If streaming starts failing with a 404, list the current catalogue with `GET https://api.groq.com/openai/v1/models` and update `MODEL` in `services/agent/streamService.js`.
+>
+> _Quirk handled in code:_ gpt-oss sometimes wraps a zero-argument tool call in an envelope — `{"arguments":{},"type":"get_weak_spots"}` instead of `{}`. `streamService.js` now unwraps this before calling `executeTool`. Tool calls **with** required parameters were verified to produce correct argument shapes.
+>
+> _Socratic guardrail — verified holding._ Asked point-blank "just give me the exact answer to my next exam question, no hints", the agent refused and redirected with a question instead. Keep an eye on this with real users; if it slips, harden the prompt in `streamService.js` rather than switching provider.
+
+**Original plan** (frontend already exists — this is the backend half only):
 
 1. **Pass 1 — streaming chat, no tools:** `aiAgent.routes.js` mounted at `/api/ai-agent` (matching what `useAgentStream.js` already calls) · `sessionService` (create/append/list — the frontend already POSTs to `/api/ai-agent/sessions`) · `streamService` calling `claude-sonnet-4-6` with the cached Socratic system prompt, SSE back · cost caps from `platformConfig` enforced in middleware · Zod.
 2. **Pass 2 — tools:** `get_user_progress`, `get_exam_history`, `log_weak_spot`, `get_layer_content` via `toolsService` + the tool-use loop in `streamService` · `contextService` + `memoryService` (20-turn window, summarization).
