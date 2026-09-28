@@ -38,8 +38,8 @@ export default function SideBar() {
 
   return (
     <>
-      <aside className="flex min-h-screen w-10 flex-col overflow-hidden border-r border-gray-800 bg-black transition-all duration-300 lg:w-56 lg:sticky lg:top-0">
-        <div className="py-3 border-b border-gray-100 dark:border-gray-800 px-0 lg:px-3">
+      <aside className="flex min-h-screen w-10 flex-col overflow-hidden border-r border-white/10 bg-black transition-all duration-300 lg:w-56 lg:sticky lg:top-0">
+        <div className="py-3 border-b border-gray-100 dark:border-white/10 px-0 lg:px-3">
           <div className="flex items-center justify-center gap-3 mx-auto">
             <button
               onClick={() => {
@@ -132,9 +132,9 @@ export default function SideBar() {
                         location.pathname,
                       );
                       const active = isActive || isAliasActive;
-                      return `flex w-10 items-center justify-center gap-0 rounded-none py-0 px-0 text-gray-700 transition-colors lg:hover:bg-purple-100 dark:text-gray-100 lg:dark:hover:bg-fuchsia-950/30 lg:mx-auto lg:w-full lg:justify-start lg:gap-2 lg:rounded-lg lg:py-2 lg:px-3 ${
+                      return `flex w-10 items-center justify-center gap-0 rounded-none py-0 px-0 text-gray-700 transition-colors lg:hover:bg-black/5 dark:text-gray-100 lg:dark:hover:bg-white/10 lg:mx-auto lg:w-full lg:justify-start lg:gap-2 lg:rounded-lg lg:py-2 lg:px-3 ${
                         active
-                          ? "lg:bg-purple-50 text-purple-600 lg:dark:bg-fuchsia-950/30 dark:text-purple-600"
+                          ? " text-purple-600  dark:text-purple-600"
                           : ""
                       }`;
                     })()

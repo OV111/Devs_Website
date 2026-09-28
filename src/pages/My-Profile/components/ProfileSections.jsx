@@ -12,7 +12,7 @@ export function SectionHeader({ title, right }) {
       <h2 className="text-sm font-semibold text-gray-900 dark:text-gray-100 uppercase tracking-wide shrink-0">
         {title}
       </h2>
-      <div className="flex-1 h-px bg-gray-200 dark:bg-gray-800" />
+      <div className="flex-1 h-px bg-gray-200 dark:bg-white/10" />
       {right && (
         <span className="shrink-0 text-xs text-gray-400 dark:text-gray-500 tabular-nums">
           {right}
@@ -26,10 +26,10 @@ export function PathCard({ path }) {
   const bars = 12;
   const filled = Math.round((path.progress / 100) * bars);
   return (
-    <div className="px-5 py-4 rounded-sm border border-gray-800">
+    <div className="px-5 py-4 rounded-sm border border-white/10">
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-sm flex items-center justify-center text-sm shrink-0 bg-gray-900 border border-gray-800 text-gray-500">
+          <div className="w-9 h-9 rounded-sm flex items-center justify-center text-sm shrink-0 bg-gray-900 border border-white/10 text-gray-500">
             ▤
           </div>
           <div>
@@ -60,7 +60,7 @@ export function PathCard({ path }) {
 
 export function CapstoneCard({ c }) {
   return (
-    <div className="px-5 py-4 rounded-sm border border-gray-800">
+    <div className="px-5 py-4 rounded-sm border border-white/10">
       <div className="flex items-start gap-3 mb-2">
         <span
           className="text-[9px] font-bold px-2 py-0.5 shrink-0 mt-0.5 border rounded-sm"
@@ -96,7 +96,7 @@ export function CapstoneCard({ c }) {
 export function ExamRow({ exam }) {
   const isFailed = exam.status === "failed";
   return (
-    <div className="flex items-center justify-between px-4 py-3 rounded-sm border border-gray-800">
+    <div className="flex items-center justify-between px-4 py-3 rounded-sm border border-white/10">
       <div className="flex items-center gap-4">
         <span className="text-[10px] font-mono w-12 shrink-0 text-gray-600">{exam.id}</span>
         <p className="text-[13px] text-gray-300">{exam.title}</p>
@@ -121,7 +121,7 @@ export function DevsCoinSection() {
   return (
     <div>
       {/* Balance row */}
-      <div className="flex items-center justify-between px-5 py-4 rounded-sm border border-gray-800 mb-3">
+      <div className="flex items-center justify-between px-5 py-4 rounded-sm border border-white/10 mb-3">
         <div className="flex items-center gap-3">
           <div
             className="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold shrink-0 border-2"
@@ -198,7 +198,7 @@ export function DevsCoinSection() {
 
 export function ForHiringPanel({ editable = false, cvUrl = null, onCvUpload }) {
   return (
-    <div className="px-4 py-4 rounded-sm border border-gray-800">
+    <div className="px-4 py-4 rounded-sm border border-white/10">
       <p className="text-[11px] font-bold tracking-widest uppercase mb-1 text-gray-600">
         for hiring
       </p>

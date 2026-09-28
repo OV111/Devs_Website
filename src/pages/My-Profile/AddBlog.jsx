@@ -1,5 +1,5 @@
 import { useMemo, useState, useCallback, useRef, useEffect } from "react";
-import { Send, Eye, Pencil } from "lucide-react";
+import { Send, Eye, Pencil, ChevronDown, Check } from "lucide-react";
 import SaveAsOutlinedIcon from "@mui/icons-material/SaveAsOutlined";
 import { toast } from "react-hot-toast";
 import ReactMarkdown from "react-markdown";
@@ -36,10 +36,66 @@ function useForm(initial) {
 }
 
 const inputCls =
-  "w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-400 transition focus:border-gray-400 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder:text-gray-600 dark:focus:border-gray-500";
+  "w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-400 transition focus:border-gray-400 dark:border-gray-700 dark:bg-black dark:text-gray-100 dark:placeholder:text-gray-600 dark:focus:border-gray-500";
 
 const selectCls =
-  "w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-gray-400 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100";
+  "w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-gray-400 dark:border-gray-700 dark:bg-black dark:text-gray-100";
+
+function CategoryDropdown({ value, onChange, options }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const onClickOutside = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className={
+          selectCls +
+          " flex items-center justify-between gap-2 text-left cursor-pointer"
+        }
+      >
+        <span className={value ? "" : "text-gray-400"}>
+          {value || "Select category"}
+        </span>
+        <ChevronDown
+          className={`h-3.5 w-3.5 shrink-0 text-gray-400 transition-transform ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+
+      {open && (
+        <div className="absolute z-20 mt-1 w-full overflow-hidden rounded-lg border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-700 dark:bg-gray-900">
+          <div className="max-h-56 overflow-auto thin-scrollbar">
+            {options.map((opt) => (
+              <button
+                key={opt}
+                type="button"
+                onClick={() => {
+                  onChange(opt);
+                  setOpen(false);
+                }}
+                className="flex w-full items-center justify-between gap-2 px-3 py-1.5 text-left text-sm text-gray-700 transition hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 cursor-pointer"
+              >
+                {opt}
+                {value === opt && (
+                  <Check className="h-3.5 w-3.5 text-fuchsia-500" />
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function AddBlog() {
   const { fields, set, reset, setFields } = useForm(INITIAL_FIELDS);
@@ -244,7 +300,7 @@ export default function AddBlog() {
                     className={`flex items-center gap-1 px-3 py-1 text-xs transition cursor-pointer ${
                       contentTab === "write"
                         ? "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100"
-                        : "bg-white text-gray-500 hover:bg-gray-50 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800"
+                        : "bg-gray-50 text-gray-500 hover:bg-gray-100 dark:bg-black dark:text-gray-400 dark:hover:bg-gray-800"
                     }`}
                   >
                     <Pencil className="h-3 w-3" />
@@ -256,7 +312,7 @@ export default function AddBlog() {
                     className={`flex items-center gap-1 px-3 py-1 text-xs transition cursor-pointer ${
                       contentTab === "preview"
                         ? "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100"
-                        : "bg-white text-gray-500 hover:bg-gray-50 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800"
+                        : "bg-gray-50 text-gray-500 hover:bg-gray-100 dark:bg-black dark:text-gray-400 dark:hover:bg-gray-800"
                     }`}
                   >
                     <Eye className="h-3 w-3" />
@@ -274,7 +330,7 @@ export default function AddBlog() {
                   className={inputCls + " resize-y font-mono text-sm leading-relaxed"}
                 />
               ) : (
-                <div className="min-h-[480px] rounded-lg border border-gray-200 bg-white px-4 py-3 dark:border-gray-700 dark:bg-gray-900">
+                <div className="min-h-[480px] rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 dark:border-gray-700 dark:bg-black">
                   {fields.content.trim() ? (
                     <div className="prose prose-sm max-w-none dark:prose-invert prose-headings:font-semibold prose-code:rounded prose-code:bg-gray-100 prose-code:px-1 prose-code:text-sm dark:prose-code:bg-gray-800">
                       <ReactMarkdown>{fields.content}</ReactMarkdown>
@@ -310,18 +366,11 @@ export default function AddBlog() {
               <label className="mb-1 block text-xs font-medium text-gray-500 dark:text-gray-400">
                 Category
               </label>
-              <select
+              <CategoryDropdown
                 value={fields.category}
-                onChange={(e) => set("category", e.target.value)}
-                className={selectCls}
-              >
-                <option value="">Select category</option>
-                {CATEGORIES.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
-                  </option>
-                ))}
-              </select>
+                onChange={(cat) => set("category", cat)}
+                options={CATEGORIES}
+              />
             </div>
 
             {/* Difficulty */}
@@ -338,7 +387,7 @@ export default function AddBlog() {
                     className={`flex-1 rounded-lg border px-2 py-1.5 text-xs font-medium transition cursor-pointer ${
                       fields.difficulty === d
                         ? "border-fuchsia-500 bg-fuchsia-50 text-fuchsia-600 dark:bg-fuchsia-950/40 dark:text-fuchsia-400"
-                        : "border-gray-200 bg-white text-gray-600 hover:border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-400 dark:hover:border-gray-600"
+                        : "border-gray-200 bg-gray-50 text-gray-600 hover:border-gray-300 dark:border-gray-700 dark:bg-black dark:text-gray-400 dark:hover:border-gray-600"
                     }`}
                   >
                     {d}
@@ -360,7 +409,7 @@ export default function AddBlog() {
 
               <div
                 onClick={() => tagInputRef.current?.focus()}
-                className="flex min-h-[38px] flex-wrap gap-1.5 rounded-lg border border-gray-200 bg-white px-2 py-1.5 cursor-text dark:border-gray-700 dark:bg-gray-900"
+                className="flex min-h-[38px] flex-wrap gap-1.5 rounded-lg border border-gray-200 bg-gray-50 px-2 py-1.5 cursor-text dark:border-gray-700 dark:bg-black"
               >
                 {fields.tags.map((tag) => (
                   <span

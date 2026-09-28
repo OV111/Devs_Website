@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useState, useMemo } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import Sidebar from "../components/SideBar";
-import { ChevronDown, SquarePen } from "lucide-react";
+import { ChevronDown, SquarePen, Users } from "lucide-react";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import { ArrowUpDown } from "lucide-react";
 import "react-loading-skeleton/dist/skeleton.css";
 import LoadingChatSuspense from "@/components/feedback/LoadingChatSuspense";
 import ChatInterface from "./ChatInterface";
 import { formatTimeAgo } from "./ChatInterface";
+import NewGroupModal from "./NewGroupModal";
 import Skeleton from "react-loading-skeleton";
 import useThemeStore from "../../../stores/useThemeStore";
 import { getAccessToken } from "../../../../constants/api";
@@ -35,11 +36,12 @@ const MIN_USER_STATS_SKELETON_MS = 350;
 const Chats = () => {
   const { theme } = useThemeStore();
   const isDarkMode = theme === "dark";
-  const [lastMessagesByRoom, setLastMessagesByRoom] = useState({});
+  const [rooms, setRooms] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
   const [isLoadingLastMessages, setIsLoadingLastMessages] = useState(true);
   const [userStats, setUserStats] = useState(null);
-  const [userSelected, setUserSelected] = useState(null);
+  // { kind: "direct", user } | { kind: "group", room } | null
+  const [activeConversation, setActiveConversation] = useState(null);
   const [filter, setFilter] = useState("");
   const [isLoadingChats, setIsLoadingChats] = useState(false);
   const [isLoadingUserStats, setIsLoadingUserStats] = useState(false);
@@ -49,35 +51,85 @@ const Chats = () => {
   const [mutualFollowers, setMutualFollowers] = useState([]);
   const [sortOrder, setSortOrder] = useState("Newest");
   const [isSortOpen, setIsSortOpen] = useState(false);
+  const [isNewGroupOpen, setIsNewGroupOpen] = useState(false);
+
+  const isGroupActive = activeConversation?.kind === "group";
+  const activeUser = activeConversation?.kind === "direct" ? activeConversation.user : null;
+  const activeRoom = isGroupActive ? activeConversation.room : null;
 
   const clickedUser =
-    `${userSelected?.firstName ?? ""} ${userSelected?.lastName ?? ""}`.trim() ||
+    `${activeUser?.firstName ?? ""} ${activeUser?.lastName ?? ""}`.trim() ||
     "Name Surname";
-  const filteredFollowers = useMemo(() => {
-    const sorted =
-      sortOrder === "Newest" ? mutualFollowers : [...mutualFollowers].reverse();
-
-    return sorted.filter((user) => {
-      const fullName = `${user.firstName ?? ""} ${user.lastName ?? ""}`
-        .trim()
-        .toLowerCase();
-
-      return fullName.includes(filter.trim().toLowerCase());
-    });
-  }, [mutualFollowers, sortOrder, filter]);
-
-  const skeletonBaseColor = isDarkMode ? "#1f2937" : "#ebebeb";
-  const skeletonHighlightColor = isDarkMode ? "#374151" : "#f5f5f5";
 
   // ws implementation //////////////////////////////////////////////
   const token = getAccessToken();
   const [socket, setSocket] = useState(null);
   const senderId = getUserIdFromJWT(token);
-  const receiverId = userSelected?._id;
-  const roomId =
-    senderId && receiverId
+  const receiverId = activeUser?._id;
+  const roomId = isGroupActive
+    ? activeRoom?._id
+    : senderId && receiverId
       ? [String(senderId), String(receiverId)].sort().join("_")
       : null;
+
+  const roomsById = useMemo(() => {
+    const map = {};
+    rooms.forEach((room) => {
+      map[room._id] = room;
+    });
+    return map;
+  }, [rooms]);
+
+  // Every conversation the user can see: existing groups they belong to, plus
+  // every mutual follower as a potential/ongoing direct chat. Direct rooms
+  // don't need their own list entry — a mutual follower IS the direct chat,
+  // whether or not a room document exists for them yet.
+  const conversationItems = useMemo(() => {
+    const groupItems = rooms
+      .filter((room) => room.type === "group")
+      .map((room) => ({
+        kind: "group",
+        key: `group-${room._id}`,
+        title: room.name || "Unnamed group",
+        avatar: room.avatar,
+        room,
+        preview: room.lastMessage
+          ? { text: room.lastMessage.text, updatedAt: room.updatedAt }
+          : null,
+      }));
+
+    const directItems = mutualFollowers.map((user) => {
+      const directRoomId =
+        senderId && user._id
+          ? [String(senderId), String(user._id)].sort().join("_")
+          : null;
+      const room = directRoomId ? roomsById[directRoomId] : null;
+      return {
+        kind: "direct",
+        key: `direct-${user._id}`,
+        title: `${user.firstName ?? ""} ${user.lastName ?? ""}`.trim(),
+        avatar: user.stats?.profileImage,
+        user,
+        preview: room?.lastMessage
+          ? { text: room.lastMessage.text, updatedAt: room.updatedAt }
+          : null,
+      };
+    });
+
+    return [...groupItems, ...directItems];
+  }, [rooms, mutualFollowers, roomsById, senderId]);
+
+  const filteredConversations = useMemo(() => {
+    const sorted =
+      sortOrder === "Newest" ? conversationItems : [...conversationItems].reverse();
+
+    return sorted.filter((item) =>
+      item.title.toLowerCase().includes(filter.trim().toLowerCase()),
+    );
+  }, [conversationItems, sortOrder, filter]);
+
+  const skeletonBaseColor = isDarkMode ? "#1f2937" : "#ebebeb";
+  const skeletonHighlightColor = isDarkMode ? "#374151" : "#f5f5f5";
 
   useEffect(() => {
     const ws = new WebSocket(import.meta.env.VITE_WS_URL);
@@ -100,18 +152,31 @@ const Chats = () => {
         setChatMessages(payload.messageHistory || []);
         setIsLoadingHistory(false);
       } else if (payload.type === "load_last_messages") {
-        const map = {};
-        for (const room of payload.roomsData) {
-          map[room._id] = {
-            text: room?.lastMessage?.text || "last message",
-            updatedAt: room?.updatedAt || room?.createdAt || null,
-          };
-        }
-        setLastMessagesByRoom(map);
+        setRooms(payload.roomsData || []);
         setIsLoadingLastMessages(false);
+      } else if (
+        payload.type === "group_created" ||
+        payload.type === "group_updated"
+      ) {
+        const room = payload.room;
+        const currentUserId = getUserIdFromJWT(getAccessToken());
+        const isStillMember = room.members.includes(String(currentUserId));
+
+        setRooms((prev) => {
+          if (!isStillMember) return prev.filter((r) => r._id !== room._id);
+          const idx = prev.findIndex((r) => r._id === room._id);
+          if (idx === -1) return [...prev, room];
+          const next = [...prev];
+          next[idx] = room;
+          return next;
+        });
+
+        if (!isStillMember) {
+          setActiveConversation((prev) =>
+            prev?.kind === "group" && prev.room._id === room._id ? null : prev,
+          );
+        }
       }
-      // else if (payload.type === "room_last_message_updated") {
-      // }
     };
     ws.onerror = (err) => {
       console.log("WebSocket error:", err);
@@ -124,7 +189,7 @@ const Chats = () => {
   }, []);
 
   useEffect(() => {
-    if (!socket || !userSelected || !roomId) return;
+    if (!socket || !activeConversation || !roomId) return;
     if (socket.readyState !== WebSocket.OPEN) return;
     setIsLoadingHistory(true);
     setChatMessages([]);
@@ -134,20 +199,20 @@ const Chats = () => {
         type: "join_room",
         roomId,
         senderId,
-        receiverId,
+        // Only meaningful for a direct chat's implicit first-message room
+        // creation — a group's roomId already resolves to an existing room.
+        receiverId: isGroupActive ? undefined : receiverId,
         message: "Creating Room",
       }),
     );
-  }, [socket, userSelected, roomId, senderId, receiverId]);
+  }, [socket, activeConversation, roomId, senderId, receiverId, isGroupActive]);
 
   const handleSendMessage = () => {
-    if (!draftMessage.trim()) return;
+    if (!draftMessage.trim() || !roomId) return;
     socket.send(
       JSON.stringify({
         type: "send_message",
         roomId,
-        senderId,
-        receiverId,
         text: draftMessage,
       }),
     );
@@ -185,7 +250,7 @@ const Chats = () => {
   }, []);
 
   useEffect(() => {
-    if (!receiverId) {
+    if (isGroupActive || !receiverId) {
       setUserStats(null);
       setIsLoadingUserStats(false);
       return;
@@ -222,7 +287,7 @@ const Chats = () => {
       }
     };
     fetchReceiverStats();
-  }, [receiverId]);
+  }, [receiverId, isGroupActive]);
 
   useEffect(() => {
     fetchUsers();
@@ -238,18 +303,25 @@ const Chats = () => {
   return (
     <div className="flex min-h-screen">
       <Sidebar />
-      {!userSelected ? (
+      {!activeConversation ? (
         <>
-          <div className="border-r w-full border-gray-200 bg-white dark:border-gray-800 dark:bg-black lg:w-70 lg:pt-4  lg:px-0 lg:text-lg">
+          <div className="border-r w-full border-white/5 bg-white dark:bg-black lg:w-70 lg:pt-4  lg:px-0 lg:text-lg">
             <div className="flex items-center justify-between px-3">
               <h1 className="mt-3 lg:mt-0 text-lg font-semibold text-gray-900 dark:text-gray-100">
                 Messages
               </h1>
-              {/* Add new chat */}
-              <SquarePen
-                size={18}
-                className="mt-3 lg:mt-0 cursor-pointer text-gray-400 transition-colors hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-200"
-              />
+              {/* New group */}
+              <button
+                type="button"
+                onClick={() => setIsNewGroupOpen(true)}
+                title="New group"
+                aria-label="New group"
+              >
+                <SquarePen
+                  size={18}
+                  className="mt-3 lg:mt-0 cursor-pointer text-gray-400 transition-colors hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-200"
+                />
+              </button>
             </div>
 
             <div className="px-3 pt-5">
@@ -318,36 +390,52 @@ const Chats = () => {
                 <div className="flex justify-center items-center px-3 py-6 text-sm text-gray-500 dark:text-gray-100">
                   <LoadingChatSuspense />
                 </div>
-              ) : filteredFollowers.length > 0 ? (
-                filteredFollowers.map((user) => {
-                  const roomIdForUser =
-                    senderId && user._id
-                      ? [String(senderId), String(user._id)].sort().join("_")
-                      : "";
-                  const roomPreview = lastMessagesByRoom[roomIdForUser];
+              ) : filteredConversations.length > 0 ? (
+                filteredConversations.map((item) => {
                   const shouldShowLastMessageSkeleton =
-                    isLoadingLastMessages && !roomPreview;
+                    isLoadingLastMessages && !item.preview;
+                  const isActive =
+                    item.kind === "group"
+                      ? isGroupActive && activeRoom?._id === item.room._id
+                      : !isGroupActive && activeUser?._id === item.user._id;
+
                   return (
                     <button
-                      key={user._id}
+                      key={item.key}
                       type="button"
-                      onClick={() => setUserSelected(user)}
-                      className={`flex w-full items-center gap-3 border-b text-purple-600 border-gray-100 px-3 py-3 text-left transition-colors first:border-t dark:border-gray-800
+                      onClick={() =>
+                        setActiveConversation(
+                          item.kind === "group"
+                            ? { kind: "group", room: item.room }
+                            : { kind: "direct", user: item.user },
+                        )
+                      }
+                      className={`flex w-full items-center gap-3 border-b text-purple-600 border-white/5 px-3 py-3 text-left transition-colors first:border-t dark:border-white/5
                   ${
-                    userSelected?._id === user._id
+                    isActive
                       ? "lg:bg-purple-50 dark:bg-fuchsia-950/30 "
-                      : "hover:bg-gray-50 dark:hover:bg-gray-900/70"
+                      : "hover:bg-gray-50 dark:hover:bg-white/5"
                   }
                     `}
                     >
-                      <img
-                        src={user.stats?.profileImage}
-                        alt="Profile"
-                        className="h-8 w-8 shrink-0 rounded-full bg-purple-100 object-cover"
-                      />
+                      {item.avatar ? (
+                        <img
+                          src={item.avatar}
+                          alt="Profile"
+                          className="h-8 w-8 shrink-0 rounded-full bg-purple-100 object-cover"
+                        />
+                      ) : (
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-purple-100 text-purple-600 dark:bg-fuchsia-950/40 dark:text-fuchsia-300">
+                          {item.kind === "group" ? (
+                            <Users size={14} />
+                          ) : (
+                            item.title?.[0]?.toUpperCase()
+                          )}
+                        </div>
+                      )}
                       <div className="min-w-0 flex-1">
                         <p className="truncate text-sm font-medium text-gray-900 dark:text-gray-100">
-                          {user.firstName} {user.lastName}
+                          {item.title}
                         </p>
                         <div className="flex justify-between items-center">
                           {shouldShowLastMessageSkeleton ? (
@@ -372,10 +460,10 @@ const Chats = () => {
                           ) : (
                             <>
                               <p className="truncate text-xs font-medium text-gray-500 dark:text-gray-400">
-                                {roomPreview?.text || "Last message"}
+                                {item.preview?.text || "Last message"}
                               </p>
                               <p className="truncate text-[14px] font-medium text-gray-500 dark:text-gray-400">
-                                {formatTimeAgo(roomPreview?.updatedAt) ||
+                                {formatTimeAgo(item.preview?.updatedAt) ||
                                   "Last Time"}
                               </p>
                             </>
@@ -410,7 +498,9 @@ const Chats = () => {
         </>
       ) : (
           <ChatInterface
-            userSelected={userSelected}
+            isGroup={isGroupActive}
+            group={activeRoom}
+            userSelected={activeUser}
             userStats={userStats}
             isMobile={isMobile}
             isLoadingUserStats={isLoadingUserStats}
@@ -418,12 +508,25 @@ const Chats = () => {
             isLoadingHistory={isLoadingHistory}
             chatMessages={chatMessages}
             senderId={senderId}
+            mutualFollowers={mutualFollowers}
             draftMessage={draftMessage}
             setDraftMessage={setDraftMessage}
             handleKeyDown={handleKeyDown}
             handleSendMessage={handleSendMessage}
-            onBack={() => setUserSelected(null)}
+            onBack={() => setActiveConversation(null)}
+            onLeftGroup={() => setActiveConversation(null)}
           />
+      )}
+
+      {isNewGroupOpen && (
+        <NewGroupModal
+          mutualFollowers={mutualFollowers}
+          onClose={() => setIsNewGroupOpen(false)}
+          onCreated={(room) => {
+            setRooms((prev) => [...prev, room]);
+            setActiveConversation({ kind: "group", room });
+          }}
+        />
       )}
     </div>
   );

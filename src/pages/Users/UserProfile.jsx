@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
 import { FiMapPin, FiClock, FiMessageSquare } from "react-icons/fi";
 import { Ellipsis } from "lucide-react";
@@ -57,6 +57,7 @@ function relativeTime(dateStr) {
 
 export default function UserProfile() {
   const { username } = useParams();
+  const navigate = useNavigate();
   const { user: loggedInUser } = useProfileStore();
   const isOwnProfile = loggedInUser?.username === username;
   const [user, setUser] = useState(null);
@@ -102,14 +103,18 @@ export default function UserProfile() {
           const blogsData = await fetchUserBlogs(fetchedStats.userId, 6);
           setBlogs(blogsData);
         }
-      } catch {
+      } catch (err) {
+        if (err.redirect) {
+          navigate(`/users/${err.redirect}`, { replace: true });
+          return;
+        }
         setNotFound(true);
       } finally {
         setLoading(false);
       }
     };
     fetchUser();
-  }, [username]);
+  }, [username, navigate]);
 
   const handleFollowToggle = async () => {
     if (followLoading) return;

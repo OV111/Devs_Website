@@ -8,7 +8,7 @@ import useAuthStore from "@/stores/useAuthStore";
 import BlogCard from "@/components/blog/BlogCard";
 import { updateLastActive, saveSettings } from "@/services/profileApi";
 import { toast } from "react-hot-toast";
-import UserBanner from "../assets/user_profile/User_Banner.png";
+import { Pencil } from "lucide-react";
 import {
   ACCENT,
   MOCK_PATHS,
@@ -109,21 +109,54 @@ const MyProfile = () => {
 
       <div className="flex-1 min-w-0">
         {/* Banner */}
-        <div className="relative">
-          <img
-            src={
-              stats?.bannerImage?.replace(
+        <div className="relative group">
+          {stats?.bannerImage ? (
+            <img
+              src={stats.bannerImage.replace(
                 "/upload/",
                 "/upload/w_1200,h_280,c_fill,f_auto,q_auto/",
-              ) || UserBanner
-            }
-            alt="Banner"
-            className="w-full h-40 sm:h-56 object-cover"
-          />
+              )}
+              alt="Banner"
+              className="w-full h-40 sm:h-56 object-cover"
+            />
+          ) : (
+            // No banner set — a generated brand-color gradient reads as an
+            // intentional empty state, not a real photo a user might mistake
+            // for something they already uploaded.
+            <div className="w-full h-40 sm:h-56 bg-linear-to-br from-purple-950 via-gray-950 to-gray-950" />
+          )}
           <div className="absolute inset-x-0 top-0 h-16 bg-linear-to-b from-gray-950 to-transparent pointer-events-none" />
           <div className="absolute inset-x-0 bottom-0 h-20 bg-linear-to-t from-gray-950 to-transparent pointer-events-none" />
+
+          {stats?.bannerImage ? (
+            // Banner already set — a quiet, hover-only edit affordance so it
+            // doesn't compete with the photo.
+            <Link
+              to="settings"
+              aria-label="Edit banner image"
+              className="absolute top-3 right-3 z-2 flex items-center gap-1.5 rounded-lg bg-black/50 px-2.5 py-1.5 text-xs font-medium text-white opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100 hover:bg-black/70 focus-visible:opacity-100"
+            >
+              <Pencil size={12} />
+              Edit banner
+            </Link>
+          ) : (
+            // Nothing set yet — the CTA stays visible so the empty state
+            // itself invites the action instead of hiding it behind hover.
+            <Link
+              to="settings"
+              className="absolute top-3 right-3 z-2 flex items-center gap-1.5 rounded-lg bg-white/10 px-2.5 py-1.5 text-xs font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+            >
+              <Pencil size={12} />
+              Add a banner
+            </Link>
+          )}
+
           <div className="absolute -bottom-10 sm:-bottom-13 lg:-bottom-14 left-14 sm:left-16 lg:left-10 -translate-x-1/2 lg:translate-x-0 z-1">
-            <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden border-3 border-white dark:border-gray-900 shadow-sm">
+            <Link
+              to="settings"
+              aria-label="Edit profile photo"
+              className="group/avatar relative block w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden border-3 border-white dark:border-gray-900 shadow-sm"
+            >
               {stats?.profileImage ? (
                 <img
                   src={stats.profileImage.replace(
@@ -139,7 +172,10 @@ const MyProfile = () => {
                   {user?.lastName?.[0]?.toUpperCase()}
                 </div>
               )}
-            </div>
+              <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity group-hover/avatar:opacity-100">
+                <Pencil size={18} className="text-white" />
+              </div>
+            </Link>
           </div>
         </div>
 
@@ -237,7 +273,7 @@ const MyProfile = () => {
                 title="activity · last 12 months"
                 right={`${TOTAL_CONTRIBUTIONS} contributions`}
               />
-              <div className="px-4 py-4 rounded-sm overflow-x-auto border border-gray-800">
+              <div className="px-4 py-4 rounded-sm overflow-x-auto border border-white/10">
                 <div className="flex gap-[3px]">
                   {ACTIVITY_GRID.map((week, wi) => (
                     <div key={wi} className="flex flex-col gap-[3px]">
@@ -377,7 +413,7 @@ const MyProfile = () => {
             {/* DEVSCOIN */}
             <div>
               <SectionHeader title="devscoin" />
-              <div className="px-4 py-4 rounded-sm border border-gray-800">
+              <div className="px-4 py-4 rounded-sm border border-white/10">
                 {/* Balance */}
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-xl font-bold" style={{ color: ACCENT }}>
