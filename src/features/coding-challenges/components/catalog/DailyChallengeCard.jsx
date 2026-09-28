@@ -10,7 +10,7 @@ export default function DailyChallengeCard({ daily, fadeUp }) {
   return (
     <Motion.div
       {...fadeUp(0.1)}
-      className="w-full lg:w-[340px] shrink-0 rounded-sm p-5 flex flex-col gap-4 bg-purple-600 border border-purple-600"
+      className="mt-13 w-full lg:w-[340px] shrink-0 rounded-sm p-5 flex flex-col gap-4 bg-purple-600 border border-purple-600"
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">

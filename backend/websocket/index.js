@@ -1,5 +1,6 @@
 import { WebSocketServer } from "ws";
 import { joinRoom, loadLastMessages, sendMessage, removeFromRooms } from "./chatHandler.js";
+import { registerUserSocket, unregisterUserSocket } from "./connectionRegistry.js";
 import { verifyToken } from "../utils/jwtToken.js";
 
 let wss;
@@ -19,6 +20,7 @@ export default function initWebSocketServer(server) {
             return ws.close();
           }
           ws.userId = decoded.id;
+          registerUserSocket(ws.userId, ws);
         } else {
           if (!ws.userId) return ws.close();
           else if (data.type === "join_room") {
@@ -37,6 +39,7 @@ export default function initWebSocketServer(server) {
     });
     ws.on("close", () => {
       removeFromRooms(ws);
+      unregisterUserSocket(ws.userId, ws);
     });
   });
 }

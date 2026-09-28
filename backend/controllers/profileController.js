@@ -6,6 +6,7 @@ import {
   getProfileService,
   updateLastActiveService,
   updateSettingsService,
+  checkUsernameAvailableService,
   uploadToCloudinary,
   getNotificationsService,
   getFollowingService,
@@ -38,6 +39,25 @@ export const updateLastActive = async (req, res) => {
     const userId = new ObjectId(verified.id);
     await updateLastActiveService(req.app.locals.db, userId, new Date());
     res.status(200).json({ message: "Updated" });
+  } catch (err) {
+    res.status(500).json({ message: "Server Error", error: err.message });
+  }
+};
+
+export const checkUsernameAvailable = async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(" ")[1];
+    const verified = verifyToken(token);
+    if (!verified) return res.status(401).json({ message: "Unauthorized" });
+
+    const username = req.query.username?.toString() || "";
+    const userId = new ObjectId(verified.id);
+    const result = await checkUsernameAvailableService(
+      req.app.locals.db,
+      userId,
+      username,
+    );
+    res.status(200).json(result);
   } catch (err) {
     res.status(500).json({ message: "Server Error", error: err.message });
   }
@@ -80,7 +100,9 @@ export const updateSettings = (req, res) => {
       const result = await updateSettingsService(req.app.locals.db, userId, fields, resolved);
       res.status(200).json({ message: "Changes Saved", ...result });
     } catch (err) {
-      res.status(500).json({ message: "Error updating profile", error: err.message });
+      res
+        .status(err.status ?? 500)
+        .json({ message: err.message || "Error updating profile" });
     }
   });
 

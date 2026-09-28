@@ -1,10 +1,16 @@
 import { useState, useRef, useEffect } from "react";
-import { ArrowUp, Mic, AudioLines, FileText, X } from "lucide-react";
-import { DROPDOWN_ITEMS, ATTACHMENT_ACCEPTED_EXTENSIONS } from "../../../../constants/AiAgent";
+import { ArrowUp, Mic, MicOff, AudioLines, FileText, X } from "lucide-react";
+import {
+  DROPDOWN_ITEMS,
+  ATTACHMENT_ACCEPTED_EXTENSIONS,
+} from "../../../../constants/AiAgent";
 import { readAttachments, formatBytes } from "../lib/readAttachment";
+import { stopSpeaking } from "../lib/speech";
 import AgentMenu from "./AgentMenu";
 
-const ACCEPT_ATTR = ATTACHMENT_ACCEPTED_EXTENSIONS.map((e) => `.${e}`).join(",");
+const ACCEPT_ATTR = ATTACHMENT_ACCEPTED_EXTENSIONS.map((e) => `.${e}`).join(
+  ",",
+);
 
 /**
  * The single composer for the agent shell.
@@ -13,7 +19,16 @@ const ACCEPT_ATTR = ATTACHMENT_ACCEPTED_EXTENSIONS.map((e) => `.${e}`).join(",")
  * prompt chips live OUTSIDE this component and need to fill the box. Keeping
  * the draft here would mean two sources of truth for the same text.
  */
-export default function ChatInput({ isStreaming, onSend, value, onValueChange, focusToken = 0 }) {
+export default function ChatInput({
+  isStreaming,
+  onSend,
+  value,
+  onValueChange,
+  focusToken = 0,
+  // Layout-only: the empty state shows a taller, roomier card; in a conversation
+  // the composer stays compact so it doesn't eat transcript space.
+  spacious = false,
+}) {
   const input = value;
   const setInput = onValueChange;
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -21,6 +36,54 @@ export default function ChatInput({ isStreaming, onSend, value, onValueChange, f
   const [attachErrors, setAttachErrors] = useState([]);
   const inputRef = useRef(null);
   const fileInputRef = useRef(null);
+  const recognitionRef = useRef(null);
+  const baseTextRef = useRef(""); // text already in the box before this recording started
+  const [isListening, setIsListening] = useState(false);
+
+  // Web Speech API — client-side STT, no backend call, no API key. Chrome/Edge
+  // only (no Firefox/Safari support as of writing); the mic button hides itself
+  // when unsupported rather than showing a dead control.
+  const SpeechRecognitionCtor =
+    typeof window !== "undefined" && (window.SpeechRecognition || window.webkitSpeechRecognition);
+
+  const toggleListening = () => {
+    if (!SpeechRecognitionCtor) return;
+
+    if (isListening) {
+      recognitionRef.current?.stop();
+      return;
+    }
+
+    stopSpeaking(); // don't talk over the user while they're dictating
+
+    const recognition = new SpeechRecognitionCtor();
+    recognition.lang = "en-US";
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    baseTextRef.current = input;
+
+    recognition.onresult = (e) => {
+      let finalText = "";
+      let interimText = "";
+      for (let i = 0; i < e.results.length; i++) {
+        const transcript = e.results[i][0].transcript;
+        if (e.results[i].isFinal) finalText += transcript;
+        else interimText += transcript;
+      }
+      const sep = baseTextRef.current.trim() ? " " : "";
+      setInput(baseTextRef.current + sep + finalText + interimText);
+    };
+
+    recognition.onerror = () => setIsListening(false);
+    recognition.onend = () => setIsListening(false);
+
+    recognitionRef.current = recognition;
+    recognition.start();
+    setIsListening(true);
+  };
+
+  // Stop any in-flight recognition on unmount so it doesn't keep the mic hot.
+  useEffect(() => () => recognitionRef.current?.stop(), []);
 
   // The parent can now set the text (prompt chips, menu shortcuts), so the
   // auto-resize has to react to `value` rather than only to typing.
@@ -45,7 +108,10 @@ export default function ChatInput({ isStreaming, onSend, value, onValueChange, f
     const files = e.target.files;
     if (!files?.length) return;
 
-    const { attachments: read, errors } = await readAttachments(files, attachments.length);
+    const { attachments: read, errors } = await readAttachments(
+      files,
+      attachments.length,
+    );
     if (read.length) setAttachments((prev) => [...prev, ...read]);
     setAttachErrors(errors);
 
@@ -79,7 +145,9 @@ export default function ChatInput({ isStreaming, onSend, value, onValueChange, f
 
     // Everything else is a prompt shortcut: drop the question into the composer
     // and focus it, so the user can edit before sending rather than firing blind.
-    const item = DROPDOWN_ITEMS.flatMap((g) => g.items).find((i) => i.label === label);
+    const item = DROPDOWN_ITEMS.flatMap((g) => g.items).find(
+      (i) => i.label === label,
+    );
     if (!item?.prompt) return;
 
     setInput(item.prompt);
@@ -106,11 +174,14 @@ export default function ChatInput({ isStreaming, onSend, value, onValueChange, f
     }
   };
 
-
   return (
     /* max-w-3xl matches the transcript column so the composer lines up with the
        messages instead of spanning the full pane. */
-    <div className="px-4 pb-4 pt-2 shrink-0 w-full max-w-3xl mx-auto">
+    <div
+      className={`px-4 shrink-0 w-full mx-auto ${
+        spacious ? "max-w-2xl pb-0 pt-0" : "max-w-3xl pb-4 pt-2"
+      }`}
+    >
       <input
         ref={fileInputRef}
         type="file"
@@ -130,7 +201,11 @@ export default function ChatInput({ isStreaming, onSend, value, onValueChange, f
         </div>
       )}
 
-      <div className="rounded-2xl px-2.5 py-2 border border-white/10 bg-white/3">
+      <div
+        className={`rounded-2xl border border-white/10 bg-white/3 ${
+          spacious ? "px-3 py-2.5" : "px-2.5 py-2"
+        }`}
+      >
         {attachments.length > 0 && (
           <div className="flex flex-wrap gap-2 px-1 pt-1 pb-2">
             {attachments.map((a) => (
@@ -140,7 +215,9 @@ export default function ChatInput({ isStreaming, onSend, value, onValueChange, f
                 title={a.truncated ? `${a.name} (truncated to fit)` : a.name}
               >
                 <FileText size={13} className="shrink-0 text-purple-400" />
-                <span className="text-[12px] text-white/80 truncate">{a.name}</span>
+                <span className="text-[12px] text-white/80 truncate">
+                  {a.name}
+                </span>
                 <span className="text-[11px] text-white/30 shrink-0">
                   {formatBytes(a.bytes)}
                   {a.truncated ? " ·cut" : ""}
@@ -157,15 +234,23 @@ export default function ChatInput({ isStreaming, onSend, value, onValueChange, f
           </div>
         )}
 
-        {/* Single row: menu, input and actions inline. items-end keeps the
-            buttons anchored to the bottom as the textarea grows. */}
-        <div className="flex items-end gap-1.5">
-          <AgentMenu
-            open={dropdownOpen}
-            onOpenChange={setDropdownOpen}
-            onSelect={handleDropdownItem}
-            isEnabled={() => true}
-          />
+        {/* Empty state stacks: the message field sits ABOVE the controls, so the
+            card reads as a writing surface. In a conversation everything stays
+            on one inline row to keep the composer short.
+            items-end keeps the buttons anchored as the textarea grows. */}
+        <div
+          className={
+            spacious ? "flex flex-col gap-1" : "flex items-end gap-1.5"
+          }
+        >
+          {!spacious && (
+            <AgentMenu
+              open={dropdownOpen}
+              onOpenChange={setDropdownOpen}
+              onSelect={handleDropdownItem}
+              isEnabled={() => true}
+            />
+          )}
 
           <textarea
             ref={inputRef}
@@ -173,60 +258,92 @@ export default function ChatInput({ isStreaming, onSend, value, onValueChange, f
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Write a message..."
+            placeholder={
+              spacious ? "How I can help you today?" : "Write a message..."
+            }
             disabled={isStreaming}
-            className="flex-1 min-w-0 bg-transparent outline-none resize-none text-[14px] leading-6 py-1 text-white placeholder:text-[#555] disabled:opacity-40 max-h-40 overflow-y-auto"
+            className={`flex-1 min-w-0 bg-transparent outline-none resize-none leading-6 text-white placeholder:text-[#555] disabled:opacity-40 max-h-40 overflow-y-auto ${
+              // A taller resting height is what makes the empty-state card feel
+              // like an invitation to type rather than a single-line field.
+              spacious ? "text-[15px] py-0.5 pl-2 min-h-12" : "text-[14px] pb-1"
+            }`}
           />
 
-          <div className="flex items-center gap-0.5 shrink-0">
-            {/* Voice is UI-only for now.
-                aria-disabled rather than the `disabled` attribute: a disabled
-                button suppresses pointer events in most browsers, which kills
-                BOTH the hover state and the native tooltip — so the control
-                would look dead and never explain why. This keeps it hoverable
-                and discoverable while still being announced as disabled, and
-                the click handler is the thing that actually blocks the action. */}
-            <button
-              aria-disabled="true"
-              onClick={(e) => e.preventDefault()}
-              title="Voice input — coming soon"
-              aria-label="Voice input"
-              className="w-8 h-8 rounded-md flex items-center justify-center text-white/25 hover:text-white/50 hover:bg-white/5 transition-colors cursor-not-allowed"
-            >
-              <Mic size={18} strokeWidth={1.5} />
-            </button>
-            <button
-              aria-disabled="true"
-              onClick={(e) => e.preventDefault()}
-              title="Voice conversation — coming soon"
-              aria-label="Voice conversation"
-              className="w-8 h-8 rounded-md flex items-center justify-center text-white/25 hover:text-white/50 hover:bg-white/5 transition-colors cursor-not-allowed"
-            >
-              <AudioLines size={18} strokeWidth={1.5} />
-            </button>
-
-            {/* Send only appears once there's something to send, so the resting
-                state stays uncluttered. */}
-            {canSend && (
-              <button
-                onClick={handleSend}
-                aria-label="Send message"
-                title="Send"
-                className="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-600 hover:bg-purple-500 text-white transition-colors cursor-pointer ml-0.5"
-              >
-                <ArrowUp size={17} strokeWidth={2} />
-              </button>
+          <div
+            className={
+              spacious
+                ? "flex items-center justify-between w-full"
+                : "flex items-center gap-0.5 shrink-0"
+            }
+          >
+            {/* In the stacked layout the menu moves down here, so the controls
+                form one row beneath the message field. */}
+            {spacious && (
+              <AgentMenu
+                open={dropdownOpen}
+                onOpenChange={setDropdownOpen}
+                onSelect={handleDropdownItem}
+                isEnabled={() => true}
+              />
             )}
+
+            <div
+              className={spacious ? "flex items-center gap-0.5" : "contents"}
+            >
+              {/* Dictation into the same textarea — everything downstream
+                  (send, teach-back grading, attachments) is unchanged, only
+                  the input method differs. Hidden entirely if the browser
+                  doesn't support SpeechRecognition rather than showing a dead
+                  control (same reasoning the old placeholder comment used for
+                  aria-disabled, but here there's truly nothing to offer). */}
+              {SpeechRecognitionCtor && (
+                <button
+                  onClick={toggleListening}
+                  title={isListening ? "Stop dictation" : "Dictate message"}
+                  aria-label={isListening ? "Stop dictation" : "Dictate message"}
+                  className={`w-8 h-8 rounded-md flex items-center justify-center transition-colors cursor-pointer ${
+                    isListening ? "text-red-400 bg-red-950/30 animate-pulse" : "text-white hover:bg-white/5"
+                  }`}
+                >
+                  {isListening ? <MicOff size={18} strokeWidth={1.5} /> : <Mic size={18} strokeWidth={1.5} />}
+                </button>
+              )}
+              <button
+                aria-disabled="true"
+                onClick={(e) => e.preventDefault()}
+                title="Voice conversation — coming soon"
+                aria-label="Voice conversation"
+                className="w-8 h-8 rounded-md flex items-center justify-center text-white  hover:bg-white/5 transition-colors cursor-not-allowed"
+              >
+                <AudioLines size={18} strokeWidth={1.5} />
+              </button>
+
+              {/* Send only appears once there's something to send, so the resting
+                state stays uncluttered. */}
+              {canSend && (
+                <button
+                  onClick={handleSend}
+                  aria-label="Send message"
+                  title="Send"
+                  className="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-600 hover:bg-purple-500 text-white transition-colors cursor-pointer ml-0.5"
+                >
+                  <ArrowUp size={17} strokeWidth={2} />
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="flex items-center justify-center mt-2 px-1">
-        <p className="text-[11px]" style={{ color: "#333" }}>
-          Agent can make mistakes. Double-check important answers.
-        </p>
-        
-      </div>
+      {/* Hidden in the empty state so greeting → composer → chips stay one tight
+          block; the disclaimer would otherwise wedge itself between them. */}
+      {!spacious && (
+        <div className="flex items-center justify-center mt-2 px-1">
+          <p className="text-[11px]" style={{ color: "#333" }}>
+            Agent can make mistakes. Double-check important answers.
+          </p>
+        </div>
+      )}
     </div>
   );
 }

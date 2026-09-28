@@ -9,15 +9,6 @@
  * - A real http.Server + ws.WebSocketServer is started on an OS-assigned port
  *   (port 0) in beforeAll and torn down in afterAll.
  * - Test clients are plain `ws` WebSocket instances connecting to that server.
- *
- * Known chatHandler bug (line 103)
- * ----------------------------------
- * chatHandler.js uses `WebSocket.OPEN` (the class, not imported from 'ws').
- * `WebSocket` is not in scope there, so `WebSocket.OPEN` is `undefined`.
- * The broadcast guard `clientSocket.readyState === undefined` is never true,
- * so messages are inserted into the DB but NOT broadcast to room members.
- * The broadcast test below documents this behaviour and tests only what
- * actually happens (DB insert path + the error-free response path).
  */
 
 import { describe, it, expect, vi, beforeAll, afterAll, afterEach } from 'vitest'
@@ -263,14 +254,16 @@ describe('WebSocket — join_room', () => {
     expect(msg.message).toMatch(/room id is missing/i)
   })
 
-  it('returns error when receiverId is missing', async () => {
+  it('returns error when the room does not exist and no receiverId is given', async () => {
     const ws = await openClient()
     await authenticate(ws)
 
+    // Without a receiverId, chatHandler can't implicitly create a direct
+    // room — that's also how a bad/expired group roomId is rejected, since
+    // groups must be created via the REST endpoint first.
     send(ws, { type: 'join_room', roomId: 'room1' })
     const msg = await waitForMsg(ws, 'error')
-    // chatHandler reports "Users Id is missing!" when receiverId is absent.
-    expect(msg.message).toMatch(/id is missing/i)
+    expect(msg.message).toMatch(/room does not exist/i)
   })
 
   it('sends joined_room and message_history on success', async () => {
@@ -333,31 +326,20 @@ describe('WebSocket — send_message', () => {
     expect(msg.message).toMatch(/room does not exist/i)
   })
 
-  it('inserts message to DB on send_message (broadcast silently skipped due to chatHandler bug)', async () => {
-    /**
-     * BUG NOTE — chatHandler.js line 103:
-     *   `if (clientSocket.readyState === WebSocket.OPEN)`
-     * `WebSocket` is not imported in chatHandler.js, so `WebSocket.OPEN` is
-     * `undefined`.  The guard is never satisfied, meaning the broadcast loop
-     * runs but never actually sends.  Both clients in the room will NOT receive
-     * a `sended_message` frame.
-     *
-     * This test verifies that:
-     *   1. The message IS inserted into the DB (messagesCollection.insertOne called).
-     *   2. The room metadata IS updated (roomsCollection.updateOne called).
-     *   3. No error is sent back to the sender.
-     *   4. The sender's connection remains open.
-     *
-     * Fix: in chatHandler.js replace `WebSocket.OPEN` with the numeric value
-     * `1` or import WebSocket from 'ws' and use `ws.OPEN`.
-     */
+  it('inserts message to DB and broadcasts it to every socket in the room', async () => {
     const insertOneSpy = vi.fn().mockResolvedValue({ insertedId: 'new-msg-id' })
     const updateOneSpy = vi.fn().mockResolvedValue({})
+    // sendMessage looks up the room's members to know who to broadcast to.
+    const roomsFindOneSpy = vi.fn().mockResolvedValue({
+      _id: 'shared-room',
+      members: ['507f1f77bcf86cd799439011', '507f1f77bcf86cd799439012'],
+    })
 
     mockConnectDB.mockResolvedValue(
       makeMockDb({
         messagesInsertOne: insertOneSpy,
         roomsUpdateOne:    updateOneSpy,
+        roomsFindOne:      roomsFindOneSpy,
       }),
     )
 
@@ -381,16 +363,21 @@ describe('WebSocket — send_message', () => {
       ),
     ])
 
-    // clientA sends a message.
-    send(clientA, {
-      type:       'send_message',
-      roomId:     'shared-room',
-      receiverId: '507f1f77bcf86cd799439012',
-      text:       'Hello from A',
-    })
+    // clientA sends a message; both listen for the broadcast.
+    const [, broadcastToB] = await Promise.all([
+      waitForMsg(clientA, 'sended_message'),
+      waitForMsg(clientB, 'sended_message'),
+      Promise.resolve().then(() =>
+        send(clientA, {
+          type:   'send_message',
+          roomId: 'shared-room',
+          text:   'Hello from A',
+        }),
+      ),
+    ])
 
-    // Allow the async handler to complete.
-    await new Promise((r) => setTimeout(r, 200))
+    expect(broadcastToB.message.text).toBe('Hello from A')
+    expect(broadcastToB.message.senderId).toBe('507f1f77bcf86cd799439011')
 
     // DB insert was called — this is the primary side-effect we can verify.
     expect(insertOneSpy).toHaveBeenCalledTimes(1)

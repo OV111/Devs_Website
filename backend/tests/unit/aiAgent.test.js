@@ -9,6 +9,7 @@ import {
 import { appendMessages, checkDailyLimit, incrementUsage, updateSession, deleteSession } from '../../services/agent/sessionService.js'
 import { executeTool, toolDefinitions } from '../../tools/agentTools.js'
 import { composeUserMessage } from '../../services/agent/streamService.js'
+import { sanitizeTitle } from '../../services/agent/titleService.js'
 
 const VALID_OID = '507f1f77bcf86cd799439011'
 const OTHER_OID = '507f1f77bcf86cd799439022'
@@ -303,15 +304,70 @@ describe('updateSession / deleteSession ownership', () => {
   })
 })
 
+// ─── conversation titling ───────────────────────────────────────────────────
+
+describe('sanitizeTitle', () => {
+  it('keeps a well-formed title unchanged', () => {
+    expect(sanitizeTitle('Express Route 404 Debugging')).toBe('Express Route 404 Debugging')
+  })
+
+  it('strips wrapping quotes the model adds despite instructions', () => {
+    expect(sanitizeTitle('"Database Index Basics"')).toBe('Database Index Basics')
+    expect(sanitizeTitle("'React Component Review'")).toBe('React Component Review')
+  })
+
+  it('strips a "Title:" prefix', () => {
+    expect(sanitizeTitle('Title: Website Homepage Copy')).toBe('Website Homepage Copy')
+    expect(sanitizeTitle("Here's a title: Website Homepage Copy")).toBe('Website Homepage Copy')
+  })
+
+  it('keeps only the first line when the model explains itself', () => {
+    expect(sanitizeTitle('React Hooks Guide\nThis title covers the topic.')).toBe('React Hooks Guide')
+  })
+
+  it('strips trailing punctuation', () => {
+    expect(sanitizeTitle('Database Index Basics.')).toBe('Database Index Basics')
+  })
+
+  it('rejects a response that is an answer rather than a title', () => {
+    // The failure mode worth guarding: the model replies to the message instead
+    // of naming it. Falling back to the placeholder beats a paragraph sidebar row.
+    expect(sanitizeTitle('x'.repeat(200))).toBeNull()
+  })
+
+  it('caps a long-but-plausible title so one row cannot dominate the sidebar', () => {
+    // 100 chars: under the "this is an answer" threshold, so it is capped
+    // rather than rejected.
+    const long = 'Word '.repeat(20).trim()
+    expect(long.length).toBeGreaterThan(60)
+    expect(sanitizeTitle(long).length).toBeLessThanOrEqual(60)
+  })
+
+  it('returns null for empty or non-string input', () => {
+    expect(sanitizeTitle('')).toBeNull()
+    expect(sanitizeTitle('   ')).toBeNull()
+    expect(sanitizeTitle(null)).toBeNull()
+    expect(sanitizeTitle(undefined)).toBeNull()
+    expect(sanitizeTitle(42)).toBeNull()
+  })
+
+  it('returns null when only quotes survive', () => {
+    expect(sanitizeTitle('""')).toBeNull()
+  })
+})
+
 // ─── tools ──────────────────────────────────────────────────────────────────
 
 describe('agentTools', () => {
   it('exposes exactly the tools the UI advertises', () => {
     expect(toolDefinitions.map((t) => t.function.name).sort()).toEqual([
+      'get_concept',
       'get_exam_history',
+      'get_learner_context',
       'get_user_profile',
       'get_user_progress',
       'get_weak_spots',
+      'log_teaching_attempt',
       'log_weak_spot',
       'search_library',
       'search_posts',

@@ -3,12 +3,22 @@ import {
   getProfile,
   updateLastActive,
   updateSettings,
+  checkUsernameAvailable,
   getNotifications,
   getFollowing,
   getFollowers,
   getMutualFollowers,
   getChatReceiverStats,
 } from "../controllers/profileController.js";
+import {
+  createGroup,
+  addGroupMember,
+  removeGroupMember,
+  leaveGroup,
+  setGroupAdmin,
+  updateGroup,
+  getGroupDetails,
+} from "../controllers/groupChatController.js";
 
 const router = Router();
 
@@ -165,10 +175,172 @@ const router = Router();
 router.get("/", getProfile);
 router.put("/", updateLastActive);
 router.put("/settings", updateSettings);
+router.get("/username-available", checkUsernameAvailable);
 router.get("/notifications", getNotifications);
 router.get("/following", getFollowing);
 router.get("/followers", getFollowers);
 router.get("/chats/mutual-followers", getMutualFollowers);
 router.get("/chats/:receiverId/stats", getChatReceiverStats);
+
+/**
+ * @openapi
+ * /my-profile/chats/groups:
+ *   post:
+ *     tags: [Profile]
+ *     summary: Create a group chat
+ *     security:
+ *       - BearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [name, memberIds]
+ *             properties:
+ *               name:
+ *                 type: string
+ *               memberIds:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *     responses:
+ *       201:
+ *         description: Group created
+ */
+router.post("/chats/groups", createGroup);
+
+/**
+ * @openapi
+ * /my-profile/chats/groups/{roomId}:
+ *   get:
+ *     tags: [Profile]
+ *     summary: Get group details and member list
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: roomId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Group details
+ *   patch:
+ *     tags: [Profile]
+ *     summary: Rename a group or change its avatar (admin only)
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: roomId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Group updated
+ */
+router.get("/chats/groups/:roomId", getGroupDetails);
+router.patch("/chats/groups/:roomId", updateGroup);
+
+/**
+ * @openapi
+ * /my-profile/chats/groups/{roomId}/members:
+ *   post:
+ *     tags: [Profile]
+ *     summary: Add a member to a group (admin only)
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: roomId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Member added
+ */
+router.post("/chats/groups/:roomId/members", addGroupMember);
+
+/**
+ * @openapi
+ * /my-profile/chats/groups/{roomId}/members/{memberId}:
+ *   delete:
+ *     tags: [Profile]
+ *     summary: Remove a member from a group (admin only)
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: roomId
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: memberId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Member removed
+ */
+router.delete("/chats/groups/:roomId/members/:memberId", removeGroupMember);
+
+/**
+ * @openapi
+ * /my-profile/chats/groups/{roomId}/leave:
+ *   post:
+ *     tags: [Profile]
+ *     summary: Leave a group chat
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: roomId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Left the group
+ */
+router.post("/chats/groups/:roomId/leave", leaveGroup);
+
+/**
+ * @openapi
+ * /my-profile/chats/groups/{roomId}/admins/{memberId}:
+ *   patch:
+ *     tags: [Profile]
+ *     summary: Promote or demote a group admin (admin only)
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: roomId
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: memberId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               promote:
+ *                 type: boolean
+ *     responses:
+ *       200:
+ *         description: Admin status updated
+ */
+router.patch("/chats/groups/:roomId/admins/:memberId", setGroupAdmin);
 
 export default router;

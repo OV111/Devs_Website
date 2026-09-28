@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { AlertTriangle, RefreshCw, X } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AlertTriangle, RefreshCw, X, GraduationCap } from "lucide-react";
 import useAiAgentStore from "@/stores/useAiAgentStore";
 import useAgentStream from "@/hooks/useAgentStream";
 import SessionsSidebar from "./components/SessionsSidebar";
@@ -7,13 +8,49 @@ import ChatTopBar from "./components/ChatTopBar";
 import MessageList from "./components/MessageList";
 import ChatInput from "./components/ChatInput";
 import AgentHero from "./components/AgentHero";
+import PromptChips from "./components/PromptChips";
 import { getAccessToken, API_BASE_URL, authHeaders } from "../../../constants/api";
+
+/**
+ * Placeholder title shown for the second or so before the generated one arrives.
+ * Breaks on a word boundary so the sidebar never shows a chopped-off word.
+ */
+const placeholderTitle = (text) => {
+  const clean = text.trim().replace(/\s+/g, " ");
+  if (clean.length <= 48) return clean;
+  const cut = clean.slice(0, 48);
+  const lastSpace = cut.lastIndexOf(" ");
+  return `${lastSpace > 20 ? cut.slice(0, lastSpace) : cut}…`;
+};
 
 export default function AiAgent() {
   // The composer draft lives here because the hero's prompt chips sit outside
   // ChatInput and need to write into it.
   const [draft, setDraft] = useState("");
   const [focusToken, setFocusToken] = useState(0);
+  const [teachBackContext, setTeachBackContext] = useState(null);
+  // Where the learner came from, sent with every message so the mentor can
+  // resolve "this" and "why did it fail". Kept SEPARATE from teachBackContext,
+  // which is cleared as soon as teach-back mode is used or dismissed — the origin
+  // is still useful context for an ordinary question afterwards.
+  const [originContext, setOriginContext] = useState({ surface: "chat" });
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Arriving from the exam results "Teach it back" nudge: capture the topic
+  // context once, then clear router state so a refresh/back doesn't re-trigger it.
+  useEffect(() => {
+    if (location.state?.teachBack) {
+      const { path, layer, topic } = location.state.teachBack;
+      setTeachBackContext({ mode: "initial", path, layer, topic });
+      setOriginContext({ surface: "exam-results", path, layer, topic });
+      setFocusToken((n) => n + 1);
+      navigate(".", { replace: true, state: {} });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.state]);
+
 
   const {
     sessions: storeSessions,
@@ -75,6 +112,9 @@ export default function AiAgent() {
     store.setMessages([]);
     store.setLoadingSession(true);
     setError(null);
+    // Opening another conversation ends the connection to wherever they arrived
+    // from — otherwise an old chat still claims they are on that exam page.
+    setOriginContext({ surface: "chat" });
 
     try {
       const res = await fetch(`${API_BASE_URL}/api/ai-agent/sessions/${sessionId}`, {
@@ -108,6 +148,8 @@ export default function AiAgent() {
       setSessions([session, ...useAiAgentStore.getState().sessions]);
       setActiveSession(session._id);
       useAiAgentStore.getState().setMessages([]);
+      // A deliberately fresh conversation carries no arrival context.
+      setOriginContext({ surface: "chat" });
     } catch { /* non-fatal */ }
   };
 
@@ -122,6 +164,37 @@ export default function AiAgent() {
   const handleSend = async (text, attachments = []) => {
     const token = getAccessToken();
     setDraft("");
+
+    // Teach-Back mode: the answer is graded against a rubric, not sent to the
+    // general agent — same "never touch the daily message cap" reasoning /context uses.
+    if (teachBackContext) {
+      const ctx = teachBackContext;
+      appendMessage({ role: "user", content: text });
+      appendMessage({ role: "teach_back", loading: true });
+      setTeachBackContext(null);
+
+      const isFollowUp = ctx.mode === "followup";
+      const url = isFollowUp
+        ? `${API_BASE_URL}/api/exams/submit-teach-back-followup`
+        : `${API_BASE_URL}/api/exams/submit-teach-back`;
+      const body = isFollowUp
+        ? { sessionId: ctx.sessionId, answerText: text }
+        : { path: ctx.path, layer: ctx.layer, topic: ctx.topic, answerText: text };
+
+      try {
+        const res = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", ...authHeaders() },
+          body: JSON.stringify(body),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message || `HTTP ${res.status}`);
+        replaceLastTeachBack({ role: "teach_back", data });
+      } catch (err) {
+        replaceLastTeachBack({ role: "teach_back", error: err.message || "Couldn't grade this explanation." });
+      }
+      return;
+    }
 
     // Slash commands are handled entirely client-side — they never reach the
     // model, so they cost nothing and don't consume the daily message cap.
@@ -147,7 +220,7 @@ export default function AiAgent() {
         const res = await fetch(`${API_BASE_URL}/api/ai-agent/sessions`, {
           method: "POST",
           headers: { "Content-Type": "application/json", ...authHeaders() },
-          body: JSON.stringify({ title: text.slice(0, 60) }),
+          body: JSON.stringify({ title: placeholderTitle(text) }),
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const session = await res.json();
@@ -161,7 +234,7 @@ export default function AiAgent() {
       }
     }
 
-    sendMessage({ sessionId, content: text, token, attachments });
+    sendMessage({ sessionId, content: text, token, attachments, activity: originContext });
   };
 
   const handleRenameSession = async (sessionId, title) => {
@@ -246,6 +319,28 @@ export default function AiAgent() {
     store.setMessages(next);
   };
 
+  // Same swap-the-placeholder pattern as /context, for teach-back grading.
+  const replaceLastTeachBack = (msg) => {
+    const store = useAiAgentStore.getState();
+    const next = [...store.messages];
+    const i = next.findLastIndex((m) => m.role === "teach_back" && m.loading);
+    if (i === -1) return;
+    next[i] = msg;
+    store.setMessages(next);
+  };
+
+  // "Answer" on a TeachBackCard's follow-up re-arms teach-back mode, scoped to
+  // just that one weak criterion via sessionId — no path/layer/topic needed.
+  const handleAnswerFollowUp = (resultData) => {
+    if (!resultData.followUp) return;
+    setTeachBackContext({
+      mode: "followup",
+      sessionId: resultData.sessionId,
+      topic: resultData.followUp.question,
+    });
+    setFocusToken((n) => n + 1);
+  };
+
   // Prompt chips and menu shortcuts fill the composer; the token bump tells
   // ChatInput to focus and park the caret at the end.
   const insertPrompt = (prompt) => {
@@ -268,8 +363,12 @@ export default function AiAgent() {
         onTogglePinSession={handleTogglePinSession}
       />
 
-      <div className="flex-1 flex flex-col min-w-0">
-        <ChatTopBar title={activeTitle} messages={messages} />
+      <div className="flex-1 flex flex-col min-w-0 relative">
+        {activeTitle && (
+          <div className="absolute top-0 inset-x-0 z-20">
+            <ChatTopBar title={activeTitle} messages={messages} />
+          </div>
+        )}
 
         {error && (
           <div
@@ -301,28 +400,58 @@ export default function AiAgent() {
           </div>
         )}
 
-        {/* The hero IS the empty state now, not a separate route. Once there's
-            anything to show — history, a live stream, or a loading session —
-            it gives way to the transcript. */}
-        {isEmptyChat ? (
-          <div className="flex-1 flex flex-col items-center justify-center min-h-0 overflow-y-auto py-8">
-            <AgentHero onSelectPrompt={insertPrompt} />
-          </div>
-        ) : (
-          <MessageList
-            messages={messages}
-            isLoadingSession={isLoadingSession}
+        {/* One flex column holds transcript-or-hero AND the composer, so the
+            SAME ChatInput instance serves both states — mounting a second copy
+            inside the hero would reset its attachment state on the first send.
+
+            Empty state: justify-center centres [greeting → composer → chips]
+            as one block. Conversation: MessageList takes flex-1 and pushes the
+            composer to the bottom. */}
+        <div
+          className={`flex-1 flex flex-col min-h-0 ${
+            isEmptyChat ? "justify-center overflow-y-auto py-8 gap-5 sm:gap-7" : ""
+          }`}
+        >
+          {isEmptyChat ? (
+            <AgentHero />
+          ) : (
+            <MessageList
+              messages={messages}
+              isLoadingSession={isLoadingSession}
+              isStreaming={isStreaming}
+              streamingContent={streamingContent}
+              onAnswerFollowUp={handleAnswerFollowUp}
+              topInset={Boolean(activeTitle)}
+            />
+          )}
+
+          {teachBackContext && (
+            <div className="max-w-3xl mx-auto w-full px-4 sm:px-8 mb-2 flex items-center justify-between gap-3 text-[12px] rounded-lg border border-purple-700/40 bg-purple-950/20 px-3 py-2">
+              <span className="flex items-center gap-1.5 text-purple-300">
+                <GraduationCap size={13} />
+                {teachBackContext.mode === "followup" ? (
+                  <>Follow-up: <strong>{teachBackContext.topic}</strong></>
+                ) : (
+                  <>Teach-Back: explain <strong>{teachBackContext.topic}</strong> in your own words</>
+                )}
+              </span>
+              <button onClick={() => setTeachBackContext(null)} className="text-purple-400/60 hover:text-purple-300">
+                <X size={13} />
+              </button>
+            </div>
+          )}
+
+          <ChatInput
             isStreaming={isStreaming}
-            streamingContent={streamingContent}
-          />
-        )}
-        <ChatInput
-          isStreaming={isStreaming}
-          onSend={handleSend}
-          value={draft}
-          onValueChange={setDraft}
-          focusToken={focusToken}
-        />
+            onSend={handleSend}
+            value={draft}
+            onValueChange={setDraft}
+            focusToken={focusToken}
+            spacious={isEmptyChat}
+            />
+            {isEmptyChat && <PromptChips onSelectPrompt={insertPrompt} />}
+
+        </div>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import {
   getFollowersData,
   getFollowingData,
 } from "./followService.js";
+import { sanitizeUsername } from "../utils/username.js";
 
 export const getProfileService = async (db, userId) => {
   const users = db.collection("users");
@@ -36,10 +37,36 @@ export const updateLastActiveService = async (db, id, lastActive) => {
 export const updateSettingsService = async (db, userId, fields, files) => {
   const users = db.collection("users");
   const usersStats = db.collection("usersStats");
+  const usernameHistory = db.collection("usernameHistory");
 
   const userUpdate = {};
   if (fields.fname !== undefined) userUpdate.firstName = fields.fname;
   if (fields.lname !== undefined) userUpdate.lastName = fields.lname;
+
+  let previousUsername = null;
+  if (fields.username !== undefined) {
+    const clean = sanitizeUsername(fields.username);
+    if (clean.length < 3) {
+      throw {
+        status: 400,
+        message: "Username must be at least 3 characters (letters and numbers only).",
+      };
+    }
+    const existing = await users.findOne({
+      username: clean,
+      _id: { $ne: userId },
+    });
+    if (existing) {
+      throw { status: 409, message: "That username is already taken." };
+    }
+
+    const currentUser = await users.findOne({ _id: userId }, { projection: { username: 1 } });
+    if (currentUser?.username && currentUser.username !== clean) {
+      previousUsername = currentUser.username;
+    }
+
+    userUpdate.username = clean;
+  }
 
   const statsUpdate = { lastActive: new Date() };
   if (fields.bio !== undefined) statsUpdate.bio = fields.bio;
@@ -61,6 +88,18 @@ export const updateSettingsService = async (db, userId, fields, files) => {
       { returnDocument: "after" },
     );
     updatedUser = result.value || result;
+
+    if (userUpdate.username) {
+      // A reclaimed old handle should point at whoever holds it now, not a stale owner.
+      await usernameHistory.deleteOne({ oldUsername: userUpdate.username });
+    }
+    if (previousUsername) {
+      await usernameHistory.updateOne(
+        { oldUsername: previousUsername },
+        { $set: { oldUsername: previousUsername, userId, changedAt: new Date() } },
+        { upsert: true },
+      );
+    }
   } else {
     updatedUser = await users.findOne({ _id: userId });
   }
@@ -72,6 +111,22 @@ export const updateSettingsService = async (db, userId, fields, files) => {
   );
 
   return { user: updatedUser, stats: statsResult.value || statsResult };
+};
+
+export const checkUsernameAvailableService = async (db, userId, rawUsername) => {
+  const users = db.collection("users");
+  const clean = sanitizeUsername(rawUsername);
+
+  if (clean.length < 3) {
+    return { available: false, username: clean, reason: "too_short" };
+  }
+
+  const existing = await users.findOne({
+    username: clean,
+    _id: { $ne: userId },
+  });
+
+  return { available: !existing, username: clean };
 };
 
 export const uploadToCloudinary = (file) =>

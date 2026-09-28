@@ -12,6 +12,19 @@ export const AVATAR_MENU_ITEMS = [
   { label: "Settings", to: "my-profile/settings", icon: SettingsIcon },
 ];
 
+export const NAV_LINKS_AUTH = [
+  { label: "Roadmaps", to: "roadmaps" },
+  { label: "Code Library", to: "libs" },
+  { label: "Challenges", to: "coding-challenges" },
+  { label: "Capstone", to: "capstone" },
+];
+
+export const NAV_LINKS_GUEST = [
+  { label: "Roadmaps", to: "roadmaps" },
+  { label: "About", to: "about" },
+  { label: "Get Started", to: "get-started" },
+];
+
 export const MOBILE_EXTRA_LINKS = [
   { label: "About", to: "about" },
   { label: "Privacy", to: "privacy" },

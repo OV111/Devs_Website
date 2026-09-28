@@ -8,13 +8,15 @@ import {
   addWeakSpotRoute,
   resolveWeakSpotRoute,
 } from "../controllers/examController.js";
-import { generate, submit } from "../controllers/examEngineController.js";
+import { generate, submit, submitTeachBackAnswer, submitTeachBackFollowUpAnswer } from "../controllers/examEngineController.js";
 
 const router = Router();
 
 // Exam engine
 router.post("/generate", authenticate, generate);
 router.post("/submit", authenticate, submit);
+router.post("/submit-teach-back", authenticate, submitTeachBackAnswer);
+router.post("/submit-teach-back-followup", authenticate, submitTeachBackFollowUpAnswer);
 
 // Exam history
 router.get("/history", authenticate, getHistory);

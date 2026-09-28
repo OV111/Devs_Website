@@ -50,12 +50,20 @@ export const getSession = async (db, userId, sessionId) => {
  * the caller turns both into a 404, so the endpoint never reveals that an id
  * exists.
  */
-export const updateSession = async (db, userId, sessionId, { title, pinned }) => {
+export const updateSession = async (
+  db,
+  userId,
+  sessionId,
+  { title, pinned, titleLocked },
+) => {
   const col = db.collection("agent_sessions");
 
   const $set = { updatedAt: new Date() };
   if (title !== undefined) $set.title = title.slice(0, 80);
   if (pinned !== undefined) $set.pinned = pinned;
+  // Set when the USER renames a chat, so auto-titling never overwrites a name
+  // they chose themselves.
+  if (titleLocked !== undefined) $set.titleLocked = titleLocked;
 
   const result = await col.findOneAndUpdate(
     { _id: new ObjectId(sessionId), userId: new ObjectId(userId) },

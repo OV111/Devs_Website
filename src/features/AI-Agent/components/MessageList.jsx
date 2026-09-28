@@ -5,6 +5,7 @@ import MarkdownMessage from "./MarkdownMessage";
 import MessageSkeleton from "./MessageSkeleton";
 import MessageActions from "./MessageActions";
 import ContextCard from "./ContextCard";
+import TeachBackCard from "./TeachBackCard";
 
 // How close to the bottom (px) still counts as "following along". If the user
 // has scrolled further up than this, we leave their scroll position alone.
@@ -64,6 +65,11 @@ export default function MessageList({
   isStreaming,
   streamingContent,
   isLoadingSession = false,
+  onAnswerFollowUp,
+  // ChatTopBar floats on top of this list (absolute + backdrop-blur) instead
+  // of pushing it down, so without this the first message renders right under
+  // the header with no way to scroll it into view.
+  topInset = false,
 }) {
   const containerRef = useRef(null);
   const prevLengthRef = useRef(messages.length);
@@ -108,7 +114,7 @@ export default function MessageList({
   return (
     <div
       ref={containerRef}
-      className="flex-1 overflow-y-auto px-4 sm:px-8 py-6"
+      className={`flex-1 overflow-y-auto px-4 sm:px-8 pb-6 ${topInset ? "pt-20" : "pt-6"}`}
       style={{ scrollbarWidth: "none" }}
     >
       {/* A centred, width-capped column. Full-bleed text on a wide monitor is
@@ -131,6 +137,16 @@ export default function MessageList({
               </div>
             ) : (
               <ContextCard key={i} data={msg.data} error={msg.error} />
+            );
+          }
+
+          if (msg.role === "teach_back") {
+            return msg.loading ? (
+              <div key={i} className="max-w-2xl rounded-xl border border-purple-700/40 bg-purple-950/10 p-4">
+                <div className="h-3 w-32 rounded bg-white/8 animate-pulse" />
+              </div>
+            ) : (
+              <TeachBackCard key={i} data={msg.data} error={msg.error} onAnswerFollowUp={onAnswerFollowUp} />
             );
           }
 

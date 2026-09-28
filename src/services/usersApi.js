@@ -4,7 +4,15 @@ export const fetchUserProfile = async (username) => {
   const res = await fetch(`${API_BASE_URL}/users/${username}`, {
     headers: authHeaders(),
   });
-  if (!res.ok) throw new Error("User not found");
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    if (body?.redirect) {
+      const err = new Error("Username changed");
+      err.redirect = body.redirect;
+      throw err;
+    }
+    throw new Error("User not found");
+  }
   return res.json();
 };
 

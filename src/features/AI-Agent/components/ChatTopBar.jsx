@@ -22,7 +22,7 @@ export default function ChatTopBar({ title, messages = [] }) {
   const canExport = messages.some((m) => m.role === "user" || m.role === "assistant");
 
   return (
-    <div className="flex items-center justify-between gap-4 px-5 py-3 shrink-0 border-b border-white/5">
+    <div className="flex items-center justify-between gap-4 px-5 py-3 shrink-0  backdrop-blur-[200px] bg-black/40">
       <h1
         className="text-[15px] tracking-tight truncate min-w-0"
         style={{ color: "#e5e5e5" }}

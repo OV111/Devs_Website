@@ -26,6 +26,16 @@ export const deleteAccount = async (email, password) => {
   return data;
 };
 
+export const checkUsernameAvailable = async (username) => {
+  const res = await fetch(
+    `${API_BASE_URL}/my-profile/username-available?username=${encodeURIComponent(username)}`,
+    { headers: authHeaders() },
+  );
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || "Failed to check username");
+  return data;
+};
+
 export const saveSettings = async (formData) => {
   const res = await fetch(`${API_BASE_URL}/my-profile/settings`, {
     method: "PUT",

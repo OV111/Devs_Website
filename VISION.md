@@ -281,13 +281,17 @@ Videos live **inside the layer, not on a separate page** — the layer is the un
 
 ---
 
-### 3. AI Agent Per User — ✅ BUILT (one blocker: provider/API key)
+### 3. AI Agent Per User — ✅ BUILT AND RUNNING
 
-> **Re-audited 2026-09-26 by running it.** The June claim that the backend was "three empty files" was stale. Reality: `routes/aiAgent.routes.js` is mounted at `/api/ai-agent` with 4 authenticated routes; `controllers/aiAgentController.js` implements sessions CRUD + SSE streaming + the 429 cap; `services/agent/sessionService.js` implements sessions, the 20-turn sliding window and the 30/day cap; `services/agent/streamService.js` implements the full streaming tool-use loop; `tools/agentTools.js` implements all 7 tools against real services. The frontend is already off mock data (`agentMockData.js` was unreferenced and has been deleted).
+> **Re-audited 2026-09-27 against the code.** The June claim that the backend was "three empty files" was stale, and so was the 2026-09-26 "one blocker: provider/API key" note — the Groq key was replaced and the agent runs end-to-end.
 >
-> **Verified working (2026-09-26, live against production Groq):** sessions create/list/fetch, Zod rejection of every malformed payload, the 30/day cap returning 429 + `resetAt`, all 7 tools returning real data from MongoDB, **live token streaming**, the **multi-round tool-use loop** (one message drove `get_user_progress` → `get_weak_spots` → `search_library` and answered from the user's real roadmap state), **session persistence**, and the **Socratic refusal guardrail**.
+> **Live today:** `routes/aiAgent.routes.js` mounted at `/api/ai-agent` with **7 authenticated routes** — `GET /context`, `GET /sessions`, `GET /sessions/:id`, `POST /sessions`, `PATCH /sessions/:id`, `DELETE /sessions/:id`, `POST /stream`. All Zod-validated at the boundary.
 >
-> _Note for future testing:_ the controller writes the message pair to Mongo **after** `res.end()`, so a client that reads the session the instant the stream closes can briefly see the previous turn count. The write does land — allow a moment before asserting on it.
+> **Verified working (live against Groq):** streaming, the multi-round tool-use loop, all 7 tools returning real MongoDB data, session persistence, the 30/day cap returning 429 + `resetAt`, and the Socratic refusal guardrail.
+>
+> **Shipped since the first audit:** session rename / delete / pin (ownership-scoped, `titleLocked`), **auto-generated conversation titles** (parallel call, `title` SSE event), the `/context` command + endpoint, **text file attachments** (client extraction, server-enforced caps, prompt-injection fencing), Markdown rendering with syntax highlighting, and **Teach-Back grading** (`POST /api/exams/submit-teach-back` + `…-followup`, `teachBackEvaluatorService.js`).
+>
+> _Fixed since:_ the stream used to close **before** the turn was persisted, so a fast follow-up could read a session missing the turn it was replying to (this lost attached-file context). The controller now persists first, then closes.
 
 Every user gets a personal AI mentor that **knows them**: skill level, active path, what they've read, where they struggled. The agent is not there to give answers — it's there to make you earn them.
 
@@ -310,55 +314,129 @@ Agent receives: cached system prompt (persona, Socratic rules)
               + last 20 turns + the message
    ↓
 Agent decides which tools to call:
-  get_user_progress()      → current path, layer, exam scores
-  get_layer_content()      → what the user is studying right now
-  search_platform_posts()  → relevant DevsWebs posts by topic
-  get_exam_history()       → past scores, failed topics
-  log_weak_spot(topic)     → persist struggles to MongoDB
+  get_user_progress()      → active path, current layer, completed layers
+  get_exam_history(limit)  → past scores, missed topics
+  get_weak_spots()         → unresolved weak spots, worst first
+  log_weak_spot(topic,…)   → persist a struggle to MongoDB
+  search_posts(cat,kw)     → community posts (collection: posts-default)
+  search_library(kw)       → library resources
+  get_user_profile(user)   → a public profile by username
    ↓
 Socratic response, streamed via SSE, logged to MongoDB
 ```
 
-**Technical decisions (updated with verified model IDs and pricing):**
+_The 7 names above are the real ones in `backend/tools/agentTools.js`. The earlier draft listed `get_layer_content()` and `search_platform_posts()` — neither exists; the second is really `search_posts`._
 
-| Decision            | Choice                                                                    | Why                                                             |
-| ------------------- | ------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| Model               | `claude-sonnet-4-6` (Anthropic) — $3/$15 per MTok                         | Native tool use, strong instruction-following                   |
-| Cheap-call model    | `claude-haiku-4-5` — $1/$5 per MTok                                       | Exam generation, grading, classification                        |
-| Context strategy    | Tool-use agent — fetches live data on demand                              | Never stale, never bloated                                      |
-| Memory — short-term | Last 20 conversation turns                                                | Cheap, predictable                                              |
-| Memory — long-term  | MongoDB: `topics_mastered[]`, `weak_spots[]`, summarized `activity_log[]` | Survives across sessions                                        |
-| Streaming           | SSE from Express (frontend hook already built)                            | Perceived performance                                           |
-| Prompt caching      | Cache the static system prefix — reads ~0.1× input cost                   | Keep the static prefix ≥ 2048 tokens or it silently won't cache |
-| Behavior rule       | Socratic — guide, never give full answers                                 | Khanmigo's lesson: users learn more, feel accomplished          |
-| Cost controls       | 30 msgs/day, 20-turn cap, in `platformConfig`                             | Hard pre-condition, ships with the first route                  |
+**Technical decisions — AS BUILT (corrected 2026-09-27):**
 
-**Agent context initialized on signup:**
+> The previous version of this table described an **Anthropic** implementation that was never built, and directly contradicted the Groq decision recorded in Recommendation #5. This table now reflects the running code.
+
+| Decision            | Choice                                                            | Why                                                                        |
+| ------------------- | ----------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Provider            | **Groq** (`groq-sdk`)                                             | Free tier; the Anthropic API has none — see Rec. #5 (superseded)           |
+| Model               | **`openai/gpt-oss-120b`** — 131K context                          | Most capable model on the Groq catalogue that supports tool calling         |
+| Cheap-call model    | **`openai/gpt-oss-20b`**                                          | Conversation titling. Reasoning model: needs `reasoning_effort: "low"`      |
+| Context strategy    | Tool-use agent — fetches live data on demand                      | Never stale, never bloated                                                  |
+| Memory — short-term | Last 20 turns (`MAX_TURNS` in `sessionService.js`)                | Cheap, predictable                                                          |
+| Memory — long-term  | ❌ **Not built** — see the staged mentor plan below                | Today the agent re-reads tools each turn; nothing persists across sessions  |
+| Streaming           | SSE from Express                                                  | Perceived performance                                                       |
+| Prompt caching      | ❌ **Not applicable** — Groq has no prompt-caching API             | The old ≥2048-token note was Anthropic-specific and never applied           |
+| Behavior rule       | Socratic — guide, never give full answers                         | Verified: refuses a direct "give me the exam answer" request                |
+| Cost controls       | 30 msgs/day, 20-turn cap — **module constants**, not a collection | `DAILY_MESSAGE_CAP` / `MAX_TURNS` in `sessionService.js`, read by `/context` |
+
+**Correction:** `platformConfig` is referenced throughout this document as the home for tunable limits. **It does not exist** — no collection, no code reads it. The caps are exported constants. Creating `platformConfig` (to tune without a deploy) is still a reasonable idea, but it is **unbuilt**, not current state.
+
+**Agent context on signup — ❌ NOT BUILT (design sketch only):**
 
 ```
-ai_agent_context: {
+ai_agent_context: {          ← no such field or collection exists in the code
   skill_level: "beginner",
   active_path: null,
   current_layer: null,
   topics_mastered: [],
   weak_spots: [],
-  activity_log: [],        ← summarized periodically
-  sessions: []             ← compressed past sessions
+  activity_log: [],
+  sessions: []
 }
 ```
 
-**Backend files to fill (frontend equivalents already exist):**
+Nothing writes `ai_agent_context` today. The agent derives what it knows per-turn from `userProgress`, `examHistory` and `weakSpots` through tools. The durable per-learner model this sketch implies is exactly what **Stages 1, 4 and 7 of the mentor plan below** are for — so treat this block as a target, not a description.
+
+**Backend files — AS BUILT (this list was previously aspirational):**
 
 ```
 backend/
-  routes/aiAgent.routes.js       ← /api/ai-agent/stream (SSE), /api/ai-agent/sessions
+  routes/aiAgent.routes.js          ← 7 routes: context, sessions CRUD, stream
+  controllers/aiAgentController.js  ← sessions, /context, SSE stream, auto-title
+  validation/aiAgent.schemas.js     ← Zod for every route
   services/agent/
-    contextService.js            ← builds the agent's view of the user
-    toolsService.js              ← implements every tool
-    memoryService.js             ← sliding window + activity_log summarization
-    sessionService.js            ← conversation session CRUD
-    streamService.js             ← Anthropic call, tool-use loop, SSE emit
+    sessionService.js               ← session CRUD, 20-turn window, daily cap
+    streamService.js                ← Groq call, tool-use loop, SSE emit
+    titleService.js                 ← conversation auto-titling
+    transcriptionService.js         ← ⚠️ scaffold only, throws "Not implemented"
+  tools/agentTools.js               ← all 7 tools
 ```
+
+_Files named in the old plan that were never created and are not needed:_ `contextService.js`, `toolsService.js` (tools live in `tools/agentTools.js`), `memoryService.js` (the sliding window is in `sessionService.js`; long-term memory is unbuilt — Stage 7).
+
+---
+
+#### From Chat Agent → Real Mentor — 📋 STAGED BUILD PLAN (2026-09-27)
+
+> The agent today answers well but doesn't **know the learner**. It reads progress and weak spots through tools, one question at a time, with no durable model of what this person actually understands. This plan closes that gap.
+>
+> Order is chosen so each stage ships something usable on its own, and **nothing is blocked waiting on content authoring**.
+
+| #   | Stage                          | Unblocks   | Effort      |
+| --- | ------------------------------ | ---------- | ----------- |
+| 0   | Canonical topic slug           | everything | S           |
+| 1   | LearnerContext aggregator      | 2, 4       | M           |
+| 2   | Wire into mentor               | usable win | S           |
+| 3   | Curriculum Knowledge Layer     | 5          | M + content |
+| 4   | Adaptive Engine                | 5          | M           |
+| 5   | Mentor Orchestrator / strategy | —          | M           |
+| 6   | Current-activity context       | —          | S           |
+| 7   | Cross-session learner memory   | —          | M           |
+
+**Stage 0 — Canonical topic key**
+Add `toSlug()`, backfill `slug` on `weakSpots`, write `slug` on new weak spots + teach-back sessions + `examHistory.missedTopics`.
+_Exit:_ one topic resolves to the same key from all four collections.
+_Why first:_ every later stage is a join on this. Doing it later means rewriting stages 1–4.
+
+**Stage 1 — LearnerContext aggregator**
+`learnerContextService.js` — pure `deriveTopicStatus` + `buildTopicStates`, unit-tested with no DB.
+_Exit:_ `getLearnerContext(db, userId)` returns real merged `TopicState[]`; tests cover shaky / solid / untested.
+
+**Stage 2 — Wire it into the mentor**
+`summarizeLearnerContext()` injected into the system prompt each turn (token-capped) + `get_learner_context({ topicSlug, detailed })` tool in `agentTools.js`. Add indexes.
+_Exit:_ the mentor references your real exam/teach-back split unprompted.
+**This is the first stage the user feels — ship here before going further.**
+
+**Stage 3 — Curriculum Knowledge Layer**
+`concepts` collection (`id`, `title`, `definition`, `purpose`, `prerequisites`, `relatedConcepts`, `misconceptions`). Move misconceptions out of `teach_back_rubrics` into `concepts`, have rubrics reference `conceptId` — single source of truth, no drift. `get_concept(slug)` tool.
+_Exit:_ JWT Signature authored end-to-end as the reference example; the rubric reads its misconceptions from the concept.
+_Note:_ the code is small — **content authoring is the real cost**, so seed only your active layer.
+
+**Stage 4 — Adaptive Engine**
+Move `deriveTopicStatus` to write-time. Hook exam submit / teach-back submit / challenge submit → upsert `learnerMastery`. Add `getNextAction(userId)` → `{ topicSlug, action: "reinforce" | "advance" | "review", reason }`.
+_Exit:_ mastery is precomputed, the roadmap UI reads the same statuses, and the mentor gets a "what's next" signal it didn't decide itself.
+
+**Stage 5 — Mentor Orchestrator + teaching strategy**
+Restructure the prompt/loop in `streamService.js`: context block, adaptive recommendation, explicit internal ordering (know → don't know → retrieve → reason → strategy), and strategy guardrails (never define a concept the learner has a live misconception on — correct the distinction first).
+_Exit:_ the JWT example produces the right response, not a definition dump.
+_Constraint:_ keep it **one LLM call** with the existing tool loop — no stage-per-call.
+
+**Stage 6 — Current-activity context**
+Frontend sends `{ path, layer, topicSlug, surface }` with each message, so the mentor knows what page you're on.
+_Exit:_ asking "why is this failing?" on an exam page needs no explanation of which exam.
+
+**Stage 7 — Cross-session learner memory**
+Beyond the 20-turn window: durable per-learner notes (open misconceptions, what was already explained and how). Written by the mentor, but **as signals into `weakSpots` / `learnerMastery` — never a private truth store.**
+_Exit:_ a new conversation continues the teaching arc instead of restarting it.
+
+**Sequencing call:** stages 0–2 are the high-value core and are independent of curriculum content — treat **0 + 1 + 2 as one push**, then reassess whether 3 or 4 matters more.
+
+**⚠️ Open decision before Stage 0 starts:** backfill `slug` into the collections, or normalize at read time only? Everything downstream joins on this, so it needs answering first.
 
 ---
 
@@ -806,9 +884,42 @@ This is the same product already being built — roadmaps, exams, AI agent, prog
 
 ---
 
-## Voice AI Progress Review (New Feature Idea — 2026-08-07)
+## Voice AI Progress Review / Teach-Back (2026-08-07, reframed & partially built 2026-09-27)
 
-> An alternate, spoken front end onto the same exam/assessment engine that already exists — not a new grading system.
+> **Status update 2026-09-27:** This shipped earlier and leaner than the "Phase 4+, after 50 users" plan below assumed — built as a minimal one-topic vertical slice to validate the grading approach cheaply, not as a scheduled phase. Read this status block first; the original 2026-08-07 write-up below is kept for the product reasoning, which still mostly holds.
+
+### Reframe: it's a learning mechanic, not a voice feature
+
+Voice is the interface, not the idea. The actual product concept is a fourth evidence source added to the existing roadmap → exam → weak-spot loop:
+
+```
+Learn → Prove (exam) → Identify weaknesses → Review → Teach back → AI follow-up → Update learner profile → Advance
+```
+
+MCQ tests recognition and is gameable; explaining a concept out loud (or in writing) under adaptive follow-up questioning tests recall and reasoning — closer to what a real technical interview demands. Brand angle if this gets promoted later: **"Learn it. Prove it. Explain it. Earn the next level."**
+
+### What's actually built (2026-09-27, one topic only — JWT Signature)
+
+Rubric-based evaluation architecture (app owns the rubric/scoring math, the LLM only fills in evidence against fixed criteria — never freely judges):
+
+- `backend/services/rubricService.js` + `backend/seeders/teachBackRubricSeeder.js` — `teach_back_rubrics` collection: `{ path, layer, topic, criteria[{id, label, levels[{score, description}]}], misconceptions[], version }`. **Only one rubric seeded so far** — this is the real bottleneck to expanding coverage, not the pipeline.
+- `backend/services/teachBackEvaluatorService.js` — calls the existing Groq client (`openai/gpt-oss-120b`, same provider/model as the main agent, zero new vendor cost) to grade a transcript against a rubric's criteria/levels, clamps scores server-side, detects known misconceptions. Also generates one targeted follow-up question scoped to the single weakest criterion.
+- `backend/services/examEngineService.js` — `submitTeachBack` (initial grading) and `submitTeachBackFollowUp` (re-scores only the targeted criterion from a follow-up answer, never re-grades the whole thing) — both reuse `saveExamResult`, `addWeakSpot`/`resolveWeakSpot`, writing into the same `examHistory`/`weakSpots` collections the MCQ exam engine already uses. New collection: `teach_back_sessions`.
+- Routes: `POST /api/exams/submit-teach-back`, `POST /api/exams/submit-teach-back-followup`.
+- **UI entry point:** exam results screen (`ExamPage.jsx`) shows a "Teach it back" link per missed topic → opens `AiAgent.jsx` in a Teach-Back mode (banner shows the topic) → typed or dictated answer routes to the grading endpoint instead of the general chat stream → `TeachBackCard.jsx` renders the graded breakdown inline in the transcript, with an "Answer" button on the follow-up question that re-arms the composer scoped to just that session/criterion.
+- **Voice — free tier only, as planned:** browser-native `SpeechRecognition` (dictation into the same textarea — `ChatInput.jsx`) and browser-native `speechSynthesis` (speaks the follow-up question aloud — `src/features/AI-Agent/lib/speech.js`). Zero marginal cost, zero new vendor, exactly the "free tier: Web Speech API" prerequisite named below — just landed as the only tier so far, not gated behind Pro. No paid STT/TTS vendor (Whisper/Deepgram/Vapi/Google Cloud Speech) has been added; explicitly deferred until grading quality is calibrated and a live-conversation upgrade (see below) is actually wanted.
+- **Async, not sync** — matches the "async is the realistic v1" recommendation below. Dictation → transcript → grade → optional one follow-up round → re-grade. No live interruption, no real-time turn-taking.
+
+### Explicitly NOT built yet
+
+- **Rubric content for any topic beyond JWT Signature** — the single largest gap. The pipeline works; the curriculum content to run it on doesn't exist yet.
+- **Calibration** — no reference answers have been graded to check the LLM scores consistently before trusting it on real users.
+- **On-demand entry point** — only reachable right after a fresh exam result. No weak-spots page exists in the frontend yet (backend `GET /api/exams/weak-spots` etc. is unwired to any UI), so there's no persistent "teach back a weak topic anytime" surface.
+- **Mentor-initiated hook from general chat** — discussed as a good extension (2026-09-27): when a user claims understanding in a normal agent conversation, the agent could offer to hand off into Teach-Back grading via a new tool call (e.g. `suggest_teach_back`), reusing the same grading pipeline. Not implemented. Explicitly *not* recommended: making the whole agent chat voice-first — voice earns its place in Teach-Back specifically because explaining out loud is the point; it doesn't help quick Q&A.
+- **Live/sync voice conversation** (Vapi, or any STT+LLM+TTS orchestration platform) — considered and deliberately deferred. Real cost (metered per-minute on top of the LLM/STT/TTS providers it wraps), and it replaces the text-based turn loop with call-style session architecture rather than extending it. Right recommendation once grading is calibrated and there's a reason to take on a metered vendor — not before.
+- **Mastery decay / re-verification over time**, **"needs review" state for low-confidence grading**, **rubric-version-aware historical display**, **public skill-profile exposure** of teach-back mastery — all still open per the original architecture-review pass in this chat.
+
+### Original concept (2026-08-07) — kept for the product reasoning
 
 **Concept:** Instead of (or in addition to) a written MCQ exam, a developer talks out loud to explain what they just learned on a topic — in their own words, like explaining it to a colleague. A voice AI listens, follows up with clarifying questions the way a mentor would, and then reviews the explanation for correctness, gaps, and confused concepts — producing the same kind of pass/fail + weak-topic breakdown the exam engine already gives, just sourced from spoken explanation instead of multiple choice.
 

@@ -12,6 +12,7 @@ import {
   revokeAllRefreshTokens,
 } from "../services/refreshTokenService.js";
 import { OAuth2Client } from "google-auth-library";
+import { sanitizeUsername } from "../utils/username.js";
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -63,12 +64,6 @@ const consumeOAuthNonce = (nonce) => {
   if (!record || Date.now() > record.expiresAt) return null;
   return record;
 };
-
-const sanitizeUsername = (value = "") =>
-  value
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g, "")
-    .slice(0, 16);
 
 const findUniqueUsername = async (users, base) => {
   if (!(await users.findOne({ username: base }))) return base;

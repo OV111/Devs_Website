@@ -7,12 +7,25 @@ export const getUserProfileService = async (db, userName, currentUserId) => {
   const follows = db.collection("follows");
   const userProgress = db.collection("userProgress");
   const examHistory = db.collection("examHistory");
+  const usernameHistory = db.collection("usernameHistory");
 
   const targetUser = await users.findOne(
     { username: userName },
     { projection: { password: 0, googleId: 0, githubId: 0 } },
   );
-  if (!targetUser) throw { status: 404, message: "Not Found" };
+  if (!targetUser) {
+    const history = await usernameHistory.findOne({ oldUsername: userName });
+    if (history) {
+      const currentOwner = await users.findOne(
+        { _id: history.userId },
+        { projection: { username: 1 } },
+      );
+      if (currentOwner?.username) {
+        throw { status: 404, message: "Username changed", redirect: currentOwner.username };
+      }
+    }
+    throw { status: 404, message: "Not Found" };
+  }
 
   const [followDoc, reverseDoc, stats, progress, exams] = await Promise.all([
     follows.findOne({ followerId: currentUserId, followingId: targetUser._id }),

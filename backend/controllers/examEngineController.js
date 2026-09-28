@@ -1,4 +1,4 @@
-import { generateAttempt, submitAttempt } from "../services/examEngineService.js";
+import { generateAttempt, submitAttempt, submitTeachBack, submitTeachBackFollowUp } from "../services/examEngineService.js";
 
 export const generate = async (req, res) => {
   try {
@@ -39,5 +39,53 @@ export const submit = async (req, res) => {
   } catch (err) {
     const status = err.status ?? 500;
     res.status(status).json({ message: err.message ?? "Failed to submit exam" });
+  }
+};
+
+export const submitTeachBackAnswer = async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const userId = req.user._id.toString();
+    const { path, layer, topic, answerText } = req.body;
+
+    if (!path || typeof path !== "string") {
+      return res.status(400).json({ message: "path is required" });
+    }
+    if (!layer || typeof layer !== "string") {
+      return res.status(400).json({ message: "layer is required" });
+    }
+    if (!topic || typeof topic !== "string") {
+      return res.status(400).json({ message: "topic is required" });
+    }
+    if (!answerText || typeof answerText !== "string" || !answerText.trim()) {
+      return res.status(400).json({ message: "answerText is required" });
+    }
+
+    const result = await submitTeachBack(db, userId, { path, layer, topic, answerText });
+    res.json(result);
+  } catch (err) {
+    const status = err.status ?? 500;
+    res.status(status).json({ message: err.message ?? "Failed to grade teach-back answer" });
+  }
+};
+
+export const submitTeachBackFollowUpAnswer = async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const userId = req.user._id.toString();
+    const { sessionId, answerText } = req.body;
+
+    if (!sessionId || typeof sessionId !== "string") {
+      return res.status(400).json({ message: "sessionId is required" });
+    }
+    if (!answerText || typeof answerText !== "string" || !answerText.trim()) {
+      return res.status(400).json({ message: "answerText is required" });
+    }
+
+    const result = await submitTeachBackFollowUp(db, userId, { sessionId, answerText });
+    res.json(result);
+  } catch (err) {
+    const status = err.status ?? 500;
+    res.status(status).json({ message: err.message ?? "Failed to grade follow-up answer" });
   }
 };

@@ -6,7 +6,7 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "";
 export default function useAgentStream() {
   const abortRef = useRef(null);
 
-  const sendMessage = useCallback(async ({ sessionId, content, token, attachments = [] }) => {
+  const sendMessage = useCallback(async ({ sessionId, content, token, attachments = [], activity = null }) => {
     // Cancel any in-flight stream
     abortRef.current?.abort();
     const controller = new AbortController();
@@ -47,6 +47,10 @@ export default function useAgentStream() {
           ...(attachments.length
             ? { attachments: attachments.map((a) => ({ name: a.name, content: a.content })) }
             : {}),
+          // Where the learner is as they type, so the mentor can resolve "this"
+          // and "why did it fail". Omitted entirely when unknown — the server
+          // schema rejects a partial object without a surface.
+          ...(activity?.surface ? { activity } : {}),
         }),
         signal: controller.signal,
       });
@@ -109,6 +113,15 @@ export default function useAgentStream() {
                 : m,
             );
             setMessages(updated);
+          } else if (event.type === "title") {
+            // The server auto-titled this conversation; swap the truncated
+            // placeholder in the sidebar for the generated name.
+            const { sessions, setSessions } = useAiAgentStore.getState();
+            setSessions(
+              sessions.map((s) =>
+                s._id === event.sessionId ? { ...s, title: event.title } : s,
+              ),
+            );
           } else if (event.type === "done") {
             break;
           } else if (event.type === "error") {

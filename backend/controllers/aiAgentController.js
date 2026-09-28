@@ -16,6 +16,7 @@ import {
   composeUserMessage,
   MODEL,
 } from "../services/agent/streamService.js";
+import { generateTitle } from "../services/agent/titleService.js";
 import { toolDefinitions } from "../tools/agentTools.js";
 import { ATTACHMENT_LIMITS } from "../validation/aiAgent.schemas.js";
 
@@ -61,7 +62,12 @@ export const updateSessionById = async (req, res) => {
   try {
     const db = req.app.locals.db;
     const userId = req.user._id.toString();
-    const session = await updateSession(db, userId, req.params.id, req.body);
+    // A rename through this endpoint is always a deliberate user action, so
+    // lock the title against later auto-generation.
+    const session = await updateSession(db, userId, req.params.id, {
+      ...req.body,
+      ...(req.body.title !== undefined && { titleLocked: true }),
+    });
 
     // Also 404 when the session belongs to someone else — a 403 would confirm
     // that the id exists, which is information the caller shouldn't get.
@@ -124,7 +130,7 @@ export const stream = async (req, res) => {
   // Shape is guaranteed by validate({ body: streamSchema }) on the route —
   // message is a non-empty trimmed string, sessionId is a valid ObjectId or null,
   // and attachments (if present) are within the per-file and total size caps.
-  const { sessionId, message, attachments = [] } = req.body;
+  const { sessionId, message, attachments = [], activity = null } = req.body;
 
   // rate limit check
   const limit = await checkDailyLimit(db, userId);
@@ -143,6 +149,12 @@ export const stream = async (req, res) => {
 
   const sessionMessages = session.messages ?? [];
 
+  // Auto-title on the first exchange only, and never over a name the user chose.
+  // Fired BEFORE streaming so it runs concurrently with the answer — by the time
+  // the reply finishes it has almost always resolved, costing no extra wait.
+  const shouldTitle = sessionMessages.length === 0 && !session.titleLocked;
+  const titlePromise = shouldTitle ? generateTitle(message) : null;
+
   // set SSE headers
   res.setHeader("Content-Type", "text/event-stream");
   res.setHeader("Cache-Control", "no-cache");
@@ -157,6 +169,14 @@ export const stream = async (req, res) => {
       sessionMessages,
       userMessage: message,
       attachments,
+      // Lets the teaching log record which conversation an explanation happened
+      // in, so a future turn can tell "I already tried this" from "we discussed
+      // this at length in one long session".
+      sessionId: session._id.toString(),
+      // Deliberately NOT persisted with the turn: where the learner was when
+      // they asked is context for this answer only. Replaying it into a later
+      // turn would tell the mentor they are still on the exam results page.
+      activity,
     });
 
     await incrementUsage(db, userId);
@@ -169,6 +189,23 @@ export const stream = async (req, res) => {
       composeUserMessage(message, attachments),
       assistantContent,
     );
+
+    if (titlePromise) {
+      // Race against a short timeout: a hung titling call must never hold the
+      // stream open, because the client can't send its next message until this
+      // closes. Titling is cosmetic — dropping it is always the right trade.
+      const title = await Promise.race([
+        titlePromise,
+        new Promise((resolve) => setTimeout(() => resolve(null), 1500)),
+      ]);
+
+      if (title) {
+        await updateSession(db, userId, session._id.toString(), { title });
+        res.write(
+          `data: ${JSON.stringify({ type: "title", sessionId: session._id.toString(), title })}\n\n`,
+        );
+      }
+    }
 
     // Close the stream only now that the turn is durable. The client treats
     // "done" as permission to send the next message, and that next request

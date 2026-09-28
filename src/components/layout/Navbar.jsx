@@ -10,9 +10,10 @@ import { CATEGORY_OPTIONS } from "../../../constants/Categories";
 import {
   AVATAR_MENU_ITEMS,
   MOBILE_EXTRA_LINKS,
+  NAV_LINKS_AUTH,
+  NAV_LINKS_GUEST,
 } from "../../../constants/Navbar";
 import useProfileStore from "@/stores/useProfileStore";
-import GradientText from "@/components/effects/GradientText";
 import CatPawButton from "@/components/effects/CatPawButton";
 
 const Navbar = () => {
@@ -173,16 +174,13 @@ const Navbar = () => {
     >
       {/* Left: Logo */}
       <div className="flex-1">
-        <h2 className="text-base font-bold cursor-pointer sm:text-xl md:text-xl lg:text-xl">
-          <NavLink to="/" aria-label="DevsWebs - Go to homepage">
-            {/* <GradientText
-              colors={["#a855f7", "#7c3aed", "#c084fc", "#7c3aed", "#a855f7"]}
-              animationSpeed={6}
-              className="font-bold text-base sm:text-xl"
-            >
-              Vahoha
-            </GradientText> */}
-            <h2 className="text-white">Vahoha</h2>
+        <h2 className="text-base font-extrabold tracking-tight sm:text-xl md:text-xl lg:text-[20px]">
+          <NavLink
+            to="/"
+            aria-label="DevsWebs - Go to homepage"
+            className="text-white transition-colors"
+          >
+            Vahoha
           </NavLink>
         </h2>
       </div>
@@ -216,89 +214,27 @@ const Navbar = () => {
           )}
         </li>
 
-        {auth ? (
-          <>
-            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 hover:text-purple-500 transition">
-              <NavLink
-                to="roadmaps"
-                className={({ isActive }) =>
-                  isActive ? "text-purple-500" : ""
-                }
-              >
-                Roadmaps
-              </NavLink>
-            </li>
-            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 hover:text-purple-500 transition">
-              <NavLink
-                to="libs"
-                className={({ isActive }) =>
-                  isActive ? "text-purple-500" : ""
-                }
-              >
-                Coding Libs
-              </NavLink>
-            </li>
-            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 hover:text-purple-500 transition">
-              <NavLink
-                to="coding-challenges"
-                className={({ isActive }) =>
-                  isActive ? "text-purple-500" : ""
-                }
-              >
-                Challenges
-              </NavLink>
-            </li>
-            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 hover:text-purple-500 transition">
-              <NavLink
-                to="capstone"
-                className={({ isActive }) =>
-                  isActive ? "text-purple-500" : ""
-                }
-              >
-                Capstone
-              </NavLink>
-            </li>
-            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 transition">
-              <CatPawButton
-                className={({ isActive }) =>
-                  isActive ? "text-emerald-500" : "text-cyan-500/80"
-                }
-              />
-            </li>
-          </>
-        ) : (
-          <>
-            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 py-1 hover:text-purple-500 transition">
-              <NavLink
-                to="roadmaps"
-                className={({ isActive }) =>
-                  isActive ? "text-purple-500" : ""
-                }
-              >
-                Roadmaps
-              </NavLink>
-            </li>
-            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 py-1 hover:text-purple-500 transition">
-              <NavLink
-                to="about"
-                className={({ isActive }) =>
-                  isActive ? "text-purple-500" : ""
-                }
-              >
-                About
-              </NavLink>
-            </li>
-            <li className="hidden md:block font-medium text-sm lg:text-sm px-1 py-1 hover:text-purple-500 transition">
-              <NavLink
-                to="get-started"
-                className={({ isActive }) =>
-                  isActive ? "text-purple-500" : ""
-                }
-              >
-                Get Started
-              </NavLink>
-            </li>
-          </>
+        {(auth ? NAV_LINKS_AUTH : NAV_LINKS_GUEST).map(({ label, to }) => (
+          <li
+            key={to}
+            className="hidden md:block font-medium text-sm lg:text-sm px-1 py-1 hover:text-purple-500 transition"
+          >
+            <NavLink
+              to={to}
+              className={({ isActive }) => (isActive ? "text-purple-500" : "")}
+            >
+              {label}
+            </NavLink>
+          </li>
+        ))}
+        {auth && (
+          <li className="hidden md:block font-medium text-sm lg:text-sm px-1 transition">
+            <CatPawButton
+              className={({ isActive }) =>
+                isActive ? "text-emerald-500" : "text-cyan-500/80"
+              }
+            />
+          </li>
         )}
       </ul>
 

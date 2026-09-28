@@ -61,9 +61,29 @@ const attachmentSchema = z.object({
   content: z.string().min(1).max(ATTACHMENT_LIMITS.MAX_CHARS_PER_FILE),
 });
 
+/**
+ * What the learner is doing right now (Stage 6).
+ *
+ * `surface` is a closed enum rather than free text on purpose: every field here
+ * is rendered into the system prompt, so an open string would be an injection
+ * vector straight into the mentor's instructions. The remaining fields are
+ * length-capped for the same reason.
+ *
+ * All optional — the mentor works fine without it, and the chat page itself has
+ * no activity to report beyond being the chat page.
+ */
+export const activitySchema = z.object({
+  surface: z.enum(["chat", "exam-results", "roadmap", "challenge", "library"]),
+  path: z.string().trim().max(60).optional(),
+  layer: z.string().trim().max(60).optional(),
+  // Display spelling; the server slugifies it to join against mastery/concepts.
+  topic: z.string().trim().max(120).optional(),
+});
+
 // POST /api/ai-agent/stream
 export const streamSchema = z
   .object({
+    activity: activitySchema.optional(),
     // useAgentStream.js sends `sessionId: null` when no session exists yet, so
     // null must be accepted — the controller then creates one.
     sessionId: objectId.nullish(),

@@ -2,6 +2,14 @@ import connectDB from "../config/db.js";
 import { getUserProgress } from "../services/userProgressService.js";
 import { getExamHistory } from "../services/examHistoryService.js";
 import { getWeakSpots, addWeakSpot } from "../services/weakSpotService.js";
+import {
+  getLearnerContext,
+  getTopicDetail,
+} from "../services/agent/learnerContextService.js";
+import { recomputeMastery, getMastery } from "../services/learnerMasteryService.js";
+import { getConcept, getConcepts } from "../services/conceptService.js";
+import { logTeachingAttempt } from "../services/agent/teachingLogService.js";
+import { toTopicSlug } from "../utils/topicKey.js";
 
 export const toolDefinitions = [
   {
@@ -76,6 +84,77 @@ export const toolDefinitions = [
       name: "get_weak_spots",
       description: "Get the topics the current user has struggled with. Call this when the user asks what they should review or study next.",
       parameters: { type: "object", properties: {} },
+    },
+  },
+  {
+    type: "function",
+    function: {
+      name: "get_learner_context",
+      // The compact summary is already in the system prompt on every turn, so
+      // this tool is the DRILL-IN path only. Saying that in the description is
+      // what stops the model re-fetching context it can already see.
+      description:
+        "Drill into the learner's evidence beyond the summary already provided to you. Pass topicSlug (e.g. 'jwt-signature') to get the per-criterion breakdown of what exactly they got wrong on a topic, including detected misconceptions. Omit topicSlug for the full cross-platform picture. Do NOT call this just to re-read the summary you already have.",
+      parameters: {
+        type: "object",
+        properties: {
+          topicSlug: {
+            type: "string",
+            description:
+              "Canonical topic key from the context summary, e.g. 'jwt-signature'. Use when the user asks what specifically they got wrong on one topic.",
+          },
+        },
+      },
+    },
+  },
+  {
+    type: "function",
+    function: {
+      name: "get_concept",
+      description:
+        "Look up DevsWebs' authored domain knowledge for a concept: its definition, purpose, prerequisites, and the known misconceptions WITH the authored correction for each. Call this before teaching or correcting a topic, especially when the learner's state lists a misconception — the correction here is the platform's canonical explanation and should shape your answer.",
+      parameters: {
+        type: "object",
+        properties: {
+          slug: {
+            type: "string",
+            description: "Concept id / topic slug, e.g. 'jwt-signature'.",
+          },
+          includePrerequisites: {
+            type: "boolean",
+            description:
+              "Also return the concepts this one builds on. Use when the learner's confusion may actually be in a prerequisite.",
+          },
+        },
+        required: ["slug"],
+      },
+    },
+  },
+  {
+    type: "function",
+    function: {
+      name: "log_teaching_attempt",
+      description:
+        "Record HOW you just explained something, so future conversations do not repeat an explanation that already failed. Call this after you teach or correct a concept, describing your angle in a few words (e.g. 'jwt.io decode demo showing readable payload'). Do not record whether it worked — that is measured from their later assessments, not from your judgement.",
+      parameters: {
+        type: "object",
+        properties: {
+          topicSlug: {
+            type: "string",
+            description: "Canonical topic slug, e.g. 'jwt-signature'.",
+          },
+          approach: {
+            type: "string",
+            description:
+              "Short description of the angle you used — the analogy, example, or question. Not the full explanation.",
+          },
+          misconceptionId: {
+            type: "string",
+            description: "The misconception id you were correcting, if any.",
+          },
+        },
+        required: ["topicSlug", "approach"],
+      },
     },
   },
   {
@@ -168,11 +247,85 @@ export async function executeTool(name, args, ctx = {}) {
     return getWeakSpots(db, userId);
   }
 
+  if (name === "get_learner_context") {
+    if (!userId) return { error: "Not authenticated" };
+
+    if (args.topicSlug) {
+      // Deliberately its own read rather than a filter over the memoized
+      // summary context: that one is capped for prompt cost, so an older topic
+      // may not appear in it, and answering "untested" for a topic the learner
+      // actually failed months ago would be worse than the extra query.
+      const detail = await getTopicDetail(db, userId, args.topicSlug);
+      return detail ?? { error: "Unrecognised topic slug" };
+    }
+
+    // Reuse the context already assembled for this turn's system prompt when
+    // the caller supplied it — otherwise this is the second identical set of
+    // five queries in one request.
+    return ctx.loadLearnerContext
+      ? ctx.loadLearnerContext()
+      : getLearnerContext(db, userId);
+  }
+
+  if (name === "get_concept") {
+    // Domain knowledge is platform-wide, not per-learner, so this one needs no
+    // auth check — there is nothing about the user in it.
+    const concept = await getConcept(db, args.slug);
+    if (!concept) {
+      // Say so explicitly rather than returning null: the model must fall back to
+      // its own knowledge knowingly, not silently treat an empty result as
+      // "this concept has no misconceptions".
+      return { found: false, slug: args.slug, message: "No authored concept for this slug." };
+    }
+
+    if (!args.includePrerequisites || !concept.prerequisites?.length) {
+      return { found: true, ...concept };
+    }
+
+    return {
+      found: true,
+      ...concept,
+      prerequisiteConcepts: await getConcepts(db, concept.prerequisites),
+    };
+  }
+
+  if (name === "log_teaching_attempt") {
+    if (!userId) return { error: "Not authenticated" };
+
+    // Capture the topic's CURRENT status as the baseline the outcome is measured
+    // against later. Read from stored mastery, so the mentor is not the one
+    // deciding what state the learner was in when it taught them.
+    const slug = toTopicSlug(args.topicSlug);
+    const mastery = await getMastery(db, userId);
+    const statusAtTime = mastery.find((t) => t.slug === slug)?.status ?? null;
+
+    const logged = await logTeachingAttempt(db, userId, {
+      topicSlug: args.topicSlug,
+      approach: args.approach,
+      misconceptionId: args.misconceptionId ?? null,
+      statusAtTime,
+      sessionId: ctx.sessionId ?? null,
+    });
+
+    if (!logged) return { error: "topicSlug and approach are both required" };
+    return { logged: true, topicSlug: logged.slug, statusAtTime };
+  }
+
   if (name === "log_weak_spot") {
     if (!userId) return { error: "Not authenticated" };
     const { topic, path = "unknown", layer = "unknown" } = args;
     if (!topic || typeof topic !== "string") return { error: "topic is required" };
     await addWeakSpot(db, userId, { topic: topic.trim(), path, layer, source: "agent" });
+
+    // Confusion revealed in conversation is evidence like any other, so the
+    // Adaptive Engine has to see it — otherwise the topic the mentor JUST logged
+    // is absent from the context of the learner's very next message.
+    try {
+      await recomputeMastery(db, userId);
+    } catch (err) {
+      console.error("mastery recompute after log_weak_spot failed:", err);
+    }
+
     return { logged: true, topic };
   }
 

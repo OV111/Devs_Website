@@ -44,11 +44,11 @@ const Footer = () => {
             <Link to="/" className="flex items-center gap-2 mb-4">
               <img src={null} width={0} height={0} alt="Logo" />
               <h1 className="text-xl font-bold tracking-wide text-[#F7F7F8]">
-                DevsWebs
+                Vahoha
               </h1>
             </Link>
             <p className="mb-6 text-sx leading-6 text-[#A1A0AB] ">
-              DevsWebs is where developers learn, build, and grow — community
+              Vahoha is where developers learn, build, and grow — community
               content, structured roadmaps you have to earn, and a personal AI
               agent that knows exactly where you are in your journey.
             </p>

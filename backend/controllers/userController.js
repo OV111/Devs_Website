@@ -26,7 +26,11 @@ export const getUserProfile = async (req, res) => {
     const result = await getUserProfileService(db, userName, currentUserId);
     res.status(200).json(result);
   } catch (err) {
-    res.status(err.status ?? 500).json({ message: err.message, code: err.status ?? 500 });
+    res.status(err.status ?? 500).json({
+      message: err.message,
+      code: err.status ?? 500,
+      ...(err.redirect ? { redirect: err.redirect } : {}),
+    });
   }
 };
 

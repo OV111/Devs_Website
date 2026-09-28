@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { useParams, useNavigate, useSearchParams } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams, Link } from "react-router-dom";
 import { motion as Motion, AnimatePresence } from "framer-motion";  
 import {
   Clock, ChevronRight, ChevronLeft, CheckCircle2, XCircle,
@@ -80,7 +80,7 @@ const CooldownScreen = ({ message, onBack }) => {
 };
 
 // ── Result screen ─────────────────────────────────────────────
-const ResultScreen = ({ result, passThreshold, onRetry, onBack }) => {
+const ResultScreen = ({ result, passThreshold, onRetry, onBack, path, layer }) => {
   const { score, passed, correctCount, total, missedResults } = result;
 
   // auto-navigate to roadmap after pass
@@ -143,7 +143,16 @@ const ResultScreen = ({ result, passThreshold, onRetry, onBack }) => {
                       Correct: {r.correctAnswer}
                     </span>
                   </div>
-                  <span className="mt-2 inline-block text-[10px] text-neutral-600 uppercase tracking-wider">{r.topic}</span>
+                  <div className="mt-2 flex items-center justify-between">
+                    <span className="text-[10px] text-neutral-600 uppercase tracking-wider">{r.topic}</span>
+                    <Link
+                      to="/ai-agent"
+                      state={{ teachBack: { path, layer, topic: r.topic } }}
+                      className="text-[11px] px-2 py-1 rounded-lg border border-purple-700/50 text-purple-400 hover:bg-purple-950/30 transition-colors"
+                    >
+                      Teach it back
+                    </Link>
+                  </div>
                 </div>
               ))}
             </div>
@@ -316,6 +325,8 @@ export default function ExamPage() {
         passThreshold={examData.passThreshold}
         onRetry={fetchExam}
         onBack={goBack}
+        path={path}
+        layer={layerId}
       />
     );
   }

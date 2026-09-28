@@ -11,7 +11,12 @@ import { DROPDOWN_ITEMS } from "../../../../constants/AiAgent";
  * Sizing follows the reference design: a wider panel, roomier rows, 18px icons
  * with a larger gap to the label, and a 2xl radius.
  */
-export default function AgentMenu({ open, onOpenChange, onSelect, isEnabled = () => false }) {
+export default function AgentMenu({
+  open,
+  onOpenChange,
+  onSelect,
+  isEnabled = () => false,
+}) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -48,11 +53,11 @@ export default function AgentMenu({ open, onOpenChange, onSelect, isEnabled = ()
       {open && (
         <div
           role="menu"
-          className="absolute bottom-12 left-0 w-[270px] rounded-2xl overflow-hidden p-1.5 z-50 border border-white/10 bg-[#191918]  shadow-2xl shadow-black/60"
+          className="absolute bottom-9 left-0 w-[220px] rounded-2xl overflow-hidden p-1 z-50 border border-white/10 bg-[#191918]  shadow-2xl shadow-black/60"
         >
           {DROPDOWN_ITEMS.map((group, gi) => (
             <div key={gi}>
-              {gi > 0 && <div className="h-px bg-white/10 my-1.5 mx-1" />}
+              {gi > 0 && <div className="h-px bg-white/10 my-1 mx-0.5" />}
               {group.items.map((item) => {
                 const ItemIcon = item.icon;
                 const enabled = isEnabled(item.label);
@@ -63,13 +68,25 @@ export default function AgentMenu({ open, onOpenChange, onSelect, isEnabled = ()
                     onClick={() => enabled && onSelect(item.label)}
                     disabled={!enabled}
                     title={enabled ? undefined : "Coming soon"}
-                    className={`w-full flex items-center rounded-lg gap-3.5 px-3 py-2.5 text-[15px] text-white transition-colors ${
-                      enabled ? "hover:bg-white/10 cursor-pointer" : "opacity-40 cursor-not-allowed"
+                    className={`w-full flex items-center rounded-lg gap-2.5 px-3 py-2 text-[13px] text-white transition-colors ${
+                      enabled
+                        ? "hover:bg-white/10 cursor-pointer"
+                        
+                        : "opacity-40 cursor-not-allowed"
                     }`}
                   >
-                    <ItemIcon size={18} strokeWidth={1.5} className="shrink-0 text-white/70" />
+                    <ItemIcon
+                      size={18}
+                      strokeWidth={1.5}
+                      className="shrink-0 text-white/70"
+                    />
                     <span className="flex-1 text-left">{item.label}</span>
-                    {item.arrow && <ChevronRight size={15} className="text-white/30 shrink-0" />}
+                    {item.arrow && (
+                      <ChevronRight
+                        size={15}
+                        className="text-white/30 shrink-0"
+                      />
+                    )}
                   </button>
                 );
               })}

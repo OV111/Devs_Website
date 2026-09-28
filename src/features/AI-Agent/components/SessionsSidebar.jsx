@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useMemo } from "react";
-import { Search, SquarePen, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search, SquarePen, PanelLeft } from "lucide-react";
 import SessionItem from "./SessionItem";
 
 /** How long the sidebar stays open after the pointer leaves, to avoid flicker. */
@@ -71,17 +71,25 @@ export default function SessionsSidebar({
       <aside
         onMouseEnter={handleEnter}
         onMouseLeave={handleLeave}
-        className="w-10 shrink-0 hidden md:flex flex-col items-center border-r border-white/5"
+        className="w-10 shrink-0 hidden md:flex flex-col items-center border-r border-white/10"
       >
-        <div className="flex-1" />
         <button
           onClick={() => setPinned(true)}
           className="mb-4 w-7 h-7 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer text-white/70 hover:text-white"
           title="Open sessions"
           aria-label="Open sessions"
         >
-          <ChevronRight size={16} strokeWidth={2} />
+          <PanelLeft size={16} strokeWidth={2} />
         </button>
+        <div className="flex-1" />
+        {/* <button
+          onClick={() => setPinned(true)}
+          className="mb-4 w-7 h-7 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer text-white/70 hover:text-white"
+          title="Open sessions"
+          aria-label="Open sessions"
+        >
+          <PanelLeft size={16} strokeWidth={2} />
+        </button> */}
       </aside>
     );
   }
@@ -91,7 +99,7 @@ export default function SessionsSidebar({
     <aside
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
-      className="w-60 shrink-0 flex-col hidden md:flex border-r border-white/5"
+      className="w-60 shrink-0 flex-col hidden md:flex border-r border-white/10"
     >
       <div className="flex items-center justify-between px-4 pt-4 pb-3">
         <span className="text-[11px] font-bold tracking-widest uppercase" style={{ color: "#444" }}>
@@ -115,7 +123,7 @@ export default function SessionsSidebar({
             title="Collapse"
             aria-label="Collapse sessions"
           >
-            <ChevronLeft size={16} strokeWidth={2} />
+            <PanelLeft size={16} strokeWidth={2} />
           </button>
         </div>
       </div>
@@ -163,7 +171,7 @@ export default function SessionsSidebar({
                       otherwise every user sees an empty "Pinned" label forever. */}
                   {filtered.some((s) => s.pinned) && (
                     <p
-                      className="text-[10px] font-bold tracking-widest uppercase px-3 pt-2 pb-1"
+                      className="text-[10px] font-bold tracking-widest  px-3 pt-2 pb-1"
                       style={{ color: "#333" }}
                     >
                       {label}
