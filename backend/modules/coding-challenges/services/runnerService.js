@@ -31,16 +31,49 @@ const TIMEOUT_MS = 5000;
 // Sentinel separating the harness payload from anything the code logged.
 const RESULT_MARKER = "__CHALLENGE_RESULT__";
 
+// isolated-vm on Node 20+ must run with V8's startup snapshot disabled, or
+// creating an isolate can crash the whole process. Without the flag we do not
+// risk it: the strong backend is treated as unavailable and the policy below
+// decides what happens instead.
+const snapshotDisabled =
+  process.execArgv.includes("--no-node-snapshot") ||
+  /--no-node-snapshot/.test(process.env.NODE_OPTIONS ?? "");
+
 let ivm = null;
+let ivmUnavailableReason = null;
 try {
-  ivm = (await import("isolated-vm")).default;
+  const mod = (await import("isolated-vm")).default;
+  if (snapshotDisabled) ivm = mod;
+  else ivmUnavailableReason = "isolated-vm is installed but node was started without --no-node-snapshot";
 } catch {
-  ivm = null;
+  ivmUnavailableReason = "isolated-vm is not installed";
+}
+
+/**
+ * May the weak child-process backend run code? Pure, so it is testable.
+ *
+ * In production the answer is no unless explicitly overridden: the child
+ * process has the server's filesystem and network, so running strangers' code in
+ * it on a public deployment is remote code execution with extra steps. Failing
+ * closed (no submissions) is the safe default; local development keeps working.
+ */
+export const fallbackAllowed = (env = process.env) =>
+  env.NODE_ENV !== "production" || env.ALLOW_UNSAFE_RUNNER === "true";
+
+if (!ivm) {
+  console.warn(
+    `runner: ${ivmUnavailableReason}; ` +
+      (fallbackAllowed()
+        ? "using the child-process fallback (NOT a security boundary)."
+        : "server-side submissions are DISABLED in production until the sandbox is available."),
+  );
 }
 
 export const describeRunner = () => ({
-  backend: ivm ? "isolated-vm" : "child-process",
+  backend: ivm ? "isolated-vm" : fallbackAllowed() ? "child-process" : "disabled",
   hardened: Boolean(ivm),
+  available: Boolean(ivm) || fallbackAllowed(),
+  reason: ivm ? null : ivmUnavailableReason,
   memoryLimitMb: MEMORY_LIMIT_MB,
   timeoutMs: TIMEOUT_MS,
 });
@@ -262,6 +295,14 @@ export const runHiddenTests = async (userCode, exportName, hiddenTests) => {
       fatal: true,
       error: "This challenge has no hidden tests yet.",
     };
+  }
+
+  if (!ivm && !fallbackAllowed()) {
+    const err = new Error(
+      "Code submissions are temporarily unavailable. You can still run the tests in your browser.",
+    );
+    err.status = 503;
+    throw err;
   }
 
   const program = buildProgram(userCode, exportName, hiddenTests);

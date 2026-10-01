@@ -1,8 +1,9 @@
 [phases.setup]
-nixPkgs = ["nodejs_18"]
+nixPkgs = ["nodejs_22", "python3", "gcc", "gnumake"]
 
 [phases.install]
 cmds = ["npm ci"]
 
 [start]
-cmd = "node backend/server.js"
+# --no-node-snapshot is required by isolated-vm (code-runner sandbox) on Node 20+.
+cmd = "node --no-node-snapshot backend/server.js"

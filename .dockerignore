@@ -1,0 +1,24 @@
+# Never bake secrets or local state into an image.
+.env
+.env.*
+backend/.env
+backend/.env.*
+*.pem
+
+# Rebuilt inside the image by `npm ci`.
+node_modules
+dist
+
+# Not needed at runtime.
+.git
+.github
+.husky
+.vscode
+.idea
+coverage
+test-results
+playwright-report
+tests
+backend/tests
+ui-ux-pro-max-skill
+*.log

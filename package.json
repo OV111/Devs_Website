@@ -3,9 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "vite",
-    "start": "node backend/server.js",
+    "start": "node --no-node-snapshot backend/server.js",
     "seed:roadmap": "node backend/seeders/roadmapSeeder.js",
     "seed:challenges": "node backend/seeders/challengeSeeder.js",
     "admin:grant": "node backend/scripts/grantAdmin.js",
@@ -15,7 +18,7 @@
     "seed:rubrics": "node backend/seeders/teachBackRubricSeeder.js",
     "build": "vite build",
     "build:staging": "vite build --mode staging",
-    "server": "nodemon ./server.js",
+    "server": "nodemon --exec \"node --no-node-snapshot\" backend/server.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "redis": "docker start redis-dev || docker run -d -p 6379:6379 --name redis-dev --restart unless-stopped redis",
@@ -75,6 +78,7 @@
     "google-auth-library": "^10.6.2",
     "groq-sdk": "^1.2.1",
     "gsap": "^3.13.0",
+    "helmet": "^8.3.0",
     "highlight.js": "^11.12.0",
     "jsonwebtoken": "^9.0.2",
     "ldrs": "^1.1.9",
@@ -109,6 +113,9 @@
   },
   "lint-staged": {
     "**/*.{js,jsx}": "eslint --fix"
+  },
+  "optionalDependencies": {
+    "isolated-vm": "~6.2.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.1",

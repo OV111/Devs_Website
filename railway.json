@@ -5,7 +5,8 @@
     "buildCommand": "npm install"
   },
   "deploy": {
-    "startCommand": "node backend/server.js",
+    "startCommand": "node --no-node-snapshot backend/server.js",
+    "healthcheckPath": "/healthz",
     "restartPolicyType": "ON_FAILURE"
   }
 }

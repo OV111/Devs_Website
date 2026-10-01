@@ -1,18 +1,15 @@
 import { Queue } from "bullmq";
-import process from "process";
-import dotenv from "dotenv";
-dotenv.config({ path: "./backend/.env.local" });
-dotenv.config({ path: "./backend/.env" });
-const connection = {
-  host: process.env.REDIS_HOST || "127.0.0.1",
-  port: Number(process.env.REDIS_PORT) || 6379,
-};
+import { redisConnection } from "../config/redis.js";
 
-// REDIS_ENABLED=false disables the queue without removing code
-const REDIS_ENABLED = process.env.REDIS_ENABLED !== "false";
-
-const notificationQueue = REDIS_ENABLED
-  ? new Queue("notifications", { connection })
-  : { add: () => Promise.resolve() };
+// Uses the shared connection from config/redis.js. It used to build its own
+// `{ host, port }` without the password or REDIS_URL, so against any
+// password-protected Redis every enqueue failed while the worker (already on
+// the shared connection) sat idle waiting for jobs that never arrived.
+//
+// REDIS_ENABLED=false (redisConnection === null) disables the queue without
+// removing code: `add` becomes a no-op.
+const notificationQueue = redisConnection
+  ? new Queue("notifications", { connection: redisConnection })
+  : { add: () => Promise.resolve(), close: () => Promise.resolve() };
 
 export default notificationQueue;

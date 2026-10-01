@@ -2,12 +2,17 @@ import { WebSocketServer } from "ws";
 import { joinRoom, loadLastMessages, sendMessage, removeFromRooms } from "./chatHandler.js";
 import { registerUserSocket, unregisterUserSocket } from "./connectionRegistry.js";
 import { verifyToken } from "../utils/jwtToken.js";
+import { isOriginAllowed } from "./origin.js";
 
 let wss;
 export const getWss = () => wss;
 
 export default function initWebSocketServer(server) {
-  wss = new WebSocketServer({ server });
+  wss = new WebSocketServer({
+    server,
+    // Refuse handshakes from foreign websites (see origin.js for why).
+    verifyClient: ({ origin }) => isOriginAllowed(origin),
+  });
   wss.on("connection", (ws) => {
     console.log("Client Connected!");
 
@@ -42,4 +47,6 @@ export default function initWebSocketServer(server) {
       unregisterUserSocket(ws.userId, ws);
     });
   });
+
+  return wss;
 }

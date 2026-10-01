@@ -48,6 +48,16 @@ const connectDB = async () => {
     throw err;
   }
 };
-// let x = await connectDB()
-// console.log(x)
+/**
+ * Close the shared client. Used on shutdown so in-flight operations finish and
+ * the connection pool is released cleanly instead of being cut by process exit.
+ */
+export const closeDB = async () => {
+  if (!client) return;
+  const closing = client;
+  client = undefined;
+  db = undefined;
+  await closing.close();
+};
+
 export default connectDB;

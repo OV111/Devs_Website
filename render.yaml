@@ -1,0 +1,75 @@
+# Render Blueprint — backend API (Express + WebSockets).
+# The frontend is deployed separately on Vercel (see vercel.json).
+# Full setup steps: docs/DEPLOYMENT.md
+#
+# Free plan caveats: the service sleeps after ~15 min idle and takes up to a
+# minute to wake. Webhooks are retried by Polar and /billing self-repairs via
+# /sync, so nothing is lost — but the first request after idle is slow and open
+# chat sockets drop. Move to a paid instance before a real pilot.
+
+services:
+  - type: web
+    name: devs-website            # -> https://devs-website.onrender.com (matches .env.production)
+    runtime: node
+    plan: free
+    region: frankfurt             # closest Render region to Armenia; put Atlas in eu-central too
+    buildCommand: npm ci
+    # --no-node-snapshot is required by isolated-vm (the code-runner sandbox) on Node 20+.
+    startCommand: npm start
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      # ── runtime ───────────────────────────────────────────────
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: HUSKY                 # git hooks are for local dev only
+        value: "0"
+      # ── core (required) ───────────────────────────────────────
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_Secret
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: FRONTEND_URL           # your Vercel URL, no trailing slash
+        sync: false
+      # ── AI ────────────────────────────────────────────────────
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY         # optional, only if Gemini features are used
+        sync: false
+      # ── auth providers / email / media ────────────────────────
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GITHUB_CLIENT_ID
+        sync: false
+      - key: GITHUB_CLIENT_SECRET
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      # ── Redis (notifications queue) ───────────────────────────
+      # Either set REDIS_URL (Render Key Value "internal URL"), or set
+      # REDIS_ENABLED=false to run without notifications.
+      - key: REDIS_URL
+        sync: false
+      - key: REDIS_ENABLED
+        value: "true"
+      # ── billing (Polar) — PRODUCTION values, never the sandbox ones ──
+      - key: POLAR_ENVIRONMENT
+        value: production
+      - key: POLAR_ACCESS_TOKEN
+        sync: false
+      - key: POLAR_PRO_PRODUCT_ID
+        sync: false
+      - key: POLAR_WEBHOOK_SECRET
+        sync: false
+      - key: BILLING_ENFORCED
+        value: "false"
