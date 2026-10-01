@@ -211,7 +211,7 @@ const BlogCard = ({ card }) => {
           </div>
         )}
 
-        <h3 className="line-clamp-2 text-lg leading-snug font-medium text-neutral-900 dark:text-neutral-100">
+        <h3 className="line-clamp-2 text-lg leading-snug font-medium text-neutral-900 transition-colors group-hover:text-purple-500 dark:text-neutral-100">
           <Link
             to={`/posts/${post.id}`}
             state={{
@@ -233,6 +233,17 @@ const BlogCard = ({ card }) => {
             {post.description}
           </p>
         )}
+
+        {/* Explicit cue that the card opens the post. Not a separate link:
+            the stretched title link already covers the card, so this is
+            visual only (aria-hidden) and the arrow nudges on hover. */}
+        <span
+          aria-hidden="true"
+          className="mt-auto flex items-center gap-1 pt-1 text-xs font-medium text-neutral-500 transition-colors group-hover:text-purple-500"
+        >
+          Read article
+          <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+        </span>
       </div>
 
       <footer className="flex items-center justify-between gap-3 border-t border-neutral-200 px-5 py-3 dark:border-neutral-800">
