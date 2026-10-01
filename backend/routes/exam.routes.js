@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { authenticate } from "../middleware/authenticate.js";
+import { aiBurstLimiter, teachBackDailyLimiter } from "../middleware/aiRateLimit.js";
 import {
   getHistory,
   getLastExamResult,
@@ -15,8 +16,8 @@ const router = Router();
 // Exam engine
 router.post("/generate", authenticate, generate);
 router.post("/submit", authenticate, submit);
-router.post("/submit-teach-back", authenticate, submitTeachBackAnswer);
-router.post("/submit-teach-back-followup", authenticate, submitTeachBackFollowUpAnswer);
+router.post("/submit-teach-back", authenticate, aiBurstLimiter, teachBackDailyLimiter, submitTeachBackAnswer);
+router.post("/submit-teach-back-followup", authenticate, aiBurstLimiter, teachBackDailyLimiter, submitTeachBackFollowUpAnswer);
 
 // Exam history
 router.get("/history", authenticate, getHistory);

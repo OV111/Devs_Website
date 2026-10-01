@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { authenticate } from "../middleware/authenticate.js";
 import { validate } from "../middleware/validate.js";
+import { aiBurstLimiter } from "../middleware/aiRateLimit.js";
 import {
   createSessionSchema,
   sessionIdParamSchema,
@@ -48,6 +49,7 @@ router.delete(
 router.post(
   "/stream",
   authenticate,
+  aiBurstLimiter,
   validate({ body: streamSchema }),
   stream,
 );

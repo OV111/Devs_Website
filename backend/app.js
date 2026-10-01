@@ -1,6 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import helmet from "helmet";
 import process from "process";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./config/swagger.js";
@@ -27,6 +28,10 @@ export function createApp(db) {
   app.locals.db = db;
 
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+  // Security headers for everything below. Mounted after /api-docs on purpose:
+  // helmet's default CSP blocks the inline scripts Swagger UI relies on.
+  app.use(helmet());
 
   app.use(
     cors({

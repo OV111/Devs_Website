@@ -21,7 +21,7 @@
  * - No test in this suite asserts that an injection "worked" — every test
  *   asserts the server correctly refused or sanitised the input.
  */
-import Buffer from 'node:buffer'
+import { Buffer } from 'node:buffer'
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest'
 import supertest from 'supertest'
 import { MongoMemoryServer } from 'mongodb-memory-server'
