@@ -7,6 +7,7 @@ import { CATEGORY_OPTIONS } from "../../../constants/Categories";
 const QuickLinks = [
   // { title: "Home", href: "/" },  
   { title: "About", href: "/about" },
+  { title: "Pricing", href: "/pricing" },
   { title: "Contact", href: "/contact" },
   { title: "Privacy Policy", href: "/privacy" },
 ];
@@ -17,6 +18,8 @@ const AuthLinks = [
   { title: "Coding Libs", href: "/libs" },
   { title: "Challenges", href: "/coding-challenges" },
   { title: "Capstone", href: "/capstone" },
+  { title: "Pricing", href: "/pricing" },
+  { title: "Billing", href: "/billing" },
   { title: "About", href: "/about" },
   { title: "Contact", href: "/contact" },
   { title: "Privacy Policy", href: "/privacy" },

@@ -17,6 +17,7 @@ import aiAgentRoutes from "./routes/aiAgent.routes.js";
 import roadmapRoutes from "./routes/roadmap.routes.js";
 import examRoutes from "./routes/exam.routes.js";
 import codingChallengeRoutes from "./modules/coding-challenges/index.js";
+import billingRoutes, { handleBillingWebhook } from "./modules/billing/index.js";
 import { notFound } from "./middleware/notFound.js";
 
 export function createApp(db) {
@@ -33,6 +34,15 @@ export function createApp(db) {
       allowedHeaders: ["Content-Type", "Authorization"],
       credentials: true,
     }),
+  );
+
+  // Polar's webhook signature is computed over the exact request bytes, so this
+  // route needs the body UNPARSED. It must be registered before express.json(),
+  // which would consume the stream and leave only a parsed object behind.
+  app.post(
+    "/api/billing/webhook",
+    express.raw({ type: "application/json" }),
+    handleBillingWebhook,
   );
 
   app.use(express.json());
@@ -59,6 +69,7 @@ export function createApp(db) {
   app.use("/api/roadmaps", roadmapRoutes);
   app.use("/api/exams", examRoutes);
   app.use("/api/challenges", codingChallengeRoutes);
+  app.use("/api/billing", billingRoutes);
 
   app.use(notFound)
   return app;
