@@ -128,8 +128,9 @@ describe('signUp — integration', () => {
 
     const db = await connectDB()
     const user = await db.collection('users').findOne({ email: 'b@test.com' })
-    // sanitized base: 'alice99', then appended with _<suffix>
-    expect(user.username).toMatch(/^alice99_\d+$/)
+    // Sanitized to 'alice99'. The base is used as-is when it is free; only a
+    // collision appends a number (see findUniqueUsername and the next test).
+    expect(user.username).toBe('alice99')
   })
 
   it('generates a unique username suffix when base username collides', async () => {
