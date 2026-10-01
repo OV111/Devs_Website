@@ -1,5 +1,7 @@
 import { ObjectId } from "mongodb";
-import { runHiddenTests } from "./runnerService.js";
+import { runHiddenTests, describeRunner } from "./runnerService.js";
+import { consumeSubmission, limitMessage } from "./submissionQuotaService.js";
+import { getUserPlan } from "../../billing/index.js";
 import { saveChallengeResult } from "../../../services/challengeResultService.js";
 
 /**
@@ -63,6 +65,24 @@ export const submitAttemptService = async (db, userId, attemptId) => {
 
   // Export name is derived from the file name: asyncHandler.js -> asyncHandler.
   const exportName = source.name.replace(/\.[^.]+$/, "");
+
+  // Check the runner BEFORE spending quota: if submissions are disabled (no
+  // sandbox in production) the learner must not lose one of today's tries.
+  if (!describeRunner().available) {
+    const err = new Error(
+      "Code submissions are temporarily unavailable. You can still run the tests in your browser.",
+    );
+    err.status = 503;
+    throw err;
+  }
+
+  // Spent only once the submission is known to be valid and runnable.
+  const quota = await consumeSubmission(db, userId, await getUserPlan(db, userId));
+  if (!quota.allowed) {
+    const err = new Error(limitMessage(quota));
+    err.status = 429;
+    throw err;
+  }
 
   const run = await runHiddenTests(
     source.code,
