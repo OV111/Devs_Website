@@ -18,15 +18,19 @@ const { processorRef } = vi.hoisted(() => ({ processorRef: { fn: null } }))
 // ─────────────────────────────────────────────────────────────────────────────
 // Step 2 — mock bullmq: capture processor; suppress real Redis connections
 // ─────────────────────────────────────────────────────────────────────────────
+// The shared connection would otherwise dial a real Redis at import time.
+vi.mock('../../config/redis.js', () => ({ redisConnection: {} }))
+
 vi.mock('bullmq', () => {
   return {
     Worker: class MockWorker {
-      constructor(name, processor, options) {
+      constructor(_name, processor) {
         processorRef.fn = processor
       }
+      on() {}
     },
     Queue: class MockQueue {
-      constructor(name, options) {
+      constructor() {
         this.add = vi.fn()
       }
     },
@@ -146,7 +150,7 @@ describe('notificationWorker processor', () => {
     expect(notification.createdAt).toBeInstanceOf(Date)
   })
 
-  it('sets senderName to "undefined undefined" gracefully when actor not found', async () => {
+  it('stores an empty senderName (not "undefined undefined") when actor not found', async () => {
     // No user inserted for this actorId — actor lookup returns null
     const actorId = new ObjectId().toString()
     const targetUserId = new ObjectId().toString()
@@ -155,10 +159,9 @@ describe('notificationWorker processor', () => {
 
     const notification = await realDb.collection('notifications').findOne({ actorId })
     expect(notification).not.toBeNull()
-    // actor?.username is undefined when actor is null
-    expect(notification.senderUsername).toBeUndefined()
-    // actor?.firstName + " " + actor?.lastName => "undefined undefined"
-    expect(notification.senderName).toBe('undefined undefined')
+    // actor?.username is undefined, which the Mongo driver stores as null
+    expect(notification.senderUsername).toBeNull()
+    expect(notification.senderName).toBe('')
   })
 
   it('sends WebSocket notification to the target user if connected', async () => {

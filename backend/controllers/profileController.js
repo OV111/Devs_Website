@@ -8,12 +8,12 @@ import {
   updateSettingsService,
   checkUsernameAvailableService,
   uploadToCloudinary,
-  getNotificationsService,
   getFollowingService,
   getFollowersService,
   getMutualFollowersService,
   getChatReceiverStatsService,
 } from "../services/profileService.js";
+import { getNotifications as getNotificationsService } from "../services/notificationService.js";
 
 export const getProfile = async (req, res) => {
   try {

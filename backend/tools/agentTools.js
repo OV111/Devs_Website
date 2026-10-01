@@ -10,6 +10,7 @@ import { recomputeMastery, getMastery } from "../services/learnerMasteryService.
 import { getConcept, getConcepts } from "../services/conceptService.js";
 import { logTeachingAttempt } from "../services/agent/teachingLogService.js";
 import { toTopicSlug } from "../utils/topicKey.js";
+import { escapeRegex } from "../utils/regex.js";
 
 export const toolDefinitions = [
   {
@@ -185,10 +186,10 @@ export async function executeTool(name, args, ctx = {}) {
     const posts = db.collection("posts-default");
     return posts
       .find({
-        category: { $regex: category, $options: "i" },
+        category: { $regex: escapeRegex(category), $options: "i" },
         $or: [
-          { title: { $regex: keyword, $options: "i" } },
-          { content: { $regex: keyword, $options: "i" } },
+          { title: { $regex: escapeRegex(keyword), $options: "i" } },
+          { content: { $regex: escapeRegex(keyword), $options: "i" } },
         ],
       })
       .project({ title: 1, category: 1, author: 1 })
@@ -202,9 +203,9 @@ export async function executeTool(name, args, ctx = {}) {
     return library
       .find({
         $or: [
-          { title: { $regex: keyword, $options: "i" } },
-          { description: { $regex: keyword, $options: "i" } },
-          { topics: { $regex: keyword, $options: "i" } },
+          { title: { $regex: escapeRegex(keyword), $options: "i" } },
+          { description: { $regex: escapeRegex(keyword), $options: "i" } },
+          { topics: { $regex: escapeRegex(keyword), $options: "i" } },
         ],
       })
       .project({ title: 1, description: 1, type: 1, difficulty: 1 })

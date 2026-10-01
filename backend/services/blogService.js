@@ -199,7 +199,7 @@ export const createBlogService = async (db, body, user, file) => {
 };
 
 export const getBlogsService = async (db, query) => {
-  const { category, tag, layer, page = 1, limit = 10, difficulty, readTime, sort, filter } = query;
+  const { category, tag, layer, page = 1, limit = 10, difficulty, readTime, sort, filter, q } = query;
 
   const pageNumber = Math.max(1, +page);
   const limitNumber = Math.min(100, Math.max(1, +limit));
@@ -207,6 +207,13 @@ export const getBlogsService = async (db, query) => {
   if (category) matchFilter.category = category;
   if (tag) matchFilter.tags = { $in: Array.isArray(tag) ? tag : [tag] };
   if (difficulty) matchFilter.difficulty = difficulty;
+  // Title search. Escaped so user input is matched literally — an unescaped
+  // "(a+)+" would be a regex the DB has to evaluate (ReDoS). Capped length
+  // for the same reason. typeof guards against ?q=a&q=b arriving as an array.
+  if (typeof q === "string" && q.trim()) {
+    const term = q.trim().slice(0, 100).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    matchFilter.title = { $regex: term, $options: "i" };
+  }
   // typeof check: a repeated ?layer=a&layer=b arrives as an array, and a
   // string is the only shape that matches one element of `layerIds`.
   if (typeof layer === "string" && LAYER_ID_PATTERN.test(layer)) matchFilter.layerIds = layer;

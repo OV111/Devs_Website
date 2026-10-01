@@ -37,4 +37,48 @@ export const deleteAccountService = async (db, userId, email, password) => {
     ] : [blogs.deleteMany({ author: userId })]),
     users.deleteOne({ _id: userId }),
   ]);
+
+  await deleteLearningAndActivityData(db, userId, currentUser.email);
 };
+
+// Every collection that stores per-user data keyed by `userId`. The Privacy
+// Policy promises that deleting an account removes all of it, so a new
+// per-user collection must be added here too — otherwise that promise breaks.
+const USER_KEYED_COLLECTIONS = [
+  "userProgress",
+  "exam_attempts",
+  "examHistory",
+  "weakSpots",
+  "learnerMastery",
+  "teach_back_sessions",
+  "mentor_teaching_log",
+  "agent_sessions",
+  "agent_usage",
+  "challenge_attempts",
+  "challengeResults",
+  "savedLibraryResources",
+  "usernameHistory",
+  "userEvents",
+  "refreshTokens",
+  "passwordResets",
+];
+
+async function deleteLearningAndActivityData(db, userId, email) {
+  // Some collections store the id as an ObjectId, others as a string
+  // (chat, notifications). Matching both keeps one missed type from silently
+  // leaving data behind.
+  const ids = [userId, userId.toString()];
+
+  await Promise.all([
+    ...USER_KEYED_COLLECTIONS.map((name) =>
+      db.collection(name).deleteMany({ userId: { $in: ids } }),
+    ),
+    // Chat: the user's own messages go; rooms stay for the other members.
+    db.collection("messages").deleteMany({ senderId: { $in: ids } }),
+    db.collection("rooms").updateMany(
+      { members: userId.toString() },
+      { $pull: { members: userId.toString() } },
+    ),
+    db.collection("contact_messages").deleteMany({ email }),
+  ]);
+}

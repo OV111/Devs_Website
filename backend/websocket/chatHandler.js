@@ -1,5 +1,14 @@
 import notificationQueue from "../queues/notificationQueue.js";
 import connectDB from "../config/db.js";
+import {
+  getOrCreateRoomForMember,
+  saveMessage,
+  loadMessages,
+  loadRoomsForUser,
+} from "../services/chatService.js";
+
+// Transport layer only: socket presence, broadcasting and notification
+// fan-out. All persistence lives in services/chatService.js.
 
 const rooms = new Map(); // roomId -> Set<ws> (sockets currently viewing that room)
 
@@ -14,39 +23,22 @@ export const joinRoom = async (ws, data) => {
 
   if (!rooms.has(roomId)) rooms.set(roomId, new Set());
 
+  let db;
   try {
-    const db = await connectDB();
-    const roomCollection = db.collection("rooms");
-    let room = await roomCollection.findOne({ _id: roomId.toString() });
-
-    if (!room) {
-      // No pre-existing room. Only the direct-chat flow can implicitly create
-      // one here (first DM between two mutual followers) — groups must be
-      // created via the REST endpoint first, since they need a name/admins.
-      if (!receiverId) return sendError(ws, "Room does not exist");
-
-      room = {
-        _id: roomId.toString(),
-        members: [receiverId.toString(), senderId.toString()],
-        type: "direct",
-        admins: [],
-        name: null,
-        avatar: null,
-        createdBy: "",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      };
-      await roomCollection.insertOne(room);
-    } else if (!room.members.includes(senderId.toString())) {
-      return sendError(ws, "Access denied");
-    }
+    db = await connectDB();
+    const { error } = await getOrCreateRoomForMember(db, {
+      roomId,
+      userId: senderId,
+      receiverId,
+    });
+    if (error) return sendError(ws, error);
   } catch (err) {
-    console.log(err);
+    console.error("joinRoom failed:", err);
     return sendError(ws, "Error with DB");
   }
 
   rooms.get(roomId).add(ws);
-  const messageHistory = await loadMessages(roomId);
+  const messageHistory = await loadMessages(db, roomId);
   ws.send(JSON.stringify({ type: "message_history", roomId, messageHistory }));
   ws.send(JSON.stringify({ type: "joined_room", roomId }));
 };
@@ -63,39 +55,12 @@ export const sendMessage = async (ws, data) => {
 
   try {
     const db = await connectDB();
-    const roomsCollection = db.collection("rooms");
-    const messagesCollection = db.collection("messages");
-
-    const room = await roomsCollection.findOne(
-      { _id: roomId.toString() },
-      { projection: { members: 1 } },
-    );
-    if (!room || !room.members.includes(senderId.toString())) {
-      return sendError(ws, "Access denied");
-    }
-
-    const messageDoc = {
-      roomId: roomId.toString(),
-      senderId: senderId.toString(),
-      text: text.trim(),
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-
-    const insertedMessage = await messagesCollection.insertOne(messageDoc);
-    await roomsCollection.updateOne(
-      { _id: roomId.toString() },
-      {
-        $set: {
-          lastMessage: {
-            text: messageDoc.text,
-            senderId: messageDoc.senderId,
-            createdAt: new Date(),
-          },
-          updatedAt: new Date(),
-        },
-      },
-    );
+    const { error, members, message } = await saveMessage(db, {
+      roomId,
+      senderId,
+      text,
+    });
+    if (error) return sendError(ws, error);
 
     // Broadcast to every socket currently viewing this room, and track who's
     // actually present so we only queue notifications for absent members —
@@ -105,16 +70,11 @@ export const sendMessage = async (ws, data) => {
     sockets.forEach((clientSocket) => {
       if (clientSocket.readyState === WebSocket.OPEN) {
         presentUserIds.add(clientSocket.userId);
-        clientSocket.send(
-          JSON.stringify({
-            type: "sended_message",
-            message: { _id: insertedMessage.insertedId, ...messageDoc },
-          }),
-        );
+        clientSocket.send(JSON.stringify({ type: "sended_message", message }));
       }
     });
 
-    const absentMembers = room.members.filter(
+    const absentMembers = members.filter(
       (memberId) => memberId !== senderId.toString() && !presentUserIds.has(memberId),
     );
     absentMembers.forEach((targetUserId) => {
@@ -125,7 +85,7 @@ export const sendMessage = async (ws, data) => {
       });
     });
   } catch (error) {
-    console.log(error);
+    console.error("sendMessage failed:", error);
     return sendError(ws, "Failed to send message");
   }
 };
@@ -137,41 +97,11 @@ export const removeFromRooms = (ws) => {
   }
 };
 
-const loadMessages = async (roomId, limitNum = 50) => {
-  const db = await connectDB();
-  const messagesCollection = db.collection("messages");
-  if (!roomId.trim()) {
-    console.error("Invalid or missing roomId");
-  }
-  const roomMessages = await messagesCollection
-    .find({ roomId: roomId.toString() })
-    .sort({ createdAt: -1, _id: -1 })
-    .limit(limitNum)
-    .toArray();
-  return roomMessages.reverse();
-};
-
 export const loadLastMessages = async (ws) => {
   const userId = ws.userId;
   if (!userId) return sendError(ws, "userId is not defined");
 
   const db = await connectDB();
-  const roomsCollection = db.collection("rooms");
-
-  const roomsData = await roomsCollection
-    .find({ members: userId.toString() })
-    .project({
-      _id: 1,
-      type: 1,
-      name: 1,
-      avatar: 1,
-      members: 1,
-      admins: 1,
-      createdBy: 1,
-      lastMessage: 1,
-      updatedAt: 1,
-    })
-    .toArray();
-
+  const roomsData = await loadRoomsForUser(db, userId);
   return ws.send(JSON.stringify({ type: "load_last_messages", roomsData }));
 };

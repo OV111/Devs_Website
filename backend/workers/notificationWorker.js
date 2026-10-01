@@ -1,5 +1,5 @@
 import { Worker } from "bullmq";
-import { ObjectId } from "mongodb";
+import { createNotification } from "../services/notificationService.js";
 import connectDB from "../config/db.js";
 import { getWss } from "../websocket/index.js";
 import { redisConnection } from "../config/redis.js";
@@ -19,24 +19,13 @@ const NotificationWorker = REDIS_ENABLED ? new Worker(
   "notifications",
   async (job) => {
     const { type, actorId, targetUserId } = job.data;
+    // Cheap guard before touching the DB; createNotification re-checks for
+    // any other caller.
     if (!type || !actorId || !targetUserId) return;
     if (actorId === targetUserId) return;
     try {
       const db = await connectDB();
-      const users = db.collection("users");
-      const notifications = db.collection("notifications");
-      const actor = await users.findOne({ _id: new ObjectId(actorId) }, { projection: { username: 1, firstName: 1, lastName: 1 } });
-
-      const newNotification = {
-        type,
-        actorId,
-        targetUserId,
-        read: false,
-        createdAt: new Date(),
-        senderUsername: actor?.username,
-        senderName: actor?.firstName + " " + actor?.lastName,
-      };
-      await notifications.insertOne(newNotification);
+      const newNotification = await createNotification(db, { type, actorId, targetUserId });
 
       const wss = getWss();
       if (wss) {

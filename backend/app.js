@@ -21,12 +21,20 @@ import analyticsRoutes from "./routes/analytics.routes.js";
 import codingChallengeRoutes from "./modules/coding-challenges/index.js";
 import billingRoutes, { handleBillingWebhook } from "./modules/billing/index.js";
 import masteryRoutes from "./modules/mastery/index.js";
+import contactRoutes from "./modules/contact/index.js";
 import { notFound } from "./middleware/notFound.js";
 
 export function createApp(db) {
   const app = express();
 
   app.locals.db = db;
+
+  // Render (and Railway) put exactly one proxy in front of the app. Trusting
+  // that single hop makes req.ip the real client IP, so the rate limiters key
+  // per user instead of lumping everyone under the proxy's IP. Don't use
+  // `true`: that trusts any client-sent X-Forwarded-For, letting an attacker
+  // spoof a fresh IP per request and walk straight past the limits.
+  app.set("trust proxy", 1);
 
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
@@ -78,6 +86,7 @@ export function createApp(db) {
   app.use("/api/challenges", codingChallengeRoutes);
   app.use("/api/billing", billingRoutes);
   app.use("/api/mastery", masteryRoutes);
+  app.use("/api/contact", contactRoutes);
   app.use("/api/admin", analyticsRoutes);
 
   app.use(notFound)

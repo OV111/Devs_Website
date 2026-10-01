@@ -1,6 +1,5 @@
 import { CATEGORY_OPTIONS } from "../../constants/Categories.js";
-const escapeRegex = (value = "") =>
-  value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+import { escapeRegex } from "../utils/regex.js";
 
 export const searchUsers = async (db, query) => {
   const users = db.collection("users");

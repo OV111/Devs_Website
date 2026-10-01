@@ -141,14 +141,6 @@ export const uploadToCloudinary = (file) =>
     file.pipe(stream);
   });
 
-export const getNotificationsService = async (db, userId) => {
-  const notifications = db.collection("notifications");
-  return notifications
-    .find({ targetUserId: userId.toString() })
-    .sort({ createdAt: -1 })
-    .toArray();
-};
-
 export const getFollowingService = (db, userId, page, limit) =>
   getFollowingData({ userId, db, page, limit });
 

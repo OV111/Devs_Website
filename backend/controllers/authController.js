@@ -369,7 +369,7 @@ const githubCallback = async (req, res) => {
     setRefreshCookie(res, refreshToken);
     res.redirect(`${process.env.FRONTEND_URL}/oauth-success`);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.redirect(`${process.env.FRONTEND_URL}/oauth-failure`);
   }
 };
@@ -405,7 +405,7 @@ const forgotPassword = async (data) => {
       message: "If email exists,a reset link has been sent.",
     };
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return {
       status: 500,
       message: "Something went wrong.",
@@ -441,7 +441,7 @@ const resetPassword = async (data) => {
     await revokeAllRefreshTokens(db, record.userId);
     return { status: 200, message: "Password updated successfully." };
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return { status: 500, message: "Server error", error: err.message };
   }
 };
