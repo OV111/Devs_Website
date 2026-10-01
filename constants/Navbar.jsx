@@ -3,11 +3,13 @@ import {
   Settings as SettingsIcon,
   Bell,
   Bookmark,
+  TrendingUp,
   CreditCard,
 } from "lucide-react";
 
 export const AVATAR_MENU_ITEMS = [
   { label: "My Profile", to: "my-profile", icon: User },
+  { label: "My Progress", to: "progress", icon: TrendingUp },
   { label: "Billing", to: "billing", icon: CreditCard },
   { label: "Notifications", to: "my-profile/notifications", icon: Bell },
   { label: "Favourites", to: "my-profile/favourites", icon: Bookmark },

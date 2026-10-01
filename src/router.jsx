@@ -53,6 +53,7 @@ const CapstonePage = lazy(() => import("./features/capstone/CapstonePage"));
 const VoiceReviewPage = lazy(() => import("./features/voiceReview/VoiceReviewPage"));
 const PricingPage = lazy(() => import("./features/billing/PricingPage"));
 const BillingPage = lazy(() => import("./features/billing/BillingPage"));
+const ProgressPage = lazy(() => import("./features/mastery/ProgressPage"));
 
 const Fundamentals = lazy(() => import("./pages/CategoryPages/Fundamentals"));
 const FullStack = lazy(() => import("./pages/CategoryPages/FullStack"));
@@ -123,6 +124,7 @@ const router = createBrowserRouter([
           { path: "ai-agent/chat", element: <Navigate to="/ai-agent" replace /> },
           { path: "capstone", element: <CapstonePage /> },
           { path: "billing", element: <BillingPage /> },
+          { path: "progress", element: <ProgressPage /> },
           { path: "voice-review", element: <VoiceReviewPage /> },
           { path: "users/:username", element: <UserProfile /> },
           {

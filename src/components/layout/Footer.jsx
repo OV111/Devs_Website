@@ -13,6 +13,7 @@ const QuickLinks = [
 ];
 const AuthLinks = [
   { title: "My Profile", href: "/my-profile" },
+  { title: "My Progress", href: "/progress" },
   { title: "Blogs", href: "/blogs" },
   { title: "Roadmaps", href: "/roadmaps" },
   { title: "Coding Libs", href: "/libs" },
