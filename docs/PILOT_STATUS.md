@@ -15,7 +15,7 @@ The technical prep for the pilot is mostly done. What's left is mostly yours: co
 | helmet mounted | `1a8c5d2` | After `/api-docs` (Swagger needs inline scripts) |
 | JWT tamper tests actually run | `1a8c5d2` | Were erroring on a bad import; now pass |
 | Event tracking (7 events) + admin funnel | `c89aadf` | `GET /api/admin/funnel?days=30` |
-| Blog posts tagged with roadmap layers; "Posts for this layer" in the layer drawer | next commit | `layerIds` on posts, `GET /blogs?layer=<id>`, layer picker in the blog editors. SEO for the blog (pre-rendering) deliberately left until after the pilot |
+| Blog posts tagged with roadmap layers; "Posts for this layer" in the layer drawer | `39d6023` | `layerIds` on posts, `GET /blogs?layer=<id>`, layer picker in the blog editors. SEO for the blog (pre-rendering) deliberately left until after the pilot |
 | Docs: critique, exam integrity, outreach kit, XP system | `3c4a6f7`, `1a8c5d2` | Also tabs in the online critique doc |
 
 ## Left before the first user
