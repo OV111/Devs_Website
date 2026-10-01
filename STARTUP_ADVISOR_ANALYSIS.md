@@ -1,9 +1,26 @@
-# DevsWebs — Startup Advisor Analysis
+# Vahoha (formerly DevsWebs) — Startup Advisor Analysis
+
+> **Update 2026-10-02:** this analysis predates three changes: billing now exists on Polar (not Stripe) but is inert, analytics events are built, and the name is decided (Vahoha). Where it says "Stripe" read "Polar", and treat "Not built" for analytics as done. The sharper critique is `docs/STARTUP_CRITIQUE_2026-10.md`; the competitive review is `docs/STARTUP_REVIEW_2026-10.md`.
 
 > **Classification:** Founder-Only Strategic Document
-> **Date:** 2026-06-11
+> **Date:** 2026-06-11 · **Updated:** 2026-10-01
 > **Prepared by:** Startup Co-Founder & Product Strategy Advisor
 > **Scope:** Full startup viability analysis — idea critique, MVP design, go-to-market, pitch, and honest verdict
+
+> ### Status update — 2026-10-01
+>
+> This document was written when the learning loop did not exist. It does now (roadmap routes, exam engine, AI mentor are all mounted; see `ADVISORY_BOARD_REPORT.md` for the code-level audit). What that changes:
+>
+> | June claim | Now |
+> |---|---|
+> | "Core loop missing" | Built, **untested with real users** |
+> | AI cost ≈ $3,000/month at 500 free users (Claude Sonnet) | Agent runs on Groq `gpt-oss-120b`; estimated **~$150–300/month** at the same load (Groq rates per a third-party summary; confirm on groq.com) |
+> | 90/100 exam threshold | Pass mark is **80** (hardcoded; make configurable) |
+> | Stripe paywall in the MVP | **Not built.** Deliberately postponed until the pilot shows people return |
+> | "Scope is the risk" | Partly materialized: the Arena, group chat, voice review and adaptive-mastery layer were built outside the MVP loop |
+> | Zero users, zero analytics | **Unchanged** |
+>
+> Sections below keep the original reasoning. Where a section is out of date, it carries an *Update* note.
 
 ---
 
@@ -23,20 +40,20 @@
 
 ### Strongest Failure Points
 
-**1. The 12-phase trap.**
-The AI agent — your most compelling feature — is Phase 3. The verified credential employers actually trust is Phase 9+. You could spend 18 months building before you have something a user would pay for and an employer would care about. Most startups do not die from bad ideas. They die from building the right thing for the wrong user, or building the right thing 18 months after someone else did.
+**1. The 12-phase trap.** *(Update: you got out of the first half and drifted into a side door.)*
+The AI agent and exam engine, which June called Phases 3–7, now exist. Good. But features from the *deferred* backlog (Arena, group chat, voice review) were built before a single outside user touched the loop. The trap is no longer "too many phases ahead"; it is "building because building is comfortable." The verified credential employers trust is still Phase 9+, and nothing in the current build gets you closer to it than 10 real users would. Most startups do not die from bad ideas. They die from building the right thing for the wrong user, or building the right thing 18 months after someone else did.
 
 **2. The credential has no market yet.**
-The entire long-term revenue thesis — employer access tier at $299/month, placement fees, verified credentials — depends on employers trusting a DevsWebs profile. Right now no employer has heard of DevsWebs. You are betting that you can build supply (verified developers) before demand (employers who care), and do it alone. LinkedIn Skill Badges, HackerRank, and Triplebyte all tried this. Most pivoted or failed.
+The entire long-term revenue thesis — employer access tier at $299/month, placement fees, verified credentials — depends on employers trusting a Vahoha profile. Right now no employer has heard of Vahoha. You are betting that you can build supply (verified developers) before demand (employers who care), and do it alone. LinkedIn Skill Badges, HackerRank, and Triplebyte all tried this. Most pivoted or failed.
 
 **3. Content is the real moat — and you have none.**
 Eight paths × multiple layers × curated content = hundreds of hours of curriculum design. That is not engineering work. You are a solo engineer. The engineering is partially built. The content is entirely absent. This is the actual blocker, not the code.
 
-**4. The AI agent cost model is dangerous at free-tier scale.**
-Your own docs calculate $3,000/month at 500 active free users. If growth works before monetization is tight, you burn through savings. If monetization is too aggressive too early, no one converts. This is a narrow corridor with no margin for error.
+**4. The AI agent cost model is dangerous at free-tier scale.** *(Update 2026-10-01: largely defused.)*
+The June docs calculated $3,000/month at 500 active free users on Claude Sonnet. The mentor now runs on Groq's `gpt-oss-120b`, which at published rates ($0.15/$0.60 per million tokens in/out) puts the same load at roughly $150–300/month, and a Pro user at the 30-messages/day cap at roughly $1–2/month. The cost corridor is no longer narrow. The new exposure is **provider reliability**: Groq's free tier is rate-limited and Groq retires models, so the mentor can break for reasons unrelated to your code.
 
-**5. The 90/100 exam threshold will kill retention.**
-Khan Academy's own research showed thresholds above 70% increase dropout without improving outcomes. You are proposing 90/100 for a cold audience of self-taught developers who already feel imposter syndrome. Your first cohort will fail Layer 1, feel humiliated, and leave. The "earn it" philosophy is correct. The number is wrong until proven otherwise with real data.
+**5. The 90/100 exam threshold will kill retention.** *(Update: threshold is now 80.)*
+The June claim was that high mastery thresholds raise dropout without improving outcomes (I attributed this to Khan Academy research; I haven't re-verified the citation, so treat it as a hypothesis, not a fact). The pass mark was lowered to 80 and exams cap at 3 attempts/day, which is a more defensible starting point. It is still a guess until real cohorts take the exam. Keep it configurable and watch the first 20 attempts.
 
 ---
 
@@ -66,10 +83,10 @@ None of these have all four of your pillars together. But each is better on one 
 
 ### Assumptions That Must Be True
 
-1. Self-taught developers will pay $15/month for a structured system when free alternatives exist
-2. Developers will accept a 90/100 pass threshold and not quit in frustration
-3. The AI agent will be genuinely good enough to justify $15/month on its own
-4. Employers will eventually trust a DevsWebs credential — without any employer-side sales
+1. Self-taught developers will pay for a structured system when free alternatives exist (price point open: $15 was set when AI cost was higher; see Business Model)
+2. Developers will accept an 80% pass threshold and not quit in frustration
+3. The AI agent will be genuinely good enough to justify paying for on its own (it now runs on a cheaper open-weight model, so "good enough" needs testing, not assuming)
+4. Employers will eventually trust a Vahoha credential — without any employer-side sales
 5. A solo engineer can build and maintain a quality curriculum for 8 paths while building all 12 phases
 6. Organic/community-driven growth reaches paying users before runway runs out
 
@@ -109,15 +126,15 @@ Secondary risk: timing. AI tutoring is hot right now. Khan Academy, Duolingo, Co
 
 ### Value Proposition (1 Sentence)
 
-> **DevsWebs tells you exactly what you don't know, forces you to prove you've learned it before moving on, and provides an AI mentor that guides you through the process — so you exit with a verified record employers can trust, not a certificate you bought.**
+> **Vahoha tells you exactly what you don't know, forces you to prove you've learned it before moving on, and provides an AI mentor that guides you through the process — so you exit with a verified record employers can trust, not a certificate you bought.**
 
 ---
 
 ### What Makes This Different from Existing Solutions
 
-Everything else is content delivery. DevsWebs is the first platform where the **progression itself is the product**. You don't get to the next layer by watching a video. You get there by demonstrating mastery. That accountability mechanic, combined with a persistent AI mentor that knows your full history, is genuinely new.
+Everything else is content delivery. Vahoha is the first platform where the **progression itself is the product**. You don't get to the next layer by watching a video. You get there by demonstrating mastery. That accountability mechanic, combined with a persistent AI mentor that knows your full history, is genuinely new.
 
-| Competitor | What They Do | DevsWebs's Edge |
+| Competitor | What They Do | Vahoha's Edge |
 |---|---|---|
 | roadmap.sh | Static visual map | Gated path you earn by passing real exams |
 | Generic AI chatbots | Give answers | Personal agent with persistent memory of your journey |
@@ -129,10 +146,12 @@ Everything else is content delivery. DevsWebs is the first platform where the **
 
 ### Business Model / Monetization
 
+*(Update: no billing exists yet. Prices below are hypotheses; the AI-message cap is now 30/day. Full detail in `BUSINESS_MODEL.md`.)*
+
 | Tier | Price | Who It's For | Key Value |
 |---|---|---|---|
-| Free | $0 | Students, curious developers | Community, first 2 roadmap layers, 15 AI messages/day |
-| Pro | $15/month | Developers actively learning | AI agent, full roadmap, certificates |
+| Free | $0 | Students, curious developers | Community, first 2 roadmap layers, 30 AI messages/day |
+| Pro | $15/month *(hypothesis)* | Developers actively learning | Full roadmap, certificates, higher AI limits |
 | Teams | $60/seat/month (min 3 seats) | Companies onboarding devs | Progress tracking, reports, bulk certs |
 | Employer Access | $299/month (Phase 9+) | Hiring managers, recruiters | Search verified developer profiles |
 
@@ -142,22 +161,29 @@ Everything else is content delivery. DevsWebs is the first platform where the **
 
 ### Must-Have Features Only
 
-1. Sign up / auth — already built
-2. One roadmap path: Backend Developer, 3 layers only
-3. Layer content: 3–5 curated posts per layer (existing blog already has content)
-4. AI agent: streaming chat with basic context (current path, current layer)
-5. Exam engine: 5 AI-generated MCQ questions per layer, server-side grading
-6. Pass/fail unlock: pass → next layer unlocks. Fail → AI surfaces weak topics
-7. Stripe paywall at Layer 3
+*(Update 2026-10-01: status per item. "Built" means code exists and is mounted, not that it has been used by outsiders.)*
 
-That is the entire MVP. Everything else is Phase 2+.
+| # | MVP item | Status |
+|---|---|---|
+| 1 | Sign up / auth | ✅ Built |
+| 2 | One roadmap path (Backend), 3 layers | ✅ Tracks and layers seeded; 15 paths authored, Backend is the target |
+| 3 | Layer content: 3–5 curated posts per layer | ❓ Not verified: confirm layers actually link to posts/library entries |
+| 4 | AI agent: streaming chat with context | ✅ Built, and well beyond "basic context" (7 tools, learner context, teach-back) |
+| 5 | Exam engine, server-side grading | ✅ Built: 15-question banks (not 5), pass at 80, shuffled choices. **Bank review not confirmed** |
+| 6 | Pass → unlock, fail → weak topics | ✅ Built (`submitAttempt` → progress + weak spots) |
+| 7 | Paywall at Layer 3 | 🟡 Polar billing built and sandbox-verified; **no route gated**, everything is free |
+| + | Analytics events | ✅ Built 2026-10-02 (`eventService.js`, admin funnel) |
+
+The original MVP definition (items 1–7) is 6/7 done. Everything else in the codebase is beyond MVP.
 
 ---
 
 ### What NOT to Build
 
+*(Update: the Arena item below was built anyway. The advice stands for everything still unbuilt: freeze the rest.)*
+
 - Admin panel — you are the admin
-- Problem Solving Arena — interesting, not critical for the core loop
+- Problem Solving Arena — ~~interesting, not critical for the core loop~~ **already built; maintain only, don't extend**
 - Weekly Challenges — retention feature, you need acquisition first
 - Ship It Capstone — only relevant after users complete full paths
 - Platform Intelligence / analytics — premature
@@ -188,24 +214,26 @@ Sign up
 
 ### Architecture
 
-No new architecture needed. The services are built. The missing piece is 3 routes + 1 seeder + Anthropic SDK + Stripe.
+*(Update 2026-10-01: the architecture work in this section is done. What remains is below.)*
 
-**Add:** `@anthropic-ai/sdk`, `stripe`, `zod`, `rate-limit-redis`
-**Remove:** `mongoose` (using native driver), `groq-sdk` (unused), `@google/generative-ai` (unused), `motion` (duplicate of framer-motion)
+**Already done:** roadmap seeder and routes, exam routes, agent routes, `zod` validation, Groq as the AI provider (`groq-sdk` is the live dependency; the June advice to remove it and use Anthropic was superseded by the 2026-09-26 decision).
+
+**Still to add:** `stripe` (only after the pilot), `helmet`, an events collection.
+**Still to remove:** `mongoose`, `@google/generative-ai`, `motion`, unused UI libraries, and `openai` if nothing imports it.
 
 ---
 
-### Reduce to 7 Days
+### The 7-Day Plan — What Happened and What's Left
 
-| Day | Task |
+Days 1–6 of the original plan were completed over the summer, except the Stripe half of Day 6. Day 7 never happened. The plan that remains:
+
+| Step | Task |
 |---|---|
-| 1 | `roadmapSeeder.js` — seed Backend path, 3 layers with content links from existing blog posts |
-| 2 | Wire roadmap routes using existing `userProgressService` |
-| 3 | Connect `RoadmapPage.jsx` to real data. Locked/unlocked node rendering |
-| 4 | Wire `aiAgent.routes.js` to Anthropic — streaming chat, basic context only |
-| 5 | Exam engine: `POST /exams/generate` + `POST /exams/submit` with `examHistoryService` |
-| 6 | Unlock logic + Stripe paywall at Layer 3 |
-| 7 | Get 10 people through the loop. Watch. Fix the top 3 issues |
+| 1 | Pre-pilot hardening: `helmet`, re-enable exam cooldown, confirm Redis in prod, confirm Groq limits (checklist in `ADVISORY_BOARD_REPORT.md` §9) |
+| 2 | Record 7 core events (signup → exam passed → return visit) |
+| 3 | Run the loop yourself on production as a brand-new account |
+| 4 | **Get 10 people through the loop. Watch. Fix the top 3 issues** (the unfinished Day 7) |
+| 5 | Only if ≥ 5 of 10 return for Layer 2: build Stripe |
 
 ---
 
@@ -255,10 +283,10 @@ Write *"Why I built a developer platform where you can't skip levels."* 1,000 wo
 ### Growth Hacks Specific to This Product
 
 **1. The public profile share is your viral loop.**
-Every developer who completes a layer shares a LinkedIn post: *"I just passed Layer 2 of the Backend Developer path on DevsWebs."* That post reaches every hiring manager and developer in their network. Build the share button before the profile is even complete.
+Every developer who completes a layer shares a LinkedIn post: *"I just passed Layer 2 of the Backend Developer path on Vahoha."* That post reaches every hiring manager and developer in their network. Build the share button before the profile is even complete.
 
 **2. The exam failure story goes viral.**
-When a developer fails an exam, the AI gives them a specific breakdown. Screenshots of this get shared: *"DevsWebs just told me I don't actually understand HTTP caching. It was right."* Failure content converts better than success content.
+When a developer fails an exam, the AI gives them a specific breakdown. Screenshots of this get shared: *"Vahoha just told me I don't actually understand HTTP caching. It was right."* Failure content converts better than success content.
 
 **3. Post your own journey.**
 You are building this platform. Go through your own Backend path as a user. Post every layer completion. Show what the AI taught you. This is not fake — it is you eating your own cooking in public.
@@ -275,13 +303,15 @@ The public progress profile. Every time someone passes a layer, they want extern
 
 ### Investor Pitch
 
-> 600M developers globally are actively learning, but 80% of online learning is passive content with no accountability. DevsWebs is the first platform where progression is gated — you must pass a real AI-generated exam to unlock the next layer, guided by a personal AI mentor that knows your entire history. We are building the verified credential layer the developer hiring market is missing. Current state: full community platform live, learning loop in final development, targeting 500 verified profiles before launching employer access. Business model: $15/month individual, $60/seat teams, $299/month employer access — 70%+ gross margins at scale. Solo founder, clean architecture, real differentiation, building in public.
+> 600M developers globally are actively learning, but 80% of online learning is passive content with no accountability. Vahoha is the first platform where progression is gated — you must pass a real AI-generated exam to unlock the next layer, guided by a personal AI mentor that knows your entire history. We are building the verified credential layer the developer hiring market is missing. Current state: community platform live, learning loop (gated roadmap, server-graded exams, tool-using AI mentor) built and entering its first user pilot, targeting 500 verified profiles before launching employer access. Business model (hypothesis, no billing live yet): individual subscription, $60/seat teams, $299/month employer access. Solo founder, clean architecture, real differentiation, building in public.
+
+*(Update: removed "70%+ gross margins" and the "$15" figure from the pitch. Neither is evidenced yet: margins depend on real usage, and the price was set when AI costs were higher. Do not quote either to an investor until the pilot gives you data.)*
 
 ---
 
 ### User-Facing Simple Explanation
 
-> DevsWebs is the learning platform that won't let you skip. You pick a path, study the material, and ask your personal AI mentor when you're stuck. When you're ready, you take an exam. If you pass, the next layer unlocks. If you fail, the AI tells you exactly what to go back and study. No random grinding. No passive content. Just a clear path from where you are to where you want to be — and proof you earned every step.
+> Vahoha is the learning platform that won't let you skip. You pick a path, study the material, and ask your personal AI mentor when you're stuck. When you're ready, you take an exam. If you pass, the next layer unlocks. If you fail, the AI tells you exactly what to go back and study. No random grinding. No passive content. Just a clear path from where you are to where you want to be — and proof you earned every step.
 
 ---
 
@@ -291,13 +321,13 @@ The public progress profile. Every time someone passes a layer, they want extern
 
 **Sub-headline:** Pick a path. Study the layer. Pass the exam. Or don't move on.
 
-**Description:** DevsWebs is a gated roadmap with a personal AI mentor. Every layer is locked until you prove you understood the previous one. When you're done, your public profile shows exactly what you earned — not what you claim.
+**Description:** Vahoha is a gated roadmap with a personal AI mentor. Every layer is locked until you prove you understood the previous one. When you're done, your public profile shows exactly what you earned — not what you claim.
 
 ---
 
 ### "Why Now" Argument
 
-AI is everywhere, but no one has used it to enforce accountability in learning — only to reduce effort. Every other platform uses AI to make it easier to get a certificate. DevsWebs uses AI to make the certificate actually mean something.
+AI is everywhere, but no one has used it to enforce accountability in learning — only to reduce effort. Every other platform uses AI to make it easier to get a certificate. Vahoha uses AI to make the certificate actually mean something.
 
 The developer hiring market is broken. Companies cannot tell which junior developers are ready. Verified progression records solve a $15B recruiting problem. The AI infrastructure to build this at scale now exists and is affordable. The developer job market contraction means more people are actively upskilling than at any point in the last decade.
 
@@ -309,17 +339,17 @@ The timing is right. The window is open. It will not stay open indefinitely.
 
 ### Hidden Risks You Missed
 
-**1. You have no feedback loop yet.**
-The VISION.md, BUSINESS_MODEL.md, and ADVISORY_BOARD_REPORT.md are excellent documents. But they are based on assumptions, not user behavior. You have zero analytics, no real user data, and no users who have completed the actual learning loop. You are planning with 100% conviction and 0% signal. Wire 5 events to MongoDB this week — it takes one afternoon and will tell you more than another planning document.
+**1. You have no feedback loop yet.** *(Still true, and now the #1 risk.)*
+The VISION.md, BUSINESS_MODEL.md, and ADVISORY_BOARD_REPORT.md are excellent documents. But they are based on assumptions, not user behavior. You have zero analytics, no real user data, and no users who have completed the actual learning loop. You are planning with 100% conviction and 0% signal. In June this was "wire 5 events this week"; four months and ~60 commits later the events still do not exist while the Arena does. That ordering is the thing to correct.
 
 **2. Curriculum is a full-time job you haven't started.**
 Eight paths. Multiple layers each. Curated content, exam questions, layer videos, library connections. This is not engineering work. It is curriculum design. You cannot engineer your way out of this. It is the biggest non-engineering constraint in the project and it appears nowhere in your build order as a discrete task with a time estimate.
 
 **3. The AI agent needs to work before it's the reason people pay.**
-A mediocre AI agent at launch permanently destroys the conversion story. If the first 100 users experience an agent that gives generic advice or breaks the Socratic constraint, they write "the AI is useless" on Reddit and you cannot recover from that with your exact target audience. Test the agent with real users before it goes behind a paywall.
+A mediocre AI agent at launch permanently destroys the conversion story. If the first 100 users experience an agent that gives generic advice or breaks the Socratic constraint, they write "the AI is useless" on Reddit and you cannot recover from that with your exact target audience. *(Update: the mentor now runs on an open-weight model chosen for cost. It passed a live Socratic-refusal test on 2026-09-26, but one test is not a quality bar. Sit next to 5 pilot users and watch whether its answers help.)*
 
-**4. You have 3 critical security bugs live in production right now.**
-The in-memory rate limiter, the `secure: false` session cookie, and the WebSocket room authorization hole are live. The WebSocket bug is a privacy breach — any authenticated user can read any other user's chat history. Fix these this week, before acquiring more users.
+**4. ~~Three critical security bugs live in production.~~** *(Update: resolved.)*
+The `secure: false` cookie, the in-memory-only login limiter and the WebSocket room-join hole from June were fixed (cookie `secure: true`; Redis-backed login counters; room membership checked in `chatHandler.js`). What remains: `helmet` is not installed, and the new server-side **code-execution sandbox** for Arena submissions is a large new attack surface that has not been threat-modeled. If you keep the Arena public, review `runnerService.js` before inviting users.
 
 **5. You don't know if Layer 3 is the right paywall placement.**
 Two free layers is a hypothesis. You don't know if Layer 3 is where users convert or where they churn. This must be validated with 50 real users before you wire the paywall into every route.
@@ -335,7 +365,7 @@ Instead of 8 paths, go all-in on Backend Developer only. Own that ICP completely
 The Teams tier ($60/seat, min 3 seats) is actually easier to sell than individual Pro. One engineering manager at a company hiring 3 junior developers signs a $180/month contract. That one sale equals 12 individual Pro subscriptions. You could flip the go-to-market entirely: direct outreach to engineering managers at companies known to hire junior developers. No SEO needed. No community building. Just 10 sales calls.
 
 **Pivot 3 — Become the exam layer for existing platforms.**
-The Odin Project has millions of users but no accountability layer. freeCodeCamp has 10M+ users but no verified credential mechanism. What if DevsWebs was the exam engine other platforms embed? B2B SaaS. No curriculum to write. No community to build. Just sell the gated exam + AI tutor infrastructure to platforms that already have the audience.
+The Odin Project has millions of users but no accountability layer. freeCodeCamp has 10M+ users but no verified credential mechanism. What if Vahoha was the exam engine other platforms embed? B2B SaaS. No curriculum to write. No community to build. Just sell the gated exam + AI tutor infrastructure to platforms that already have the audience.
 
 ---
 
@@ -355,21 +385,23 @@ The technical foundation is real. A live community platform, clean backend archi
 
 ### What's Not Real Yet
 
-The product is not real yet. A community platform with a roadmap shell is not a learning platform. Until a developer can pick a path, study a layer, take an exam, and unlock the next layer — you have infrastructure for a product, not a product.
+*(Update 2026-10-01: the first paragraph of this section has flipped. The product is now real in the sense that matters for a pilot.)*
 
-Traction is not real. No users have completed the learning loop. No one has paid. No one has come back. Every assumption in the business model is untested.
+The product exists but is unproven. A developer can pick a path, study a layer, take a server-graded exam and unlock the next layer, with a mentor available. That is the June definition of "real". What it lacks is evidence that anyone *wants* to do this.
 
-The curriculum does not exist. Quality content per layer, exam questions, library resources — this work has not started.
+Traction is not real. No users have completed the learning loop. No one has paid (and no payment path exists). No one has come back. Every assumption in the business model is untested.
+
+The curriculum is partial. Roadmap structure exists for 15 paths and exam banks are generated per layer, but content depth, link quality and **human review of exam answer keys** are unconfirmed. Backend Layers 1–3 are the only ones that matter right now.
 
 ---
 
 ### The Honest Comparison
 
-| Factor | DevsWebs Today | What a Real Startup Needs |
+| Factor | Vahoha Today | What a Real Startup Needs |
 |---|---|---|
 | Problem | ✅ Real and validated by market | ✅ |
-| Solution | 🔧 Partially built, core loop missing | Core loop working with real users |
-| Traction | ❌ Zero users through the loop | Even 50 engaged users is signal |
+| Solution | ✅ Core loop built (roadmap → exam → mentor); 🔧 unvalidated, content review unconfirmed | Core loop working with real users |
+| Traction | ❌ Zero users through the loop (unchanged since June) | Even 50 engaged users is signal |
 | Team | ⚠️ Solo founder, strong engineer | Survivable solo if scoped ruthlessly |
 | Market size | ✅ 600M+ developers globally | ✅ |
 | Differentiation | ✅ Genuine, not easily copied | ✅ |
@@ -380,11 +412,11 @@ The curriculum does not exist. Quality content per layer, exam questions, librar
 
 ### The Three Scenarios
 
-**Scenario A — Scope down and ship the loop in 7 days.**
-50 users go through it. 20 convert to Pro. You have $300 MRR, real data, and a story to tell. This is the path to a real startup. Probability of reaching this: **high**, if you stop adding scope.
+**Scenario A — Freeze features and run the pilot.** *(Loop is built; this is now a 2–3 week plan, not 7 days.)*
+Harden, instrument, recruit 10 users by hand, then widen to 50. If they return, add Stripe. The earlier "20 convert → $300 MRR" figure was an illustration, not a forecast: treat it as unvalidated. Probability of reaching a real signal: **high**, because the engineering is done and only the uncomfortable part remains.
 
-**Scenario B — Keep building all 12 phases.**
-18 months from now you have a technically complete platform with no users and no revenue. A competitor with half your features and twice your distribution beats you to the audience. This is the most likely failure mode based on current trajectory.
+**Scenario B — Keep building.**
+Arena today, then group-chat polish, then voice review, then Weekly Challenges. A year from now you have a technically rich platform with no users and no revenue. A competitor with half your features and twice your distribution beats you to the audience. **This is the most likely failure mode, and the commit history since September shows you are already moving toward it.**
 
 **Scenario C — Pivot to B2B immediately.**
 Sell the platform directly to 3 companies as a developer onboarding tool at $500/month each. $1,500 MRR in 30 days with no SEO, no community building, no content creation. Fastest path to revenue with your current build state.
@@ -393,21 +425,21 @@ Sell the platform directly to 3 companies as a developer onboarding tool at $500
 
 ### Final Verdict
 
-**DevsWebs can be a startup. It cannot be all of VISION.md right now.**
+**Vahoha can be a startup. It cannot be all of VISION.md right now.**
 
-The idea deserves to exist. The execution risk is real. The path forward is simple: build the core loop in 7 days, get 50 real users through it, and let the data tell you which direction to go next.
+The idea deserves to exist. The execution risk is real. *(Update 2026-10-01: the core loop is built. The path forward is now: harden it, get 10 and then 50 real users through it, and let the data tell you which direction to go next.)*
 
 > If you do that and users come back — you have a startup.
 > If you keep building Phase 6, 7, 8 before the loop works — you have an expensive hobby.
 
 **The idea is not the risk. The scope is the risk.**
 
-The version of DevsWebs in VISION.md — 12 phases, 8 paths, AI agent, exam engine, capstone, employer access, platform intelligence — that is a Series A company. That requires a team, time, and capital.
+The version of Vahoha in VISION.md — 12 phases, 8 paths, AI agent, exam engine, capstone, employer access, platform intelligence — that is a Series A company. That requires a team, time, and capital.
 
-The version of DevsWebs that is one path, three layers, a working AI agent, and a $15/month paywall — that is a bootstrapped startup one person can build. And that version, if it gets 200 paying users, is either self-sustaining or fundable.
+The version of Vahoha that is one path, three layers, a working AI agent, and a $15/month paywall — that is a bootstrapped startup one person can build. And that version, if it gets 200 paying users, is either self-sustaining or fundable.
 
 **Build the loop. Get 50 users through it. Then decide if Phase 4 is worth building.**
 
 ---
 
-*Generated 2026-06-11 — Update this document as assumptions are validated or invalidated by real user data. The moment you have 10 users through the learning loop, half of what is written here becomes either confirmed or irrelevant. Ship first. Strategize second.*
+*Generated 2026-06-11, updated 2026-10-01 — Update this document as assumptions are validated or invalidated by real user data. The moment you have 10 users through the learning loop, half of what is written here becomes either confirmed or irrelevant. Ship first. Strategize second.*

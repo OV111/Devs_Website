@@ -1,5 +1,18 @@
 # Issues & Fix Options
 
+> **Status review: 2026-10-02.** These six UI issues date from May 2026. Each was re-checked against the code; the original write-ups are kept below.
+
+| # | Issue | Status | Evidence |
+|---|---|---|---|
+| 1 | Roadmap data bundle size | **Fixed** (a variant of Option A) | Each category is a JSON file in `src/data/roadmaps/` and `RoadmapTree` loads only the selected one with a dynamic `import()`. Tracks and layers are also seeded into MongoDB (`npm run seed:roadmap`) |
+| 2 | Horizontal `flex-wrap` layer cards | **Superseded** | Replaced by the tree layout (`features/Roadmap/components/tree/`, `rf/`) in the roadmap UI refactor |
+| 3 | No progress persistence | **Fixed** | Progress is saved server-side through `/api/roadmaps/progress`; guests get a read-only preview |
+| 4 | Inline `<style>` in `CategoryBar` and `TrackSelector` | **Resolved by removal; cleanup left** | Both `<style>` blocks are commented out. Delete the commented code |
+| 5 | No `exit` animation on `RoadmapTree` | **Open** | No `exit` prop in `RoadmapTree.jsx` |
+| 6 | No Escape key on `LayerDetail` | **Open** | No `keydown` handler in `features/Roadmap` |
+
+Nothing here blocks the pilot. Issues 5 and 6 are about 10 minutes each.
+
 ---
 
 ## 1. Roadmap Data Bundle Size

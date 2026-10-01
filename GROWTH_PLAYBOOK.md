@@ -1,9 +1,13 @@
-# DevsWebs — Growth Playbook
+# Vahoha (formerly DevsWebs) — Growth Playbook
 
 > **Classification:** Founder-Only Strategic Document
-> **Date:** 2026-06-11
+> **Date:** 2026-06-11 · **Updated:** 2026-10-02
 > **Prepared by:** Startup Co-Founder & Product Strategy Advisor
 > **Scope:** How to launch, how to get real users, and which discipline to use when (sales vs marketing vs growth)
+>
+> **What changed in this update:** the learning loop this playbook told you to build in Week 1 is now built (roadmap, exam engine, AI mentor). The plan therefore starts at *Week 0: pre-pilot hardening*, then goes straight to recruiting. Acquisition tactics (sections 2–3) are unchanged because they never depended on the build state. The pricing and timeline in Week 3 and the table below were revised: there is still no billing code, and the $15 price was set when AI costs were higher (see `BUSINESS_MODEL.md`). **Also decide the product name first** (homepage says Vahoha, everything else says Vahoha).
+>
+> **Update 2026-10-02:** the Week 0 hardening is mostly done (helmet, cooldown, rate limits on LLM routes, server-side event tracking and an admin funnel). Billing now exists on Polar (not Stripe, which doesn't support Armenia) but is inert. The product name is **Vahoha**. Recruiting now has a working kit: `docs/OUTREACH_KIT.md` (DM scripts, interview questions, payment test, Day-21 decision). The plan also changed in one important way: **test payment before wiring gates**, and don't treat "10 users returned" as enough evidence anyone will pay.
 
 ---
 
@@ -18,33 +22,32 @@
 
 ## 1. How to Actually Start — Week by Week
 
-### Week 1 — Close the Loop (Nothing Else Matters)
+### Week 0 — Pre-Pilot Hardening (mostly done)
 
-Follow the 7-day plan in `STARTUP_ADVISOR_ANALYSIS.md` exactly. One path, three layers, working AI agent, basic exam. Do not touch Weekly Challenges, Awards, Company Portal, or any other phase.
+Status of the checklist from `ADVISORY_BOARD_REPORT.md` §9 (full list and owners in `docs/PILOT_STATUS.md`):
 
-**The only acceptable output of Week 1:** a developer can sign up, study Layer 1, ask the AI agent a question, take a 5-question exam, pass or fail, and have the result saved. That's it.
+- ✅ `helmet` mounted · ✅ exam cooldown back on · ✅ rate limits on the mentor and teach-back routes · ✅ 7 core events recorded server-side, with an admin funnel · ✅ product name decided (Vahoha)
+- ❌ Seed exam banks for one track's Layers 1–3 and **hand-check every question** (new questions are flagged `reviewed: false`)
+- ❌ Make yourself admin (`npm run admin:grant -- you@example.com`) so you can read the funnel
+- ❌ Confirm Redis is on in production, and check Groq's limits for about 10 concurrent users
+- ❌ Create the $29 one-off product in Polar for the payment test
+- ❌ Run the loop yourself on production with a brand-new account and confirm the events show up
 
----
+Do **not** extend the Arena, group chat, voice review, XP, or anything from the deferred backlog. They are built; leave them alone.
 
-### Week 2 — Get 10 Real People Through It
-
-Not friends who will be nice. Developers who match the Keanu persona — self-taught, job hunting, frustrated. Find them in:
-
-- r/learnprogramming
-- The Odin Project Discord
-- Your own network if any fit the profile
-
-Watch them use it. Don't help them. Just observe. Write down every place they hesitate, get confused, or quit. Fix the top 3 problems. Ignore everything else.
-
-**The question this week answers:** do people come back for Layer 2 after completing Layer 1?
+**The only acceptable output of Week 0:** a stranger could sign up, study Layer 1, ask the mentor a question, take the Layer 1 exam, pass or fail, and you would *see it happen in the funnel*.
 
 ---
 
-### Week 3 — Wire Stripe, Start Charging
+### Week 1–3 — Interview, Observe, Ask for Money
 
-If at least 5 of your 10 users came back for Layer 2, put the paywall at Layer 3. Don't wait for perfect. Don't wait for the Awards system. Wire Stripe Checkout in one day — it is a ~200-line integration. Gate Layer 3 behind $15/month.
+Not friends who will be nice. Developers who match the persona: self-taught, aiming at backend, applying for 3+ months without an offer. Find them with the kit in `docs/OUTREACH_KIT.md`: r/learnprogramming and r/cscareerquestions (DM, don't post links), The Odin Project and 100Devs Discords, your own network. Five DMs a day.
 
-**The question this week answers:** will anyone pay?
+- **Interview first (15 minutes).** Ask about what they did, not what they would do. The kit has 10 questions.
+- **Then watch them take the Layer 1 exam.** Don't help. Write down every hesitation.
+- **Then ask:** "How would you feel if you couldn't use this anymore?" and offer a $29 early-access slot (3 months, refundable) through a Polar checkout link. No new code needed.
+
+**The questions this stage answers:** is the pain "I don't know what I don't know" (the product's problem) or "I can't get interviews" (not its problem), and will anyone pay? Target: 15 interviews, at least 3 payments in 3 weeks. Zero payers means pivot or stop. Return for Layer 2 is a secondary signal, read from the funnel.
 
 ---
 
@@ -64,7 +67,8 @@ This builds an audience before you need one. When you launch on Reddit or Produc
 
 - Do not build the Awards system yet — you have no users to award
 - Do not build the Company Portal yet — you have no profiles to show companies
-- Do not write a landing page — your Reddit post is your landing page
+- Do not build another landing page — the Vahoha homepage exists; your Reddit post is the real landing page
+- Do not add more features. Not the Arena, not group chat, not voice review. Pilot first
 - Do not optimize bundle size, refactor the codebase, or fix cosmetic issues
 - Do not add a second roadmap path until the first one has 20 completions
 
@@ -74,14 +78,14 @@ This builds an audience before you need one. When you launch on Reddit or Produc
 
 | Week | Goal |
 |---|---|
-| 1 | Loop working end-to-end |
-| 2 | 10 real users through it, top 3 issues fixed |
-| 3 | Stripe live, first paying user |
-| 4–6 | Fix what breaks, get to 10 paying users |
-| Month 2–3 | Add second path, start Awards system, grow to 50 Pro users |
-| Month 4–6 | Company Portal design + first employer conversations |
+| 0 | Pre-pilot hardening: mostly done; seed and check Backend Layers 1–3 (the remaining work) |
+| 1–3 | 15 interviews, observe exams, ask for the $29 payment; fix the top 3 issues |
+| Day 21 | Decision: 3+ of 15 paid = widen; 1–2 = fix and repeat; 0 = pivot or stop (`docs/OUTREACH_KIT.md`) |
+| 4–6 | Fix what breaks, get to the first paying users |
+| Month 2–3 | Widen to 50 users, decide on a second path from data |
+| Month 4–6 | Revisit Awards / Teams / employer conversations only if retention supports them |
 
-You do not need funding to get to Month 3. You need $15/month × 10 users = $150 MRR — enough to cover hosting and prove the model. That is the real starting line.
+You do not need funding to get to Month 3. Fixed hosting is on the order of $100–160/month (see `BUSINESS_MODEL.md`) and AI inference is now cheap, so a handful of paying users covers costs. The real starting line is **retention evidence**, not revenue.
 
 ---
 
@@ -157,7 +161,7 @@ Already designed: shareable progress cards, award shares, public profiles. Build
 
 ### What Does NOT Work Anymore
 
-- **Paid ads** — CAC will exceed LTV at $15/month; don't touch until conversion data exists
+- **Paid ads** — CAC will likely exceed LTV at a ~$15/month price; don't touch until conversion data exists
 - **Cold launching a landing page with a waitlist** — waitlists without an audience collect 12 emails
 - **Posting in 20 places at once** — pick 2 channels and go deep; shallow presence everywhere converts nowhere
 
@@ -181,7 +185,7 @@ The thing founders get wrong: they look for *scalable* channels before they have
 
 People use these words loosely. They are different disciplines with different timing:
 
-| Term | What It Means | DevsWebs Examples |
+| Term | What It Means | Vahoha Examples |
 |---|---|---|
 | **Marketing** | Broad awareness — making people know and want the product | Build in public on X, Reddit story post, TikTok videos, SEO blog posts |
 | **Sales** | Direct 1-on-1 conversations to convert a specific person | DMing Reddit users who describe the problem, talking to engineering managers for the Teams tier |
@@ -193,7 +197,7 @@ People use these words loosely. They are different disciplines with different ti
 - **Sales** doesn't scale but works from day one (that's why the first 20 users come from DMs)
 - **Growth** only works once you *have* users (a share button with zero users shares nothing)
 
-### The Correct Sequence for DevsWebs
+### The Correct Sequence for Vahoha
 
 ```
 SALES first        →  hand-recruit the first 20 users via DMs
@@ -218,4 +222,4 @@ Everything else — Awards, Company Portal, Weekly Challenges, Platform Intellig
 
 ---
 
-*Generated 2026-06-11 — Revisit after the first 20 users. Every channel ranking above is a hypothesis until your own data confirms it. The channel that brings users who come back for Layer 2 is your channel — double down there and drop the rest.*
+*Generated 2026-06-11, updated 2026-10-01 — Revisit after the first 20 users. Every channel ranking above is a hypothesis until your own data confirms it. The channel that brings users who come back for Layer 2 is your channel — double down there and drop the rest.*

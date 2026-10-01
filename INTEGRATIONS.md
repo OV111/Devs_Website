@@ -1,7 +1,7 @@
-# DevsWebs — Integrations & Features Backlog
+# Vahoha (formerly DevsWebs) — Integrations & Features Backlog
 
 > This file tracks planned integrations and new features. Each entry includes what to build, where it goes in the codebase, and what the DB/API changes look like.
-> Last updated: 2026-03-27
+> Last updated: 2026-10-02 (status column re-checked against the code). The designs below are the original March 2026 proposals and are kept as written, even where the shipped version differs.
 
 ---
 
@@ -9,8 +9,10 @@
 
 | # | Feature | Status |
 |---|---------|--------|
-| 1 | Like / Reaction System | Planned |
-| 2 | Notification System (BullMQ + WebSocket) | Planned |
+| 1 | Like / Reaction System | **Built, differently from this design.** Likes are stored as a `likes` array on each blog and toggled by `POST /blogs/:id/like` (`blogService.js`); there is no `reactions` collection and only the single "like" type |
+| 2 | Notification System (BullMQ + WebSocket) | **Built.** `queues/notificationQueue.js`, `workers/notificationWorker.js`, `services/notificationService.js`, `GET` notifications under `/my-profile/notifications`, live delivery over WebSocket |
+
+Other integrations that now exist but were never in this backlog: Groq (mentor and exam seeding), Polar (billing, `docs/BILLING.md`), Resend (email), Cloudinary (images), Google and GitHub OAuth. Deployment is described in `docs/DEPLOYMENT.md`.
 
 ---
 

@@ -1,6 +1,6 @@
 # Exam Integrity — Anti-Cheating Plan
 
-> Date: 2026-10-01 · Status: #1, #2 and #4 built 2026-10-01 (banks not yet re-seeded to 60); #3, #5 not built; #6 ruled out
+> Updated: 2026-10-02 · Built: #1 (bigger-bank seeder, unseen-first), #2 (cooldown), #4 (tab-switch and paste flags); also per-user rate limits on the LLM routes. Not built: #3 (per-question timer), #5 (oral exam). #6 ruled out. Banks are not yet re-seeded to 60.
 > Context: fix #2 in `docs/STARTUP_CRITIQUE_2026-10.md`.
 
 ## The honest constraint

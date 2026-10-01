@@ -6,7 +6,7 @@
 
 ## Collaborative Build Teams (2026-06-11)
 
-**Concept:** Developers on DevsWebs group together socially, pick a real project they want to build, and the AI assigns tasks to each member based on their known skill level and learning progress. The team ships a real product together.
+**Concept:** Developers on Vahoha group together socially, pick a real project they want to build, and the AI assigns tasks to each member based on their known skill level and learning progress. The team ships a real product together.
 
 **How it works:**
 
@@ -29,7 +29,7 @@
 
 - [ ] How does the AI verify task completion? (PR review? Demo video? Peer review?)
 - [ ] What's the minimum team size? (2–5 devs seems right for a first version)
-- [ ] Do completed Build Team projects get a public profile page on DevsWebs?
+- [ ] Do completed Build Team projects get a public profile page on Vahoha?
 - [ ] Can a Build Team project become a portfolio piece linked to each member's profile?
 
 ---
@@ -38,21 +38,21 @@
 
 > Builds directly on Collaborative Build Teams. This is the revenue endgame for that feature.
 
-**Concept:** A company pays DevsWebs ($2–5K) to have a Build Team deliver a real small product — an internal tool, an MVP, a dashboard. DevsWebs takes a 15–20% platform fee; the rest is split among the team members based on completed tasks.
+**Concept:** A company pays Vahoha ($2–5K) to have a Build Team deliver a real small product — an internal tool, an MVP, a dashboard. Vahoha takes a 15–20% platform fee; the rest is split among the team members based on completed tasks.
 
 **Why everyone wins:**
 
 - **Developers** — get paid real money, gain real work experience, and ship a verified portfolio piece ("built for an actual client" beats any tutorial project)
 - **Company** — gets cheap delivery on small projects AND a recruiting preview: they watch a team work for weeks before deciding to hire anyone (better signal than any interview)
-- **DevsWebs** — earns the platform fee, and every sponsored project generates verified work-history data that makes the hiring marketplace more valuable
+- **Vahoha** — earns the platform fee, and every sponsored project generates verified work-history data that makes the hiring marketplace more valuable
 
 **How it works:**
 
-1. Company posts a project with budget and scope; DevsWebs (AI-assisted) validates the scope is junior-team-sized
+1. Company posts a project with budget and scope; Vahoha (AI-assisted) validates the scope is junior-team-sized
 2. Money goes into escrow (Stripe — not crypto)
 3. AI matches a Build Team whose verified skills fit the project, splits it into tasks, assigns by skill level
 4. AI + milestones track progress; company sees demo checkpoints
-5. On delivery and acceptance: escrow releases, split by contribution, DevsWebs takes its cut
+5. On delivery and acceptance: escrow releases, split by contribution, Vahoha takes its cut
 6. The project becomes a verified portfolio piece on every member's profile
 
 **Why this is the most unique revenue stream:** "Junior-team-as-a-service with AI project management" doesn't exist. Toptal/Upwork sell individual senior freelancers. Agencies are expensive. Nobody sells coordinated junior teams with AI doing the task-splitting and the platform vouching for each member's verified skill level.
@@ -66,8 +66,8 @@
 
 **Open questions:**
 
-- [ ] Who handles scope disputes between company and team? (DevsWebs arbitration? AI-assisted?)
-- [ ] Quality guarantee — does DevsWebs refund if the team fails to deliver? (Probably yes, from escrow — never deliver = company pays nothing)
+- [ ] Who handles scope disputes between company and team? (Vahoha arbitration? AI-assisted?)
+- [ ] Quality guarantee — does Vahoha refund if the team fails to deliver? (Probably yes, from escrow — never deliver = company pays nothing)
 - [ ] Legal: contractor relationships, taxes per country, liability for delivered code
 - [ ] Minimum platform maturity before charging real companies (reputation risk if early projects fail)
 
@@ -77,28 +77,28 @@
 
 > Reuses the Exam Engine. Near-zero extra cost per sale — the infrastructure is being built anyway for the roadmap gating.
 
-**Concept:** Companies send their own job candidates through DevsWebs's exam engine as a hiring screen, and pay $30–50 per assessment. The candidate doesn't need to be a DevsWebs user — the company just sends them a link.
+**Concept:** Companies send their own job candidates through Vahoha's exam engine as a hiring screen, and pay $30–50 per assessment. The candidate doesn't need to be a Vahoha user — the company just sends them a link.
 
 **Why it works:**
 
 - The exam engine already exists for roadmap gating — same AI-generated, skill-targeted exams, just pointed at an external candidate
 - Marginal cost per assessment is almost zero (one AI exam generation + grading run)
 - Companies already pay for this elsewhere (HackerRank, Codility, TestGorilla) — proven market, proven willingness to pay
-- Every external candidate who takes a screen discovers DevsWebs → free user acquisition funnel
+- Every external candidate who takes a screen discovers Vahoha → free user acquisition funnel
 
 **How it works:**
 
 1. Company creates a screening request: role, stack, seniority level
-2. DevsWebs generates a tailored exam (theory + practical coding challenge) from the same engine that powers roadmap layer exams
+2. Vahoha generates a tailored exam (theory + practical coding challenge) from the same engine that powers roadmap layer exams
 3. Company sends the link to candidates; they take it (proctoring/anti-cheat measures needed)
-4. Company gets a structured report: score, strengths, weak spots, comparison against DevsWebs's verified user base ("scores better than 70% of devs who passed Backend Layer 3")
+4. Company gets a structured report: score, strengths, weak spots, comparison against Vahoha's verified user base ("scores better than 70% of devs who passed Backend Layer 3")
 5. Billed per assessment, or monthly bundles (e.g. 20 assessments/month)
 
-**The hidden advantage over HackerRank/Codility:** DevsWebs's comparison baseline is real — thousands of verified developers with known skill levels took these same exam types while actually learning. "Better than 70% of our verified Layer 3 devs" is a benchmark competitors can't fake, because their test-takers are anonymous one-time strangers.
+**The hidden advantage over HackerRank/Codility:** Vahoha's comparison baseline is real — thousands of verified developers with known skill levels took these same exam types while actually learning. "Better than 70% of our verified Layer 3 devs" is a benchmark competitors can't fake, because their test-takers are anonymous one-time strangers.
 
 **Prerequisites:**
 
-1. Exam engine live and proven on DevsWebs's own users first
+1. Exam engine live and proven on Vahoha's own users first
 2. Enough verified users that the comparison benchmark is statistically meaningful
 3. Anti-cheat / proctoring strategy (AI-assisted code review for plagiarism, time analysis, etc.)
 4. Simple company-facing dashboard (can start as a manual/email process for the first customers)
@@ -106,7 +106,7 @@
 **Open questions:**
 
 - [ ] Per-assessment pricing vs monthly subscription bundles — or both?
-- [ ] Do screened candidates get an offer to join DevsWebs with their results pre-loaded as a starting profile?
+- [ ] Do screened candidates get an offer to join Vahoha with their results pre-loaded as a starting profile?
 - [ ] White-label option (company's branding on the exam) at a higher price tier?
 - [ ] How to handle cheating/AI-assistance during remote assessments?
 
@@ -116,12 +116,12 @@
 
 > The same platform, sold per-seat to institutions. One deal = hundreds of users at once.
 
-**Concept:** Universities and coding bootcamps license DevsWebs per student per semester. Their students get the roadmaps, exam engine, and AI mentor; their instructors get a dashboard showing each student's real progress, exam results, and weak spots.
+**Concept:** Universities and coding bootcamps license Vahoha per student per semester. Their students get the roadmaps, exam engine, and AI mentor; their instructors get a dashboard showing each student's real progress, exam results, and weak spots.
 
 **Why institutions would pay:**
 
-- **Bootcamps** — their entire sales pitch is job outcomes. DevsWebs's verified-skill data proves outcomes ("94% of our grads passed Backend Layer 3") in a way no bootcamp can fake today.
-- **Universities** — CS programs are theory-heavy; DevsWebs adds the practical, measured track without faculty needing to build anything.
+- **Bootcamps** — their entire sales pitch is job outcomes. Vahoha's verified-skill data proves outcomes ("94% of our grads passed Backend Layer 3") in a way no bootcamp can fake today.
+- **Universities** — CS programs are theory-heavy; Vahoha adds the practical, measured track without faculty needing to build anything.
 - **Both** — instructor dashboards replace gut feeling with data: who's falling behind, on what exactly, before exams reveal it too late.
 
 **Business model:**
@@ -135,7 +135,7 @@
 **Strategic side effects:**
 
 - Hundreds of students onboarded per deal → solves the cold-start problem institutionally instead of one user at a time
-- Students who graduate keep their DevsWebs profile → flow straight into the hiring marketplace funnel
+- Students who graduate keep their Vahoha profile → flow straight into the hiring marketplace funnel
 - Institutional credibility ("used by X university") makes every other B2B sale easier
 
 **Prerequisites:**
@@ -209,6 +209,6 @@ MCQ tests recognition and is gameable; explaining a concept out loud (or in writ
 - [ ] Can users contribute posts that become official curriculum content?
 - [ ] Peer review system for practical exam submissions?
 - [ ] Cohort feature — go through a path with a group at the same time?
-- [ ] Public API for roadmap data — let others build on top of DevsWebs paths?
+- [ ] Public API for roadmap data — let others build on top of Vahoha paths?
 - [ ] ATS integration for the Company Portal (export verified profiles to Greenhouse, Lever, etc.)?
 - [ ] Developer referral system — earn XP or subscription credit for referring a developer who converts to Pro?

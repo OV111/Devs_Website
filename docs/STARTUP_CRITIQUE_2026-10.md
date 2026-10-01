@@ -1,4 +1,4 @@
-# DevsWebs Startup Critique
+# Vahoha (formerly DevsWebs) Startup Critique
 
 2026-10-01 · Vahe
 
@@ -71,7 +71,7 @@ Competitor details come from `docs/STARTUP_REVIEW_2026-10.md` §7 and its source
 Too much has been built, and the core loop still lacks the pieces that would prove it works.
 
 - **Overbuilt:** the Arena with its code sandbox (your biggest attack surface), group chat, community proposals, blogs, 15 authored paths, and a 9-phase voice exam spec.
-- **Missing:** event tracking, billing, a public profile (the viral loop in `BUSINESS_MODEL.md` depends on it), real exam integrity, and one product name (Vahoha vs DevsWebs).
+- **Missing:** event tracking, billing, a public profile (the viral loop in `BUSINESS_MODEL.md` depends on it), real exam integrity, and one product name (since decided: Vahoha, formerly DevsWebs).
 - **Too hard to build solo:** the voice exam with calibration (grades must closely match human graders, κ ≥ 0.7) and per-layer rubric authoring, plus the employer marketplace.
 
 ## 7. Moat

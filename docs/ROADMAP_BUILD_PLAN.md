@@ -1,4 +1,6 @@
-# DevsWebs — Roadmap Build Plan
+# Vahoha (formerly DevsWebs) — Roadmap Build Plan
+
+> **Update 2026-10-02:** the Current State table below was rewritten against the code; the phase text further down is the original plan and is kept for reference. Live status: `docs/PILOT_STATUS.md`.
 
 > Moved out of VISION.md 2026-09-30 to keep that document investor-readable. This is the working build-status and phase-plan doc — update it as phases complete. `VISION.md` should stay a business/product doc; this is where implementation reality lives.
 > Last audit: 2026-09-27 (AI Mentor re-audit) / 2026-09-26 (Phase E verification pass, architecture health) / 2026-06-11 (original audit).
@@ -9,6 +11,20 @@
 
 | Feature | Status |
 | --- | --- |
+| Community Platform (blogs, profiles, chat, auth) | Built. Chat room-join hole fixed. Blogs can be tagged to roadmap layers (`layerIds`) |
+| Roadmap | Built: tracks and layers seeded into MongoDB, progress server-side (`/api/roadmaps`), tree UI, "Posts for this layer" in the layer drawer |
+| Exam Engine | Built (`/api/exams`): server-graded, 15 questions per attempt, pass at 80, shuffled choices, unseen-first, cooldown on, integrity flags. Banks must be seeded and hand-checked per layer (`docs/EXAM_INTEGRITY.md`) |
+| Exam History, Weak Spots, Mastery | Built and wired; `modules/mastery` exposes per-topic status |
+| Dev Library | Built (`/library`); layer linking and content depth still to do |
+| AI Mentor | Built and verified: `/api/ai-agent`, sessions, SSE streaming, tool loop, learner context, 30/day cap, per-user burst limit |
+| Teach-Back | One-topic slice built; full voice exam is a spec (`docs/VOICE_EXAM_SPEC.md`) |
+| Problem Solving Arena | Built (`modules/coding-challenges`): catalog, `isolated-vm` grading, proposals, XP hints, daily submission cap. Built early, against this plan's own deferral rule |
+| Billing | Built on Polar, sandbox-verified, inert (`docs/BILLING.md`) |
+| Analytics | Built: 7 events, admin funnel |
+| Ship It Capstone | UI shell only |
+| Admin Panel, Public Progress Profiles, Weekly Challenges, Platform Intelligence | Not started |
+
+--- | --- |
 | Community Platform (blogs, profiles, chat, auth) | Built — the chat room-join hole is fixed (re-verified 2026-09-26) |
 | Roadmap UI | Frontend shell built; 15 path JSONs in `src/data/roadmaps/`; progress is localStorage-only — no backend wiring |
 | User Progress Tracking | `userProgressService.js` built — no route exposes it |
@@ -40,7 +56,7 @@ Sign up → pick Backend path → study Layer 1 (posts + library resources)
    → FAIL → weak spots recorded → ask the AI mentor → targeted review → retry
 ```
 
-When one real user can do that on production, DevsWebs exists. Until then, it's a community blog with ambitions.
+When one real user can do that on production, Vahoha exists. Until then, it's a community blog with ambitions.
 
 **In scope (Phases A–E, ~4–6 weeks focused work, 3 months with buffer):** critical bug fixes → roadmap backend → roadmap UI wiring → exam engine → AI mentor backend.
 
@@ -60,7 +76,7 @@ When one real user can do that on production, DevsWebs exists. Until then, it's 
 2. **NotificationWorker missing Redis password — fixed.** `workers/notificationWorker.js` now imports the shared `redisConnection` from `config/redis.js`.
 3. **`connectDB` swallows connection failure — fixed.** `config/db.js` now throws; the server fails fast at boot.
 
-**Still outstanding:** `helmet` is not installed/mounted. `@google/generative-ai`, `groq-sdk`, and `mongoose` are all still in `package.json` (`groq-sdk` is intentionally kept — it's the live provider, see decision #5 below).
+**Still outstanding:** (helmet is now mounted.) `@google/generative-ai`, `groq-sdk`, and `mongoose` are all still in `package.json` (`groq-sdk` is intentionally kept — it's the live provider, see decision #5 below).
 
 ### Standing decisions
 

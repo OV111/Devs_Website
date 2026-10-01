@@ -24,8 +24,8 @@ The technical prep for the pilot is mostly done. What's left is mostly yours: co
 | --- | --- | --- | --- |
 | 1 | Re-seed exam banks for **one track, Layers 1–3** | You | Set `layers: [...]` in `SEED_CONFIG` (`examSeeder.js`), run the seeder |
 | 2 | Hand-check every question marked `reviewed: false` | You | About 135 questions. A wrong answer key on a gated exam destroys trust |
-| 3 | Make yourself admin so you can read the funnel | You | In MongoDB: set `role: "admin"` on your user |
-| 4 | Pick one product name (Vahoha or DevsWebs) | You | Claude can do the find-and-replace after |
+| 3 | Make yourself admin so you can read the funnel | You | `npm run admin:grant -- you@example.com` |
+| 4 | ~~Pick one product name~~ | Done | Vahoha. README, VISION and strategy docs updated 2026-10-02 |
 | 5 | Remove "AI-proctored" and "hard to fake" claims | You or Claude | `VISION.md` §5; see `docs/EXAM_INTEGRITY.md` |
 | 6 | Confirm Redis is on in production | You | Auth rate-limit counters depend on it |
 | 7 | Check Groq limits for about 10 concurrent users | You | Move to the paid tier if the free tier rate-limits |
