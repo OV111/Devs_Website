@@ -6,6 +6,7 @@ import { getRubric, listRubricsForLayer } from "./rubricService.js";
 import { evaluateTeachBack, generateFollowUp } from "./teachBackEvaluatorService.js";
 import { toTopicSlug } from "../utils/topicKey.js";
 import { recomputeMastery } from "./learnerMasteryService.js";
+import { trackEvent } from "./eventService.js";
 
 /**
  * Refresh the Adaptive Engine's view of this learner after new evidence lands.
@@ -171,9 +172,10 @@ export const generateAttempt = async (db, userId, path, layer) => {
   const collection = db.collection("exam_attempts");
   const result = await collection.insertOne(attempt);
   const attemptId = result.insertedId.toString();
+  await trackEvent(db, userId, "exam_started", { path, layer, attemptId });
 
   // return questions WITHOUT answerIdx
-  const clientQuestions = selected.map(({ answerIdx: _A, reviewed: _R, ...rest }) => rest); // eslint-disable-line no-unused-vars
+  const clientQuestions = selected.map(({ answerIdx: _A, reviewed: _R, ...rest }) => rest);
 
   return {
     attemptId,
@@ -287,6 +289,14 @@ export const submitAttempt = async (db, userId, attemptId, clientAnswers, client
 
   // Must run after saveExamResult and addWeakSpot — it reads what they wrote.
   await refreshMastery(db, userId);
+
+  await trackEvent(db, userId, "exam_submitted", {
+    path: attempt.path,
+    layer: attempt.layer,
+    attemptId,
+    score,
+    passed,
+  });
 
   // One query for the whole layer rather than a getRubric() per missed topic —
   // rubric coverage is still thin (hand-authored, see teachBackRubricSeeder.js),

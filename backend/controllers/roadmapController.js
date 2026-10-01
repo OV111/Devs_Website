@@ -3,6 +3,7 @@ import {
   createUserProgress,
   updateUserProgress,
 } from "../services/userProgressService.js";
+import { trackEvent } from "../services/eventService.js";
 
 export const getProgress = async (req, res) => {
   try {
@@ -36,6 +37,7 @@ export const startPath = async (req, res) => {
     }
 
     const existing = await getUserProgress(db, userId);
+    await trackEvent(db, userId, "path_selected", { path: activePath, switched: Boolean(existing) });
     if (existing) {
       // only update activePath (+ skillLevel, if the onboarding wizard sent
       // one this time) — never reset progress already earned

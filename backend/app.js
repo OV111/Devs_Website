@@ -17,6 +17,7 @@ import libraryRoutes from "./routes/library.routes.js";
 import aiAgentRoutes from "./routes/aiAgent.routes.js";
 import roadmapRoutes from "./routes/roadmap.routes.js";
 import examRoutes from "./routes/exam.routes.js";
+import analyticsRoutes from "./routes/analytics.routes.js";
 import codingChallengeRoutes from "./modules/coding-challenges/index.js";
 import billingRoutes, { handleBillingWebhook } from "./modules/billing/index.js";
 import masteryRoutes from "./modules/mastery/index.js";
@@ -77,6 +78,7 @@ export function createApp(db) {
   app.use("/api/challenges", codingChallengeRoutes);
   app.use("/api/billing", billingRoutes);
   app.use("/api/mastery", masteryRoutes);
+  app.use("/api/admin", analyticsRoutes);
 
   app.use(notFound)
   return app;

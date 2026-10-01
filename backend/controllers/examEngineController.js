@@ -1,4 +1,5 @@
 import { generateAttempt, submitAttempt, submitTeachBack, submitTeachBackFollowUp } from "../services/examEngineService.js";
+import { trackEvent } from "../services/eventService.js";
 
 export const generate = async (req, res) => {
   try {
@@ -63,6 +64,7 @@ export const submitTeachBackAnswer = async (req, res) => {
     }
 
     const result = await submitTeachBack(db, userId, { path, layer, topic, answerText });
+    await trackEvent(db, userId, "teach_back", { path, layer, topic, score: result.score, passed: result.passed, followUp: false });
     res.json(result);
   } catch (err) {
     const status = err.status ?? 500;
@@ -84,6 +86,7 @@ export const submitTeachBackFollowUpAnswer = async (req, res) => {
     }
 
     const result = await submitTeachBackFollowUp(db, userId, { sessionId, answerText });
+    await trackEvent(db, userId, "teach_back", { sessionId, score: result.score, passed: result.passed, followUp: true });
     res.json(result);
   } catch (err) {
     const status = err.status ?? 500;

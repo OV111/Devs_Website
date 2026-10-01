@@ -19,6 +19,7 @@ import {
 import { generateTitle } from "../services/agent/titleService.js";
 import { toolDefinitions } from "../tools/agentTools.js";
 import { ATTACHMENT_LIMITS } from "../validation/aiAgent.schemas.js";
+import { trackEvent } from "../services/eventService.js";
 
 export const createSession = async (req, res) => {
   try {
@@ -137,6 +138,8 @@ export const stream = async (req, res) => {
   if (!limit.allowed) {
     return res.status(429).json({ message: "Daily message limit reached.", resetAt: limit.resetAt });
   }
+
+  await trackEvent(db, userId, "mentor_message", { hasAttachments: attachments.length > 0 });
 
   // resolve or create session
   let session = null;

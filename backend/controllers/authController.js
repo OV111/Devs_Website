@@ -13,6 +13,7 @@ import {
 } from "../services/refreshTokenService.js";
 import { OAuth2Client } from "google-auth-library";
 import { sanitizeUsername } from "../utils/username.js";
+import { trackEvent, trackActiveDay } from "../services/eventService.js";
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -133,6 +134,8 @@ const signUp = async (data) => {
     });
     // here also insert userStats (with default starting values )
     await usersStats.insertOne(buildDefaultUserStats(result.insertedId));
+    await trackEvent(db, result.insertedId, "signup", { provider: "email" });
+    await trackActiveDay(db, result.insertedId);
 
     const { accessToken, refreshToken } = await issueTokenPair(db, result.insertedId);
 
@@ -180,6 +183,7 @@ const login = async (data) => {
     },
     { upsert: true },
   );
+  await trackActiveDay(db, user._id);
   const { accessToken, refreshToken } = await issueTokenPair(db, user._id);
   return {
     status: 200,
@@ -220,8 +224,10 @@ const googleAuth = async (data) => {
         provider: "google",
       });
       await usersStats.insertOne(buildDefaultUserStats(result.insertedId));
+      await trackEvent(db, result.insertedId, "signup", { provider: "google" });
       user = await users.findOne({ _id: result.insertedId });
     }
+    await trackActiveDay(db, user._id);
 
     const { accessToken, refreshToken } = await issueTokenPair(db, user._id);
     return {
@@ -355,8 +361,10 @@ const githubCallback = async (req, res) => {
         password: null,
       });
       await usersStats.insertOne(buildDefaultUserStats(result.insertedId));
+      await trackEvent(db, result.insertedId, "signup", { provider: "github" });
       user = { _id: result.insertedId };
     }
+    await trackActiveDay(db, user._id);
     const { refreshToken } = await issueTokenPair(db, user._id);
     setRefreshCookie(res, refreshToken);
     res.redirect(`${process.env.FRONTEND_URL}/oauth-success`);
@@ -450,6 +458,10 @@ const refreshAccessToken = async (refreshTokenValue) => {
   const db = await connectDB();
   const pair = await rotateRefreshToken(db, decoded.id, decoded.jti);
   if (!pair) return { status: 401, message: "Refresh token was already used or revoked" };
+
+  // Refresh runs on app load and every ~15 min of use, so it doubles as the
+  // "came back today" signal; trackActiveDay dedupes to one row per day.
+  await trackActiveDay(db, decoded.id);
 
   return { status: 200, accessToken: pair.accessToken, refreshToken: pair.refreshToken };
 };

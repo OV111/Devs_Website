@@ -40,6 +40,15 @@ const connectDB = async () => {
       // One redirect target per freed-up handle; renaming or reclaiming a
       // username upserts/deletes this row rather than duplicating it.
       db.collection("usernameHistory").createIndex({ oldUsername: 1 }, { unique: true }),
+      // Pilot analytics (eventService.js): per-user timelines and per-type counts.
+      db.collection("userEvents").createIndex({ userId: 1, createdAt: -1 }),
+      db.collection("userEvents").createIndex({ type: 1, createdAt: -1 }),
+      // Backs trackActiveDay's upsert; unique so two concurrent token refreshes
+      // on the same day can't both insert.
+      db.collection("userEvents").createIndex(
+        { userId: 1, day: 1 },
+        { unique: true, partialFilterExpression: { type: "active_day" } },
+      ),
     ]);
 
     return db;
