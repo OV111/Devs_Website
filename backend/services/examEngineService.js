@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb";
 import { saveExamResult } from "./examHistoryService.js";
 import { addWeakSpot, resolveWeakSpot } from "./weakSpotService.js";
 import { updateUserProgress } from "./userProgressService.js";
-import { getRubric } from "./rubricService.js";
+import { getRubric, listRubricsForLayer } from "./rubricService.js";
 import { evaluateTeachBack, generateFollowUp } from "./teachBackEvaluatorService.js";
 import { toTopicSlug } from "../utils/topicKey.js";
 import { recomputeMastery } from "./learnerMasteryService.js";
@@ -25,9 +25,10 @@ const refreshMastery = async (db, userId) => {
 };
 
 const TIME_LIMIT_SECS = 600;
-const QUESTIONS_PER_EXAM = 10;
+const QUESTIONS_PER_EXAM = 15; // = QUESTIONS_PER_LAYER in examSeeder.js — serve the full bank
 const MAX_ATTEMPTS_PER_DAY = 3;
 const COOLDOWN_AFTER_FAIL_MINS = 30;
+const COOLDOWN_ENABLED = false; // TEMP: off while developing the exam UI — set back to true before shipping
 const PASS_THRESHOLD = 80;
 
 // ── Question bank ─────────────────────────────────────────────
@@ -65,6 +66,8 @@ const checkAttemptLimits = async (db, userId, path, layer) => {
   if (todayAttempts >= MAX_ATTEMPTS_PER_DAY) {
     return { allowed: false, reason: `Daily limit reached (${MAX_ATTEMPTS_PER_DAY} attempts per day). Try again tomorrow.` };
   }
+
+  if (!COOLDOWN_ENABLED) return { allowed: true };
 
   const cooldownCutoff = new Date(Date.now() - COOLDOWN_AFTER_FAIL_MINS * 60 * 1000);
   const recentFail = await collection.findOne(
@@ -207,10 +210,15 @@ export const submitAttempt = async (db, userId, attemptId, clientAnswers) => {
     timeTakenSecs,
   });
 
-  // save weak spots for missed topics
-  if (missedTopics.length > 0) {
+  // save weak spots for missed topics — dedupe first: addWeakSpot's own
+  // existing-doc check is a separate findOne + insert/update, not atomic, so
+  // firing it twice for the same topic in one Promise.all (e.g. two missed
+  // questions sharing a topic) is a real race — both calls see "no existing
+  // doc" and both insert, leaving duplicate weakSpots rows for one topic.
+  const uniqueMissedTopics = [...new Set(missedTopics)];
+  if (uniqueMissedTopics.length > 0) {
     await Promise.all(
-      missedTopics.map((topic) =>
+      uniqueMissedTopics.map((topic) =>
         addWeakSpot(db, userId, { topic, path: attempt.path, layer: attempt.layer, source: "exam" }),
       ),
     );
@@ -226,7 +234,17 @@ export const submitAttempt = async (db, userId, attemptId, clientAnswers) => {
   // Must run after saveExamResult and addWeakSpot — it reads what they wrote.
   await refreshMastery(db, userId);
 
-  return { score, passed, correctCount, total: attempt.questions.length, missedResults: results.filter((r) => !r.correct) };
+  // One query for the whole layer rather than a getRubric() per missed topic —
+  // rubric coverage is still thin (hand-authored, see teachBackRubricSeeder.js),
+  // so the client needs to know which "Teach it back" buttons will actually
+  // work instead of showing one for every miss and failing silently on submit.
+  const layerRubrics = await listRubricsForLayer(db, attempt.path, attempt.layer);
+  const rubricTopics = new Set(layerRubrics.map((r) => r.topic));
+  const missedResults = results
+    .filter((r) => !r.correct)
+    .map((r) => ({ ...r, hasRubric: rubricTopics.has(r.topic) }));
+
+  return { score, passed, correctCount, total: attempt.questions.length, missedResults };
 };
 
 // ── Teach-Back (rubric-based, free-form explanation) ────────────

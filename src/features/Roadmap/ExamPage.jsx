@@ -1,36 +1,49 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { useParams, useNavigate, useSearchParams, Link } from "react-router-dom";
-import { motion as Motion, AnimatePresence } from "framer-motion";  
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Clock, ChevronRight, ChevronLeft, CheckCircle2, XCircle,
   RotateCcw, ArrowLeft, Loader2, AlertTriangle, Timer,
 } from "lucide-react";
 import { API_BASE_URL, authHeaders } from "../../../constants/api";
 import useRoadmapStore from "../../stores/useRoadmapStore";
+import InlineTeachBack from "./components/InlineTeachBack";
 
 // ── Exam timer (only mounts when exam is ready) ───────────────
 const ExamTimer = ({ timeLimitSecs, onExpire }) => {
   const [remaining, setRemaining] = useState(timeLimitSecs);
-  const ref = useRef(null);
+  // Ref keeps the latest onExpire closure; the interval below is created once,
+  // so calling the prop directly would submit the first render's (empty) answers.
+  const onExpireRef = useRef(onExpire);
+  onExpireRef.current = onExpire;
 
   useEffect(() => {
-    ref.current = setInterval(() => {
-      setRemaining((s) => {
-        if (s <= 1) { clearInterval(ref.current); onExpire(); return 0; }
-        return s - 1;
-      });
+    const id = setInterval(() => {
+      setRemaining((s) => (s <= 1 ? 0 : s - 1));
     }, 1000);
-    return () => clearInterval(ref.current);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => clearInterval(id);
   }, []);
+
+  // Side effect lives outside the state updater (updaters must stay pure).
+  useEffect(() => {
+    if (remaining === 0) onExpireRef.current();
+  }, [remaining]);
 
   const mins = String(Math.floor(remaining / 60)).padStart(2, "0");
   const secs = String(remaining % 60).padStart(2, "0");
   const urgent = remaining < 60;
 
   return (
-    <div className={`flex items-center gap-1.5 text-sm font-mono px-3 py-1.5 rounded-lg border transition-colors ${urgent ? "border-red-800/60 bg-red-950/30 text-red-400" : "border-neutral-800 bg-neutral-900 text-neutral-400"}`}>
-      <Clock size={13} /> {mins}:{secs}
+    <div
+      role="timer"
+      aria-label={`Time remaining ${mins} minutes ${secs} seconds`}
+      className={`flex items-center gap-1.5 text-sm font-mono px-3 py-1.5 rounded-lg border transition-colors ${urgent ? "border-red-800/60 bg-red-950/30 text-red-400" : "border-neutral-800 bg-neutral-900 text-neutral-400"}`}
+    >
+      <Clock size={13} className={urgent ? "animate-pulse" : ""} /> {mins}:{secs}
+      <span className="sr-only" aria-live="polite">
+        {remaining === 60 ? "One minute remaining" : remaining === 10 ? "Ten seconds remaining" : ""}
+      </span>
     </div>
   );
 };
@@ -145,14 +158,10 @@ const ResultScreen = ({ result, passThreshold, onRetry, onBack, path, layer }) =
                   </div>
                   <div className="mt-2 flex items-center justify-between">
                     <span className="text-[10px] text-neutral-600 uppercase tracking-wider">{r.topic}</span>
-                    <Link
-                      to="/ai-agent"
-                      state={{ teachBack: { path, layer, topic: r.topic } }}
-                      className="text-[11px] px-2 py-1 rounded-lg border border-purple-700/50 text-purple-400 hover:bg-purple-950/30 transition-colors"
-                    >
-                      Teach it back
-                    </Link>
                   </div>
+                  {r.hasRubric && (
+                    <InlineTeachBack path={path} layer={layer} topic={r.topic} />
+                  )}
                 </div>
               ))}
             </div>
@@ -199,6 +208,7 @@ export default function ExamPage() {
   const [selected, setSelected] = useState(null);
   const [result, setResult] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const fetchExam = useCallback(async () => {
     setLoadState("loading");
@@ -238,6 +248,12 @@ export default function ExamPage() {
 
   useEffect(() => { fetchExam(); }, [fetchExam]);
 
+  // React Router keeps the previous page's scroll position on navigation,
+  // so jump to the top whenever an exam is entered.
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [layerId]);
+
   // warn before leaving mid-exam
   useEffect(() => {
     if (loadState !== "ready" || result) return;
@@ -249,6 +265,7 @@ export default function ExamPage() {
   const handleSubmit = useCallback(async (finalAnswers) => {
     if (submitting || !examData) return;
     setSubmitting(true);
+    setSubmitError("");
     try {
       const res = await fetch(`${API_BASE_URL}/api/exams/submit`, {
         method: "POST",
@@ -256,16 +273,16 @@ export default function ExamPage() {
         body: JSON.stringify({ attemptId: examData.attemptId, answers: finalAnswers }),
       });
       const data = await res.json();
+      // Stay on the exam page on failure: the "error" screen's retry would
+      // refetch a new exam and throw the learner's answers away.
       if (!res.ok) {
-        setErrorMsg(data.message ?? "Failed to submit exam.");
-        setLoadState("error");
+        setSubmitError(data.message ?? "Failed to submit exam.");
         return;
       }
       if (data.passed) setLayerStatus(layerId, "done");
       setResult(data);
     } catch {
-      setErrorMsg("Network error while submitting. Please retry.");
-      setLoadState("error");
+      setSubmitError("Network error while submitting. Please retry.");
     } finally {
       setSubmitting(false);
     }
@@ -370,20 +387,31 @@ export default function ExamPage() {
         <ExamTimer
           key={examData.attemptId}
           timeLimitSecs={timeLimitSecs}
-          onExpire={() => { if (!result) handleSubmit(answers); }}
+          onExpire={() => {
+            if (result) return;
+            // include the choice made on the current, not-yet-saved question
+            handleSubmit(selected == null ? answers : { ...answers, [q.id]: selected });
+          }}
         />
       </div>
 
       {/* Progress header */}
       <div className="mb-6">
-        <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-600 mb-1">
+        <p className="text-xs uppercase tracking-[0.2em] text-neutral-400 mb-1">
           Layer Exam · pass threshold {passThreshold}%
         </p>
         <div className="flex items-center justify-between mb-2">
-          <span className="text-xs text-neutral-500">Question {current + 1} of {total}</span>
-          <span className="text-xs text-neutral-600">{Object.keys(answers).length} answered</span>
+          <span className="text-sm text-neutral-300">Question {current + 1} of {total}</span>
+          <span className="text-xs text-neutral-400">{Object.keys(answers).length} answered</span>
         </div>
-        <div className="h-1 rounded-full bg-neutral-800 overflow-hidden">
+        <div
+          role="progressbar"
+          aria-label="Exam progress"
+          aria-valuemin={1}
+          aria-valuemax={total}
+          aria-valuenow={current + 1}
+          className="h-2 rounded-full bg-neutral-800 overflow-hidden"
+        >
           <motion.div
             className="h-full bg-linear-to-r from-purple-600 to-violet-500 rounded-full"
             animate={{ width: `${((current + 1) / total) * 100}%` }}
@@ -407,12 +435,14 @@ export default function ExamPage() {
             <h2 className="text-lg font-semibold text-neutral-100 leading-snug">{q.stem}</h2>
           </div>
 
-          <div className="space-y-3">
+          <div role="radiogroup" aria-label={q.stem} className="space-y-3">
             {q.choices.map((choice, idx) => (
               <button
                 key={idx}
+                role="radio"
+                aria-checked={selected === idx}
                 onClick={() => setSelected(idx)}
-                className={`w-full text-left px-4 py-3.5 rounded-xl border text-sm transition-all duration-150 ${
+                className={`w-full min-h-11 text-left px-4 py-3.5 rounded-xl border text-sm transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 ${
                   selected === idx
                     ? "border-purple-500 bg-purple-900/30 text-purple-200"
                     : "border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:border-neutral-600 hover:bg-neutral-800/60"
@@ -427,6 +457,19 @@ export default function ExamPage() {
           </div>
         </motion.div>
       </AnimatePresence>
+
+      {submitError && (
+        <div role="alert" className="mt-6 flex items-center justify-between gap-3 rounded-xl border border-red-800/50 bg-red-950/30 px-4 py-3 text-sm text-red-300">
+          <span>{submitError}</span>
+          <button
+            onClick={() => handleSubmit(answers)}
+            disabled={submitting}
+            className="shrink-0 px-3 py-1.5 rounded-lg bg-red-700/60 hover:bg-red-600/60 text-white text-xs font-medium disabled:opacity-50"
+          >
+            Retry submit
+          </button>
+        </div>
+      )}
 
       {/* Navigation */}
       <div className="flex items-center justify-between mt-8 pt-6 border-t border-neutral-800">

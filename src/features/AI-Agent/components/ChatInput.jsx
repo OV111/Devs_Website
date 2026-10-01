@@ -5,7 +5,7 @@ import {
   ATTACHMENT_ACCEPTED_EXTENSIONS,
 } from "../../../../constants/AiAgent";
 import { readAttachments, formatBytes } from "../lib/readAttachment";
-import { stopSpeaking } from "../lib/speech";
+import { useSpeechDictation } from "../lib/useSpeechDictation";
 import AgentMenu from "./AgentMenu";
 
 const ACCEPT_ATTR = ATTACHMENT_ACCEPTED_EXTENSIONS.map((e) => `.${e}`).join(
@@ -36,54 +36,8 @@ export default function ChatInput({
   const [attachErrors, setAttachErrors] = useState([]);
   const inputRef = useRef(null);
   const fileInputRef = useRef(null);
-  const recognitionRef = useRef(null);
-  const baseTextRef = useRef(""); // text already in the box before this recording started
-  const [isListening, setIsListening] = useState(false);
 
-  // Web Speech API — client-side STT, no backend call, no API key. Chrome/Edge
-  // only (no Firefox/Safari support as of writing); the mic button hides itself
-  // when unsupported rather than showing a dead control.
-  const SpeechRecognitionCtor =
-    typeof window !== "undefined" && (window.SpeechRecognition || window.webkitSpeechRecognition);
-
-  const toggleListening = () => {
-    if (!SpeechRecognitionCtor) return;
-
-    if (isListening) {
-      recognitionRef.current?.stop();
-      return;
-    }
-
-    stopSpeaking(); // don't talk over the user while they're dictating
-
-    const recognition = new SpeechRecognitionCtor();
-    recognition.lang = "en-US";
-    recognition.continuous = true;
-    recognition.interimResults = true;
-    baseTextRef.current = input;
-
-    recognition.onresult = (e) => {
-      let finalText = "";
-      let interimText = "";
-      for (let i = 0; i < e.results.length; i++) {
-        const transcript = e.results[i][0].transcript;
-        if (e.results[i].isFinal) finalText += transcript;
-        else interimText += transcript;
-      }
-      const sep = baseTextRef.current.trim() ? " " : "";
-      setInput(baseTextRef.current + sep + finalText + interimText);
-    };
-
-    recognition.onerror = () => setIsListening(false);
-    recognition.onend = () => setIsListening(false);
-
-    recognitionRef.current = recognition;
-    recognition.start();
-    setIsListening(true);
-  };
-
-  // Stop any in-flight recognition on unmount so it doesn't keep the mic hot.
-  useEffect(() => () => recognitionRef.current?.stop(), []);
+  const { isSupported: speechSupported, isListening, toggleListening } = useSpeechDictation(input, setInput);
 
   // The parent can now set the text (prompt chips, menu shortcuts), so the
   // auto-resize has to react to `value` rather than only to typing.
@@ -296,7 +250,7 @@ export default function ChatInput({
                   doesn't support SpeechRecognition rather than showing a dead
                   control (same reasoning the old placeholder comment used for
                   aria-disabled, but here there's truly nothing to offer). */}
-              {SpeechRecognitionCtor && (
+              {speechSupported && (
                 <button
                   onClick={toggleListening}
                   title={isListening ? "Stop dictation" : "Dictate message"}

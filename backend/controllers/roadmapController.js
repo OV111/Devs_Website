@@ -16,20 +16,32 @@ export const getProgress = async (req, res) => {
   }
 };
 
+// Same 4 values TrackOnboardingPanel.jsx's first step offers — keeping one
+// source of truth would mean sharing a constants file across frontend/backend,
+// which this repo doesn't have set up yet; small enough set to duplicate here
+// deliberately rather than take on that restructuring for one field.
+const VALID_SKILL_LEVELS = ["beginner", "some", "intermediate", "advanced"];
+
 export const startPath = async (req, res) => {
   try {
     const db = req.app.locals.db;
     const userId = req.user._id.toString();
-    const { activePath } = req.body;
+    const { activePath, skillLevel } = req.body;
 
     if (!activePath || typeof activePath !== "string") {
       return res.status(400).json({ message: "activePath is required" });
     }
+    if (skillLevel !== undefined && !VALID_SKILL_LEVELS.includes(skillLevel)) {
+      return res.status(400).json({ message: `skillLevel must be one of: ${VALID_SKILL_LEVELS.join(", ")}` });
+    }
 
     const existing = await getUserProgress(db, userId);
     if (existing) {
-      // only update activePath — never reset progress already earned
-      const updated = await updateUserProgress(db, userId, { activePath });
+      // only update activePath (+ skillLevel, if the onboarding wizard sent
+      // one this time) — never reset progress already earned
+      const fields = { activePath };
+      if (skillLevel) fields.skillLevel = skillLevel;
+      const updated = await updateUserProgress(db, userId, fields);
       return res.json({ progress: updated });
     }
 
@@ -37,6 +49,7 @@ export const startPath = async (req, res) => {
       activePath,
       currentLayer: 1,
       completedLayers: [],
+      skillLevel, // createUserProgress defaults this to "beginner" if undefined
     });
     res.status(201).json({ progress: created });
   } catch (err) {

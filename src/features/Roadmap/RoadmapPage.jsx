@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion as Motion, AnimatePresence } from "framer-motion";
+import { Toaster, toast } from "react-hot-toast";
 import CategoryBar from "./components/CategotyBar";
 import TrackSelector from "./components/TrackSelector";
 import RoadmapTree from "./components/RoadmapTree";
@@ -8,12 +9,24 @@ import FloatingLoad from "./components/FloatingLoad";
 import TrackOnboardingPanel from "./components/TrackOnboardingPanel";
 
 export default function RoadmapPage() {
-  const { selectedCategory, selectedTrack } = useRoadmapStore();
+  const { selectedCategory, selectedTrack, submitOnboarding, closePanel } = useRoadmapStore();
   const [panelOpen, setPanelOpen] = useState(false);
+  const [saving, setSaving] = useState(false);
 
-  const handleStart = (answers) => {
-    console.log("User answers:", answers);
+  // Only `skillLevel` is actually persisted right now — see submitOnboarding
+  // in useRoadmapStore.js for why the other 4 answers aren't sent yet. The
+  // panel used to close instantly on submit with no signal either way —
+  // a failed save looked identical to a successful one.
+  const handleStart = async (answers) => {
+    setSaving(true);
+    const ok = await submitOnboarding(answers);
+    setSaving(false);
     setPanelOpen(false);
+    if (ok) {
+      toast.success("Got it — your mentor will use this to calibrate its answers.");
+    } else {
+      toast.error("Couldn't save that — your progress on the path itself is unaffected, but try Start Path again to set your level.");
+    }
   };
 
   return (
@@ -37,10 +50,10 @@ export default function RoadmapPage() {
         </h2>
 
         <p className="mt-3 text-sm sm:text-base max-w-2xl mx-auto bg-gradient-to-r from-violet-700 via-purple-600 to-fuchsia-700 dark:from-violet-400 dark:via-purple-400 dark:to-fuchsia-500 bg-clip-text text-transparent">
-          Structured learning paths built for developers — from first commit to
-          production-ready. Pick a domain, choose your specialization, and track
-          your progress with exams, coding challenges, real projects layer by
-          layer.
+          Pick a domain and a track, then work through it layer by layer. Pass
+          a timed exam to unlock the next layer, explain what you missed back
+          to your AI mentor, and sharpen the skills with coding challenges
+          along the way.
         </p>
       </Motion.div>
 
@@ -60,7 +73,7 @@ export default function RoadmapPage() {
 
       {selectedTrack && !panelOpen && (
         <button
-          onClick={() => setPanelOpen(true)}
+          onClick={() => { closePanel(); setPanelOpen(true); }} // close any open layer sidebar first
           // bg-fuchsia-500
           className=" fixed right-0 top-1/4 -translate-y-1/2 z-4
           bg-purple-500 glow-pulse
@@ -76,13 +89,28 @@ export default function RoadmapPage() {
 
       <AnimatePresence>
         {panelOpen && (
+          // Backdrop: sits under the panel (z-50) but over the page, so the tree
+          // can't be clicked while setup is open (no two sidebars at once).
+          <Motion.div
+            key="onboarding-backdrop"
+            className="fixed inset-0 z-40 bg-black/50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => { if (!saving) setPanelOpen(false); }}
+          />
+        )}
+        {panelOpen && (
           <TrackOnboardingPanel
             track={selectedTrack}
             onClose={() => setPanelOpen(false)}
             onStart={handleStart}
+            submitting={saving}
           />
         )}
       </AnimatePresence>
+
+      <Toaster position="top-center" />
     </div>
   );
 }

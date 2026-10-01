@@ -21,6 +21,7 @@ import {
   Timer,
   Flame,
   Zap,
+  Loader2,
 } from "lucide-react";
 
 const FREE_TEXT_STEP = {
@@ -161,7 +162,7 @@ const STEPS = [
 const TOTAL_STEPS = STEPS.length + 1; // +1 for free-text step
 const FREE_TEXT_STEP_INDEX = STEPS.length;
 
-export default function TrackOnboardingPanel({ track, onClose, onStart }) {
+export default function TrackOnboardingPanel({ track, onClose, onStart, submitting = false }) {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState({});
   const [freeText, setFreeText] = useState("");
@@ -178,7 +179,7 @@ export default function TrackOnboardingPanel({ track, onClose, onStart }) {
   };
 
   const handleNext = () => {
-    if (!canContinue) return;
+    if (!canContinue || submitting) return;
     if (isLast) {
       onStart({ ...answers, about: freeText.trim() || null, track });
     } else {
@@ -212,7 +213,8 @@ export default function TrackOnboardingPanel({ track, onClose, onStart }) {
           </div>
           <button
             onClick={onClose}
-            className="ml-4 w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-full text-neutral-500 hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
+            disabled={submitting}
+            className="ml-4 w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-full text-neutral-500 hover:text-white hover:bg-white/5 transition-colors cursor-pointer disabled:opacity-30 disabled:pointer-events-none"
           >
             <X size={15} />
           </button>
@@ -327,7 +329,7 @@ export default function TrackOnboardingPanel({ track, onClose, onStart }) {
         >
           <button
             onClick={() => setStep((s) => s - 1)}
-            disabled={step === 0}
+            disabled={step === 0 || submitting}
             className="flex items-center gap-1.5 text-[12px] text-neutral-500 hover:text-white transition-colors disabled:opacity-0 disabled:pointer-events-none cursor-pointer"
           >
             <ChevronLeft size={14} /> Back
@@ -335,16 +337,23 @@ export default function TrackOnboardingPanel({ track, onClose, onStart }) {
 
           <button
             onClick={handleNext}
-            disabled={!canContinue}
+            disabled={!canContinue || submitting}
             className="flex items-center gap-1.5 px-5 py-2 rounded-xl text-[13px] font-semibold transition-all"
             style={{
-              backgroundColor: canContinue ? "#7c3aed" : "#161616",
+              backgroundColor: canContinue ? "#9333ea" : "#161616", // purple-600, same as the selected category pill
               color: canContinue ? "#fff" : "#333",
-              cursor: canContinue ? "pointer" : "default",
+              cursor: canContinue && !submitting ? "pointer" : "default",
+              opacity: submitting ? 0.7 : 1,
             }}
           >
-            {isLast ? "Start path" : "Continue"}
-            <ChevronRight size={14} />
+            {submitting ? (
+              <Loader2 size={14} className="animate-spin" />
+            ) : (
+              <>
+                {isLast ? "Start path" : "Continue"}
+                <ChevronRight size={14} />
+              </>
+            )}
           </button>
         </div>
       </motion.div>

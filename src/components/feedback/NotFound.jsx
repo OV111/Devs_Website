@@ -7,6 +7,7 @@ const NotFound = () => {
       <div className="flex justify-center items-center text-center">
         <FuzzyText
           fontSize="clamp(6rem,14vw,14rem)"
+          color="#A1A1AA"
           baseIntensity={0.3}
           hoverIntensity={0.5}
           enableHover={true}
@@ -15,7 +16,12 @@ const NotFound = () => {
         </FuzzyText>
       </div>
       <div>
-        <FuzzyText baseIntensity={0.3} hoverIntensity={0.5} enableHover={true}>
+        <FuzzyText
+          color="#A1A1AA"
+          baseIntensity={0.3}
+          hoverIntensity={0.5}
+          enableHover={true}
+        >
           Not found!
         </FuzzyText>
       </div>

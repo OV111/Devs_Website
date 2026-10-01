@@ -19,13 +19,16 @@ import { dirname, join } from "path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const GROQ_MODEL = "llama-3.3-70b-versatile";
+const GROQ_MODEL = "openai/gpt-oss-120b";
 const QUESTIONS_PER_LAYER = 15;
 
 // ── Which tracks to seed ──────────────────────────────────────
 // layers: null = all layers in the track; or pass an array of layer IDs
 const SEED_CONFIG = [
   { path: "backend", file: "backend.json", trackId: "api-dev", layers: null },
+  { path: "backend", file: "backend.json", trackId: "node-dev", layers: null },
+  { path: "backend", file: "backend.json", trackId: "python-backend", layers: null },
+  { path: "backend", file: "backend.json", trackId: "db-engineer", layers: null },
   // { path: "fullstack", file: "fullstack.json", trackId: "mern", layers: null },
 ];
 
@@ -33,13 +36,38 @@ const SEED_CONFIG = [
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
+// Free tier is capped at 8000 TPM for this model and one call costs ~2500-3000
+// tokens, so bursts of 3+ calls/minute 429. Retry with the server's own
+// suggested wait (falls back to a fixed pause) instead of guessing a fixed
+// delay that either wastes time when Groq isn't busy or still 429s when it is.
+const withRateLimitRetry = async (fn, { retries = 5 } = {}) => {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      return await fn();
+    } catch (err) {
+      const status = err?.status ?? err?.response?.status;
+      if (status !== 429 || attempt === retries) throw err;
+
+      const msg = err?.error?.message ?? err?.message ?? "";
+      const match = msg.match(/try again in ([\d.]+)(m?s)/i);
+      const waitMs = match
+        ? (match[2] === "ms" ? parseFloat(match[1]) : parseFloat(match[1]) * 1000)
+        : 15000;
+      const padded = Math.ceil(waitMs) + 1000; // small buffer over the server's own estimate
+
+      console.log(`  ⏸  Rate limited — waiting ${Math.round(padded / 1000)}s before retry ${attempt + 1}/${retries}...`);
+      await new Promise((r) => setTimeout(r, padded));
+    }
+  }
+};
+
 const generateQuestionsForLayer = async (layer, path) => {
   const topicList = layer.topics.join("\n- ");
 
-  const completion = await groq.chat.completions.create({
+  const completion = await withRateLimitRetry(() => groq.chat.completions.create({
     model: GROQ_MODEL,
     temperature: 0.4,
-    max_tokens: 4096,
+    max_tokens: 8192,
     messages: [
       {
         role: "system",
@@ -74,7 +102,7 @@ Return a JSON array ONLY:
 ]`,
       },
     ],
-  });
+  }));
 
   const raw = completion.choices[0]?.message?.content?.trim() ?? "";
 
@@ -160,8 +188,10 @@ const seed = async () => {
 
       console.log(`  ✓  ${questions.length} questions saved for "${layer.title}"\n`);
 
-      // rate-limit courtesy pause between layers
-      await new Promise((r) => setTimeout(r, 800));
+      // ~2500-3000 tokens/call against an 8000 TPM free-tier cap means >3
+      // calls/minute 429s — pace at ~22s so we stay under it proactively
+      // instead of relying on the retry backoff for every other call.
+      await new Promise((r) => setTimeout(r, 22000));
     }
   }
 

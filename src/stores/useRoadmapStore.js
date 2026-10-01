@@ -26,19 +26,27 @@ const persistProgress = async (layerProgress, activePath) => {
   }
 };
 
-const startPath = async (pathId) => {
+// Returns whether the save actually succeeded. setTrack's background call
+// ignores this (that one's genuinely fire-and-forget — the track-select flow
+// shouldn't block/error on it), but submitOnboarding needs it: a user who
+// just answered 5 questions and hit "Start path" deserves to know if that
+// was silently dropped.
+const startPath = async (pathId, skillLevel) => {
   try {
-    await fetch(`${API_BASE_URL}/api/roadmaps/start`, {
+    const body = { activePath: pathId };
+    if (skillLevel) body.skillLevel = skillLevel;
+    const res = await fetch(`${API_BASE_URL}/api/roadmaps/start`, {
       method: "POST",
       headers: { "Content-Type": "application/json", ...authHeaders() },
-      body: JSON.stringify({ activePath: pathId }),
+      body: JSON.stringify(body),
     });
+    return res.ok;
   } catch {
-    // non-fatal
+    return false;
   }
 };
 
-const useRoadmapStore = create((set) => ({
+const useRoadmapStore = create((set, get) => ({
   selectedCategory: null,
   selectedTrack: null,
   activeLayer: null,
@@ -80,6 +88,18 @@ const useRoadmapStore = create((set) => ({
       layerProgress: progress?.layerProgress ?? {},
       progressLoaded: true,
     });
+  },
+
+  // Only skillLevel has a real consumer right now (learnerContextService.js
+  // feeds it into the mentor's system prompt) — the onboarding wizard's other
+  // answers (goal, background, weeklyTime, about) aren't sent anywhere yet
+  // because nothing downstream reads them. Re-sends activePath too since
+  // startPath is an upsert either way — cheaper than adding a second route
+  // for one extra field.
+  submitOnboarding: async (answers) => {
+    const track = get().selectedTrack;
+    if (!track) return false;
+    return startPath(track.id, answers.skillLevel);
   },
 
   setActiveLayer: (layer) => set({ activeLayer: layer, isPanelOpen: true }),
