@@ -25,7 +25,7 @@ export const submit = async (req, res) => {
   try {
     const db = req.app.locals.db;
     const userId = req.user._id.toString();
-    const { attemptId, answers } = req.body;
+    const { attemptId, answers, integrity } = req.body;
 
     if (!attemptId || typeof attemptId !== "string") {
       return res.status(400).json({ message: "attemptId is required" });
@@ -34,7 +34,8 @@ export const submit = async (req, res) => {
       return res.status(400).json({ message: "answers must be an object mapping questionId to choiceIndex" });
     }
 
-    const result = await submitAttempt(db, userId, attemptId, answers);
+    // integrity is optional and sanitized in the service, never a reason to 400
+    const result = await submitAttempt(db, userId, attemptId, answers, integrity);
     res.json(result);
   } catch (err) {
     const status = err.status ?? 500;

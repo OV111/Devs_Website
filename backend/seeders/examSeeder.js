@@ -4,10 +4,15 @@
  * Usage:
  *   GROQ_API_KEY=... MONGO_URI=... node backend/seeders/examSeeder.js
  *
- * Generates 15 MCQ questions per layer, stores them in exam_question_banks.
- * REVIEW the output in MongoDB before opening exams to users.
+ * Grows each layer's bank to QUESTIONS_PER_LAYER MCQs in batches, stored in
+ * exam_question_banks. The exam serves a random 15, so a bank larger than 15
+ * is what stops learners memorising the whole exam across attempts.
  *
- * To re-seed a layer, delete its doc from exam_question_banks first.
+ * Existing banks are topped up, not replaced: questions you already reviewed
+ * are kept, and new ones are appended. REVIEW the new questions in MongoDB
+ * before opening exams to users.
+ *
+ * To regenerate a layer from scratch, delete its doc from exam_question_banks first.
  */
 
 import Groq from "groq-sdk";
@@ -20,7 +25,11 @@ import { dirname, join } from "path";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const GROQ_MODEL = "openai/gpt-oss-120b";
-const QUESTIONS_PER_LAYER = 15;
+const QUESTIONS_PER_LAYER = 60; // target bank size; the exam serves a random 15 of these
+// One call per 15 questions: 60 at once would exceed max_tokens, and a single
+// request larger than the free tier's 8000 TPM can never succeed, retries or not.
+const QUESTIONS_PER_CALL = 15;
+const PACE_MS = 35000; // calls now carry the existing stems too (~4k tokens), so pace under 8000 TPM
 
 // ── Which tracks to seed ──────────────────────────────────────
 // layers: null = all layers in the track; or pass an array of layer IDs
@@ -61,8 +70,23 @@ const withRateLimitRetry = async (fn, { retries = 5 } = {}) => {
   }
 };
 
-const generateQuestionsForLayer = async (layer, path) => {
+// A malformed question would crash or silently break a live exam, so drop it
+// here rather than trusting the model's JSON shape.
+const isValidQuestion = (q) =>
+  typeof q?.stem === "string" && q.stem.trim() !== "" &&
+  Array.isArray(q.choices) && q.choices.length === 4 &&
+  q.choices.every((c) => typeof c === "string" && c.trim() !== "") &&
+  Number.isInteger(q.answerIdx) && q.answerIdx >= 0 && q.answerIdx <= 3;
+
+const normalizeStem = (stem) => stem.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+
+const generateQuestionsForLayer = async (layer, path, count, avoidStems = []) => {
   const topicList = layer.topics.join("\n- ");
+  // Without this the model happily regenerates the questions already in the
+  // bank, and the bank grows in size but not in variety.
+  const avoidBlock = avoidStems.length
+    ? `\n\nThe bank already contains these questions. Do NOT repeat or rephrase them; cover different angles:\n- ${avoidStems.join("\n- ")}`
+    : "";
 
   const completion = await withRateLimitRetry(() => groq.chat.completions.create({
     model: GROQ_MODEL,
@@ -80,14 +104,14 @@ const generateQuestionsForLayer = async (layer, path) => {
 Topics covered:
 - ${topicList}
 
-Generate exactly ${QUESTIONS_PER_LAYER} multiple-choice questions that test genuine understanding — not trivia or memorization. Each question should test a concept a working developer must know.
+Generate exactly ${count} multiple-choice questions that test genuine understanding — not trivia or memorization. Each question should test a concept a working developer must know.${avoidBlock}
 
 Rules:
 - 4 choices each (indices 0–3)
 - Exactly one correct answer
 - Distractors must be plausible — not obviously wrong
 - No trick questions
-- Vary difficulty: ~5 easy, ~7 medium, ~3 hard
+- Vary difficulty: about one third easy, half medium, the rest hard
 - Cover different topics across the set
 
 Return a JSON array ONLY:
@@ -127,8 +151,18 @@ Return a JSON array ONLY:
     return null;
   }
 
-  // ensure IDs are unique across layers
-  return questions.map((q, i) => ({ ...q, id: `${layer.id}-q${i + 1}` }));
+  // IDs are assigned by the caller, which knows what is already in the bank
+  return questions.filter(isValidQuestion);
+};
+
+// Next free `<layer>-qN` number. Uses the highest existing N, not the count,
+// so a bank with hand-deleted questions never reuses an ID.
+const nextQuestionNumber = (layerId, questions) => {
+  const idPattern = new RegExp(`^${layerId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}-q(\\d+)$`);
+  const nums = questions
+    .map((q) => Number(q.id?.match(idPattern)?.[1]))
+    .filter(Number.isFinite);
+  return (nums.length ? Math.max(...nums) : 0) + 1;
 };
 
 // ── Main seeder ───────────────────────────────────────────────
@@ -163,35 +197,65 @@ const seed = async () => {
 
     for (const layer of targetLayers) {
       const existing = await col.findOne({ path, layer: layer.id });
+      const current = existing?.questions ?? [];
+      if (current.length >= QUESTIONS_PER_LAYER) {
+        console.log(`  ⏭  "${layer.title}" already has ${current.length} questions — skipping`);
+        continue;
+      }
+
+      console.log(`  ⏳  "${layer.title}": ${current.length} → ${QUESTIONS_PER_LAYER} questions...`);
+      const seen = new Set(current.map((q) => normalizeStem(q.stem)));
+      const added = [];
+
+      while (current.length + added.length < QUESTIONS_PER_LAYER) {
+        const count = Math.min(QUESTIONS_PER_CALL, QUESTIONS_PER_LAYER - current.length - added.length);
+        const avoidStems = [...current, ...added].map((q) => q.stem);
+        const batch = await generateQuestionsForLayer(layer, path, count, avoidStems);
+
+        // ~4k tokens/call against an 8000 TPM free-tier cap — pace proactively
+        // instead of relying on the retry backoff for every other call.
+        await new Promise((r) => setTimeout(r, PACE_MS));
+
+        if (!batch) break;
+        const fresh = batch.filter((q) => {
+          const key = normalizeStem(q.stem);
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        });
+        // A batch of nothing but duplicates means the model has run out of
+        // angles for this layer; stop rather than loop forever.
+        if (!fresh.length) break;
+        added.push(...fresh.slice(0, count));
+      }
+
+      if (!added.length) {
+        console.log(`  ✗  No new questions for "${layer.title}"\n`);
+        continue;
+      }
+
+      let n = nextQuestionNumber(layer.id, current);
+      // `reviewed: false` marks what still needs a human check of its answer key
+      const newQuestions = added.map((q) => ({ ...q, id: `${layer.id}-q${n++}`, reviewed: false }));
+
       if (existing) {
-        console.log(`  ⏭  "${layer.title}" already seeded — skipping (delete doc to regenerate)`);
-        continue;
+        await col.updateOne(
+          { _id: existing._id },
+          { $push: { questions: { $each: newQuestions } }, $set: { model: GROQ_MODEL, updatedAt: new Date() } },
+        );
+      } else {
+        await col.insertOne({
+          path,
+          layer: layer.id,
+          layerTitle: layer.title,
+          questions: newQuestions,
+          model: GROQ_MODEL,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
       }
 
-      console.log(`  ⏳  Generating: "${layer.title}"...`);
-      const questions = await generateQuestionsForLayer(layer, path);
-
-      if (!questions) {
-        console.log(`  ✗  Skipping "${layer.title}" due to generation error\n`);
-        continue;
-      }
-
-      await col.insertOne({
-        path,
-        layer: layer.id,
-        layerTitle: layer.title,
-        questions,
-        model: GROQ_MODEL,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      });
-
-      console.log(`  ✓  ${questions.length} questions saved for "${layer.title}"\n`);
-
-      // ~2500-3000 tokens/call against an 8000 TPM free-tier cap means >3
-      // calls/minute 429s — pace at ~22s so we stay under it proactively
-      // instead of relying on the retry backoff for every other call.
-      await new Promise((r) => setTimeout(r, 22000));
+      console.log(`  ✓  +${newQuestions.length} questions for "${layer.title}" (now ${current.length + newQuestions.length})\n`);
     }
   }
 

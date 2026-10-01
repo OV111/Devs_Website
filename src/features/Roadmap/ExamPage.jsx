@@ -209,8 +209,12 @@ export default function ExamPage() {
   const [result, setResult] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  // Integrity flags sent with the submission (review only, never graded).
+  // A ref, not state: counting a tab switch must not re-render the exam.
+  const integrityRef = useRef({ tabSwitches: 0, pasteEvents: 0 });
 
   const fetchExam = useCallback(async () => {
+    integrityRef.current = { tabSwitches: 0, pasteEvents: 0 };
     setLoadState("loading");
     setErrorMsg("");
     setAnswers({});
@@ -262,6 +266,19 @@ export default function ExamPage() {
     return () => window.removeEventListener("beforeunload", handler);
   }, [loadState, result]);
 
+  // count tab switches and pastes while an attempt is in progress
+  useEffect(() => {
+    if (loadState !== "ready" || result) return;
+    const onVisibility = () => { if (document.hidden) integrityRef.current.tabSwitches++; };
+    const onPaste = () => { integrityRef.current.pasteEvents++; };
+    document.addEventListener("visibilitychange", onVisibility);
+    document.addEventListener("paste", onPaste);
+    return () => {
+      document.removeEventListener("visibilitychange", onVisibility);
+      document.removeEventListener("paste", onPaste);
+    };
+  }, [loadState, result]);
+
   const handleSubmit = useCallback(async (finalAnswers) => {
     if (submitting || !examData) return;
     setSubmitting(true);
@@ -270,7 +287,7 @@ export default function ExamPage() {
       const res = await fetch(`${API_BASE_URL}/api/exams/submit`, {
         method: "POST",
         headers: { "Content-Type": "application/json", ...authHeaders() },
-        body: JSON.stringify({ attemptId: examData.attemptId, answers: finalAnswers }),
+        body: JSON.stringify({ attemptId: examData.attemptId, answers: finalAnswers, integrity: integrityRef.current }),
       });
       const data = await res.json();
       // Stay on the exam page on failure: the "error" screen's retry would

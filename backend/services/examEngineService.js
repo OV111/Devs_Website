@@ -25,10 +25,10 @@ const refreshMastery = async (db, userId) => {
 };
 
 const TIME_LIMIT_SECS = 600;
-const QUESTIONS_PER_EXAM = 15; // = QUESTIONS_PER_LAYER in examSeeder.js — serve the full bank
+const QUESTIONS_PER_EXAM = 15; // served per attempt, sampled from a bank of QUESTIONS_PER_LAYER (examSeeder.js)
 const MAX_ATTEMPTS_PER_DAY = 3;
 const COOLDOWN_AFTER_FAIL_MINS = 30;
-const COOLDOWN_ENABLED = false; // TEMP: off while developing the exam UI — set back to true before shipping
+const COOLDOWN_ENABLED = true;
 const PASS_THRESHOLD = 80;
 
 // ── Question bank ─────────────────────────────────────────────
@@ -113,6 +113,25 @@ export const shuffleChoices = (question) => {
   };
 };
 
+// Unseen questions first, then fill from seen ones if the bank runs short.
+// Pure (no db) so it can be unit-tested like shuffle. Each group is shuffled
+// on its own so "unseen first" never turns into "always the same unseen ones".
+export const pickQuestions = (bankQuestions, seenIds, n) => {
+  const unseen = bankQuestions.filter((q) => !seenIds.has(q.id));
+  const seen = bankQuestions.filter((q) => seenIds.has(q.id));
+  return [...shuffle(unseen), ...shuffle(seen)].slice(0, n);
+};
+
+// Every question this user was ever served for this layer — abandoned and
+// timed-out attempts included, since they saw those questions too.
+const getSeenQuestionIds = async (db, userId, path, layer) => {
+  const attempts = await db
+    .collection("exam_attempts")
+    .find({ userId: new ObjectId(userId), path, layer }, { projection: { "questions.id": 1 } })
+    .toArray();
+  return new Set(attempts.flatMap((a) => (a.questions ?? []).map((q) => q.id)));
+};
+
 export const generateAttempt = async (db, userId, path, layer) => {
   const limits = await checkAttemptLimits(db, userId, path, layer);
   if (!limits.allowed) {
@@ -128,13 +147,13 @@ export const generateAttempt = async (db, userId, path, layer) => {
     throw err;
   }
 
-  // Sample questions, then shuffle each one's choices so the correct answer's
-  // position is uniform no matter how the bank was authored (LLM-generated
-  // banks skew heavily toward "A"). answerIdx is remapped to the new order;
-  // the attempt stores this shuffled copy, so grading stays consistent.
-  const selected = shuffle(bank.questions)
-    .slice(0, QUESTIONS_PER_EXAM)
-    .map(shuffleChoices);
+  // Sample questions (unseen first, so retries can't be passed by memorising),
+  // then shuffle each one's choices so the correct answer's position is
+  // uniform no matter how the bank was authored (LLM-generated banks skew
+  // heavily toward "A"). answerIdx is remapped to the new order; the attempt
+  // stores this shuffled copy, so grading stays consistent.
+  const seenIds = await getSeenQuestionIds(db, userId, path, layer);
+  const selected = pickQuestions(bank.questions, seenIds, QUESTIONS_PER_EXAM).map(shuffleChoices);
 
   const now = new Date();
   const attempt = {
@@ -154,7 +173,7 @@ export const generateAttempt = async (db, userId, path, layer) => {
   const attemptId = result.insertedId.toString();
 
   // return questions WITHOUT answerIdx
-  const clientQuestions = selected.map(({ answerIdx: _A, ...rest }) => rest); // eslint-disable-line no-unused-vars
+  const clientQuestions = selected.map(({ answerIdx: _A, reviewed: _R, ...rest }) => rest); // eslint-disable-line no-unused-vars
 
   return {
     attemptId,
@@ -166,7 +185,18 @@ export const generateAttempt = async (db, userId, path, layer) => {
 
 // ── Submit attempt ────────────────────────────────────────────
 
-export const submitAttempt = async (db, userId, attemptId, clientAnswers) => {
+const MAX_INTEGRITY_COUNT = 1000;
+
+// Client-reported, so a cheater can send zeros: these are review flags, never
+// grading input. Malformed values are coerced to 0 rather than rejected — a
+// bad flag must not cost a learner their submitted exam.
+export const sanitizeIntegrity = (raw) => {
+  const count = (v) =>
+    Number.isInteger(v) && v >= 0 ? Math.min(v, MAX_INTEGRITY_COUNT) : 0;
+  return { tabSwitches: count(raw?.tabSwitches), pasteEvents: count(raw?.pasteEvents) };
+};
+
+export const submitAttempt = async (db, userId, attemptId, clientAnswers, clientIntegrity) => {
   const collection = db.collection("exam_attempts");
 
   const attempt = await collection.findOne({
@@ -219,7 +249,7 @@ export const submitAttempt = async (db, userId, attemptId, clientAnswers) => {
   // mark attempt submitted
   await collection.updateOne(
     { _id: attempt._id },
-    { $set: { submitted: true, submittedAt: new Date(), score, passed } },
+    { $set: { submitted: true, submittedAt: new Date(), score, passed, integrity: sanitizeIntegrity(clientIntegrity) } },
   );
 
   // save to exam history
