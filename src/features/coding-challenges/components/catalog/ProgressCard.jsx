@@ -52,7 +52,7 @@ export default function ProgressCard({ readiness, loading }) {
     );
   }
 
-  const { percent, toGo, message, layerId } = readiness;
+  const { percent, toGo, message, layerId, categoryId } = readiness;
 
   return (
     <div className={CARD}>
@@ -92,7 +92,7 @@ export default function ProgressCard({ readiness, loading }) {
       <p className="text-[11px] text-center text-[#555]">{message}</p>
 
       <button
-        onClick={() => navigate(`/roadmaps/exam/${layerId}`)}
+        onClick={() => navigate(`/roadmaps/exam/${layerId}?path=${categoryId ?? "backend"}`)}
         className="w-full flex justify-center items-center gap-1.5 py-2 text-[12px] font-bold transition-opacity hover:opacity-80 cursor-pointer bg-purple-600 text-white"
       >
         <DollarSign size={12} /> take exam <ArrowRight size={13} />

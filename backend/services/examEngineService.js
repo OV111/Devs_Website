@@ -93,6 +93,26 @@ const checkAttemptLimits = async (db, userId, path, layer) => {
 
 // ── Generate attempt ──────────────────────────────────────────
 
+// Fisher–Yates. `sort(() => Math.random() - 0.5)` is not uniform: the comparator
+// is inconsistent, so engines produce biased orderings.
+export const shuffle = (items) => {
+  const out = [...items];
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+};
+
+export const shuffleChoices = (question) => {
+  const order = shuffle(question.choices.map((_, i) => i));
+  return {
+    ...question,
+    choices: order.map((i) => question.choices[i]),
+    answerIdx: order.indexOf(question.answerIdx),
+  };
+};
+
 export const generateAttempt = async (db, userId, path, layer) => {
   const limits = await checkAttemptLimits(db, userId, path, layer);
   if (!limits.allowed) {
@@ -108,9 +128,13 @@ export const generateAttempt = async (db, userId, path, layer) => {
     throw err;
   }
 
-  // sample QUESTIONS_PER_EXAM questions randomly
-  const shuffled = [...bank.questions].sort(() => Math.random() - 0.5);
-  const selected = shuffled.slice(0, Math.min(QUESTIONS_PER_EXAM, shuffled.length));
+  // Sample questions, then shuffle each one's choices so the correct answer's
+  // position is uniform no matter how the bank was authored (LLM-generated
+  // banks skew heavily toward "A"). answerIdx is remapped to the new order;
+  // the attempt stores this shuffled copy, so grading stays consistent.
+  const selected = shuffle(bank.questions)
+    .slice(0, QUESTIONS_PER_EXAM)
+    .map(shuffleChoices);
 
   const now = new Date();
   const attempt = {

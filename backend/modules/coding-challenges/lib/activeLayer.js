@@ -26,13 +26,14 @@ export const resolveActiveLayer = async (db, userId) => {
 
   const layer = await db.collection("roadmap_layers").findOne(
     { trackId: progress.activePath, order: progress.currentLayer || 1 },
-    { projection: { layerId: 1, trackId: 1, order: 1, title: 1 } },
+    { projection: { layerId: 1, trackId: 1, categoryId: 1, order: 1, title: 1 } },
   );
 
   if (!layer) return null;
 
   return {
     trackId: layer.trackId,
+    categoryId: layer.categoryId,
     layerId: layer.layerId,
     order: layer.order,
     title: layer.title,

@@ -81,6 +81,7 @@ export const getReadinessService = async (db, userId) => {
     hasLayer: true,
     layerId: layer.layerId,
     trackId: layer.trackId,
+    categoryId: layer.categoryId,
     layerOrder: layer.order,
     layerTitle: layer.title,
     total,
