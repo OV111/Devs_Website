@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { X, Clock, BookOpen, Code2, Layers, Check, ChevronRight } from "lucide-react";
 import useRoadmapStore from "@/stores/useRoadmapStore";
+import LayerPosts from "./LayerPosts";
 
 const resourceTypeColor = {
   docs: "bg-blue-900/30 text-blue-400 border border-blue-800/50",
@@ -126,6 +127,8 @@ const LayerDetail = () => {
               ))}
             </ul>
           </div>
+
+          <LayerPosts layerId={activeLayer.id} onNavigate={closePanel} />
 
           {/* Challenge */}
           <div className="rounded-2xl border border-purple-800/40 bg-purple-950/20 px-4 py-4">

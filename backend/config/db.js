@@ -21,6 +21,8 @@ const connectDB = async () => {
       db.collection("follows").createIndex({ followerId: 1, followingId: 1 }, { unique: true }),
       db.collection("notifications").createIndex({ targetUserId: 1, createdAt: -1 }),
       db.collection("blogs").createIndex({ status: 1, category: 1, createdAt: -1 }),
+      // "Posts for this layer" in the roadmap drawer (blogService getBlogsService).
+      db.collection("blogs").createIndex({ layerIds: 1, status: 1, createdAt: -1 }),
       db.collection("exam_attempts").createIndex({ userId: 1, path: 1, layer: 1, startedAt: -1 }),
       db.collection("teach_back_rubrics").createIndex({ path: 1, layer: 1, topic: 1 }, { unique: true }),
       db.collection("teach_back_sessions").createIndex({ userId: 1, path: 1, layer: 1, startedAt: -1 }),

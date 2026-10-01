@@ -1,4 +1,33 @@
 import { ObjectId } from "mongodb";
+
+const MAX_LAYER_IDS = 10;
+// Roadmap layer ids look like "api-dev-3": lowercase slug, short. Anything
+// else is rejected rather than stored, so a tag can't carry markup or operators.
+const LAYER_ID_PATTERN = /^[a-z0-9][a-z0-9-]{0,59}$/;
+
+/**
+ * Cleans the `layerIds` a post is tagged with. Accepts an array or a JSON
+ * string (blog forms are multipart/FormData, so arrays arrive as strings, the
+ * same way `tags` do). Invalid ids are dropped, duplicates removed, and the
+ * list is capped. Never throws: a bad tag must not lose the author their post.
+ */
+export const normalizeLayerIds = (raw) => {
+  let list = raw;
+  if (typeof raw === "string") {
+    try {
+      list = JSON.parse(raw);
+    } catch {
+      list = [];
+    }
+  }
+  if (!Array.isArray(list)) return [];
+  const clean = list
+    .filter((id) => typeof id === "string")
+    .map((id) => id.trim().toLowerCase())
+    .filter((id) => LAYER_ID_PATTERN.test(id));
+  return [...new Set(clean)].slice(0, MAX_LAYER_IDS);
+};
+
 export const buildBlogDocument = ({
   title,
   description,
@@ -10,6 +39,7 @@ export const buildBlogDocument = ({
   coverImage,
   author,
   slug,
+  layerIds,
 }) => {
   const words = content?.trim().split(/\s+/).filter(Boolean).length ?? 0;
 
@@ -21,6 +51,7 @@ export const buildBlogDocument = ({
     description,
     content,
     tags,
+    layerIds: layerIds ?? [],
     status: status || "draft",
     author,
     readTime: Math.max(1, Math.ceil(words / 200)),
@@ -133,6 +164,7 @@ export const createBlogService = async (db, body, user, file) => {
     ...body,
     slug,
     tags: parsedTags,
+    layerIds: normalizeLayerIds(body.layerIds),
     coverImage: file?.path ?? null,
     author: authorId,
   });
@@ -167,7 +199,7 @@ export const createBlogService = async (db, body, user, file) => {
 };
 
 export const getBlogsService = async (db, query) => {
-  const { category, tag, page = 1, limit = 10, difficulty, readTime, sort, filter } = query;
+  const { category, tag, layer, page = 1, limit = 10, difficulty, readTime, sort, filter } = query;
 
   const pageNumber = Math.max(1, +page);
   const limitNumber = Math.min(100, Math.max(1, +limit));
@@ -175,6 +207,9 @@ export const getBlogsService = async (db, query) => {
   if (category) matchFilter.category = category;
   if (tag) matchFilter.tags = { $in: Array.isArray(tag) ? tag : [tag] };
   if (difficulty) matchFilter.difficulty = difficulty;
+  // typeof check: a repeated ?layer=a&layer=b arrives as an array, and a
+  // string is the only shape that matches one element of `layerIds`.
+  if (typeof layer === "string" && LAYER_ID_PATTERN.test(layer)) matchFilter.layerIds = layer;
   if (readTime === "< 5 min") matchFilter.readTime = { $lt: 5 };
   else if (readTime === "5–10 min") matchFilter.readTime = { $gte: 5, $lte: 10 };
   else if (readTime === "10+ min") matchFilter.readTime = { $gt: 10 };
@@ -355,6 +390,7 @@ export const updateBlogService = async (db, blogId, userId, body, file) => {
     tags: parsedTags,
     category: body.category ?? existing.category,
     difficulty: body.difficulty ?? existing.difficulty,
+    layerIds: body.layerIds !== undefined ? normalizeLayerIds(body.layerIds) : (existing.layerIds ?? []),
     status: body.status ?? existing.status,
     readTime: Math.max(1, Math.ceil(words / 200)),
     wordCount: words,

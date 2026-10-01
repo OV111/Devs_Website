@@ -13,6 +13,7 @@ import {
 } from "../../../constants/addBlog.js";
 import { authHeaders } from "../../../constants/api.js";
 import { updateBlog } from "../../services/blogsApi.js";
+import LayerPicker from "../../components/blog/LayerPicker";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -21,6 +22,7 @@ const EMPTY = {
   description: "",
   content: "",
   tags: [],
+  layerIds: [],
   category: "",
   difficulty: "",
   cover: null,
@@ -65,6 +67,7 @@ export default function EditBlog() {
           description: b.description ?? "",
           content: b.content ?? "",
           tags: Array.isArray(b.tags) ? b.tags : [],
+          layerIds: Array.isArray(b.layerIds) ? b.layerIds : [],
           category: b.category ?? "",
           difficulty: b.difficulty ?? "",
           cover: null,
@@ -124,6 +127,7 @@ export default function EditBlog() {
       formData.append("description", fields.description);
       formData.append("content", fields.content);
       formData.append("tags", JSON.stringify(fields.tags));
+      formData.append("layerIds", JSON.stringify(fields.layerIds));
       formData.append("category", fields.category);
       formData.append("difficulty", fields.difficulty);
       formData.append("status", status);
@@ -335,6 +339,8 @@ export default function EditBlog() {
                 ))}
               </div>
             </div>
+
+            <LayerPicker value={fields.layerIds} onChange={(ids) => set("layerIds", ids)} />
 
             <div>
               <div className="mb-1 flex items-center justify-between">

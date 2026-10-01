@@ -1,0 +1,102 @@
+import { useMemo, useState } from "react";
+
+const MAX_LAYERS = 10; // keep in sync with MAX_LAYER_IDS in backend/services/blogService.js
+
+// Not imported eagerly: the 15 roadmap files are large, and only authors
+// opening this picker need them. Vite turns each into its own lazy chunk.
+const roadmapFiles = import.meta.glob("../../data/roadmaps/*.json");
+
+let indexPromise;
+const loadLayerIndex = async () => {
+  const modules = await Promise.all(Object.values(roadmapFiles).map((load) => load()));
+  // Each file is { "<trackId>": [layer, ...] }; flatten every track's layers.
+  return modules
+    .flatMap((m) => Object.values(m.default ?? {}).flat())
+    .filter((layer) => layer?.id && layer?.title)
+    .map(({ id, title }) => ({ id, title }));
+};
+// One shared load for AddBlog and EditBlog; a failure resets so a retry can work.
+const getLayerIndex = () =>
+  (indexPromise ??= loadLayerIndex().catch(() => {
+    indexPromise = undefined;
+    return [];
+  }));
+
+/** Search-and-pick for the roadmap layers a post belongs to. */
+export default function LayerPicker({ value, onChange }) {
+  const [index, setIndex] = useState([]);
+  const [query, setQuery] = useState("");
+
+  const matches = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return [];
+    return index
+      .filter((l) => !value.includes(l.id) && (l.id.includes(q) || l.title.toLowerCase().includes(q)))
+      .slice(0, 8);
+  }, [index, query, value]);
+
+  const add = (id) => {
+    if (value.length >= MAX_LAYERS || value.includes(id)) return;
+    onChange([...value, id]);
+    setQuery("");
+  };
+
+  return (
+    <div>
+      <div className="mb-1 flex items-center justify-between">
+        <label className="text-xs font-medium text-gray-500 dark:text-gray-400">
+          Roadmap layers
+        </label>
+        <span className="text-xs text-gray-400">
+          {value.length}/{MAX_LAYERS}
+        </span>
+      </div>
+
+      <div className="flex min-h-[38px] flex-wrap gap-1.5 rounded-lg border border-gray-200 bg-gray-50 px-2 py-1.5 dark:border-gray-700 dark:bg-black">
+        {value.map((id) => (
+          <span
+            key={id}
+            className="flex items-center gap-1 rounded-md bg-gray-100 px-2 py-0.5 text-xs text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+          >
+            {id}
+            <button
+              type="button"
+              onClick={() => onChange(value.filter((v) => v !== id))}
+              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 cursor-pointer"
+            >
+              ×
+            </button>
+          </span>
+        ))}
+        <input
+          type="text"
+          value={query}
+          onFocus={() => getLayerIndex().then(setIndex)}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder={value.length === 0 ? "Search a layer, e.g. HTTP…" : ""}
+          className="min-w-[60px] flex-1 bg-transparent text-xs text-gray-900 outline-none placeholder:text-gray-400 dark:text-gray-100 dark:placeholder:text-gray-600"
+        />
+      </div>
+
+      {matches.length > 0 && (
+        <ul className="mt-1 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-700 dark:bg-neutral-950">
+          {matches.map((l) => (
+            <li key={l.id}>
+              <button
+                type="button"
+                onClick={() => add(l.id)}
+                className="flex w-full items-baseline justify-between gap-3 px-3 py-1.5 text-left text-xs text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 cursor-pointer"
+              >
+                <span className="truncate">{l.title}</span>
+                <span className="shrink-0 text-[10px] text-gray-400">{l.id}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+      <p className="mt-1 text-[10px] text-gray-400">
+        Shows this post under those layers in the roadmap
+      </p>
+    </div>
+  );
+}

@@ -11,6 +11,7 @@ import {
   RECOMMENDED_TAGS,
 } from "../../../constants/addBlog.js";
 import { authHeaders } from "../../../constants/api.js";
+import LayerPicker from "../../components/blog/LayerPicker";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const AUTOSAVE_KEY = "blog-draft-autosave";
@@ -20,6 +21,7 @@ const INITIAL_FIELDS = {
   description: "",
   content: "",
   tags: [],
+  layerIds: [],
   category: "",
   difficulty: "",
   cover: null,
@@ -118,6 +120,7 @@ export default function AddBlog() {
           description: parsed.description || prev.description,
           content: parsed.content || prev.content,
           tags: parsed.tags || prev.tags,
+          layerIds: parsed.layerIds || prev.layerIds,
           category: parsed.category || prev.category,
           difficulty: parsed.difficulty || prev.difficulty,
         }));
@@ -138,13 +141,14 @@ export default function AddBlog() {
           description: fields.description,
           content: fields.content,
           tags: fields.tags,
+          layerIds: fields.layerIds,
           category: fields.category,
           difficulty: fields.difficulty,
         })
       );
     }, 1500);
     return () => clearTimeout(autoSaveTimerRef.current);
-  }, [fields.title, fields.description, fields.content, fields.tags, fields.category, fields.difficulty]);
+  }, [fields.title, fields.description, fields.content, fields.tags, fields.layerIds, fields.category, fields.difficulty]);
 
   const wordCount = useMemo(() => {
     return fields.content.trim().split(/\s+/).filter(Boolean).length;
@@ -192,6 +196,7 @@ export default function AddBlog() {
       formData.append("description", fields.description);
       formData.append("content", fields.content);
       formData.append("tags", JSON.stringify(fields.tags));
+      formData.append("layerIds", JSON.stringify(fields.layerIds));
       formData.append("category", fields.category);
       formData.append("difficulty", fields.difficulty);
       formData.append("status", status);
@@ -395,6 +400,8 @@ export default function AddBlog() {
                 ))}
               </div>
             </div>
+
+            <LayerPicker value={fields.layerIds} onChange={(ids) => set("layerIds", ids)} />
 
             {/* Tags */}
             <div>
