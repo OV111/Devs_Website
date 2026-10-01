@@ -54,7 +54,7 @@ const CatPawButton = ({ className }) => {
         }}
       >
         <defs>
-          {RINGS.map(({ color: _c }, i) => ( // eslint-disable-line no-unused-vars
+          {RINGS.map(({ color: _c }, i) => (  
             <filter key={i} id={`glow-${i}`} x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur stdDeviation={hovered ? "2.5" : "1.5"} result="blur" />
               <feMerge>

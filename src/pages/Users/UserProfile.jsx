@@ -384,7 +384,7 @@ export default function UserProfile() {
 
             {/* Paths */}
             <div>
-              <SectionHeader title="paths" right="verified by devswebs" />
+              <SectionHeader title="paths" right="verified by vahoha" />
               {progress?.activePath ? (
                 <div className="px-5 py-4 rounded-sm border border-gray-800">
                   <div className="flex items-start justify-between gap-4">

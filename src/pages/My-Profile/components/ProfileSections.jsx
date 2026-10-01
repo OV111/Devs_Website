@@ -203,7 +203,7 @@ export function ForHiringPanel({ editable = false, cvUrl = null, onCvUpload }) {
         for hiring
       </p>
       <p className="text-[11px] mb-4 text-gray-600">
-        Every score is verified by DevsWebs. Capstones are agent-reviewed. Nothing on this profile is
+        Every score is verified by Vahoha. Capstones are agent-reviewed. Nothing on this profile is
         self-reported.
       </p>
 

@@ -10,7 +10,7 @@ const splitTrailingPunctuation = (word) => {
 const RiseText = ({
   lines,
   highlight = "",
-  // eslint-disable-next-line no-unused-vars -- used as the JSX tag below; this repo's eslint config lacks jsx-uses-vars
+   
   as: Tag = "h1",
   stagger = 60,
   duration = 700,

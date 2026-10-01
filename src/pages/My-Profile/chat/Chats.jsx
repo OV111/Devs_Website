@@ -135,7 +135,6 @@ const Chats = () => {
     const ws = new WebSocket(import.meta.env.VITE_WS_URL);
 
     ws.onopen = () => {
-      console.log("WebSocket connection opened");
       ws.send(JSON.stringify({ type: "auth", token }));
       ws.send(
         JSON.stringify({
@@ -179,7 +178,7 @@ const Chats = () => {
       }
     };
     ws.onerror = (err) => {
-      console.log("WebSocket error:", err);
+      console.error("WebSocket error:", err);
       setIsLoadingLastMessages(false);
     };
     ws.onclose = () => {
@@ -242,7 +241,7 @@ const Chats = () => {
       const response = await request.json();
       setMutualFollowers(response.mutualFollowers);
     } catch (err) {
-      console.log(err);
+      console.error("Failed to load mutual followers:", err);
       setMutualFollowers([]);
     } finally {
       setIsLoadingChats(false);
@@ -275,7 +274,7 @@ const Chats = () => {
         const response = await request.json();
         setUserStats(response.stats);
       } catch (error) {
-        console.log(error);
+        console.error("Failed to load user stats:", error);
       } finally {
         const elapsed = Date.now() - startedAt;
         if (elapsed < MIN_USER_STATS_SKELETON_MS) {

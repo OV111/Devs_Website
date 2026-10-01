@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-// Generic version of use-mobile.js's pattern for an arbitrary query, so the
+// Generic matchMedia hook for an arbitrary query, so the
 // roadmap tree's 1280px desktop/mobile split doesn't need its own one-off
 // matchMedia wiring.
 export function useMediaQuery(query) {

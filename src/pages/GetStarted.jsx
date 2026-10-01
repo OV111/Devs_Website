@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Toaster, toast } from "react-hot-toast";
 import { Eye, EyeOff } from "lucide-react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import useAuthStore from "../stores/useAuthStore";
 import { GoogleLogin } from "@react-oauth/google";
 import { sanitizeInput } from "../utils/sanitize";
@@ -25,7 +25,10 @@ const GetStarted = () => {
   const navigate = useNavigate();
   const { login } = useAuthStore();
   const [isLoading, setIsLoading] = useState(false);
-  const [isSignedUp, setIsSignedUp] = useState(true);
+  // The URL owns the mode (?mode=login | signup) so the navbar's "Log in" /
+  // "Start free" links switch the form even while this page is mounted.
+  const [searchParams, setSearchParams] = useSearchParams();
+  const isSignedUp = searchParams.get("mode") !== "login";
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [authUiMessage, setAuthUiMessage] = useState("");
@@ -109,7 +112,7 @@ const GetStarted = () => {
   };
 
   const toggleLink = () => {
-    setIsSignedUp(!isSignedUp);
+    setSearchParams({ mode: isSignedUp ? "login" : "signup" }, { replace: true });
     setAuthUiMessage("");
     reset();
   };
@@ -150,7 +153,7 @@ const GetStarted = () => {
             </h1>
             <p className="flex justify-center text-[13.5px] text-[#697386] dark:text-zinc-400 mb-7">
               {isSignedUp
-                ? "Join DevsWebs and start building today."
+                ? "Join Vahoha and start building today."
                 : "Welcome back! Enter your details below."}
             </p>
 

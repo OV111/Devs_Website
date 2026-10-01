@@ -1,137 +1,163 @@
 import { Link } from "react-router-dom";
+import { SITE } from "../../constants/site";
 
-const sections = [
+// Every statement here must match the code. If you add a per-user collection,
+// a third-party service or a cookie, update this page — and for new per-user
+// data, USER_KEYED_COLLECTIONS in backend/services/accountService.js, which
+// backs the "delete your account" promise below.
+const EFFECTIVE_DATE = "October 2, 2026";
+
+const SUMMARY = [
+  "We collect what's needed to run your account and track your learning.",
+  "We never sell your data or show you ads.",
+  "Your AI mentor messages are processed by an AI provider to generate replies.",
+  "Deleting your account deletes your data.",
+];
+
+const SECTIONS = [
   {
-    title: "Information We Collect",
-    content: [
-      "Account information: first name, last name, username, email address, and password (stored encrypted) when you register.",
-      "OAuth identity: if you sign in with Google or GitHub, we store your provider ID, email, and display name returned by that provider.",
-      "Profile details you choose to provide: bio, location, profile image, banner image, and links to GitHub, LinkedIn, and Twitter/X.",
-      "Content you create: blog posts, comments, likes, and saved articles.",
-      "Social activity: followers and following relationships, and in-app notifications.",
-      "Learning progress: the roadmap path you are on, your current layer, completed layers, and per-layer progress status.",
-      "Exam performance: scores, number of correct answers, total questions, time taken, whether you passed, and the topics you missed for each exam attempt.",
-      "Weak spots: topics automatically flagged from failed exam questions, along with the associated path and layer.",
-      "Activity metadata: your last active timestamp, updated on each login.",
+    id: "collect",
+    title: "What we collect",
+    items: [
+      ["Account", "Name, username, email and a hashed password. If you sign in with Google or GitHub, the ID, name and email they share with us."],
+      ["Profile", "Anything you add: bio, location, profile and banner images, and social links."],
+      ["Learning", "Your roadmap path and progress, exam attempts and scores, the topics you missed (weak spots), mastery levels, coding challenge attempts and the code you submit, and teach-back answers."],
+      ["AI mentor", "Your conversations with the mentor and how many messages you send per day (used for usage limits)."],
+      ["Community", "Posts, comments, likes, saved items, follows, notifications and chat messages."],
+      ["Billing", "Your plan and subscription status. Card details are handled entirely by our payment provider and never reach our servers."],
+      ["Usage", "Product events such as signing up, starting a path or submitting an exam, used to understand which features help people learn."],
+      ["Contact", "The name, email and message you send through the contact form."],
     ],
   },
   {
-    title: "How We Use Your Information",
-    content: [
-      "To create and manage your account and authenticate your identity.",
-      "To display your profile and published content to other users.",
-      "To track and display your learning progress through roadmap paths.",
-      "To power the AI agent — exam results, weak spots, and progress data are used to personalise recommendations and guidance.",
-      "To surface topics you should revisit based on missed exam questions.",
-      "To send newsletter updates if you have subscribed.",
-      "To enforce rate limits on login and sign-up attempts (IP address is used temporarily and is not stored in the database).",
-      "To improve and maintain the platform.",
+    id: "use",
+    title: "How we use it",
+    items: [
+      [null, "To run your account, sign you in and keep it secure, including rate limits on sign-in and AI features."],
+      [null, "To track your progress, grade exams and show you which topics to revisit."],
+      [null, "To give the AI mentor context about your path, exam history and weak spots, so its guidance fits you."],
+      [null, "To show your profile and posts to other users, as you choose."],
+      [null, "To reply when you contact us, and to fix bugs and improve the product."],
     ],
   },
   {
-    title: "Third-Party Services",
-    content: [
-      "Google OAuth — used for sign-in. We receive your name, email, and Google ID from Google.",
-      "GitHub OAuth — used for sign-in and profile linking. We receive your GitHub username, ID, and primary email.",
-      "Cloudinary — used to store and serve profile images and banner images you upload.",
-      "MongoDB Atlas — our database provider where all user data is stored.",
-      "Resend — used to send password reset and notification emails.",
+    id: "third-parties",
+    title: "Services we rely on",
+    items: [
+      ["MongoDB Atlas", "Database where your data is stored."],
+      ["Groq", "Runs the AI models. Your mentor messages, the learning context sent with them, and teach-back answers are sent to Groq to generate a response."],
+      ["Polar", "Handles payments as merchant of record, including tax. It processes your payment details, not us."],
+      ["Cloudinary", "Stores and serves images you upload."],
+      ["Resend", "Sends emails such as password resets and contact-form notifications."],
+      ["Google and GitHub", "Optional sign-in."],
     ],
   },
   {
-    title: "What We Do Not Do",
-    content: [
-      "We do not sell your personal data to third parties.",
-      "We do not share your information with advertisers.",
-      "We do not use your content or learning data for purposes beyond operating and improving the platform.",
-      "We do not store third-party OAuth access tokens beyond what is needed to complete authentication.",
+    id: "cookies",
+    title: "Cookies and storage",
+    items: [
+      [null, "One secure, httpOnly cookie keeps you signed in. Your session token is kept in memory, not in browser storage."],
+      [null, "Your theme preference is saved in your browser's local storage."],
+      [null, "We use no advertising or third-party tracking cookies."],
     ],
   },
   {
-    title: "Your Rights",
-    content: [
-      "View and update your profile information at any time from your profile settings.",
-      "Delete your account and all associated data via the Delete Account option in settings.",
-      "Unsubscribe from newsletter emails at any time using the unsubscribe link in any email.",
-      "Request a copy of your data or ask questions about what we hold by contacting us.",
+    id: "rights",
+    title: "Your choices",
+    items: [
+      [null, "Edit your profile at any time in settings."],
+      [null, "Delete your account in settings. This permanently removes your account, profile, posts, comments, learning progress, exam history, weak spots, AI mentor conversations, challenge submissions, chat messages you sent, and usage events."],
+      [null, "Ask for a copy of your data, or ask what we hold, by emailing us."],
     ],
   },
   {
-    title: "Data Retention",
-    content: [
-      "Your data is retained for as long as your account is active.",
-      "Password reset tokens expire after 1 hour and are deleted after use.",
-      "If you delete your account, all associated data including posts, progress, exam history, and weak spots is permanently removed.",
+    id: "retention",
+    title: "How long we keep data",
+    items: [
+      [null, "For as long as your account exists. Password reset links expire after 1 hour."],
+      [null, "Payment records may be kept by Polar as required by tax and accounting law."],
     ],
   },
   {
-    title: "Changes to This Policy",
-    content: [
-      "We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated effective date. Continued use of DevsWebs after changes constitutes your acceptance of the updated policy.",
+    id: "changes",
+    title: "Changes to this policy",
+    items: [
+      [null, "If this policy changes, we'll update this page and its effective date. Significant changes will also be announced in the app."],
     ],
   },
 ];
 
-const Privacy = () => {
-  return (
-    <div className="relative overflow-hidden">
-
-      <div className="mx-auto max-w-3xl px-6 sm:px-10 py-16 flex flex-col gap-10">
-
-        {/* Header */}
-        <div className="flex flex-col gap-3">
-          <h1 className="text-3xl sm:text-4xl font-bold text-purple-800 dark:text-purple-300">
-            Privacy Policy
-          </h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            Effective date: June 2026
-          </p>
-          <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
-            At <span className="font-semibold text-purple-700 dark:text-purple-400">DevsWebs</span>, we
-            respect your privacy. This policy explains what information we collect, how we use it,
-            and what rights you have over your data.
-          </p>
-        </div>
-
-        {/* Sections */}
-        <div className="flex flex-col gap-8">
-          {sections.map(({ title, content }) => (
-            <div key={title} className="flex flex-col gap-3">
-              <h2 className="text-lg sm:text-xl font-semibold text-purple-700 dark:text-purple-400">
-                {title}
-              </h2>
-              <ul className="flex flex-col gap-2">
-                {content.map((item, i) => (
-                  <li key={i} className="flex gap-2 text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed">
-                    <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-purple-400 dark:bg-purple-500" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        {/* Contact */}
-        <div className="border-t border-gray-200 dark:border-gray-700 pt-8 flex flex-col gap-2">
-          <h2 className="text-lg sm:text-xl font-semibold text-purple-700 dark:text-purple-400">
-            Contact
-          </h2>
-          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed">
-            If you have any questions about this Privacy Policy, please reach out via our{" "}
-            <Link
-              to="/contact"
-              className="text-purple-600 dark:text-purple-400 underline underline-offset-2 hover:text-purple-800 dark:hover:text-purple-300 transition"
-            >
-              Contact page
-            </Link>
-            .
-          </p>
-        </div>
-
+const Privacy = () => (
+  <div className="mx-auto grid max-w-5xl gap-12 px-6 py-20 lg:grid-cols-[200px_1fr]">
+    {/* Table of contents — long legal pages are scanned, not read top to bottom. */}
+    <nav aria-label="On this page" className="hidden lg:block">
+      <div className="sticky top-[calc(var(--navbar-h,56px)+32px)] flex flex-col gap-2">
+        <p className="mb-1 text-xs font-medium text-neutral-500">On this page</p>
+        {SECTIONS.map(({ id, title }) => (
+          <a key={id} href={`#${id}`} className="text-sm text-neutral-400 transition hover:text-white">
+            {title}
+          </a>
+        ))}
       </div>
-    </div>
-  );
-};
+    </nav>
+
+    <article className="flex max-w-2xl flex-col gap-12">
+      <header className="flex flex-col gap-3">
+        <h1
+          className="text-4xl font-[450] tracking-tight text-white"
+          style={{ fontFamily: '"Geist Variable", system-ui, sans-serif' }}
+        >
+          Privacy Policy
+        </h1>
+        <p className="text-sm text-neutral-500">Effective {EFFECTIVE_DATE}</p>
+      </header>
+
+      <section className="rounded-2xl border border-neutral-800 bg-neutral-950 p-6">
+        <h2 className="text-sm font-medium text-white">The short version</h2>
+        <ul className="mt-3 flex flex-col gap-2">
+          {SUMMARY.map((line) => (
+            <li key={line} className="flex gap-2 text-sm text-neutral-300">
+              <span className="text-purple-400">•</span>
+              {line}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {SECTIONS.map(({ id, title, items }) => (
+        <section
+          key={id}
+          id={id}
+          className="flex scroll-mt-[calc(var(--navbar-h,56px)+24px)] flex-col gap-4"
+        >
+          <h2 className="text-xl font-medium text-white">{title}</h2>
+          <ul className="flex flex-col gap-3">
+            {items.map(([label, text]) => (
+              <li key={text} className="text-[15px] leading-relaxed text-neutral-400">
+                {label && <span className="font-medium text-neutral-200">{label}: </span>}
+                {text}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+
+      <section className="flex flex-col gap-3 border-t border-neutral-800 pt-8">
+        <h2 className="text-xl font-medium text-white">Contact</h2>
+        <p className="text-[15px] leading-relaxed text-neutral-400">
+          Questions about your data? Email{" "}
+          <a href={`mailto:${SITE.email}`} className="text-purple-400 hover:text-purple-300">
+            {SITE.email}
+          </a>{" "}
+          or use the{" "}
+          <Link to="/contact" className="text-purple-400 hover:text-purple-300">
+            contact form
+          </Link>
+          .
+        </p>
+      </section>
+    </article>
+  </div>
+);
 
 export default Privacy;

@@ -10,6 +10,6 @@ export const getNotifications = async () => {
         const response = await request.json();
         return response
     } catch (err) {
-        console.log(err)
+        console.error("getNotifications failed:", err)
     }
 }

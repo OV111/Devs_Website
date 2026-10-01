@@ -26,8 +26,8 @@ const useProfileStore = create((set) => ({
         stats: data.stats,
       });
       return data.stats;
-    } catch {
-      console.log("Error");
+    } catch (err) {
+      console.error("fetchProfile failed:", err);
     } finally {
       set({ isLoading: false });
     }
@@ -43,8 +43,8 @@ const useProfileStore = create((set) => ({
       }
       const data = await response.json();
       set({ blogs: data.data ?? [], isBlogsLoading: false });
-    } catch {
-      console.log("Error");
+    } catch (err) {
+      console.error("fetchUserBlogs failed:", err);
       set({ isBlogsLoading: false });
     }
   },

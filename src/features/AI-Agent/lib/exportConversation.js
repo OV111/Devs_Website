@@ -24,7 +24,7 @@ export const buildMarkdown = (title, messages) => {
     })
     .join("\n\n---\n\n");
 
-  return `# ${title}\n\n_Exported from DevsWebs Agent on ${new Date().toLocaleString()}_\n\n${body}\n`;
+  return `# ${title}\n\n_Exported from Vahoha Agent on ${new Date().toLocaleString()}_\n\n${body}\n`;
 };
 
 export const exportConversation = (title, messages) => {

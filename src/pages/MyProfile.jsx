@@ -246,7 +246,7 @@ const MyProfile = () => {
           <div className="flex-1 min-w-0 space-y-8">
             {/* PATHS */}
             <div>
-              <SectionHeader title="paths" right="verified by devswebs" />
+              <SectionHeader title="paths" right="verified by vahoha" />
               <div className="space-y-3">
                 {MOCK_PATHS.map((p) => (
                   <PathCard key={p.id} path={p} />

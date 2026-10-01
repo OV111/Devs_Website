@@ -22,10 +22,8 @@ export default defineConfig({
         manualChunks: {
           "vendor-react": ["react", "react-dom", "react-router-dom"],
           "vendor-motion": ["framer-motion"],
-          "vendor-three": ["three", "postprocessing"],
           "vendor-mui": ["@mui/material", "@mui/icons-material"],
           "vendor-gsap": ["gsap"],
-          "vendor-lottie": ["lottie-react"],
           "vendor-icons": ["react-icons"],
           "vendor-toast": ["react-hot-toast"],
           "vendor-forms": ["react-hook-form"],

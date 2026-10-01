@@ -5,11 +5,13 @@ import CategoryBar from "./components/CategotyBar";
 import TrackSelector from "./components/TrackSelector";
 import RoadmapTree from "./components/RoadmapTree";
 import useRoadmapStore from "../../stores/useRoadmapStore";
+import useAuthStore from "../../stores/useAuthStore";
 import FloatingLoad from "./components/FloatingLoad";
 import TrackOnboardingPanel from "./components/TrackOnboardingPanel";
 
 export default function RoadmapPage() {
   const { selectedCategory, selectedTrack, submitOnboarding, closePanel } = useRoadmapStore();
+  const { auth } = useAuthStore();
   const [panelOpen, setPanelOpen] = useState(false);
   const [saving, setSaving] = useState(false);
 
@@ -71,7 +73,8 @@ export default function RoadmapPage() {
         {selectedTrack && <RoadmapTree key={selectedTrack.id} />}
       </AnimatePresence>
 
-      {selectedTrack && !panelOpen && (
+      {/* Onboarding saves to the account, so guests don't get it. */}
+      {auth && selectedTrack && !panelOpen && (
         <button
           onClick={() => { closePanel(); setPanelOpen(true); }} // close any open layer sidebar first
           // bg-fuchsia-500

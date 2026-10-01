@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 // import {useLocation} from "react-router-dom"
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
@@ -19,6 +19,10 @@ const MainLayout = () => {
         </>
       )} */}
 
+      {/* One place for scroll behaviour on every page: new navigations start
+          at the top (or at the #hash target), and Back/Forward restore where
+          you were. Replaces per-page window.scrollTo(0, 0) effects. */}
+      <ScrollRestoration />
       <Navbar />
       <main className="min-h-screen">
         <Suspense fallback={<LoadingSuspense />}>

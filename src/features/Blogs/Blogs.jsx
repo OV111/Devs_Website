@@ -1,422 +1,315 @@
-import { useState, useEffect, useRef, lazy, Suspense } from "react";
-// eslint-disable-next-line no-unused-vars
-import { motion, AnimatePresence } from "motion/react";
-import { Search, X, ChevronDown, Check } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { Search, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import useThemeStore from "@/stores/useThemeStore";
+import BlogCard from "@/components/blog/BlogCard";
 import { BlogCardSkeletonGrid } from "@/components/blog/BlogCardSkeleton";
+import useDebouncedValue from "@/hooks/useDebouncedValue";
+import { fetchBlogs } from "@/services/blogsApi";
+import FilterMenu from "./components/FilterMenu";
 import {
-  FILTER_TABS,
+  BLOG_TOPICS,
   SORT_OPTIONS,
   DIFFICULTIES,
   READ_TIMES,
 } from "../../../constants/Blogs";
 
-import { fetchBlogs as fetchBlogsApi } from "@/services/blogsApi";
+const PAGE_SIZE = 12; // divisible by 2 and 3, so the grid never ends on a gap
+const DEFAULTS = { sort: "Newest", page: "1" };
+const toOptions = (list) => list.map((v) => ({ label: v, value: v }));
 
-const BlogCard = lazy(() => import("@/components/blog/BlogCard"));
+const chipClass = (active) =>
+  `shrink-0 cursor-pointer rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+    active
+      ? "border-white bg-white text-black"
+      : "border-neutral-800 text-neutral-400 hover:border-neutral-700 hover:text-white"
+  }`;
 
 const Blogs = () => {
-  const { theme } = useThemeStore();
-  const isDarkMode = theme === "dark";
-  const skeletonBaseColor = isDarkMode ? "#1f2937" : "#ebebeb";
-  const skeletonHighlightColor = isDarkMode ? "#374151" : "#f5f5f5";
+  // Filters live in the URL, not useState: a filtered view can be shared or
+  // bookmarked, and Back/Forward step through filter changes.
+  const [params, setParams] = useSearchParams();
+  const topic = params.get("topic") ?? "";
+  const sort = params.get("sort") ?? DEFAULTS.sort;
+  const level = params.get("level") ?? "";
+  const time = params.get("time") ?? "";
+  const q = params.get("q") ?? "";
+  const page = Math.max(1, Number(params.get("page")) || 1);
+
+  const [searchInput, setSearchInput] = useState(q);
+  const debouncedSearch = useDebouncedValue(searchInput.trim(), 300);
 
   const [blogs, setBlogs] = useState([]);
   const [pagination, setPagination] = useState(null);
-  const [page, setPage] = useState(1);
-  const [activeFilter, setActiveFilter] = useState("All");
-  const [sortBy, setSortBy] = useState("Newest");
-  const [difficulty, setDifficulty] = useState("");
-  const [readTime, setReadTime] = useState("");
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [openDropdown, setOpenDropdown] = useState(null);
-  const [loading, setLoading] = useState(false);
+  // One status instead of loading/error booleans that could disagree.
+  const [status, setStatus] = useState("loading"); // loading | ready | error
+  const [retryKey, setRetryKey] = useState(0);
 
-  const searchInputRef = useRef(null);
+  // Any filter change goes back to page 1 — page 3 of the old results means
+  // nothing for the new ones. Defaults are removed to keep URLs short.
+  const updateParams = (patch, { replace = false } = {}) => {
+    setParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        for (const [key, value] of Object.entries(patch)) {
+          if (!value || value === DEFAULTS[key]) next.delete(key);
+          else next.set(key, value);
+        }
+        if (!("page" in patch)) next.delete("page");
+        return next;
+      },
+      { replace },
+    );
+  };
 
-  const openMenu = (name) => setOpenDropdown(name);
-  const closeMenu = () => setOpenDropdown(null);
+  // Typing updates the URL once the user pauses. `replace` so each keystroke
+  // pause doesn't add a Back-button step.
+  useEffect(() => {
+    setParams(
+      (prev) => {
+        if ((prev.get("q") ?? "") === debouncedSearch) return prev;
+        const next = new URLSearchParams(prev);
+        if (debouncedSearch) next.set("q", debouncedSearch);
+        else next.delete("q");
+        next.delete("page");
+        return next;
+      },
+      { replace: true },
+    );
+  }, [debouncedSearch, setParams]);
 
   useEffect(() => {
-    if (searchOpen) searchInputRef.current?.focus();
-  }, [searchOpen]);
+    // Abort the previous request when filters change, so a slow stale response
+    // can never overwrite the results of a newer one.
+    const controller = new AbortController();
+    setStatus("loading");
 
-  useEffect(() => {
-    setLoading(true);
-    fetchBlogsApi(page, 10, { filter: activeFilter, sort: sortBy, difficulty, readTime })
+    fetchBlogs(
+      page,
+      PAGE_SIZE,
+      { category: topic, sort, difficulty: level, readTime: time, q },
+      { signal: controller.signal },
+    )
       .then(({ blogs, pagination }) => {
         setBlogs(blogs);
         setPagination(pagination);
+        setStatus("ready");
       })
-      .catch(() => {})
-      .finally(() => setLoading(false));
-  }, [page, activeFilter, sortBy, difficulty, readTime]);
+      .catch((err) => {
+        if (err.name !== "AbortError") setStatus("error");
+      });
 
-  const filteredBlogs = searchQuery
-    ? blogs.filter((b) =>
-        b.title?.toLowerCase().includes(searchQuery.toLowerCase()),
-      )
-    : blogs;
+    return () => controller.abort();
+  }, [topic, sort, level, time, q, page, retryKey]);
+
+  const goToPage = (n) => {
+    updateParams({ page: String(n) });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const hasFilters = Boolean(topic || level || time || q);
+  const clearFilters = () => {
+    setSearchInput("");
+    setParams(sort === DEFAULTS.sort ? {} : { sort });
+  };
 
   const totalPages = pagination?.totalPages ?? 1;
 
-  const handleFilterTab = (tab) => {
-    setActiveFilter(tab);
-    setPage(1);
-  };
-
-  const handleDifficulty = (d) => {
-    setDifficulty(d === "All" ? "" : d);
-    setPage(1);
-    closeMenu();
-  };
-
-  const handleReadTime = (t) => {
-    setReadTime(t === "All" ? "" : t);
-    setPage(1);
-    closeMenu();
-  };
-
-  const handleSort = (opt) => {
-    setSortBy(opt);
-    setPage(1);
-    closeMenu();
-  };
-
-  const getPageNumbers = () => {
-    if (totalPages <= 5)
-      return Array.from({ length: totalPages }, (_, i) => i + 1);
-    if (page <= 3) return [1, 2, 3, "...", totalPages];
-    if (page >= totalPages - 2)
-      return [1, "...", totalPages - 2, totalPages - 1, totalPages];
-    return [1, "...", page - 1, page, page + 1, "...", totalPages];
-  };
-
   return (
-    <div className="mx-auto max-w-7xl px-4 pb-20 pt-8 sm:px-6 lg:px-8">
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.35, ease: "easeOut" }}
-        className="mb-3 flex flex-col gap-3"
-      >
-        <div className="flex items-center justify-between gap-3">
-          <div className="overflow-x-auto pb-1 sm:pb-0">
-            <ul className="flex w-max gap-1 sm:w-auto sm:flex-wrap sm:gap-2">
-              {FILTER_TABS.map((tab) => (
-                <li key={tab}>
-                  <button
-                    type="button"
-                    onClick={() => handleFilterTab(tab)}
-                    className={`cursor-pointer whitespace-nowrap rounded-md px-2.5 py-1.5 text-xs font-medium transition-all duration-200 sm:px-3 ${
-                      activeFilter === tab
-                        ? "bg-purple-600 text-white"
-                        : "bg-gray-100 text-gray-600 hover:bg-purple-50 hover:text-purple-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-purple-950/40 dark:hover:text-purple-300"
-                    }`}
-                  >
-                    {tab}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="flex shrink-0 items-center gap-2">
-            <div
-              className="flex items-center gap-2"
-              onMouseEnter={() => setSearchOpen(true)}
-              onMouseLeave={() => { if (!searchQuery) setSearchOpen(false); }}
-            >
-              <AnimatePresence>
-                {searchOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, width: 0 }}
-                    animate={{ opacity: 1, width: 300 }}
-                    exit={{ opacity: 0, width: 0 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
-                    className="overflow-hidden"
-                  >
-                    <div className="flex items-center gap-2 rounded-md bg-white px-3 py-1 dark:border-gray-700 dark:bg-gray-900">
-                      <Search className="h-3 w-3 shrink-0 text-gray-400 dark:text-gray-500" />
-                      <input
-                        ref={searchInputRef}
-                        type="text"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Search blogs..."
-                        className="min-w-0 flex-1 bg-transparent text-sm text-gray-800 placeholder-gray-400 outline-none dark:text-gray-100 dark:placeholder-gray-500"
-                      />
-                      {searchQuery && (
-                        <button
-                          type="button"
-                          onClick={() => setSearchQuery("")}
-                          className="shrink-0 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                        >
-                          <X className="h-3.5 w-3.5" />
-                        </button>
-                      )}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              <button
-                type="button"
-                aria-label="Toggle search"
-                className={`flex cursor-pointer items-center justify-center rounded-md px-2 py-1.5 transition-all duration-200 ${
-                  searchOpen
-                    ? "bg-purple-600 text-white dark:border-purple-500"
-                    : "bg-gray-100 text-gray-500 hover:bg-purple-50 hover:text-purple-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-purple-950/40 dark:hover:text-purple-300"
-                }`}
-              >
-                <Search className="h-4 w-4" />
-              </button>
-            </div>
-
-            <div
-              className="relative"
-              onMouseEnter={() => openMenu("level")}
-              onMouseLeave={closeMenu}
-            >
-              <button
-                type="button"
-                className="flex cursor-pointer items-center gap-1.5 rounded-md bg-gray-100 px-2.5 py-1.5 text-xs font-medium text-gray-600 transition-all duration-200 hover:bg-purple-50 hover:text-purple-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-purple-950/40 dark:hover:text-purple-300 sm:px-3"
-              >
-                <span>{difficulty || "Level"}</span>
-                <motion.span
-                  animate={{ rotate: openDropdown === "level" ? 180 : 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <ChevronDown className="h-3.5 w-3.5" />
-                </motion.span>
-              </button>
-
-              <AnimatePresence>
-                {openDropdown === "level" && (
-                  <motion.ul
-                    initial={{ opacity: 0, y: -6, scale: 0.96 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -6, scale: 0.96 }}
-                    transition={{ duration: 0.18, ease: "easeOut" }}
-                    className="absolute right-0 z-50 mt-1.5 w-36 overflow-hidden rounded-md bg-white dark:border-gray-700 dark:bg-gray-900"
-                  >
-                    {["All", ...DIFFICULTIES].map((d) => (
-                      <li key={d}>
-                        <button
-                          type="button"
-                          onClick={() => handleDifficulty(d)}
-                          className="flex w-full cursor-pointer items-center justify-between px-3 py-2 text-xs font-medium text-gray-700 transition-colors hover:bg-purple-50 hover:text-purple-700 dark:text-gray-300 dark:hover:bg-purple-950/40 dark:hover:text-purple-300"
-                        >
-                          {d}
-                          {(difficulty === d ||
-                            (d === "All" && !difficulty)) && (
-                            <Check className="h-3 w-3 text-purple-600 dark:text-purple-400" />
-                          )}
-                        </button>
-                      </li>
-                    ))}
-                  </motion.ul>
-                )}
-              </AnimatePresence>
-            </div>
-
-            <div
-              className="relative"
-              onMouseEnter={() => openMenu("time")}
-              onMouseLeave={closeMenu}
-            >
-              <button
-                type="button"
-                className="flex cursor-pointer items-center gap-1.5 rounded-md bg-gray-100 px-2.5 py-1.5 text-xs font-medium text-gray-600 transition-all duration-200 hover:bg-purple-50 hover:text-purple-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-purple-950/40 dark:hover:text-purple-300 sm:px-3"
-              >
-                <span>{readTime || "Time"}</span>
-                <motion.span
-                  animate={{ rotate: openDropdown === "time" ? 180 : 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <ChevronDown className="h-3.5 w-3.5" />
-                </motion.span>
-              </button>
-
-              <AnimatePresence>
-                {openDropdown === "time" && (
-                  <motion.ul
-                    initial={{ opacity: 0, y: -6, scale: 0.96 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -6, scale: 0.96 }}
-                    transition={{ duration: 0.18, ease: "easeOut" }}
-                    className="absolute right-0 z-50 mt-1.5 w-36 overflow-hidden rounded-md  bg-white shadow-lg shadow-black/5 dark:bg-gray-900 dark:shadow-black/30"
-                  >
-                    {["All", ...READ_TIMES].map((t) => (
-                      <li key={t}>
-                        <button
-                          type="button"
-                          onClick={() => handleReadTime(t)}
-                          className="flex w-full cursor-pointer items-center justify-between px-3 py-2 text-xs font-medium text-gray-700 transition-colors hover:bg-purple-50 hover:text-purple-700 dark:text-gray-300 dark:hover:bg-purple-950/40 dark:hover:text-purple-300"
-                        >
-                          {t}
-                          {(readTime === t || (t === "All" && !readTime)) && (
-                            <Check className="h-3 w-3 text-purple-600 dark:text-purple-400" />
-                          )}
-                        </button>
-                      </li>
-                    ))}
-                  </motion.ul>
-                )}
-              </AnimatePresence>
-            </div>
-
-            <div
-              className="relative"
-              onMouseEnter={() => openMenu("sort")}
-              onMouseLeave={closeMenu}
-            >
-              <button
-                type="button"
-                className="flex cursor-pointer items-center gap-1.5 rounded-md bg-gray-100 px-2.5 py-1.5 text-xs font-medium text-gray-600 transition-all duration-200 hover:bg-purple-50 hover:text-purple-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-purple-950/40 dark:hover:text-purple-300 sm:px-3"
-              >
-                <span>{sortBy}</span>
-                <motion.span
-                  animate={{ rotate: openDropdown === "sort" ? 180 : 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <ChevronDown className="h-3.5 w-3.5" />
-                </motion.span>
-              </button>
-
-              <AnimatePresence>
-                {openDropdown === "sort" && (
-                  <motion.ul
-                    initial={{ opacity: 0, y: -6, scale: 0.96 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -6, scale: 0.96 }}
-                    transition={{ duration: 0.18, ease: "easeOut" }}
-                    className="absolute right-0 z-50 mt-1.5 w-36 overflow-hidden rounded-md  bg-white shadow-lg shadow-black/5  dark:bg-gray-900 "
-                  >
-                    {SORT_OPTIONS.map((opt) => (
-                      <li key={opt}>
-                        <button
-                          type="button"
-                          onClick={() => handleSort(opt)}
-                          className="flex w-full cursor-pointer items-center justify-between px-3 py-2 text-xs font-medium text-gray-700 transition-colors hover:bg-purple-50 hover:text-purple-700 dark:text-gray-300 dark:hover:bg-purple-950/40 dark:hover:text-purple-300"
-                        >
-                          {opt}
-                          {sortBy === opt && (
-                            <Check className="h-3 w-3 text-purple-600 dark:text-purple-400" />
-                          )}
-                        </button>
-                      </li>
-                    ))}
-                  </motion.ul>
-                )}
-              </AnimatePresence>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-
-      <div className="mt-5">
-        <SkeletonTheme
-          baseColor={skeletonBaseColor}
-          highlightColor={skeletonHighlightColor}
+    <div className="mx-auto max-w-7xl px-4 pt-14 pb-24 sm:px-6 lg:px-8">
+      <header className="mb-10">
+        <h1
+          className="text-4xl font-[450] tracking-tight text-white"
+          style={{ fontFamily: '"Geist Variable", system-ui, sans-serif' }}
         >
-          <Suspense fallback={<BlogCardSkeletonGrid />}>
-            {loading ? (
-              <BlogCardSkeletonGrid />
-            ) : filteredBlogs.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-28 text-center">
-                <p className="text-lg font-semibold text-gray-600 dark:text-gray-400">No posts found</p>
-                <p className="mt-1 text-sm text-gray-400">Try adjusting your filters or search query.</p>
-              </div>
-            ) : (
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={`${activeFilter}-${sortBy}-${difficulty}-${readTime}-${page}`}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3"
-                >
-                  {filteredBlogs.map((blog, i) => (
-                    <motion.div
-                      key={blog._id}
-                      className="h-full flex flex-col"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        duration: 0.3,
-                        delay: i * 0.05,
-                        ease: "easeOut",
-                      }}
-                    >
-                      <BlogCard card={blog} />
-                    </motion.div>
-                  ))}
-                </motion.div>
-              </AnimatePresence>
-            )}
-          </Suspense>
-        </SkeletonTheme>
+          Blog
+        </h1>
+        <p className="mt-2 text-neutral-400">
+          Articles from the community, organised by topic.
+        </p>
+      </header>
+
+      {/* Search + menus */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <label className="relative flex items-center sm:w-80">
+          <Search size={15} className="pointer-events-none absolute left-3 text-neutral-500" />
+          <input
+            type="search"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            placeholder="Search by title…"
+            aria-label="Search posts by title"
+            className="w-full rounded-lg border border-neutral-800 bg-neutral-950 py-2 pr-9 pl-9 text-sm text-white placeholder:text-neutral-600 outline-none transition-colors focus:border-neutral-600"
+          />
+          {searchInput && (
+            <button
+              type="button"
+              onClick={() => setSearchInput("")}
+              aria-label="Clear search"
+              className="absolute right-2.5 cursor-pointer text-neutral-500 hover:text-white"
+            >
+              <X size={15} />
+            </button>
+          )}
+        </label>
+
+        <div className="flex items-center gap-2">
+          <FilterMenu
+            label="Level"
+            allLabel="All levels"
+            value={level}
+            options={toOptions(DIFFICULTIES)}
+            onChange={(v) => updateParams({ level: v })}
+          />
+          <FilterMenu
+            label="Read time"
+            allLabel="Any length"
+            value={time}
+            options={toOptions(READ_TIMES)}
+            onChange={(v) => updateParams({ time: v })}
+          />
+          <FilterMenu
+            label={sort}
+            value={sort}
+            options={toOptions(SORT_OPTIONS)}
+            onChange={(v) => updateParams({ sort: v })}
+          />
+        </div>
       </div>
 
-      {totalPages > 1 && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="mt-12 flex flex-wrap items-center justify-center gap-1.5"
-        >
+      {/* Topics — scrolls sideways on small screens instead of wrapping into
+          several rows that push the posts down. */}
+      <div className="-mx-4 mt-5 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0">
+        <div className="flex w-max gap-2 sm:w-auto sm:flex-wrap">
+          <button type="button" onClick={() => updateParams({ topic: "" })} className={chipClass(!topic)}>
+            All topics
+          </button>
+          {BLOG_TOPICS.map(({ label, value }) => (
+            <button
+              key={value}
+              type="button"
+              onClick={() => updateParams({ topic: value })}
+              className={chipClass(topic === value)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Result summary */}
+      <div className="mt-6 mb-5 flex h-6 items-center justify-between text-sm text-neutral-500">
+        <span>
+          {status === "ready" && pagination
+            ? `${pagination.total} ${pagination.total === 1 ? "post" : "posts"}`
+            : ""}
+        </span>
+        {hasFilters && (
           <button
             type="button"
-            onClick={() => setPage((p) => Math.max(1, p - 1))}
-            disabled={page === 1}
-            aria-label="Previous page"
-            className="flex h-8 w-8 items-center justify-center rounded-md  bg-white text-slate-500 transition hover:border-slate-300 hover:text-slate-700 disabled:cursor-not-allowed disabled:opacity-40 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400 sm:h-9 sm:w-9"
+            onClick={clearFilters}
+            className="cursor-pointer text-neutral-400 transition-colors hover:text-white"
           >
-            ‹
+            Clear filters
           </button>
+        )}
+      </div>
 
-          {getPageNumbers().map((num, i) =>
-            num === "..." ? (
-              <span
-                key={`ellipsis-${i}`}
-                className="flex h-8 w-8 items-center justify-center text-[13px] text-slate-400 sm:h-9 sm:w-9"
-              >
-                …
-              </span>
-            ) : (
-              <button
-                key={num}
-                type="button"
-                onClick={() => setPage(num)}
-                className={`flex h-8 w-8 items-center justify-center rounded-md border text-[13px] font-medium transition sm:h-9 sm:w-9 ${
-                  page === num
-                    ? "border-violet-600 bg-violet-600 text-white"
-                    : "border-slate-200 bg-white text-slate-500 hover:border-slate-300 hover:text-slate-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400"
-                }`}
-              >
-                {num}
-              </button>
-            ),
-          )}
+      <SkeletonTheme baseColor="#171717" highlightColor="#262626">
+        {status === "loading" && <BlogCardSkeletonGrid count={6} />}
 
-          <button
-            type="button"
-            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-            disabled={page === totalPages}
-            aria-label="Next page"
-            className="flex h-8 w-8 items-center justify-center rounded-md border border-slate-200 bg-purple-600 text-slate-500 transition hover:border-slate-300 hover:text-slate-700 disabled:cursor-not-allowed disabled:opacity-40 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400 sm:h-9 sm:w-9"
-          >
-            ›
-          </button>
-        </motion.div>
+        {status === "error" && (
+          <div className="flex flex-col items-center gap-3 rounded-2xl border border-neutral-800 py-20 text-center">
+            <p className="font-medium text-neutral-200">Couldn&apos;t load posts</p>
+            <p className="text-sm text-neutral-500">Check your connection and try again.</p>
+            <button
+              type="button"
+              onClick={() => setRetryKey((k) => k + 1)}
+              className="mt-2 cursor-pointer rounded-full bg-white px-4 py-2 text-sm font-medium text-black transition hover:bg-neutral-200"
+            >
+              Retry
+            </button>
+          </div>
+        )}
+
+        {status === "ready" && blogs.length === 0 && (
+          <div className="flex flex-col items-center gap-2 rounded-2xl border border-neutral-800 py-20 text-center">
+            <p className="font-medium text-neutral-200">No posts found</p>
+            <p className="text-sm text-neutral-500">
+              {hasFilters ? "Try a different topic or search." : "Nothing has been published yet."}
+            </p>
+          </div>
+        )}
+
+        {status === "ready" && blogs.length > 0 && (
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            {blogs.map((blog) => (
+              <BlogCard key={blog._id} card={blog} />
+            ))}
+          </div>
+        )}
+      </SkeletonTheme>
+
+      {status === "ready" && totalPages > 1 && (
+        <Pagination page={page} totalPages={totalPages} onChange={goToPage} />
       )}
     </div>
   );
 };
+
+const pageNumbers = (page, total) => {
+  if (total <= 5) return Array.from({ length: total }, (_, i) => i + 1);
+  if (page <= 3) return [1, 2, 3, 4, "…", total];
+  if (page >= total - 2) return [1, "…", total - 3, total - 2, total - 1, total];
+  return [1, "…", page - 1, page, page + 1, "…", total];
+};
+
+const pageBtn =
+  "flex h-9 min-w-9 cursor-pointer items-center justify-center rounded-lg px-2 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-30";
+
+const Pagination = ({ page, totalPages, onChange }) => (
+  <nav aria-label="Pagination" className="mt-12 flex items-center justify-center gap-1">
+    <button
+      type="button"
+      onClick={() => onChange(page - 1)}
+      disabled={page === 1}
+      aria-label="Previous page"
+      className={`${pageBtn} text-neutral-400 hover:bg-neutral-900 hover:text-white`}
+    >
+      <ChevronLeft size={16} />
+    </button>
+    {pageNumbers(page, totalPages).map((n, i) =>
+      n === "…" ? (
+        <span key={`gap-${i}`} className="px-1 text-neutral-600">
+          …
+        </span>
+      ) : (
+        <button
+          key={n}
+          type="button"
+          onClick={() => onChange(n)}
+          aria-current={n === page ? "page" : undefined}
+          className={`${pageBtn} ${
+            n === page
+              ? "bg-white font-medium text-black"
+              : "text-neutral-400 hover:bg-neutral-900 hover:text-white"
+          }`}
+        >
+          {n}
+        </button>
+      ),
+    )}
+    <button
+      type="button"
+      onClick={() => onChange(page + 1)}
+      disabled={page === totalPages}
+      aria-label="Next page"
+      className={`${pageBtn} text-neutral-400 hover:bg-neutral-900 hover:text-white`}
+    >
+      <ChevronRight size={16} />
+    </button>
+  </nav>
+);
 
 export default Blogs;

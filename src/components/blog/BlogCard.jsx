@@ -1,11 +1,3 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
 import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { FaRegBookmark, FaBookmark, FaRegComment, FaRegHeart, FaHeart } from "react-icons/fa6";
@@ -108,7 +100,7 @@ const BlogCard = ({ card }) => {
   const resolvedPicture = resolveAsset(post.pictures, pictureMap);
   const resolvedCover   = resolveAsset(post.image, blogImgMap);
   const authorName = `${post.firstName ?? ""} ${post.lastName ?? ""}`.trim() || "Unknown";
-  const userName = post.userName || "@username";
+  const userName = post.userName ?? "";
   const authorInitial = authorName.charAt(0).toUpperCase();
 
   const liked = likedIds.has(post.rawId);
@@ -166,39 +158,60 @@ const BlogCard = ({ card }) => {
     }
   };
 
-  const tags = post.tags;
+  const tags = post.tags.slice(0, 2);
+  const date = new Date(post.createdAt).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+  const canInteract = auth && !post.isDefault;
+  const iconBtn = (active, activeClass) =>
+    `relative z-10 flex items-center gap-1 rounded-full p-1.5 transition-colors ${
+      canInteract ? "cursor-pointer" : "cursor-not-allowed opacity-60"
+    } ${active ? activeClass : "hover:text-neutral-900 dark:hover:text-white"}`;
 
   return (
-    <Card className="flex flex-col w-full h-full min-h-[478px] overflow-hidden rounded-2xl border-none bg-violet-50/40 dark:bg-slate-900">
-      <div className="relative h-56 border-b border-violet-200 bg-violet-200/60 dark:border-slate-700 dark:bg-slate-800">
-        {resolvedCover ? (
+    // The whole card opens the post: the title link stretches over it
+    // (after:absolute after:inset-0), and the action buttons sit above that
+    // layer with z-10 so they stay clickable on their own.
+    <article className="group relative flex h-full min-h-[478px] flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-colors hover:border-neutral-300 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:border-neutral-700">
+      <div className="relative h-56 shrink-0 overflow-hidden bg-neutral-100 dark:bg-neutral-900">
+        {resolvedCover && (
           <img
             src={resolvedCover}
-            alt={post.title}
-            className="h-full w-full object-cover"
+            alt=""
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
-        ) : (
-          <div className="h-full w-full bg-violet-200/60 dark:bg-slate-800" />
         )}
         <button
           type="button"
           onClick={handleSave}
-          disabled={!auth || post.isDefault || saveLoading}
-          className={`absolute right-4 top-4 rounded-full bg-white/95 p-2 font-medium shadow-sm transition-colors duration-200 hover:bg-violet-600 hover:text-white dark:bg-slate-800/90 dark:text-slate-200 ${!auth || post.isDefault ? "cursor-not-allowed text-slate-400" : "cursor-pointer text-slate-700"} ${saved ? "text-violet-600" : ""}`}
+          disabled={!canInteract || saveLoading}
+          aria-label={saved ? "Remove from saved" : "Save post"}
+          aria-pressed={saved}
+          className={`absolute top-3 right-3 z-10 rounded-full bg-black/60 p-2 backdrop-blur-sm transition-colors ${
+            saved ? "text-purple-400" : "text-white hover:text-purple-300"
+          } ${canInteract ? "cursor-pointer" : "cursor-not-allowed"}`}
         >
-          {saved ? <FaBookmark /> : <FaRegBookmark />}
+          {saved ? <FaBookmark size={13} /> : <FaRegBookmark size={13} />}
         </button>
-        <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-3">
-          <div className="flex max-w-[20rem] flex-wrap gap-1.5 overflow-hidden">
+      </div>
+
+      <div className="flex flex-1 flex-col gap-2.5 p-5">
+        {tags.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
             {tags.map((tag, index) => (
               <span
                 key={`${tag}-${index}`}
-                className="flex min-w-0 items-center justify-center rounded-full bg-violet-950/70 px-3 py-1 text-[8px] font-semibold uppercase tracking-wide text-violet-50 shadow-sm backdrop-blur-sm"
+                className="rounded-full bg-neutral-100 px-2.5 py-0.5 text-[11px] font-medium text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400"
               >
                 #{tag}
               </span>
             ))}
           </div>
+        )}
+
+        <h3 className="line-clamp-2 text-lg leading-snug font-medium text-neutral-900 dark:text-neutral-100">
           <Link
             to={`/posts/${post.id}`}
             state={{
@@ -209,81 +222,67 @@ const BlogCard = ({ card }) => {
                 _displayPicture: auth ? (post.pictures ?? null) : null,
               },
             }}
-            className="shrink-0 rounded-full bg-purple-600 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-violet-400 dark:bg-purple-600 dark:hover:bg-violet-500"
+            className="after:absolute after:inset-0 focus-visible:outline-none"
           >
-            Read More
+            {post.title}
           </Link>
-        </div>
-      </div>
-      <CardHeader className="space-y-3 px-6 pb-0 pt-4">
-        <div className="flex items-center justify-between text-xs font-medium uppercase text-slate-500 dark:text-slate-400">
-          <span>
-            {new Date(post.createdAt).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </span>
-          <CardDescription className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
-            {post.readTime} read
-          </CardDescription>
-        </div>
-        <CardTitle className="h-[50px] overflow-hidden pb-3 text-xl leading-tight text-slate-900 dark:text-slate-100">
-          {post.title}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="flex-1 px-6 pb-2 pt-0">
-        <p className="h-[72px] overflow-hidden text-sm leading-6 text-slate-600 dark:text-slate-300">
-          {post.description}
-        </p>
-      </CardContent>
+        </h3>
 
-      <CardFooter className="relative items-center justify-between border-t border-violet-100 px-4 py-3 dark:border-slate-700 sm:px-6">
-        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+        {post.description && (
+          <p className="line-clamp-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+            {post.description}
+          </p>
+        )}
+      </div>
+
+      <footer className="flex items-center justify-between gap-3 border-t border-neutral-200 px-5 py-3 dark:border-neutral-800">
+        <div className="flex min-w-0 items-center gap-2.5">
           {resolvedPicture ? (
             <img
               src={resolvedPicture}
-              alt={authorName}
-              className="h-8 w-8 sm:h-10 sm:w-10 rounded-full shrink-0 object-cover"
+              alt=""
+              className="h-7 w-7 shrink-0 rounded-full object-cover"
             />
           ) : (
-            <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full shrink-0 bg-purple-100 dark:bg-purple-950 flex items-center justify-center text-purple-600 dark:text-purple-300 text-xs sm:text-sm font-bold">
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-purple-100 text-xs font-semibold text-purple-700 dark:bg-purple-950 dark:text-purple-300">
               {authorInitial}
-            </div>
+            </span>
           )}
-          <div className="flex flex-col min-w-0">
-            <span className="h-5 overflow-x-hidden text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200 truncate max-w-[100px] sm:max-w-40">
+          <div className="min-w-0 leading-tight">
+            <p className="truncate text-xs font-medium text-neutral-800 dark:text-neutral-200">
               {authorName}
-            </span>
-            <span className="h-4 overflow-x-hidden capitalize truncate text-xs font-semibold text-gray-400 dark:text-slate-400 max-w-20 sm:max-w-[150px]">
-              {userName}
-            </span>
+            </p>
+            <p className="truncate text-[11px] text-neutral-500">
+              {date} · {post.readTime} read
+            </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-0.5 sm:gap-1 text-slate-400 dark:text-slate-500 shrink-0">
+        <div className="flex shrink-0 items-center text-neutral-400 dark:text-neutral-500">
           <button
             type="button"
             onClick={handleLike}
-            disabled={!auth || post.isDefault || likeLoading}
-            className={`flex items-center gap-1 rounded-full p-1.5 sm:p-2 transition
-              ${!auth || post.isDefault ? "cursor-not-allowed" : "cursor-pointer hover:text-rose-500"}
-              ${liked ? "text-rose-500" : ""}
-            `}
+            disabled={!canInteract || likeLoading}
+            aria-label={liked ? "Unlike post" : "Like post"}
+            aria-pressed={liked}
+            className={iconBtn(liked, "text-rose-500")}
           >
-            {liked
-              ? <FaHeart className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              : <FaRegHeart className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-            }
+            {liked ? <FaHeart className="h-3.5 w-3.5" /> : <FaRegHeart className="h-3.5 w-3.5" />}
             {likesCount > 0 && <span className="text-xs">{likesCount}</span>}
           </button>
-          <div className="relative">
+
+          <div className="relative z-10">
             <button
               type="button"
-              onClick={() => { setCommentOpen((prev) => !prev); setShareOpen(false); }}
-              className={`flex items-center gap-1 rounded-full p-1.5 sm:p-2 transition hover:text-blue-500 ${commentOpen ? "text-blue-500" : ""} ${auth ? "cursor-pointer" : "cursor-not-allowed"}`}
+              onClick={() => {
+                setCommentOpen((prev) => !prev);
+                setShareOpen(false);
+              }}
+              aria-label="Comments"
+              aria-expanded={commentOpen}
+              className={iconBtn(commentOpen, "text-sky-500")}
             >
-              <FaRegComment className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              <FaRegComment className="h-3.5 w-3.5" />
               {commentsCount > 0 && <span className="text-xs">{commentsCount}</span>}
             </button>
             {commentOpen && !post.isDefault && (
@@ -294,13 +293,21 @@ const BlogCard = ({ card }) => {
               />
             )}
           </div>
-          <div className="relative">
+
+          <div className="relative z-10">
             <button
               type="button"
-              onClick={() => { setShareOpen((prev) => !prev); setCommentOpen(false); }}
-              className={`cursor-pointer rounded-full p-1.5 sm:p-2 transition hover:text-emerald-500 ${shareOpen ? "text-emerald-500" : ""}`}
+              onClick={() => {
+                setShareOpen((prev) => !prev);
+                setCommentOpen(false);
+              }}
+              aria-label="Share post"
+              aria-expanded={shareOpen}
+              className={`relative z-10 cursor-pointer rounded-full p-1.5 transition-colors ${
+                shareOpen ? "text-emerald-500" : "hover:text-neutral-900 dark:hover:text-white"
+              }`}
             >
-              <FiShare className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              <FiShare className="h-3.5 w-3.5" />
             </button>
             {shareOpen && (
               <SharePopover
@@ -311,8 +318,8 @@ const BlogCard = ({ card }) => {
             )}
           </div>
         </div>
-      </CardFooter>
-    </Card>
+      </footer>
+    </article>
   );
 };
 

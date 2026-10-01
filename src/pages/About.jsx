@@ -1,607 +1,212 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import GradientText from "../components/effects/GradientText";
-import ShinyText from "../components/effects/ShinyText";
-import { CATEGORY_OPTIONS2 } from "../../constants/Categories";
-import { motion as Motion } from "framer-motion";
+import { motion as Motion } from "motion/react";
+import { Lock, Target, Bot, Check, Github } from "lucide-react";
 
-function useCounter(target, duration = 2000, active = false) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!active) return;
-    let current = 0;
-    const step = target / (duration / 16);
-    const timer = setInterval(() => {
-      current += step;
-      if (current >= target) {
-        setCount(target);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(current));
-      }
-    }, 16);
-    return () => clearInterval(timer);
-  }, [target, duration, active]);
-  return count;
-}
-
-function StatCard({ value, label, suffix = "+", delay = 0 }) {
-  const [started, setStarted] = useState(false);
-  const count = useCounter(value, 2000, started);
-  return (
-    <Motion.div
-      className="flex flex-col items-center gap-2 p-6 rounded-2xl
-        bg-white/60 dark:bg-white/5
-        border border-fuchsia-100 dark:border-fuchsia-900/40
-        shadow-sm backdrop-blur"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.5 }}
-      transition={{ duration: 0.5, delay }}
-      onViewportEnter={() => setStarted(true)}
-    >
-      <span className="text-4xl md:text-5xl font-bold text-fuchsia-700 dark:text-fuchsia-400">
-        {count}
-        {suffix}
-      </span>
-      <span className="text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium text-center">
-        {label}
-      </span>
-    </Motion.div>
-  );
-}
+// Copy follows VISION.md (problem → solution → who it's for). Everything on
+// this page must be true today: no invented user counts, no placeholder
+// socials, and roadmap items only for work that's built or actually planned.
 
 const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 28 },
+  initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.55, delay },
+  transition: { duration: 0.5, delay },
 });
 
-const features = [
+const PILLARS = [
   {
-    icon: "📖",
-    title: "Read",
-    desc: "Browse curated technical content organised by specialisation. From quick tips to deep-dives — find what you need, when you need it.",
-    gradient:
-      "from-purple-500/10 to-fuchsia-500/10 dark:from-purple-900/20 dark:to-fuchsia-900/20",
-    border: "border-purple-200 dark:border-purple-800/40",
-    badge: "Available now",
+    icon: Lock,
+    title: "Roadmaps you have to earn",
+    body: "Every layer is locked until you pass a server-graded exam on the one before it. No checkbox to tick, no skipping ahead.",
   },
   {
-    icon: "✍️",
-    title: "Write",
-    desc: "Share your knowledge with thousands of developers. Publish articles, tutorials, and insights across 12 tech categories.",
-    gradient:
-      "from-fuchsia-500/10 to-pink-500/10 dark:from-fuchsia-900/20 dark:to-pink-900/20",
-    border: "border-fuchsia-200 dark:border-fuchsia-800/40",
-    badge: "Available now",
+    icon: Target,
+    title: "Your weak spots, not a score",
+    body: "Fail an exam and you see exactly which topics you missed, so you review those instead of starting over.",
   },
   {
-    icon: "🤝",
-    title: "Connect",
-    desc: "Follow developers you admire, get followed back, and chat in real-time with your network. Community is at the core.",
-    gradient:
-      "from-violet-500/10 to-purple-500/10 dark:from-violet-900/20 dark:to-purple-900/20",
-    border: "border-violet-200 dark:border-violet-800/40",
-    badge: "Available now",
-  },
-  {
-    icon: "🗂️",
-    title: "Create Projects",
-    desc: "Showcase what you have built. Share repos, demos, and write-ups so the community can discover, learn from, and contribute to your work.",
-    gradient:
-      "from-sky-500/10 to-cyan-500/10 dark:from-sky-900/20 dark:to-cyan-900/20",
-    border: "border-sky-200 dark:border-sky-800/40",
-    badge: "Coming soon",
-  },
-  {
-    icon: "📚",
-    title: "Code Libraries",
-    desc: "Publish and browse reusable snippets, hooks, utilities, and mini-libraries tagged by language and framework — copy, adapt, ship faster.",
-    gradient:
-      "from-emerald-500/10 to-teal-500/10 dark:from-emerald-900/20 dark:to-teal-900/20",
-    border: "border-emerald-200 dark:border-emerald-800/40",
-    badge: "Coming soon",
-  },
-  {
-    icon: "🎬",
-    title: "Video Explanations",
-    desc: "Some concepts click better when you see them. Attach short video walkthroughs to your articles and library entries.",
-    gradient:
-      "from-orange-500/10 to-amber-500/10 dark:from-orange-900/20 dark:to-amber-900/20",
-    border: "border-orange-200 dark:border-orange-800/40",
-    badge: "Coming soon",
-  },
-  {
-    icon: "📝",
-    title: "Exams",
-    desc: "Test your knowledge with topic-based exams tied to your roadmap. Track your score, review missed topics, and let the AI agent guide what to study next.",
-    gradient:
-      "from-rose-500/10 to-pink-500/10 dark:from-rose-900/20 dark:to-pink-900/20",
-    border: "border-rose-200 dark:border-rose-800/40",
-    badge: "Available now",
-  },
-  {
-    icon: "💻",
-    title: "Coding Problems",
-    desc: "Sharpen your skills with hand-picked coding challenges. Solve problems directly in the browser, compare solutions with other devs, and build real interview confidence.",
-    gradient:
-      "from-cyan-500/10 to-sky-500/10 dark:from-cyan-900/20 dark:to-sky-900/20",
-    border: "border-cyan-200 dark:border-cyan-800/40",
-    badge: "Available now",
-  },
-  {
-    icon: "🗺️",
-    title: "Roadmaps",
-    desc: "Follow structured learning paths for every specialisation. Know exactly what to learn next, track your progress layer by layer, and unlock the AI agent as you advance.",
-    gradient:
-      "from-lime-500/10 to-green-500/10 dark:from-lime-900/20 dark:to-green-900/20",
-    border: "border-lime-200 dark:border-lime-800/40",
-    badge: "Available now",
+    icon: Bot,
+    title: "A mentor that knows your journey",
+    body: "The AI mentor can see your path, exam history and weak spots. It guides you to the answer instead of handing it over.",
   },
 ];
 
-const categoryEmoji = {
-  fullstack: "🌐",
-  backend: "⚙️",
-  mobile: "📱",
-  aiml: "🤖",
-  qa: "🧪",
-  devops: "🚀",
-  gamedev: "🎮",
-  datascience: "📊",
-  cybersecurity: "🔒",
-  cloud: "☁️",
-  database: "🗄️",
-  quantum: "⚛️",
-};
+const AUDIENCE = [
+  "Self-taught developers who want proof they're job-ready",
+  "Career switchers and bootcamp grads filling gaps in what they learned",
+  "Early-career devs who want an honest signal of what they don't know yet",
+];
 
-const roadmap = [
+const STATUS = [
   {
     done: true,
-    label: "Platform Launch",
-    desc: "DevsWebs goes live with core blog features.",
+    label: "Gated roadmaps",
+    desc: "Layer-by-layer paths with progress tracking.",
   },
   {
     done: true,
-    label: "7 Tech Categories",
-    desc: "Organised content across Full Stack, Backend, Mobile, AI & ML, QA, DevOps and Game Dev.",
+    label: "Exams & weak spots",
+    desc: "Server-graded exams that record what you missed.",
   },
   {
     done: true,
-    label: "User Profiles & Follows",
-    desc: "Build your dev identity and grow your network.",
+    label: "AI mentor",
+    desc: "Grounded in your progress, exam history and weak spots.",
   },
   {
     done: true,
-    label: "Real-time Chat",
-    desc: "Instant messaging with mutual connections via WebSocket.",
-  },
-  {
-    done: true,
-    label: "Learning Roadmaps",
-    desc: "Structured paths for 15 specialisations with layer-by-layer progress tracking.",
-  },
-  {
-    done: true,
-    label: "Exams & Weak Spot Tracking",
-    desc: "Topic exams per roadmap layer, with automatic weak spot detection and AI-powered review.",
-  },
-  {
-    done: true,
-    label: "Coding Challenges",
-    desc: "In-browser coding problems with a challenge arena.",
-  },
-  {
-    done: true,
-    label: "AI Agent",
-    desc: "Personalised AI assistant that knows your progress, weak spots, and learning path.",
+    label: "Coding challenges",
+    desc: "Practice problems you solve in the browser.",
   },
   {
     done: false,
-    label: "Code Playground",
-    desc: "Run and share code snippets directly inside articles.",
+    label: "More exam-ready paths",
+    desc: "Backend is first; more paths get full exams next.",
   },
   {
     done: false,
-    label: "Open-Source Integration",
-    desc: "Link repositories, showcase contributions, and celebrate OSS work.",
-  },
-  {
-    done: false,
-    label: "Mobile App",
-    desc: "DevsWebs on iOS & Android — dev content in your pocket.",
+    label: "Teach-back",
+    desc: "Explain a topic out loud and get graded on your understanding.",
   },
 ];
 
-const socials = [
-  {
-    label: "GitHub",
-    handle: "@devswebs",
-    desc: "Star us, fork us, contribute.",
-    href: "#",
-    color: "from-gray-800 to-gray-600 dark:from-gray-700 dark:to-gray-500",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
-        <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-      </svg>
-    ),
-  },
-  {
-    label: "Twitter / X",
-    handle: "@devswebs_dev",
-    desc: "Updates, tips and community highlights.",
-    href: "#",
-    color: "from-sky-500 to-blue-600 dark:from-sky-600 dark:to-blue-700",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-      </svg>
-    ),
-  },
-  {
-    label: "LinkedIn",
-    handle: "DevsWebs",
-    desc: "Professional updates and articles.",
-    href: "#",
-    color: "from-blue-600 to-blue-800 dark:from-blue-700 dark:to-blue-900",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-      </svg>
-    ),
-  },
-];
+const SectionTitle = ({ children }) => (
+  <Motion.h2
+    className="text-center text-3xl font-[450] tracking-tight text-white"
+    {...fadeUp()}
+  >
+    {children}
+  </Motion.h2>
+);
 
-const About = () => {
-  return (
-    <div className="relative overflow-hidden">
-      <div className="mx-auto max-w-5xl px-6 sm:px-10 md:px-16 py-16 flex flex-col gap-28">
-        <section className="flex flex-col items-center text-center gap-6">
-          <Motion.div {...fadeUp(0)}>
-            <ShinyText
-              text="Developer Community Platform"
-              speed={4}
-              className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-purple-600"
-            />
-          </Motion.div>
+const About = () => (
+  <div className="mx-auto flex max-w-5xl flex-col gap-28 px-6 py-20">
+    {/* Hero */}
+    <section className="flex flex-col items-center gap-6 text-center">
+      <Motion.span
+        className="text-sm font-medium text-neutral-400"
+        {...fadeUp()}
+      >
+        About Vahoha
+      </Motion.span>
+      <Motion.h1
+        className="max-w-2xl text-4xl leading-tight font-[450] tracking-tight text-white sm:text-5xl"
+        style={{ fontFamily: '"Geist Variable", system-ui, sans-serif' }}
+        {...fadeUp(0.1)}
+      >
+        Learning that won&apos;t let you fake it.
+      </Motion.h1>
+      <Motion.p
+        className="max-w-2xl text-lg leading-relaxed text-neutral-300"
+        {...fadeUp(0.2)}
+      >
+        Courses, tutorials and roadmaps all share one gap: nothing checks
+        whether you actually understood. You can finish them all and only find
+        out what you missed in an interview. Vahoha closes that gap.
+      </Motion.p>
+    </section>
 
-          <Motion.div {...fadeUp(0.1)}>
-            <GradientText
-              colors={["#8A2BE2", "#FF1493", "#FF00FF", "#9c40ff", "#8A2BE2"]}
-              animationSpeed={7}
-              showBorder={false}
-              className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight px-2"
-            >
-              Built by Devs, for Devs.
-            </GradientText>
-          </Motion.div>
-
-          <Motion.p
-            className="max-w-2xl text-base sm:text-lg text-gray-600 dark:text-gray-400 leading-relaxed"
-            {...fadeUp(0.2)}
-          >
-            DevsWebs is a community-driven platform where developers read,
-            write, and connect. Whether you are sharing a deep-dive on system
-            design or looking for your next mentor — this is your place.
-          </Motion.p>
-
+    {/* What makes it different */}
+    <section className="flex flex-col gap-10">
+      <SectionTitle>How Vahoha is different</SectionTitle>
+      <div className="grid gap-4 sm:grid-cols-3">
+        {PILLARS.map(({ icon: Icon, title, body }, i) => (
           <Motion.div
-            className="flex gap-4 flex-wrap justify-center mt-2"
-            {...fadeUp(0.3)}
+            key={title}
+            className="rounded-2xl border border-neutral-800 bg-neutral-950 p-6"
+            {...fadeUp(i * 0.1)}
           >
-            <Link
-              to="/get-started"
-              className="bg-fuchsia-700 hover:bg-fuchsia-600 dark:bg-fuchsia-800 dark:hover:bg-fuchsia-700
-                px-7 py-2.5 rounded-xl text-sm font-semibold text-white
-                border border-fuchsia-600/70 shadow-md
-                transition-all duration-200 hover:scale-105"
-            >
-              Join the Community
-            </Link>
-            <Link
-              to="/categories/fullstack"
-              className="bg-fuchsia-100 hover:bg-fuchsia-200 dark:bg-fuchsia-900/30 dark:hover:bg-fuchsia-900/50
-                px-7 py-2.5 rounded-xl text-sm font-semibold
-                text-fuchsia-800 dark:text-fuchsia-200
-                border border-fuchsia-300 dark:border-fuchsia-700
-                transition-all duration-200 hover:scale-105"
-            >
-              Explore Content
-            </Link>
+            <Icon size={20} className="text-purple-400" />
+            <h3 className="mt-4 text-base font-medium text-neutral-100">
+              {title}
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-neutral-400">
+              {body}
+            </p>
           </Motion.div>
-        </section>
-
-        <section className="flex flex-col gap-10">
-          <Motion.h2
-            className="text-2xl sm:text-3xl font-bold text-center text-purple-800 dark:text-purple-300"
-            {...fadeUp(0)}
-          >
-            What We Offer
-          </Motion.h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((f, i) => (
-              <Motion.div
-                key={f.title}
-                className={`relative flex flex-col gap-4 p-7 rounded-2xl bg-gradient-to-br ${f.gradient} border ${f.border} shadow-sm`}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5, delay: (i % 3) * 0.1 }}
-                whileHover={{ y: -5 }}
-              >
-                {f.badge && (
-                  <span
-                    className={`absolute top-4 right-4 text-xs font-semibold px-2.5 py-0.5 rounded-full ${
-                      f.badge === "Coming soon"
-                        ? "bg-violet-100 dark:bg-violet-900/40 text-violet-600 dark:text-violet-400"
-                        : "bg-fuchsia-100 dark:bg-fuchsia-900/40 text-fuchsia-600 dark:text-fuchsia-400"
-                    }`}
-                  >
-                    {f.badge}
-                  </span>
-                )}
-                <span className="text-4xl">{f.icon}</span>
-                <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100">
-                  {f.title}
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                  {f.desc}
-                </p>
-              </Motion.div>
-            ))}
-          </div>
-        </section>
-
-        <section className="flex flex-col gap-10">
-          <Motion.h2
-            className="text-2xl sm:text-3xl font-bold text-center text-purple-800 dark:text-purple-300"
-            {...fadeUp(0)}
-          >
-            Growing Every Day
-          </Motion.h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <StatCard value={120} label="Articles Published" delay={0} />
-            <StatCard value={500} label="Developers Joined" delay={0.1} />
-            <StatCard
-              value={12}
-              label="Tech Categories"
-              suffix=""
-              delay={0.2}
-            />
-          </div>
-        </section>
-
-        <section className="flex flex-col gap-10">
-          <Motion.h2
-            className="text-2xl sm:text-3xl font-bold text-center text-purple-800 dark:text-purple-300"
-            {...fadeUp(0)}
-          >
-            12 Specialisations, One Platform
-          </Motion.h2>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
-            {CATEGORY_OPTIONS2.map((cat, i) => (
-              <Motion.div
-                key={cat.id}
-                initial={{ opacity: 0, scale: 0.85 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.4, delay: i * 0.07 }}
-                whileHover={{ scale: 1.06 }}
-              >
-                <Link
-                  to={`/categories/${cat.slug}`}
-                  className="flex flex-col items-center justify-center gap-2 p-4 rounded-2xl h-24
-                    bg-white/70 dark:bg-white/5
-                    border border-fuchsia-100 dark:border-fuchsia-900/40
-                    shadow-sm hover:shadow-md
-                    hover:border-fuchsia-400 dark:hover:border-fuchsia-600
-                    transition-all duration-200 group"
-                >
-                  <span className="text-2xl">
-                    {categoryEmoji[cat.id] ?? "💻"}
-                  </span>
-                  <span className="text-xs font-medium text-center text-gray-700 dark:text-gray-300 group-hover:text-fuchsia-700 dark:group-hover:text-fuchsia-400 transition-colors">
-                    {cat.title}
-                  </span>
-                </Link>
-              </Motion.div>
-            ))}
-          </div>
-        </section>
-
-        <section className="flex flex-col gap-10">
-          <Motion.h2
-            className="text-2xl sm:text-3xl font-bold text-center text-purple-800 dark:text-purple-300"
-            {...fadeUp(0)}
-          >
-            Our Roadmap
-          </Motion.h2>
-
-          <div className="relative flex flex-col pl-8">
-            <div className="absolute left-3 top-2 bottom-2 w-0.5 rounded-full bg-gradient-to-b from-fuchsia-400 via-purple-400 to-violet-300 dark:from-fuchsia-700 dark:via-purple-700 dark:to-violet-600" />
-
-            {roadmap.map((item, i) => (
-              <Motion.div
-                key={i}
-                className="relative flex gap-5 pb-8 last:pb-0"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.45, delay: i * 0.08 }}
-              >
-                {/* dot */}
-                <div
-                  className={`absolute -left-5 mt-0.5 flex items-center justify-center w-5 h-5 rounded-full border-2 ${
-                    item.done
-                      ? "bg-fuchsia-500 border-fuchsia-400 dark:bg-fuchsia-600 dark:border-fuchsia-500"
-                      : "bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-600"
-                  }`}
-                >
-                  {item.done && (
-                    <svg
-                      className="w-2.5 h-2.5 text-white"
-                      fill="none"
-                      viewBox="0 0 12 12"
-                    >
-                      <path
-                        d="M2 6l3 3 5-5"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  )}
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span
-                      className={`text-sm font-bold ${
-                        item.done
-                          ? "text-fuchsia-700 dark:text-fuchsia-400"
-                          : "text-gray-500 dark:text-gray-400"
-                      }`}
-                    >
-                      {item.label}
-                    </span>
-                    {!item.done && (
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-violet-100 dark:bg-violet-900/40 text-violet-700 dark:text-violet-400 font-medium">
-                        Coming soon
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-sm text-gray-500 dark:text-gray-500">
-                    {item.desc}
-                  </p>
-                </div>
-              </Motion.div>
-            ))}
-          </div>
-        </section>
-
-        <section className="flex flex-col gap-10">
-          <div className="flex flex-col items-center gap-3 text-center">
-            <Motion.div {...fadeUp(0)}>
-              <ShinyText
-                text="We build in public"
-                speed={4}
-                className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-purple-600"
-              />
-            </Motion.div>
-            <Motion.div {...fadeUp(0.1)}>
-              <GradientText
-                colors={["#8A2BE2", "#FF1493", "#FF00FF", "#9c40ff", "#8A2BE2"]}
-                animationSpeed={7}
-                className="text-3xl sm:text-4xl font-bold"
-              >
-                Stay Connected
-              </GradientText>
-            </Motion.div>
-            <Motion.p
-              className="text-gray-500 dark:text-gray-400 max-w-lg text-sm sm:text-base"
-              {...fadeUp(0.2)}
-            >
-              Follow us across platforms for updates, articles,
-              behind-the-scenes development, and community highlights.
-            </Motion.p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            {socials.map((s, i) => (
-              <Motion.a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative flex flex-col gap-4 p-6 rounded-2xl overflow-hidden
-                  bg-white/70 dark:bg-white/5
-                  border border-gray-100 dark:border-white/10
-                  shadow-sm hover:shadow-xl
-                  transition-all duration-300"
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                whileHover={{ y: -6 }}
-              >
-                <div
-                  className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 bg-gradient-to-br ${s.color}`}
-                />
-
-                <div
-                  className={`w-12 h-12 rounded-xl flex items-center justify-center text-white bg-gradient-to-br ${s.color} shadow-md`}
-                >
-                  {s.icon}
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <span className="font-bold text-gray-800 dark:text-gray-100 text-base">
-                    {s.label}
-                  </span>
-                  <span className="text-xs font-mono text-fuchsia-600 dark:text-fuchsia-400">
-                    {s.handle}
-                  </span>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">
-                    {s.desc}
-                  </p>
-                </div>
-
-                <div className="mt-auto flex items-center gap-1 text-xs font-semibold text-gray-400 dark:text-gray-500 group-hover:text-fuchsia-600 dark:group-hover:text-fuchsia-400 transition-colors">
-                  Follow
-                  <svg
-                    className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
-                    fill="none"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="M3 8h10M9 4l4 4-4 4"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-              </Motion.a>
-            ))}
-          </div>
-
-          <Motion.div
-            className="relative overflow-hidden flex flex-col sm:flex-row items-center justify-between gap-6
-              p-8 rounded-3xl
-              bg-gradient-to-br from-fuchsia-600 to-violet-700 dark:from-fuchsia-700 dark:to-violet-800
-              shadow-xl shadow-fuchsia-500/20 dark:shadow-fuchsia-900/40"
-            {...fadeUp(0.3)}
-          >
-            <div className="pointer-events-none absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/10 blur-2xl" />
-            <div className="pointer-events-none absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-white/10 blur-2xl" />
-
-            <div className="flex flex-col gap-1 text-center sm:text-left z-2">
-              <span className="text-white font-bold text-xl sm:text-2xl">
-                Ready to join the community?
-              </span>
-              <span className="text-fuchsia-200 text-sm">
-                Start reading, writing, and connecting with developers today.
-              </span>
-            </div>
-            <Link
-              to="/get-started"
-              className="z-2 flex-shrink-0 bg-white hover:bg-fuchsia-50 text-fuchsia-700 font-bold
-                px-8 py-3 rounded-xl text-sm
-                transition-all duration-200 hover:scale-105 shadow-lg"
-            >
-              Get Started — it&apos;s free
-            </Link>
-          </Motion.div>
-        </section>
+        ))}
       </div>
-    </div>
-  );
-};
+    </section>
+
+    {/* Who it's for */}
+    <section className="flex flex-col gap-10">
+      <SectionTitle>Who it&apos;s for</SectionTitle>
+      <ul className="mx-auto flex max-w-xl flex-col gap-3">
+        {AUDIENCE.map((line, i) => (
+          <Motion.li
+            key={line}
+            className="flex items-start gap-3 text-neutral-300"
+            {...fadeUp(i * 0.08)}
+          >
+            <Check size={18} className="mt-0.5 shrink-0 text-purple-400" />
+            {line}
+          </Motion.li>
+        ))}
+      </ul>
+    </section>
+
+    {/* Honest build status */}
+    <section className="flex flex-col gap-10">
+      <SectionTitle>Where we are</SectionTitle>
+      <ol className="mx-auto flex w-full max-w-xl flex-col gap-5 border-l border-neutral-800 pl-6">
+        {STATUS.map(({ done, label, desc }, i) => (
+          <Motion.li key={label} className="relative" {...fadeUp(i * 0.06)}>
+            <span
+              className={`absolute top-1.5 -left-[29px] h-2.5 w-2.5 rounded-full ${
+                done ? "bg-purple-400" : "border border-neutral-600 bg-black"
+              }`}
+            />
+            <p className="flex items-center gap-2 text-sm font-medium text-neutral-100">
+              {label}
+              {!done && (
+                <span className="rounded-full border border-neutral-700 px-2 py-0.5 text-[11px] text-neutral-400">
+                  Next
+                </span>
+              )}
+            </p>
+            <p className="mt-1 text-sm text-neutral-400">{desc}</p>
+          </Motion.li>
+        ))}
+      </ol>
+    </section>
+
+    {/* Built in public + CTA */}
+    <Motion.section
+      className="flex flex-col items-center gap-6 rounded-3xl border border-neutral-800 bg-neutral-950 px-6 py-12 text-center"
+      {...fadeUp()}
+    >
+      <h2 className="text-3xl font-[450] tracking-tight text-white">
+        Built in public
+      </h2>
+      <p className="max-w-lg text-neutral-400">
+        Vahoha is free during beta and built by a solo developer. Early users
+        shape what gets built next, so tell us what works and what doesn&apos;t.
+      </p>
+      <div className="flex flex-wrap justify-center gap-3">
+        <Link
+          to="/get-started"
+          className="rounded-full bg-white px-5 py-3 text-sm font-medium text-black transition hover:bg-neutral-200"
+        >
+          Get Started →
+        </Link>
+        <a
+          href="https://github.com/OV111"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 rounded-full bg-neutral-800 px-5 py-3 text-sm font-medium text-white transition hover:bg-neutral-700"
+        >
+          <Github size={16} />
+          GitHub
+        </a>
+        <Link
+          to="/contact"
+          className="rounded-full px-5 py-3 text-sm font-medium text-neutral-300 transition hover:text-white"
+        >
+          Contact
+        </Link>
+      </div>
+    </Motion.section>
+  </div>
+);
 
 export default About;

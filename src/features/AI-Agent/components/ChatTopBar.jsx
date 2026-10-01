@@ -5,7 +5,7 @@ import { exportConversation } from "../lib/exportConversation";
  * Minimal chat header: the conversation title, and one working action.
  *
  * What was removed and why:
- * - "DevsWebs Agent" — a constant. The app chrome already says where you are;
+ * - "Vahoha Agent" — a constant. The app chrome already says where you are;
  *   the useful thing here is WHICH conversation you're in.
  * - The session-id badge (`slice(-6)`) — debug output, not user information.
  * - "socratic mode · 5 tools" — it was also factually wrong (there are 7 tools),

@@ -77,6 +77,9 @@ const router = createBrowserRouter([
       { path: "contact", element: <Contact /> },
       { path: "privacy", element: <Privacy /> },
       { path: "pricing", element: <PricingPage /> },
+      // Public on purpose: guests browse the paths with every layer locked.
+      // The exam route below stays protected.
+      { path: "roadmaps", element: <RoadmapPage /> },
       { path: "oauth-success", element: <OAuthSuccess /> },
       {
         path: "get-started",
@@ -109,7 +112,6 @@ const router = createBrowserRouter([
         element: <ProtectedLayout />,
         children: [
           { path: "blogs", element: <Blogs /> },
-          { path: "roadmaps", element: <RoadmapPage /> },
           { path: "roadmaps/exam/:layerId", element: <ExamPage /> },
           { path: "libs", element: <LibsPage /> },
           { path: "libs/:id", element: <BookDetailPage /> },

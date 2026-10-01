@@ -22,7 +22,7 @@ const useNotificationStore = create((set, get) => ({
             }
         };
         ws.onerror = () => {
-            console.log("error");
+            console.error("Notifications WebSocket error");
         };
         ws.onclose = () => {
             set({ ws: null });

@@ -1,8 +1,18 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import { X, Clock, BookOpen, Code2, Layers, Check, ChevronRight } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  X,
+  Clock,
+  BookOpen,
+  Code2,
+  Layers,
+  Check,
+  ChevronRight,
+  Lock,
+} from "lucide-react";
 import useRoadmapStore from "@/stores/useRoadmapStore";
+import useAuthStore from "@/stores/useAuthStore";
 import LayerPosts from "./LayerPosts";
 
 const resourceTypeColor = {
@@ -16,11 +26,19 @@ const resourceTypeColor = {
 
 const LayerDetail = () => {
   const navigate = useNavigate();
-  const { activeLayer, closePanel, layerProgress, setLayerStatus, selectedCategory } = useRoadmapStore();
+  const {
+    activeLayer,
+    closePanel,
+    layerProgress,
+    setLayerStatus,
+    selectedCategory,
+  } = useRoadmapStore();
+  const { auth } = useAuthStore();
 
   if (!activeLayer) return null;
 
-  const currentStatus = layerProgress[activeLayer.id] ?? activeLayer.status ?? "locked";
+  const currentStatus =
+    layerProgress[activeLayer.id] ?? activeLayer.status ?? "locked";
   const isDone = currentStatus === "done";
 
   const toggleComplete = () => {
@@ -70,7 +88,6 @@ const LayerDetail = () => {
 
         {/* Scrollable body */}
         <div className="flex-1 overflow-y-auto px-6 py-5 space-y-6">
-
           {/* Tech pills */}
           <div className="flex flex-wrap gap-2">
             {activeLayer.techs.map((t) => (
@@ -96,7 +113,10 @@ const LayerDetail = () => {
             </h3>
             <ul className="space-y-2">
               {activeLayer.topics.map((topic, i) => (
-                <li key={i} className="flex items-start gap-2.5 text-sm text-neutral-300">
+                <li
+                  key={i}
+                  className="flex items-start gap-2.5 text-sm text-neutral-300"
+                >
                   <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-purple-500 shrink-0" />
                   {topic}
                 </li>
@@ -117,10 +137,16 @@ const LayerDetail = () => {
                   className="flex items-center justify-between gap-3 py-2 px-3 rounded-xl bg-neutral-900 border border-neutral-800"
                 >
                   <div className="min-w-0">
-                    <p className="text-sm font-medium text-neutral-200 truncate">{r.label}</p>
-                    <p className="text-[11px] text-neutral-600 mt-0.5">{r.platform}</p>
+                    <p className="text-sm font-medium text-neutral-200 truncate">
+                      {r.label}
+                    </p>
+                    <p className="text-[11px] text-neutral-600 mt-0.5">
+                      {r.platform}
+                    </p>
                   </div>
-                  <span className={`shrink-0 text-[10px] px-2 py-0.5 rounded-full font-medium ${resourceTypeColor[r.type] ?? "bg-neutral-800 text-neutral-500"}`}>
+                  <span
+                    className={`shrink-0 text-[10px] px-2 py-0.5 rounded-full font-medium ${resourceTypeColor[r.type] ?? "bg-neutral-800 text-neutral-500"}`}
+                  >
                     {r.type}
                   </span>
                 </li>
@@ -142,30 +168,57 @@ const LayerDetail = () => {
           </div>
         </div>
 
-        {/* Footer actions */}
-        <div className="px-6 py-4 border-t border-neutral-800 flex items-center justify-between gap-3">
-          <button
-            onClick={toggleComplete}
-            className={`
+        {/* Footer actions — guests can read everything above, but tracking
+            progress and taking the exam need an account. */}
+        {!auth ? (
+          <div className="px-6 py-4 border-t border-neutral-800 flex items-center justify-between gap-3">
+            <span className="flex items-center gap-2 text-xs text-neutral-500">
+              <Lock size={12} />
+              Pass the exam to unlock the next layer
+            </span>
+            <Link
+              to="/get-started"
+              onClick={closePanel}
+              className="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white transition-colors duration-200"
+            >
+              Sign up to start
+              <ChevronRight size={14} />
+            </Link>
+          </div>
+        ) : (
+          <div className="px-6 py-4 border-t border-neutral-800 flex items-center justify-between gap-3">
+            <button
+              onClick={toggleComplete}
+              className={`
               flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-xl border transition-all duration-200
-              ${isDone
-                ? "bg-purple-600/20 border-purple-600/50 text-purple-300 hover:bg-purple-600/30"
-                : "bg-neutral-900 border-neutral-700 text-neutral-400 hover:border-neutral-500 hover:text-neutral-200"
+              ${
+                isDone
+                  ? "bg-purple-600/20 border-purple-600/50 text-purple-300 hover:bg-purple-600/30"
+                  : "bg-neutral-900 border-neutral-700 text-neutral-400 hover:border-neutral-500 hover:text-neutral-200"
               }
             `}
-          >
-            <Check size={14} className={isDone ? "text-purple-400" : "text-neutral-600"} />
-            {isDone ? "Completed" : "Mark complete"}
-          </button>
+            >
+              <Check
+                size={14}
+                className={isDone ? "text-purple-400" : "text-neutral-600"}
+              />
+              {isDone ? "Completed" : "Mark complete"}
+            </button>
 
-          <button
-            onClick={() => { closePanel(); navigate(`/roadmaps/exam/${activeLayer.id}?path=${selectedCategory?.id ?? "backend"}`); }}
-            className="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white transition-colors duration-200"
-          >
-            Take Exam
-            <ChevronRight size={14} />
-          </button>
-        </div>
+            <button
+              onClick={() => {
+                closePanel();
+                navigate(
+                  `/roadmaps/exam/${activeLayer.id}?path=${selectedCategory?.id ?? "backend"}`,
+                );
+              }}
+              className="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white transition-colors duration-200"
+            >
+              Take Exam
+              <ChevronRight size={14} />
+            </button>
+          </div>
+        )}
       </motion.div>
     </>
   );

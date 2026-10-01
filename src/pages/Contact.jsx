@@ -1,241 +1,255 @@
 import { useState } from "react";
-import { motion as Motion } from "framer-motion";
-import { Mail, MessageSquare, User, Send, Github, Twitter, Linkedin } from "lucide-react";
+import { motion as Motion } from "motion/react";
+import { Mail, Send, Github, CheckCircle2 } from "lucide-react";
+import XLogo from "../components/ui/XLogo";
+import { API_BASE_URL } from "../../constants/api";
+import { SITE } from "../../constants/site";
 
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.5, delay },
-});
+// Must match CONTACT_TOPICS in backend/modules/contact/schemas/contact.schemas.js
+// — the server rejects anything else with a 400.
+const TOPICS = ["General question", "Bug report", "Feature request", "Partnership", "Other"];
+const MAX_MESSAGE = 1000;
+const EMPTY_FORM = { name: "", email: "", topic: "", message: "", website: "" };
 
 const SOCIALS = [
-  {
-    label: "GitHub",
-    handle: "@devswebs",
-    href: "#",
-    Icon: Github,
-  },
-  {
-    label: "Twitter / X",
-    handle: "@devswebs",
-    href: "#",
-    Icon: Twitter,
-  },
-  {
-    label: "LinkedIn",
-    handle: "DevsWebs",
-    href: "#",
-    Icon: Linkedin,
-  },
+  { label: "X", ...SITE.socials.x, Icon: XLogo },
+  { label: "GitHub", ...SITE.socials.github, Icon: Github },
 ];
 
-const TOPICS = [
-  "General question",
-  "Bug report",
-  "Feature request",
-  "Partnership",
-  "Press inquiry",
-  "Other",
-];
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.45, delay },
+});
 
-export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", topic: "", message: "" });
-  const [sent, setSent] = useState(false);
+const inputClass =
+  "w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-sm text-white placeholder:text-neutral-600 outline-none transition-colors focus:border-purple-500/60";
+
+const Field = ({ label, htmlFor, error, children }) => (
+  <div className="flex flex-col gap-1.5">
+    <label htmlFor={htmlFor} className="text-xs font-medium text-neutral-400">
+      {label}
+    </label>
+    {children}
+    {error && <p className="text-xs text-red-400">{error}</p>}
+  </div>
+);
+
+const Contact = () => {
+  const [form, setForm] = useState(EMPTY_FORM);
+  // "idle" | "sending" | "sent" | "error" — one status instead of several
+  // booleans that could contradict each other (sending AND sent).
+  const [status, setStatus] = useState("idle");
+  const [error, setError] = useState({ field: null, message: "" });
 
   const handleChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSent(true);
+    setStatus("sending");
+    setError({ field: null, message: "" });
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        setError({ field: body.field ?? null, message: body.message ?? "Something went wrong." });
+        setStatus("error");
+        return;
+      }
+      setStatus("sent");
+    } catch {
+      setError({ field: null, message: "Network error. Check your connection and try again." });
+      setStatus("error");
+    }
   };
 
+  const fieldError = (name) => (error.field === name ? error.message : null);
+
   return (
-    <div className="min-h-screen px-6 sm:px-10 md:px-20 lg:px-28 py-16">
-      <div className="max-w-5xl mx-auto flex flex-col gap-16">
+    <div className="mx-auto flex max-w-5xl flex-col gap-14 px-6 py-20">
+      <Motion.header className="flex flex-col items-center gap-4 text-center" {...fadeUp()}>
+        <span className="text-sm font-medium text-neutral-400">Contact</span>
+        <h1
+          className="text-4xl font-[450] tracking-tight text-white sm:text-5xl"
+          style={{ fontFamily: '"Geist Variable", system-ui, sans-serif' }}
+        >
+          Talk to the person building it.
+        </h1>
+        <p className="max-w-xl text-neutral-400">
+          Found a bug, have an idea, or want to try Vahoha with your students?
+          Every message is read by a human, not a bot.
+        </p>
+      </Motion.header>
 
-        {/* Header */}
-        <Motion.div className="text-center" {...fadeUp(0)}>
-          <p className="text-[11px] font-bold tracking-[0.25em] uppercase text-purple-500 mb-3">
-            Get in touch
-          </p>
-          <h1 className="text-4xl sm:text-5xl font-bold text-white leading-tight">
-            We'd love to hear<br className="hidden sm:block" /> from you
-          </h1>
-          <p className="mt-4 text-[15px] text-neutral-400 max-w-xl mx-auto leading-relaxed">
-            Whether you've found a bug, have a feature idea, or just want to say hello — drop us a message and we'll get back to you within 24 hours.
-          </p>
-        </Motion.div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
-
-          {/* Form */}
-          <Motion.div className="lg:col-span-3" {...fadeUp(0.1)}>
-            {sent ? (
-              <div className="flex flex-col items-center justify-center gap-4 h-full min-h-[400px] rounded-2xl border border-neutral-800 bg-neutral-900/50 text-center px-8">
-                <div className="w-14 h-14 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center">
-                  <Send size={22} className="text-purple-400" />
-                </div>
-                <h2 className="text-xl font-semibold text-white">Message sent!</h2>
-                <p className="text-[14px] text-neutral-400 max-w-xs">
-                  Thanks for reaching out. We'll reply to <span className="text-white">{form.email}</span> within 24 hours.
-                </p>
-                <button
-                  onClick={() => { setSent(false); setForm({ name: "", email: "", topic: "", message: "" }); }}
-                  className="mt-2 text-[13px] text-purple-400 hover:text-purple-300 transition-colors cursor-pointer"
-                >
-                  Send another message
-                </button>
-              </div>
-            ) : (
-              <form
-                onSubmit={handleSubmit}
-                className="flex flex-col gap-5 p-8 rounded-2xl border border-neutral-800 bg-neutral-900/50"
+      <div className="grid gap-8 lg:grid-cols-5">
+        <Motion.div className="lg:col-span-3" {...fadeUp(0.1)}>
+          {status === "sent" ? (
+            <div className="flex min-h-[420px] flex-col items-center justify-center gap-4 rounded-2xl border border-neutral-800 bg-neutral-950 px-8 text-center">
+              <CheckCircle2 size={36} className="text-purple-400" />
+              <h2 className="text-xl font-medium text-white">Message sent</h2>
+              <p className="max-w-xs text-sm text-neutral-400">
+                Thanks, {form.name}. I&apos;ll reply to{" "}
+                <span className="text-white">{form.email}</span>.
+              </p>
+              <button
+                onClick={() => {
+                  setForm(EMPTY_FORM);
+                  setStatus("idle");
+                }}
+                className="mt-2 cursor-pointer text-sm text-purple-400 transition-colors hover:text-purple-300"
               >
-                {/* Name + Email */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[12px] font-medium text-neutral-400">Name</label>
-                    <div className="relative">
-                      <User size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-600" />
-                      <input
-                        type="text"
-                        name="name"
-                        value={form.name}
-                        onChange={handleChange}
-                        required
-                        placeholder="Your name"
-                        className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-neutral-800/60 border border-neutral-700/60 text-[13px] text-white placeholder:text-neutral-600 outline-none focus:border-purple-500/60 transition-colors"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[12px] font-medium text-neutral-400">Email</label>
-                    <div className="relative">
-                      <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-600" />
-                      <input
-                        type="email"
-                        name="email"
-                        value={form.email}
-                        onChange={handleChange}
-                        required
-                        placeholder="you@example.com"
-                        className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-neutral-800/60 border border-neutral-700/60 text-[13px] text-white placeholder:text-neutral-600 outline-none focus:border-purple-500/60 transition-colors"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Topic */}
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-[12px] font-medium text-neutral-400">Topic</label>
-                  <select
-                    name="topic"
-                    value={form.topic}
+                Send another message
+              </button>
+            </div>
+          ) : (
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-5 rounded-2xl border border-neutral-800 bg-neutral-950 p-6 sm:p-8"
+            >
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Field label="Name" htmlFor="contact-name" error={fieldError("name")}>
+                  <input
+                    id="contact-name"
+                    name="name"
+                    value={form.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 rounded-xl bg-neutral-800/60 border border-neutral-700/60 text-[13px] text-white outline-none focus:border-purple-500/60 transition-colors cursor-pointer appearance-none"
-                  >
-                    <option value="" disabled className="bg-neutral-900">Select a topic…</option>
-                    {TOPICS.map((t) => (
-                      <option key={t} value={t} className="bg-neutral-900">{t}</option>
-                    ))}
-                  </select>
-                </div>
+                    maxLength={100}
+                    autoComplete="name"
+                    placeholder="Your name"
+                    className={inputClass}
+                  />
+                </Field>
+                <Field label="Email" htmlFor="contact-email" error={fieldError("email")}>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    required
+                    autoComplete="email"
+                    placeholder="you@example.com"
+                    className={inputClass}
+                  />
+                </Field>
+              </div>
 
-                {/* Message */}
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-[12px] font-medium text-neutral-400">Message</label>
-                  <div className="relative">
-                    <MessageSquare size={14} className="absolute left-3 top-3.5 text-neutral-600" />
-                    <textarea
-                      name="message"
-                      value={form.message}
-                      onChange={handleChange}
-                      required
-                      rows={5}
-                      placeholder="Tell us what's on your mind…"
-                      className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-neutral-800/60 border border-neutral-700/60 text-[13px] text-white placeholder:text-neutral-600 outline-none focus:border-purple-500/60 transition-colors resize-none"
-                    />
-                    <p className="text-right text-[11px] text-neutral-700 mt-1">
-                      {form.message.length} / 1000
-                    </p>
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-[13px] font-semibold transition-colors cursor-pointer"
+              <Field label="Topic" htmlFor="contact-topic" error={fieldError("topic")}>
+                <select
+                  id="contact-topic"
+                  name="topic"
+                  value={form.topic}
+                  onChange={handleChange}
+                  required
+                  className={`${inputClass} cursor-pointer`}
                 >
-                  <Send size={14} />
-                  Send message
-                </button>
-              </form>
-            )}
-          </Motion.div>
+                  <option value="" disabled>
+                    Select a topic…
+                  </option>
+                  {TOPICS.map((t) => (
+                    <option key={t} value={t}>
+                      {t}
+                    </option>
+                  ))}
+                </select>
+              </Field>
 
-          {/* Sidebar info */}
-          <Motion.div className="lg:col-span-2 flex flex-col gap-6" {...fadeUp(0.15)}>
+              <Field label="Message" htmlFor="contact-message" error={fieldError("message")}>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
+                  required
+                  minLength={10}
+                  maxLength={MAX_MESSAGE}
+                  rows={6}
+                  placeholder="What's on your mind?"
+                  className={`${inputClass} resize-none`}
+                />
+                <p className="text-right text-[11px] text-neutral-600">
+                  {form.message.length} / {MAX_MESSAGE}
+                </p>
+              </Field>
 
-            {/* Direct email */}
-            <div className="p-6 rounded-2xl border border-neutral-800 bg-neutral-900/50 flex flex-col gap-3">
-              <div className="w-9 h-9 rounded-lg bg-purple-600/15 border border-purple-500/20 flex items-center justify-center">
-                <Mail size={16} className="text-purple-400" />
-              </div>
-              <div>
-                <p className="text-[13px] font-semibold text-white">Email us directly</p>
-                <p className="text-[12px] text-neutral-500 mt-0.5">For anything urgent or private.</p>
-              </div>
-              <a
-                href="mailto:hello@devswebs.com"
-                className="text-[13px] text-purple-400 hover:text-purple-300 transition-colors font-medium"
-              >
-                hello@devswebs.com
-              </a>
-            </div>
+              {/* Honeypot: invisible to people and skipped by keyboard and
+                  screen readers. Bots fill every field, which marks them. */}
+              <input
+                type="text"
+                name="website"
+                value={form.website}
+                onChange={handleChange}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="hidden"
+              />
 
-            {/* Response time */}
-            <div className="p-6 rounded-2xl border border-neutral-800 bg-neutral-900/50 flex flex-col gap-3">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_6px_2px_rgba(74,222,128,0.5)]" />
-                <p className="text-[13px] font-semibold text-white">Typical response time</p>
-              </div>
-              <p className="text-[28px] font-bold text-white">
-                &lt; 24h
-              </p>
-              <p className="text-[12px] text-neutral-500 leading-relaxed">
-                We read every message and respond personally. No bots, no auto-replies.
-              </p>
-            </div>
-
-            {/* Socials */}
-            <div className="p-6 rounded-2xl border border-neutral-800 bg-neutral-900/50 flex flex-col gap-4">
-              <p className="text-[13px] font-semibold text-white">Find us online</p>
-              <div className="flex flex-col gap-3">
-                {SOCIALS.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-3 group"
-                  >
-                    <div className="w-8 h-8 rounded-lg bg-neutral-800 border border-neutral-700 flex items-center justify-center group-hover:border-purple-500/50 group-hover:bg-purple-600/10 transition-colors">
-                      <social.Icon size={14} className="text-neutral-400 group-hover:text-purple-400 transition-colors" />
-                    </div>
-                    <div>
-                      <p className="text-[12px] font-medium text-neutral-300 group-hover:text-white transition-colors">{social.label}</p>
-                      <p className="text-[11px] text-neutral-600">{social.handle}</p>
-                    </div>
+              {status === "error" && !error.field && (
+                <p role="alert" className="text-sm text-red-400">
+                  {error.message}{" "}
+                  <a href={`mailto:${SITE.email}`} className="underline">
+                    Email instead
                   </a>
-                ))}
-              </div>
-            </div>
+                </p>
+              )}
 
-          </Motion.div>
-        </div>
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-white py-2.5 text-sm font-medium text-black transition hover:bg-neutral-200 disabled:cursor-wait disabled:opacity-60"
+              >
+                <Send size={14} />
+                {status === "sending" ? "Sending…" : "Send message"}
+              </button>
+            </form>
+          )}
+        </Motion.div>
+
+        <Motion.aside className="flex flex-col gap-4 lg:col-span-2" {...fadeUp(0.15)}>
+          <div className="flex flex-col gap-2 rounded-2xl border border-neutral-800 bg-neutral-950 p-6">
+            <Mail size={18} className="text-purple-400" />
+            <p className="mt-2 text-sm font-medium text-white">Email directly</p>
+            <a
+              href={`mailto:${SITE.email}`}
+              className="text-sm break-all text-purple-400 transition-colors hover:text-purple-300"
+            >
+              {SITE.email}
+            </a>
+            <p className="text-xs text-neutral-500">Usually answered within 1–2 days.</p>
+          </div>
+
+          <div className="flex flex-col gap-4 rounded-2xl border border-neutral-800 bg-neutral-950 p-6">
+            <p className="text-sm font-medium text-white">Follow along</p>
+            {SOCIALS.map(({ label, handle, href, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3"
+              >
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-neutral-800 transition-colors group-hover:border-purple-500/50">
+                  <Icon size={15} className="text-neutral-400 transition-colors group-hover:text-purple-400" />
+                </span>
+                <span>
+                  <span className="block text-sm text-neutral-200 group-hover:text-white">{label}</span>
+                  <span className="block text-xs text-neutral-500">{handle}</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </Motion.aside>
       </div>
     </div>
   );
-}
+};
+
+export default Contact;

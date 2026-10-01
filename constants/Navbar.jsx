@@ -23,10 +23,12 @@ export const NAV_LINKS_AUTH = [
   { label: "Capstone", to: "capstone" },
 ];
 
+// Guests only get public pages — a link behind ProtectedLayout would bounce
+// them to the login wall on their first click.
 export const NAV_LINKS_GUEST = [
   { label: "Roadmaps", to: "roadmaps" },
+  { label: "Pricing", to: "pricing" },
   { label: "About", to: "about" },
-  { label: "Get Started", to: "get-started" },
 ];
 
 export const MOBILE_EXTRA_LINKS = [

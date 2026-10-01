@@ -40,13 +40,13 @@ export const fetchUserData = async (query, isAuthenticated = false) => {
 
     const response = await request.json();
     if (!request.ok) {
-      console.log("Search API error:", response);
+      console.error("Search API error:", response);
       return [];
     }
 
     return response.results ?? [];
   } catch (err) {
-    console.log("Search API error:", err);
+    console.error("Search API error:", err);
     return [];
   }
 };
@@ -66,7 +66,7 @@ export const fetchCategoryData = async (query) => {
 
     return data.results ?? [];
   } catch (err) {
-    console.log("Search API error:", err);
+    console.error("Search API error:", err);
     return [];
   }
 };

@@ -1,180 +1,139 @@
-import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Send, Github, Mail } from "lucide-react";
+import { NavLink, useLocation } from "react-router-dom";
+import { Github, Mail } from "lucide-react";
 import useAuthStore from "../../stores/useAuthStore";
+import { isNavLinkActive } from "@/utils/navigation";
+import Divider from "@/components/ui/Divider";
+import Wordmark from "@/components/ui/Wordmark";
+import XLogo from "@/components/ui/XLogo";
+import { SITE } from "../../../constants/site";
 import { CATEGORY_OPTIONS } from "../../../constants/Categories";
 
-const QuickLinks = [
-  // { title: "Home", href: "/" },  
-  { title: "About", href: "/about" },
-  { title: "Pricing", href: "/pricing" },
-  { title: "Contact", href: "/contact" },
-  { title: "Privacy Policy", href: "/privacy" },
+// Guests only get public routes — anything behind ProtectedLayout would bounce
+// them to the login wall. Members get the core learning loop instead.
+const PRODUCT_LINKS_GUEST = [
+  { title: "Roadmaps", to: "/roadmaps" },
+  { title: "How it works", to: "/#how-it-works" },
+  { title: "Pricing", to: "/pricing" },
 ];
-const AuthLinks = [
-  { title: "My Profile", href: "/my-profile" },
-  { title: "My Progress", href: "/progress" },
-  { title: "Blogs", href: "/blogs" },
-  { title: "Roadmaps", href: "/roadmaps" },
-  { title: "Coding Libs", href: "/libs" },
-  { title: "Challenges", href: "/coding-challenges" },
-  { title: "Capstone", href: "/capstone" },
-  { title: "Pricing", href: "/pricing" },
-  { title: "Billing", href: "/billing" },
-  { title: "About", href: "/about" },
-  { title: "Contact", href: "/contact" },
-  { title: "Privacy Policy", href: "/privacy" },
+const PRODUCT_LINKS_AUTH = [
+  { title: "Roadmaps", to: "/roadmaps" },
+  { title: "Challenges", to: "/coding-challenges" },
+  { title: "My Progress", to: "/progress" },
+  { title: "Billing", to: "/billing" },
 ];
+const COMPANY_LINKS = [
+  { title: "About", to: "/about" },
+  { title: "Contact", to: "/contact" },
+  { title: "Privacy Policy", to: "/privacy" },
+];
+const CATEGORY_LINKS = CATEGORY_OPTIONS.map(({ title, slug }) => ({
+  title,
+  to: `/categories/${slug}`,
+}));
+
+// Small, medium-weight headings (Stripe/Vercel/Linear style): the links are
+// the content, the heading only labels the group.
+const headingClass = "mb-3 text-sm font-medium text-[#F7F7F8]";
+
+const iconClass =
+  "group flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/10 transition duration-200 hover:border-white/40 hover:bg-white/20";
+
+const LinkColumn = ({ title, links }) => {
+  const location = useLocation();
+  return (
+    <nav aria-label={title} className="flex flex-col gap-1">
+      <h2 className={headingClass}>{title}</h2>
+      {links.map(({ title, to }) => (
+        <NavLink
+          key={to}
+          to={to}
+          className={({ isActive }) =>
+            `text-sm transition hover:text-purple-500 ${
+              isNavLinkActive(to, location, isActive)
+                ? "text-purple-500"
+                : "text-[#A1A0AB]"
+            }`
+          }
+        >
+          {title}
+        </NavLink>
+      ))}
+    </nav>
+  );
+};
 
 const Footer = () => {
-  const { pathname } = useLocation();
   const { auth } = useAuthStore();
-  const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    setSubscribed(true);
-    setEmail("");
-  };
 
   return (
-    <React.Fragment>
-      {/* bg-linear-to-r from-purple-600 to-purple-800 dark:from-purple-700 dark:to-purple-800 */}
-      <footer className="relative z-1 px-5 pt-24 sm:px-8 lg:px-12">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.8fr_1fr_1fr_1fr] lg:gap-10">
-          <div className="flex flex-col items-start">
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <img src={null} width={0} height={0} alt="Logo" />
-              <h1 className="text-xl font-bold tracking-wide text-[#F7F7F8]">
-                Vahoha
-              </h1>
-            </Link>
-            <p className="mb-6 text-sx leading-6 text-[#A1A0AB] ">
+    <footer className="relative z-1 mt-16">
+      <Divider />
+      <div className="px-5 pt-16 sm:px-8 lg:px-12">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-10 lg:grid-cols-[1.8fr_1fr_1fr_1fr]">
+          <div className="col-span-2 flex flex-col items-start lg:col-span-1">
+            <Wordmark className="mb-4" />
+            <p className="mb-6 max-w-sm text-sm leading-6 text-[#A1A0AB]">
               Vahoha is where developers learn, build, and grow — community
               content, structured roadmaps you have to earn, and a personal AI
-              agent that knows exactly where you are in your journey.
+              mentor that knows exactly where you are in your journey.
             </p>
 
-            {/* Social Links */}
-            <div className="mb-2">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-[#F7F7F8]">
-                Follow Us
-              </p>
-              <div className="flex flex-wrap items-center gap-3">
-                <Link
-                  to="https://github.com/OV111"
-                  aria-label="Visit our GitHub"
-                  className="group flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/10 transition duration-200  hover:border-white/40 hover:bg-white/20"
-                >
-                  <Github
-                    size={16}
-                    className="text-[#A1A0AB] transition group-hover:text-white"
-                  />
-                </Link>
-                <Link
-                  to="/"
-                  aria-label="Visit our X profile"
-                  className="group flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/10 transition duration-200  hover:border-white/40 hover:bg-white/20"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="w-[16px] h-[16px] fill-[#A1A0AB] transition group-hover:fill-white"
-                    aria-hidden="true"
-                  >
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                  </svg>
-                </Link>
-                <Link
-                  to="/"
-                  aria-label="Send us an email"
-                  className="group flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-sm transition duration-200 hover:border-white/40 hover:bg-white/20"
-                >
-                  <Mail
-                    size={16}
-                    className="text-[#A1A0AB] transition group-hover:text-white"
-                  />
-                </Link>
-              </div>
+            <p className="mb-4 text-xs font-semibold tracking-[0.22em] text-[#F7F7F8] uppercase">
+              Follow Us
+            </p>
+            <div className="flex items-center gap-3">
+              {/* External: plain <a> + new tab. <Link> is for in-app routes. */}
+              <a
+                href={SITE.socials.x.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Vahoha on X"
+                className={iconClass}
+              >
+                <XLogo
+                  size={15}
+                  className="text-[#A1A0AB] transition group-hover:text-white"
+                />
+              </a>
+              <a
+                href={SITE.socials.github.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Vahoha on GitHub"
+                className={iconClass}
+              >
+                <Github
+                  size={16}
+                  className="text-[#A1A0AB] transition group-hover:text-white"
+                />
+              </a>
+              <a
+                href={`mailto:${SITE.email}`}
+                aria-label="Email Vahoha"
+                className={iconClass}
+              >
+                <Mail
+                  size={16}
+                  className="text-[#A1A0AB] transition group-hover:text-white"
+                />
+              </a>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="flex flex-col gap-1">
-            <h2 className="text-xl font-bold mb-2 text-[#F7F7F8]">
-              Quick Links
-            </h2>
-            {(auth ? AuthLinks : QuickLinks).map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                className={`text-sx hover:text-purple-500 transition ${
-                  pathname === link.href ? "text-purple-500" : "text-[#A1A0AB]"
-                }`}
-              >
-                {link.title}
-              </Link>
-            ))}
-          </div>
-
-          {/* Categories */}
-          <div className="flex flex-col gap-1">
-            <h2 className="text-xl font-bold mb-2 text-[#F7F7F8]">
-              Categories
-            </h2>
-            {CATEGORY_OPTIONS.map(({ title, slug }) => (
-              <Link
-                key={slug}
-                to={`/categories/${slug}`}
-                className={`text-sx hover:text-purple-500 transition  ${
-                  pathname === `/categories/${slug}`
-                    ? "text-purple-500"
-                    : "text-[#A1A0AB]"
-                }`}
-              >
-                {title}
-              </Link>
-            ))}
-          </div>
-          {/* Email Part */}
-          <div className="flex flex-col gap-4 mt-5 lg:mt-0">
-            <h2 className="text-xl font-bold mb-0 text-[#F7F7F8]">
-              Stay Updated!
-            </h2>
-            <p className="text-[#A1A0AB] text-sx mb-4 lg:mb-0">
-              Subscribe to our newsletter for the latest articles and updates.
-            </p>
-            {subscribed ? (
-              <p className="text-purple-200 text-sm">Thanks for subscribing!</p>
-            ) : (
-              <form onSubmit={handleSubscribe} className="flex gap-2 lg:h-10">
-                <input
-                  type="email"
-                  placeholder="Enter Your Email."
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="flex-1 px-4 py-2 rounded-md bg-zinc-900 border border-zinc-700 text-white placeholder-zinc-500 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
-
-                />
-                <button
-                  type="submit"
-                  aria-label="Subscribe to newsletter"
-                  className="p-0 bg-purple-600 cursor-pointer   hover:bg-purple-700 text-white  rounded-md shadow-sm transition-colors duration-200"
-                >
-                  <Send className="w-4 h-4 lg:mx-4 my-0 "></Send>
-                </button>
-              </form>
-            )}
-          </div>
+          <LinkColumn
+            title="Product"
+            links={auth ? PRODUCT_LINKS_AUTH : PRODUCT_LINKS_GUEST}
+          />
+          <LinkColumn title="Company" links={COMPANY_LINKS} />
+          <LinkColumn title="Topics" links={CATEGORY_LINKS} />
         </div>
 
-        <div className="mx-auto mt-6 max-w-7xl py-5 text-center text-sm text-[#A1A0AB] sm:text-base">
-          © {new Date().getFullYear()} DevsWebs. All rights reserved!
+        <div className="mx-auto mt-12 max-w-7xl py-5 text-center text-sm text-[#A1A0AB]">
+          © {new Date().getFullYear()} Vahoha. All rights reserved.
         </div>
-      </footer>
-    </React.Fragment>
+      </div>
+    </footer>
   );
 };
+
 export default Footer;

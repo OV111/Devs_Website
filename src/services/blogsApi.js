@@ -7,18 +7,21 @@ export const fetchDefaultPostsByCategory = async (categoryName) => {
   return Array.isArray(data) ? data : [];
 };
 
-export const fetchBlogs = async (page = 1, limit = 10, params = {}) => {
+// `signal` lets the caller cancel a request that's no longer wanted (the user
+// changed a filter mid-flight), so a slow old response can't overwrite a newer one.
+export const fetchBlogs = async (page = 1, limit = 10, params = {}, { signal } = {}) => {
   const url = new URL(`${API_BASE_URL}/blogs`);
   url.searchParams.set("page", String(page));
   url.searchParams.set("limit", String(limit));
-  const { filter, sort, difficulty, readTime, category } = params;
+  const { filter, sort, difficulty, readTime, category, q } = params;
   if (filter && filter !== "All" && filter !== "Latest")
     url.searchParams.set("filter", filter);
   if (sort && sort !== "Newest") url.searchParams.set("sort", sort);
   if (difficulty) url.searchParams.set("difficulty", difficulty);
   if (readTime) url.searchParams.set("readTime", readTime);
   if (category) url.searchParams.set("category", category);
-  const res = await fetch(url.toString());
+  if (q) url.searchParams.set("q", q);
+  const res = await fetch(url.toString(), { signal });
   if (!res.ok) throw new Error("Failed to fetch blogs");
   const data = await res.json();
   if (!data.success) throw new Error("Failed to fetch blogs");

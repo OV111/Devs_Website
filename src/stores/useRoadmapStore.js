@@ -1,5 +1,11 @@
 import { create } from "zustand";
 import { API_BASE_URL, authHeaders } from "../../constants/api";
+import useAuthStore from "./useAuthStore";
+
+// /roadmaps is public, so every server call below is guarded here — the one
+// place all callers pass through — rather than only hiding buttons in the UI.
+// Guests get a read-only preview: every layer locked, nothing persisted.
+const isGuest = () => !useAuthStore.getState().auth;
 
 const fetchProgress = async () => {
   try {
@@ -73,6 +79,11 @@ const useRoadmapStore = create((set, get) => ({
       progressLoaded: false,
     });
 
+    if (isGuest()) {
+      set({ progressLoaded: true });
+      return;
+    }
+
     await startPath(track.id);
 
     const progress = await fetchProgress();
@@ -83,6 +94,7 @@ const useRoadmapStore = create((set, get) => ({
   },
 
   loadProgress: async () => {
+    if (isGuest()) return set({ layerProgress: {}, progressLoaded: true });
     const progress = await fetchProgress();
     set({
       layerProgress: progress?.layerProgress ?? {},
@@ -98,7 +110,7 @@ const useRoadmapStore = create((set, get) => ({
   // for one extra field.
   submitOnboarding: async (answers) => {
     const track = get().selectedTrack;
-    if (!track) return false;
+    if (!track || isGuest()) return false;
     return startPath(track.id, answers.skillLevel);
   },
 
@@ -106,12 +118,14 @@ const useRoadmapStore = create((set, get) => ({
 
   closePanel: () => set({ isPanelOpen: false }),
 
-  setLayerStatus: (layerId, status) =>
+  setLayerStatus: (layerId, status) => {
+    if (isGuest()) return;
     set((state) => {
       const updated = { ...state.layerProgress, [layerId]: status };
       persistProgress(updated, state.selectedTrack?.id);
       return { layerProgress: updated };
-    }),
+    });
+  },
 
   reset: () =>
     set({
@@ -123,5 +137,14 @@ const useRoadmapStore = create((set, get) => ({
       progressLoaded: false,
     }),
 }));
+
+// Progress belongs to whoever is signed in. Without this, a guest's locked
+// preview survives login (and one user's progress survives a logout + another
+// login in the same tab), since nothing else clears this store.
+useAuthStore.subscribe((state, prev) => {
+  if (state.auth !== prev.auth || state.session !== prev.session) {
+    useRoadmapStore.getState().reset();
+  }
+});
 
 export default useRoadmapStore;

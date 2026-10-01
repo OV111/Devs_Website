@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useRef, Suspense } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "motion/react";
+import { ChevronDown, LogOut, Menu, X, Search } from "lucide-react";
 import useAuthStore from "../../stores/useAuthStore";
 import SearchResults from "../search/SearchResults";
 import SearchBar from "../search/SearchBar";
-import { ChevronDown, LogOut, Menu, X, Search } from "lucide-react";
+import CatPawButton from "@/components/effects/CatPawButton";
+import { isNavLinkActive } from "@/utils/navigation";
 import { CATEGORY_OPTIONS } from "../../../constants/Categories";
 import {
   AVATAR_MENU_ITEMS,
@@ -13,51 +15,84 @@ import {
   NAV_LINKS_AUTH,
   NAV_LINKS_GUEST,
 } from "../../../constants/Navbar";
-import useProfileStore from "@/stores/useProfileStore";
-import CatPawButton from "@/components/effects/CatPawButton";
+import AvatarImage from "./navbar/AvatarImage";
+import UserSummary from "./navbar/UserSummary";
+import GuestActions from "./navbar/GuestActions";
+import DropdownPanel from "./navbar/DropdownPanel";
+import Wordmark from "@/components/ui/Wordmark";
+
+const HIDE_SEARCH_ROUTES = new Set(["/get-started", "/forgot-password", "/reset-password"]);
+
+const focusRing =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400";
+
+const MobileNavLink = ({ to, children, className = "" }) => (
+  <li className="text-base font-medium transition hover:text-purple-300">
+    {/* py-2.5 gives a ~44px touch target (WCAG 2.5.5 / Apple HIG minimum). */}
+    <NavLink to={to} className={`block py-2.5 ${className}`}>
+      {children}
+    </NavLink>
+  </li>
+);
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { pathname } = location;
+  const { auth, logout } = useAuthStore();
 
+  // One name at a time: "categories" | "avatar" | "search" | null.
   const [openDropdown, setOpenDropdown] = useState(null);
-  const openMenu = (name) => setOpenDropdown(name);
-  const closeMenu = () => setOpenDropdown(null);
-
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [showMobileCategories, setShowMobileCategories] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [showDropdownMobile, setShowDropdownMobile] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const searchRef = useRef(null);
   const navRef = useRef(null);
 
-  const { pathname } = useLocation();
-  const { auth, logout } = useAuthStore();
-  const { user, stats } = useProfileStore();
-
-  const hideSearchRoutes = [
-    "/get-started",
-    "/forgot-password",
-    "/reset-password",
-  ];
-  const showSearch = !hideSearchRoutes.includes(pathname);
-
+  const navLinks = auth ? NAV_LINKS_AUTH : NAV_LINKS_GUEST;
+  const showSearch = !HIDE_SEARCH_ROUTES.has(pathname);
   const isCategoryActive = pathname.startsWith("/categories");
 
+  // Hover already opened the menu for mouse users, so a mouse click must not
+  // toggle it shut again. Keyboard activation (e.detail === 0 — no pointer
+  // clicks) toggles; pointer clicks only open (that's also how touch opens it).
+  const handleTriggerClick = (name) => (e) =>
+    setOpenDropdown((current) => (e.detail === 0 && current === name ? null : name));
+  const closeDropdown = () => setOpenDropdown(null);
+
+  // Every navigation (and every login/logout) closes all menus and clears the
+  // search. Keyed on location.key, not pathname, so clicking a link to the page
+  // you're already on still closes the mobile menu. This replaces an
+  // onClick={close} on every single link.
   useEffect(() => {
     setOpenDropdown(null);
-  }, [auth]);
-
-  useEffect(() => {
+    setIsMobileOpen(false);
+    setShowMobileCategories(false);
     setSearchValue("");
-  }, [pathname]);
+  }, [location.key, auth]);
 
+  // Escape closes whichever menu is open.
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isMobileOpen && !openDropdown) return;
     const onKey = (e) => {
-      if (e.key === "Escape") setIsOpen(false);
+      if (e.key !== "Escape") return;
+      setIsMobileOpen(false);
+      setOpenDropdown(null);
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [isOpen]);
+  }, [isMobileOpen, openDropdown]);
+
+  // Lock page scroll behind the open mobile menu, otherwise swiping the
+  // menu scrolls the page underneath it.
+  useEffect(() => {
+    if (!isMobileOpen) return;
+    const { overflow } = document.body.style;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = overflow;
+    };
+  }, [isMobileOpen]);
 
   // --navbar-h drives every "sit right below the navbar" layout (the Arena's
   // fixed panel, its mobile overlay, sticky toolbars). A one-shot read on
@@ -74,130 +109,48 @@ const Navbar = () => {
     return () => observer.disconnect();
   }, []);
 
-  const closeDropdownMobile = () => {
-    setShowDropdownMobile(false);
-    setIsOpen(false);
-  };
-
   const handleLogout = () => {
     logout();
     navigate("/get-started");
-    setIsOpen(false);
-  };
-
-  const handleSearchSubmit = () => {
-    setIsOpen(false);
   };
 
   const handleSearchSelect = (item) => {
     if (item.type === "user") navigate(`/users/${item.username}`);
-    else if (item.type === "post")
-      navigate(`/?search=${encodeURIComponent(item.title)}`);
+    else if (item.type === "post") navigate(`/?search=${encodeURIComponent(item.title)}`);
     else if (item.type === "category") navigate(`/categories/${item.slug}`);
-    setSearchValue("");
-    setIsOpen(false);
   };
 
-  const MobileNavLink = ({ to, children, className }) => (
-    <li className="font-medium text-base hover:text-purple-300 transition">
-      <NavLink to={to} onClick={() => setIsOpen(false)} className={className}>
-        {children}
-      </NavLink>
-    </li>
-  );
-
-  const AvatarImage = ({ inDropdown = false }) => (
-    <div
-      className={`w-7 h-7 my-1 rounded-full shrink-0 border overflow-hidden flex justify-center items-center ${
-        inDropdown ? "border-gray-200 dark:border-gray-600" : "border-white/50"
-      }`}
-    >
-      {stats?.profileImage ? (
-        <img
-          src={stats.profileImage?.replace(
-            "/upload/",
-            "/upload/w_64,h_64,c_fill,f_auto,q_auto/",
-          )}
-          alt="avatar"
-          className="w-full h-full object-cover rounded-full"
-        />
-      ) : (
-        <div
-          className={`w-full h-full flex rounded-full items-center justify-center text-sm font-semibold ${
-            inDropdown
-              ? "bg-purple-100 dark:bg-purple-600 text-purple-700 dark:text-white"
-              : "bg-white/20 text-white"
-          }`}
-        >
-          {user?.firstName?.[0]?.toUpperCase() || ""}
-          {user?.lastName?.[0]?.toUpperCase() || ""}
-        </div>
-      )}
-    </div>
-  );
-
-  const CategoryList = ({ onClose }) => (
-    <AnimatePresence>
-      <motion.ul
-        initial={{ opacity: 0, y: -6, scale: 0.97 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: -6, scale: 0.97 }}
-        transition={{ duration: 0.18, ease: "easeOut" }}
-        id="categories-dropdown"
-        className="absolute top-full mt-0 left-0 w-44 overflow-hidden rounded-md border border-white/10 bg-neutral-900 shadow-lg shadow-black/40 z-40"
-      >
-        {CATEGORY_OPTIONS.map(({ title, slug }) => (
-          <li key={slug}>
-            <NavLink
-              to={`/categories/${slug}`}
-              onClick={onClose}
-              className={({ isActive }) =>
-                `flex items-center px-4 py-2 text-sm transition-colors duration-150 ${
-                  isActive
-                    ? "font-medium text-purple-500"
-                    : "text-gray-700 dark:text-gray-200 hover:text-purple-500"
-                }`
-              }
-            >
-              {title}
-            </NavLink>
-          </li>
-        ))}
-      </motion.ul>
-    </AnimatePresence>
+  const searchResults = (props) => (
+    <Suspense fallback={null}>
+      <SearchResults query={searchValue} onSelect={handleSearchSelect} {...props} />
+    </Suspense>
   );
 
   return (
     <nav
       ref={navRef}
-      className="sticky top-0 flex items-center px-4 lg:px-6 py-2 z-50 w-full bg-black backdrop-blur-md"
+      className="sticky top-0 z-50 flex w-full items-center bg-black px-4 py-2 text-white backdrop-blur-md lg:px-6"
     >
-      {/* Left: Logo */}
+      {/* Left: logo */}
       <div className="flex-1">
-        <h2 className="text-base font-extrabold tracking-tight sm:text-xl md:text-xl lg:text-[20px]">
-          <NavLink
-            to="/"
-            aria-label="DevsWebs - Go to homepage"
-            className="text-white transition-colors"
-          >
-            Vahoha
-          </NavLink>
-        </h2>
+        <Wordmark size="sm" className="sm:text-xl" />
       </div>
 
-      {/* Center: Nav links (desktop only) */}
-      <ul className="hidden md:flex items-center gap-0.5 text-gray-100">
+      {/* Center: nav links (desktop) */}
+      <ul className="hidden items-center gap-0.5 text-sm font-medium text-gray-100 md:flex">
+        {/* Hover opens it for mouse users; the click toggle is what makes it
+            reachable by keyboard and touch. */}
         <li
-          className="relative hidden md:block text-sm lg:text-sm font-medium px-1 py-1 transition-all duration-200 ease-out"
-          onMouseLeave={closeMenu}
-          onMouseEnter={() => openMenu("categories")}
+          className="relative px-1 py-1"
+          onMouseEnter={() => setOpenDropdown("categories")}
+          onMouseLeave={closeDropdown}
         >
           <button
-            aria-label="Toggle categories menu"
+            onClick={handleTriggerClick("categories")}
             aria-haspopup="menu"
             aria-expanded={openDropdown === "categories"}
             aria-controls="categories-dropdown"
-            className={`flex items-center gap-1 cursor-pointer transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded ${
+            className={`flex cursor-pointer items-center gap-1 rounded transition ${focusRing} ${
               isCategoryActive || openDropdown === "categories"
                 ? "text-purple-500"
                 : "hover:text-purple-500"
@@ -209,44 +162,60 @@ const Navbar = () => {
               className={`transition-transform duration-200 ${openDropdown === "categories" ? "rotate-180" : ""}`}
             />
           </button>
-          {openDropdown === "categories" && (
-            <CategoryList onClose={closeMenu} />
-          )}
+          <DropdownPanel
+            open={openDropdown === "categories"}
+            id="categories-dropdown"
+            className="left-0 w-44"
+          >
+            <ul>
+              {CATEGORY_OPTIONS.map(({ title, slug }) => (
+                <li key={slug}>
+                  <NavLink
+                    to={`/categories/${slug}`}
+                    className={({ isActive }) =>
+                      `flex px-4 py-2 text-sm transition-colors ${
+                        isActive ? "text-purple-500" : "text-gray-200 hover:text-purple-500"
+                      }`
+                    }
+                  >
+                    {title}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </DropdownPanel>
         </li>
 
-        {(auth ? NAV_LINKS_AUTH : NAV_LINKS_GUEST).map(({ label, to }) => (
-          <li
-            key={to}
-            className="hidden md:block font-medium text-sm lg:text-sm px-1 py-1 hover:text-purple-500 transition"
-          >
+        {navLinks.map(({ label, to }) => (
+          <li key={to} className="px-1 py-1 transition hover:text-purple-500">
             <NavLink
               to={to}
-              className={({ isActive }) => (isActive ? "text-purple-500" : "")}
+              className={({ isActive }) =>
+                isNavLinkActive(to, location, isActive) ? "text-purple-500" : ""
+              }
             >
               {label}
             </NavLink>
           </li>
         ))}
+
         {auth && (
-          <li className="hidden md:block font-medium text-sm lg:text-sm px-1 transition">
+          <li className="px-1">
             <CatPawButton
-              className={({ isActive }) =>
-                isActive ? "text-emerald-500" : "text-cyan-500/80"
-              }
+              className={({ isActive }) => (isActive ? "text-emerald-500" : "text-cyan-500/80")}
             />
           </li>
         )}
       </ul>
 
-      {/* Right: search + avatar (desktop) + hamburger (mobile) */}
-      <div className="flex-1 flex items-center gap-1 justify-end">
-        {/* Search — desktop */}
+      {/* Right: search, avatar / guest actions (desktop), hamburger (mobile) */}
+      <div className="flex flex-1 items-center justify-end gap-1">
         {showSearch && (
           <div
             ref={searchRef}
-            className="relative hidden items-center md:flex gap-2"
-            onMouseEnter={() => openMenu("search")}
-            onMouseLeave={() => { if (!searchValue) closeMenu(); }}
+            className="relative hidden items-center gap-2 md:flex"
+            onMouseEnter={() => setOpenDropdown("search")}
+            onMouseLeave={() => !searchValue && closeDropdown()}
           >
             <AnimatePresence>
               {openDropdown === "search" && (
@@ -257,30 +226,20 @@ const Navbar = () => {
                   transition={{ duration: 0.25, ease: "easeOut" }}
                   className="overflow-hidden"
                 >
-                  <SearchBar
-                    value={searchValue}
-                    onChange={setSearchValue}
-                    onSubmit={handleSearchSubmit}
-                    placeholder="Search…"
-                  />
-                  <Suspense fallback={null}>
-                    <SearchResults
-                      query={searchValue}
-                      onSelect={handleSearchSelect}
-                      boundaryRef={searchRef}
-                    />
-                  </Suspense>
+                  <SearchBar value={searchValue} onChange={setSearchValue} placeholder="Search…" />
+                  {searchResults({ boundaryRef: searchRef })}
                 </motion.div>
               )}
             </AnimatePresence>
             <button
+              onClick={handleTriggerClick("search")}
               aria-label="Open search"
               aria-expanded={openDropdown === "search"}
               aria-controls="search-results"
-              className={`flex items-center justify-center w-8 h-8 rounded-full transition ${
+              className={`flex h-8 w-8 items-center justify-center rounded-full transition ${focusRing} ${
                 openDropdown === "search"
-                  ? "text-white bg-white/10"
-                  : "text-white/60 hover:text-white hover:bg-white/10"
+                  ? "bg-white/10 text-white"
+                  : "text-white/60 hover:bg-white/10 hover:text-white"
               }`}
             >
               <Search size={16} />
@@ -288,220 +247,166 @@ const Navbar = () => {
           </div>
         )}
 
-        {/* Avatar — desktop */}
-        {auth && (
+        {auth ? (
           <div
-            className="relative hidden md:block ml-1 mr-0"
-            onMouseLeave={closeMenu}
-            onMouseEnter={() => openMenu("avatar")}
+            className="relative ml-1 hidden md:block"
+            onMouseEnter={() => setOpenDropdown("avatar")}
+            onMouseLeave={closeDropdown}
           >
             <button
+              onClick={handleTriggerClick("avatar")}
               aria-label="Open profile menu"
               aria-haspopup="menu"
               aria-expanded={openDropdown === "avatar"}
               aria-controls="avatar-dropdown"
-              className="flex items-center cursor-pointer transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded-full"
+              className={`flex cursor-pointer items-center rounded-full ${focusRing}`}
             >
               <AvatarImage />
             </button>
 
-            <AnimatePresence>
-              {openDropdown === "avatar" && (
-                <motion.div
-                  id="avatar-dropdown"
-                  initial={{ opacity: 0, y: -6, scale: 0.97 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -6, scale: 0.97 }}
-                  transition={{ duration: 0.18, ease: "easeOut" }}
-                  className="absolute right-0 top-full mt-0 w-52 overflow-hidden rounded-md border border-white/10 bg-neutral-900 shadow-lg shadow-black/40 z-40"
+            <DropdownPanel open={openDropdown === "avatar"} id="avatar-dropdown" className="right-0 w-52">
+              <UserSummary inDropdown className="border-b border-white/10 px-4 py-2" />
+              {AVATAR_MENU_ITEMS.map(({ label, to, icon: Icon }) => (
+                <NavLink
+                  key={to}
+                  to={to}
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-4 py-2 text-sm transition-colors ${
+                      isActive ? "font-medium text-purple-500" : "text-gray-200 hover:text-purple-500"
+                    }`
+                  }
                 >
-                  <div className="flex items-center gap-3 px-4 py-2 border-b border-white/10">
-                    <AvatarImage inDropdown />
-                    <div className="min-w-0">
-                      <p className="text-sm font-semibold text-gray-100 truncate">
-                        {user?.firstName} {user?.lastName}
-                      </p>
-                      {user?.username && (
-                        <p
-                          className="text-xs text-gray-400 truncate"
-                          title={`@${user.username}`}
-                        >
-                          @{user.username}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  {AVATAR_MENU_ITEMS.map(({ label, to, icon }) => (
-                    <NavLink
-                      key={to}
-                      to={to}
-                      onClick={closeMenu}
-                      className={({ isActive }) =>
-                        `flex items-center gap-3 px-4 py-2 text-sm transition-colors duration-150 ${
-                          isActive
-                            ? "font-medium text-purple-500"
-                            : "text-gray-200 hover:text-purple-500"
-                        }`
-                      }
-                    >
-                      {React.createElement(icon, { size: 15 })}
-                      {label}
-                    </NavLink>
-                  ))}
-
-                  <div className="border-t border-white/10" />
-
-                  <button
-                    onClick={handleLogout}
-                    className="flex items-center gap-3 w-full px-4 py-2 text-sm text-red-400 hover:bg-red-500/20 hover:text-red-300 transition-colors duration-150 cursor-pointer"
-                  >
-                    <LogOut size={15} />
-                    Logout
-                  </button>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  <Icon size={15} />
+                  {label}
+                </NavLink>
+              ))}
+              <button
+                onClick={handleLogout}
+                className="flex w-full cursor-pointer items-center gap-3 border-t border-white/10 px-4 py-2 text-sm text-red-400 transition-colors hover:bg-red-500/20 hover:text-red-300"
+              >
+                <LogOut size={15} />
+                Logout
+              </button>
+            </DropdownPanel>
           </div>
+        ) : (
+          <GuestActions showBadge className="ml-2 hidden md:flex" />
         )}
 
-        {/* Hamburger — mobile */}
         <button
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label={isOpen ? "Close menu" : "Open menu"}
-          className="md:hidden p-1"
+          onClick={() => setIsMobileOpen((open) => !open)}
+          aria-label={isMobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMobileOpen}
+          aria-controls="mobile-menu"
+          className={`-mr-2 flex h-11 w-11 items-center justify-center rounded-full transition hover:bg-white/10 md:hidden ${focusRing}`}
         >
-          {isOpen ? <X size={18} /> : <Menu size={18} />}
+          {isMobileOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
-      {/* Mobile menu backdrop */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black/40 md:hidden z-40"
-          style={{ top: "var(--navbar-h)" }}
-          onClick={() => setIsOpen(false)}
-        />
-      )}
+      {isMobileOpen && (
+        <>
+          <div
+            className="fixed inset-0 z-40 bg-black/40 md:hidden"
+            style={{ top: "var(--navbar-h)" }}
+            onClick={() => setIsMobileOpen(false)}
+          />
 
-      {/* Mobile menu */}
-      {isOpen && (
-        <ul className="flex flex-col gap-1 p-4 border-t border-white/10 absolute top-full left-0 w-full bg-black md:hidden z-50 shadow-xl text-gray-100">
-          {showSearch && (
-            <li className="mb-1">
-              <div className="relative">
+          <ul
+            id="mobile-menu"
+            // Capped to the viewport and scrollable, so an expanded Categories
+            // list on a short phone can't push links off-screen.
+            className="absolute top-full left-0 z-50 flex max-h-[calc(100dvh-var(--navbar-h))] w-full flex-col overflow-y-auto overscroll-contain rounded-b-2xl border-y border-white/10 bg-black px-4 pt-3 pb-5 text-gray-100 shadow-xl md:hidden"
+          >
+            {showSearch && (
+              <li className="relative mb-1">
                 <SearchBar
                   value={searchValue}
                   onChange={setSearchValue}
-                  onSubmit={handleSearchSubmit}
+                  onSubmit={() => setIsMobileOpen(false)}
                   placeholder="Search posts..."
                 />
-                <Suspense fallback={null}>
-                  <SearchResults
-                    query={searchValue}
-                    onSelect={handleSearchSelect}
-                  />
-                </Suspense>
-              </div>
-            </li>
-          )}
-
-          <MobileNavLink to="/">Home</MobileNavLink>
-
-          <li className="text-base font-medium hover:text-purple-300 transition">
-            <button
-              onClick={() => setShowDropdownMobile(!showDropdownMobile)}
-              className="flex items-center gap-1 cursor-pointer w-full py-0.5"
-            >
-              Categories
-              <ChevronDown
-                size={15}
-                className={`transition-transform duration-200 ${showDropdownMobile ? "rotate-180" : ""}`}
-              />
-            </button>
-            {showDropdownMobile && (
-              <ul className="mt-1 ml-3 flex flex-col border-l border-white/20 pl-3 gap-0.5">
-                {CATEGORY_OPTIONS.map(({ title, slug }) => (
-                  <li key={slug}>
-                    <NavLink
-                      to={`/categories/${slug}`}
-                      onClick={closeDropdownMobile}
-                      className={({ isActive }) =>
-                        `block py-1 text-sm transition ${isActive ? "text-purple-400" : "text-purple-100 hover:text-white"}`
-                      }
-                    >
-                      {title}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
+                {searchResults()}
+              </li>
             )}
-          </li>
 
-          <MobileNavLink to="roadmaps">Roadmaps</MobileNavLink>
+            <MobileNavLink to="/">Home</MobileNavLink>
 
-          {auth && (
-            <>
-              <MobileNavLink to="libs">Coding Libs</MobileNavLink>
-              <MobileNavLink to="coding-challenges">Challenges</MobileNavLink>
-              <li className="font-medium text-base transition">
-                <CatPawButton />
+            <li className="text-base font-medium">
+              <button
+                onClick={() => setShowMobileCategories((open) => !open)}
+                aria-expanded={showMobileCategories}
+                className="flex w-full cursor-pointer items-center gap-1 py-2.5 transition hover:text-purple-300"
+              >
+                Categories
+                <ChevronDown
+                  size={15}
+                  className={`transition-transform duration-200 ${showMobileCategories ? "rotate-180" : ""}`}
+                />
+              </button>
+              {showMobileCategories && (
+                <ul className="mt-1 ml-3 flex flex-col gap-0.5 border-l border-white/20 pl-3">
+                  {CATEGORY_OPTIONS.map(({ title, slug }) => (
+                    <li key={slug}>
+                      <NavLink
+                        to={`/categories/${slug}`}
+                        className={({ isActive }) =>
+                          `block py-2 text-sm transition ${isActive ? "text-purple-400" : "text-purple-100 hover:text-white"}`
+                        }
+                      >
+                        {title}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+
+            {/* Same source as the desktop links, so the two can't drift apart. */}
+            {navLinks.map(({ label, to }) => (
+              <MobileNavLink key={to} to={to}>
+                {label}
+              </MobileNavLink>
+            ))}
+
+            {auth ? (
+              <>
+                <li className="text-base font-medium">
+                  <CatPawButton />
+                </li>
+                {MOBILE_EXTRA_LINKS.map(({ label, to }) => (
+                  <MobileNavLink key={to} to={to}>
+                    {label}
+                  </MobileNavLink>
+                ))}
+
+                <li className="mt-2 border-t border-white/20 pt-3">
+                  <UserSummary />
+                </li>
+                {AVATAR_MENU_ITEMS.map(({ label, to, icon: Icon }) => (
+                  <MobileNavLink key={to} to={to} className="flex items-center gap-2">
+                    <Icon size={14} />
+                    {label}
+                  </MobileNavLink>
+                ))}
+
+                <li className="mt-1 border-t border-white/20 pt-3">
+                  <button
+                    onClick={handleLogout}
+                    className="flex w-full cursor-pointer items-center gap-2 py-2.5 text-base font-medium text-red-300 transition hover:text-red-200"
+                  >
+                    <LogOut size={14} />
+                    Logout
+                  </button>
+                </li>
+              </>
+            ) : (
+              <li className="mt-3 border-t border-white/20 pt-4">
+                <GuestActions fullWidth />
               </li>
-              <MobileNavLink to="capstone">Capstone</MobileNavLink>
-
-              {MOBILE_EXTRA_LINKS.map(({ label, to }) => (
-                <MobileNavLink key={to} to={to}>
-                  {label}
-                </MobileNavLink>
-              ))}
-
-              <li className="flex items-center gap-3 pt-3 mt-2 border-t border-white/20">
-                <AvatarImage />
-                <div className="min-w-0">
-                  <p className="text-sm font-semibold text-white truncate">
-                    {user?.firstName} {user?.lastName}
-                  </p>
-                  {user?.username && (
-                    <p
-                      className="text-xs text-purple-200 truncate"
-                      title={`@${user.username}`}
-                    >
-                      @{user.username}
-                    </p>
-                  )}
-                </div>
-              </li>
-
-              {AVATAR_MENU_ITEMS.map(({ label, to, icon }) => (
-                <MobileNavLink
-                  key={to}
-                  to={to}
-                  className="flex items-center gap-2"
-                >
-                  {React.createElement(icon, { size: 14 })}
-                  {label}
-                </MobileNavLink>
-              ))}
-
-              <li className="border-t border-white/20 pt-3 mt-1">
-                <button
-                  onClick={handleLogout}
-                  className="flex items-center gap-2 text-base font-medium text-red-300 hover:text-red-200 transition cursor-pointer"
-                >
-                  <LogOut size={14} />
-                  Logout
-                </button>
-              </li>
-            </>
-          )}
-
-          {!auth && (
-            <>
-              <MobileNavLink to="about">About</MobileNavLink>
-              <MobileNavLink to="get-started">Get Started</MobileNavLink>
-            </>
-          )}
-        </ul>
+            )}
+          </ul>
+        </>
       )}
     </nav>
   );
