@@ -12,6 +12,7 @@ import { Pencil } from "lucide-react";
 import { SectionHeader, ForHiringPanel } from "./My-Profile/components/ProfileSections";
 import useProfileProgress from "@/features/profile/hooks/useProfileProgress";
 import AchievementsPanel from "@/features/profile/components/AchievementsPanel";
+import RecruiterSettings from "@/features/recruiter/components/RecruiterSettings";
 import { deriveAchievements } from "@/features/profile/lib/achievements";
 import {
   AsyncSection,
@@ -356,6 +357,23 @@ const MyProfile = () => {
                   ))}
                 </div>
               </AsyncSection>
+            </section>
+
+            {/* BUILD TEAM */}
+            <section>
+              <SectionHeader title="Build team" right="after your capstone" />
+              <Link
+                to="/team"
+                className="block rounded-xl border border-neutral-800 p-4 text-sm text-neutral-300 transition-colors hover:border-purple-500/50"
+              >
+                Open your build team: your defense, peer ratings and merged work.
+              </Link>
+            </section>
+
+            {/* RECRUITER VISIBILITY */}
+            <section>
+              <SectionHeader title="Recruiters" right="you choose" />
+              <RecruiterSettings username={user?.username} />
             </section>
 
             {/* EXAM HISTORY */}

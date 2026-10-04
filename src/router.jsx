@@ -52,6 +52,9 @@ const ReviewProposals = lazy(
 const AiAgent = lazy(() => import("./features/AI-Agent/AiAgent"));
 const CapstonePage = lazy(() => import("./features/capstone/CapstonePage"));
 const CertificatePage = lazy(() => import("./features/capstone/CertificatePage"));
+const TeamPage = lazy(() => import("./features/teams/TeamPage"));
+const EvidencePage = lazy(() => import("./features/teams/EvidencePage"));
+const CandidatePage = lazy(() => import("./features/recruiter/CandidatePage"));
 const CapstoneAdminPage = lazy(() => import("./features/capstone/CapstoneAdminPage"));
 const VoiceReviewPage = lazy(() => import("./features/voiceReview/VoiceReviewPage"));
 const PricingPage = lazy(() => import("./features/billing/PricingPage"));
@@ -97,6 +100,10 @@ const router = createBrowserRouter([
       { path: "posts/:id", element: <ReadMore /> },
       // Public on purpose: certificates must be verifiable without an account.
       { path: "verify/:publicId", element: <CertificatePage /> },
+      // Public on purpose: team evidence is meant for recruiters without an account.
+      { path: "evidence/:publicId", element: <EvidencePage /> },
+      // Public on purpose, but only for developers who opted in (the API answers 404 otherwise).
+      { path: "candidate/:username", element: <CandidatePage /> },
       {
         path: "categories",
         children: [
@@ -135,6 +142,7 @@ const router = createBrowserRouter([
           // Static segment wins over ":trackId" in React Router's ranking.
           { path: "capstone/admin", element: <CapstoneAdminPage /> },
           { path: "capstone/:trackId", element: <CapstonePage /> },
+          { path: "team", element: <TeamPage /> },
           { path: "billing", element: <BillingPage /> },
           { path: "progress", element: <ProgressPage /> },
           { path: "voice-review", element: <VoiceReviewPage /> },

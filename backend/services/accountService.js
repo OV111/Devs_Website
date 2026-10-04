@@ -118,7 +118,38 @@ const USER_KEYED_COLLECTIONS = [
   // Public, verifiable credentials that carry the learner's name. The Privacy
   // Policy promises full removal, so they go too (their share links stop working).
   "certificates",
+  // Build Teams, XP and recruiter visibility (added with those features).
+  "team_defenses",
+  "xpAwards",
+  "recruiter_settings",
 ];
+
+/**
+ * Team data is not keyed by `userId` alone: ratings point at the user as rater
+ * OR ratee, contributions at `authorId`, and the user appears inside a team's
+ * `members` array and inside the public evidence snapshot (which carries their
+ * name and GitHub login). All of it goes, otherwise a deleted user's name would
+ * stay on a public /evidence page.
+ */
+async function deleteTeamData(db, userId) {
+  const teams = await db
+    .collection("teams")
+    .find({ "members.userId": userId }, { projection: { members: 1 } })
+    .toArray();
+  for (const team of teams) {
+    const login = team.members.find((m) => m.userId.equals(userId))?.githubLogin;
+    if (login) {
+      await db
+        .collection("team_evidence")
+        .updateOne({ teamId: team._id }, { $pull: { "snapshot.members": { githubLogin: login } } });
+    }
+  }
+  await Promise.all([
+    db.collection("teams").updateMany({ "members.userId": userId }, { $pull: { members: { userId } } }),
+    db.collection("team_ratings").deleteMany({ $or: [{ raterId: userId }, { rateeId: userId }] }),
+    db.collection("team_contributions").deleteMany({ authorId: userId }),
+  ]);
+}
 
 async function deleteLearningAndActivityData(db, userId, email) {
   // Some collections store the id as an ObjectId, others as a string
@@ -131,6 +162,8 @@ async function deleteLearningAndActivityData(db, userId, email) {
   const attemptIds = (
     await db.collection("capstone_attempts").find({ userId }, { projection: { _id: 1 } }).toArray()
   ).map((a) => a._id);
+
+  await deleteTeamData(db, userId);
 
   await Promise.all([
     ...(attemptIds.length
