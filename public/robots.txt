@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://devswebs.com/sitemap.xml
+Sitemap: https://vahoha.com/sitemap.xml

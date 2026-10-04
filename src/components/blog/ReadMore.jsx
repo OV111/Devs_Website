@@ -329,7 +329,7 @@ const ReadMore = () => {
           <div className="space-y-2">
             <button
               type="button"
-              className={`flex w-full items-center justify-center gap-2 rounded-xl bg-violet-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-violet-500 ${!auth && "cursor-not-allowed opacity-60"}`}
+              className={`flex w-full items-center justify-center gap-2 rounded-xl bg-purple-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-purple-500 ${!auth && "cursor-not-allowed opacity-60"}`}
             >
               <FaRegHeart /> Like this post
             </button>

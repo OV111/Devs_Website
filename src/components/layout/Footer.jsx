@@ -18,6 +18,7 @@ const PRODUCT_LINKS_GUEST = [
 const PRODUCT_LINKS_AUTH = [
   { title: "Roadmaps", to: "/roadmaps" },
   { title: "Challenges", to: "/coding-challenges" },
+  { title: "Capstone", to: "/capstone" },
   { title: "My Progress", to: "/progress" },
   { title: "Billing", to: "/billing" },
 ];
@@ -62,15 +63,22 @@ const LinkColumn = ({ title, links }) => {
   );
 };
 
+// Heading only for now — content to come.
+const AiColumn = () => (
+  <div className="flex flex-col gap-1">
+    <h2 className={headingClass}>In the AI era</h2>
+  </div>
+);
+
 const Footer = () => {
   const { auth } = useAuthStore();
 
   return (
     <footer className="relative z-1 mt-16">
-      <Divider />
+      {/* <Divider /> */}
       <div className="px-5 pt-16 sm:px-8 lg:px-12">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-10 lg:grid-cols-[1.8fr_1fr_1fr_1fr]">
-          <div className="col-span-2 flex flex-col items-start lg:col-span-1">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-10 sm:grid-cols-4 lg:grid-cols-[1.8fr_1fr_1.3fr_1fr_1fr]">
+          <div className="col-span-2 flex flex-col items-start sm:col-span-4 lg:col-span-1">
             <Wordmark className="mb-4" />
             <p className="mb-6 max-w-sm text-sm leading-6 text-[#A1A0AB]">
               Vahoha is where developers learn, build, and grow — community
@@ -124,6 +132,7 @@ const Footer = () => {
             title="Product"
             links={auth ? PRODUCT_LINKS_AUTH : PRODUCT_LINKS_GUEST}
           />
+          <AiColumn />
           <LinkColumn title="Company" links={COMPANY_LINKS} />
           <LinkColumn title="Topics" links={CATEGORY_LINKS} />
         </div>

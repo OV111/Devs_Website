@@ -134,7 +134,7 @@ export default function SearchResults({ query = "", onSelect, boundaryRef }) {
                       onClick={() => { setOpen(false); onSelect?.(category); }}
                       className="group flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left transition-all duration-150 hover:bg-white/[0.07] focus-visible:bg-white/[0.07] focus:outline-none"
                       >
-                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-400 ring-1 ring-violet-400/20 transition-colors duration-150 group-hover:bg-violet-500/25 group-hover:ring-violet-400/40">
+                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-400 ring-1 ring-violet-400/20 transition-colors duration-150 group-hover:bg-purple-500/25 group-hover:ring-violet-400/40">
                           <TagIcon />
                         </span>
                         <span className="flex-1 min-w-0">

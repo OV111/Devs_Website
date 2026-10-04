@@ -38,6 +38,8 @@ services:
       # ── AI ────────────────────────────────────────────────────
       - key: GROQ_API_KEY
         sync: false
+      - key: GITHUB_TOKEN           # capstone repo checks; fine-grained token, public repos read-only
+        sync: false
       - key: GEMINI_API_KEY         # optional, only if Gemini features are used
         sync: false
       # ── auth providers / email / media ────────────────────────
