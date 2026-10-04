@@ -193,7 +193,7 @@ export const getPersonalStatsService = async (db, userId) => {
   const results = await db
     .collection("challengeResults")
     .find({ userId: new ObjectId(userId) })
-    .project({ status: 1, solvedAt: 1 })
+    .project({ status: 1, solvedAt: 1, challengeId: 1 })
     .toArray();
 
   const solved = results.filter((r) => r.status === "solved");
@@ -231,6 +231,27 @@ export const getPersonalStatsService = async (db, userId) => {
     .collection("userProgress")
     .findOne({ userId: new ObjectId(userId) }, { projection: { xpTotal: 1 } });
 
+  // Last few solves with their titles, for the profile. Titles are joined in
+  // one query (not one per row); a solve whose challenge was since removed is
+  // simply left out rather than shown as a blank row.
+  const recentRows = solved
+    .filter((r) => r.solvedAt)
+    .sort((a, b) => new Date(b.solvedAt) - new Date(a.solvedAt))
+    .slice(0, 5);
+  const challenges = recentRows.length
+    ? await db
+        .collection(COL)
+        .find(
+          { slug: { $in: recentRows.map((r) => r.challengeId) } },
+          { projection: { _id: 0, slug: 1, title: 1, difficulty: 1 } },
+        )
+        .toArray()
+    : [];
+  const bySlug = new Map(challenges.map((c) => [c.slug, c]));
+  const recentSolved = recentRows
+    .filter((r) => bySlug.has(r.challengeId))
+    .map((r) => ({ ...bySlug.get(r.challengeId), solvedAt: r.solvedAt }));
+
   return {
     solved: solved.length,
     solvedThisWeek,
@@ -238,6 +259,7 @@ export const getPersonalStatsService = async (db, userId) => {
     accuracy: attempted > 0 ? Math.round((solved.length / attempted) * 100) : 0,
     streakDays,
     xpTotal: progress?.xpTotal ?? 0,
+    recentSolved,
   };
 };
 

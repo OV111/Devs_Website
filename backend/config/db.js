@@ -20,6 +20,10 @@ const connectDB = async () => {
     await Promise.all([
       db.collection("follows").createIndex({ followerId: 1, followingId: 1 }, { unique: true }),
       db.collection("notifications").createIndex({ targetUserId: 1, createdAt: -1 }),
+      // Chat blocks: unique pair so a repeated block can't duplicate; the
+      // reverse index backs the "did the other side block me" check.
+      db.collection("blocks").createIndex({ blockerId: 1, blockedId: 1 }, { unique: true }),
+      db.collection("blocks").createIndex({ blockedId: 1, blockerId: 1 }),
       db.collection("blogs").createIndex({ status: 1, category: 1, createdAt: -1 }),
       // "Posts for this layer" in the roadmap drawer (blogService getBlogsService).
       db.collection("blogs").createIndex({ layerIds: 1, status: 1, createdAt: -1 }),

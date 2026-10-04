@@ -4,9 +4,9 @@ const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "DevsWebs API",
+      title: "Vahoha API",
       version: "1.0.0",
-      description: "REST API for the DevsWebs developer community platform",
+      description: "REST API for the Vahoha developer learning platform",
     },
     servers: [
       {
@@ -14,7 +14,7 @@ const options = {
         description: "Development",
       },
       {
-        url: "https://devswebs-production.up.railway.app",
+        url: "https://devs-website.onrender.com",
         description: "Production",
       },
     ],

@@ -1,6 +1,7 @@
 import {
   getExamHistory,
   getLastExam,
+  withLayerTitles,
   saveExamResult,
 } from "../services/examHistoryService.js";
 import {
@@ -16,7 +17,10 @@ export const getHistory = async (req, res) => {
     const db = req.app.locals.db;
     const userId = req.user._id.toString();
     const limit = Math.min(Number(req.query.limit) || 10, 50);
-    const history = await getExamHistory(db, userId, limit);
+    const history = await withLayerTitles(
+      db,
+      await getExamHistory(db, userId, limit),
+    );
     res.json({ history });
   } catch (err) {
     console.error("getHistory error:", err);

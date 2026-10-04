@@ -27,6 +27,7 @@ const MyBlogs = lazy(() => import("./pages/My-Profile/MyBlogs"));
 const Chats = lazy(() => import("./pages/My-Profile/chat/Chats"));
 const Notifications = lazy(() => import("./pages/My-Profile/Notifications"));
 const Settings = lazy(() => import("./pages/My-Profile/Settings"));
+const BlockedUsers = lazy(() => import("./pages/My-Profile/BlockedUsers"));
 const ConnectedAccounts = lazy(
   () => import("./pages/My-Profile/ConnectedAccounts"),
 );
@@ -50,6 +51,8 @@ const ReviewProposals = lazy(
 );
 const AiAgent = lazy(() => import("./features/AI-Agent/AiAgent"));
 const CapstonePage = lazy(() => import("./features/capstone/CapstonePage"));
+const CertificatePage = lazy(() => import("./features/capstone/CertificatePage"));
+const CapstoneAdminPage = lazy(() => import("./features/capstone/CapstoneAdminPage"));
 const VoiceReviewPage = lazy(() => import("./features/voiceReview/VoiceReviewPage"));
 const PricingPage = lazy(() => import("./features/billing/PricingPage"));
 const BillingPage = lazy(() => import("./features/billing/BillingPage"));
@@ -92,6 +95,8 @@ const router = createBrowserRouter([
       { path: "forgot-password", element: <ForgotPassword /> },
       { path: "reset-password", element: <ResetPassword /> },
       { path: "posts/:id", element: <ReadMore /> },
+      // Public on purpose: certificates must be verifiable without an account.
+      { path: "verify/:publicId", element: <CertificatePage /> },
       {
         path: "categories",
         children: [
@@ -124,7 +129,12 @@ const router = createBrowserRouter([
           // existing links and bookmarks don't 404.
           { path: "ai-agent", element: <AiAgent /> },
           { path: "ai-agent/chat", element: <Navigate to="/ai-agent" replace /> },
+          // /capstone shows the default track (api-dev) directly, no redirect;
+          // /capstone/:trackId serves other tracks once they have a brief.
           { path: "capstone", element: <CapstonePage /> },
+          // Static segment wins over ":trackId" in React Router's ranking.
+          { path: "capstone/admin", element: <CapstoneAdminPage /> },
+          { path: "capstone/:trackId", element: <CapstonePage /> },
           { path: "billing", element: <BillingPage /> },
           { path: "progress", element: <ProgressPage /> },
           { path: "voice-review", element: <VoiceReviewPage /> },
@@ -143,6 +153,7 @@ const router = createBrowserRouter([
               { path: "notifications", element: <Notifications /> },
               { path: "favourites", element: <Favorites /> },
               { path: "connected-accounts", element: <ConnectedAccounts /> },
+              { path: "blocked", element: <BlockedUsers /> },
             ],
           },
         ],

@@ -7,6 +7,7 @@ import LayerDetail from "./LayerDetail";
 import { ConnectorProvider } from "./tree/ConnectorContext";
 import DesktopTreeRow from "./tree/DesktopTreeRow";
 import MobileTreeRow from "./tree/MobileTreeRow";
+import CapstoneRoadmapNode from "@/features/capstone/components/CapstoneRoadmapNode";
 
 const ETA_MAP = {
   mern: "~6 months",
@@ -168,6 +169,8 @@ const RoadmapTree = () => {
                   isPrevDone={index > 0 && (layerProgress[layers[index - 1].id] ?? layers[index - 1].status) === "done"}
                 />
               ))}
+              {/* The track's final step; renders nothing if it has no capstone. */}
+              <CapstoneRoadmapNode trackId={selectedTrack.id} />
             </div>
           </ConnectorProvider>
         ) : (
@@ -180,6 +183,7 @@ const RoadmapTree = () => {
                 isDone={(layerProgress[layer.id] ?? layer.status) === "done"}
               />
             ))}
+            <CapstoneRoadmapNode trackId={selectedTrack.id} />
           </div>
         )}
       </motion.div>

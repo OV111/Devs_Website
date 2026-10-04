@@ -62,6 +62,15 @@ export default function useAgentStream() {
         return;
       }
 
+      // 423: the mentor is paused during a live capstone defense. Show the
+      // server's own explanation instead of a generic connection error.
+      if (res.status === 423) {
+        const data = await res.json().catch(() => ({}));
+        setError({ type: "paused", message: data.message ?? "Your mentor is paused right now." });
+        setStreaming(false);
+        return;
+      }
+
       if (!res.ok) {
         throw new Error(`HTTP ${res.status}`);
       }

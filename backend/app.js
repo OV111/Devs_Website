@@ -22,6 +22,7 @@ import codingChallengeRoutes from "./modules/coding-challenges/index.js";
 import billingRoutes, { handleBillingWebhook } from "./modules/billing/index.js";
 import masteryRoutes from "./modules/mastery/index.js";
 import contactRoutes from "./modules/contact/index.js";
+import capstoneRoutes from "./modules/capstone/index.js";
 import { notFound } from "./middleware/notFound.js";
 
 export function createApp(db) {
@@ -87,6 +88,7 @@ export function createApp(db) {
   app.use("/api/billing", billingRoutes);
   app.use("/api/mastery", masteryRoutes);
   app.use("/api/contact", contactRoutes);
+  app.use("/api/capstone", capstoneRoutes);
   app.use("/api/admin", analyticsRoutes);
 
   app.use(notFound)

@@ -12,7 +12,7 @@ const CTA_BASE =
 const PlanCard = ({ plan, cta }) => {
   const ctaClass = `${CTA_BASE} ${
     plan.highlighted
-      ? "bg-purple-600 text-white hover:bg-purple-700"
+      ? "bg-purple-600 text-white hover:bg-purple-500"
       : "border border-white/15 text-[#F7F7F8] hover:bg-white/5"
   } disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent`;
 

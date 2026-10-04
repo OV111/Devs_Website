@@ -8,7 +8,7 @@ import { PLANS_BY_ID } from "./plans";
 const SECTION = "rounded-xl border border-white/10 bg-zinc-950 p-6";
 const SECTION_TITLE = "mb-4 text-base font-semibold text-[#F7F7F8]";
 const PRIMARY_BTN =
-  "rounded-md bg-purple-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-purple-700 disabled:cursor-not-allowed disabled:opacity-50";
+  "rounded-md bg-purple-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-purple-500 disabled:cursor-not-allowed disabled:opacity-50";
 const SECONDARY_BTN =
   "rounded-md border border-white/15 px-4 py-2 text-sm font-medium text-[#F7F7F8] transition-colors hover:bg-white/5 disabled:cursor-not-allowed disabled:opacity-50";
 

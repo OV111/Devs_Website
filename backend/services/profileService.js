@@ -6,6 +6,31 @@ import {
 } from "./followService.js";
 import { sanitizeUsername } from "../utils/username.js";
 
+export const PROFILE_LINK_FIELDS = [
+  "githubLink",
+  "linkedinLink",
+  "twitterLink",
+  "mediumLink",
+];
+
+// Profile links are rendered as <a href>, so an unchecked value like
+// `javascript:alert(1)` would run when someone clicks it. Only http(s) URLs
+// are stored; an empty string clears the link.
+export const sanitizeProfileLink = (value, field = "link") => {
+  const trimmed = String(value ?? "").trim();
+  if (trimmed === "") return "";
+  let url;
+  try {
+    url = new URL(trimmed);
+  } catch {
+    throw { status: 400, message: `${field} must be a valid URL.` };
+  }
+  if (url.protocol !== "http:" && url.protocol !== "https:") {
+    throw { status: 400, message: `${field} must start with http:// or https://.` };
+  }
+  return url.toString();
+};
+
 export const getProfileService = async (db, userId) => {
   const users = db.collection("users");
   const usersStats = db.collection("usersStats");
@@ -71,9 +96,9 @@ export const updateSettingsService = async (db, userId, fields, files) => {
   const statsUpdate = { lastActive: new Date() };
   if (fields.bio !== undefined) statsUpdate.bio = fields.bio;
   if (fields.postsCount !== undefined) statsUpdate.postsCount = Number(fields.postsCount);
-  if (fields.githubLink !== undefined) statsUpdate.githubLink = fields.githubLink;
-  if (fields.linkedinLink !== undefined) statsUpdate.linkedinLink = fields.linkedinLink;
-  if (fields.twitterLink !== undefined) statsUpdate.twitterLink = fields.twitterLink;
+  for (const key of PROFILE_LINK_FIELDS) {
+    if (fields[key] !== undefined) statsUpdate[key] = sanitizeProfileLink(fields[key], key);
+  }
   if (fields.location !== undefined) statsUpdate.location = fields.location;
   if (fields.timezone !== undefined) statsUpdate.timezone = fields.timezone;
   if (files.profileImage) statsUpdate.profileImage = files.profileImage;

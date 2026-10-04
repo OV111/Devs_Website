@@ -1,0 +1,17 @@
+// asyncHandler.js: reference solution
+function asyncHandler(fn) {
+  const wrapped = function (...args) {
+    const next = args[args.length - 1];
+    try {
+      // Promise.resolve covers async fns, plain promise-returning fns, and sync fns
+      return Promise.resolve(fn.apply(this, args)).catch(next);
+    } catch (err) {
+      return next(err);
+    }
+  };
+  // Express reads fn.length to tell error handlers (4 args) from normal ones (3)
+  Object.defineProperty(wrapped, "length", { value: fn.length });
+  return wrapped;
+}
+
+module.exports = asyncHandler;

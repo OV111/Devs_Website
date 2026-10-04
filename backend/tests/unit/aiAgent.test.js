@@ -361,6 +361,7 @@ describe('sanitizeTitle', () => {
 describe('agentTools', () => {
   it('exposes exactly the tools the UI advertises', () => {
     expect(toolDefinitions.map((t) => t.function.name).sort()).toEqual([
+      'get_capstone_status',
       'get_concept',
       'get_exam_history',
       'get_learner_context',
@@ -376,7 +377,7 @@ describe('agentTools', () => {
 
   it('refuses user-scoped tools when there is no authenticated user', async () => {
     const db = { collection: () => ({}) }
-    for (const name of ['get_user_progress', 'get_exam_history', 'get_weak_spots', 'log_weak_spot']) {
+    for (const name of ['get_user_progress', 'get_exam_history', 'get_weak_spots', 'log_weak_spot', 'get_capstone_status']) {
       expect(await executeTool(name, {}, { db })).toEqual({ error: 'Not authenticated' })
     }
   })

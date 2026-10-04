@@ -24,21 +24,23 @@ export const joinRoom = async (ws, data) => {
   if (!rooms.has(roomId)) rooms.set(roomId, new Set());
 
   let db;
+  let clearedAt = null;
   try {
     db = await connectDB();
-    const { error } = await getOrCreateRoomForMember(db, {
+    const { error, room } = await getOrCreateRoomForMember(db, {
       roomId,
       userId: senderId,
       receiverId,
     });
     if (error) return sendError(ws, error);
+    clearedAt = room.memberSettings?.[senderId]?.clearedAt ?? null;
   } catch (err) {
     console.error("joinRoom failed:", err);
     return sendError(ws, "Error with DB");
   }
 
   rooms.get(roomId).add(ws);
-  const messageHistory = await loadMessages(db, roomId);
+  const messageHistory = await loadMessages(db, roomId, 50, clearedAt);
   ws.send(JSON.stringify({ type: "message_history", roomId, messageHistory }));
   ws.send(JSON.stringify({ type: "joined_room", roomId }));
 };
@@ -55,7 +57,7 @@ export const sendMessage = async (ws, data) => {
 
   try {
     const db = await connectDB();
-    const { error, members, message } = await saveMessage(db, {
+    const { error, members, mutedMembers = [], message } = await saveMessage(db, {
       roomId,
       senderId,
       text,
@@ -74,8 +76,12 @@ export const sendMessage = async (ws, data) => {
       }
     });
 
+    // Muted members still receive the message, just no notification.
     const absentMembers = members.filter(
-      (memberId) => memberId !== senderId.toString() && !presentUserIds.has(memberId),
+      (memberId) =>
+        memberId !== senderId.toString() &&
+        !presentUserIds.has(memberId) &&
+        !mutedMembers.includes(memberId),
     );
     absentMembers.forEach((targetUserId) => {
       notificationQueue.add("new_message", {

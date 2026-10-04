@@ -10,6 +10,24 @@ export const getExamHistory = async (db, userId, limit = 10) => {
     .toArray();
 };
 
+/**
+ * Adds `layerTitle` to exam rows. `layer` is an id like "L_03" — meaningless
+ * to a person — so the learner-facing history joins roadmap_layers once
+ * (one query for all rows, not one per row). Unknown ids fall back to null
+ * and the caller shows the id instead.
+ */
+export const withLayerTitles = async (db, rows) => {
+  const ids = [...new Set(rows.map((r) => r.layer).filter(Boolean))];
+  if (ids.length === 0) return rows.map((r) => ({ ...r, layerTitle: null }));
+
+  const layers = await db
+    .collection("roadmap_layers")
+    .find({ layerId: { $in: ids } }, { projection: { _id: 0, layerId: 1, title: 1 } })
+    .toArray();
+  const titleOf = new Map(layers.map((l) => [l.layerId, l.title]));
+  return rows.map((r) => ({ ...r, layerTitle: titleOf.get(r.layer) ?? null }));
+};
+
 export const getLastExam = async (db, userId) => {
   const collection = db.collection("examHistory");
   return collection.findOne(

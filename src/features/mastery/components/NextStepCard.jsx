@@ -26,7 +26,7 @@ const NextStepCard = ({ nextAction }) => {
       <div className="mt-5 flex flex-wrap gap-3">
         <Link
           to={hrefForTarget(nextAction.target)}
-          className="inline-flex items-center gap-2 rounded-md bg-purple-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-purple-700"
+          className="inline-flex items-center gap-2 rounded-md bg-purple-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-purple-500"
         >
           {ACTION_LABEL[nextAction.action] ?? "Continue"} <ArrowRight size={14} />
         </Link>

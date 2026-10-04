@@ -379,7 +379,7 @@ export default function AiAgent() {
             <span className="flex-1">
               {error.type === "rate_limit"
                 ? `Daily limit reached (30 messages/day).${error.resetAt ? ` Resets at ${new Date(error.resetAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}.` : ""}`
-                : error.type === "session_load"
+                : error.type === "session_load" || error.type === "paused"
                   ? error.message
                   : "Connection error. Your message was not sent."}
             </span>

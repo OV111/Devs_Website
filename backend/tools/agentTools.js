@@ -11,13 +11,23 @@ import { getConcept, getConcepts } from "../services/conceptService.js";
 import { logTeachingAttempt } from "../services/agent/teachingLogService.js";
 import { toTopicSlug } from "../utils/topicKey.js";
 import { escapeRegex } from "../utils/regex.js";
+import { getCapstoneMentorView } from "../modules/capstone/index.js";
 
 export const toolDefinitions = [
   {
     type: "function",
     function: {
+      name: "get_capstone_status",
+      description:
+        "Get the learner's capstone project status: attempt state, AI review scores and feedback per rubric criterion, and their last defense result. Call this when they ask about their capstone, its review, or why it failed. Coach from the feedback Socratically — never write capstone code or draft defense answers.",
+      parameters: { type: "object", properties: {} },
+    },
+  },
+  {
+    type: "function",
+    function: {
       name: "search_posts",
-      description: "Search community posts by keyword on DevsWebs. Use when the user asks about a topic and you want to surface relevant platform content.",
+      description: "Search community posts by keyword on Vahoha. Use when the user asks about a topic and you want to surface relevant platform content.",
       parameters: {
         type: "object",
         properties: {
@@ -33,7 +43,7 @@ export const toolDefinitions = [
     type: "function",
     function: {
       name: "search_library",
-      description: "Search the DevsWebs learning library for books, docs, and guides. Use when the user needs resources to study a topic.",
+      description: "Search the Vahoha learning library for books, docs, and guides. Use when the user needs resources to study a topic.",
       parameters: {
         type: "object",
         properties: {
@@ -48,7 +58,7 @@ export const toolDefinitions = [
     type: "function",
     function: {
       name: "get_user_profile",
-      description: "Look up a DevsWebs user's public profile by username.",
+      description: "Look up a Vahoha user's public profile by username.",
       parameters: {
         type: "object",
         properties: {
@@ -113,7 +123,7 @@ export const toolDefinitions = [
     function: {
       name: "get_concept",
       description:
-        "Look up DevsWebs' authored domain knowledge for a concept: its definition, purpose, prerequisites, and the known misconceptions WITH the authored correction for each. Call this before teaching or correcting a topic, especially when the learner's state lists a misconception — the correction here is the platform's canonical explanation and should shape your answer.",
+        "Look up Vahoha's authored domain knowledge for a concept: its definition, purpose, prerequisites, and the known misconceptions WITH the authored correction for each. Call this before teaching or correcting a topic, especially when the learner's state lists a misconception — the correction here is the platform's canonical explanation and should shape your answer.",
       parameters: {
         type: "object",
         properties: {
@@ -328,6 +338,11 @@ export async function executeTool(name, args, ctx = {}) {
     }
 
     return { logged: true, topic };
+  }
+
+  if (name === "get_capstone_status") {
+    if (!userId) return { error: "Not authenticated" };
+    return getCapstoneMentorView(db, userId);
   }
 
   return { error: `Unknown tool: ${name}` };

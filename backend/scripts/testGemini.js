@@ -18,7 +18,7 @@ async function testGemini() {
   try {
     const model = getGeminiModel();
     const result = await model.generateContent(
-      "Reply with exactly one sentence: DevsWebs agent ready."
+      "Reply with exactly one sentence: Vahoha agent ready."
     );
     const text = result.response.text();
     console.log("✅  Gemini responded:", text.trim());

@@ -20,6 +20,7 @@ import { generateTitle } from "../services/agent/titleService.js";
 import { toolDefinitions } from "../tools/agentTools.js";
 import { ATTACHMENT_LIMITS } from "../validation/aiAgent.schemas.js";
 import { trackEvent } from "../services/eventService.js";
+import { hasLiveDefense } from "../modules/capstone/index.js";
 
 export const createSession = async (req, res) => {
   try {
@@ -132,6 +133,16 @@ export const stream = async (req, res) => {
   // message is a non-empty trimmed string, sessionId is a valid ObjectId or null,
   // and attachments (if present) are within the per-file and total size caps.
   const { sessionId, message, attachments = [], activity = null } = req.body;
+
+  // Anti-cheat: while a capstone defense question is on the clock, the mentor
+  // is paused — otherwise it could be asked the answers. Checked before the
+  // daily limit so a paused request does not use up a message.
+  if (await hasLiveDefense(db, userId)) {
+    return res.status(423).json({
+      message: "Your mentor is paused while a capstone defense question is on the clock. It will be back as soon as you answer.",
+      code: "defense_in_progress",
+    });
+  }
 
   // rate limit check
   const limit = await checkDailyLimit(db, userId);

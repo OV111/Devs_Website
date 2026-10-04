@@ -1,7 +1,7 @@
 /**
  * Coding Challenges module — the only public entry point.
  *
- * Everything DevsWebs needs from this module is re-exported here, so `app.js`
+ * Everything Vahoha needs from this module is re-exported here, so `app.js`
  * mounts one router and never reaches inside the module's folders. Sub-routers
  * are added to this router as each stage lands (attempts, submissions, admin).
  */
