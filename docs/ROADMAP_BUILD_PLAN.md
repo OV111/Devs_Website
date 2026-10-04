@@ -151,7 +151,7 @@ Goal: Learn → Build → Break → Fix → Evaluate → Defend → Improve → 
 | 8 | Per-skill progression view with history | Mastery view | Small (snapshot per recompute) | **V2**, after rubric calibration |
 | 9 | Evidence profile (skill + linked evidence) | Public profiles (Phase 9), certificates | Medium | **Future** |
 | 10 | Production-incident scenarios (leak, race, bottleneck, failed deploy) | Extension of 6 | Medium | **Future** |
-| 11 | Build Teams grouped by shared aim | `FUTURE_IDEAS.md` | New collection | **Future**, manual team first |
+| 11 | Build Teams grouped by shared aim | `FUTURE_IDEAS.md` | New collection | **MVP built 2026-10-04** (see `docs/FUTURE_IDEAS.md`), untested on real data; team 1 run by hand |
 | 12 | Employer-run assessments | Screening-as-a-Service | Large | **Future** |
 | 13 | Numeric skill scores, "worth returning to" effect, injected bugs in learner repos | — | — | **Experiment** with users |
 

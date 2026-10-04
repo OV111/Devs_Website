@@ -6,6 +6,8 @@
 
 ## Collaborative Build Teams (2026-06-11)
 
+> **2026-10-04: a manual-first MVP is built** (`backend/modules/teams`, `src/features/teams`). It covers verified PR contributions, a per-member defense, peer ratings and a public evidence page. Social team formation, AI task assignment and stakes below are still ideas. Status: `docs/PILOT_STATUS.md`.
+
 **Concept:** Developers on Vahoha group together socially, pick a real project they want to build, and the AI assigns tasks to each member based on their known skill level and learning progress. The team ships a real product together.
 
 **How it works:**

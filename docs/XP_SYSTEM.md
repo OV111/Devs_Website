@@ -37,6 +37,7 @@ Verdict: **Now** = cheap and safe for the pilot · **Later** = only if pilot dat
 | Idea | Why it might help | Critique | Verdict |
 | --- | --- | --- | --- |
 | XP for passing a layer exam (first pass only, more for a higher score) | Connects the core loop to the XP economy, so non-Arena users can afford hints | Passing already unlocks the next layer, so it's a double reward. Without "first pass only", people farm it with retries | **Later** (first pass only) |
+| XP for passing a capstone (first pass only; a bigger reward than a layer exam). Added 2026-10-04 at the founder's request | Rewards the hardest verified milestone and gives capstone passers XP to spend | Same double-reward risk: the certificate is already the reward, and a retry loop could farm it. Pay once per track, only on the final pass, never on a revoked certificate. The grade is AI-assisted, so only pay on a passed result the server decided | **Later** (first pass only, once per track) |
 | XP for a teach-back explanation that passes | Rewards the hardest, most valuable action | LLM grading isn't calibrated yet (κ target 0.7). Paying out XP on unreliable grades rewards the wrong answers | **Later**, once grading is calibrated |
 | XP for reading library resources or "studying" a layer | Rewards preparation | Rewards clicking, not learning, and can't be checked. Easy to farm | **Never** |
 | Unlock layers with XP instead of exams | Gives an alternative route for people who struggle with exams | Destroys the core idea: layers must be earned by showing understanding | **Never** |
@@ -80,6 +81,7 @@ Verdict: **Now** = cheap and safe for the pilot · **Later** = only if pilot dat
 
 | Idea | Why it might help | Critique | Verdict |
 | --- | --- | --- | --- |
+| Recruiter filter or ranking by XP (founder idea, 2026-10-04) | Recruiters get a filtered list of developers | XP is effort, so a farmer outranks a stronger developer, and it rewards farming. Rank by verified results instead: exam scores, capstone and certificate, defense score, team evidence (merged PRs, peer ratings). Needs real users first | **Never** as the sort key. XP may show as a small secondary number |
 | Show XP on the public profile | Signals effort | Employers ignore points: nobody hires because of a Codecademy badge. Next to verified results it blurs what's actually verified | **Never** as the headline. Show verified results; XP optional and small |
 | XP on a Teams manager dashboard | Managers see engagement | Measures activity, not skill, and invites managers to judge people by points | **Later**: show mastery, with XP secondary |
 | Awards and badges tied to XP milestones | Moments people want to share | Same problem as levels. Awards should mark verified events (like "100/100 on an exam"), not XP totals | **Later**, based on verified events only |

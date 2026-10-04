@@ -58,6 +58,8 @@ Single-instance Express 5 + MongoDB (native driver) + Redis/BullMQ, with WebSock
 | Mentor | `/api/ai-agent`, `services/agent/*`, `tools/agentTools.js` | Sessions, SSE streaming, tool loop, 20-turn window, 30 messages/day |
 | Mastery | `modules/mastery` | Per-topic status and next action |
 | Challenges (Arena) | `modules/coding-challenges` | Catalog, grading in an `isolated-vm` sandbox, proposals with admin review, XP-priced hints, daily submission cap |
+| Capstone | `modules/capstone` | Repo review, timed technical defense, certificates, admin overrides |
+| Build Teams | `modules/teams`, `/api/teams` | Built 2026-10-04, not yet run on real data. Admin-created team on one GitHub repo; merged PRs synced per member; per-member defense on their own PR diffs (reuses capstone helpers, capstone code untouched); peer ratings; public evidence snapshot at `GET /api/teams/evidence/:publicId` |
 | Billing | `modules/billing` | Polar checkout, signed webhook, subscription state. **Inert** until `BILLING_ENFORCED=true` |
 | Analytics | `services/eventService.js`, `routes/analytics.routes.js` | 7 server-side events and an admin-only funnel at `GET /api/admin/funnel` |
 | Real time | `websocket/`, `workers/notificationWorker.js`, `queues/` | DMs and group chat; notifications via BullMQ |
@@ -65,7 +67,7 @@ Single-instance Express 5 + MongoDB (native driver) + Redis/BullMQ, with WebSock
 
 ### Frontend (`src/`)
 
-`features/` holds one folder per product area: `Roadmap`, `AI-Agent`, `coding-challenges`, `mastery`, `billing`, `blogs`, `profile`, `codingLibs`, plus unfinished `capstone` and `voiceReview` shells. Stores are in `stores/` (auth, roadmap, agent, notifications, profile, theme). Access tokens live in memory only; the httpOnly refresh cookie restores the session on load.
+`features/` holds one folder per product area: `Roadmap`, `AI-Agent`, `coding-challenges`, `mastery`, `billing`, `blogs`, `profile`, `codingLibs`, `capstone`, `teams` (`/team` for members, public `/evidence/:publicId`), plus an unfinished `voiceReview` shell. Stores are in `stores/` (auth, roadmap, agent, notifications, profile, theme). Access tokens live in memory only; the httpOnly refresh cookie restores the session on load.
 
 ### MongoDB collections (database `DevsBlog`)
 
@@ -74,6 +76,8 @@ Single-instance Express 5 + MongoDB (native driver) + Redis/BullMQ, with WebSock
 - **Learning:** `roadmap_tracks`, `roadmap_layers`, `userProgress`, `exam_question_banks`, `exam_attempts`, `examHistory`, `weakSpots`, `teach_back_rubrics`, `teach_back_sessions`, `concepts`, `learnerMastery`, `mentor_teaching_log`, `libraryResources`, `savedLibraryResources`
 - **Mentor:** `agent_sessions`, `agent_usage`
 - **Arena:** `challenges`, `challenge_attempts`, `challengeResults`
+- **Capstone:** `capstone_briefs`, `capstone_attempts`, `capstone_submissions`, `capstone_reviews`, `capstone_defenses`, `capstone_admin_actions`, `certificates`
+- **Teams:** `teams`, `team_contributions`, `team_defenses`, `team_ratings`, `team_evidence`
 - **Analytics:** `userEvents`
 
 ---

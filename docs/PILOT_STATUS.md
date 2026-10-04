@@ -44,6 +44,16 @@ The technical prep for the pilot is mostly done. What's left is mostly yours: co
 - The funnel loads the whole cohort into memory. Fine at pilot scale; switch to an aggregation pipeline before thousands of users.
 - `active_day` comes from login and token refresh, so it means "opened the app that day", not "studied".
 
+## Decision: Build Teams MVP built ahead of pilot data (2026-10-04)
+
+Against the "no new features until pilot data" rule and the advice in `docs/STARTUP_CRITIQUE_2026-10.md` / the validate-idea verdict (pivot, 19/35), the founder chose to build Build Teams now. Risk raised once: the pool of capstone passers is empty. Status: all 8 stages written, ESLint and `vite build` pass; never run against GitHub, the database or the model, and not committed.
+
+- **Backend:** `backend/modules/teams` at `/api/teams`. Team record (admin-only writes), contribution sync from merged PRs, per-member defense on their own PR diffs, peer ratings, public evidence snapshot.
+- **Frontend:** `src/features/teams`: `/team` (entry: card on the profile page) and public `/evidence/:publicId`.
+- **Manual for team 1:** matching, applications, GitHub login confirmation, capstone-pass check, inactivity messages. No admin UI: create team, set repo, add members, sync and issue evidence are API calls.
+- **Before real use:** run it end to end on a test repo, get each member's consent before issuing evidence (it publishes names), add a pointer to teams from the capstone page.
+- **Not built:** AI skill judge, team moves, AI task assignment, demo day, startup support, sponsored projects.
+
 ## Frozen until pilot data says otherwise
 
-Voice exam, Arena features, new paths, awards, XP changes (`docs/XP_SYSTEM.md`), group chat, Teams and employer tiers.
+Voice exam, Arena features, new paths, awards, XP changes (`docs/XP_SYSTEM.md`), group chat, further Teams work beyond the MVP above, and employer tiers.

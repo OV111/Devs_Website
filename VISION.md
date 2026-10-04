@@ -160,9 +160,21 @@ That verified population is what unlocks the second half of the business: an emp
 
 ---
 
+## XP and the voice exam (ideas, not built)
+
+Short versions of `docs/XP_SYSTEM.md` and `docs/VOICE_EXAM_SPEC.md`. Both stay frozen until pilot data says otherwise.
+
+**XP.** Today XP is earned only by solving Arena challenges and spent only on Arena hints; the core loop (roadmap, exams, teach-back) gives none. One rule governs every idea: **XP measures effort, never proof.** It can't unlock layers, skip exams, buy attempts or be bought with money, and mastery and verified results stay a separate number. Levels, XP decay, XP in mentor answers and an XP headline on public profiles are rejected. Streaks, first-pass XP for passing layer exams and first-pass XP for passing a capstone (once per track, never on a revoked certificate) are the only candidates, and only if the pilot shows people don't return for Layer 2. Boot.dev already sells XP in this niche, so it is not a differentiator.
+
+**Voice exam.** A spoken "teach-back" exam per layer: the learner explains the layer aloud, the examiner asks 2-3 one-at-a-time follow-ups, and the answer is graded against a hand-written rubric of concepts. Each credited concept must cite a quote that really appears in the learner's transcript, two independent grader runs are compared, and the app, not the model, decides pass/fail. Accent, fluency and pace are never graded. A soft gate in V1: the multiple-choice exam still unlocks the next layer, and the voice exam adds a "verified" status. A failed attempt feeds the mentor's weak spots and needs a 24-hour wait plus a mentor review before the retry. Build order starts text-only, then adds audio. Backend path first, one layer first. Not started; the biggest cost is authoring the rubrics, and no hard gate before human calibration (Cohen's kappa of 0.7 or more).
+
+---
+
 ## Notes & ideas (not committed, not scoped)
 
 **Build Teams (idea).** Developers who share the same aim (for example "backend, mid-level in six months") are grouped, build a real production-grade project together, and some teams might go on to start a company. Only learners who passed a track's capstone would join, so every member has a verified baseline, and the platform already knows each member's strengths and gaps for matching. The startup is a possible outcome, not a feature, and the legal side (equity, IP) is out of scope. Not scoped; validate with one hand-run team before any product work. Details in `docs/FUTURE_IDEAS.md`.
+
+**Recruiter filter (long-term).** A filtered list of developers for recruiters, ranked by verified results (exam scores, capstone and certificate, defense score, team evidence), with XP only as a small secondary number: XP measures effort, not proof. Needs real users first.
 
 **Evidence profile and employer assessments (long-term).** A profile that shows each skill together with the evidence behind it, and later companies running their own build-and-evaluate assessments on the same engine. Both are future extensions of section 12, not current requirements.
 
