@@ -94,7 +94,7 @@ const CooldownScreen = ({ message, onBack }) => {
 
 // ── Result screen ─────────────────────────────────────────────
 const ResultScreen = ({ result, passThreshold, onRetry, onBack, path, layer }) => {
-  const { score, passed, correctCount, total, missedResults } = result;
+  const { score, passed, correctCount, total, missedResults, xpEarned } = result;
 
   // auto-navigate to roadmap after pass
   useEffect(() => {
@@ -132,6 +132,9 @@ const ResultScreen = ({ result, passThreshold, onRetry, onBack, path, layer }) =
               <div className="flex items-center justify-center gap-2 text-purple-400 text-sm">
                 <CheckCircle2 size={16} /> Next layer unlocked
               </div>
+              {xpEarned > 0 && (
+                <p className="text-sm font-semibold text-yellow-400">+{xpEarned} XP</p>
+              )}
               <p className="text-xs text-neutral-600">Returning to roadmap in 3 seconds...</p>
             </div>
           ) : (

@@ -8,6 +8,7 @@ const APPROVAL_ITEMS = [
   "A capstone certificate with a public verification link",
   "Your repository and exact commit on the certificate",
   "Review and defense scores anyone can check",
+  "XP the first time you pass a track capstone",
 ];
 
 /**

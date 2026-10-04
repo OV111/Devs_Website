@@ -10,6 +10,7 @@
  */
 
 import { ObjectId } from "mongodb";
+import { revokeCapstoneXp } from "../../../services/xpService.js";
 import { COOLDOWN_MS } from "../lib/constants.js";
 import { ensureCertificate } from "./certificateService.js";
 import {
@@ -188,6 +189,10 @@ export const overrideAttemptService = async (db, adminId, attemptId, { outcome, 
       { attemptId: attempt._id, revokedAt: null },
       { $set: { revokedAt: now, revokedReason: `Capstone outcome changed after review: ${reason}` } },
     );
+    // The XP was a reward for a pass that no longer stands.
+    await revokeCapstoneXp(db, attempt.userId, attempt._id).catch((err) =>
+      console.error("capstone XP revoke failed (override already applied):", err),
+    );
   }
 
   await logAction(db, adminId, "override", {
@@ -219,6 +224,11 @@ export const setCertificateRevokedService = async (db, adminId, publicId, { revo
     { $set: revoked ? { revokedAt: new Date(), revokedReason: reason } : { revokedAt: null, revokedReason: null } },
     { returnDocument: "after" },
   );
+  if (revoked) {
+    await revokeCapstoneXp(db, cert.userId, cert.attemptId).catch((err) =>
+      console.error("capstone XP revoke failed (certificate already revoked):", err),
+    );
+  }
   await logAction(db, adminId, revoked ? "revoke_certificate" : "restore_certificate", {
     attemptId: cert.attemptId,
     publicId,

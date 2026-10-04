@@ -38,6 +38,7 @@ export const toPublicAttempt = (attempt, brief) => {
     startedAt: attempt.startedAt,
     cooldownUntil: attempt.cooldownUntil ?? null,
     defenseRetryAt: attempt.defenseRetryAt ?? null,
+    xpAwarded: attempt.xpAwarded ?? null,
   };
 };
 

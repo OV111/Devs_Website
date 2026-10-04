@@ -28,6 +28,7 @@ import { ObjectId } from "mongodb";
 import { trackEvent } from "../../../services/eventService.js";
 import { addWeakSpot } from "../../../services/weakSpotService.js";
 import { recomputeMastery } from "../../../services/learnerMasteryService.js";
+import { XP_AMOUNTS, awardXp } from "../../../services/xpService.js";
 import {
   COOLDOWN_MS,
   DEFENSE_LOCK_STALE_MS,
@@ -107,6 +108,27 @@ const applyResult = async (db, userId, attempt, session, brief, gradedSessions) 
   const meta = { trackId: attempt.trackId, attemptId: attempt._id.toString(), stage: "defense", score: session.result.score };
   if (session.result.passed) await trackEvent(db, userId, "capstone_passed", meta);
   else if (finalFail) await trackEvent(db, userId, "capstone_failed", meta);
+
+  // XP for the first genuine defense pass on this track (not admin overrides,
+  // which never reach applyResult). Once per track, enforced by xpAwards' unique
+  // index. Derived reward: never fail the learner's request over it.
+  if (session.result.passed) {
+    try {
+      const award = await awardXp(db, userId, {
+        kind: "capstone",
+        sourceId: attempt.trackId,
+        amount: XP_AMOUNTS.capstone,
+        meta: { attemptId: attempt._id.toString(), score: session.result.score },
+      });
+      if (award.awarded) {
+        // Remembered on the attempt so the result screen can say "+N XP".
+        await db.collection(ATTEMPTS).updateOne({ _id: updated._id }, { $set: { xpAwarded: award.amount } });
+        updated.xpAwarded = award.amount;
+      }
+    } catch (err) {
+      console.error("capstone XP award failed (result already applied):", err);
+    }
+  }
 
   // Issue the certificate now. If this fails, the status read retries it, so
   // never fail the learner's request over it.

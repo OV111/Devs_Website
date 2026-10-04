@@ -71,7 +71,9 @@ const describe = (status, busy) => {
     return {
       label: "Approved",
       title: `review ${review?.totalScore ?? "—"}%`,
-      line: "capstone approved — certificate issued",
+      line: status.attempt?.xpAwarded
+        ? `capstone approved — certificate issued · +${status.attempt.xpAwarded} XP`
+        : "capstone approved — certificate issued",
     };
   return {
     label: "Sent back",

@@ -27,19 +27,7 @@ export const updateUserProgress = async (db, userId, fields) => {
   const collection = db.collection("userProgress");
   return collection.findOneAndUpdate(
     { userId: new ObjectId(userId) },
-    { $set: { ...fields, updatedAt: new Date() } },
+    { $set: { ...fields, updatedAt: new Date() }, $setOnInsert: { createdAt: new Date() } },
     { returnDocument: "after", upsert: true },
-  );
-};
-
-export const incrementXP = async (db, userId, amount) => {
-  const collection = db.collection("userProgress");
-  return collection.findOneAndUpdate(
-    { userId: new ObjectId(userId) },
-    {
-      $inc: { xpTotal: amount },
-      $set: { lastActiveAt: new Date(), updatedAt: new Date() },
-    },
-    { returnDocument: "after" },
   );
 };

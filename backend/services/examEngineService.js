@@ -7,6 +7,7 @@ import { evaluateTeachBack, generateFollowUp } from "./teachBackEvaluatorService
 import { toTopicSlug } from "../utils/topicKey.js";
 import { recomputeMastery } from "./learnerMasteryService.js";
 import { trackEvent } from "./eventService.js";
+import { awardXp, examXp } from "./xpService.js";
 
 /**
  * Refresh the Adaptive Engine's view of this learner after new evidence lands.
@@ -281,10 +282,35 @@ export const submitAttempt = async (db, userId, attemptId, clientAnswers, client
   }
 
   // unlock next layer if passed
+  let xpEarned = 0;
   if (passed) {
     await updateUserProgress(db, userId, {
       [`layerProgress.${attempt.layer}`]: "done",
     });
+    // First pass of this layer only (retries award nothing). Derived reward:
+    // never fail the learner's result over it.
+    try {
+      // saveExamResult already wrote THIS pass, so more than one passed row means
+      // the layer was passed before (possibly before XP existed): no XP for a retake.
+      const passedBefore =
+        (await db.collection("examHistory").countDocuments({
+          userId: new ObjectId(userId),
+          path: attempt.path,
+          layer: attempt.layer,
+          passed: true,
+        })) > 1;
+      const award = passedBefore
+        ? { amount: 0 }
+        : await awardXp(db, userId, {
+            kind: "exam",
+            sourceId: `${attempt.path}:${attempt.layer}`,
+            amount: examXp(score),
+            meta: { path: attempt.path, layer: attempt.layer, score },
+          });
+      xpEarned = award.amount;
+    } catch (err) {
+      console.error("exam XP award failed (result already saved):", err);
+    }
   }
 
   // Must run after saveExamResult and addWeakSpot — it reads what they wrote.
@@ -308,7 +334,7 @@ export const submitAttempt = async (db, userId, attemptId, clientAnswers, client
     .filter((r) => !r.correct)
     .map((r) => ({ ...r, hasRubric: rubricTopics.has(r.topic) }));
 
-  return { score, passed, correctCount, total: attempt.questions.length, missedResults };
+  return { score, passed, correctCount, total: attempt.questions.length, missedResults, xpEarned };
 };
 
 // ── Teach-Back (rubric-based, free-form explanation) ────────────
