@@ -135,6 +135,32 @@ The agent today answers well but doesn't durably know the learner beyond what to
 
 ---
 
+## Loop strengthening — direction (added 2026-10-04)
+
+Goal: Learn → Build → Break → Fix → Evaluate → Defend → Improve → Prove → harder challenge, built on the existing mastery spine. Additive; nothing here replaces a current system. The pilot freeze (`docs/PILOT_STATUS.md`) still applies: V2 items start after pilot data.
+
+| # | Item | Belongs to | Arch change | Phase |
+| --- | --- | --- | --- | --- |
+| 1 | Loop framing, entry→mid-level outcome | VISION, ARCHITECTURE | None | **MVP (docs)** |
+| 2 | Capstone defense documented as the "Defend" step | Capstone stage 4 (built) | None | **Built** |
+| 3 | Mentor suggests next steps from capstone weak criteria, past challenges, repeated weak spots (new `challenge` / `capstone-fix` target kinds in `deriveNextAction`) | `streamService`, `learnerMasteryService` | Small | **V2** |
+| 4 | Mentor modes (teach / coach / review / debug / defend) as prompt strategy; still one LLM call | Mentor stage 5 | None | **V2** |
+| 5 | Weakness → targeted challenge → reassess: challenges tagged by concept slug, results feed `recomputeMastery` | `challenges`, mastery | Small | **V2** |
+| 6 | Scenario challenges (find the bug, slow query, stale cache, auth hole, resilience) as a new `type` | `challenges`, runner | Medium (multi-file runner) | **V2**, content first |
+| 7 | Capstone fix rounds: pick review weaknesses, fix, re-evaluate, scored on delta | Capstone module | Medium | **V2** |
+| 8 | Per-skill progression view with history | Mastery view | Small (snapshot per recompute) | **V2**, after rubric calibration |
+| 9 | Evidence profile (skill + linked evidence) | Public profiles (Phase 9), certificates | Medium | **Future** |
+| 10 | Production-incident scenarios (leak, race, bottleneck, failed deploy) | Extension of 6 | Medium | **Future** |
+| 11 | Build Teams grouped by shared aim | `FUTURE_IDEAS.md` | New collection | **Future**, manual team first |
+| 12 | Employer-run assessments | Screening-as-a-Service | Large | **Future** |
+| 13 | Numeric skill scores, "worth returning to" effect, injected bugs in learner repos | — | — | **Experiment** with users |
+
+Mentor stage 8 (proposed): proactive next steps and mode selection, after stage 5.
+
+Caveat: skill numbers depend on calibrated rubrics. Only four sample rubrics exist and none are checked against human graders, so do not display numeric progression before that.
+
+---
+
 ## Data Model — Planned Additions
 
 The community DB (`DevsBlog`) already has: `users`, `usersStats`, `blogs`, `comments`, `favouriteBlogs`, `follows`, notifications, chat, `libraryResources`, plus the unwired `userProgress`, `examHistory`, `weakSpots`, `challengeResults` collections the services target.

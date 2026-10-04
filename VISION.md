@@ -9,6 +9,8 @@
 
 Vahoha is a learning platform for developers who want a roadmap they *earn* — server-graded exams gate every step, and a personal AI mentor guides them through it — instead of another static checklist or generic chatbot.
 
+**The outcome we are aiming at:** helping developers get past the entry-level plateau, to mid-level and to the jobs that come with it. Junior skills (syntax, CRUD, concepts) are easy to find content for. Mid-level skills (design, testing, performance, security, debugging under pressure, defending decisions) are the ones nobody checks, and the ones this platform exists to train and prove. This is the goal, not a promise: nothing here claims to get anyone hired until real learners have done it.
+
 ---
 
 ## 2. Problem
@@ -37,6 +39,17 @@ Pick a path → study a layer (curated posts/library) → take the layer exam
 ```
 
 The AI mentor is not a bolt-on chat widget — it has live tools into your actual progress, exam history, and weak spots, so its answers are grounded in what you specifically struggled with, not a canned response to your question text alone.
+
+### The loop we are growing toward
+
+The gated roadmap stays the spine. The direction is to make each step more about doing than reading:
+
+```
+Learn → Build → Break → Fix → Get evaluated → Defend your decisions
+   → Improve → Prove it → Take the next, harder challenge
+```
+
+Much of this already exists: exams, Coding Challenges, Capstone repository review, and the Capstone technical defense (questions about your own code, answered under a timer). What is added over time is *Break* (realistic failure scenarios), *Fix* rounds after a review, and a weakness → targeted challenge → reassessment loop on the existing mastery data. Progress should come from evidence of ability (challenges, projects, defense answers, repeated performance), kept distinct from content completion. Status per item (MVP / V2 / future / experiment) is in `docs/ROADMAP_BUILD_PLAN.md`. None of this changes the pilot plan in section 10.
 
 ---
 
@@ -148,5 +161,9 @@ That verified population is what unlocks the second half of the business: an emp
 ---
 
 ## Notes & ideas (not committed, not scoped)
+
+**Build Teams (idea).** Developers who share the same aim (for example "backend, mid-level in six months") are grouped, build a real production-grade project together, and some teams might go on to start a company. Only learners who passed a track's capstone would join, so every member has a verified baseline, and the platform already knows each member's strengths and gaps for matching. The startup is a possible outcome, not a feature, and the legal side (equity, IP) is out of scope. Not scoped; validate with one hand-run team before any product work. Details in `docs/FUTURE_IDEAS.md`.
+
+**Evidence profile and employer assessments (long-term).** A profile that shows each skill together with the evidence behind it, and later companies running their own build-and-evaluate assessments on the same engine. Both are future extensions of section 12, not current requirements.
 
 Longer-form speculative concepts — Collaborative Build Teams, Sponsored Real Projects, Screening-as-a-Service, University/Bootcamp Licensing, Voice AI Teach-Back — are written up in detail in `docs/FUTURE_IDEAS.md`. None of them are in scope until the MVP loop above is validated with real users; they're kept there so the idea isn't lost, not because they're next.

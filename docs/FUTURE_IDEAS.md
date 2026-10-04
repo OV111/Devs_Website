@@ -25,6 +25,15 @@
 
 **Why this is unique:** No existing platform combines social team formation + AI-aware task splitting based on personal skill data + in-platform currency commitment. Buildspace did cohorts, hackathons do time-boxed teams — but neither is persistent, AI-assigned, or economically reinforced.
 
+**Added 2026-10-04 — grouping by shared aim, and the startup outcome:**
+
+- Teams form around a shared goal (e.g. "backend, mid-level in six months"), not only a project idea. Matching reads the mastery data: same target, complementary strengths and gaps.
+- Entry gate: a passed track capstone and defense, so every member has a verified baseline.
+- Teamwork is evidence in its own right: reviewing teammates' code, PR history and shipped features show the collaboration skill that separates mid-level from junior. It should feed the same mastery/evidence spine, not a separate "team score".
+- The project could be defended together using the existing capstone defense.
+- A team may choose to turn the project into a startup. That is an outcome, not a feature: build nothing for it. Equity, IP and legal questions are real and out of scope.
+- Validate first: run one team by hand (chat group plus shared repo) before any product work.
+
 **Open questions:**
 
 - [ ] How does the AI verify task completion? (PR review? Demo video? Peer review?)
@@ -201,6 +210,20 @@ MCQ tests recognition and is gameable; explaining a concept out loud (or in writ
 - [ ] Does a passed voice review count the same as a passed MCQ exam for layer unlock, or is it a separate "verified deep understanding" badge on top?
 - [ ] Transcript storage/privacy — users are speaking, not just clicking; needs clear consent and data-handling language.
 - [ ] Accessibility: must remain fully optional — mic access, accents, non-native English speakers, and users who prefer not to be recorded should never be blocked from progressing.
+
+---
+
+## Production Incident Scenarios (2026-10-04)
+
+The learner has a working app, then an incident: "API response time went from 100ms to 4s." They inspect, reason, find the cause, fix it and explain it (observe → reproduce → hypothesise → gather evidence → test → fix → verify). Candidates: memory leak, race condition, database bottleneck, broken auth, failed deploy, cache invalidation, API timeout, queue failure, bad error handling. This is the later tier of scenario challenges (`ROADMAP_BUILD_PLAN.md`, Loop strengthening), an extension of Coding Challenges and Capstones rather than a new subsystem. Open: curated sandbox projects versus injecting faults into the learner's own repo (experiment).
+
+---
+
+## Evidence Profile and Employer Assessments (2026-10-04)
+
+**Evidence profile:** each skill (frontend, backend, databases, testing, system design) shown with the evidence behind it: evaluated challenges, capstones, defenses, scenarios. Never a bare number. Extends the planned public profiles and certificate `/verify` page. Depends on calibrated rubrics.
+
+**Employer assessments:** same infrastructure, reversed: a company creates an assessment, a candidate builds, Vahoha evaluates, the company receives evidence. This is the Screening-as-a-Service idea above; it is not a current requirement and Vahoha is not a hiring platform.
 
 ---
 

@@ -38,6 +38,10 @@ Single-instance Express 5 + MongoDB (native driver) + Redis/BullMQ, with WebSock
 3. **Server-authoritative progression.** Layer N+1 unlocks only when the exam is passed at `PASS_THRESHOLD = 80`, stored in `userProgress` server-side. The threshold is a hardcoded constant in `examEngineService.js`; the planned `platformConfig` collection was never built.
 4. **Learner model.** Mastery per topic is derived from exams, teach-back and challenge results (`learnerMasteryService`, `modules/mastery`) and fed to the mentor as context, so its answers are grounded in what the learner actually struggled with.
 
+### Planned extensions (direction, not built)
+
+`learnerMastery` is the single evidence spine: exams, teach-back and challenge results already feed it, and the Capstone review (rubric scores 0–4 per criterion) and defense are the next evidence sources. New features should write evidence into this spine through `recomputeMastery`, not into a parallel score or progress store. Per-skill progression (e.g. "databases 6.4 → 7.3") would be a derived view over that evidence with a snapshot per recompute. Content completion and demonstrated mastery stay separate signals. See `docs/ROADMAP_BUILD_PLAN.md` ("Loop strengthening") for what is MVP, V2, future or experiment.
+
 ---
 
 ## Current layout
