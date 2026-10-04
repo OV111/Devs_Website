@@ -31,11 +31,45 @@ export async function createNotification(db, { type, actorId, targetUserId }) {
   return notification;
 }
 
+// The inbox is capped: an unbounded list grows with the account's age.
+export const NOTIFICATION_LIMIT = 100;
+
 // Newest first. Served by GET /my-profile/notifications.
 export async function getNotifications(db, userId) {
   return db
     .collection("notifications")
     .find({ targetUserId: userId.toString() })
     .sort({ createdAt: -1 })
+    .limit(NOTIFICATION_LIMIT)
     .toArray();
+}
+
+// Every write below filters on `targetUserId`, so a user can only ever touch
+// their own notifications — knowing another notification's id gets you nothing.
+// Each returns whether anything of theirs matched (false → 404).
+
+export async function markNotificationRead(db, userId, notificationId) {
+  if (!ObjectId.isValid(notificationId)) return false;
+  const { matchedCount } = await db
+    .collection("notifications")
+    .updateOne(
+      { _id: new ObjectId(notificationId), targetUserId: userId.toString() },
+      { $set: { read: true } },
+    );
+  return matchedCount > 0;
+}
+
+export async function markAllNotificationsRead(db, userId) {
+  const { modifiedCount } = await db
+    .collection("notifications")
+    .updateMany({ targetUserId: userId.toString(), read: false }, { $set: { read: true } });
+  return modifiedCount;
+}
+
+export async function deleteNotification(db, userId, notificationId) {
+  if (!ObjectId.isValid(notificationId)) return false;
+  const { deletedCount } = await db
+    .collection("notifications")
+    .deleteOne({ _id: new ObjectId(notificationId), targetUserId: userId.toString() });
+  return deletedCount > 0;
 }

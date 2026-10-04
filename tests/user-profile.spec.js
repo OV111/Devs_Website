@@ -27,7 +27,7 @@ test.describe('User Profile Page', () => {
 
   test('navbar is present on profile page', async ({ page }) => {
     await page.goto('/users/anyuser');
-    await expect(page.getByRole('link', { name: /devswebs/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /vahoha home/i })).toBeVisible();
   });
 
   test('footer is present on profile page', async ({ page }) => {

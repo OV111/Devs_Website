@@ -78,7 +78,7 @@ export const sidebarArr = [
         label: "Connected Accounts",
       },
       {
-        to: "/",
+        to: "/my-profile/blocked",
         icon: (
           <GroupOffOutlinedIcon sx={{ fontSize: 22, color: "currentColor" }} />
         ),

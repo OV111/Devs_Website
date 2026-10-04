@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaMedium } from "react-icons/fa";
 import XIcon from "@mui/icons-material/X";
 
 const SOCIAL_LINKS = [
@@ -18,6 +18,12 @@ const SOCIAL_LINKS = [
     key: "twitterLink",
     label: "Twitter / X",
     icon: <XIcon fontSize="inherit" />,
+    hover: "hover:text-gray-900 dark:hover:text-gray-100",
+  },
+  {
+    key: "mediumLink",
+    label: "Medium",
+    icon: <FaMedium />,
     hover: "hover:text-gray-900 dark:hover:text-gray-100",
   },
 ];

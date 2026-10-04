@@ -13,7 +13,12 @@ import {
   getMutualFollowersService,
   getChatReceiverStatsService,
 } from "../services/profileService.js";
-import { getNotifications as getNotificationsService } from "../services/notificationService.js";
+import {
+  getNotifications as getNotificationsService,
+  markNotificationRead,
+  markAllNotificationsRead,
+  deleteNotification,
+} from "../services/notificationService.js";
 
 export const getProfile = async (req, res) => {
   try {
@@ -122,6 +127,27 @@ export const getNotifications = async (req, res) => {
     res.status(500).json({ message: "Server Error", error: err.message });
   }
 };
+
+// Notification writes: authenticate, run the owner-scoped service call,
+// 404 when nothing of theirs matched.
+const notificationAction = (run) => async (req, res) => {
+  try {
+    const verified = verifyToken(req.headers.authorization?.split(" ")[1]);
+    if (!verified) return res.status(401).json({ message: "Unauthorized" });
+    const ok = await run(req.app.locals.db, new ObjectId(verified.id), req.params.id);
+    if (ok === false) return res.status(404).json({ message: "Notification not found" });
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.error("notification action failed:", err);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
+export const readNotification = notificationAction(markNotificationRead);
+export const readAllNotifications = notificationAction((db, userId) =>
+  markAllNotificationsRead(db, userId),
+);
+export const removeNotification = notificationAction(deleteNotification);
 
 export const getFollowing = async (req, res) => {
   try {

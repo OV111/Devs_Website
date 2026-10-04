@@ -36,7 +36,9 @@ const DeleteAccount = () => {
       logout();
       navigate("/get-started");
     } catch (error) {
-      toast.error(error.message || "Server is unavailable. Please try again later.");
+      toast.error(
+        error.message || "Server is unavailable. Please try again later.",
+      );
     } finally {
       setIsDeleting(false);
     }
@@ -65,11 +67,14 @@ const DeleteAccount = () => {
         <div className="grid gap-4">
           <div className="grid gap-4 md:grid-cols-2">
             <div className="grid w-full gap-1">
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label htmlFor="delete-email" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Confirm Email
               </label>
               <input
+                id="delete-email"
                 type="email"
+                autoComplete="email"
+                aria-invalid={Boolean(errors.email)}
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -77,19 +82,22 @@ const DeleteAccount = () => {
                     setErrors((prev) => ({ ...prev, email: "" }));
                 }}
                 placeholder="Enter your email to confirm"
-                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 outline-none placeholder:text-gray-400 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder:text-gray-500"
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 outline-none placeholder:text-gray-400 focus:border-red-400 focus:ring-2 focus:ring-red-200 dark:focus:border-red-500 dark:focus:ring-red-900/70 dark:border-white/10 dark:bg-white/[0.04] dark:text-gray-100 dark:placeholder:text-[#8A8A93]"
               />
               {errors.email && (
-                <p className="text-xs text-red-600">{errors.email}</p>
+                <p className="text-xs text-red-600" role="alert">{errors.email}</p>
               )}
             </div>
 
             <div className="grid w-full gap-1">
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label htmlFor="delete-password" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Current Password
               </label>
               <div className="relative">
                 <input
+                  id="delete-password"
+                  autoComplete="current-password"
+                  aria-invalid={Boolean(errors.password)}
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => {
@@ -98,18 +106,20 @@ const DeleteAccount = () => {
                       setErrors((prev) => ({ ...prev, password: "" }));
                   }}
                   placeholder="Enter your password"
-                  className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 pr-10 text-gray-900 outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-red-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:ring-red-900/70"
+                  className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 pr-10 text-gray-900 outline-none placeholder:text-gray-400 focus:border-red-400 focus:ring-2 focus:ring-red-200 dark:focus:border-red-500 dark:focus:ring-red-900/70 dark:border-white/10 dark:bg-white/[0.04] dark:text-gray-100 dark:placeholder:text-[#8A8A93]"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-3 cursor-pointer text-gray-400 dark:text-gray-500"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  aria-pressed={showPassword}
+                  className="absolute inset-y-0 right-3 cursor-pointer text-gray-400 hover:text-gray-200 dark:text-gray-500"
                 >
                   {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
                 </button>
               </div>
               {errors.password && (
-                <p className="text-xs text-red-600">{errors.password}</p>
+                <p className="text-xs text-red-600" role="alert">{errors.password}</p>
               )}
             </div>
           </div>

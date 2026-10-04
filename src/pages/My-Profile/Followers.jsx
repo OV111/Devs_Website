@@ -1,307 +1,245 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { sortOptions, filterOptions } from "../../../constants/FollowersPage";
-import SideBar from "./components/SideBar";
-import FollowersCard from "./FollowersCard";
-import {
-  fetchFollowers as fetchFollowersApi,
-  fetchFollowing as fetchFollowingApi,
-  toggleFollow,
-} from "@/services/followersApi";
+import { useMemo, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { Search } from "lucide-react";
+import PageShell from "./components/PageShell";
+import { SURFACE } from "@/components/ui/surface";
+import useConnections from "@/features/connections/hooks/useConnections";
+import ConnectionRow from "@/features/connections/components/ConnectionRow";
+import ConnectionsSkeleton from "@/features/connections/components/ConnectionsSkeleton";
+import { FILTERS, matchesQuery } from "@/features/connections/lib/connections";
 
-const PAGE_LIMIT = 2; // 20 for ui is normal
+const COPY = {
+  followers: {
+    subtitle: "People who follow you",
+    empty: {
+      title: "No followers yet",
+      body: "Publish a post or share your profile — the people who follow you will show up here.",
+      to: "/my-profile/add-blog",
+      cta: "Write a post",
+    },
+  },
+  following: {
+    subtitle: "People you follow",
+    empty: {
+      title: "You're not following anyone yet",
+      body: "Follow writers whose posts you like and they'll show up here.",
+      to: "/blogs",
+      cta: "Browse posts",
+    },
+  },
+};
 
-const Followers = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [sortBy, setSortBy] = useState("Most Relevant");
-  const [activeFilter, setActiveFilter] = useState("All");
-  const [followers, setFollowers] = useState([]);
-  const [followings, setFollowings] = useState([]);
-  const [followersCount, setFollowersCount] = useState(0);
-  const [followingCount, setFollowingCount] = useState(0);
-  const [actionLoadingId, setActionLoadingId] = useState(null);
-  const [followersPage, setFollowerPage] = useState(1);
-  const [followingPage, setFollowingPage] = useState(1);
-  const [followersHasMore, setFollowersHasMore] = useState(true);
-  const [followingHasMore, setFollowingHasMore] = useState(true);
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [initialLoading, setInitialLoading] = useState(true);
-  const followersView = location.pathname.endsWith("/following");
+const tabClass = ({ isActive }) =>
+  `inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 ${
+    isActive
+      ? "bg-purple-600 text-white"
+      : "text-neutral-300 hover:bg-white/[0.06] hover:text-white"
+  }`;
 
-  const fetchFollowers = useCallback(async () => {
-    try {
-      const response = await fetchFollowersApi(followersPage, PAGE_LIMIT);
-      if (followersPage === 1) {
-        setFollowers(response.followers ?? []);
-      } else {
-        setFollowers((prev) => [...prev, ...(response.followers ?? [])]);
-      }
-      setFollowersCount(response.followersCount ?? 0);
-      setFollowingCount(response.followingCount ?? 0);
-      setFollowersHasMore(Boolean(response.hasMore));
-    } catch (err) {
-      console.error("followers fetch error", err);
-    } finally {
-      setLoadingMore(false);
-      setInitialLoading(false);
-    }
-  }, [followersPage]);
+const LINK_BUTTON =
+  "mt-1 text-sm font-medium text-purple-300 underline hover:text-purple-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400";
 
-  const fetchFollowing = useCallback(async () => {
-    try {
-      const response = await fetchFollowingApi(followingPage, PAGE_LIMIT);
-      if (followingPage === 1) {
-        setFollowings(response.following ?? []);
-      } else {
-        setFollowings((prev) => [...prev, ...(response.following ?? [])]);
-      }
-      setFollowersCount(response.followersCount ?? 0);
-      setFollowingCount(response.followingCount ?? 0);
-      setFollowingHasMore(Boolean(response.hasMore));
-    } catch (err) {
-      console.error("following fetch error", err);
-    } finally {
-      setLoadingMore(false);
-      setInitialLoading(false);
-    }
-  }, [followingPage]);
+function Notice({ title, body, to, cta, action }) {
+  return (
+    <div className="flex flex-col items-start gap-2 px-5 py-10">
+      <p className="text-base font-semibold text-neutral-100">{title}</p>
+      {body && <p className="max-w-md text-sm text-neutral-400">{body}</p>}
+      {to && (
+        <Link
+          to={to}
+          className="mt-1 text-sm font-medium text-purple-300 hover:text-purple-200"
+        >
+          {cta} →
+        </Link>
+      )}
+      {action}
+    </div>
+  );
+}
 
-  useEffect(() => {
-    if (followersView) {
-      fetchFollowing();
-    } else {
-      fetchFollowers();
-      fetchFollowing();
-    }
-  }, [followersView, fetchFollowers, fetchFollowing]);
+function ConnectionsList({ kind }) {
+  const copy = COPY[kind];
+  const list = useConnections(kind);
+  const [query, setQuery] = useState("");
+  const [filterId, setFilterId] = useState("all");
 
-  useEffect(() => {
-    setFollowerPage(1);
-    setFollowingPage(1);
-    setFollowersHasMore(true);
-    setFollowingHasMore(true);
-    setLoadingMore(false);
-    setInitialLoading(true);
-  }, [followersView]);
+  const filters = FILTERS[kind];
+  const active = filters.find((f) => f.id === filterId) ?? filters[0];
+  const visible = useMemo(
+    () => list.items.filter((u) => active.test(u) && matchesQuery(u, query)),
+    [list.items, active, query],
+  );
+  const narrowed = query.trim() !== "" || active.id !== "all";
+  const total = list.counts[kind];
 
-  const handleFollowToggle = async (user, isFollowing) => {
-    if (!user?.username) return;
-
-    try {
-      setActionLoadingId(user._id ?? user.id ?? user.username);
-      const res = await toggleFollow(user.username, isFollowing);
-      if (!res.ok) return;
-      if (isFollowing) {
-        setFollowings((prev) =>
-          prev.filter(
-            (item) =>
-              (item._id ?? item.id ?? item.username) !==
-              (user._id ?? user.id ?? user.username),
-          ),
-        );
-        setFollowingCount((prev) => Math.max(prev - 1, 0));
-      } else {
-        setFollowings((prev) => {
-          const exists = prev.some(
-            (item) =>
-              (item._id ?? item.id ?? item.username) ===
-              (user._id ?? user.id ?? user.username),
-          );
-          if (exists) return prev;
-          return [...prev, user];
-        });
-        setFollowingCount((prev) => prev + 1);
-      }
-    } catch (err) {
-      console.error("follow toggle error", err);
-    } finally {
-      setActionLoadingId(null);
-    }
+  const clearNarrowing = () => {
+    setQuery("");
+    setFilterId("all");
   };
 
-  const usersList = followersView ? followings : followers;
-  const followingUsernames = useMemo(
-    () => new Set(followings.map((user) => String(user?.username ?? ""))),
-    [followings],
-  );
-
-  const sortedList = useMemo(() => {
-    if (sortBy === "Newest") {
-      return [...usersList].sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
-      );
-    } else if (sortBy === "Oldest") {
-      return [...usersList].sort(
-        (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
-      );
-    }
-    return usersList;
-  }, [usersList, sortBy]);
-
-  const filteredList = useMemo(() => {
-    if (activeFilter === "Mutuals") {
-      return sortedList.filter((user) =>
-        followingUsernames.has(String(user?.username ?? "")),
-      );
-    }
-    return sortedList;
-  }, [sortedList, activeFilter, followingUsernames]);
-
   return (
-    <div className="flex min-h-screen">
-      <SideBar />
+    <PageShell title="Your network" subtitle={copy.subtitle}>
+      <nav
+        aria-label="Network"
+        className="mt-6 flex w-fit gap-1 rounded-xl border border-white/[0.08] bg-neutral-950 p-1"
+      >
+        <NavLink to="/my-profile/followers" className={tabClass}>
+          Followers
+          <span className="font-mono text-xs opacity-80">
+            {list.counts.followers ?? "–"}
+          </span>
+        </NavLink>
+        <NavLink to="/my-profile/following" className={tabClass}>
+          Following
+          <span className="font-mono text-xs opacity-80">
+            {list.counts.following ?? "–"}
+          </span>
+        </NavLink>
+      </nav>
 
-      <div className="flex-1 w-full min-w-0 p-4 sm:p-6 lg:p-8">
-        <h1 className="mb-1 font-bold text-2xl lg:text-3xl text-gray-900 dark:text-gray-100">
-          {followersView ? "Following" : "Followers"}
-        </h1>
+      <section className={`${SURFACE} mt-5 overflow-hidden`}>
+        {/* search + filters */}
+        <div className="flex flex-col gap-3 border-b border-white/[0.06] p-4 sm:p-5">
+          <label className="relative block">
+            <span className="sr-only">Search people</span>
+            <Search
+              size={16}
+              aria-hidden="true"
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-500"
+            />
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search by name or @username"
+              className="w-full rounded-lg border border-white/10 bg-white/[0.03] py-2.5 pl-10 pr-3 text-sm text-neutral-100 outline-none placeholder:text-neutral-500 focus:border-purple-400 focus:ring-2 focus:ring-purple-500/30"
+            />
+          </label>
 
-        <p className="pb-6 text-sm lg:text-base text-gray-500 dark:text-gray-400 max-w-xl">
-          {followersView ? "People you are following" : "People who follow you"}
-        </p>
-
-        <div className="bg-white dark:bg-gray-900 w-full rounded-xl border border-gray-200 dark:border-gray-800">
-          <div className="flex flex-wrap justify-between items-center gap-3 px-4 py-3 border-b border-gray-200 dark:border-gray-800">
-            <div className="flex items-center gap-2">
+          <div
+            role="group"
+            aria-label="Filter"
+            className="flex flex-wrap gap-2"
+          >
+            {filters.map((f) => (
               <button
+                key={f.id}
                 type="button"
-                onClick={() => navigate("/my-profile/followers")}
-                className={`rounded-lg px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium cursor-pointer transition-all duration-200 ${
-                  !followersView
-                    ? "bg-purple-600 text-white"
-                    : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-950/40 hover:text-purple-700 dark:hover:text-purple-300"
+                aria-pressed={f.id === active.id}
+                onClick={() => setFilterId(f.id)}
+                className={`rounded-full border px-3 py-1 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 ${
+                  f.id === active.id
+                    ? "border-purple-400 bg-purple-500/15 text-purple-100"
+                    : "border-white/10 text-neutral-300 hover:border-white/25 hover:text-white"
                 }`}
               >
-                Followers ({followersCount})
+                {f.label}
               </button>
+            ))}
+          </div>
+        </div>
+
+        {/* list states */}
+        {list.status === "loading" && <ConnectionsSkeleton />}
+
+        {list.status === "error" && (
+          <div role="alert">
+            <Notice
+              title="Couldn't load this list"
+              body={list.error?.message}
+              action={
+                <button
+                  type="button"
+                  onClick={list.retry}
+                  className={LINK_BUTTON}
+                >
+                  Try again
+                </button>
+              }
+            />
+          </div>
+        )}
+
+        {list.status === "ready" && list.items.length === 0 && (
+          <Notice {...copy.empty} />
+        )}
+
+        {list.status === "ready" &&
+          list.items.length > 0 &&
+          visible.length === 0 && (
+            <Notice
+              title="No one matches"
+              body={
+                list.hasMore
+                  ? "Only the people loaded so far are searched — load more to look further."
+                  : undefined
+              }
+              action={
+                <button
+                  type="button"
+                  onClick={clearNarrowing}
+                  className={LINK_BUTTON}
+                >
+                  Clear search and filters
+                </button>
+              }
+            />
+          )}
+
+        {list.status === "ready" && visible.length > 0 && (
+          <ul className="divide-y divide-white/[0.06]">
+            {visible.map((user) => (
+              <ConnectionRow
+                key={String(user._id)}
+                user={user}
+                kind={kind}
+                pending={list.isPending(user)}
+                onToggle={list.toggle}
+              />
+            ))}
+          </ul>
+        )}
+
+        {/* footer: count + load more */}
+        {list.status === "ready" && list.items.length > 0 && (
+          <div className="flex flex-col items-center gap-3 border-t border-white/[0.06] p-4 sm:flex-row sm:justify-between">
+            <p className="text-sm text-neutral-400" aria-live="polite">
+              {narrowed
+                ? `${visible.length} of ${list.items.length} loaded`
+                : `Showing ${list.items.length}${total != null ? ` of ${total}` : ""}`}
+            </p>
+            {list.loadMoreError && (
+              <p role="alert" className="text-sm text-amber-300">
+                Couldn't load more.
+              </p>
+            )}
+            {list.hasMore && (
               <button
                 type="button"
-                onClick={() => navigate("/my-profile/following")}
-                className={`rounded-lg px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium cursor-pointer transition-all duration-200 ${
-                  followersView
-                    ? "bg-purple-600 text-white"
-                    : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-950/40 hover:text-purple-700 dark:hover:text-purple-300"
-                }`}
+                disabled={list.loadingMore}
+                onClick={list.loadMore}
+                className="rounded-lg border border-white/10 px-5 py-2 text-sm font-semibold text-neutral-100 transition-colors hover:border-purple-400/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 disabled:cursor-wait disabled:opacity-60"
               >
-                Following ({followingCount})
-              </button>
-            </div>
-
-            <ul className="flex flex-wrap items-center gap-1 sm:gap-2 text-sm">
-              <li className="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wide">
-                Sort:
-              </li>
-              {sortOptions.map((option) => (
-                <li key={option}>
-                  <button
-                    type="button"
-                    onClick={() => setSortBy(option)}
-                    className={`cursor-pointer rounded-md px-2 sm:px-3 py-1 text-xs font-medium transition-all duration-200 ${
-                      sortBy === option
-                        ? "bg-purple-600 text-white"
-                        : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-purple-50 dark:hover:bg-purple-950/40 hover:text-purple-700 dark:hover:text-purple-300"
-                    }`}
-                  >
-                    {option}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-800">
-            <ul className="flex flex-wrap gap-1 sm:gap-2">
-              {filterOptions.map((option) => {
-                const Icon = option.icon;
-                const isActive = activeFilter === option.content;
-
-                return (
-                  <li key={option.content}>
-                    <button
-                      type="button"
-                      onClick={() => setActiveFilter(option.content)}
-                      className={`inline-flex cursor-pointer items-center gap-1.5 rounded-full px-2 sm:px-3 py-0.5 sm:py-1 text-sm font-medium transition-all duration-200 ${
-                        isActive
-                          ? "bg-purple-600 text-white"
-                          : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-purple-50 dark:hover:bg-purple-950/40 hover:text-purple-700 dark:hover:text-purple-300"
-                      }`}
-                    >
-                      <Icon fontSize="small" />
-                      <span>{option.content}</span>
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-
-          <div className="px-4 py-3 space-y-3">
-            {initialLoading
-              ? Array.from({ length: 4 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="rounded-xl border border-gray-200 dark:border-gray-700/60 bg-white dark:bg-gray-800/50 p-4 animate-pulse"
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex items-center gap-3">
-                        <div className="h-11 w-11 lg:h-14 lg:w-14 rounded-full bg-gray-200 dark:bg-gray-700" />
-                        <div className="space-y-2">
-                          <div className="h-4 w-32 rounded bg-gray-200 dark:bg-gray-700" />
-                          <div className="h-3 w-20 rounded bg-gray-200 dark:bg-gray-700" />
-                        </div>
-                      </div>
-                      <div className="h-8 w-20 rounded-lg bg-gray-200 dark:bg-gray-700" />
-                    </div>
-                    <div className="mt-3 h-3 w-3/4 rounded bg-gray-200 dark:bg-gray-700" />
-                    <div className="mt-3 pt-3 border-t border-gray-100 dark:border-gray-700/50 flex flex-col gap-2 sm:flex-row sm:justify-between">
-                      <div className="h-3 w-full sm:w-40 rounded bg-gray-200 dark:bg-gray-700" />
-                      <div className="h-3 w-full sm:w-36 rounded bg-gray-200 dark:bg-gray-700" />
-                    </div>
-                  </div>
-                ))
-              : filteredList.map((user) => (
-                  <FollowersCard
-                    key={user._id ?? user.id}
-                    user={user}
-                    isFollowing={followingUsernames.has(
-                      String(user?.username ?? ""),
-                    )}
-                    actionLoading={
-                      actionLoadingId === (user._id ?? user.id ?? user.username)
-                    }
-                    onToggleFollow={handleFollowToggle}
-                  />
-                ))}
-          </div>
-
-          <div className="px-4 pb-4">
-            {(followersView ? followingHasMore : followersHasMore) && (
-              <button
-                type="button"
-                disabled={loadingMore}
-                onClick={() => {
-                  setLoadingMore(true);
-                  if (followersView) {
-                    setFollowingPage((prev) => prev + 1);
-                  } else {
-                    setFollowerPage((prev) => prev + 1);
-                  }
-                }}
-                className={`w-full rounded-lg px-3 py-2.5 text-sm font-semibold transition-all duration-200 ${
-                  loadingMore
-                    ? "cursor-not-allowed bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500"
-                    : "cursor-pointer bg-purple-600 hover:bg-purple-700 text-white"
-                }`}
-              >
-                {loadingMore ? "Loading..." : "Load more"}
+                {list.loadingMore
+                  ? "Loading…"
+                  : list.loadMoreError
+                    ? "Try again"
+                    : "Load more"}
               </button>
             )}
           </div>
-        </div>
-      </div>
-    </div>
+        )}
+      </section>
+    </PageShell>
   );
+}
+
+/** /my-profile/followers and /my-profile/following — one page, two lists. */
+const Followers = () => {
+  const { pathname } = useLocation();
+  const kind = pathname.endsWith("/following") ? "following" : "followers";
+  // Keyed by tab so search and filter reset instead of leaking between lists.
+  return <ConnectionsList key={kind} kind={kind} />;
 };
 
 export default Followers;

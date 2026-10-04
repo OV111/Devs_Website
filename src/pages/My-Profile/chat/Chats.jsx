@@ -1,7 +1,15 @@
 import React, { useCallback, useEffect, useState, useMemo } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import Sidebar from "../components/SideBar";
-import { ChevronDown, SquarePen, Users } from "lucide-react";
+import { BellOff, ChevronDown, SquarePen, Users } from "lucide-react";
+import toast, { Toaster } from "react-hot-toast";
+import {
+  setRoomMuted,
+  clearRoom,
+  getBlockedIds,
+  blockUser,
+  unblockUser,
+} from "./chatControlsApi";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import { ArrowUpDown } from "lucide-react";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -52,6 +60,9 @@ const Chats = () => {
   const [sortOrder, setSortOrder] = useState("Newest");
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [isNewGroupOpen, setIsNewGroupOpen] = useState(false);
+  // Ids of users I've blocked (string ids). Blocked-by-them is deliberately not
+  // exposed — the server just rejects the send, so it can't be probed.
+  const [blockedIds, setBlockedIds] = useState([]);
 
   const isGroupActive = activeConversation?.kind === "group";
   const activeUser = activeConversation?.kind === "direct" ? activeConversation.user : null;
@@ -90,6 +101,7 @@ const Chats = () => {
       .map((room) => ({
         kind: "group",
         key: `group-${room._id}`,
+        muted: Boolean(room.mySettings?.muted),
         title: room.name || "Unnamed group",
         avatar: room.avatar,
         room,
@@ -107,6 +119,7 @@ const Chats = () => {
       return {
         kind: "direct",
         key: `direct-${user._id}`,
+        muted: Boolean(room?.mySettings?.muted),
         title: `${user.firstName ?? ""} ${user.lastName ?? ""}`.trim(),
         avatar: user.stats?.profileImage,
         user,
@@ -120,8 +133,19 @@ const Chats = () => {
   }, [rooms, mutualFollowers, roomsById, senderId]);
 
   const filteredConversations = useMemo(() => {
-    const sorted =
-      sortOrder === "Newest" ? conversationItems : [...conversationItems].reverse();
+    // Sort by the last message time. Conversations with no messages yet have
+    // nothing to order by, so they always go last in either direction.
+    const time = (item) =>
+      item.preview?.updatedAt ? new Date(item.preview.updatedAt).getTime() : null;
+    const direction = sortOrder === "Newest" ? -1 : 1;
+    const sorted = [...conversationItems].sort((a, b) => {
+      const ta = time(a);
+      const tb = time(b);
+      if (ta === null && tb === null) return 0;
+      if (ta === null) return 1;
+      if (tb === null) return -1;
+      return (ta - tb) * direction;
+    });
 
     return sorted.filter((item) =>
       item.title.toLowerCase().includes(filter.trim().toLowerCase()),
@@ -145,7 +169,9 @@ const Chats = () => {
     };
     ws.onmessage = (event) => {
       const payload = JSON.parse(event.data);
-      if (payload.type === "sended_message") {
+      if (payload.type === "error") {
+        toast.error(payload.message || "Something went wrong");
+      } else if (payload.type === "sended_message") {
         setChatMessages((prev) => [...prev, payload.message]);
       } else if (payload.type === "message_history") {
         setChatMessages(payload.messageHistory || []);
@@ -166,7 +192,9 @@ const Chats = () => {
           const idx = prev.findIndex((r) => r._id === room._id);
           if (idx === -1) return [...prev, room];
           const next = [...prev];
-          next[idx] = room;
+          // The broadcast room is shared by all members, so it carries no
+          // per-user settings — keep this user's own.
+          next[idx] = { ...room, mySettings: prev[idx].mySettings };
           return next;
         });
 
@@ -206,6 +234,67 @@ const Chats = () => {
     );
   }, [socket, activeConversation, roomId, senderId, receiverId, isGroupActive]);
 
+  // Patch (or create a stub for) a room in the list. A direct chat's room is
+  // created server-side on join, so it may not be in `rooms` yet.
+  const patchRoom = (id, patch, direct = false) =>
+    setRooms((prev) =>
+      prev.some((r) => r._id === id)
+        ? prev.map((r) => (r._id === id ? { ...r, ...patch } : r))
+        : [...prev, { _id: id, type: direct ? "direct" : "group", ...patch }],
+    );
+
+  const activeRoomDoc = roomId ? roomsById[roomId] : null;
+  const isMuted = Boolean(activeRoomDoc?.mySettings?.muted);
+  const isBlockedByMe = Boolean(receiverId && blockedIds.includes(String(receiverId)));
+
+  const handleToggleMute = async () => {
+    if (!roomId) return;
+    const next = !isMuted;
+    try {
+      await setRoomMuted(roomId, next);
+      patchRoom(roomId, { mySettings: { muted: next } }, !isGroupActive);
+      toast.success(next ? "Notifications muted" : "Notifications on");
+    } catch (err) {
+      toast.error(err.message || "Couldn't update notifications");
+    }
+  };
+
+  const handleClearChat = async () => {
+    if (!roomId) return;
+    try {
+      await clearRoom(roomId);
+      setChatMessages([]);
+      patchRoom(roomId, { lastMessage: null }, !isGroupActive);
+      toast.success("Chat cleared");
+    } catch (err) {
+      toast.error(err.message || "Couldn't clear chat");
+    }
+  };
+
+  const handleToggleBlock = async () => {
+    if (!receiverId) return;
+    const id = String(receiverId);
+    try {
+      if (isBlockedByMe) {
+        await unblockUser(id);
+        setBlockedIds((prev) => prev.filter((b) => b !== id));
+        toast.success("User unblocked");
+      } else {
+        await blockUser(id);
+        setBlockedIds((prev) => [...prev, id]);
+        toast.success("User blocked");
+      }
+    } catch (err) {
+      toast.error(err.message || "Couldn't update block");
+    }
+  };
+
+  useEffect(() => {
+    getBlockedIds()
+      .then(({ blockedIds: ids }) => setBlockedIds(ids.map(String)))
+      .catch((err) => console.error("Failed to load blocked users:", err));
+  }, []);
+
   const handleSendMessage = () => {
     if (!draftMessage.trim() || !roomId) return;
     socket.send(
@@ -216,13 +305,6 @@ const Chats = () => {
       }),
     );
     setDraftMessage("");
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      handleSendMessage();
-    }
   };
 
   const fetchUsers = useCallback(async () => {
@@ -301,10 +383,11 @@ const Chats = () => {
   }, []);
   return (
     <div className="flex min-h-screen">
+      <Toaster position="top-center" />
       <Sidebar />
       {!activeConversation ? (
         <>
-          <div className="border-r w-full border-white/5 bg-white dark:bg-black lg:w-70 lg:pt-4  lg:px-0 lg:text-lg">
+          <div className="border-r w-full border-white/10 bg-white dark:bg-black lg:w-70 lg:pt-4  lg:px-0 lg:text-lg">
             <div className="flex items-center justify-between px-3">
               <h1 className="mt-3 lg:mt-0 text-lg font-semibold text-gray-900 dark:text-gray-100">
                 Messages
@@ -317,7 +400,8 @@ const Chats = () => {
                 aria-label="New group"
               >
                 <SquarePen
-                  size={18}
+                  size={15}
+                  strokeWidth={1.75}
                   className="mt-3 lg:mt-0 cursor-pointer text-gray-400 transition-colors hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-200"
                 />
               </button>
@@ -409,11 +493,12 @@ const Chats = () => {
                             : { kind: "direct", user: item.user },
                         )
                       }
-                      className={`flex w-full items-center gap-3 border-b text-purple-600 border-white/5 px-3 py-3 text-left transition-colors first:border-t dark:border-white/5
+                      aria-current={isActive ? "true" : undefined}
+                      className={`flex w-full items-center gap-3 border-b border-white/5 px-3 py-3 text-left transition-colors first:border-t focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-fuchsia-400
                   ${
                     isActive
-                      ? "lg:bg-purple-50 dark:bg-fuchsia-950/30 "
-                      : "hover:bg-gray-50 dark:hover:bg-white/5"
+                      ? "bg-fuchsia-950/30"
+                      : "hover:bg-white/5"
                   }
                     `}
                     >
@@ -433,8 +518,15 @@ const Chats = () => {
                         </div>
                       )}
                       <div className="min-w-0 flex-1">
-                        <p className="truncate text-sm font-medium text-gray-900 dark:text-gray-100">
-                          {item.title}
+                        <p className="flex items-center gap-1.5 text-sm font-medium text-gray-100">
+                          <span className="truncate">{item.title}</span>
+                          {item.muted && (
+                            <BellOff
+                              size={12}
+                              className="shrink-0 text-[#8A8A93]"
+                              aria-label="Muted"
+                            />
+                          )}
                         </p>
                         <div className="flex justify-between items-center">
                           {shouldShowLastMessageSkeleton ? (
@@ -458,13 +550,14 @@ const Chats = () => {
                             </>
                           ) : (
                             <>
-                              <p className="truncate text-xs font-medium text-gray-500 dark:text-gray-400">
-                                {item.preview?.text || "Last message"}
+                              <p className="truncate text-xs text-[#8A8A93]">
+                                {item.preview?.text || "No messages yet"}
                               </p>
-                              <p className="truncate text-[14px] font-medium text-gray-500 dark:text-gray-400">
-                                {formatTimeAgo(item.preview?.updatedAt) ||
-                                  "Last Time"}
-                              </p>
+                              {item.preview && (
+                                <p className="ml-2 shrink-0 text-xs text-[#8A8A93]">
+                                  {formatTimeAgo(item.preview.updatedAt)}
+                                </p>
+                              )}
                             </>
                           )}
                         </div>
@@ -510,8 +603,12 @@ const Chats = () => {
             mutualFollowers={mutualFollowers}
             draftMessage={draftMessage}
             setDraftMessage={setDraftMessage}
-            handleKeyDown={handleKeyDown}
             handleSendMessage={handleSendMessage}
+            isMuted={isMuted}
+            isBlockedByMe={isBlockedByMe}
+            onToggleMute={handleToggleMute}
+            onClearChat={handleClearChat}
+            onToggleBlock={handleToggleBlock}
             onBack={() => setActiveConversation(null)}
             onLeftGroup={() => setActiveConversation(null)}
           />

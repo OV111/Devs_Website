@@ -1,241 +1,349 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Bell, CheckCheck, Trash2, UserPlus, MessageCircle, Heart, FileText } from "lucide-react";
-import SideBar from "./components/SideBar";
-import { getNotifications } from "@/services/notificationsApi";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { Bell, CheckCheck, Trash2 } from "lucide-react";
+import PageShell from "./components/PageShell";
+import { SURFACE } from "@/components/ui/surface";
+import { timeAgo } from "@/features/connections/lib/connections";
+import toast from "react-hot-toast";
+import {
+  getNotifications,
+  markNotificationRead,
+  markAllNotificationsRead,
+  deleteNotification,
+} from "@/services/notificationsApi";
 import useNotificationStore from "@/stores/useNotificationStore";
-import { FILTERS, TYPE_META, FILTER_TYPE_MAP } from "../../../constants/notifications";
+import {
+  FILTERS,
+  TYPE_META,
+  FILTER_TYPE_MAP,
+} from "../../../constants/notifications";
 
-function timeAgo(dateStr) {
-  const diff = Math.floor((Date.now() - new Date(dateStr)) / 1000);
-  if (diff < 60) return `${diff}s ago`;
-  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
-  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
-  return `${Math.floor(diff / 86400)}d ago`;
-}
+const DAY = 24 * 60 * 60 * 1000;
 
-const FILTER_ICONS = {
-  All: Bell,
-  Unread: Bell,
-  Follows: UserPlus,
-  Messages: MessageCircle,
-  Likes: Heart,
+/** Today / This week / Earlier — a long flat list is hard to scan. */
+const groupOf = (createdAt, now = Date.now()) => {
+  const age = now - new Date(createdAt).getTime();
+  if (age < DAY) return "Today";
+  if (age < 7 * DAY) return "This week";
+  return "Earlier";
+};
+const GROUP_ORDER = ["Today", "This week", "Earlier"];
+
+/** Where a notification leads, if anywhere. */
+const hrefFor = (n) => {
+  if (n.type === "follow" && n.senderUsername)
+    return `/users/${n.senderUsername}`;
+  if (n.type === "new_message") return "/my-profile/chats";
+  return null;
 };
 
-const Notifications = () => {
-  const navigate = useNavigate();
-  const [activeFilter, setActiveFilter] = useState("All");
-  const [loading, setLoading] = useState(false);
+const FOCUS =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-purple-400";
 
-  const { notifications, unreadCount, setNotifications } = useNotificationStore();
+function NotificationRow({ notif, onRead, onDelete }) {
+  const meta = TYPE_META[notif.type] ?? TYPE_META.follow;
+  const Icon = meta.icon;
+  const href = hrefFor(notif);
 
-  const filtered = notifications.filter((n) => {
-    if (activeFilter === "Unread") return !n.read;
-    const mappedType = FILTER_TYPE_MAP[activeFilter];
-    if (mappedType) return n.type === mappedType;
-    return true;
-  });
-
-  const handleMarkRead = (id) => {
-    setNotifications(notifications.map((n) => (n._id === id ? { ...n, read: true } : n)));
-  };
-
-  const handleMarkAllRead = () => {
-    setNotifications(notifications.map((n) => ({ ...n, read: true })));
-  };
-
-  const handleDelete = (id) => {
-    setNotifications(notifications.filter((n) => n._id !== id));
-  };
-
-  const handleNavigate = (notif) => {
-    handleMarkRead(notif._id);
-    if (notif.type === "follow") navigate(`/users/${notif.senderUsername}`);
-    else if (notif.type === "new_message") navigate(`/my-profile/chats`);
-  };
-
-  useEffect(() => {
-    const fetchNotifications = async () => {
-      setLoading(true);
-      const data = await getNotifications();
-      if (data) setNotifications(data);
-      setLoading(false);
-    };
-    fetchNotifications();
-  }, []);
+  const body = (
+    <>
+      <span
+        className={`grid size-10 shrink-0 place-items-center rounded-full ${meta.bg}`}
+      >
+        <Icon size={17} className={meta.color} aria-hidden="true" />
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block text-[15px] leading-snug text-neutral-200">
+          <span className="font-semibold text-white">{notif.senderName}</span>{" "}
+          {meta.label}
+          {notif.meta?.postTitle && (
+            <span className="text-neutral-300">
+              {" "}
+              — “{notif.meta.postTitle}”
+            </span>
+          )}
+        </span>
+        <span className="mt-1 block text-xs text-neutral-500">
+          {timeAgo(notif.createdAt)}
+          {!notif.read && <span className="sr-only"> · unread</span>}
+        </span>
+      </span>
+    </>
+  );
+  const bodyClass = `flex min-w-0 flex-1 items-start gap-4 py-4 pl-5 text-left ${FOCUS}`;
+  const click = () => !notif.read && onRead(notif._id);
 
   return (
-    <div className="flex min-h-screen bg-gray-50 dark:bg-black">
-      <SideBar />
+    <li
+      className={`group relative flex items-center gap-1 pr-3 transition-colors hover:bg-white/[0.025] ${
+        notif.read ? "" : "bg-purple-500/[0.05]"
+      }`}
+    >
+      {!notif.read && (
+        <span
+          aria-hidden="true"
+          className="absolute inset-y-4 left-0 w-0.5 rounded-full bg-purple-400"
+        />
+      )}
 
-      <div className="flex-1 min-w-0 px-4 sm:px-8 lg:px-12 py-10">
+      {href ? (
+        <Link to={href} onClick={click} className={bodyClass}>
+          {body}
+        </Link>
+      ) : (
+        <button type="button" onClick={click} className={bodyClass}>
+          {body}
+        </button>
+      )}
 
-        {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-              Notifications
-            </h1>
-            <p className="mt-1 text-sm text-gray-500 dark:text-gray-500">
-              {unreadCount > 0
-                ? `${unreadCount} unread notification${unreadCount > 1 ? "s" : ""}`
-                : "You're all caught up"}
-            </p>
-          </div>
-          {unreadCount > 0 && (
-            <button
-              type="button"
-              onClick={handleMarkAllRead}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold text-violet-600 dark:text-violet-400 ring-1 ring-violet-200 dark:ring-violet-900/60 hover:bg-violet-50 dark:hover:bg-violet-950/30 transition-colors cursor-pointer"
-            >
-              <CheckCheck size={13} />
-              Mark all read
-            </button>
-          )}
-        </div>
+      {!notif.read && (
+        <span
+          aria-hidden="true"
+          className="size-2 shrink-0 rounded-full bg-purple-400"
+        />
+      )}
 
-        {/* Filter tabs */}
-        <div className="flex items-center gap-1.5 mb-6 overflow-x-auto pb-1">
-          {FILTERS.map((f) => {
-            const Icon = FILTER_ICONS[f];
-            const isActive = activeFilter === f;
-            return (
-              <button
-                key={f}
-                type="button"
-                onClick={() => setActiveFilter(f)}
-                className={`flex items-center gap-1.5 shrink-0 px-3.5 py-2 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
-                  isActive
-                    ? "bg-violet-600 text-white shadow-sm shadow-violet-500/30"
-                    : "bg-gray-100 dark:bg-gray-800/80 text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-800"
-                }`}
-              >
-                <Icon size={12} />
-                {f}
-                {f === "Unread" && unreadCount > 0 && (
-                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none ${
-                    isActive ? "bg-white text-violet-600" : "bg-violet-600 text-white"
-                  }`}>
-                    {unreadCount}
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Notification list */}
-        <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 overflow-hidden">
-          {loading ? (
-            <div className="divide-y divide-gray-100 dark:divide-gray-800">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <div key={i} className="flex items-start gap-4 px-5 py-4 animate-pulse">
-                  <div className="shrink-0 h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-800" />
-                  <div className="flex-1 space-y-2.5 min-w-0 pt-1">
-                    <div className="h-3 w-2/3 rounded-full bg-gray-200 dark:bg-gray-800" />
-                    <div className="h-2.5 w-1/3 rounded-full bg-gray-200 dark:bg-gray-800" />
-                  </div>
-                  <div className="h-2.5 w-10 rounded-full bg-gray-200 dark:bg-gray-800 shrink-0 mt-1" />
-                </div>
-              ))}
-            </div>
-          ) : filtered.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-20 text-center px-6">
-              <div className="flex items-center justify-center h-16 w-16 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
-                <Bell size={26} className="text-gray-400 dark:text-gray-500" />
-              </div>
-              <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                {activeFilter === "Unread" ? "You're all caught up" : "No notifications yet"}
-              </p>
-              <p className="mt-1.5 text-xs text-gray-400 dark:text-gray-500 max-w-xs">
-                {activeFilter === "Unread"
-                  ? "All notifications have been read."
-                  : "When someone follows you, likes your post, or messages you — it'll show up here."}
-              </p>
-            </div>
-          ) : (
-            <div className="divide-y divide-gray-100 dark:divide-gray-800/60">
-              {filtered.map((notif) => {
-                const meta = TYPE_META[notif.type] ?? TYPE_META.follow;
-                const Icon = meta.icon;
-                return (
-                  <div
-                    key={notif._id}
-                    onClick={() => handleNavigate(notif)}
-                    className={`group relative flex items-start gap-4 px-5 py-4 cursor-pointer transition-colors duration-150 hover:bg-gray-50 dark:hover:bg-gray-800/50 ${
-                      !notif.read ? "bg-violet-50/50 dark:bg-violet-950/10" : ""
-                    }`}
-                  >
-                    {/* Unread indicator bar */}
-                    {!notif.read && (
-                      <div className="absolute left-0 top-4 bottom-4 w-0.5 rounded-full bg-violet-500" />
-                    )}
-
-                    {/* Icon */}
-                    <div className={`shrink-0 flex items-center justify-center h-10 w-10 rounded-full ${meta.bg}`}>
-                      <Icon size={16} className={meta.color} />
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1 min-w-0 pt-0.5">
-                      <p className="text-sm text-gray-800 dark:text-gray-100 leading-snug">
-                        <span className="font-semibold">{notif.senderName}</span>{" "}
-                        <span className="text-gray-500 dark:text-gray-400">{meta.label}</span>
-                        {notif.meta?.postTitle && (
-                          <>
-                            {" — "}
-                            <span className="font-medium text-gray-700 dark:text-gray-200 italic">
-                              &ldquo;{notif.meta.postTitle}&rdquo;
-                            </span>
-                          </>
-                        )}
-                      </p>
-                      <p className="mt-1 text-xs text-gray-400 dark:text-gray-500">
-                        {timeAgo(notif.createdAt)}
-                      </p>
-                    </div>
-
-                    {/* Actions */}
-                    <div className="shrink-0 flex items-center gap-1 pt-0.5">
-                      {!notif.read && (
-                        <span className="h-2 w-2 rounded-full bg-violet-500 mr-1 mt-1" />
-                      )}
-                      <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
-                        {!notif.read && (
-                          <button
-                            type="button"
-                            title="Mark as read"
-                            onClick={(e) => { e.stopPropagation(); handleMarkRead(notif._id); }}
-                            className="p-1.5 rounded-lg text-gray-400 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-950/30 transition-colors"
-                          >
-                            <CheckCheck size={14} />
-                          </button>
-                        )}
-                        <button
-                          type="button"
-                          title="Delete"
-                          onClick={(e) => { e.stopPropagation(); handleDelete(notif._id); }}
-                          className="p-1.5 rounded-lg text-gray-400 hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors"
-                        >
-                          <Trash2 size={14} />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
-
-        {/* Footer count */}
-        {!loading && filtered.length > 0 && (
-          <p className="mt-4 text-center text-xs text-gray-400 dark:text-gray-600">
-            {filtered.length} notification{filtered.length !== 1 ? "s" : ""}
-          </p>
+      {/* Always visible on touch screens; revealed on hover/focus from sm up. */}
+      <span className="flex shrink-0 items-center sm:opacity-0 sm:transition-opacity sm:group-focus-within:opacity-100 sm:group-hover:opacity-100">
+        {!notif.read && (
+          <button
+            type="button"
+            onClick={() => onRead(notif._id)}
+            aria-label={`Mark ${notif.senderName}'s notification as read`}
+            className={`rounded-lg p-2 text-neutral-400 hover:bg-white/[0.06] hover:text-purple-300 ${FOCUS}`}
+          >
+            <CheckCheck size={16} aria-hidden="true" />
+          </button>
         )}
-      </div>
+        <button
+          type="button"
+          onClick={() => onDelete(notif._id)}
+          aria-label={`Delete ${notif.senderName}'s notification`}
+          className={`rounded-lg p-2 text-neutral-400 hover:bg-red-500/10 hover:text-red-300 ${FOCUS}`}
+        >
+          <Trash2 size={16} aria-hidden="true" />
+        </button>
+      </span>
+    </li>
+  );
+}
+
+function RowsSkeleton() {
+  return (
+    <SkeletonTheme baseColor="#171717" highlightColor="#262626">
+      <ul
+        role="status"
+        aria-busy="true"
+        aria-label="Loading notifications"
+        className="divide-y divide-white/[0.06]"
+      >
+        {Array.from({ length: 5 }, (_, i) => (
+          <li key={i} className="flex items-center gap-4 px-5 py-4">
+            <Skeleton circle width={40} height={40} />
+            <div className="min-w-0 flex-1">
+              <Skeleton width="55%" height={15} />
+              <Skeleton width="20%" height={12} className="mt-2" />
+            </div>
+          </li>
+        ))}
+      </ul>
+    </SkeletonTheme>
+  );
+}
+
+function Notice({ title, body, action }) {
+  return (
+    <div className="flex flex-col items-center px-6 py-16 text-center">
+      <span className="grid size-12 place-items-center rounded-full bg-white/[0.05] text-neutral-400">
+        <Bell size={22} aria-hidden="true" />
+      </span>
+      <p className="mt-4 text-base font-semibold text-neutral-100">{title}</p>
+      {body && (
+        <p className="mt-1.5 max-w-sm text-sm text-neutral-400">{body}</p>
+      )}
+      {action}
     </div>
+  );
+}
+
+const Notifications = () => {
+  const [activeFilter, setActiveFilter] = useState("All");
+  const [status, setStatus] = useState("loading"); // "loading" | "ready" | "error"
+  const { notifications, unreadCount, setNotifications } =
+    useNotificationStore();
+
+  const load = useCallback(async () => {
+    setStatus("loading");
+    const data = await getNotifications();
+    // The api returns null/undefined when the request fails — that is an error,
+    // not an empty inbox.
+    if (!Array.isArray(data)) return setStatus("error");
+    setNotifications(data);
+    setStatus("ready");
+  }, [setNotifications]);
+
+  useEffect(() => {
+    load();
+  }, [load]);
+
+  // Optimistic: update the screen now, persist in the background. On failure,
+  // reload from the server rather than restoring a snapshot — a notification
+  // pushed over the socket meanwhile would otherwise be lost.
+  const persist = async (optimistic, request, failure) => {
+    setNotifications(optimistic(notifications));
+    try {
+      await request();
+    } catch {
+      toast.error(failure);
+      load();
+    }
+  };
+
+  const markRead = (id) =>
+    persist(
+      (list) => list.map((n) => (n._id === id ? { ...n, read: true } : n)),
+      () => markNotificationRead(id),
+      "Couldn't mark that as read. Try again.",
+    );
+  const markAllRead = () =>
+    persist(
+      (list) => list.map((n) => ({ ...n, read: true })),
+      markAllNotificationsRead,
+      "Couldn't mark everything as read. Try again.",
+    );
+  const remove = (id) =>
+    persist(
+      (list) => list.filter((n) => n._id !== id),
+      () => deleteNotification(id),
+      "Couldn't delete that notification. Try again.",
+    );
+
+  const filtered = useMemo(
+    () =>
+      notifications.filter((n) => {
+        if (activeFilter === "Unread") return !n.read;
+        const type = FILTER_TYPE_MAP[activeFilter];
+        return type ? n.type === type : true;
+      }),
+    [notifications, activeFilter],
+  );
+
+  const groups = useMemo(() => {
+    const now = Date.now();
+    const by = new Map(GROUP_ORDER.map((g) => [g, []]));
+    filtered.forEach((n) => by.get(groupOf(n.createdAt, now)).push(n));
+    return GROUP_ORDER.map((g) => [g, by.get(g)]).filter(
+      ([, rows]) => rows.length > 0,
+    );
+  }, [filtered]);
+
+  return (
+    <PageShell
+      title="Notifications"
+      subtitle={
+        unreadCount > 0 ? `${unreadCount} unread` : "You're all caught up"
+      }
+      actions={
+        unreadCount > 0 && (
+          <button
+            type="button"
+            onClick={markAllRead}
+            className={`inline-flex items-center gap-2 rounded-lg border border-white/10 px-4 py-2 text-sm font-medium text-neutral-100 transition-colors hover:border-purple-400/50 hover:text-white ${FOCUS}`}
+          >
+            <CheckCheck size={16} aria-hidden="true" />
+            Mark all read
+          </button>
+        )
+      }
+    >
+      <div
+        role="group"
+        aria-label="Filter"
+        className="mt-6 flex flex-wrap gap-2"
+      >
+        {FILTERS.map((f) => (
+          <button
+            key={f}
+            type="button"
+            aria-pressed={f === activeFilter}
+            onClick={() => setActiveFilter(f)}
+            className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 ${
+              f === activeFilter
+                ? "border-purple-400 bg-purple-500/15 text-purple-100"
+                : "border-white/10 text-neutral-300 hover:border-white/25 hover:text-white"
+            }`}
+          >
+            {f}
+            {f === "Unread" && unreadCount > 0 && (
+              <span className="rounded-full bg-purple-600 px-1.5 py-0.5 font-mono text-xs leading-none text-white">
+                {unreadCount}
+              </span>
+            )}
+          </button>
+        ))}
+      </div>
+
+      <section className={`${SURFACE} mt-5 overflow-hidden`}>
+        {status === "loading" && <RowsSkeleton />}
+
+        {status === "error" && (
+          <div role="alert">
+            <Notice
+              title="Couldn't load your notifications"
+              body="Check your connection and try again."
+              action={
+                <button
+                  type="button"
+                  onClick={load}
+                  className={`mt-4 rounded-lg bg-purple-600 px-5 py-2 text-sm font-semibold text-white hover:bg-purple-500 ${FOCUS}`}
+                >
+                  Try again
+                </button>
+              }
+            />
+          </div>
+        )}
+
+        {status === "ready" && filtered.length === 0 && (
+          <Notice
+            title={
+              activeFilter === "Unread"
+                ? "You're all caught up"
+                : "Nothing here yet"
+            }
+            body={
+              activeFilter === "All"
+                ? "When someone follows you or messages you, it shows up here."
+                : "No notifications match this filter."
+            }
+          />
+        )}
+
+        {status === "ready" &&
+          groups.map(([group, rows]) => (
+            <div
+              key={group}
+              className="border-t border-white/[0.06] first:border-t-0"
+            >
+              <h2 className="bg-white/[0.02] px-5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-neutral-400">
+                {group}
+              </h2>
+              <ul className="divide-y divide-white/[0.06]">
+                {rows.map((n) => (
+                  <NotificationRow
+                    key={n._id}
+                    notif={n}
+                    onRead={markRead}
+                    onDelete={remove}
+                  />
+                ))}
+              </ul>
+            </div>
+          ))}
+      </section>
+    </PageShell>
   );
 };
 

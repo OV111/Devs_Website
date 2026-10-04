@@ -1,12 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  AudioLines,
-  Plus,
-  Ellipsis,
-  Send,
-  ArrowLeft,
-  Users,
-} from "lucide-react";
+import { AudioLines, Ellipsis, Mic, Send, ArrowLeft, Users } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import Skeleton from "react-loading-skeleton";
 import GroupMembersModal from "./GroupMembersModal";
 // import StartChatSvg from "../../../assets/StartChat.svg";
@@ -36,7 +31,23 @@ export function formatTimeAgo(dateString) {
   return "just now";
 }
 
-const isOnlineByLastActive = (dateString) => {
+const MENU_ITEM =
+  "w-full cursor-pointer rounded-lg border border-transparent bg-white/5 px-3 py-2 text-left text-xs font-medium text-white/80 transition-all duration-200 hover:border-white/10 hover:bg-white/10 disabled:cursor-not-allowed disabled:text-[#8A8A93] disabled:hover:border-transparent disabled:hover:bg-white/5";
+
+const CONFIRM_COPY = {
+  clear: {
+    title: "Clear this chat?",
+    body: "This removes the messages from your view only. The other person keeps their copy.",
+    confirmLabel: "Clear chat",
+  },
+  block: {
+    title: "Block this user?",
+    body: "Neither of you will be able to send messages in this chat. You can unblock them any time.",
+    confirmLabel: "Block",
+  },
+};
+
+const isOnlineByLastActive =(dateString) => {
   if (!dateString) return false;
   const lastActive = new Date(dateString);
   if (Number.isNaN(lastActive.getTime())) return false;
@@ -57,13 +68,18 @@ const ChatInterface = ({
   mutualFollowers = [],
   draftMessage,
   setDraftMessage,
-  handleKeyDown,
   handleSendMessage,
+  isMuted = false,
+  isBlockedByMe = false,
+  onToggleMute,
+  onClearChat,
+  onToggleBlock,
   onBack,
   onLeftGroup,
 }) => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isPlusMenuOpen, setIsPlusMenuOpen] = useState(false);
+  const [confirm, setConfirm] = useState(null); // "clear" | "block" | null
   const [isMembersOpen, setIsMembersOpen] = useState(false);
   const messagesContainerRef = useRef(null);
   const menuRef = useRef(null);
@@ -117,9 +133,9 @@ const ChatInterface = ({
   return (
     <div className="min-w-0 flex-1 bg-black">
       <div className="flex h-screen flex-col justify-between overflow-hidden">
-        <div className="flex items-center justify-between border-b border-white/5 bg-black px-2 lg:px-3 py-2.5">
+        <div className="flex items-center justify-between border-b border-white/10 bg-black px-2 lg:px-3 py-2.5">
           <div className="flex justify-center items-center">
-            <button onClick={onBack}>
+            <button type="button" onClick={onBack} aria-label="Back to conversations">
               <ArrowLeft
                 // size={18}
                 className="w-4 h-4 lg:w-5 lg:h-5 lg:mr-4 mr-2 cursor-pointer text-white/70 hover:text-white "
@@ -147,11 +163,17 @@ const ChatInterface = ({
                   highlightColor={skeletonHighlightColor}
                 />
               ) : (
-                <img
-                  src={userStats?.profileImage}
-                  alt="Profile"
-                  className="lg:mx-0 mx-auto h-8 w-8 object-cover rounded-full bg-purple-100"
-                />
+                userStats?.profileImage ? (
+                  <img
+                    src={userStats.profileImage}
+                    alt="Profile"
+                    className="lg:mx-0 mx-auto h-8 w-8 object-cover rounded-full bg-purple-100"
+                  />
+                ) : (
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-fuchsia-950/40 text-sm font-medium text-fuchsia-300">
+                    {clickedUser?.[0]?.toUpperCase()}
+                  </div>
+                )
               )}
               <div className=" ">
                 {isGroup ? (
@@ -159,7 +181,7 @@ const ChatInterface = ({
                     <p className="text-sm lg:text-base text-white/90 ">
                       {group?.name || "Group"}
                     </p>
-                    <p className="text-xs text-white/40">
+                    <p className="text-xs text-[#8A8A93]">
                       {group?.members?.length ?? 0} members
                     </p>
                   </div>
@@ -186,16 +208,16 @@ const ChatInterface = ({
                       {clickedUser}
                     </p>
 
-                    <div className="flex items-center gap-2 overflow-x-auto text-xs text-white/40">
+                    <div className="flex items-center gap-2 overflow-x-auto text-xs text-[#8A8A93]">
                       {isOnlineByLastActive(userStats?.lastActive) ? (
                         <>
                           <span className="h-2.5 w-2.5 rounded-full bg-green-400" />
-                          <p className="text-xs text-white/40">
+                          <p className="text-xs text-[#8A8A93]">
                             Online
                           </p>
                         </>
                       ) : (
-                        <p className="text-xs text-white/40">
+                        <p className="text-xs text-[#8A8A93]">
                           {formatTimeAgo(userStats?.lastActive)}
                         </p>
                       )}
@@ -210,6 +232,7 @@ const ChatInterface = ({
               type="button"
               aria-label="Open chat actions"
               aria-expanded={isMenuOpen}
+              aria-haspopup="menu"
               onClick={() => setIsMenuOpen((prev) => !prev)}
               className="cursor-pointer rounded-2xl bg-white/5 p-1 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
             >
@@ -217,59 +240,73 @@ const ChatInterface = ({
             </button>
 
             {isMenuOpen && (
-              <ul className="absolute right-0 z-4 mt-2 grid w-52 gap-1 overflow-hidden rounded-2xl border border-white/10 bg-black/95 p-2 shadow-xl shadow-black/40 backdrop-blur-sm">
+              <div
+                role="menu"
+                className="absolute right-0 z-4 mt-2 grid w-52 gap-1 overflow-hidden rounded-2xl border border-white/10 bg-black/95 p-2 shadow-xl shadow-black/40 backdrop-blur-sm"
+              >
                 {isGroup ? (
                   <button
                     type="button"
+                    role="menuitem"
                     onClick={() => {
                       setIsMenuOpen(false);
                       setIsMembersOpen(true);
                     }}
-                    className="w-full cursor-pointer rounded-lg border border-transparent bg-white/5 px-3 py-2 text-left text-xs font-medium text-white/80 transition-all duration-200 hover:border-white/10 hover:bg-white/10"
+                    className={MENU_ITEM}
                   >
-                    <li>Manage members</li>
+                    Manage members
                   </button>
                 ) : (
-                  <>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsMenuOpen(false);
-                      }}
-                      className="w-full cursor-pointer rounded-lg border border-transparent bg-white/5 px-3 py-2 text-left text-xs font-medium text-white/80 transition-all duration-200 hover:border-white/10 hover:bg-white/10"
-                    >
-                      <li>View Profile</li>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsMenuOpen(false);
-                      }}
-                      className="w-full cursor-pointer rounded-lg border border-transparent bg-white/5 px-3 py-2 text-left text-xs font-medium text-white/80 transition-all duration-200 hover:border-white/10 hover:bg-white/10"
-                    >
-                      <li>Mute Notifications</li>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsMenuOpen(false);
-                      }}
-                      className="w-full cursor-pointer rounded-lg border border-transparent bg-white/5 px-3 py-2 text-left text-xs font-medium text-white/80 transition-all duration-200 hover:border-white/10 hover:bg-white/10"
-                    >
-                      <li>Clear Chat</li>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsMenuOpen(false);
-                      }}
-                      className="w-full cursor-pointer rounded-lg border border-transparent bg-red-50 px-3 py-2 text-left text-xs font-medium text-red-700 transition-all duration-200 hover:border-red-200 hover:bg-red-100 dark:bg-red-950/30 dark:text-red-300 dark:hover:border-red-900/70 dark:hover:bg-red-950/50"
-                    >
-                      <li>Block User</li>
-                    </button>
-                  </>
+                  <button
+                    type="button"
+                    role="menuitem"
+                    disabled={!userSelected?.username}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      navigate(`/users/${userSelected.username}`);
+                    }}
+                    className={MENU_ITEM}
+                  >
+                    View Profile
+                  </button>
                 )}
-              </ul>
+                <button
+                  type="button"
+                  role="menuitem"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    onToggleMute();
+                  }}
+                  className={MENU_ITEM}
+                >
+                  {isMuted ? "Unmute notifications" : "Mute notifications"}
+                </button>
+                {/* Destructive-ish actions confirm first. */}
+                <button
+                  type="button"
+                  role="menuitem"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    setConfirm("clear");
+                  }}
+                  className={MENU_ITEM}
+                >
+                  Clear chat
+                </button>
+                {!isGroup && !isBlockedByMe && (
+                  <button
+                    type="button"
+                    role="menuitem"
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setConfirm("block");
+                    }}
+                    className={`${MENU_ITEM} text-red-300! hover:bg-red-950/40!`}
+                  >
+                    Block user
+                  </button>
+                )}
+              </div>
             )}
           </div>
         </div>
@@ -322,9 +359,7 @@ const ChatInterface = ({
                         {msg.text}
                       </p>
                       <span
-                        className={`mt-1 px-2 text-[10px] ${
-                          isMine ? "text-white/30" : "text-white/25"
-                        }`}
+                        className="mt-1 px-2 text-[11px] text-[#8A8A93]"
                       >
                         {msg.createdAt
                           ? new Date(msg.createdAt).toLocaleTimeString([], {
@@ -344,7 +379,7 @@ const ChatInterface = ({
                   <p className="text-sm font-medium text-white/80">
                     No messages yet
                   </p>
-                  <p className="mt-1 text-xs text-white/40">
+                  <p className="mt-1 text-xs text-[#8A8A93]">
                     Start the conversation with your first message.
                   </p>
                 </div>
@@ -353,37 +388,77 @@ const ChatInterface = ({
           </div>
         </div>
 
-        <div className="border-t border-white/5 bg-black p-2">
-          <div className="flex items-center gap-1.5 rounded-2xl border border-white/10 bg-white/3 px-2.5 py-1.5">
+        {isBlockedByMe ? (
+          <div className="flex items-center justify-between gap-3 border-t border-white/10 bg-black px-4 py-3">
+            <p className="text-sm text-[#8A8A93]">
+              You blocked this user. They can&apos;t message you and you can&apos;t
+              message them.
+            </p>
             <button
-              onClick={() => setIsPlusMenuOpen((prev) => !prev)}
-              className={`${isPlusMenuOpen ? "bg-white/10" : ""} w-8 h-8 rounded-md flex items-center justify-center text-white transition-colors hover:bg-white/5 cursor-pointer shrink-0`}
-              title="More options"
-              aria-haspopup="menu"
-              aria-expanded={isPlusMenuOpen}
+              type="button"
+              onClick={onToggleBlock}
+              className="shrink-0 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-fuchsia-400"
             >
-              <Plus size={20} strokeWidth={1.5} />
+              Unblock
             </button>
+          </div>
+        ) : (
+        /* A real <form>: Enter submits natively, so no key handler is needed. */
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSendMessage();
+          }}
+          className="border-t border-white/10 bg-black p-2"
+        >
+          <div className="flex items-center gap-1.5 rounded-2xl border border-white/10 bg-white/3 px-2.5 py-1.5 focus-within:border-fuchsia-500/60">
             <input
               type="text"
               value={draftMessage}
               placeholder="Write your message..."
+              aria-label="Message"
               onChange={(e) => setDraftMessage(e.target.value)}
-              onKeyDown={handleKeyDown}
-              className="w-full bg-transparent px-1 py-1 text-sm text-white placeholder:text-[#555] outline-none"
+              className="w-full bg-transparent px-1 py-1 text-sm text-white placeholder:text-[#8A8A93] outline-none"
             />
-            <AudioLines
-              size={22}
-              className="mx-1 shrink-0 cursor-pointer text-white/70 transition-colors hover:text-fuchsia-400"
-            />
-            <Send
-              onClick={handleSendMessage}
-              size={22}
-              className="mr-1 shrink-0 cursor-pointer text-fuchsia-500 transition-colors hover:text-fuchsia-400"
-            />
+            {/* UI only for now — wire onClick when voice features are built. */}
+            <button
+              type="button"
+              aria-label="Record voice message"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-purple-600 dark:text-purple-600 transition-colors hover:bg-white/5 hover:text-purple-500 focus-visible:outline-2 focus-visible:outline-purple-500"
+            >
+              <Mic size={20} />
+            </button>
+            <button
+              type="button"
+              aria-label="Voice mode"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-purple-600 dark:text-purple-600 transition-colors hover:bg-white/5 hover:text-purple-500 focus-visible:outline-2 focus-visible:outline-purple-500"
+            >
+              <AudioLines size={20} />
+            </button>
+            <button
+              type="submit"
+              aria-label="Send message"
+              disabled={!draftMessage.trim()}
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-purple-600 dark:text-purple-600 transition-colors hover:bg-white/5 hover:text-purple-500 focus-visible:outline-2 focus-visible:outline-purple-500 disabled:cursor-not-allowed disabled:text-[#8A8A93]/50 disabled:hover:bg-transparent"
+            >
+              <Send size={20} />
+            </button>
           </div>
-        </div>
+        </form>
+        )}
       </div>
+
+      {confirm && (
+        <ConfirmDialog
+          {...CONFIRM_COPY[confirm]}
+          onCancel={() => setConfirm(null)}
+          onConfirm={() => {
+            const action = confirm === "clear" ? onClearChat : onToggleBlock;
+            setConfirm(null);
+            action();
+          }}
+        />
+      )}
 
       {isGroup && isMembersOpen && (
         <GroupMembersModal

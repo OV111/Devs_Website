@@ -116,7 +116,7 @@ const NewGroupModal = ({ mutualFollowers, onClose, onCreated }) => {
           <button
             type="submit"
             disabled={!canSubmit}
-            className="w-full cursor-pointer rounded-xl bg-fuchsia-600 py-2 text-sm font-medium text-white transition-colors hover:bg-fuchsia-700 disabled:cursor-not-allowed disabled:opacity-40"
+            className="w-full cursor-pointer rounded-xl bg-purple-600 py-2 text-sm font-medium text-white transition-colors hover:bg-purple-500 disabled:cursor-not-allowed disabled:opacity-40"
           >
             {isSubmitting ? "Creating..." : "Create group"}
           </button>

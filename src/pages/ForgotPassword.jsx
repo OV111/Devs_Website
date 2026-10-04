@@ -98,7 +98,7 @@ export default function ForgotPassword() {
                     className={`w-full mt-2 py-2.5 px-4 rounded-md text-sm font-semibold text-white transition-colors duration-150 ${
                       isLoading
                         ? "bg-fuchsia-300 dark:bg-fuchsia-950 cursor-not-allowed"
-                        : "bg-fuchsia-600 hover:bg-fuchsia-700 active:bg-fuchsia-800 cursor-pointer"
+                        : "bg-purple-600 hover:bg-purple-500 active:bg-fuchsia-800 cursor-pointer"
                     }`}
                   >
                     {isLoading ? "Sending…" : "Send reset link"}

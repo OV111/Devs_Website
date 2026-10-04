@@ -1,6 +1,15 @@
 import { ObjectId } from "mongodb";
 import notificationQueue from "../queues/notificationQueue.js";
 
+import { withLayerTitles } from "./examHistoryService.js";
+import { listPublicCertificatesForUser } from "../modules/capstone/index.js";
+
+// What ANY logged-in viewer may see about another user's account record.
+// An explicit allow-list: the old `{ password: 0, googleId: 0, githubId: 0 }`
+// deny-list sent everything else — email included — to every profile visitor,
+// and would silently leak any field added to `users` later.
+export const PUBLIC_USER_FIELDS = Object.freeze({ username: 1, firstName: 1, lastName: 1 });
+
 export const getUserProfileService = async (db, userName, currentUserId) => {
   const users = db.collection("users");
   const userStats = db.collection("usersStats");
@@ -11,7 +20,7 @@ export const getUserProfileService = async (db, userName, currentUserId) => {
 
   const targetUser = await users.findOne(
     { username: userName },
-    { projection: { password: 0, googleId: 0, githubId: 0 } },
+    { projection: PUBLIC_USER_FIELDS },
   );
   if (!targetUser) {
     const history = await usernameHistory.findOne({ oldUsername: userName });
@@ -27,7 +36,7 @@ export const getUserProfileService = async (db, userName, currentUserId) => {
     throw { status: 404, message: "Not Found" };
   }
 
-  const [followDoc, reverseDoc, stats, progress, exams] = await Promise.all([
+  const [followDoc, reverseDoc, stats, progress, exams, certificates] = await Promise.all([
     follows.findOne({ followerId: currentUserId, followingId: targetUser._id }),
     follows.findOne({ followerId: targetUser._id, followingId: currentUserId }),
     userStats.findOne({ userId: targetUser._id }),
@@ -36,7 +45,9 @@ export const getUserProfileService = async (db, userName, currentUserId) => {
       .find({ userId: targetUser._id })
       .sort({ takenAt: -1 })
       .limit(10)
-      .toArray(),
+      .toArray()
+      .then((rows) => withLayerTitles(db, rows)),
+    listPublicCertificatesForUser(db, targetUser._id, targetUser.username),
   ]);
 
   return {
@@ -44,6 +55,7 @@ export const getUserProfileService = async (db, userName, currentUserId) => {
     stats,
     progress: progress ?? null,
     examHistory: exams,
+    certificates,
     isFollowing: !!followDoc,
     isFollower: !!reverseDoc,
   };

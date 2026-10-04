@@ -130,7 +130,7 @@ const ConnectedAccounts = () => {
     <div className="flex min-h-screen">
       <SideBar />
 
-      <div className="flex-1 p-4 sm:p-6 lg:p-8">
+      <div className="min-w-0 flex-1 px-4 py-8 sm:px-6 lg:px-10">
         <div className="flex items-start justify-between">
           <div>
             <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 lg:text-2xl">
@@ -143,7 +143,7 @@ const ConnectedAccounts = () => {
           <button
             onClick={saveLinks}
             disabled={saving}
-            className="rounded-lg bg-fuchsia-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-fuchsia-700 disabled:opacity-60"
+            className="rounded-lg bg-purple-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-purple-500 disabled:opacity-60"
           >
             {saving ? "Saving…" : "Save"}
           </button>

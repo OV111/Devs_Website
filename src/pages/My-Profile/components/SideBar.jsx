@@ -118,7 +118,7 @@ export default function SideBar() {
               key={group.section}
               className="grid text-lg py-0 lg:pt-2 gap-3 lg:gap-1"
             >
-              <p className="hidden px-2 py-0 text-[9px] uppercase tracking-wider text-gray-400 font-semibold dark:text-gray-400 lg:block lg:py-0.5">
+              <p className="hidden px-2 py-0 text-[11px] uppercase tracking-wider text-[#8A8A93] font-semibold lg:block lg:py-0.5">
                 {group.section}
               </p>
               {group.items.map((item) => (
@@ -126,6 +126,8 @@ export default function SideBar() {
                   key={`${item.to}-${item.label}`}
                   to={item.to}
                   end={item.end}
+                  aria-label={item.label}
+                  title={item.label}
                   className={({ isActive }) =>
                     (() => {
                       const isAliasActive = item.activePaths?.includes(
@@ -162,13 +164,15 @@ export default function SideBar() {
           </div>
 
           {/* Logout */}
-          <div
+          <button
+            type="button"
             onClick={handleLogOut}
-            className="flex items-center justify-center w-10 py-2 text-gray-100 cursor-pointer transition-colors hover:bg-red-500/20 lg:w-auto lg:justify-between lg:px-3 lg:rounded-lg lg:bg-fuchsia-950/30 lg:hover:bg-red-600"
+            aria-label="Log out"
+            className="flex items-center justify-center w-10 py-2 text-gray-100 cursor-pointer transition-colors hover:bg-red-500/20 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-fuchsia-400 lg:w-auto lg:justify-between lg:px-3 lg:rounded-lg lg:bg-fuchsia-950/30 lg:hover:bg-red-600"
           >
-            <p className="hidden text-[14px] font-medium lg:block">Logout</p>
+            <span className="hidden text-[14px] font-medium lg:block">Logout</span>
             <LogOut size={16} />
-          </div>
+          </button>
         </div>
       </aside>
     </>

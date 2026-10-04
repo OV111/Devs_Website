@@ -10,16 +10,8 @@ import BlogCard from "@/components/blog/BlogCard";
 import useProfileStore from "@/stores/useProfileStore";
 import ProfileSkeleton from "./ProfileSkeleton";
 import SOCIAL_LINKS from "../../../constants/SocialLinks";
-import { SectionHeader, CapstoneCard, ExamRow, ForHiringPanel } from "../My-Profile/components/ProfileSections";
-import {
-  MOCK_BADGES,
-  MOCK_CERTIFICATES,
-  MOCK_CAPSTONES,
-  ACTIVITY_GRID,
-  ACTIVITY_COLORS,
-  TOTAL_CONTRIBUTIONS,
-  ACCENT,
-} from "../My-Profile/components/profileData";
+import { SectionHeader, ForHiringPanel } from "../My-Profile/components/ProfileSections";
+import { CertificateCard, EmptyState, ExamRow } from "@/features/profile/components/ProfileProgress";
 
 const UserNotFound = () => (
   <div className="min-h-screen bg-black flex flex-col items-center justify-center text-center px-4">
@@ -35,7 +27,7 @@ const UserNotFound = () => (
     </p>
     <Link
       to="/"
-      className="mt-6 rounded-full bg-violet-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-violet-500 transition shadow-sm shadow-violet-500/20"
+      className="mt-6 rounded-full bg-purple-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-purple-500 transition shadow-sm shadow-violet-500/20"
     >
       Go home
     </Link>
@@ -64,6 +56,7 @@ export default function UserProfile() {
   const [stats, setStats] = useState({});
   const [progress, setProgress] = useState(null);
   const [examHistory, setExamHistory] = useState([]);
+  const [certificates, setCertificates] = useState([]);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
@@ -97,6 +90,7 @@ export default function UserProfile() {
         setStats(fetchedStats);
         setProgress(response.progress ?? null);
         setExamHistory(response.examHistory ?? []);
+        setCertificates(response.certificates ?? []);
         setIsFollowing(Boolean(response.isFollowing));
         setIsFollower(Boolean(response.isFollower));
         if (fetchedStats.userId) {
@@ -222,8 +216,8 @@ export default function UserProfile() {
                   disabled={followLoading || isOwnProfile}
                   className={`group flex items-center gap-1.5 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer ${
                     isFollowing
-                      ? "bg-violet-600 hover:bg-violet-500 shadow-sm shadow-violet-500/30"
-                      : "bg-fuchsia-600 hover:bg-fuchsia-700"
+                      ? "border border-white/15 bg-transparent text-neutral-200! hover:border-red-500/50 hover:bg-red-500/10 hover:text-red-300!"
+                      : "bg-purple-600 hover:bg-purple-500"
                   }`}
                 >
                   {isFollowing ? (
@@ -350,41 +344,14 @@ export default function UserProfile() {
         </div>
 
         {/* Two-column body */}
-        <div className="flex gap-6 px-5 sm:px-8 mt-2 pb-16">
+        <div className="flex flex-col gap-6 px-5 sm:px-8 mt-2 pb-16 xl:flex-row">
 
           {/* Main column */}
           <div className="flex-1 min-w-0 space-y-0">
 
-            {/* Activity */}
-            <div>
-              <SectionHeader title="activity · last 12 months" right={`${TOTAL_CONTRIBUTIONS} contributions`} />
-              <div className="px-4 py-4 rounded-sm overflow-x-auto border border-gray-200 dark:border-gray-800">
-                <div className="flex gap-[3px]">
-                  {ACTIVITY_GRID.map((week, wi) => (
-                    <div key={wi} className="flex flex-col gap-[3px]">
-                      {week.map((val, di) => (
-                        <div
-                          key={di}
-                          className="w-[11px] h-[11px] rounded-[2px]"
-                          style={{ backgroundColor: ACTIVITY_COLORS[val] }}
-                        />
-                      ))}
-                    </div>
-                  ))}
-                </div>
-                <div className="flex items-center gap-1.5 mt-3 justify-end">
-                  <span className="text-[10px] text-gray-400 dark:text-gray-600">less</span>
-                  {ACTIVITY_COLORS.map((c, i) => (
-                    <div key={i} className="w-[11px] h-[11px] rounded-[2px]" style={{ backgroundColor: c }} />
-                  ))}
-                  <span className="text-[10px] text-gray-400 dark:text-gray-600">more</span>
-                </div>
-              </div>
-            </div>
-
             {/* Paths */}
             <div>
-              <SectionHeader title="paths" right="verified by vahoha" />
+              <SectionHeader title="Paths" />
               {progress?.activePath ? (
                 <div className="px-5 py-4 rounded-sm border border-gray-800">
                   <div className="flex items-start justify-between gap-4">
@@ -413,35 +380,32 @@ export default function UserProfile() {
 
             {/* Capstones */}
             <div>
-              <SectionHeader title="capstones · verified portfolio" right="ai-reviewed" />
-              <div className="space-y-3">
-                {MOCK_CAPSTONES.map((c) => <CapstoneCard key={c.id} c={c} />)}
-              </div>
+              <SectionHeader title="Capstones" right="AI-reviewed" />
+              {certificates.length > 0 ? (
+                <div className="space-y-3">
+                  {certificates.map((c) => (
+                    <CertificateCard key={c.publicId} cert={c} />
+                  ))}
+                </div>
+              ) : (
+                <EmptyState
+                  title="No approved capstone yet"
+                  body={`${isOwnProfile ? "Your" : `${user?.firstName ?? "This user"}'s`} approved capstones appear here, each with a link anyone can check.`}
+                />
+              )}
             </div>
 
             {/* Exam history */}
             <div>
-              <SectionHeader title="exam history · verified" right={examHistory.length > 0 ? `${examHistory.length} attempts` : undefined} />
+              <SectionHeader title="Exam history" right={examHistory.length > 0 ? `${examHistory.length} attempts` : undefined} />
               {examHistory.length > 0 ? (
-                <div className="space-y-2">
+                <ul className="space-y-2">
                   {examHistory.map((e) => (
-                    <ExamRow
-                      key={String(e._id)}
-                      exam={{
-                        id: e.layer,
-                        title: `${e.path} — ${e.layer}`,
-                        score: e.correctAnswers,
-                        total: e.totalQuestions,
-                        status: e.passed ? "passed" : "failed",
-                        date: new Date(e.takenAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
-                      }}
-                    />
+                    <ExamRow key={String(e._id)} exam={e} />
                   ))}
-                </div>
+                </ul>
               ) : (
-                <div className="flex flex-col items-center justify-center py-10 text-center rounded-sm border border-dashed border-gray-200 dark:border-gray-800">
-                  <p className="text-sm text-gray-400 dark:text-gray-500">No exams taken yet.</p>
-                </div>
+                <EmptyState title="No exams taken yet" />
               )}
             </div>
 
@@ -474,37 +438,13 @@ export default function UserProfile() {
             </div>
           </div>
 
-          {/* Right panel */}
-          <div className="w-60 shrink-0 hidden xl:block space-y-0">
+          {/* Right panel: first on small screens, right column from xl */}
+          <aside className="order-first w-full shrink-0 space-y-0 xl:order-last xl:w-60">
 
             {/* For hiring */}
             <div>
-              <SectionHeader title="for hiring" />
+              <SectionHeader title="For hiring" />
               <ForHiringPanel cvUrl={stats?.cvUrl ?? null} />
-            </div>
-
-            {/* Certificates */}
-            <div>
-              <SectionHeader title="certificates" />
-              <div className="space-y-2">
-                {MOCK_CERTIFICATES.map((cert) => (
-                  <div
-                    key={cert.id}
-                    className="flex items-center gap-3 px-3 py-3 rounded-sm border border-gray-800"
-                  >
-                    <div
-                      className="w-9 h-9 rounded-sm flex items-center justify-center text-[11px] font-bold shrink-0"
-                      style={{ border: `2px solid ${cert.color}`, backgroundColor: cert.bg, color: cert.color }}
-                    >
-                      {cert.char}
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-[12px] font-semibold text-gray-100 truncate">{cert.title}</p>
-                      <p className="text-[10px] font-mono text-gray-600">{cert.score} · {cert.issued}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
 
             {/* At a glance */}
@@ -520,40 +460,12 @@ export default function UserProfile() {
                 ].map(({ label, value }) => (
                   <div key={label} className="flex items-center justify-between text-[12px]">
                     <span className="text-gray-400 dark:text-gray-600">{label}</span>
-                    <span className="font-semibold" style={{ color: ACCENT }}>{value}</span>
+                    <span className="font-semibold text-purple-400">{value}</span>
                   </div>
                 ))}
               </div>
             </div>
-
-            {/* Badges */}
-            <div>
-              <SectionHeader title="badges" right="all →" />
-              <div className="grid grid-cols-2 gap-3">
-                {MOCK_BADGES.map((badge, i) => (
-                  <div key={i} className="flex flex-col items-center gap-1">
-                    <div
-                      className="w-12 h-12 rounded-full flex items-center justify-center text-[13px] font-bold"
-                      style={{
-                        border: `2px solid ${badge.earned ? badge.color : "#1f1f1f"}`,
-                        backgroundColor: badge.earned ? badge.bg : "#0d0d0d",
-                        color: badge.earned ? badge.color : "#333",
-                        opacity: badge.earned ? 1 : 0.4,
-                      }}
-                    >
-                      {badge.char}
-                    </div>
-                    <p
-                      className="text-[9px] text-center font-bold leading-tight whitespace-pre-line"
-                      style={{ color: badge.earned ? badge.color : "#333" }}
-                    >
-                      {badge.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          </aside>
         </div>
       </div>
     </div>

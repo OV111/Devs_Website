@@ -46,3 +46,27 @@ export const saveSettings = async (formData) => {
   if (!res.ok) throw new Error(data.message || "Failed to save changes");
   return data;
 };
+
+/** The learner's own recent exam attempts (newest first), with `layerTitle` joined in. */
+export const fetchExamHistory = async (limit = 10) => {
+  const res = await fetch(`${API_BASE_URL}/api/exams/history?limit=${limit}`, {
+    headers: authHeaders(),
+    credentials: "include",
+  });
+  const data = await res.json().catch(() => null);
+  if (!res.ok) throw new Error(data?.message || "Couldn't load your exam history.");
+  return data.history ?? [];
+};
+
+/** The learner's coding-challenge stats + their most recent solves. */
+export const fetchChallengeStats = async () => {
+  const res = await fetch(`${API_BASE_URL}/api/challenges/stats/me`, {
+    headers: authHeaders(),
+    credentials: "include",
+  });
+  const body = await res.json().catch(() => null);
+  if (!res.ok || !body?.success) {
+    throw new Error(body?.message || "Couldn't load your challenge stats.");
+  }
+  return body.data;
+};

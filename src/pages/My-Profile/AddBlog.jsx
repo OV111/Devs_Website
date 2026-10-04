@@ -246,7 +246,7 @@ export default function AddBlog() {
             <button
               onClick={() => handleSubmit("published")}
               disabled={isSubmitting}
-              className="flex items-center gap-1.5 rounded-lg bg-fuchsia-600 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-fuchsia-700 disabled:opacity-50 cursor-pointer"
+              className="flex items-center gap-1.5 rounded-lg bg-purple-600 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-purple-500 disabled:opacity-50 cursor-pointer"
             >
               <Send className="h-3.5 w-3.5" />
               Publish

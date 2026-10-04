@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SideBar from "./components/SideBar";
+import PageShell from "./components/PageShell";
 import BlogCard from "@/components/blog/BlogCard";
 import { Bookmark } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -22,19 +22,8 @@ const Favourites = () => {
   }, []);
 
   return (
-    <div className="flex min-h-screen">
-      <SideBar />
-
-      <div className="flex-1 px-4 py-8 sm:px-6 lg:px-10">
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-            Favourites
-          </h1>
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            Posts you saved for later
-          </p>
-        </div>
-
+    <PageShell title="Favourites" subtitle="Posts you saved for later">
+      <div className="mt-8">
         {isLoading ? (
           <SkeletonTheme
             baseColor={isDarkMode ? "#1f2937" : "#ebebeb"}
@@ -42,7 +31,7 @@ const Favourites = () => {
           >
             <BlogCardSkeletonGrid />
           </SkeletonTheme>
-        ) :blogs.length === 0 ? (
+        ) : blogs.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-28 text-center">
             <Bookmark
               size={48}
@@ -56,7 +45,7 @@ const Favourites = () => {
             </p>
             <Link
               to="/"
-              className="mt-5 rounded-xl bg-violet-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-violet-500"
+              className="mt-5 rounded-xl bg-purple-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-purple-500"
             >
               Browse posts
             </Link>
@@ -69,8 +58,7 @@ const Favourites = () => {
           </div>
         )}
       </div>
-    </div>
-
+    </PageShell>
   );
 };
 

@@ -5,6 +5,9 @@ import {
   updateSettings,
   checkUsernameAvailable,
   getNotifications,
+  readNotification,
+  readAllNotifications,
+  removeNotification,
   getFollowing,
   getFollowers,
   getMutualFollowers,
@@ -19,6 +22,14 @@ import {
   updateGroup,
   getGroupDetails,
 } from "../controllers/groupChatController.js";
+import {
+  muteRoom,
+  clearRoom,
+  getBlockedUsers,
+  getBlockedUserList,
+  blockChatUser,
+  unblockChatUser,
+} from "../controllers/chatControlsController.js";
 
 const router = Router();
 
@@ -177,10 +188,88 @@ router.put("/", updateLastActive);
 router.put("/settings", updateSettings);
 router.get("/username-available", checkUsernameAvailable);
 router.get("/notifications", getNotifications);
+router.patch("/notifications/read-all", readAllNotifications);
+router.patch("/notifications/:id/read", readNotification);
+router.delete("/notifications/:id", removeNotification);
 router.get("/following", getFollowing);
 router.get("/followers", getFollowers);
 router.get("/chats/mutual-followers", getMutualFollowers);
 router.get("/chats/:receiverId/stats", getChatReceiverStats);
+
+/**
+ * @openapi
+ * /my-profile/chats/rooms/{roomId}/mute:
+ *   patch:
+ *     tags: [Profile]
+ *     summary: Mute or unmute a chat's notifications (for the caller only)
+ *     security:
+ *       - BearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [muted]
+ *             properties:
+ *               muted:
+ *                 type: boolean
+ *     responses:
+ *       200:
+ *         description: Mute state saved
+ *       404:
+ *         description: Room not found or caller is not a member
+ * /my-profile/chats/rooms/{roomId}/clear:
+ *   post:
+ *     tags: [Profile]
+ *     summary: Clear a chat for the caller only (other members keep their history)
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Chat cleared for the caller
+ * /my-profile/chats/blocks:
+ *   get:
+ *     tags: [Profile]
+ *     summary: Ids of users the caller has blocked
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Blocked user ids
+ * /my-profile/blocked-users:
+ *   get:
+ *     tags: [Profile]
+ *     summary: Users the caller has blocked, with name, username and avatar
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Blocked users, newest block first
+ * /my-profile/chats/blocks/{userId}:
+ *   put:
+ *     tags: [Profile]
+ *     summary: Block a user from messaging (idempotent)
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User blocked
+ *   delete:
+ *     tags: [Profile]
+ *     summary: Unblock a user
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User unblocked
+ */
+router.patch("/chats/rooms/:roomId/mute", muteRoom);
+router.post("/chats/rooms/:roomId/clear", clearRoom);
+router.get("/chats/blocks", getBlockedUsers);
+router.get("/blocked-users", getBlockedUserList);
+router.put("/chats/blocks/:userId", blockChatUser);
+router.delete("/chats/blocks/:userId", unblockChatUser);
 
 /**
  * @openapi

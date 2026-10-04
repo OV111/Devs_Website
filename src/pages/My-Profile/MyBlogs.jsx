@@ -2,12 +2,18 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { Pencil, Trash2, Send, Eye, FileText } from "lucide-react";
-import SideBar from "./components/SideBar";
-import { fetchMyBlogs, deleteBlog, updateBlog } from "../../services/blogsApi.js";
+import PageShell from "./components/PageShell";
+import {
+  fetchMyBlogs,
+  deleteBlog,
+  updateBlog,
+} from "../../services/blogsApi.js";
 
 const STATUS_COLORS = {
-  published: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
-  draft: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
+  published:
+    "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
+  draft:
+    "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
 };
 
 const DIFF_COLORS = {
@@ -44,7 +50,9 @@ export default function MyBlogs() {
     }
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    load();
+  }, []);
 
   const handleDelete = async (id) => {
     try {
@@ -69,10 +77,14 @@ export default function MyBlogs() {
       await updateBlog(blog._id.toString(), formData);
       setBlogs((prev) =>
         prev.map((b) =>
-          b._id.toString() === blog._id.toString() ? { ...b, status: newStatus } : b
-        )
+          b._id.toString() === blog._id.toString()
+            ? { ...b, status: newStatus }
+            : b,
+        ),
       );
-      toast.success(newStatus === "published" ? "Blog published!" : "Moved to drafts");
+      toast.success(
+        newStatus === "published" ? "Blog published!" : "Moved to drafts",
+      );
     } catch {
       toast.error("Failed to update status");
     } finally {
@@ -84,43 +96,37 @@ export default function MyBlogs() {
   const drafts = blogs.filter((b) => b.status === "draft");
 
   return (
-    <div className="flex min-h-screen">
-      <SideBar />
-
-      <div className="flex-1 overflow-auto">
-        {/* Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between bg-gray-50 px-6 py-1.5 dark:border-gray-800 dark:bg-black">
-          <div>
-            <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 lg:text-2xl">
-              My Blogs
-            </h1>
-            <p className="text-xs text-gray-400">
-              {published.length} published · {drafts.length} draft{drafts.length !== 1 ? "s" : ""}
-            </p>
-          </div>
+    <>
+      <PageShell
+        title="My Blogs"
+        subtitle={`${published.length} published · ${drafts.length} draft${drafts.length !== 1 ? "s" : ""}`}
+        actions={
           <button
             onClick={() => navigate("/my-profile/add-blog")}
-            className="flex items-center gap-1.5 rounded-lg bg-fuchsia-600 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-fuchsia-700 cursor-pointer"
+            className="flex items-center gap-1.5 rounded-lg bg-purple-600 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-purple-500 cursor-pointer"
           >
             <Pencil className="h-3.5 w-3.5" />
             New Post
           </button>
-        </div>
-
-        <div className="p-6">
+        }
+      >
+        <div className="mt-8">
           {isLoading ? (
             <div className="flex items-center justify-center py-24">
               <div className="h-8 w-8 animate-spin rounded-full border-2 border-fuchsia-500 border-t-transparent" />
             </div>
           ) : blogs.length === 0 ? (
             <div className="flex flex-col items-center justify-center gap-3 py-24 text-center">
-              <FileText size={40} className="text-gray-300 dark:text-gray-700" />
+              <FileText
+                size={40}
+                className="text-gray-300 dark:text-gray-700"
+              />
               <p className="text-gray-500 dark:text-gray-400">
                 You haven't written any blogs yet.
               </p>
               <button
                 onClick={() => navigate("/my-profile/add-blog")}
-                className="rounded-lg bg-fuchsia-600 px-4 py-2 text-sm font-semibold text-white hover:bg-fuchsia-700 cursor-pointer"
+                className="rounded-lg bg-purple-600 px-4 py-2 text-sm font-semibold text-white hover:bg-purple-500 cursor-pointer"
               >
                 Write your first post
               </button>
@@ -154,19 +160,25 @@ export default function MyBlogs() {
                         {blog.status}
                       </span>
                       {blog.difficulty && (
-                        <span className={`text-xs font-medium ${DIFF_COLORS[blog.difficulty] ?? ""}`}>
+                        <span
+                          className={`text-xs font-medium ${DIFF_COLORS[blog.difficulty] ?? ""}`}
+                        >
                           {blog.difficulty}
                         </span>
                       )}
                       {blog.category && (
-                        <span className="text-xs text-gray-400">{blog.category}</span>
+                        <span className="text-xs text-gray-400">
+                          {blog.category}
+                        </span>
                       )}
                     </div>
                     <p className="truncate font-medium text-gray-900 dark:text-gray-100">
                       {blog.title}
                     </p>
                     <p className="flex gap-3 text-[11px] text-gray-400">
-                      <span>{blog.readTime} min read · {blog.wordCount ?? 0} words</span>
+                      <span>
+                        {blog.readTime} min read · {blog.wordCount ?? 0} words
+                      </span>
                       <span>{blog.views ?? 0} views</span>
                       <span>{fmt(blog.createdAt)}</span>
                     </p>
@@ -175,7 +187,9 @@ export default function MyBlogs() {
                   {/* Actions */}
                   <div className="flex shrink-0 items-center gap-2">
                     <button
-                      onClick={() => navigate(`/my-profile/edit-blog/${blog._id}`)}
+                      onClick={() =>
+                        navigate(`/my-profile/edit-blog/${blog._id}`)
+                      }
                       title="Edit"
                       className="flex items-center gap-1 rounded-lg border border-gray-200 px-2.5 py-1.5 text-xs text-gray-600 transition hover:border-gray-300 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 cursor-pointer"
                     >
@@ -186,7 +200,11 @@ export default function MyBlogs() {
                     <button
                       onClick={() => handlePublish(blog)}
                       disabled={publishingId === blog._id}
-                      title={blog.status === "published" ? "Move to draft" : "Publish"}
+                      title={
+                        blog.status === "published"
+                          ? "Move to draft"
+                          : "Publish"
+                      }
                       className={`flex items-center gap-1 rounded-lg border px-2.5 py-1.5 text-xs font-medium transition disabled:opacity-50 cursor-pointer ${
                         blog.status === "published"
                           ? "border-yellow-200 text-yellow-600 hover:bg-yellow-50 dark:border-yellow-800 dark:text-yellow-400 dark:hover:bg-yellow-900/20"
@@ -194,9 +212,15 @@ export default function MyBlogs() {
                       }`}
                     >
                       {blog.status === "published" ? (
-                        <><Eye className="h-3.5 w-3.5" />Unpublish</>
+                        <>
+                          <Eye className="h-3.5 w-3.5" />
+                          Unpublish
+                        </>
                       ) : (
-                        <><Send className="h-3.5 w-3.5" />Publish</>
+                        <>
+                          <Send className="h-3.5 w-3.5" />
+                          Publish
+                        </>
                       )}
                     </button>
 
@@ -215,7 +239,7 @@ export default function MyBlogs() {
             </div>
           )}
         </div>
-      </div>
+      </PageShell>
 
       {/* Delete confirmation modal */}
       {confirmDelete && (
@@ -231,7 +255,8 @@ export default function MyBlogs() {
               Delete blog?
             </h2>
             <p className="mb-5 text-sm text-gray-500 dark:text-gray-400">
-              This action cannot be undone. The post will be permanently removed.
+              This action cannot be undone. The post will be permanently
+              removed.
             </p>
             <div className="flex gap-2 justify-end">
               <button
@@ -251,6 +276,6 @@ export default function MyBlogs() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
