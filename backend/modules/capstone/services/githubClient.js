@@ -148,3 +148,53 @@ export const getFileText = async (fullName, sha, path) => {
   const text = await res.text();
   return text.includes(String.fromCharCode(0)) ? null : text;
 };
+
+const PULLS_PAGE_SIZE = 50;
+const PULLS_MAX_PAGES = 5; // 250 closed PRs: bounds the API calls of one sync
+
+/**
+ * Merged pull requests, most recently updated first. GitHub's list has no
+ * "merged" filter, so we page through CLOSED PRs (unmerged ones take up room too)
+ * and keep those with merged_at. Returns null if the repo is missing or private.
+ */
+export const listMergedPulls = async (owner, repo) => {
+  const merged = [];
+  for (let page = 1; page <= PULLS_MAX_PAGES; page++) {
+    const result = await request(
+      `${repoPath(owner, repo)}/pulls?state=closed&sort=updated&direction=desc&per_page=${PULLS_PAGE_SIZE}&page=${page}`,
+    );
+    if (!result) return page === 1 ? null : merged;
+    merged.push(
+      ...result.body
+        .filter((pr) => pr.merged_at)
+        .map((pr) => ({
+          number: pr.number,
+          title: pr.title,
+          authorLogin: pr.user?.login ?? null,
+          mergedAt: new Date(pr.merged_at),
+        })),
+    );
+    if (result.body.length < PULLS_PAGE_SIZE) break; // last page
+  }
+  return merged;
+};
+
+/** Changed files of one PR (max 100). `patch` is the diff text, absent for binary or huge files. */
+export const getPullFiles = async (owner, repo, number) => {
+  const result = await request(`${repoPath(owner, repo)}/pulls/${Number(number)}/files?per_page=100`);
+  if (!result) return [];
+  return result.body.map((f) => ({
+    path: f.filename,
+    additions: f.additions,
+    deletions: f.deletions,
+    patch: f.patch ?? null,
+  }));
+};
+
+/** Logins of people who reviewed a PR, excluding its author. */
+export const getPullReviewers = async (owner, repo, number, authorLogin) => {
+  const result = await request(`${repoPath(owner, repo)}/pulls/${Number(number)}/reviews?per_page=100`);
+  if (!result) return [];
+  const logins = result.body.map((r) => r.user?.login).filter((l) => l && l !== authorLogin);
+  return [...new Set(logins)];
+};
