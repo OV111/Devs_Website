@@ -377,12 +377,14 @@ const Settings = () => {
                 <>
                   <ImageDropZone
                     label="Profile Image"
+                    hint="Square, at least 400 × 400 px."
                     image={profileImage}
                     currentUrl={stats?.profileImage}
                     onImageChange={setProfileImage}
                   />
                   <ImageDropZone
                     label="Banner Image"
+                    hint="Recommended 1500 × 350 px (wide), under 1 MB. Keep faces and key shapes in the middle; the top and bottom get cropped."
                     image={bannerImage}
                     currentUrl={stats?.bannerImage}
                     onImageChange={setBannerImage}

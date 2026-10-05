@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 
 import { UploadCloud, X } from "lucide-react";
 const MAX_SIZE = 5 * 1024 * 1024; // 5 MB
-const ImageDropZone = ({ label, image, currentUrl, onImageChange }) => {
+const ImageDropZone = ({ label, hint, image, currentUrl, onImageChange }) => {
   const [isDragging, setIsDragging] = useState(false);
   const inputRef = useRef(null);
   const [cleared, setCleared] = useState(false);
@@ -39,6 +39,9 @@ const ImageDropZone = ({ label, image, currentUrl, onImageChange }) => {
       <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
         {label}
       </label>
+      {hint && (
+        <p className="-mt-1 text-xs text-gray-500 dark:text-gray-400">{hint}</p>
+      )}
       <div
         onClick={() => inputRef.current?.click()}
         onDragOver={(e) => {

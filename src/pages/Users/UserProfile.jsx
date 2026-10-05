@@ -149,7 +149,7 @@ export default function UserProfile() {
         {/* Banner */}
         <div className="relative">
           <img
-            src={stats?.bannerImage?.replace("/upload/", "/upload/w_1200,h_280,c_fill,f_auto,q_auto/") || UserBanner}
+            src={stats?.bannerImage?.replace("/upload/", "/upload/w_1500,h_350,c_fill,g_auto,f_auto,q_auto/") || UserBanner}
             alt="Banner"
             className="w-full h-40 sm:h-56 object-cover"
           />

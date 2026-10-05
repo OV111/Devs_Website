@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { recruiterApi } from "../recruiterApi";
+import Checkbox from "@/components/ui/FormCheckbox";
 
 function CopyLink({ path }) {
   const [copied, setCopied] = useState(false);
@@ -72,18 +73,38 @@ export default function RecruiterSettings({ username }) {
 
   return (
     <div className="flex flex-col gap-3 rounded-xl border border-neutral-800 p-4">
-      <label className="flex items-center gap-3 text-sm font-semibold text-white">
-        <input
-          type="checkbox"
-          checked={settings.enabled}
+      <div className="flex items-center justify-between gap-4">
+        <div className="min-w-0">
+          <p
+            id="recruiter-switch-label"
+            className="text-sm font-semibold text-white"
+          >
+            Show me to recruiters
+          </p>
+          <p className="text-xs text-neutral-400">
+            {settings.enabled
+              ? "Your scorecard is public: anyone with your link can open it."
+              : "Your scorecard is private. Turn this on to get a public link."}
+          </p>
+        </div>
+        <button
+          type="button"
+          role="switch"
+          aria-checked={settings.enabled}
+          aria-labelledby="recruiter-switch-label"
           disabled={saving}
-          onChange={(e) => save({ ...settings, enabled: e.target.checked })}
-        />
-        Show me to recruiters
-      </label>
-      <p className="text-xs text-neutral-500">
-        Creates a public page anyone with the link can open. Off by default.
-      </p>
+          onClick={() => save({ ...settings, enabled: !settings.enabled })}
+          className={`relative h-6 w-11 shrink-0 rounded-full transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-400 disabled:opacity-60 ${
+            settings.enabled ? "bg-purple-600" : "bg-neutral-700"
+          }`}
+        >
+          <span
+            className={`absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${
+              settings.enabled ? "translate-x-5" : "translate-x-0"
+            }`}
+          />
+        </button>
+      </div>
 
       {settings.enabled && (
         <>
@@ -92,33 +113,25 @@ export default function RecruiterSettings({ username }) {
               What the page shows
             </legend>
             {SECTIONS.map(({ key, label }) => (
-              <label
+              <Checkbox
                 key={key}
-                className="flex items-center gap-2 text-sm text-neutral-300"
-              >
-                <input
-                  type="checkbox"
-                  checked={settings.show[key]}
-                  onChange={(e) =>
-                    save({
-                      ...settings,
-                      show: { ...settings.show, [key]: e.target.checked },
-                    })
-                  }
-                />
-                {label}
-              </label>
+                label={label}
+                checked={settings.show[key]}
+                onChange={(e) =>
+                  save({
+                    ...settings,
+                    show: { ...settings.show, [key]: e.target.checked },
+                  })
+                }
+              />
             ))}
           </fieldset>
-          <label className="flex items-center gap-2 text-sm text-neutral-300">
-            <input
-              type="checkbox"
-              checked={settings.openToWork}
-              disabled={saving}
-              onChange={(e) => save({ ...settings, openToWork: e.target.checked })}
-            />
-            Show an &quot;Open to work&quot; badge
-          </label>
+          <Checkbox
+            label={'Show an "Open to work" badge'}
+            checked={settings.openToWork}
+            disabled={saving}
+            onChange={(e) => save({ ...settings, openToWork: e.target.checked })}
+          />
           {username && (
             <div className="flex flex-wrap items-center gap-3">
               <Link
