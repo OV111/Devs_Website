@@ -1,0 +1,35 @@
+/*
+ * Roadmap-page-only design layer (Raycast structure, project colors).
+ * Everything is scoped under .rm so nothing leaks to other pages.
+ * These shadows are neutral white/black alpha overlays, not palette colors.
+ */
+.rm {
+  --rm-shadow-key:
+    rgba(255, 255, 255, 0.05) 0 1px 0 0 inset,
+    rgba(255, 255, 255, 0.25) 0 0 0 1px,
+    rgba(0, 0, 0, 0.2) 0 -1px 0 0 inset;
+  --rm-shadow-highlight: rgba(255, 255, 255, 0.1) 0 1px 0 0 inset;
+  --rm-shadow-button: rgba(0, 0, 0, 0.03) 0 7px 3px 0, rgba(0, 0, 0, 0.25) 0 4px 4px 0;
+
+  font-feature-settings: "calt", "kern", "liga", "ss03";
+}
+
+/* Hairline-bordered key card: the 1px ring is already the border, so no extra border. */
+.rm-key {
+  box-shadow: var(--rm-shadow-key);
+}
+
+/* Edge-highlight: border + top inset highlight, transparent fill. */
+.rm-edge {
+  box-shadow: var(--rm-shadow-highlight);
+}
+
+.rm-btn {
+  box-shadow: var(--rm-shadow-button);
+}
+
+/* Geist Mono eyebrow / meta text. */
+.rm-mono {
+  font-family: "Geist Mono Variable", "JetBrains Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+  font-feature-settings: "calt", "kern", "liga", "ss03", "ss09";
+}

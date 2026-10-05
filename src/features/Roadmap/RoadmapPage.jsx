@@ -6,8 +6,10 @@ import TrackSelector from "./components/TrackSelector";
 import RoadmapTree from "./components/RoadmapTree";
 import useRoadmapStore from "../../stores/useRoadmapStore";
 import useAuthStore from "../../stores/useAuthStore";
+import RoadmapHero from "./components/RoadmapHero";
 import FloatingLoad from "./components/FloatingLoad";
 import TrackOnboardingPanel from "./components/TrackOnboardingPanel";
+import "./roadmap.css";
 
 export default function RoadmapPage() {
   const { selectedCategory, selectedTrack, submitOnboarding, closePanel } = useRoadmapStore();
@@ -32,32 +34,8 @@ export default function RoadmapPage() {
   };
 
   return (
-    <div className="min-h-screen px-6 sm:px-10 md:px-20 lg:px-28 py-12">
-      <Motion.div
-        className="mb-10 text-center"
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      >
-        <h2
-          className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight tracking-wide bg-clip-text text-transparent"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, #7c3aed, #a855f7, #6d28d9, #c084fc, #7c3aed)",
-            backgroundSize: "300% 100%",
-            WebkitBackgroundClip: "text",
-          }}
-        >
-          Roadmaps
-        </h2>
-
-        <p className="mt-3 text-sm sm:text-base max-w-2xl mx-auto bg-gradient-to-r from-violet-700 via-purple-600 to-fuchsia-700 dark:from-violet-400 dark:via-purple-400 dark:to-fuchsia-500 bg-clip-text text-transparent">
-          Pick a domain and a track, then work through it layer by layer. Pass
-          a timed exam to unlock the next layer, explain what you missed back
-          to your AI mentor, and sharpen the skills with coding challenges
-          along the way.
-        </p>
-      </Motion.div>
+    <div className="rm min-h-screen mx-auto max-w-[1200px] px-6 sm:px-10 py-12">
+      <RoadmapHero />
 
       <CategoryBar />
 
@@ -74,17 +52,21 @@ export default function RoadmapPage() {
       </AnimatePresence>
 
       {/* Onboarding saves to the account, so guests don't get it. */}
-      {auth && selectedTrack && !panelOpen && (
+      {/* Appears once a domain is picked, but a path can only start from a
+          track, so it stays disabled until one is chosen. */}
+      {auth && selectedCategory && !panelOpen && (
         <button
+          disabled={!selectedTrack}
+          title={selectedTrack ? undefined : "Choose a track first"}
           onClick={() => { closePanel(); setPanelOpen(true); }} // close any open layer sidebar first
-          // bg-fuchsia-500
-          className=" fixed right-0 top-1/4 -translate-y-1/2 z-4
-          bg-purple-500 glow-pulse
+          className={`fixed right-0 top-1/4 -translate-y-1/2 z-4
           flex items-center gap-2
-          px-3 py-2.5 rounded-l-xl
-          text-[13px] font-semibold text-white
-          cursor-pointer transition-all hover:px-4"
-          // className="fixed right-0 top-1/4 -translate-y-1/2 z-4 bg-purple-500 flex items-center gap-2 px-3 py-2.5 rounded-l-xl text-[13px] font-semibold text-white cursor-pointer transition-all hover:px-4"
+          px-3 py-2 rounded-l-lg
+          text-[13px] font-medium transition-all ${
+            selectedTrack
+              ? "bg-purple-500 rm-btn text-white cursor-pointer hover:px-4"
+              : "bg-purple-500/30 text-white/50 cursor-not-allowed"
+          }`}
         >
           Start Path
         </button>

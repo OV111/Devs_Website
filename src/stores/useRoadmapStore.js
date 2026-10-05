@@ -93,6 +93,16 @@ const useRoadmapStore = create((set, get) => ({
     });
   },
 
+  // Back to the catalog: drop the track and its progress view.
+  clearTrack: () =>
+    set({
+      selectedTrack: null,
+      activeLayer: null,
+      isPanelOpen: false,
+      layerProgress: {},
+      progressLoaded: false,
+    }),
+
   loadProgress: async () => {
     if (isGuest()) return set({ layerProgress: {}, progressLoaded: true });
     const progress = await fetchProgress();
