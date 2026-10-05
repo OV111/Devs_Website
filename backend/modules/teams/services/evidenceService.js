@@ -95,6 +95,12 @@ export const issueEvidenceService = async (db, adminId, teamId) => {
   return { publicId: doc.publicId, path: `/evidence/${doc.publicId}`, revoked: doc.revoked };
 };
 
+// Admin: current evidence link for a team, or null if none was issued yet.
+export const getEvidenceStatusService = async (db, teamId) => {
+  const doc = await db.collection(TEAM_EVIDENCE).findOne({ teamId: new ObjectId(teamId) });
+  return doc ? { publicId: doc.publicId, path: `/evidence/${doc.publicId}`, revoked: doc.revoked } : null;
+};
+
 export const setEvidenceRevokedService = async (db, teamId, revoked) => {
   const res = await db
     .collection(TEAM_EVIDENCE)

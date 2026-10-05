@@ -53,3 +53,6 @@ export const evidenceRevokeSchema = z.object({ revoked: z.boolean() });
 
 // PUT /api/teams/:teamId/status (admin)
 export const statusSchema = z.object({ status: z.enum(TEAM_STATUSES) });
+
+// GET /api/teams/admin/users?q= (admin)
+export const userSearchSchema = z.object({ q: z.string().trim().min(2).max(60) });

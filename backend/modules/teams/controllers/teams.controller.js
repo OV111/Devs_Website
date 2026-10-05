@@ -1,5 +1,6 @@
 import {
   getPublicEvidenceService,
+  getEvidenceStatusService,
   issueEvidenceService,
   setEvidenceRevokedService,
 } from "../services/evidenceService.js";
@@ -16,7 +17,9 @@ import {
   createTeamService,
   getMyTeamService,
   getTeamService,
+  listTeamsService,
   removeMemberService,
+  searchUsersService,
   setRepoService,
   setStatusService,
 } from "../services/teamsService.js";
@@ -60,7 +63,11 @@ export const rateMember = handle((req) =>
 export const listMyRatings = handle((req) => listMyRatingsService(db(req), req.params.teamId, me(req)));
 
 export const issueEvidence = handle((req) => issueEvidenceService(db(req), req.user._id, req.params.teamId));
+export const getEvidenceStatus = handle((req) => getEvidenceStatusService(db(req), req.params.teamId));
 export const revokeEvidence = handle((req) => setEvidenceRevokedService(db(req), req.params.teamId, req.body.revoked));
 export const getPublicEvidence = handle((req) => getPublicEvidenceService(db(req), req.params.publicId));
 
 export const setStatus = handle((req) => setStatusService(db(req), req.params.teamId, req.body.status));
+
+export const listTeams = handle((req) => listTeamsService(db(req)));
+export const searchUsers = handle((req) => searchUsersService(db(req), req.query));

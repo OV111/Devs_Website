@@ -25,23 +25,23 @@ function Question({ question, total, onAnswer, busy }) {
 
   return (
     <div className="flex flex-col gap-3 py-4">
-      <p className="text-[15px] font-semibold leading-snug text-white">
-        <span className="mr-2 font-bold text-purple-500">?</span>
+      <p className="t-h2">
+        <span className="mr-2 text-[var(--t-accent-text)]">?</span>
         {question.text}
       </p>
       <span
-        className={`flex items-center gap-2 text-xs ${urgent ? "text-red-400" : "text-yellow-400"}`}
+        className={`t-mono flex items-center gap-2 ${urgent ? "text-[var(--t-red)]" : "text-[var(--t-fog)]"}`}
         role="timer"
       >
         <Clock size={10} aria-hidden="true" />
         {Math.floor(left / 60)}:{String(left % 60).padStart(2, "0")} left ·
         question {question.number} of {total} · no going back
       </span>
-      <span className="inline-flex items-center gap-1 text-xs text-neutral-500">
+      <span className="t-caption t-mono inline-flex items-center gap-1">
         <FileCode2 size={10} aria-hidden="true" />
         PR #{question.prNumber} · {question.codeRef.path}
       </span>
-      <pre className="max-h-64 overflow-auto rounded-lg border border-neutral-800 bg-neutral-900 p-3 text-[11px] leading-relaxed text-neutral-300">
+      <pre className="t-code max-h-64 overflow-auto">
         {question.excerpt}
       </pre>
       <label className="sr-only" htmlFor={`answer-${question.id}`}>
@@ -55,13 +55,13 @@ function Question({ question, total, onAnswer, busy }) {
         maxLength={3000}
         autoFocus
         placeholder="Type your answer… specific to your change"
-        className="w-full max-w-2xl resize-y rounded-lg border border-neutral-700 bg-neutral-800/60 px-3 py-2.5 text-sm text-neutral-200 outline-none transition-colors placeholder:text-neutral-500 focus:border-purple-500/50"
+        className="t-input max-w-2xl resize-y"
       />
       <button
         type="button"
         onClick={send}
         disabled={busy}
-        className="w-fit rounded-lg border border-neutral-700 px-4 py-2.5 text-xs font-semibold text-neutral-300 transition-colors hover:border-purple-500/50 hover:text-white disabled:opacity-50"
+        className="t-btn t-btn-primary w-fit"
       >
         {busy
           ? "sending…"
@@ -105,9 +105,9 @@ export default function TeamDefense({ teamId }) {
 
   if (!state) {
     return error ? (
-      <p className="text-sm text-red-400">{error}</p>
+      <p className="text-sm text-[var(--t-red)]">{error}</p>
     ) : (
-      <p className="text-sm text-neutral-500">Loading…</p>
+      <p className="t-caption">Loading…</p>
     );
   }
 
@@ -116,9 +116,9 @@ export default function TeamDefense({ teamId }) {
 
   return (
     <div className="flex flex-col gap-3">
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-sm text-[var(--t-red)]">{error}</p>}
       {state.gradingError && (
-        <p className="text-sm text-yellow-400">{state.gradingError}</p>
+        <p className="text-sm text-[var(--t-fog)]">{state.gradingError}</p>
       )}
 
       {session?.status === "active" && session.current && (
@@ -132,7 +132,7 @@ export default function TeamDefense({ teamId }) {
       )}
 
       {session?.status === "generating" && (
-        <p className="text-sm text-neutral-400">Preparing your questions…</p>
+        <p className="t-muted">Preparing your questions…</p>
       )}
 
       {(answeredNotGraded || session?.status === "grading") && (
@@ -140,7 +140,7 @@ export default function TeamDefense({ teamId }) {
           type="button"
           onClick={() => run(() => teamsApi.gradeDefense(teamId))}
           disabled={busy}
-          className="w-fit rounded-lg border border-neutral-700 px-4 py-2.5 text-xs font-semibold text-neutral-300 hover:border-purple-500/50 hover:text-white disabled:opacity-50"
+          className="t-btn t-btn-ghost w-fit"
         >
           {busy ? "grading…" : "grade my defense"}
         </button>
@@ -148,11 +148,11 @@ export default function TeamDefense({ teamId }) {
 
       {session?.status === "graded" && (
         <div className="flex flex-col gap-3">
-          <p className="text-sm text-white">
+          <p className="t-h2">
             Result: {session.result.score}% ·{" "}
             <span
               className={
-                session.result.passed ? "text-green-400" : "text-red-400"
+                session.result.passed ? "text-[var(--t-green)]" : "text-[var(--t-red)]"
               }
             >
               {session.result.passed ? "passed" : "not passed"}
@@ -160,15 +160,12 @@ export default function TeamDefense({ teamId }) {
           </p>
           <ul className="flex flex-col gap-2">
             {session.answered.map((q) => (
-              <li
-                key={q.id}
-                className="rounded-lg border border-neutral-800 p-3 text-[13px] text-neutral-300"
-              >
-                <p className="font-semibold text-white">{q.text}</p>
-                <p className="mt-1 text-neutral-400">
+              <li key={q.id} className="t-card-subtle text-[13px]">
+                <p className="text-[var(--t-paper)]">{q.text}</p>
+                <p className="t-muted mt-1">
                   {q.expired ? "(no answer in time)" : q.answer}
                 </p>
-                <p className="mt-1 text-purple-300">
+                <p className="mt-1 text-[var(--t-accent-text)]">
                   {q.score}/{q.maxScore} · {q.feedback}
                 </p>
               </li>
@@ -182,7 +179,7 @@ export default function TeamDefense({ teamId }) {
           type="button"
           onClick={() => run(() => teamsApi.startDefense(teamId))}
           disabled={busy}
-          className="w-fit rounded-lg bg-purple-600 px-4 py-2.5 text-xs font-semibold text-white hover:bg-purple-500 disabled:opacity-50"
+          className="t-btn t-btn-primary w-fit"
         >
           {busy
             ? "preparing…"
@@ -191,7 +188,7 @@ export default function TeamDefense({ teamId }) {
               : "start my defense"}
         </button>
       )}
-      <p className="text-xs text-neutral-500">
+      <p className="t-caption">
         Sessions used: {state.sessionsUsed}/{state.maxSessions}
       </p>
     </div>

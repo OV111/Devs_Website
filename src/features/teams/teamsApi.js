@@ -56,6 +56,30 @@ export const teamsApi = {
       body,
     }),
 
+  // Admin only: the server answers 404/403 to everyone else.
+  list: () => request("/"),
+  searchUsers: (q) => request(`/admin/users?q=${encodeURIComponent(q)}`),
+  create: (body) => request("/", { method: "POST", body }),
+  setRepo: (teamId, repoUrl) =>
+    request(`${team(teamId)}/repo`, { method: "PUT", body: { repoUrl } }),
+  addMember: (teamId, body) =>
+    request(`${team(teamId)}/members`, { method: "POST", body }),
+  removeMember: (teamId, userId) =>
+    request(`${team(teamId)}/members/${encodeURIComponent(userId)}`, {
+      method: "DELETE",
+    }),
+  setStatus: (teamId, status) =>
+    request(`${team(teamId)}/status`, { method: "PUT", body: { status } }),
+  sync: (teamId) => request(`${team(teamId)}/sync`, { method: "POST" }),
+  evidenceStatus: (teamId) => request(`${team(teamId)}/evidence`),
+  issueEvidence: (teamId) =>
+    request(`${team(teamId)}/evidence`, { method: "POST" }),
+  revokeEvidence: (teamId, revoked) =>
+    request(`${team(teamId)}/evidence/revocation`, {
+      method: "PUT",
+      body: { revoked },
+    }),
+
   // Public: anyone with the link (a recruiter) can open it, so no auth header.
   evidence: (publicId) =>
     request(`/evidence/${encodeURIComponent(publicId)}`, { auth: false }),

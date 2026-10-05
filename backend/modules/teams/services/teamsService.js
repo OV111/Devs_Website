@@ -111,3 +111,24 @@ export const setStatusService = async (db, teamId, status) => {
     .findOneAndUpdate({ _id: new ObjectId(teamId) }, { $set: { status, updatedAt: new Date() } }, { returnDocument: "after" });
   return updated ?? fail(404, "Team not found");
 };
+
+export const listTeamsService = async (db) =>
+  db
+    .collection(TEAMS)
+    .find({}, { projection: { name: 1, trackId: 1, status: 1, repo: 1, members: 1, createdAt: 1 } })
+    .sort({ createdAt: -1 })
+    .limit(100)
+    .toArray();
+
+const escapeRegex = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+// Admin picker for "add member": the form needs a userId, but nobody remembers one.
+// Case-insensitive prefix match on username or email, so it can use an index later.
+export const searchUsersService = async (db, { q }) => {
+  const prefix = new RegExp(`^${escapeRegex(q)}`, "i");
+  return db
+    .collection("users")
+    .find({ $or: [{ username: prefix }, { email: prefix }] }, { projection: { username: 1, firstName: 1, lastName: 1, email: 1 } })
+    .limit(10)
+    .toArray();
+};

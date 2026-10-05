@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
 import { teamsApi } from "./teamsApi";
+import "./teams-theme.css";
 
 /**
  * Public team evidence: /evidence/:publicId. No account needed.
@@ -19,22 +20,22 @@ const formatDate = (iso) =>
 
 function Member({ m }) {
   return (
-    <li className="flex flex-col gap-1 rounded-lg border border-neutral-800 p-4">
+    <li className="t-card flex flex-col gap-2">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <span className="font-semibold text-white">
+        <span className="t-h2">
           {m.name}
           {!m.active && (
-            <span className="ml-2 text-xs text-neutral-500">(left the team)</span>
+            <span className="t-badge ml-2">left the team</span>
           )}
         </span>
-        <span className="text-xs text-neutral-500">@{m.githubLogin}</span>
+        <span className="t-mono text-[var(--t-fog)]">@{m.githubLogin}</span>
       </div>
-      <p className="text-[13px] text-neutral-300">
+      <p className="text-[14px] text-[var(--t-mist)]">
         {m.mergedPulls} merged PRs · {m.reviewsGiven} reviews given ·{" "}
-        <span className="text-green-400">+{m.additions}</span>{" "}
-        <span className="text-red-400">-{m.deletions}</span>
+        <span className="t-mono text-[var(--t-green)]">+{m.additions}</span>{" "}
+        <span className="t-mono text-[var(--t-red)]">-{m.deletions}</span>
       </p>
-      <p className="text-[13px] text-neutral-300">
+      <p className="text-[14px] text-[var(--t-mist)]">
         Defense:{" "}
         {m.defense ? `${m.defense.score}% (passed)` : "no passed defense yet"}
         {m.peerRating &&
@@ -60,14 +61,21 @@ export default function EvidencePage() {
       );
   }, [publicId]);
 
-  if (error) return <p className="p-8 text-sm text-red-400">{error}</p>;
-  if (!data) return <p className="p-8 text-sm text-neutral-500">Loading…</p>;
+  const shell = (children) => (
+    <div className="teams-theme">
+      <main className="mx-auto flex max-w-[1200px] flex-col gap-6 px-4 py-12">
+        {children}
+      </main>
+    </div>
+  );
+  if (error) return shell(<p className="text-sm text-[var(--t-red)]">{error}</p>);
+  if (!data) return shell(<p className="t-muted">Loading…</p>);
 
-  return (
-    <main className="mx-auto flex max-w-3xl flex-col gap-6 px-4 py-10">
+  return shell(
+    <>
       <header className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold text-white">{data.team.name}</h1>
-        <p className="text-sm text-neutral-400">
+        <h1 className="t-h1">{data.team.name}</h1>
+        <p className="t-muted">
           Track: {data.team.trackId} · {data.totals.mergedPulls} merged pull
           requests · {data.totals.defensesPassed} defenses passed · updated{" "}
           {formatDate(data.updatedAt)}
@@ -77,7 +85,7 @@ export default function EvidencePage() {
             href={data.team.repoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex w-fit items-center gap-1.5 text-sm text-purple-300 hover:text-purple-200"
+            className="t-link inline-flex w-fit items-center gap-1.5"
           >
             View the repository
             <ExternalLink size={11} aria-hidden="true" />
@@ -91,16 +99,14 @@ export default function EvidencePage() {
         ))}
       </ul>
 
-      <section className="border-t border-neutral-800 pt-6 text-[13px] leading-relaxed text-neutral-400">
-        <h2 className="mb-1 text-sm font-semibold text-neutral-200">
-          How this was assessed
-        </h2>
+      <section className="t-section t-muted">
+        <h2 className="t-h2">How this was assessed</h2>
         PR numbers come from the team repository on GitHub. Each defense is a
         timed, AI-graded set of questions about that member&apos;s own merged
         changes, so the score shows how well they can explain their work. It
         does not prove they wrote every line, and peer ratings are only shown
         when at least three teammates rated the person.
       </section>
-    </main>
+    </>,
   );
 }

@@ -16,6 +16,7 @@ import {
   setRepoSchema,
   statusSchema,
   teamParamSchema,
+  userSearchSchema,
 } from "../schemas/teams.schemas.js";
 import {
   addMember,
@@ -26,6 +27,9 @@ import {
   getMyTeam,
   gradeDefense,
   getTeam,
+  listTeams,
+  searchUsers,
+  getEvidenceStatus,
   issueEvidence,
   listContributions,
   listMyRatings,
@@ -53,6 +57,10 @@ router.get("/evidence/:publicId", evidenceLimiter, validate({ params: publicIdPa
 
 router.use(authenticate);
 
+// Admin reads. Both sit above "/:teamId" so "admin" is not read as an id.
+router.get("/", requireAdmin, listTeams);
+router.get("/admin/users", requireAdmin, validate({ query: userSearchSchema }), searchUsers);
+
 router.get("/mine", getMyTeam); // before "/:teamId" so "mine" is not read as an id
 router.get("/:teamId", validate({ params: teamParamSchema }), getTeam);
 router.get("/:teamId/contributions", validate({ params: teamParamSchema }), listContributions);
@@ -73,6 +81,7 @@ router.put("/:teamId/repo", requireAdmin, validate({ params: teamParamSchema, bo
 router.post("/:teamId/members", requireAdmin, validate({ params: teamParamSchema, body: addMemberSchema }), addMember);
 router.put("/:teamId/status", requireAdmin, validate({ params: teamParamSchema, body: statusSchema }), setStatus);
 router.post("/:teamId/sync", requireAdmin, validate({ params: teamParamSchema }), syncContributions);
+router.get("/:teamId/evidence", requireAdmin, validate({ params: teamParamSchema }), getEvidenceStatus);
 router.post("/:teamId/evidence", requireAdmin, validate({ params: teamParamSchema }), issueEvidence);
 router.put("/:teamId/evidence/revocation", requireAdmin, validate({ params: teamParamSchema, body: evidenceRevokeSchema }), revokeEvidence);
 router.delete("/:teamId/members/:userId", requireAdmin, validate({ params: memberParamSchema }), removeMember);

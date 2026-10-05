@@ -81,4 +81,32 @@ Top 3 fixes to prioritize:
 
 # Project Context
 
-<!-- Fill in per project: stack, folder structure, current focus, conventions, known gotchas -->
+**Product:** Vahoha (owns vahoha.com; older strings may still say DevsWebs/DevsFlow). A learning platform for developers: roadmap, exams, AI mentor, capstones, and Build Teams that turn merged PRs into public evidence.
+
+## Stack
+- **Frontend:** React 19, Vite 7, React Router 7, Zustand, Tailwind 4, lucide-react. Plain `fetch` hooks, no TanStack Query.
+- **Backend:** Express 5 (ESM), MongoDB native driver (no Mongoose), Zod validation at the route boundary, BullMQ + ioredis, Groq SDK for LLM calls, JWT auth.
+- **Tests:** Vitest (unit, frontend, integration, API, websocket, security configs under `config/`), Playwright for e2e.
+- **Deploy target:** Render + Vercel + Atlas.
+
+## Layout
+- `src/features/<name>/` is one folder per frontend feature (capstone, teams, recruiter, mastery, billing, coding-challenges...). `src/router.jsx` lazy-loads pages.
+- `backend/modules/<name>/` is `routes/`, `controllers/`, `services/`, `schemas/` per feature. Controllers stay thin; services take `db` as a parameter.
+- `docs/` holds live status. Start with `docs/PILOT_STATUS.md`. Root-level strategy docs can be stale.
+
+## Commands
+`npm run dev` (frontend), `npm start` (backend), `npm run lint`, `npm run build`, `npm run test:unit`, `npm run admin:grant -- <email>`.
+
+## Current focus
+Pilot first: finish `docs/PILOT_STATUS.md` pre-pilot items and talk to users. New features are frozen until pilot data says otherwise. Build Teams is built but has never been run end to end. Its admin UI is `src/features/teams/TeamAdminPage.jsx` (the user writes it; the router already imports it, so `vite build` fails until it exists).
+
+## Conventions
+- Teams UI uses the scoped Linear-style theme in `src/features/teams/teams-theme.css` (`.teams-theme` wrapper and `t-*` classes, purple as the single accent). Don't use global styles there.
+- Admin-only API routes use `requireAdmin`; the UI treats non-admins as 404.
+- Express routes with fixed paths (`/mine`, `/admin/...`) go above `/:teamId`.
+
+## Gotchas
+- Files in this repo are often CRLF. Multi-line string replacements can silently miss; normalize with `sed -i 's/$//'` first.
+- On Windows, set `PYTHONUTF8=1` when scripting edits, or characters like `…` won't match.
+- Git path case mismatches have bitten this repo (see the 2026-10-03 fix). Re-scan before deploy.
+- Known unfixed backend issues are listed in the memory note `devswebs-known-gaps`.

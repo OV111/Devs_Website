@@ -4,6 +4,7 @@ import { ExternalLink, Github } from "lucide-react";
 import { teamsApi } from "./teamsApi";
 import TeamDefense from "./components/TeamDefense";
 import PeerRatings from "./components/PeerRatings";
+import "./teams-theme.css";
 
 /**
  * /team: the signed-in developer's build team.
@@ -14,8 +15,8 @@ import PeerRatings from "./components/PeerRatings";
 
 function Section({ title, children }) {
   return (
-    <section className="flex flex-col gap-3 border-t border-neutral-800 pt-6">
-      <h2 className="text-lg font-semibold text-white">{title}</h2>
+    <section className="t-section">
+      <h2 className="t-h2">{title}</h2>
       {children}
     </section>
   );
@@ -24,8 +25,8 @@ function Section({ title, children }) {
 function NoTeam() {
   return (
     <div className="flex flex-col gap-3">
-      <h1 className="text-2xl font-bold text-white">Build teams</h1>
-      <p className="max-w-xl text-sm leading-relaxed text-neutral-400">
+      <h1 className="t-h1">Build teams</h1>
+      <p className="t-muted max-w-xl">
         After you pass a capstone, you can join a small team of developers with
         the same aim and build one real project together. Each member merges
         pull requests, is questioned on their own changes, and gets a public
@@ -33,7 +34,7 @@ function NoTeam() {
       </p>
       <Link
         to="/capstone"
-        className="w-fit rounded-lg bg-purple-600 px-4 py-2.5 text-xs font-semibold text-white hover:bg-purple-500"
+        className="t-btn t-btn-primary w-fit"
       >
         Go to your capstone
       </Link>
@@ -66,34 +67,35 @@ export default function TeamPage() {
     };
   }, []);
 
-  if (error) return <p className="p-8 text-sm text-red-400">{error}</p>;
-  if (team === undefined)
-    return <p className="p-8 text-sm text-neutral-500">Loading…</p>;
-
-  const wrap = "mx-auto flex max-w-3xl flex-col gap-6 px-4 py-10";
-  if (team === null)
-    return (
-      <main className={wrap}>
-        <NoTeam />
+  const shell = (children) => (
+    <div className="teams-theme">
+      <main className="mx-auto flex max-w-[1200px] flex-col gap-6 px-4 py-12">
+        {children}
       </main>
-    );
+    </div>
+  );
+
+  if (error) return shell(<p className="text-sm text-[var(--t-red)]">{error}</p>);
+  if (team === undefined) return shell(<p className="t-muted">Loading…</p>);
+  if (team === null) return shell(<NoTeam />);
 
   const active = team.members.filter((m) => m.status === "active");
   const teammates = active.filter((m) => m.userId !== team.viewerId);
 
-  return (
-    <main className={wrap}>
+  return shell(
+    <>
       <header className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold text-white">{team.name}</h1>
-        <p className="text-sm text-neutral-400">
-          Track: {team.trackId} · status: {team.status}
+        <h1 className="t-h1">{team.name}</h1>
+        <p className="flex items-center gap-2">
+          <span className="t-badge t-mono">{team.trackId}</span>
+          <span className="t-badge">{team.status}</span>
         </p>
         {team.repo && (
           <a
             href={team.repo.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex w-fit items-center gap-1.5 text-sm text-purple-300 hover:text-purple-200"
+            className="t-link inline-flex w-fit items-center gap-1.5"
           >
             <Github size={14} aria-hidden="true" />
             {team.repo.fullName}
@@ -105,10 +107,7 @@ export default function TeamPage() {
       <Section title="Members">
         <ul className="flex flex-wrap gap-2">
           {active.map((m) => (
-            <li
-              key={m.userId}
-              className="rounded-full border border-neutral-700 px-3 py-1 text-xs text-neutral-300"
-            >
+            <li key={m.userId} className="t-pill t-mono">
               @{m.githubLogin}
               {m.userId === team.viewerId ? " (you)" : ""}
             </li>
@@ -117,7 +116,7 @@ export default function TeamPage() {
       </Section>
 
       <Section title="Your defense">
-        <p className="text-sm text-neutral-400">
+        <p className="t-muted">
           Five questions about the pull requests you merged. Only you can answer
           them, and each has a 3-minute timer.
         </p>
@@ -130,20 +129,21 @@ export default function TeamPage() {
 
       <Section title="Merged work">
         {contributions.length === 0 ? (
-          <p className="text-sm text-neutral-500">
+          <p className="t-caption">
             No merged pull requests synced yet.
           </p>
         ) : (
-          <ul className="flex flex-col gap-1.5">
+          <ul className="flex flex-col gap-2">
             {contributions.map((c) => (
-              <li key={c._id} className="text-sm text-neutral-300">
-                <span className="text-neutral-500">#{c.prNumber}</span>{" "}
-                {c.title} · @{c.authorLogin}
+              <li key={c._id} className="t-card-subtle flex items-baseline gap-3 text-sm">
+                <span className="t-mono text-[var(--t-ash)]">#{c.prNumber}</span>
+                <span className="flex-1 text-[var(--t-mist)]">{c.title}</span>
+                <span className="t-mono text-[var(--t-fog)]">@{c.authorLogin}</span>
               </li>
             ))}
           </ul>
         )}
       </Section>
-    </main>
+    </>,
   );
 }

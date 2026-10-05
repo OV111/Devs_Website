@@ -53,6 +53,7 @@ const AiAgent = lazy(() => import("./features/AI-Agent/AiAgent"));
 const CapstonePage = lazy(() => import("./features/capstone/CapstonePage"));
 const CertificatePage = lazy(() => import("./features/capstone/CertificatePage"));
 const TeamPage = lazy(() => import("./features/teams/TeamPage"));
+const TeamAdminPage = lazy(() => import("./features/teams/TeamAdminPage"));
 const EvidencePage = lazy(() => import("./features/teams/EvidencePage"));
 const CandidatePage = lazy(() => import("./features/recruiter/CandidatePage"));
 const CapstoneAdminPage = lazy(() => import("./features/capstone/CapstoneAdminPage"));
@@ -143,6 +144,7 @@ const router = createBrowserRouter([
           { path: "capstone/admin", element: <CapstoneAdminPage /> },
           { path: "capstone/:trackId", element: <CapstonePage /> },
           { path: "team", element: <TeamPage /> },
+          { path: "team/admin", element: <TeamAdminPage /> },
           { path: "billing", element: <BillingPage /> },
           { path: "progress", element: <ProgressPage /> },
           { path: "voice-review", element: <VoiceReviewPage /> },

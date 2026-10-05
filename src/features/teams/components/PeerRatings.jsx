@@ -29,18 +29,18 @@ export default function PeerRatings({ teamId, teammates }) {
   };
 
   if (!teammates.length) {
-    return <p className="text-sm text-neutral-500">No teammates to rate yet.</p>;
+    return <p className="t-caption">No teammates to rate yet.</p>;
   }
 
   return (
     <div className="flex flex-col gap-3">
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-sm text-[var(--t-red)]">{error}</p>}
       {teammates.map((m) => (
         <div
           key={m.userId}
           className="flex flex-wrap items-center justify-between gap-3"
         >
-          <span className="text-sm text-neutral-200">@{m.githubLogin}</span>
+          <span className="t-mono text-[var(--t-mist)]">@{m.githubLogin}</span>
           <div
             role="radiogroup"
             aria-label={`Rate ${m.githubLogin}`}
@@ -53,10 +53,8 @@ export default function PeerRatings({ teamId, teammates }) {
                 role="radio"
                 aria-checked={given[m.userId] === n}
                 onClick={() => rate(m.userId, n)}
-                className={`h-8 w-8 rounded-md border text-xs font-semibold transition-colors ${
-                  given[m.userId] === n
-                    ? "border-purple-500 bg-purple-600 text-white"
-                    : "border-neutral-700 text-neutral-400 hover:border-purple-500/50"
+                className={`t-btn h-8 w-8 !p-0 ${
+                  given[m.userId] === n ? "t-btn-primary" : "t-btn-ghost"
                 }`}
               >
                 {n}
