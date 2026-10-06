@@ -32,11 +32,11 @@ const ConnectedAccounts = lazy(
   () => import("./pages/My-Profile/ConnectedAccounts"),
 );
 
-const Blogs = lazy(() => import("./features/blogs/Blogs"));
+const Blogs = lazy(() => import("./features/Blogs/Blogs"));
 const RoadmapPage = lazy(() => import("./features/Roadmap/RoadmapPage"));
 const ExamPage = lazy(() => import("./features/Roadmap/ExamPage"));
-const LibsPage = lazy(() => import("./features/codingLibs/LibsPage"));
-const BookDetailPage = lazy(() => import("./features/codingLibs/BookDetailPage"));
+const LibsPage = lazy(() => import("./features/CodingLibs/LibsPage"));
+const BookDetailPage = lazy(() => import("./features/CodingLibs/BookDetailPage"));
 const CodingChallenges = lazy(
   () => import("./features/coding-challenges/CodingChallenges"),
 );
@@ -57,7 +57,7 @@ const TeamAdminPage = lazy(() => import("./features/teams/TeamAdminPage"));
 const EvidencePage = lazy(() => import("./features/teams/EvidencePage"));
 const CandidatePage = lazy(() => import("./features/recruiter/CandidatePage"));
 const CapstoneAdminPage = lazy(() => import("./features/capstone/CapstoneAdminPage"));
-const VoiceReviewPage = lazy(() => import("./features/voiceReview/VoiceReviewPage"));
+const VoiceReviewPage = lazy(() => import("./features/VoiceReview/VoiceReviewPage"));
 const PricingPage = lazy(() => import("./features/billing/PricingPage"));
 const BillingPage = lazy(() => import("./features/billing/BillingPage"));
 const ProgressPage = lazy(() => import("./features/mastery/ProgressPage"));

@@ -1,0 +1,45 @@
+# Runs on Linux so case-sensitive import paths (e.g. "./features/blogs" vs
+# "src/features/Blogs") fail here instead of on Render/Vercel.
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+# Cancel an older run when a newer commit lands on the same branch/PR.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Lint, test, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Backend unit tests
+        run: npm run test:unit
+
+      - name: Frontend unit tests
+        run: npm run test:frontend
+
+      - name: Build
+        run: npm run build
