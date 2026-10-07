@@ -46,7 +46,7 @@ export function EmptyState({ title, body, to, cta }) {
       {to && (
         <Link
           to={to}
-          className="mt-1 text-sm font-medium text-purple-300 hover:text-purple-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+          className="mt-1 text-sm font-medium dark:text-purple-600 hover:text-purple-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
         >
           {cta} →
         </Link>
@@ -155,7 +155,7 @@ export function TrackRow({ track, linkTo }) {
         aria-valuenow={passed}
       >
         <div
-          className="h-full rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-400"
+          className="h-full rounded-full bg-purple-600"
           style={{ width: `${pct}%` }}
         />
       </div>
@@ -181,7 +181,7 @@ export function CertificateCard({ cert }) {
   return (
     <article className={`${SURFACE} flex flex-col gap-4 p-5`}>
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <span className="text-[13px] font-medium text-purple-300">
+        <span className="text-[13px] font-medium dark:text-purple-600">
           {cert.track.title} capstone
         </span>
         <div className="flex items-center gap-2">
@@ -217,10 +217,10 @@ export function CertificateCard({ cert }) {
           href={cert.repo.commitUrl}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 px-3.5 py-2 text-[13px] font-medium text-neutral-300 transition-colors hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+          className="inline-flex min-w-0 max-w-full items-center gap-1.5 rounded-lg border border-white/10 px-3.5 py-2 text-[13px] font-medium text-neutral-300 transition-colors hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
         >
           <Github size={14} aria-hidden="true" />
-          <span className="font-mono">{cert.repo.fullName}</span>
+          <span className="truncate font-mono">{cert.repo.fullName}</span>
         </a>
       </div>
     </article>

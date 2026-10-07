@@ -25,39 +25,7 @@ import {
   TrackRow,
 } from "@/features/profile/components/ProfileProgress";
 import { BlogCardSkeletonGrid } from "@/components/blog/BlogCardSkeleton";
-
-// The grid pattern for the empty state: reads as designed, not as a missing photo.
-const GRID_PATTERN = {
-  backgroundImage:
-    "linear-gradient(rgba(168,85,247,0.10) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,0.10) 1px, transparent 1px)",
-  backgroundSize: "32px 32px",
-};
-
-/**
- * Banner photo with a blur-up: a tiny blurred copy (a few hundred bytes from
- * Cloudinary) paints instantly behind the real image, which fades in once loaded,
- * so the strip never flashes empty while the photo downloads.
- */
-function BannerImage({ url }) {
-  const [loaded, setLoaded] = useState(false);
-  const full = url.replace("/upload/", "/upload/w_1500,h_350,c_fill,g_auto,f_auto,q_auto/");
-  const tiny = url.replace("/upload/", "/upload/w_40,h_10,c_fill,g_auto,e_blur:300,q_30/");
-  return (
-    <div
-      className="h-40 w-full bg-gray-900 bg-cover bg-center sm:h-56"
-      style={{ backgroundImage: `url(${tiny})` }}
-    >
-      <img
-        src={full}
-        alt="Banner"
-        onLoad={() => setLoaded(true)}
-        className={`h-full w-full object-cover transition-opacity duration-500 ${
-          loaded ? "opacity-100" : "opacity-0"
-        }`}
-      />
-    </div>
-  );
-}
+import ProfileBanner from "@/features/profile/components/ProfileBanner";
 
 const MyProfile = () => {
   const navigate = useNavigate();
@@ -163,30 +131,14 @@ const MyProfile = () => {
 
       <div className="flex-1 min-w-0">
         {/* Banner */}
-        <div className="relative group">
-          {stats?.bannerImage ? (
-            <BannerImage url={stats.bannerImage} />
-          ) : (
-            // No banner set: a brand-color gradient with a faint grid reads as an
-            // intentional empty state, not a real photo a user might mistake
-            // for something they already uploaded.
-            <div
-              className="h-40 w-full bg-linear-to-br from-purple-950 via-gray-950 to-gray-950 sm:h-56"
-              style={GRID_PATTERN}
-            />
-          )}
-          {/* Light edge fades only: heavy ones covered most of a 160px phone banner.
-              The bottom one just blends the strip into the page below. */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-linear-to-b from-gray-950/50 to-transparent" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-linear-to-t from-gray-950/70 to-transparent" />
-
+        <ProfileBanner url={stats?.bannerImage}>
           {stats?.bannerImage ? (
             // Banner already set — a quiet, hover-only edit affordance so it
             // doesn't compete with the photo.
             <Link
               to="settings"
               aria-label="Edit banner image"
-              className="absolute top-3 right-3 z-2 flex items-center gap-1.5 rounded-lg bg-black/50 px-2.5 py-1.5 text-xs font-medium text-white opacity-100 backdrop-blur-sm transition-opacity hover:bg-black/70 focus-visible:opacity-100 md:opacity-0 md:group-hover:opacity-100"
+              className="absolute top-3 right-3 z-2 flex items-center gap-1.5 rounded-lg max-md:after:absolute max-md:after:-inset-2 bg-black/50 px-2.5 py-1.5 text-xs font-medium text-white opacity-100 backdrop-blur-sm transition-opacity hover:bg-black/70 focus-visible:opacity-100 md:opacity-0 md:group-hover:opacity-100"
             >
               <Pencil size={12} />
               Edit banner
@@ -196,7 +148,7 @@ const MyProfile = () => {
             // itself invites the action instead of hiding it behind hover.
             <Link
               to="settings"
-              className="absolute top-3 right-3 z-2 flex items-center gap-1.5 rounded-lg bg-purple-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-purple-500"
+              className="absolute top-3 right-3 z-2 flex items-center gap-1.5 rounded-lg max-md:after:absolute max-md:after:-inset-2 bg-purple-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-purple-500"
             >
               <Pencil size={12} />
               Add a banner
@@ -229,10 +181,10 @@ const MyProfile = () => {
               </div>
             </Link>
           </div>
-        </div>
+        </ProfileBanner>
 
         {/* Profile header */}
-        <div className="px-0 pt-16 sm:px-6 lg:px-10 lg:pt-20">
+        <div className="px-4 pt-16 sm:px-6 lg:px-10 lg:pt-20">
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
             <div className="space-y-1 max-w-2xl">
               <div className="flex flex-wrap items-center gap-3">
@@ -249,7 +201,7 @@ const MyProfile = () => {
                 </Link>
               </div>
               {summary.headline && (
-                <p className="text-sm font-semibold text-purple-300">
+                <p className="text-sm font-semibold dark:text-purple-600">
                   {summary.headline}
                 </p>
               )}
@@ -272,7 +224,7 @@ const MyProfile = () => {
                     <p className="text-base font-bold text-gray-900 dark:text-gray-100 lg:text-xl">
                       {item.value}
                     </p>
-                    <p className="text-base text-gray-600 dark:text-gray-400 lg:text-sm">
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
                       {item.label}
                     </p>
                   </div>
@@ -285,7 +237,8 @@ const MyProfile = () => {
                     href={stats[item.key]}
                     target="_blank"
                     rel="noreferrer"
-                    className={`transition ${item.hover}`}
+                    aria-label={item.label}
+                    className={`relative transition after:absolute after:-inset-2.5 ${item.hover}`}
                   >
                     {item.icon}
                   </a>

@@ -21,7 +21,7 @@ export default function SaveBar({ dirty, saving, saved, onSave, onDiscard }) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 24, opacity: 0 }}
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="pointer-events-none fixed inset-x-0 bottom-4 z-30 flex justify-center pl-10 pr-4 lg:pl-56"
+            className="pointer-events-none fixed inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] z-30 flex justify-center pl-10 pr-4 lg:pl-56"
           >
             <div
               className={`${SURFACE} pointer-events-auto flex flex-wrap items-center justify-center gap-x-5 gap-y-3 px-5 py-3 shadow-2xl shadow-black/60`}

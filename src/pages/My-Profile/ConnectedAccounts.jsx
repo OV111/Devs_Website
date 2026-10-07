@@ -127,7 +127,7 @@ const ConnectedAccounts = () => {
   };
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-dvh">
       <SideBar />
 
       <div className="min-w-0 flex-1 px-4 py-8 sm:px-6 lg:px-10">

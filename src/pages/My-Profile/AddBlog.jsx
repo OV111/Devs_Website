@@ -38,10 +38,10 @@ function useForm(initial) {
 }
 
 const inputCls =
-  "w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-400 transition focus:border-gray-400 dark:border-gray-700 dark:bg-black dark:text-gray-100 dark:placeholder:text-gray-600 dark:focus:border-gray-500";
+  "w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-base md:text-sm text-gray-900 outline-none placeholder:text-gray-400 transition focus:border-gray-400 dark:border-gray-700 dark:bg-black dark:text-gray-100 dark:placeholder:text-gray-600 dark:focus:border-gray-500";
 
 const selectCls =
-  "w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-gray-400 dark:border-gray-700 dark:bg-black dark:text-gray-100";
+  "w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-base md:text-sm text-gray-900 outline-none transition focus:border-gray-400 dark:border-gray-700 dark:bg-black dark:text-gray-100";
 
 function CategoryDropdown({ value, onChange, options }) {
   const [open, setOpen] = useState(false);
@@ -220,12 +220,12 @@ export default function AddBlog() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-[calc(100dvh-var(--navbar-h,0px))] md:h-screen overflow-hidden">
       <SideBar />
 
       <div className="flex-1 overflow-auto thin-scrollbar">
         {/* Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between bg-gray-50 px-6 py-1.5 dark:border-gray-800 dark:bg-black">
+        <div className="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-2 bg-gray-50 px-4 py-1.5 sm:px-6 dark:border-gray-800 dark:bg-black">
           <div>
             <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 lg:text-2xl">
               New Post
@@ -255,7 +255,7 @@ export default function AddBlog() {
         </div>
 
         {/* Body */}
-        <div className="flex flex-col gap-6 p-6 lg:flex-row lg:gap-8">
+        <div className="flex flex-col gap-6 p-4 sm:p-6 lg:flex-row lg:gap-8">
           {/* Writing area */}
           <div className="flex flex-1 flex-col gap-5">
             <div>

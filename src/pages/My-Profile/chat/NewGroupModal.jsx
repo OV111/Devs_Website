@@ -40,11 +40,11 @@ const NewGroupModal = ({ mutualFollowers, onClose, onCreated }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 sm:items-center sm:p-4"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-sm rounded-2xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-900"
+        className="w-full rounded-t-2xl border border-gray-200 bg-white p-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:max-w-sm sm:rounded-2xl sm:pb-4 dark:border-gray-700 dark:bg-gray-900"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between">
@@ -66,7 +66,7 @@ const NewGroupModal = ({ mutualFollowers, onClose, onCreated }) => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Group name"
-            className="w-full rounded-xl border border-gray-200 bg-transparent px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 outline-none focus:border-fuchsia-400 dark:border-gray-700 dark:text-gray-100"
+            className="w-full rounded-xl border border-gray-200 bg-transparent px-3 py-2 text-base md:text-sm text-gray-900 placeholder:text-gray-400 outline-none focus:border-fuchsia-400 dark:border-gray-700 dark:text-gray-100"
           />
 
           <div className="max-h-56 overflow-y-auto rounded-xl border border-gray-200 dark:border-gray-700">

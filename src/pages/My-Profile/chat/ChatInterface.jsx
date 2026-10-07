@@ -132,10 +132,10 @@ const ChatInterface = ({
 
   return (
     <div className="min-w-0 flex-1 bg-black">
-      <div className="flex h-screen flex-col justify-between overflow-hidden">
+      <div className="flex h-[calc(100dvh-var(--navbar-h,0px))] md:h-screen flex-col justify-between overflow-hidden">
         <div className="flex items-center justify-between border-b border-white/10 bg-black px-2 lg:px-3 py-2.5">
           <div className="flex justify-center items-center">
-            <button type="button" onClick={onBack} aria-label="Back to conversations">
+            <button type="button" onClick={onBack} aria-label="Back to conversations" className="relative after:absolute after:-inset-3">
               <ArrowLeft
                 // size={18}
                 className="w-4 h-4 lg:w-5 lg:h-5 lg:mr-4 mr-2 cursor-pointer text-white/70 hover:text-white "
@@ -418,7 +418,7 @@ const ChatInterface = ({
               placeholder="Write your message..."
               aria-label="Message"
               onChange={(e) => setDraftMessage(e.target.value)}
-              className="w-full bg-transparent px-1 py-1 text-sm text-white placeholder:text-[#8A8A93] outline-none"
+              className="w-full bg-transparent px-1 py-1 text-base md:text-sm text-white placeholder:text-[#8A8A93] outline-none"
             />
             {/* UI only for now — wire onClick when voice features are built. */}
             <button

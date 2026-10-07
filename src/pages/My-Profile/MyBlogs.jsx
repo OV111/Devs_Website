@@ -244,11 +244,11 @@ export default function MyBlogs() {
       {/* Delete confirmation modal */}
       {confirmDelete && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+          className="fixed inset-0 z-50 flex items-end justify-center bg-black/50 sm:items-center sm:p-4"
           onClick={() => setConfirmDelete(null)}
         >
           <div
-            className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl dark:bg-gray-900"
+            className="w-full rounded-t-2xl bg-white p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] shadow-xl sm:max-w-sm sm:rounded-2xl sm:pb-6 dark:bg-gray-900"
             onClick={(e) => e.stopPropagation()}
           >
             <h2 className="mb-2 text-base font-semibold text-gray-900 dark:text-gray-100">

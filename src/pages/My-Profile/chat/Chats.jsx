@@ -382,7 +382,7 @@ const Chats = () => {
     return () => window.removeEventListener("resize", check);
   }, []);
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-dvh">
       <Toaster position="top-center" />
       <Sidebar />
       {!activeConversation ? (
@@ -422,7 +422,7 @@ const Chats = () => {
                   value={filter}
                   onChange={(e) => setFilter(e.target.value)}
                   placeholder="Search conversations"
-                  className="w-full bg-transparent text-sm text-gray-700 outline-none placeholder:text-gray-400 dark:text-gray-200"
+                  className="w-full bg-transparent text-base md:text-sm text-gray-700 outline-none placeholder:text-gray-400 dark:text-gray-200"
                 />
               </label>
 
@@ -468,7 +468,7 @@ const Chats = () => {
               </div>
             </div>
 
-            <div className="max-h-[calc(100vh-180px)] overflow-y-auto bg-white dark:bg-black">
+            <div className="max-h-[calc(100dvh-180px)] overflow-y-auto bg-white dark:bg-black">
               {isLoadingChats ? (
                 <div className="flex justify-center items-center px-3 py-6 text-sm text-gray-500 dark:text-gray-100">
                   <LoadingChatSuspense />

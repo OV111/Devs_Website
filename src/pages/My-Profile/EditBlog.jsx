@@ -37,10 +37,10 @@ function useForm(initial) {
 }
 
 const inputCls =
-  "w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-400 transition focus:border-gray-400 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder:text-gray-600 dark:focus:border-gray-500";
+  "w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-base md:text-sm text-gray-900 outline-none placeholder:text-gray-400 transition focus:border-gray-400 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder:text-gray-600 dark:focus:border-gray-500";
 
 const selectCls =
-  "w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-gray-400 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100";
+  "w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-base md:text-sm text-gray-900 outline-none transition focus:border-gray-400 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100";
 
 export default function EditBlog() {
   const { id } = useParams();
@@ -145,7 +145,7 @@ export default function EditBlog() {
 
   if (isFetching) {
     return (
-      <div className="flex min-h-screen">
+      <div className="flex min-h-dvh">
         <SideBar />
         <div className="flex flex-1 items-center justify-center">
           <div className="h-8 w-8 animate-spin rounded-full border-2 border-fuchsia-500 border-t-transparent" />
@@ -155,12 +155,12 @@ export default function EditBlog() {
   }
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-[calc(100dvh-var(--navbar-h,0px))] md:h-screen overflow-hidden">
       <SideBar />
 
       <div className="flex-1 overflow-auto thin-scrollbar">
         {/* Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between bg-gray-50 px-6 py-1.5 dark:border-gray-800 dark:bg-black">
+        <div className="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-2 bg-gray-50 px-4 py-1.5 sm:px-6 dark:border-gray-800 dark:bg-black">
           <div>
             <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 lg:text-2xl">
               Edit Post
