@@ -9,8 +9,10 @@ import { Check, ChevronDown } from "lucide-react";
  * Escape, or picking an option.
  *
  * `value === ""` means "no filter"; `allLabel` is the option that clears it.
+ * `mobileAlign="left"` opens the panel rightwards on phones, for menus that
+ * sit at the left of the row there (right-anchored they'd run off-screen).
  */
-const FilterMenu = ({ label, value, options, onChange, allLabel }) => {
+const FilterMenu = ({ label, value, options, onChange, allLabel, mobileAlign = "right" }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
@@ -66,7 +68,9 @@ const FilterMenu = ({ label, value, options, onChange, allLabel }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 z-30 mt-2 w-40 overflow-hidden rounded-lg border border-neutral-800 bg-neutral-950 py-1 shadow-xl shadow-black/50"
+            className={`absolute right-0 z-30 mt-2 w-40 overflow-hidden rounded-lg border border-neutral-800 bg-neutral-950 py-1 shadow-xl shadow-black/50 ${
+              mobileAlign === "left" ? "max-sm:right-auto max-sm:left-0" : ""
+            }`}
           >
             {items.map((o) => (
               <li key={o.label} role="option" aria-selected={o.value === value}>

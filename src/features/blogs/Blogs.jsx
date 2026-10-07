@@ -117,10 +117,10 @@ const Blogs = () => {
   const totalPages = pagination?.totalPages ?? 1;
 
   return (
-    <div className="mx-auto max-w-7xl px-4 pt-14 pb-24 sm:px-6 lg:px-8">
-      <header className="mb-10">
+    <div className="mx-auto max-w-7xl px-4 pt-10 pb-24 sm:px-6 sm:pt-14 lg:px-8">
+      <header className="mb-8 sm:mb-10">
         <h1
-          className="text-4xl font-[450] tracking-tight text-white"
+          className="text-3xl font-[450] tracking-tight text-white sm:text-4xl"
           style={{ fontFamily: '"Geist Variable", system-ui, sans-serif' }}
         >
           Blog
@@ -140,14 +140,14 @@ const Blogs = () => {
             onChange={(e) => setSearchInput(e.target.value)}
             placeholder="Search by title…"
             aria-label="Search posts by title"
-            className="w-full rounded-lg border border-neutral-800 bg-neutral-950 py-2 pr-9 pl-9 text-sm text-white placeholder:text-neutral-600 outline-none transition-colors focus:border-neutral-600"
+            className="w-full rounded-lg border border-neutral-800 bg-neutral-950 py-2 pr-9 pl-9 text-base sm:text-sm text-white placeholder:text-neutral-600 outline-none transition-colors focus:border-neutral-600"
           />
           {searchInput && (
             <button
               type="button"
               onClick={() => setSearchInput("")}
               aria-label="Clear search"
-              className="absolute right-2.5 cursor-pointer text-neutral-500 hover:text-white"
+              className="absolute right-2.5 cursor-pointer text-neutral-500 hover:text-white after:absolute after:-inset-3"
             >
               <X size={15} />
             </button>
@@ -157,6 +157,7 @@ const Blogs = () => {
         <div className="flex items-center gap-2">
           <FilterMenu
             label="Level"
+            mobileAlign="left"
             allLabel="All levels"
             value={level}
             options={toOptions(DIFFICULTIES)}
@@ -164,6 +165,7 @@ const Blogs = () => {
           />
           <FilterMenu
             label="Read time"
+            mobileAlign="left"
             allLabel="Any length"
             value={time}
             options={toOptions(READ_TIMES)}
