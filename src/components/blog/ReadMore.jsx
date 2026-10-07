@@ -1,356 +1,316 @@
-// ! For now the posts default is not fixable with read-more but i will fix in db
-import React, { useEffect, useState } from "react";
-import { useLocation, useParams, useNavigate } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
+import { useCallback, useEffect, useState } from "react";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { DynamicIslandTOC } from "@/components/ui/dynamic-island-toc";
-import { FaRegHeart, FaRegComment } from "react-icons/fa6";
+import { ArrowLeft } from "lucide-react";
+import { FaHeart, FaRegComment, FaRegHeart } from "react-icons/fa6";
 import { FiShare } from "react-icons/fi";
 import useAuthStore from "../../stores/useAuthStore";
+import { fetchComments } from "../../services/commentsApi";
+import CommentPopover from "./CommentPopover";
+import SharePopover from "./SharePopover";
+import PostMarkdown from "./post/PostMarkdown";
+import { decodePostId, formatDate, toPostView } from "./post/postModel";
+import useBlogActions from "./post/useBlogActions";
+import useBlogPost from "./post/useBlogPost";
 
-import JohnDoe from "../../assets/postsProfiles/JohnDoe.png";
-import AdaByte from "../../assets/postsProfiles/AdaByte.png";
-import DmitryPetrov from "../../assets/postsProfiles/DmitryPetrov.png";
-import AliceKeyes from "../../assets/postsProfiles/AliceKeyes.png";
-import WilliamChen from "../../assets/postsProfiles/WilliamChen.png";
-import GraceHopper from "../../assets/postsProfiles/GraceHopper.png";
+// Sidebar cards use the same surface as the blog cards (BlogCard.jsx).
+const SIDE_CARD =
+  "rounded-2xl border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-950";
 
-import fs1React from "../../assets/blog-pics/fs1React.jpg";
-import BuildingRestApi from "../../assets/blog-pics/BuildingRestApi.png";
-import NodejsMongodb from "../../assets/blog-pics/nodejsmongodb.png";
-import AuthStrategiesBack from "../../assets/blog-pics/AuthStrategiesBack.png";
-import Caching from "../../assets/blog-pics/caching.png";
-import ScalableDesign from "../../assets/blog-pics/scalabledesign.png";
+// Same prose styling the page always had, handed to the shared markdown renderer.
+const PROSE =
+  "space-y-4 text-[15px] leading-[1.85] text-slate-700 dark:text-slate-300 prose prose-slate dark:prose-invert max-w-none prose-headings:font-serif prose-headings:text-slate-900 dark:prose-headings:text-white prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg prose-p:leading-relaxed prose-code:text-violet-600 dark:prose-code:text-violet-400 prose-pre:bg-slate-900 prose-pre:text-slate-100";
 
-const imageMap = {
-  "fs1React.jpg": fs1React,
-  "BuildingRestApi.png": BuildingRestApi,
-  "nodejsmongodb.png": NodejsMongodb,
-  "AuthStrategiesBack.png": AuthStrategiesBack,
-  "caching.png": Caching,
-  "scalabledesign.png": ScalableDesign,
-};
+const backClass =
+  "group mb-6 inline-flex cursor-pointer items-center gap-2.5 text-sm font-medium text-slate-500 transition-colors hover:text-violet-600 dark:text-slate-400 dark:hover:text-violet-300";
 
-const pictureMap = {
-  "JohnDoe.png": JohnDoe,
-  "AdaByte.png": AdaByte,
-  "DmitryPetrov.png": DmitryPetrov,
-  "AliceKeyes.png": AliceKeyes,
-  "WilliamChen.png": WilliamChen,
-  "GraceHopper.png": GraceHopper,
-};
+// A small round arrow that slides left on hover, then the label.
+const BackContent = () => (
+  <>
+    <span className="flex h-8 w-8 items-center justify-center rounded-full border border-neutral-200 transition-colors group-hover:border-violet-400 group-hover:bg-violet-500/10 dark:border-neutral-800 dark:group-hover:border-violet-500/50">
+      <ArrowLeft
+        size={15}
+        aria-hidden="true"
+        className="transition-transform duration-200 group-hover:-translate-x-0.5"
+      />
+    </span>
+    Back to posts
+  </>
+);
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
-const decodePostId = (prefixedId) => {
-  const idx = prefixedId.indexOf("_");
-  return {
-    type: prefixedId.slice(0, idx), // "blog" | "sys"
-    rawId: prefixedId.slice(idx + 1),
-  };
-};
-
-const FictionalUsers = [
-  { name: "John Doe", userName: "@johndoe", pictures: JohnDoe },
-  { name: "Ada Byte", userName: "@adabyte", pictures: AdaByte },
-  { name: "Dmitry Petrov", userName: "@dmit_petrov", pictures: DmitryPetrov },
-  { name: "Alice Keyes", userName: "@alice_keys", pictures: AliceKeyes },
-  { name: "William Chen", userName: "@will_chen", pictures: WilliamChen },
-  { name: "Grace Hopper", userName: "@gracehopper", pictures: GraceHopper },
-];
-
-const resolveAuthor = (post, auth) => {
-  if (!auth) {
-    const fallbackSeed = String(post.rawId ?? post.title ?? "");
-    const fallbackIndex =
-      [...fallbackSeed].reduce((sum, char) => sum + char.charCodeAt(0), 0) %
-      FictionalUsers.length;
-    return {
-      authorName: FictionalUsers[fallbackIndex].name,
-      userName: FictionalUsers[fallbackIndex].userName,
-      picture: FictionalUsers[fallbackIndex].pictures,
-    };
-  }
-
-  if (post._displayName) {
-    const pic = post._displayPicture;
-    return {
-      authorName: post._displayName,
-      userName: post._displayUserName || "",
-      picture: pic?.startsWith("http") ? pic : (pictureMap[pic] ?? null),
-    };
-  }
-
-  if (post.author && typeof post.author === "object") {
-    const { firstName, lastName, userName, pictures } = post.author;
-    return {
-      authorName:
-        `${firstName ?? ""} ${lastName ?? ""}`.trim() || "Unknown Author",
-      userName: userName || "",
-      picture: pictures?.startsWith("http")
-        ? pictures
-        : (pictureMap[pictures?.split("/").pop()] ?? null),
-    };
-  }
-
-  return {
-    authorName:
-      `${post.firstName ?? ""} ${post.lastName ?? ""}`.trim() ||
-      "Unknown Author",
-    userName: post.userName || "",
-    picture: post.pictures?.startsWith("http")
-      ? post.pictures
-      : (pictureMap[post.pictures?.split("/").pop()] ?? null),
-  };
-};
-
-const ReadMore = () => {
-  const location = useLocation();
+function BackLink() {
   const navigate = useNavigate();
+  const { key } = useLocation();
+  // "default" means the page was opened directly (new tab, shared link): there
+  // is no history to go back to, so go to the post list instead.
+  return key === "default" ? (
+    <Link to="/blogs" className={backClass}>
+      <BackContent />
+    </Link>
+  ) : (
+    <button type="button" onClick={() => navigate(-1)} className={backClass}>
+      <BackContent />
+    </button>
+  );
+}
+
+function Avatar({ author, className, fallbackClass }) {
+  return author.picture ? (
+    <img src={author.picture} alt={author.name} className={className} />
+  ) : (
+    <div className={fallbackClass}>{author.name.charAt(0)}</div>
+  );
+}
+
+// Everything that needs the loaded post lives here, so its hooks start with
+// real data (like counts) instead of placeholders.
+function LoadedPost({ id, raw }) {
   const { auth } = useAuthStore();
-  const { id } = useParams(); // "blog_69f88..." or "sys_0"
+  const { type, rawId } = decodePostId(id);
+  const post = toPostView(raw);
+  const { author } = post;
 
-  const [post, setPost] = useState(location.state?.post ?? null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const actions = useBlogActions({
+    rawId,
+    isDefault: type !== "blog",
+    initialLikes: post.likes,
+  });
+  const [commentsCount, setCommentsCount] = useState(post.comments);
+  const [commentOpen, setCommentOpen] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
+  const closeComment = useCallback(() => setCommentOpen(false), []);
 
+  // The post payload has no comment count, so read it once for the details card.
+  const canComment = type === "blog";
   useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        const { type, rawId } = decodePostId(id);
-
-        const endpoint =
-          type === "blog"
-            ? `${API_BASE_URL}/blogs/id/${rawId}`
-            : `${API_BASE_URL}/posts/${rawId}`;
-
-        const res = await fetch(endpoint);
-        if (!res.ok) throw new Error("Post not found");
-
-        const data = await res.json();
-        setPost(data.data ?? data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
+    if (!canComment) return;
+    let cancelled = false;
+    fetchComments(rawId)
+      .then((list) => !cancelled && setCommentsCount(list.length))
+      .catch(() => {}); // the count is cosmetic; the popover reports its own errors
+    return () => {
+      cancelled = true;
     };
+  }, [rawId, canComment]);
+  const closeShare = useCallback(() => setShareOpen(false), []);
 
-    fetchPost();
-  }, [id]);
+  const date = formatDate(post.createdAt);
+  const dimmed = !actions.canInteract && "cursor-not-allowed opacity-60";
 
-  if (loading && !post) {
+  return (
+    <DynamicIslandTOC>
+      {/* React 19 hoists these into <head>. */}
+      <title>{`${post.title} · Vahoha`}</title>
+      {post.description && <meta name="description" content={post.description} />}
+
+      <main className="mx-auto max-w-5xl px-4 pb-20 pt-6 sm:pt-10">
+        <BackLink />
+
+        {/* Phones: the box grows with its text, so a long title can't be
+            clipped at the top. sm+: the original fixed 380px hero. */}
+        <div className="relative mb-8 flex min-h-[300px] items-end overflow-hidden rounded-2xl bg-slate-900 sm:mb-10 sm:h-[380px]">
+          {post.cover && (
+            <img
+              src={post.cover}
+              alt={post.title}
+              className="absolute inset-0 h-full w-full object-cover opacity-60"
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/70 to-slate-950/40" />
+          <div className="relative w-full p-5 sm:p-8">
+            {/* Gradient pill with a soft violet glow; the diamond is the accent. */}
+            <span className="mb-3 inline-flex items-center gap-2 rounded-full border border-violet-300/30 bg-gradient-to-r from-violet-500/40 via-fuchsia-500/25 to-violet-500/10 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-violet-100 shadow-[0_0_24px_-6px_rgba(167,139,250,0.9)] backdrop-blur-md">
+              <span aria-hidden="true" className="text-fuchsia-300">
+                ◆
+              </span>
+              {post.category}
+            </span>
+            <h1 className="mb-4 font-serif text-2xl font-semibold leading-tight text-white sm:text-3xl md:text-4xl">
+              {post.title}
+            </h1>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+              <div className="flex items-center gap-2">
+                <Avatar
+                  author={author}
+                  className="h-8 w-8 rounded-full border border-white/20 object-cover"
+                  fallbackClass="flex h-8 w-8 items-center justify-center rounded-full bg-violet-800 text-xs font-medium text-violet-200"
+                />
+                <span className="text-sm text-white/80">
+                  <span className="font-medium text-white">{author.name}</span>
+                  {author.userName && (
+                    <span className="ml-1 text-white/50">{author.userName}</span>
+                  )}
+                </span>
+              </div>
+              <span className="text-white/30">·</span>
+              <span className="text-sm text-white/60">🕐 {post.readTime} read</span>
+              <span className="text-white/30">·</span>
+              <span className="text-sm text-white/60">{date}</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid gap-10 md:grid-cols-[1fr_240px]">
+          <article>
+            <p className="mb-8 border-l-4 border-violet-500 pl-4 font-serif text-base italic sm:pl-5 sm:text-lg leading-relaxed text-slate-500 dark:text-slate-400">
+              {post.description}
+            </p>
+            <PostMarkdown content={post.content} className={PROSE} />
+
+            {post.tags.length > 0 && (
+              <div className="mt-8 flex flex-wrap gap-2 border-t border-violet-100 pt-6 dark:border-slate-700">
+                {post.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-800 dark:bg-violet-900/40 dark:text-violet-300"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </article>
+
+          <aside className="space-y-4">
+            <div className={SIDE_CARD}>
+              <p className="mb-3 text-[11px] font-medium uppercase tracking-widest text-slate-400">
+                Post details
+              </p>
+              {[
+                ["Category", post.category || "—"],
+                ["Difficulty", post.difficulty || "—"],
+                ["Read time", post.readTime],
+                ["Published", date || "—"],
+                ["Likes", actions.likesCount],
+                ["Comments", commentsCount],
+                ["Views", post.views ?? "—"],
+              ].map(([label, val]) => (
+                <div
+                  key={label}
+                  className="flex items-center justify-between border-b border-violet-100 py-2 text-sm last:border-none dark:border-slate-700"
+                >
+                  <span className="text-slate-500 dark:text-slate-400">{label}</span>
+                  <span className="block max-w-[120px] truncate text-[12px] font-medium capitalize text-slate-700 dark:text-slate-200">
+                    {val}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <div className={SIDE_CARD}>
+              <p className="mb-3 text-[11px] font-medium uppercase tracking-widest text-slate-400">
+                Author
+              </p>
+              <div className="flex items-center gap-3">
+                <Avatar
+                  author={author}
+                  className="h-10 w-10 rounded-full object-cover"
+                  fallbackClass="flex h-10 w-10 items-center justify-center rounded-full bg-violet-200 text-sm font-medium text-violet-800"
+                />
+                <div>
+                  <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">
+                    {author.name}
+                  </p>
+                  <p className="text-xs text-slate-400">{author.userName}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <button
+                type="button"
+                onClick={actions.toggleLike}
+                disabled={!actions.canInteract || actions.likeBusy}
+                aria-pressed={actions.liked}
+                title={actions.canInteract ? undefined : "Sign in to like user posts"}
+                className={`flex w-full items-center justify-center gap-2 rounded-xl bg-purple-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-purple-500 ${dimmed || "cursor-pointer"}`}
+              >
+                {actions.liked ? <FaHeart /> : <FaRegHeart />}
+                {actions.liked ? "Liked" : "Like this post"}
+              </button>
+
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCommentOpen((open) => !open);
+                    setShareOpen(false);
+                  }}
+                  disabled={!canComment}
+                  aria-expanded={commentOpen}
+                  className={`flex w-full items-center justify-center gap-2 rounded-xl border border-violet-200 px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-violet-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800 ${canComment ? "cursor-pointer" : "cursor-not-allowed opacity-60"}`}
+                >
+                  <FaRegComment /> {auth ? "Leave a comment" : "Comments"}
+                </button>
+                {commentOpen && canComment && (
+                  <CommentPopover
+                    blogId={rawId}
+                    onClose={closeComment}
+                    onCountChange={setCommentsCount}
+                  />
+                )}
+              </div>
+
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShareOpen((open) => !open);
+                    setCommentOpen(false);
+                  }}
+                  aria-expanded={shareOpen}
+                  className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-violet-200 px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-violet-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
+                >
+                  <FiShare /> Share
+                </button>
+                {shareOpen && (
+                  <SharePopover
+                    url={`${window.location.origin}/posts/${id}`}
+                    title={post.title}
+                    onClose={closeShare}
+                  />
+                )}
+              </div>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </DynamicIslandTOC>
+  );
+}
+
+const centered = "flex min-h-dvh flex-col items-center justify-center gap-4";
+
+function PostPage({ id }) {
+  const { post: raw, loading, error, retry } = useBlogPost(id);
+
+  if (raw) return <LoadedPost id={id} raw={raw} />;
+
+  if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
+      <div className={centered}>
         <p className="text-slate-400">Loading post...</p>
       </div>
     );
   }
 
-  if (error || !post) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <p className="text-slate-400">{error ?? "Post not found."}</p>
-      </div>
-    );
-  }
-
-  const { authorName, userName, picture } = resolveAuthor(post, auth);
-
-  // blog posts: Cloudinary URL (starts with http)
-  // default posts: local asset via imageMap
-  const coverImage = post.coverImage?.startsWith("http")
-    ? post.coverImage
-    : post.image?.startsWith("http")
-      ? post.image
-      : (imageMap[post.image?.split("/").pop()] ?? null);
-
-  const readTime =
-    typeof post.readTime === "number"
-      ? `${post.readTime} min`
-      : (post.readTime ?? "1 min");
-
-  const tags = Array.isArray(post.tags)
-    ? post.tags
-    : typeof post.tags === "string"
-      ? post.tags
-          .split(",")
-          .map((t) => t.trim())
-          .filter(Boolean)
-      : [];
-
-  const likes = Array.isArray(post.likes) ? post.likes.length : post.likes || 0;
-
   return (
-    <DynamicIslandTOC key={id}>
-    <main className="mx-auto max-w-5xl px-4 pb-20 pt-10">
-      <button
-        onClick={() => navigate(-1)}
-        className="mb-6 flex items-center gap-2 text-sm cursor-pointer text-slate-500 transition hover:text-violet-600 dark:text-slate-400"
-      >
-        ← Back to posts
-      </button>
-
-      <div className="relative mb-10 h-[380px] overflow-hidden rounded-2xl bg-slate-900">
-        {coverImage && (
-          <img
-            src={coverImage}
-            alt={post.title}
-            className="h-full w-full object-cover opacity-60 "
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/70 to-slate-950/40" />
-        {/* <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent" /> */}
-        <div className="absolute inset-x-0 bottom-0 p-8">
-          <span className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-violet-400/30 bg-violet-500/20 px-3 py-1 text-[11px] font-medium uppercase tracking-widest text-violet-300">
-            ◆ {post.category}
-          </span>
-          <h1 className="mb-4 font-serif text-3xl font-semibold leading-tight text-white md:text-4xl">
-            {post.title}
-          </h1>
-          <div className="flex flex-wrap items-center gap-4">
-            <div className="flex items-center gap-2">
-              {picture ? (
-                <img
-                  src={picture}
-                  alt={authorName}
-                  className="h-8 w-8 rounded-full border border-white/20 object-cover"
-                />
-              ) : (
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-violet-800 text-xs font-medium text-violet-200">
-                  {authorName.charAt(0)}
-                </div>
-              )}
-              <span className="text-sm text-white/80">
-                <span className="font-medium text-white">{authorName}</span>
-                {userName && (
-                  <span className="ml-1 text-white/50">{userName}</span>
-                )}
-              </span>
-            </div>
-            <span className="text-white/30">·</span>
-            <span className="text-sm text-white/60">🕐 {readTime} read</span>
-            <span className="text-white/30">·</span>
-            <span className="text-sm text-white/60">
-              {new Date(post.createdAt).toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-              })}
-            </span>
-          </div>
-        </div>
+    <div className={centered}>
+      <p className="text-slate-400">{error ?? "Post not found."}</p>
+      <div className="flex gap-4 text-sm">
+        <button onClick={retry} className="cursor-pointer text-violet-500 hover:underline">
+          Try again
+        </button>
+        <Link to="/blogs" className="text-slate-400 hover:text-violet-500">
+          Back to posts
+        </Link>
       </div>
-
-      <div className="grid gap-10 md:grid-cols-[1fr_240px]">
-        <article>
-          <p className="mb-8 border-l-4 border-violet-500 pl-5 font-serif text-lg italic leading-relaxed text-slate-500 dark:text-slate-400">
-            {post.description}
-          </p>
-          <div className="space-y-4 text-[15px] leading-[1.85] text-slate-700 dark:text-slate-300 prose prose-slate dark:prose-invert max-w-none prose-headings:font-serif prose-headings:text-slate-900 dark:prose-headings:text-white prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg prose-p:leading-relaxed prose-code:text-violet-600 dark:prose-code:text-violet-400 prose-pre:bg-slate-900 prose-pre:text-slate-100">
-            <ReactMarkdown>{post.content}</ReactMarkdown>
-          </div>
-
-          {tags.length > 0 && (
-            <div className="mt-8 flex flex-wrap gap-2 border-t border-violet-100 pt-6 dark:border-slate-700">
-              {tags.map((tag, i) => (
-                <span
-                  key={i}
-                  className="rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-800 dark:bg-violet-900/40 dark:text-violet-300"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </article>
-
-        <aside className="space-y-4">
-          <div className="rounded-2xl border border-violet-100 bg-violet-50/40 p-5 dark:border-slate-700 dark:bg-slate-900">
-            <p className="mb-3 text-[11px] font-medium uppercase tracking-widest text-slate-400">
-              Post details
-            </p>
-            {[
-              ["Category", post.category ?? "—"],
-              ["Difficulty", post.difficulty ?? "—"],
-              ["Read time", readTime],
-              [
-                "Published",
-                new Date(post.createdAt).toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                  year: "numeric",
-                }),
-              ],
-              ["Likes", likes],
-              ["Views", post.views ?? "—"],
-            ].map(([label, val]) => (
-              <div
-                key={label}
-                className="flex items-center justify-between border-b border-violet-100 py-2 text-sm last:border-none dark:border-slate-700"
-              >
-                <span className="text-slate-500 dark:text-slate-400">
-                  {label}
-                </span>
-                <span className="font-medium capitalize text-[12px] text-slate-200 truncate max-w-[120px] block">
-                  {val}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          <div className="rounded-2xl border border-violet-100 bg-violet-50/40 p-5 dark:border-slate-700 dark:bg-slate-900">
-            <p className="mb-3 text-[11px] font-medium uppercase tracking-widest text-slate-400">
-              Author
-            </p>
-            <div className="flex items-center gap-3">
-              {picture ? (
-                <img
-                  src={picture}
-                  alt={authorName}
-                  className="h-10 w-10 rounded-full object-cover"
-                />
-              ) : (
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-violet-200 text-sm font-medium text-violet-800">
-                  {authorName.charAt(0)}
-                </div>
-              )}
-              <div>
-                <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">
-                  {authorName}
-                </p>
-                <p className="text-xs text-slate-400">{userName}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <button
-              type="button"
-              className={`flex w-full items-center justify-center gap-2 rounded-xl bg-purple-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-purple-500 ${!auth && "cursor-not-allowed opacity-60"}`}
-            >
-              <FaRegHeart /> Like this post
-            </button>
-            <button
-              type="button"
-              className={`flex w-full items-center justify-center gap-2 rounded-xl border border-violet-200 px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-violet-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800 ${!auth && "cursor-not-allowed opacity-60"}`}
-            >
-              <FaRegComment /> Leave a comment
-            </button>
-            <button
-              type="button"
-              className="flex w-full items-center justify-center gap-2 rounded-xl border border-violet-200 px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-violet-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
-            >
-              <FiShare /> Share
-            </button>
-          </div>
-        </aside>
-      </div>
-    </main>
-    </DynamicIslandTOC>
+    </div>
   );
-};
+}
 
-export default ReadMore;
+// Keyed by id so moving from one post to another starts from a clean state.
+export default function ReadMore() {
+  const { id } = useParams();
+  return <PostPage key={id} id={id} />;
+}

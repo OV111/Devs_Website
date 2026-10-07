@@ -128,18 +128,25 @@ export function DynamicIslandTOC({
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
+  // A post with no headings has no sections to jump between, so the arrows page
+  // up and down by most of a screen instead, and the island can't be opened.
+  const hasHeadings = headings.length > 0;
+  const pageStep = () => window.innerHeight * 0.8;
+
   const goToPrev = (e) => {
     e.stopPropagation();
-    if (activeIndex > 0) scrollToHeading(headings[activeIndex - 1]);
+    if (!hasHeadings) window.scrollBy({ top: -pageStep(), behavior: "smooth" });
+    else if (activeIndex > 0) scrollToHeading(headings[activeIndex - 1]);
   };
 
   const goToNext = (e) => {
     e.stopPropagation();
-    if (activeIndex < headings.length - 1) scrollToHeading(headings[activeIndex + 1]);
+    if (!hasHeadings) window.scrollBy({ top: pageStep(), behavior: "smooth" });
+    else if (activeIndex < headings.length - 1) scrollToHeading(headings[activeIndex + 1]);
   };
 
-  const hasPrev = activeIndex > 0;
-  const hasNext = activeIndex < headings.length - 1;
+  const hasPrev = hasHeadings ? activeIndex > 0 : progress > 1;
+  const hasNext = hasHeadings ? activeIndex < headings.length - 1 : progress < 99;
 
   const minLevel = useMemo(() => {
     if (headings.length === 0) return 1;
@@ -167,7 +174,7 @@ export function DynamicIslandTOC({
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 25 }}
-        className="fixed bottom-[30px] left-1/2 z-[9999] flex -translate-x-1/2 flex-col items-center"
+        className="fixed bottom-[max(30px,env(safe-area-inset-bottom))] left-1/2 z-[9999] flex -translate-x-1/2 flex-col items-center"
       >
         {/* Side pill buttons row */}
         <div className="mb-2 flex items-center gap-3">
@@ -178,7 +185,7 @@ export function DynamicIslandTOC({
             animate={{ opacity: hasPrev ? 1 : 0.3, scale: hasPrev ? 1 : 0.9 }}
             transition={{ duration: 0.2 }}
             disabled={!hasPrev}
-            aria-label="Previous section"
+            aria-label={hasHeadings ? "Previous section" : "Scroll up"}
             className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-foreground/10 bg-background text-foreground shadow-lg transition-colors hover:bg-foreground/5 disabled:cursor-not-allowed"
           >
             <ChevronUp className="h-4 w-4" />
@@ -198,7 +205,7 @@ export function DynamicIslandTOC({
             animate={{ opacity: hasNext ? 1 : 0.3, scale: hasNext ? 1 : 0.9 }}
             transition={{ duration: 0.2 }}
             disabled={!hasNext}
-            aria-label="Next section"
+            aria-label={hasHeadings ? "Next section" : "Scroll down"}
             className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-foreground/10 bg-background text-foreground shadow-lg transition-colors hover:bg-foreground/5 disabled:cursor-not-allowed"
           >
             <ChevronDown className="h-4 w-4" />
@@ -211,7 +218,14 @@ export function DynamicIslandTOC({
           initial={false}
           animate={{
             width: isExpanded ? 340 : 280,
-            height: isExpanded ? 400 : 52,
+            // Fit the list (header + ~38px a row), up to 400px, instead of a
+            // fixed tall box that is mostly empty for short lists. With no
+            // sections it is just tall enough for the message.
+            height: isExpanded
+              ? hasHeadings
+                ? Math.min(400, 84 + headings.length * 38)
+                : 180
+              : 52,
             borderRadius: isExpanded ? 24 : 26,
           }}
           transition={islandTransition}
@@ -277,7 +291,10 @@ export function DynamicIslandTOC({
             <div className="flex-1 overflow-y-auto overscroll-contain px-3 pb-4">
               <div className="flex flex-col gap-0.5">
                 {headings.length === 0 ? (
-                  <p className="px-3 py-4 text-sm text-muted-foreground">No sections found.</p>
+                  <p className="px-3 py-4 text-sm leading-relaxed text-muted-foreground">
+                    This post has no sections to jump to. Use the arrows above the island to
+                    move through it.
+                  </p>
                 ) : (
                   headings.map((h) => {
                     const isActive = activeId === h.id;
