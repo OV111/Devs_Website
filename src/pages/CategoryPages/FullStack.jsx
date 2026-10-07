@@ -155,7 +155,7 @@ const FullStack = () => {
         />
       </svg>
 
-      <header className="min-h-screen mt-0 relative">
+      <header className="min-h-svh mt-0 md:min-h-screen relative">
         <FloatingIcons category="fullstack" />
 
         <div className="flex justify-center items-center pt-40">
@@ -163,7 +163,7 @@ const FullStack = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.3 }}
-            className=" text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold"
+            className=" text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold"
           >
             <div className="grid justify-center items-center">
               <span className="mx-auto mb-1 bg-linear-to-l from-purple-500 to-purple-800 bg-clip-text text-transparent">
@@ -180,7 +180,7 @@ const FullStack = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-6 max-w-3xl text-lg font-semibold sm:text-xl text-muted-foreground mx-auto"
+          className="mt-6 max-w-3xl px-4 text-lg font-semibold sm:text-xl text-muted-foreground mx-auto"
         >
           <span className="bg-gradient-to-r from-gray-600 via-purple-600 to-indigo-400 text-center block max-w-3xl mx-auto bg-clip-text text-transparent">
             Master every layer of modern web development—from crafting intuitive
@@ -195,14 +195,14 @@ const FullStack = () => {
           {loading ? (
             <LoadingSuspense />
           ) : (
-            <div ref={containerRef} className="overflow-hidden h-screen">
+            <div ref={containerRef} className="overflow-hidden h-svh md:h-screen">
               <div
                 ref={cardsRef}
-                className="flex items-center gap-10 px-16 h-full"
+                className="flex items-center gap-5 px-6 h-full sm:gap-10 sm:px-16"
                 style={{ width: "max-content" }}
               >
                 {data.map((card) => (
-                  <div key={String(card._id)} className="w-[380px] shrink-0">
+                  <div key={String(card._id)} className="w-[min(380px,calc(100vw-3rem))] shrink-0">
                     <BlogCard card={card} />
                   </div>
                 ))}

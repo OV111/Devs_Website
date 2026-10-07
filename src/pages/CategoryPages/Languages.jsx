@@ -80,7 +80,7 @@ const Languages = () => {
 
   return (
     <React.Fragment>
-      <header className="min-h-screen pt-40 relative">
+      <header className="min-h-svh pt-24 sm:pt-40 md:min-h-screen relative">
         <FloatingIcons category={"languages"} />
 
         <div className="flex justify-center items-center">
@@ -88,7 +88,7 @@ const Languages = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.3 }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold"
+            className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold"
           >
             <div className="grid justify-center items-center">
               <span className="bg-linear-to-r from-purple-800 to-purple-400 bg-clip-text text-transparent">
@@ -102,7 +102,7 @@ const Languages = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.4 }}
-          className="mt-6 max-w-3xl text-lg font-semibold sm:text-xl text-muted-foreground mx-auto"
+          className="mt-6 max-w-3xl px-4 text-lg font-semibold sm:text-xl text-muted-foreground mx-auto"
         >
           <span className="bg-linear-to-r from-slate-400 via-purple-600 to-indigo-400 text-center block max-w-3xl mx-auto bg-clip-text text-transparent">
             Master the languages that power the modern world — from scripting
@@ -110,7 +110,7 @@ const Languages = () => {
           </span>
         </motion.p>
 
-        <section className="mx-auto py-20">
+        <section className="mx-auto py-12 sm:py-20">
           <div className="rounded-3xl px-6 py-8">
             <p className="text-center text-2xl font-bold uppercase tracking-[4px] text-purple-700">
               Browse by Language
@@ -139,14 +139,14 @@ const Languages = () => {
           {loading ? (
             <LoadingSuspense />
           ) : (
-            <div ref={containerRef} className="overflow-hidden h-screen">
+            <div ref={containerRef} className="overflow-hidden h-svh md:h-screen">
               <div
                 ref={cardsRef}
-                className="flex items-center gap-10 px-16 h-full"
+                className="flex items-center gap-5 px-6 h-full sm:gap-10 sm:px-16"
                 style={{ width: "max-content" }}
               >
                 {data.map((card) => (
-                  <div key={String(card._id)} className="w-[380px] shrink-0">
+                  <div key={String(card._id)} className="w-[min(380px,calc(100vw-3rem))] shrink-0">
                     <BlogCard card={card} />
                   </div>
                 ))}
