@@ -57,7 +57,7 @@ const TeamAdminPage = lazy(() => import("./features/teams/TeamAdminPage"));
 const EvidencePage = lazy(() => import("./features/teams/EvidencePage"));
 const CandidatePage = lazy(() => import("./features/recruiter/CandidatePage"));
 const CapstoneAdminPage = lazy(() => import("./features/capstone/CapstoneAdminPage"));
-const VoiceReviewPage = lazy(() => import("./features/voiceReview/VoiceReviewPage"));
+const VoiceReviewPage = lazy(() => import("./features/VoiceReview/VoiceReviewPage"));
 const PricingPage = lazy(() => import("./features/billing/PricingPage"));
 const BillingPage = lazy(() => import("./features/billing/BillingPage"));
 const ProgressPage = lazy(() => import("./features/mastery/ProgressPage"));
