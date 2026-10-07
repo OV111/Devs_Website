@@ -4,7 +4,7 @@ import { toast, Toaster } from "react-hot-toast";
 import { requestPasswordReset } from "@/services/authApi";
 
 const inputBase =
-  "w-full px-3.5 py-2.5 text-sm text-[#30313d] dark:text-white bg-white dark:bg-zinc-800 border rounded-md placeholder:text-[#a3acb9] dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-fuchsia-100 dark:focus:ring-fuchsia-900/30 transition-all duration-150";
+  "w-full px-3.5 py-2.5 text-base sm:text-sm text-[#30313d] dark:text-white bg-white dark:bg-zinc-800 border rounded-md placeholder:text-[#a3acb9] dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-fuchsia-100 dark:focus:ring-fuchsia-900/30 transition-all duration-150";
 const inputNormal =
   "border-[#e0e0e0] dark:border-zinc-700 focus:border-fuchsia-500 dark:focus:border-fuchsia-400";
 
@@ -30,9 +30,9 @@ export default function ForgotPassword() {
   return (
     <>
       <Toaster position="top-center" />
-      <div className="min-h-screen flex items-center justify-center px-4 py-12">
+      <div className="min-h-dvh flex items-center justify-center px-4 py-8 sm:py-12">
         <div className="w-full max-w-[440px]">
-          <div className="dark:bg-zinc-900 rounded-xl px-8 py-10">
+          <div className="dark:bg-zinc-900 rounded-xl px-5 py-8 sm:px-8 sm:py-10">
 
             {sent ? (
               <div className="flex flex-col items-center text-center space-y-4 py-4">
@@ -79,11 +79,14 @@ export default function ForgotPassword() {
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-[#30313d] dark:text-zinc-300 mb-1.5">
+                    <label htmlFor="email" className="block text-sm font-medium text-[#30313d] dark:text-zinc-300 mb-1.5">
                       Email
                     </label>
                     <input
+                      id="email"
                       type="email"
+                      autoComplete="email"
+                      inputMode="email"
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}

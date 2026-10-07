@@ -5,7 +5,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { confirmPasswordReset } from "@/services/authApi";
 
 const inputBase =
-  "w-full px-3.5 py-2.5 text-sm text-[#30313d] dark:text-white bg-white dark:bg-zinc-800 border rounded-md placeholder:text-[#a3acb9] dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-fuchsia-100 dark:focus:ring-fuchsia-900/30 transition-all duration-150";
+  "w-full px-3.5 py-2.5 text-base sm:text-sm text-[#30313d] dark:text-white bg-white dark:bg-zinc-800 border rounded-md placeholder:text-[#a3acb9] dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-fuchsia-100 dark:focus:ring-fuchsia-900/30 transition-all duration-150";
 const inputNormal =
   "border-[#e0e0e0] dark:border-zinc-700 focus:border-fuchsia-500 dark:focus:border-fuchsia-400";
 const labelClass =
@@ -24,7 +24,7 @@ export default function ResetPassword() {
 
   if (!token) {
     return (
-      <div className="flex min-h-screen items-center justify-center px-4 text-center">
+      <div className="flex min-h-dvh items-center justify-center px-4 text-center">
         <div className="space-y-3">
           <p className="font-medium text-red-500">Invalid or missing reset token.</p>
           <Link
@@ -61,9 +61,9 @@ export default function ResetPassword() {
   return (
     <>
       <Toaster position="top-center" />
-      <div className="min-h-screen flex items-center justify-center px-4 py-12">
+      <div className="min-h-dvh flex items-center justify-center px-4 py-8 sm:py-12">
         <div className="w-full max-w-[440px]">
-          <div className="dark:bg-zinc-900 rounded-xl px-8 py-10">
+          <div className="dark:bg-zinc-900 rounded-xl px-5 py-8 sm:px-8 sm:py-10">
 
             <h1 className="text-[22px] sm:text-[24px] font-semibold leading-tight text-[#1a1f36] dark:text-white mb-1">
               Set new password
@@ -74,9 +74,11 @@ export default function ResetPassword() {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className={labelClass}>New password</label>
+                <label htmlFor="new-password" className={labelClass}>New password</label>
                 <div className="relative">
                   <input
+                    id="new-password"
+                    autoComplete="new-password"
                     type={showPassword ? "text" : "password"}
                     required
                     value={newPassword}
@@ -88,7 +90,7 @@ export default function ResetPassword() {
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     aria-label={showPassword ? "Hide password" : "Show password"}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[#a3acb9] dark:text-zinc-500 hover:text-[#697386] dark:hover:text-zinc-400 cursor-pointer transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 after:absolute after:-inset-3.5 text-[#a3acb9] dark:text-zinc-500 hover:text-[#697386] dark:hover:text-zinc-400 cursor-pointer transition-colors"
                   >
                     {showPassword ? <Eye size={16} /> : <EyeOff size={16} />}
                   </button>
@@ -96,9 +98,11 @@ export default function ResetPassword() {
               </div>
 
               <div>
-                <label className={labelClass}>Confirm password</label>
+                <label htmlFor="confirm-password" className={labelClass}>Confirm password</label>
                 <div className="relative">
                   <input
+                    id="confirm-password"
+                    autoComplete="new-password"
                     type={showConfirm ? "text" : "password"}
                     required
                     value={confirmPassword}
@@ -110,7 +114,7 @@ export default function ResetPassword() {
                     type="button"
                     onClick={() => setShowConfirm(!showConfirm)}
                     aria-label={showConfirm ? "Hide password" : "Show password"}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[#a3acb9] dark:text-zinc-500 hover:text-[#697386] dark:hover:text-zinc-400 cursor-pointer transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 after:absolute after:-inset-3.5 text-[#a3acb9] dark:text-zinc-500 hover:text-[#697386] dark:hover:text-zinc-400 cursor-pointer transition-colors"
                   >
                     {showConfirm ? <Eye size={16} /> : <EyeOff size={16} />}
                   </button>
