@@ -1,0 +1,399 @@
+/*
+ * Foundations theme: Raycast-style dark "command center", scoped to
+ * .foundations-theme so nothing leaks. Near-black canvas, hairline borders,
+ * tactile "key" inner-shadow cards, neutral filled buttons. Colour is rationed:
+ * the project purple appears only in the hero artwork and the AI-era badge,
+ * never on body text or buttons. Always dark, like the Teams theme.
+ */
+
+.foundations-theme {
+  --f-void: #040506;
+  --f-card: #07080a;
+  --f-recessed: #111214;
+  --f-badge: #1b1c1e;
+  --f-border: #363739;
+  --f-white: #ffffff;
+  --f-ash: #9c9c9d;
+  --f-smoke: #6a6b6c;
+  --f-mist: #e6e6e6;
+  --f-iron: #454647;
+
+  /* Project purple replaces Raycast's coral */
+  --f-accent: #9333ea;
+  --f-accent-glow: #a855f7;
+  --f-accent-text: #d8b4fe;
+  --f-accent-tint: #26163a;
+
+  --f-green: #59d499;
+  --f-amber: #f5c15d;
+  --f-red: #ff6363;
+
+  --f-key: rgba(255, 255, 255, 0.05) 0 1px 0 0 inset,
+    rgba(255, 255, 255, 0.22) 0 0 0 1px, rgba(0, 0, 0, 0.2) 0 -1px 0 0 inset;
+
+  --f-sans: "Inter", "Geist Variable", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+  --f-mono: "Geist Mono Variable", "JetBrains Mono", ui-monospace,
+    SFMono-Regular, Menlo, Consolas, monospace;
+
+  min-height: 100vh;
+  /* No background of its own: the site's background shows through. */
+  color: var(--f-ash);
+  font-family: var(--f-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-x: clip;
+}
+
+.foundations-theme .f-wrap {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 120px;
+}
+
+/* Hero: the one cinematic moment */
+.foundations-theme .f-hero {
+  position: relative;
+  min-height: 78vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 0 64px;
+  isolation: isolate;
+}
+.foundations-theme .f-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--f-ash);
+  background: rgba(27, 28, 30, 0.7);
+  border: 1px solid var(--f-border);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  margin-bottom: 28px;
+  backdrop-filter: blur(12px);
+}
+.foundations-theme .f-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--f-accent-glow);
+}
+.foundations-theme .f-display {
+  /* The original Fundamentals headline gradient (amber-400 / orange-400 /
+     amber-500), eased halfway toward a lighter amber-200 / orange-300 / amber-300. */
+  background-image: linear-gradient(90deg, #fcd257, #fca658, #f8b82c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-size: clamp(40px, 7vw, 64px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0;
+  max-width: 820px;
+}
+.foundations-theme .f-lede {
+  max-width: 520px;
+  margin: 20px 0 0;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--f-ash);
+}
+.foundations-theme .f-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 32px;
+}
+.foundations-theme .f-meta {
+  margin-top: 20px;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--f-smoke);
+  letter-spacing: 0.017em;
+}
+
+/* Buttons: neutral, never chromatic */
+.foundations-theme .f-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--f-sans);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  text-decoration: none;
+  border: 0;
+  transition: background 0.2s, color 0.2s;
+}
+.foundations-theme .f-btn-primary {
+  background: var(--f-mist);
+  color: var(--f-iron);
+  box-shadow: rgba(0, 0, 0, 0.03) 0 7px 3px 0, rgba(0, 0, 0, 0.25) 0 4px 4px 0;
+}
+.foundations-theme .f-btn-primary:hover {
+  background: var(--f-white);
+}
+.foundations-theme .f-btn-ghost {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--f-white);
+  box-shadow: var(--f-key);
+}
+.foundations-theme .f-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.09);
+}
+
+/* Filter bar */
+.foundations-theme .f-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 48px;
+}
+.foundations-theme .f-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--f-border);
+  margin: 0 8px;
+}
+.foundations-theme .f-pill {
+  position: relative;
+  font-family: var(--f-sans);
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: capitalize;
+  border: 1px solid var(--f-border);
+  border-radius: 9999px;
+  padding: 7px 14px;
+  background: transparent;
+  color: var(--f-ash);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.foundations-theme .f-pill:hover {
+  color: var(--f-white);
+}
+.foundations-theme .f-pill[aria-pressed="true"] {
+  color: var(--f-iron);
+  border-color: transparent;
+}
+.foundations-theme .f-pill-bg {
+  position: absolute;
+  inset: -1px;
+  border-radius: 9999px;
+  background: var(--f-mist);
+  z-index: 0;
+}
+.foundations-theme .f-pill-label {
+  position: relative;
+  z-index: 1;
+}
+
+/* Sections */
+.foundations-theme .f-section {
+  margin-top: 96px;
+}
+.foundations-theme .f-section:first-of-type {
+  margin-top: 0;
+}
+.foundations-theme .f-section-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--f-smoke);
+  margin: 0 0 12px;
+}
+.foundations-theme .f-section-title {
+  color: var(--f-white);
+  font-size: clamp(28px, 4vw, 32px);
+  font-weight: 500;
+  line-height: 1.15;
+  margin: 0 0 8px;
+}
+.foundations-theme .f-section-sub {
+  margin: 0 0 32px;
+  max-width: 520px;
+  color: var(--f-ash);
+}
+
+/* Cards: the "key cap" treatment */
+.foundations-theme .f-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.foundations-theme .f-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  /* Original Fundamentals card look: bg-neutral-900, border-neutral-800,
+     rounded-2xl, hover:border-amber-700. */
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid #262626;
+  background: #171717;
+  transition: border-color 0.2s;
+}
+.foundations-theme .f-card:hover {
+  border-color: #b45309;
+}
+.foundations-theme .f-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.foundations-theme .f-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  font-size: 22px;
+  background: var(--f-recessed);
+  box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0 0 inset;
+}
+.foundations-theme .f-card-title {
+  color: var(--f-white);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  margin: 4px 0 0;
+}
+.foundations-theme .f-card-desc {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--f-ash);
+  margin: 0;
+}
+.foundations-theme .f-ai-note {
+  margin: auto 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--f-badge);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--f-mist);
+}
+.foundations-theme .f-ai-note b {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--f-accent-text);
+  margin-bottom: 4px;
+}
+
+/* Badges */
+.foundations-theme .f-tag {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--f-badge);
+  border-radius: 6px;
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+.foundations-theme .f-tag-beginner { color: var(--f-green); }
+.foundations-theme .f-tag-medium { color: var(--f-amber); }
+.foundations-theme .f-tag-hard { color: var(--f-red); }
+.foundations-theme .f-tag-ai {
+  color: var(--f-accent-text);
+  background: rgba(147, 51, 234, 0.16);
+}
+
+/* FAQ */
+.foundations-theme .f-faq-item {
+  border-bottom: 1px solid var(--f-badge);
+}
+.foundations-theme .f-faq-q {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px 0;
+  background: none;
+  border: 0;
+  color: var(--f-white);
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--f-sans);
+  font-size: 18px;
+  font-weight: 500;
+}
+.foundations-theme .f-faq-q:hover {
+  color: var(--f-mist);
+}
+.foundations-theme .f-faq-a {
+  margin: 0;
+  padding-bottom: 24px;
+  max-width: 640px;
+  color: var(--f-ash);
+}
+
+/* CTA */
+.foundations-theme .f-cta {
+  margin-top: 120px;
+  text-align: center;
+  padding: 72px 24px;
+  border-radius: 20px;
+  background: radial-gradient(
+      70% 120% at 50% 0%,
+      rgba(76, 29, 149, 0.4),
+      transparent 70%
+    ),
+    var(--f-card);
+  box-shadow: var(--f-key);
+}
+.foundations-theme .f-cta .f-section-sub {
+  margin: 0 auto 28px;
+}
+
+.foundations-theme .f-empty {
+  color: var(--f-smoke);
+  padding: 48px 0;
+  text-align: center;
+}
+
+.foundations-theme a:focus-visible,
+.foundations-theme button:focus-visible {
+  outline: 2px solid var(--f-accent-glow);
+  outline-offset: 2px;
+}
+
+/* Phones: the desktop spacing (120px hero top, 120px CTA gap, 24px gutters)
+   wastes most of a 360px screen. Same look, tighter rhythm. */
+@media (max-width: 639px) {
+  .foundations-theme {
+    min-height: 100dvh;
+  }
+  .foundations-theme .f-wrap {
+    padding: 0 16px 80px;
+  }
+  .foundations-theme .f-hero {
+    min-height: 70svh;
+    padding: 72px 0 48px;
+  }
+  .foundations-theme .f-cta {
+    margin-top: 72px;
+    padding: 48px 20px;
+  }
+}

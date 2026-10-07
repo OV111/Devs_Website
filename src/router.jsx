@@ -62,7 +62,7 @@ const PricingPage = lazy(() => import("./features/billing/PricingPage"));
 const BillingPage = lazy(() => import("./features/billing/BillingPage"));
 const ProgressPage = lazy(() => import("./features/mastery/ProgressPage"));
 
-const Fundamentals = lazy(() => import("./pages/CategoryPages/Fundamentals"));
+const FoundationsPage = lazy(() => import("./features/foundations/FoundationsPage"));
 const FullStack = lazy(() => import("./pages/CategoryPages/FullStack"));
 const Backend = lazy(() => import("./pages/CategoryPages/Backend"));
 const Mobile = lazy(() => import("./pages/CategoryPages/Mobile"));
@@ -105,10 +105,12 @@ const router = createBrowserRouter([
       { path: "evidence/:publicId", element: <EvidencePage /> },
       // Public on purpose, but only for developers who opted in (the API answers 404 otherwise).
       { path: "candidate/:username", element: <CandidatePage /> },
+      { path: "foundations", element: <FoundationsPage /> },
       {
         path: "categories",
         children: [
-          { path: "fundamentals", element: <Fundamentals /> },
+          // Old URL kept as a redirect so existing links and the navbar don't 404.
+          { path: "fundamentals", element: <Navigate to="/foundations" replace /> },
           { path: "fullstack", element: <FullStack /> },
           { path: "backend", element: <Backend /> },
           { path: "mobile", element: <Mobile /> },
