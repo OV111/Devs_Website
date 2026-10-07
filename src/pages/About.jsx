@@ -80,7 +80,7 @@ const SectionTitle = ({ children }) => (
 );
 
 const About = () => (
-  <div className="mx-auto flex max-w-5xl flex-col gap-28 px-6 py-20">
+  <div className="mx-auto flex max-w-5xl flex-col gap-16 px-4 py-12 sm:gap-28 sm:px-6 sm:py-20">
     {/* Hero */}
     <section className="flex flex-col items-center gap-6 text-center">
       <Motion.span
@@ -90,7 +90,7 @@ const About = () => (
         About Vahoha
       </Motion.span>
       <Motion.h1
-        className="max-w-2xl text-4xl leading-tight font-[450] tracking-tight text-white sm:text-5xl"
+        className="max-w-2xl text-3xl leading-tight font-[450] tracking-tight text-balance text-white sm:text-5xl"
         style={{ fontFamily: '"Geist Variable", system-ui, sans-serif' }}
         {...fadeUp(0.1)}
       >
@@ -172,10 +172,10 @@ const About = () => (
 
     {/* Built in public + CTA */}
     <Motion.section
-      className="flex flex-col items-center gap-6 rounded-3xl border border-neutral-800 bg-neutral-950 px-6 py-12 text-center"
+      className="flex flex-col items-center gap-6 rounded-3xl border border-neutral-800 bg-neutral-950 px-5 py-10 text-center sm:px-6 sm:py-12"
       {...fadeUp()}
     >
-      <h2 className="text-3xl font-[450] tracking-tight text-white">
+      <h2 className="text-2xl font-[450] tracking-tight text-white sm:text-3xl">
         Built in public
       </h2>
       <p className="max-w-lg text-neutral-400">

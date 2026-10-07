@@ -88,7 +88,7 @@ const SECTIONS = [
 ];
 
 const Privacy = () => (
-  <div className="mx-auto grid max-w-5xl gap-12 px-6 py-20 lg:grid-cols-[200px_1fr]">
+  <div className="mx-auto grid max-w-5xl gap-12 px-4 py-12 sm:px-6 sm:py-20 lg:grid-cols-[200px_1fr]">
     {/* Table of contents — long legal pages are scanned, not read top to bottom. */}
     <nav aria-label="On this page" className="hidden lg:block">
       <div className="sticky top-[calc(var(--navbar-h,56px)+32px)] flex flex-col gap-2">
@@ -104,7 +104,7 @@ const Privacy = () => (
     <article className="flex max-w-2xl flex-col gap-12">
       <header className="flex flex-col gap-3">
         <h1
-          className="text-4xl font-[450] tracking-tight text-white"
+          className="text-3xl font-[450] tracking-tight text-white sm:text-4xl"
           style={{ fontFamily: '"Geist Variable", system-ui, sans-serif' }}
         >
           Privacy Policy

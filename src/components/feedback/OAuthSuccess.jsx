@@ -30,7 +30,11 @@ const OAuthSuccess = () => {
     })();
   }, [searchParams, navigate, init]);
 
-  return <p>Logging you in...</p>;
+  return (
+    <p className="flex min-h-dvh items-center justify-center px-4 text-sm text-neutral-400">
+      Logging you in...
+    </p>
+  );
 };
 
 export default OAuthSuccess;

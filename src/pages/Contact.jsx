@@ -23,7 +23,7 @@ const fadeUp = (delay = 0) => ({
 });
 
 const inputClass =
-  "w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-sm text-white placeholder:text-neutral-600 outline-none transition-colors focus:border-purple-500/60";
+  "w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-base md:text-sm text-white placeholder:text-neutral-600 outline-none transition-colors focus:border-purple-500/60";
 
 const Field = ({ label, htmlFor, error, children }) => (
   <div className="flex flex-col gap-1.5">
@@ -72,11 +72,11 @@ const Contact = () => {
   const fieldError = (name) => (error.field === name ? error.message : null);
 
   return (
-    <div className="mx-auto flex max-w-5xl flex-col gap-14 px-6 py-20">
+    <div className="mx-auto flex max-w-5xl flex-col gap-10 px-4 py-12 sm:gap-14 sm:px-6 sm:py-20">
       <Motion.header className="flex flex-col items-center gap-4 text-center" {...fadeUp()}>
         <span className="text-sm font-medium text-neutral-400">Contact</span>
         <h1
-          className="text-4xl font-[450] tracking-tight text-white sm:text-5xl"
+          className="text-3xl font-[450] tracking-tight text-balance text-white sm:text-5xl"
           style={{ fontFamily: '"Geist Variable", system-ui, sans-serif' }}
         >
           Talk to the person building it.
@@ -90,7 +90,7 @@ const Contact = () => {
       <div className="grid gap-8 lg:grid-cols-5">
         <Motion.div className="lg:col-span-3" {...fadeUp(0.1)}>
           {status === "sent" ? (
-            <div className="flex min-h-[420px] flex-col items-center justify-center gap-4 rounded-2xl border border-neutral-800 bg-neutral-950 px-8 text-center">
+            <div className="flex min-h-[320px] flex-col items-center justify-center gap-4 rounded-2xl border border-neutral-800 bg-neutral-950 px-6 sm:min-h-[420px] sm:px-8 text-center">
               <CheckCircle2 size={36} className="text-purple-400" />
               <h2 className="text-xl font-medium text-white">Message sent</h2>
               <p className="max-w-xs text-sm text-neutral-400">
@@ -110,7 +110,7 @@ const Contact = () => {
           ) : (
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col gap-5 rounded-2xl border border-neutral-800 bg-neutral-950 p-6 sm:p-8"
+              className="flex flex-col gap-5 rounded-2xl border border-neutral-800 bg-neutral-950 p-5 sm:p-8"
             >
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field label="Name" htmlFor="contact-name" error={fieldError("name")}>
