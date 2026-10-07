@@ -123,12 +123,12 @@ const HowItWorks = () => {
       <section
         id="how-it-works"
         ref={ref}
-        className="mx-auto max-w-6xl scroll-mt-[calc(var(--navbar-h,56px)+24px)] px-6 py-24"
+        className="mx-auto max-w-6xl scroll-mt-[calc(var(--navbar-h,56px)+24px)] px-6 py-16 md:py-24"
       >
         <h2 className="text-center text-3xl font-[450] tracking-tight text-white">
           How it works
         </h2>
-        <p className="mx-auto mt-3 max-w-xl text-center text-neutral-400">
+        <p className="mx-auto mt-3 max-w-xl text-center text-base text-neutral-400">
           A roadmap you earn, not one you scroll past.
         </p>
 
@@ -214,8 +214,8 @@ const HowItWorks = () => {
                 <Icon size={20} aria-hidden="true" />
               </span>
               <div>
-                <h3 className="text-base font-medium text-neutral-100">{title}</h3>
-                <p className="mt-0.5 text-sm text-neutral-400">{body}</p>
+                <h3 className="text-lg font-medium text-neutral-100 md:text-base">{title}</h3>
+                <p className="mt-0.5 text-base text-neutral-400 md:text-sm">{body}</p>
               </div>
             </li>
           ))}
@@ -224,7 +224,7 @@ const HowItWorks = () => {
         <div className="mt-14 flex justify-center">
           <Link
             to="/roadmaps"
-            className="rounded-full bg-white px-5 py-3 text-[14px] leading-[20px] font-medium text-black transition hover:bg-neutral-200"
+            className="flex min-h-11 items-center rounded-full bg-white px-6 py-3 text-base leading-[20px] font-medium text-black sm:text-[14px] transition hover:bg-neutral-200"
           >
             Browse the roadmaps →
           </Link>
