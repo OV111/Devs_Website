@@ -133,7 +133,9 @@ const Navbar = () => {
     >
       {/* Left: logo */}
       <div className="flex-1">
-        <Wordmark size="sm" className="sm:text-xl" />
+        <Wordmark
+          className="text-xl leading-6 text-[#E6E6E6] md:text-[21px] transition-transform duration-200 hover:opacity-100 hover:scale-[1.03]"
+        />
       </div>
 
       {/* Center: nav links (desktop) */}
@@ -351,7 +353,7 @@ const Navbar = () => {
                       <NavLink
                         to={`/categories/${slug}`}
                         className={({ isActive }) =>
-                          `block py-2 text-sm transition ${isActive ? "text-purple-400" : "text-purple-100 hover:text-white"}`
+                          `flex min-h-11 items-center text-base transition ${isActive ? "text-purple-400" : "text-purple-100 hover:text-white"}`
                         }
                       >
                         {title}

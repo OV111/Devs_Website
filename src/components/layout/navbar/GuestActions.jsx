@@ -18,7 +18,7 @@ const GuestActions = ({
       to="/get-started"
       className={`text-sm font-medium text-gray-100 transition hover:text-purple-500 ${
         fullWidth
-          ? "flex-1 rounded-md border border-white/20 py-2.5 text-center"
+          ? "flex min-h-11 flex-1 items-center justify-center rounded-md border border-white/20 text-center text-base"
           : "py-1.5"
       }`}
     >
