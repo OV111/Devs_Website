@@ -7,6 +7,7 @@ import {
 import { readAttachments, formatBytes } from "../lib/readAttachment";
 import { useSpeechDictation } from "../lib/useSpeechDictation";
 import AgentMenu from "./AgentMenu";
+import posthog, { isPostHogConfigured } from "@/lib/posthog";
 
 const ACCEPT_ATTR = ATTACHMENT_ACCEPTED_EXTENSIONS.map((e) => `.${e}`).join(
   ",",
@@ -87,6 +88,12 @@ export default function ChatInput({
 
   const handleSend = () => {
     if (!input.trim() || isStreaming) return;
+    if (isPostHogConfigured) {
+      posthog.capture("ai_agent_message_sent", {
+        has_attachments: attachments.length > 0,
+        composer_layout: spacious ? "hero" : "conversation",
+      });
+    }
     onSend(input.trim(), attachments);
     setInput("");
     setAttachments([]);

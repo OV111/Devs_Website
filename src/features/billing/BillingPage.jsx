@@ -4,6 +4,7 @@ import { Toaster, toast } from "react-hot-toast";
 import { AlertTriangle, Check, CreditCard, Info } from "lucide-react";
 import useBilling from "./hooks/useBilling";
 import { PLANS_BY_ID } from "./plans";
+import posthog, { isPostHogConfigured } from "@/lib/posthog";
 
 const SECTION = "rounded-xl border border-white/10 bg-zinc-950 p-5 sm:p-6";
 const SECTION_TITLE = "mb-4 text-base font-semibold text-[#F7F7F8]";
@@ -73,8 +74,11 @@ const BillingPage = () => {
     })();
   }, [searchParams, setSearchParams, syncAfterCheckout]);
 
-  const run = (action) => async () => {
+  const run = (action, event) => async () => {
     try {
+      if (isPostHogConfigured) {
+        posthog.capture(event, { current_plan: status?.plan ?? "free" });
+      }
       await action();
     } catch (err) {
       toast.error(err.message);
@@ -158,7 +162,7 @@ const BillingPage = () => {
                       type="button"
                       className={PRIMARY_BTN}
                       disabled={busy === "checkout"}
-                      onClick={run(startCheckout)}
+                      onClick={run(startCheckout, "checkout_started")}
                     >
                       {busy === "checkout" ? "Redirecting…" : "Upgrade to Pro"}
                     </button>
@@ -213,7 +217,7 @@ const BillingPage = () => {
                   type="button"
                   className={SECONDARY_BTN}
                   disabled={!status.configured || !hasBillingAccount || busy === "portal"}
-                  onClick={run(openPortal)}
+                  onClick={run(openPortal, "billing_portal_opened")}
                 >
                   {busy === "portal" ? "Opening…" : "Manage billing"}
                 </button>
