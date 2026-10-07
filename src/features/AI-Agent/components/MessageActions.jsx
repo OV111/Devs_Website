@@ -20,7 +20,7 @@ function ActionButton({ icon, label, onClick, disabled, active }) {
       onClick={disabled ? (e) => e.preventDefault() : onClick}
       title={disabled ? `${label} — coming soon` : label}
       aria-label={label}
-      className={`w-7 h-7 rounded-md flex items-center justify-center transition-colors ${
+      className={`w-9 h-9 md:w-7 md:h-7 relative max-md:after:absolute max-md:after:-inset-1 rounded-md flex items-center justify-center transition-colors ${
         disabled
           ? "text-white/20 hover:text-white/40 hover:bg-white/5 cursor-not-allowed"
           : "text-white/35 hover:text-white hover:bg-white/8 cursor-pointer"
@@ -46,7 +46,7 @@ export default function MessageActions({ content }) {
 
   return (
     // Focus-within keeps the row reachable by keyboard, not hover-only.
-    <div className="flex items-center gap-0.5 mt-1 -ml-1.5 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
+    <div className="flex items-center gap-0.5 mt-1 -ml-1.5 opacity-0 group-hover:opacity-100 focus-within:opacity-100 pointer-coarse:opacity-100 transition-opacity">
       <ActionButton
         icon={copied ? Check : Copy}
         label={copied ? "Copied" : "Copy"}

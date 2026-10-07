@@ -42,11 +42,16 @@ export default function ChatInput({
   // The parent can now set the text (prompt chips, menu shortcuts), so the
   // auto-resize has to react to `value` rather than only to typing.
   useEffect(() => {
+  // `spacious` is a dependency because the hero layout's min-h-12 inflates
+  // scrollHeight; without re-measuring, that 48px height leaked into the
+  // compact conversation row after the first message.
     const el = inputRef.current;
     if (!el) return;
     el.style.height = "auto";
     el.style.height = Math.min(el.scrollHeight, 160) + "px";
-  }, [value]);
+    // Empty box: let rows={1} + CSS size it instead of a measured pixel value.
+    if (!value) return;
+  }, [value, spacious]);
 
   // Parent bumps focusToken when it injects a prompt, so the caret lands at the
   // end of the inserted text ready for the user to keep typing.
@@ -133,7 +138,7 @@ export default function ChatInput({
        messages instead of spanning the full pane. */
     <div
       className={`px-4 shrink-0 w-full mx-auto ${
-        spacious ? "max-w-2xl pb-0 pt-0" : "max-w-3xl pb-4 pt-2"
+        spacious ? "max-w-2xl pb-0 pt-0" : "max-w-3xl pb-[max(1rem,env(safe-area-inset-bottom))] pt-2"
       }`}
     >
       <input
@@ -178,7 +183,7 @@ export default function ChatInput({
                 </span>
                 <button
                   onClick={() => removeAttachment(a.name)}
-                  className="w-5 h-5 rounded flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 shrink-0 cursor-pointer"
+                  className="w-8 h-8 md:w-5 md:h-5 relative max-md:after:absolute max-md:after:-inset-1.5 rounded flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 shrink-0 cursor-pointer"
                   title="Remove"
                 >
                   <X size={12} />
@@ -217,9 +222,9 @@ export default function ChatInput({
             }
             disabled={isStreaming}
             className={`flex-1 min-w-0 bg-transparent outline-none resize-none leading-6 text-white placeholder:text-[#555] disabled:opacity-40 max-h-40 overflow-y-auto ${
-              // A taller resting height is what makes the empty-state card feel
-              // like an invitation to type rather than a single-line field.
-              spacious ? "text-[15px] py-0.5 pl-2 min-h-12" : "text-[14px] pb-1"
+              // Sub-16px is safe on iOS only because index.html sets maximum-scale=1.
+              // Conversation row: 24px line + py-1 = 32px, same as the buttons.
+              spacious ? "text-[14px] md:text-[15px] py-0.5 pl-2 min-h-12" : "text-[14px] py-1"
             }`}
           />
 
@@ -255,7 +260,7 @@ export default function ChatInput({
                   onClick={toggleListening}
                   title={isListening ? "Stop dictation" : "Dictate message"}
                   aria-label={isListening ? "Stop dictation" : "Dictate message"}
-                  className={`w-8 h-8 rounded-md flex items-center justify-center transition-colors cursor-pointer ${
+                  className={`w-8 h-8 md:w-8 md:h-8 relative max-md:after:absolute max-md:after:-inset-1 rounded-md flex items-center justify-center transition-colors cursor-pointer ${
                     isListening ? "text-red-400 bg-red-950/30 animate-pulse" : "text-white hover:bg-white/5"
                   }`}
                 >
@@ -267,7 +272,7 @@ export default function ChatInput({
                 onClick={(e) => e.preventDefault()}
                 title="Voice conversation — coming soon"
                 aria-label="Voice conversation"
-                className="w-8 h-8 rounded-md flex items-center justify-center text-white  hover:bg-white/5 transition-colors cursor-not-allowed"
+                className="w-8 h-8 md:w-8 md:h-8 relative max-md:after:absolute max-md:after:-inset-1 rounded-md flex items-center justify-center text-white  hover:bg-white/5 transition-colors cursor-not-allowed"
               >
                 <AudioLines size={18} strokeWidth={1.5} />
               </button>
@@ -279,7 +284,7 @@ export default function ChatInput({
                   onClick={handleSend}
                   aria-label="Send message"
                   title="Send"
-                  className="w-8 h-8 rounded-lg flex items-center justify-center bg-purple-600 hover:bg-purple-500 text-white transition-colors cursor-pointer ml-0.5"
+                  className="w-8 h-8 md:w-8 md:h-8 relative max-md:after:absolute max-md:after:-inset-1 rounded-lg flex items-center justify-center bg-purple-600 hover:bg-purple-500 text-white transition-colors cursor-pointer ml-0.5"
                 >
                   <ArrowUp size={17} strokeWidth={2} />
                 </button>
@@ -292,8 +297,8 @@ export default function ChatInput({
       {/* Hidden in the empty state so greeting → composer → chips stay one tight
           block; the disclaimer would otherwise wedge itself between them. */}
       {!spacious && (
-        <div className="flex items-center justify-center mt-2 px-1">
-          <p className="text-[11px]" style={{ color: "#333" }}>
+        <div className="flex items-center justify-center mt-1.5 md:mt-2 px-1">
+          <p className="text-[9px] md:text-[11px]" style={{ color: "#333" }}>
             Agent can make mistakes. Double-check important answers.
           </p>
         </div>

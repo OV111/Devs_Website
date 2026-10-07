@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AlertTriangle, RefreshCw, X, GraduationCap } from "lucide-react";
+import { AlertTriangle, RefreshCw, X, GraduationCap, PanelLeft } from "lucide-react";
 import useAiAgentStore from "@/stores/useAiAgentStore";
 import useAgentStream from "@/hooks/useAgentStream";
 import SessionsSidebar from "./components/SessionsSidebar";
@@ -27,6 +27,8 @@ export default function AiAgent() {
   // The composer draft lives here because the hero's prompt chips sit outside
   // ChatInput and need to write into it.
   const [draft, setDraft] = useState("");
+  // Phones have no sidebar, so the sessions list opens as a drawer from here.
+  const [sessionsOpen, setSessionsOpen] = useState(false);
   const [focusToken, setFocusToken] = useState(0);
   const [teachBackContext, setTeachBackContext] = useState(null);
   // Where the learner came from, sent with every message so the mentor can
@@ -350,8 +352,7 @@ export default function AiAgent() {
 
   return (
     <div
-      className="flex bg-black text-[#e5e5e5]"
-      style={{ height: "calc(100vh - 44px)" }}
+      className="flex h-[calc(100dvh-var(--navbar-h,44px))] bg-black text-[#e5e5e5] md:h-[calc(100vh-44px)]"
     >
       <SessionsSidebar
         sessions={sessions}
@@ -361,9 +362,19 @@ export default function AiAgent() {
         onRenameSession={handleRenameSession}
         onDeleteSession={handleDeleteSession}
         onTogglePinSession={handleTogglePinSession}
+        mobileOpen={sessionsOpen}
+        onMobileClose={() => setSessionsOpen(false)}
       />
 
       <div className="flex-1 flex flex-col min-w-0 relative">
+        <button
+          type="button"
+          onClick={() => setSessionsOpen(true)}
+          aria-label="Open sessions"
+          className="absolute top-2 left-2 z-30 flex h-9 w-9 items-center justify-center rounded-lg text-white/70 after:absolute after:-inset-1 hover:bg-white/10 hover:text-white md:hidden"
+        >
+          <PanelLeft size={18} strokeWidth={2} />
+        </button>
         {activeTitle && (
           <div className="absolute top-0 inset-x-0 z-20">
             <ChatTopBar title={activeTitle} messages={messages} />
@@ -372,7 +383,7 @@ export default function AiAgent() {
 
         {error && (
           <div
-            className="mx-4 mt-2 px-4 py-3 rounded-xl flex items-start gap-3 text-[13px] shrink-0"
+            className="mx-4 mt-12 md:mt-2 px-4 py-3 rounded-xl flex items-start gap-3 text-[13px] shrink-0"
             style={{ backgroundColor: "#1a0e0e", border: "1px solid #4a1a1a", color: "#f87171" }}
           >
             <AlertTriangle size={15} className="shrink-0 mt-0.5" />
@@ -394,7 +405,7 @@ export default function AiAgent() {
                 <RefreshCw size={12} /> Retry
               </button>
             )}
-            <button onClick={() => setError(null)} className="shrink-0 hover:opacity-60">
+            <button onClick={() => setError(null)} aria-label="Dismiss error" className="shrink-0 hover:opacity-60 -m-3 p-3">
               <X size={14} />
             </button>
           </div>
@@ -435,7 +446,7 @@ export default function AiAgent() {
                   <>Teach-Back: explain <strong>{teachBackContext.topic}</strong> in your own words</>
                 )}
               </span>
-              <button onClick={() => setTeachBackContext(null)} className="text-purple-400/60 hover:text-purple-300">
+              <button onClick={() => setTeachBackContext(null)} aria-label="Cancel teach-back" className="text-purple-400/60 hover:text-purple-300 -m-3 p-3">
                 <X size={13} />
               </button>
             </div>

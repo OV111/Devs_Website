@@ -22,7 +22,7 @@ export default function ChatTopBar({ title, messages = [] }) {
   const canExport = messages.some((m) => m.role === "user" || m.role === "assistant");
 
   return (
-    <div className="flex items-center justify-between gap-4 px-5 py-3 shrink-0  backdrop-blur-[200px] bg-black/40">
+    <div className="flex items-center justify-between gap-4 pl-14 pr-3 py-2 md:px-5 md:py-3 shrink-0  backdrop-blur-[200px] bg-black/40">
       <h1
         className="text-[15px] tracking-tight truncate min-w-0"
         style={{ color: "#e5e5e5" }}
@@ -36,7 +36,7 @@ export default function ChatTopBar({ title, messages = [] }) {
         disabled={!canExport}
         aria-label="Export conversation as Markdown"
         title={canExport ? "Export as Markdown" : "Nothing to export yet"}
-        className={`flex items-center gap-1.5 text-[13px] px-2.5 py-1.5 rounded-lg shrink-0 transition-colors ${
+        className={`flex items-center gap-1.5 text-[13px] px-2.5 py-1.5 min-h-9 md:min-h-0 relative max-md:after:absolute max-md:after:-inset-1 rounded-lg shrink-0 transition-colors ${
           canExport
             ? "text-white/50 hover:text-white hover:bg-white/8 cursor-pointer"
             : "text-white/20 cursor-not-allowed"

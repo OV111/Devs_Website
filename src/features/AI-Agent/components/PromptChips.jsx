@@ -17,7 +17,7 @@ export default function PromptChips({ onSelectPrompt }) {
           <button
             key={c.label}
             onClick={() => onSelectPrompt(c.prompt)}
-            className="group flex items-center gap-2 px-4 py-2.5 rounded-2xl text-[13px] font-medium border border-white/10 bg-white/5 text-white/50 backdrop-blur transition-all duration-200 hover:border-purple-500/40 hover:bg-purple-500/10 hover:text-white cursor-pointer"
+            className="group flex min-h-9 items-center relative max-md:after:absolute max-md:after:-inset-1 gap-2 px-4 py-2.5 rounded-2xl text-[13px] font-medium border border-white/10 bg-white/5 text-white/50 backdrop-blur transition-all duration-200 hover:border-purple-500/40 hover:bg-purple-500/10 hover:text-white cursor-pointer"
           >
             <ChipIcon
               size={14}

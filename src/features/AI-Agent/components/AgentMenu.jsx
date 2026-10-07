@@ -42,7 +42,7 @@ export default function AgentMenu({
     <div className="relative" ref={ref}>
       <button
         onClick={() => onOpenChange(!open)}
-        className={`${open ? "bg-white/10" : ""} w-8 h-8 rounded-md flex items-center justify-center text-white transition-colors hover:bg-white/5 cursor-pointer`}
+        className={`${open ? "bg-white/10" : ""} w-9 h-9 md:w-8 md:h-8 relative max-md:after:absolute max-md:after:-inset-1 rounded-md flex items-center justify-center text-white transition-colors hover:bg-white/5 cursor-pointer`}
         title="More options"
         aria-haspopup="menu"
         aria-expanded={open}
@@ -53,7 +53,7 @@ export default function AgentMenu({
       {open && (
         <div
           role="menu"
-          className="absolute bottom-9 left-0 w-[220px] rounded-2xl overflow-hidden p-1 z-50 border border-white/10 bg-[#191918]  shadow-2xl shadow-black/60"
+          className="absolute bottom-10 md:bottom-9 left-0 w-[min(220px,calc(100vw-3rem))] rounded-2xl overflow-hidden p-1 z-50 border border-white/10 bg-[#191918]  shadow-2xl shadow-black/60"
         >
           {DROPDOWN_ITEMS.map((group, gi) => (
             <div key={gi}>
@@ -68,7 +68,7 @@ export default function AgentMenu({
                     onClick={() => enabled && onSelect(item.label)}
                     disabled={!enabled}
                     title={enabled ? undefined : "Coming soon"}
-                    className={`w-full flex items-center rounded-lg gap-2.5 px-3 py-2 text-[13px] text-white transition-colors ${
+                    className={`w-full flex items-center rounded-lg gap-2.5 px-3 py-2.5 md:py-2 text-[13px] text-white transition-colors ${
                       enabled
                         ? "hover:bg-white/10 cursor-pointer"
                         

@@ -122,7 +122,7 @@ export default function SessionItem({ session, active, onSelect, onRename, onDel
     >
       <button
         onClick={() => onSelect(session._id)}
-        className="flex-1 min-w-0 text-left px-3 py-2 cursor-pointer"
+        className="flex-1 min-w-0 text-left px-3 py-2.5 md:py-2 cursor-pointer"
       >
         <div className="flex items-center gap-1.5 min-w-0">
           {session.pinned && (
@@ -143,7 +143,7 @@ export default function SessionItem({ session, active, onSelect, onRename, onDel
           // Always visible for the active row and while open, otherwise on
           // hover/focus — a permanently visible control on every row is noise,
           // but one that only appears on hover is unreachable by keyboard.
-          className={`w-6 h-6 rounded flex items-center justify-center transition-all cursor-pointer text-white/50 hover:text-white hover:bg-white/10 focus:opacity-100 ${
+          className={`w-9 h-9 md:w-6 md:h-6 relative max-md:after:absolute max-md:after:-inset-1 rounded flex items-center justify-center transition-all cursor-pointer text-white/50 hover:text-white hover:bg-white/10 focus:opacity-100 pointer-coarse:opacity-100 ${
             menuOpen || active ? "opacity-100" : "opacity-0 group-hover:opacity-100"
           }`}
           title="Session options"
@@ -157,7 +157,7 @@ export default function SessionItem({ session, active, onSelect, onRename, onDel
         {menuOpen && (
           <div
             role="menu"
-            className="absolute right-0 top-7 w-40 rounded-xl overflow-hidden p-1 z-50 border border-white/10 bg-[#191918] shadow-2xl shadow-black/60"
+            className="absolute right-0 top-10 md:top-7 w-40 rounded-xl overflow-hidden p-1 z-50 border border-white/10 bg-[#191918] shadow-2xl shadow-black/60"
           >
             {confirmDelete ? (
               <>
