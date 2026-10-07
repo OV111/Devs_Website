@@ -41,16 +41,16 @@ export default function ChatInput({
 
   // The parent can now set the text (prompt chips, menu shortcuts), so the
   // auto-resize has to react to `value` rather than only to typing.
-  useEffect(() => {
   // `spacious` is a dependency because the hero layout's min-h-12 inflates
   // scrollHeight; without re-measuring, that 48px height leaked into the
   // compact conversation row after the first message.
+  useEffect(() => {
     const el = inputRef.current;
     if (!el) return;
     el.style.height = "auto";
-    el.style.height = Math.min(el.scrollHeight, 160) + "px";
     // Empty box: let rows={1} + CSS size it instead of a measured pixel value.
     if (!value) return;
+    el.style.height = Math.min(el.scrollHeight, 160) + "px";
   }, [value, spacious]);
 
   // Parent bumps focusToken when it injects a prompt, so the caret lands at the
