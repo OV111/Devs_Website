@@ -5,12 +5,12 @@ import { AlertTriangle, Check, CreditCard, Info } from "lucide-react";
 import useBilling from "./hooks/useBilling";
 import { PLANS_BY_ID } from "./plans";
 
-const SECTION = "rounded-xl border border-white/10 bg-zinc-950 p-6";
+const SECTION = "rounded-xl border border-white/10 bg-zinc-950 p-5 sm:p-6";
 const SECTION_TITLE = "mb-4 text-base font-semibold text-[#F7F7F8]";
 const PRIMARY_BTN =
-  "rounded-md bg-purple-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-purple-500 disabled:cursor-not-allowed disabled:opacity-50";
+  "flex min-h-11 w-full items-center justify-center rounded-md bg-purple-600 px-4 py-2 text-base font-medium sm:w-auto sm:text-sm text-white transition-colors hover:bg-purple-500 disabled:cursor-not-allowed disabled:opacity-50";
 const SECONDARY_BTN =
-  "rounded-md border border-white/15 px-4 py-2 text-sm font-medium text-[#F7F7F8] transition-colors hover:bg-white/5 disabled:cursor-not-allowed disabled:opacity-50";
+  "flex min-h-11 w-full items-center justify-center rounded-md border border-white/15 px-4 py-2 text-base font-medium sm:w-auto sm:text-sm text-[#F7F7F8] transition-colors hover:bg-white/5 disabled:cursor-not-allowed disabled:opacity-50";
 
 const formatDate = (value) =>
   value
@@ -37,7 +37,7 @@ const describeRenewal = (status) => {
 const Notice = ({ icon, children, tone = "info" }) => (
   <div
     role="note"
-    className={`mb-6 flex items-start gap-3 rounded-lg border px-4 py-3 text-[13px] ${
+    className={`mb-6 flex items-start gap-3 rounded-lg border px-4 py-3 text-base md:text-[13px] ${
       tone === "warn"
         ? "border-amber-500/30 bg-amber-500/5 text-amber-200"
         : "border-white/10 bg-zinc-900/60 text-[#A1A0AB]"
@@ -89,11 +89,11 @@ const BillingPage = () => {
 
   return (
     <div className="mx-auto max-w-3xl px-5 py-16 pt-28 sm:px-8">
-      <Toaster position="top-center" />
+      <Toaster position="top-center" containerStyle={{ top: "max(1rem, env(safe-area-inset-top))" }} />
 
       <header className="mb-8">
         <h1 className="text-3xl font-semibold text-[#F7F7F8]">Billing</h1>
-        <p className="mt-1 text-sm text-[#A1A0AB]">
+        <p className="mt-1 text-base text-[#A1A0AB] md:text-sm">
           Your plan, payment method and invoices.
         </p>
       </header>
@@ -138,21 +138,21 @@ const BillingPage = () => {
                 Current plan
               </h2>
 
-              <div className="flex flex-wrap items-center justify-between gap-4">
+              <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
                 <div>
                   <p className="text-xl font-semibold text-[#F7F7F8]">
                     {plan.name}
-                    <span className="ml-3 text-sm font-normal text-[#A1A0AB]">
+                    <span className="ml-3 inline-block text-base font-normal text-[#A1A0AB] md:text-sm">
                       {plan.price}
                       {plan.period}
                     </span>
                   </p>
-                  <p className="mt-1 text-[13px] text-[#A1A0AB]">
+                  <p className="mt-1 text-base text-[#A1A0AB] md:text-[13px]">
                     {renewal ?? plan.description}
                   </p>
                 </div>
 
-                <div className="flex gap-3">
+                <div className="flex flex-col gap-3 sm:flex-row">
                   {!isPro && status.configured && (
                     <button
                       type="button"
@@ -175,7 +175,7 @@ const BillingPage = () => {
                 {included.map((feature) => (
                   <li
                     key={feature.text}
-                    className="flex items-start gap-2 text-[13px] text-[#D4D4DC]"
+                    className="flex items-start gap-2 text-base text-[#D4D4DC] md:text-[13px]"
                   >
                     <Check
                       size={15}
@@ -195,14 +195,14 @@ const BillingPage = () => {
                 Payment method &amp; invoices
               </h2>
 
-              <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-3">
                   <CreditCard
                     size={20}
                     className="mt-0.5 shrink-0 text-zinc-500"
                     aria-hidden="true"
                   />
-                  <p className="text-[13px] text-[#A1A0AB]">
+                  <p className="text-base text-[#A1A0AB] md:text-[13px]">
                     {hasBillingAccount
                       ? "Update your card, download invoices or cancel your subscription in the secure billing portal."
                       : "You don't have a billing account yet. It's created when you subscribe."}
