@@ -78,7 +78,7 @@ const CommentPopover = ({ blogId, onClose, onCountChange }) => {
   };
 
   return (
-    <Popover title="Comments" badge={comments.length} onClose={onClose} className="w-80">
+    <Popover title="Comments" badge={comments.length} onClose={onClose} className="max-md:right-3 max-md:w-[calc(100%-1.5rem)] md:w-80">
       <div ref={listRef} className="flex max-h-60 flex-col gap-3 overflow-y-auto px-4 py-3">
         {loading ? (
           <div className="flex justify-center py-6">
@@ -148,7 +148,7 @@ const CommentPopover = ({ blogId, onClose, onCountChange }) => {
               placeholder="Write a comment…"
               aria-label="Write a comment"
               maxLength={500}
-              className="min-w-0 flex-1 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-xs text-neutral-800 outline-none placeholder:text-neutral-400 focus:border-neutral-400 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200 dark:placeholder:text-neutral-600 dark:focus:border-neutral-600"
+              className="min-w-0 flex-1 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-base md:text-xs text-neutral-800 outline-none placeholder:text-neutral-400 focus:border-neutral-400 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200 dark:placeholder:text-neutral-600 dark:focus:border-neutral-600"
             />
             <button
               type="submit"

@@ -55,7 +55,7 @@ const SharePopover = ({ url, title, onClose }) => {
   ];
 
   return (
-    <Popover title="Share" onClose={onClose} className="w-72">
+    <Popover title="Share" onClose={onClose} className="max-md:right-3 max-md:w-[calc(100%-1.5rem)] md:w-72">
       <div className="flex flex-col gap-3 p-4">
         <div className="flex gap-2">
           {socials.map(({ label, icon, href, hover }) => (

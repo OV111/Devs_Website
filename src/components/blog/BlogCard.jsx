@@ -165,7 +165,7 @@ const BlogCard = ({ card }) => {
   });
   const canInteract = auth && !post.isDefault;
   const iconBtn = (active, activeClass) =>
-    `relative z-10 flex items-center gap-1 rounded-full p-1.5 transition-colors ${
+    `relative z-10 flex items-center gap-1 rounded-full p-1.5 transition-colors max-md:after:absolute max-md:after:-inset-2 ${
       canInteract ? "cursor-pointer" : "cursor-not-allowed opacity-60"
     } ${active ? activeClass : "hover:text-neutral-900 dark:hover:text-white"}`;
 
@@ -173,8 +173,8 @@ const BlogCard = ({ card }) => {
     // The whole card opens the post: the title link stretches over it
     // (after:absolute after:inset-0), and the action buttons sit above that
     // layer with z-10 so they stay clickable on their own.
-    <article className="group relative flex h-full min-h-[478px] flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-colors hover:border-neutral-300 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:border-neutral-700">
-      <div className="relative h-56 shrink-0 overflow-hidden bg-neutral-100 dark:bg-neutral-900">
+    <article className="group relative flex h-full flex-col sm:min-h-[478px] overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-colors hover:border-neutral-300 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:border-neutral-700">
+      <div className="relative h-44 shrink-0 sm:h-56 overflow-hidden bg-neutral-100 dark:bg-neutral-900">
         {resolvedCover && (
           <img
             src={resolvedCover}
@@ -189,7 +189,7 @@ const BlogCard = ({ card }) => {
           disabled={!canInteract || saveLoading}
           aria-label={saved ? "Remove from saved" : "Save post"}
           aria-pressed={saved}
-          className={`absolute top-3 right-3 z-10 rounded-full bg-black/60 p-2 backdrop-blur-sm transition-colors ${
+          className={`absolute top-3 right-3 z-10 rounded-full bg-black/60 p-2 backdrop-blur-sm transition-colors max-md:after:absolute max-md:after:-inset-2 ${
             saved ? "text-purple-400" : "text-white hover:text-purple-300"
           } ${canInteract ? "cursor-pointer" : "cursor-not-allowed"}`}
         >
@@ -197,7 +197,7 @@ const BlogCard = ({ card }) => {
         </button>
       </div>
 
-      <div className="flex flex-1 flex-col gap-2.5 p-5">
+      <div className="flex flex-1 flex-col gap-2.5 p-4 sm:p-5">
         {tags.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
             {tags.map((tag, index) => (
@@ -246,7 +246,7 @@ const BlogCard = ({ card }) => {
         </span>
       </div>
 
-      <footer className="flex items-center justify-between gap-3 border-t border-neutral-200 px-5 py-3 dark:border-neutral-800">
+      <footer className="flex items-center justify-between gap-3 border-t border-neutral-200 px-4 py-3 sm:px-5 dark:border-neutral-800">
         <div className="flex min-w-0 items-center gap-2.5">
           {resolvedPicture ? (
             <img
@@ -282,7 +282,7 @@ const BlogCard = ({ card }) => {
             {likesCount > 0 && <span className="text-xs">{likesCount}</span>}
           </button>
 
-          <div className="relative z-10">
+          <div className="z-10 md:relative">
             <button
               type="button"
               onClick={() => {
@@ -305,7 +305,7 @@ const BlogCard = ({ card }) => {
             )}
           </div>
 
-          <div className="relative z-10">
+          <div className="z-10 md:relative">
             <button
               type="button"
               onClick={() => {
@@ -314,7 +314,7 @@ const BlogCard = ({ card }) => {
               }}
               aria-label="Share post"
               aria-expanded={shareOpen}
-              className={`relative z-10 cursor-pointer rounded-full p-1.5 transition-colors ${
+              className={`relative z-10 cursor-pointer rounded-full p-1.5 transition-colors max-md:after:absolute max-md:after:-inset-2 ${
                 shareOpen ? "text-emerald-500" : "hover:text-neutral-900 dark:hover:text-white"
               }`}
             >
