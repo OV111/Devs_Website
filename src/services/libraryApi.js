@@ -1,6 +1,6 @@
 import { API_BASE_URL, authHeaders } from "../../constants/api";
 
-export const fetchLibraryResources = async (params = {}) => {
+export const fetchLibraryResources = async (params = {}, signal) => {
   const url = new URL(`${API_BASE_URL}/library`);
 
   const { type, path, difficulty, topic, is_free, layer_id, q, page, limit } = params;
@@ -18,7 +18,7 @@ export const fetchLibraryResources = async (params = {}) => {
   if (page) url.searchParams.set("page", String(page));
   if (limit) url.searchParams.set("limit", String(limit));
 
-  const res = await fetch(url.toString());
+  const res = await fetch(url.toString(), { signal });
   if (!res.ok) throw new Error("Failed to fetch library resources");
   const data = await res.json();
   if (!data.success) throw new Error("Failed to fetch library resources");

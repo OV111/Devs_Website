@@ -33,20 +33,21 @@ export function Checkbox({
   children,
 }) {
   return (
-    <div
-      className={`flex items-center  cursor-pointer text-[13px] font-sans group ${
-        disabled ? "text-[#555]" : "text-[#e5e5e5]"
+    <label
+      className={`flex items-center cursor-pointer text-[13px] font-sans group ${
+        disabled ? "text-neutral-500" : "text-[#e5e5e5]"
       }`}
-      onClick={() => onChange && !indeterminate && onChange(!checked)}
     >
       <input
         disabled={disabled}
         type="checkbox"
         checked={checked}
-        onChange={() => {}}
-        className="sr-only"
+        onChange={() => onChange && !indeterminate && onChange(!checked)}
+        className="peer sr-only"
       />
-      <span className={getInputClasses(checked, disabled, indeterminate)}>
+      <span
+        className={`${getInputClasses(checked, disabled, indeterminate)} peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-purple-400`}
+      >
         <svg className="shrink-0" height="16" viewBox="0 0 20 20" width="16">
           {indeterminate ? (
             <line
@@ -69,6 +70,6 @@ export function Checkbox({
         </svg>
       </span>
       {children && <span className="ml-2">{children}</span>}
-    </div>
+    </label>
   );
 }

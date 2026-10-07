@@ -35,8 +35,8 @@ const ConnectedAccounts = lazy(
 const Blogs = lazy(() => import("./features/blogs/Blogs"));
 const RoadmapPage = lazy(() => import("./features/Roadmap/RoadmapPage"));
 const ExamPage = lazy(() => import("./features/Roadmap/ExamPage"));
-const LibsPage = lazy(() => import("./features/codingLibs/LibsPage"));
-const BookDetailPage = lazy(() => import("./features/codingLibs/BookDetailPage"));
+const LibsPage = lazy(() => import("./features/coding-libs/LibsPage"));
+const BookDetailPage = lazy(() => import("./features/coding-libs/BookDetailPage"));
 const CodingChallenges = lazy(
   () => import("./features/coding-challenges/CodingChallenges"),
 );

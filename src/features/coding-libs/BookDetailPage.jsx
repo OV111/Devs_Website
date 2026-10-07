@@ -46,7 +46,7 @@ function MonoLabel({ children, style, className = "" }) {
 function LoadingState() {
   return (
     <div
-      className="min-h-screen flex items-center justify-center"
+      className="min-h-dvh flex items-center justify-center"
       style={{ background: "#0a0a0c" }}
     >
       <div className="text-center">
@@ -63,10 +63,10 @@ function LoadingState() {
 function ErrorState({ message, onBack }) {
   return (
     <div
-      className="min-h-screen flex items-center justify-center"
+      className="min-h-dvh flex items-center justify-center"
       style={{ background: "#0a0a0c" }}
     >
-      <div className="text-center max-w-sm px-8">
+      <div className="text-center max-w-sm px-4 sm:px-8">
         <MonoLabel style={{ color: "#f87171", fontSize: 11 }} className="block mb-3">
           // error
         </MonoLabel>
@@ -130,7 +130,7 @@ export default function BookDetailPage() {
   // ── breadcrumb ─────────────────────────────────────────────────────────────
   const Breadcrumb = (
     <div
-      className="max-w-6xl mx-auto px-8 pt-6 pb-0 flex items-center gap-2"
+      className="max-w-6xl mx-auto px-4 pt-6 pb-0 flex items-center gap-2 sm:px-8"
       style={{ fontFamily: "monospace" }}
     >
       <button
@@ -304,13 +304,12 @@ export default function BookDetailPage() {
       />
 
       <div
-        className="max-w-6xl mx-auto px-8 relative"
+        className="max-w-6xl mx-auto px-4 relative sm:px-8"
         style={{ zIndex: 1 }}
       >
-        <div
-          className="flex flex-col md:flex-row items-end gap-12 pt-10"
-          style={{ alignItems: "flex-end" }}
-        >
+        {/* Stacked on phones, the old inline align-items:flex-end pushed the
+            book and its info to the right edge; left-align them below md. */}
+        <div className="flex flex-col items-start gap-6 pt-10 md:flex-row md:items-end md:gap-12">
           {/* Left — decorative book object */}
           <div style={{ position: "relative", zIndex: 2 }}>
             {BookObject}
@@ -472,7 +471,7 @@ export default function BookDetailPage() {
       >
         {/* left column — prose */}
         <div
-          className="px-8 py-10"
+          className="px-4 py-8 sm:px-8 sm:py-10"
           style={{ borderRight: "1px dotted #1a1a1a" }}
         >
           <h2
@@ -499,7 +498,7 @@ export default function BookDetailPage() {
         </div>
 
         {/* right column — code block */}
-        <div className="px-8 py-10">
+        <div className="px-4 py-8 sm:px-8 sm:py-10">
           <div
             style={{
               background: "#0a0a0c",
@@ -600,7 +599,7 @@ export default function BookDetailPage() {
       {Hero}
 
       {/* content area — pt-24 to clear the overlapping book card */}
-      <div className="max-w-6xl mx-auto px-8 pt-24 pb-20">
+      <div className="max-w-6xl mx-auto px-4 pt-16 pb-20 sm:px-8 sm:pt-24">
         {ReadingPreview}
 
         {/* dotted divider */}

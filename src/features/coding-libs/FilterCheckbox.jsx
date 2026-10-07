@@ -8,7 +8,7 @@ export default function FilterCheckbox({ label, count, active, onClick }) {
         {label}
       </Checkbox>
       {count !== undefined && (
-        <span className="text-[#444] text-[12px]">{count}</span>
+        <span className="text-neutral-400 text-xs">{count}</span>
       )}
     </li>
   );
