@@ -45,7 +45,7 @@
     "test:queue": "vitest run --config config/vitest.queue.config.js",
     "test:performance": "vitest run --config config/vitest.performance.config.js",
     "test:security": "vitest run --config config/vitest.security.config.js",
-    "prepare": "husky"
+    "prepare": "husky || true"
   },
   "dependencies": {
     "@codemirror/commands": "^6.11.1",

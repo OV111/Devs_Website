@@ -13,7 +13,7 @@ services:
     runtime: node
     plan: free
     region: frankfurt             # closest Render region to Armenia; put Atlas in eu-central too
-    buildCommand: npm ci
+    buildCommand: npm ci --omit=dev   # the API needs no devDependencies (vite, eslint, husky)
     # --no-node-snapshot is required by isolated-vm (the code-runner sandbox) on Node 20+.
     startCommand: npm start
     healthCheckPath: /healthz
