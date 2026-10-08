@@ -26,6 +26,7 @@ const COMPANY_LINKS = [
   { title: "About", to: "/about" },
   { title: "Contact", to: "/contact" },
   { title: "Privacy Policy", to: "/privacy" },
+  { title: "Terms of Service", to: "/terms" },
 ];
 const CATEGORY_LINKS = CATEGORY_OPTIONS.map(({ title, slug }) => ({
   title,

@@ -13,6 +13,7 @@ import ResetPassword from "./pages/ResetPassword";
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Privacy = lazy(() => import("./pages/Privacy"));
+const Terms = lazy(() => import("./pages/Terms"));
 const MyProfile = lazy(() => import("./pages/MyProfile"));
 const GetStarted = lazy(() => import("./pages/GetStarted"));
 const ReadMore = lazy(() => import("./components/blog/ReadMore"));
@@ -83,6 +84,7 @@ const router = createBrowserRouter([
       { path: "about", element: <About /> },
       { path: "contact", element: <Contact /> },
       { path: "privacy", element: <Privacy /> },
+      { path: "terms", element: <Terms /> },
       { path: "pricing", element: <PricingPage /> },
       // Public on purpose: guests browse the paths with every layer locked.
       // The exam route below stays protected.

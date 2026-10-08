@@ -29,6 +29,10 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://vahoha.com/terms</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://vahoha.com/categories/fullstack</loc>
     <priority>0.6</priority>
   </url>
