@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
 import useRoadmapStore from "@/stores/useRoadmapStore";
+import { useTrackLayers } from "../hooks/useTrackLayers";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import LayerDetail from "./LayerDetail";
 import { ConnectorProvider } from "./tree/ConnectorContext";
@@ -21,24 +21,11 @@ const DESKTOP_BREAKPOINT = "(min-width: 1280px)";
 
 const RoadmapTree = () => {
   const { selectedTrack, selectedCategory, isPanelOpen, layerProgress } = useRoadmapStore();
-  const [categoryData, setCategoryData] = useState({});
-  const [loadingCategory, setLoadingCategory] = useState(false);
   const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT);
+  // Fetches only the selected track (~50 KB), not its whole category file.
+  const { layers, loading, error } = useTrackLayers(selectedCategory?.id, selectedTrack?.id);
 
-  useEffect(() => {
-    if (!selectedCategory) return;
-    setLoadingCategory(true);
-    import(`../../../data/roadmaps/${selectedCategory.id}.json`)
-      .then((mod) => {
-        setCategoryData(mod.default);
-        setLoadingCategory(false);
-      })
-      .catch(() => setLoadingCategory(false));
-  }, [selectedCategory]);
-
-  const layers = selectedTrack ? categoryData[selectedTrack.id] : null;
-
-  if (loadingCategory) {
+  if (loading) {
     return (
       <motion.div
         className="mt-20 flex flex-col items-center gap-3"
@@ -49,6 +36,21 @@ const RoadmapTree = () => {
         <div className="w-5 h-5 rounded-full border-2 border-purple-500 border-t-transparent animate-spin" />
         <p className="text-xs text-neutral-600">Loading roadmap...</p>
       </motion.div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="mt-20 flex flex-col items-center gap-3" role="alert">
+        <p className="text-sm text-neutral-400">Couldn&rsquo;t load this roadmap.</p>
+        <button
+          type="button"
+          onClick={() => window.location.reload()}
+          className="text-xs text-purple-400 underline underline-offset-4 hover:text-purple-300"
+        >
+          Try again
+        </button>
+      </div>
     );
   }
 
