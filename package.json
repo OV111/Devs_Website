@@ -32,6 +32,7 @@
     "preview": "vite preview",
     "redis": "docker start redis-dev || docker run -d -p 6379:6379 --name redis-dev --restart unless-stopped redis",
     "dev:full": "npm run redis && concurrently -n web,api -c cyan,magenta \"npm run dev\" \"nodemon backend/server.js\"",
+    "eval:mentor": "node backend/scripts/evalMentor.js",
     "test:unit": "vitest run --config config/vitest.unit.config.js",
     "test:unit:watch": "vitest --config config/vitest.unit.config.js",
     "test:unit:coverage": "vitest run --config config/vitest.unit.config.js --coverage",
