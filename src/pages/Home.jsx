@@ -4,6 +4,7 @@ import useAuthStore from "../stores/useAuthStore";
 import RiseText from "../components/RiseText";
 import Divider from "../components/ui/Divider";
 import HowItWorks from "../components/home/HowItWorks";
+import vahohaMark from "@/assets/vahoha_mark_circle.png";
 
 const Home = () => {
   const { auth } = useAuthStore();
@@ -25,7 +26,8 @@ const Home = () => {
           className="rt-fade mb-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1"
           style={{ "--delay": "0ms" }}
         >
-          <span className="text-sm leading-6 font-normal text-neutral-300 sm:text-base sm:leading-7 md:text-[18px] md:leading-[29.25px]">
+          <span className="inline-flex items-center gap-2.5 text-sm leading-6 font-normal text-neutral-300 sm:text-base sm:leading-7 md:text-[18px] md:leading-[29.25px]">
+            <img src={vahohaMark} alt="" className="h-7 w-7 rounded-full md:h-8 md:w-8" />
             Vahoha
           </span>
           <span className="text-neutral-600" aria-hidden="true">|</span>

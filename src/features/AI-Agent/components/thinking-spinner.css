@@ -1,0 +1,20 @@
+/* One full turn every 2.4s. Paused (not removed) when idle, so it stops where it is
+   instead of snapping back to 0deg. */
+.vh-spin__ring {
+  transform-origin: 32px 32px;
+  animation: vh-spin 2.4s linear infinite;
+  animation-play-state: paused;
+}
+.vh-spin.is-thinking .vh-spin__ring {
+  animation-play-state: running;
+}
+@keyframes vh-spin {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vh-spin__ring { animation: none; }
+  .vh-spin.is-thinking { animation: vh-pulse 1.6s ease-in-out infinite; }
+}
+@keyframes vh-pulse {
+  50% { opacity: 0.55; }
+}

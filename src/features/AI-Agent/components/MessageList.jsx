@@ -6,6 +6,7 @@ import MessageSkeleton from "./MessageSkeleton";
 import MessageActions from "./MessageActions";
 import ContextCard from "./ContextCard";
 import TeachBackCard from "./TeachBackCard";
+import ThinkingSpinner from "./ThinkingSpinner";
 
 // How close to the bottom (px) still counts as "following along". If the user
 // has scrolled further up than this, we leave their scroll position alone.
@@ -171,17 +172,9 @@ export default function MessageList({
                 <span className="animate-pulse text-[14px] text-white">▊</span>
               </>
             ) : (
-              // Before the first token arrives, show a thinking indicator rather
+              // Before the first token arrives, show the spinning brand mark rather
               // than a bare cursor, so the wait reads as progress.
-              <div className="flex items-center gap-1.5">
-                {[0, 150, 300].map((delay) => (
-                  <span
-                    key={delay}
-                    className="w-1.5 h-1.5 rounded-full bg-purple-500/70 animate-bounce"
-                    style={{ animationDelay: `${delay}ms` }}
-                  />
-                ))}
-              </div>
+              <ThinkingSpinner thinking size={24} />
             )}
           </div>
         )}

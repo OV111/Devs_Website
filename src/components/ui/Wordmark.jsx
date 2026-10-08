@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import vahohaMark from "@/assets/vahoha_mark_circle.png";
 
 // The brand name is a logo, so it must render identically everywhere: same
 // typeface as the hero headline (Geist), same weight, same tracking. Only the
@@ -9,7 +10,9 @@ const SIZES = {
   md: "text-xl",
 };
 
-const Wordmark = ({ size = "md", className }) => (
+// `markOnMobile`: below the md breakpoint the name collapses to the logo mark, so
+// a crowded mobile navbar keeps its space. The link keeps its aria-label either way.
+const Wordmark = ({ size = "md", className, markOnMobile = false }) => (
   <Link
     to="/"
     aria-label="Vahoha home"
@@ -20,7 +23,14 @@ const Wordmark = ({ size = "md", className }) => (
     )}
     style={{ fontFamily: '"Geist Variable", system-ui, sans-serif' }}
   >
-    Vahoha
+    {markOnMobile ? (
+      <>
+        <img src={vahohaMark} alt="" className="block h-8 w-8 rounded-full md:hidden" />
+        <span className="hidden md:inline">Vahoha</span>
+      </>
+    ) : (
+      "Vahoha"
+    )}
   </Link>
 );
 

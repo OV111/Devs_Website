@@ -101,9 +101,7 @@ const Footer = () => {
           <div className="col-span-2 flex flex-col items-start sm:col-span-4 lg:col-span-1">
             <Wordmark className="mb-4" />
             <p className="mb-6 max-w-sm text-sm leading-6 text-[#A1A0AB]">
-              Vahoha is where developers learn, build, and grow — community
-              content, structured roadmaps you have to earn, and a personal AI
-              mentor that knows exactly where you are in your journey.
+              Learn, build, and grow as a developer.
             </p>
 
             <p className="mb-4 text-xs font-semibold tracking-[0.22em] text-[#F7F7F8] uppercase">

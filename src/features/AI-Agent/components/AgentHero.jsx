@@ -1,5 +1,5 @@
 import useProfileStore from "@/stores/useProfileStore";
-import hexLogo from "@/assets/vahoha_mark_transparent.png";
+import hexLogo from "@/assets/vahoha_mark_circle.png";
 import TextType from "@/components/effects/TextType";
 
 function getGreeting() {
@@ -28,7 +28,7 @@ export default function AgentHero() {
           <img
             src={hexLogo}
             alt="Vahoha"
-            className="w-9 h-9 sm:w-11 sm:h-11 object-contain"
+            className="w-9 h-9 sm:w-11 sm:h-11 object-contain rounded-full"
           />
           <h1 className="text-xl sm:text-2xl lg:text-4xl font-semibold tracking-tight truncate min-w-0 text-white">
             {greeting}
