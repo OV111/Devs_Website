@@ -7,6 +7,7 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "predev": "node scripts/splitRoadmaps.js",
     "dev": "vite",
     "start": "node --no-node-snapshot backend/server.js",
     "seed:roadmap": "node backend/seeders/roadmapSeeder.js",
@@ -22,7 +23,9 @@
     "migrate:mastery": "node backend/scripts/recomputeMastery.js",
     "seed:concepts": "node backend/seeders/conceptSeeder.js",
     "seed:rubrics": "node backend/seeders/teachBackRubricSeeder.js",
+    "prebuild": "node scripts/splitRoadmaps.js",
     "build": "vite build",
+    "prebuild:staging": "node scripts/splitRoadmaps.js",
     "build:staging": "vite build --mode staging",
     "server": "nodemon --exec \"node --no-node-snapshot\" backend/server.js",
     "lint": "eslint .",
