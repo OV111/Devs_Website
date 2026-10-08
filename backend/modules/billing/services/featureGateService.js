@@ -3,7 +3,7 @@ import { getEntitlement } from "./subscriptionService.js";
 
 /**
  * The single place that answers "may this user do this?" — the enforcement point
- * BUSINESS_MODEL.md calls the most critical business-logic file.
+ * docs/strategy/BUSINESS_MODEL.md calls the most critical business-logic file.
  *
  * Routes call `canAccess` and never look at subscriptions themselves, so changing
  * what a plan includes is a one-file edit.

@@ -9,7 +9,7 @@
 
 > ### Status update — 2026-10-01
 >
-> This document was written when the learning loop did not exist. It does now (roadmap routes, exam engine, AI mentor are all mounted; see `ADVISORY_BOARD_REPORT.md` for the code-level audit). What that changes:
+> This document was written when the learning loop did not exist. It does now (roadmap routes, exam engine, AI mentor are all mounted; see `docs/strategy/ADVISORY_BOARD_REPORT.md` for the code-level audit). What that changes:
 >
 > | June claim | Now |
 > |---|---|
@@ -146,7 +146,7 @@ Everything else is content delivery. Vahoha is the first platform where the **pr
 
 ### Business Model / Monetization
 
-*(Update: no billing exists yet. Prices below are hypotheses; the AI-message cap is now 30/day. Full detail in `BUSINESS_MODEL.md`.)*
+*(Update: no billing exists yet. Prices below are hypotheses; the AI-message cap is now 30/day. Full detail in `docs/strategy/BUSINESS_MODEL.md`.)*
 
 | Tier | Price | Who It's For | Key Value |
 |---|---|---|---|
@@ -229,7 +229,7 @@ Days 1–6 of the original plan were completed over the summer, except the Strip
 
 | Step | Task |
 |---|---|
-| 1 | Pre-pilot hardening: `helmet`, re-enable exam cooldown, confirm Redis in prod, confirm Groq limits (checklist in `ADVISORY_BOARD_REPORT.md` §9) |
+| 1 | Pre-pilot hardening: `helmet`, re-enable exam cooldown, confirm Redis in prod, confirm Groq limits (checklist in `docs/strategy/ADVISORY_BOARD_REPORT.md` §9) |
 | 2 | Record 7 core events (signup → exam passed → return visit) |
 | 3 | Run the loop yourself on production as a brand-new account |
 | 4 | **Get 10 people through the loop. Watch. Fix the top 3 issues** (the unfinished Day 7) |
@@ -340,7 +340,7 @@ The timing is right. The window is open. It will not stay open indefinitely.
 ### Hidden Risks You Missed
 
 **1. You have no feedback loop yet.** *(Still true, and now the #1 risk.)*
-The VISION.md, BUSINESS_MODEL.md, and ADVISORY_BOARD_REPORT.md are excellent documents. But they are based on assumptions, not user behavior. You have zero analytics, no real user data, and no users who have completed the actual learning loop. You are planning with 100% conviction and 0% signal. In June this was "wire 5 events this week"; four months and ~60 commits later the events still do not exist while the Arena does. That ordering is the thing to correct.
+The docs/strategy/VISION.md, docs/strategy/BUSINESS_MODEL.md, and docs/strategy/ADVISORY_BOARD_REPORT.md are excellent documents. But they are based on assumptions, not user behavior. You have zero analytics, no real user data, and no users who have completed the actual learning loop. You are planning with 100% conviction and 0% signal. In June this was "wire 5 events this week"; four months and ~60 commits later the events still do not exist while the Arena does. That ordering is the thing to correct.
 
 **2. Curriculum is a full-time job you haven't started.**
 Eight paths. Multiple layers each. Curated content, exam questions, layer videos, library connections. This is not engineering work. It is curriculum design. You cannot engineer your way out of this. It is the biggest non-engineering constraint in the project and it appears nowhere in your build order as a discrete task with a time estimate.
@@ -425,7 +425,7 @@ Sell the platform directly to 3 companies as a developer onboarding tool at $500
 
 ### Final Verdict
 
-**Vahoha can be a startup. It cannot be all of VISION.md right now.**
+**Vahoha can be a startup. It cannot be all of docs/strategy/VISION.md right now.**
 
 The idea deserves to exist. The execution risk is real. *(Update 2026-10-01: the core loop is built. The path forward is now: harden it, get 10 and then 50 real users through it, and let the data tell you which direction to go next.)*
 
@@ -434,7 +434,7 @@ The idea deserves to exist. The execution risk is real. *(Update 2026-10-01: the
 
 **The idea is not the risk. The scope is the risk.**
 
-The version of Vahoha in VISION.md — 12 phases, 8 paths, AI agent, exam engine, capstone, employer access, platform intelligence — that is a Series A company. That requires a team, time, and capital.
+The version of Vahoha in docs/strategy/VISION.md — 12 phases, 8 paths, AI agent, exam engine, capstone, employer access, platform intelligence — that is a Series A company. That requires a team, time, and capital.
 
 The version of Vahoha that is one path, three layers, a working AI agent, and a $15/month paywall — that is a bootstrapped startup one person can build. And that version, if it gets 200 paying users, is either self-sustaining or fundable.
 

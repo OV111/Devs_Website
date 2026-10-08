@@ -5,8 +5,8 @@
 >
 > ### How this was produced (and its limits)
 >
-> - **Read:** `VISION.md` (repo root, not `docs/`), `BUSINESS_MODEL.md`, `ARCHITECTURE.md`, `docs/ROADMAP_BUILD_PLAN.md`, `docs/FUTURE_IDEAS.md`, `docs/VOICE_EXAM_SPEC.md`, `STARTUP_ADVISOR_ANALYSIS.md`, plus the backend route mounts, exam/agent services and `git log`. I did **not** run the app, and I have no user or usage data, because none exists.
-> - **`STARTUP_ADVISOR_ANALYSIS.md` is not an independent opinion.** I (Claude) edited it earlier today to bring its status claims up to date. This review challenges several of its recommendations; see §"Where I'm overturning the previous opinion".
+> - **Read:** `docs/strategy/VISION.md` (repo root, not `docs/`), `docs/strategy/BUSINESS_MODEL.md`, `docs/ARCHITECTURE.md`, `docs/ROADMAP_BUILD_PLAN.md`, `docs/FUTURE_IDEAS.md`, `docs/VOICE_EXAM_SPEC.md`, `docs/strategy/STARTUP_ADVISOR_ANALYSIS.md`, plus the backend route mounts, exam/agent services and `git log`. I did **not** run the app, and I have no user or usage data, because none exists.
+> - **`docs/strategy/STARTUP_ADVISOR_ANALYSIS.md` is not an independent opinion.** I (Claude) edited it earlier today to bring its status claims up to date. This review challenges several of its recommendations; see §"Where I'm overturning the previous opinion".
 > - **Plugins.** The Product Management plugin (`competitive-brief`, `product-brainstorming`, `metrics-review`, `roadmap-update`) is installed on disk (v1.2.0) but **not loaded into this session**, because plugins load at startup. I followed the `competitive-brief` structure by hand. **No `market-researcher` skill exists** in any installed marketplace, and I found no dedicated positioning/ICP skill in the Product Management plugin (the separate `marketingskills` marketplace has `product-marketing` and `customer-research`, also not loaded). Restart Claude Code and rerun if you want those invoked formally.
 > - **Market claims are cited** `[S#]` with a source list at the end. Several junior-job-market statistics come from low-quality aggregator blogs whose numbers disagree (50–73% declines). Treat them as *direction, not magnitude*.
 > - Everything labelled **"my judgment"** is a threshold or opinion, not an industry fact.
@@ -30,7 +30,7 @@ You have built, alone, the engineering of a product that many funded teams would
 ## 3. Top 5 problems, ranked by severity
 
 ### P1 — No demand evidence at all, and the plan to get it is too weak *(fatal if unaddressed)*
-Zero users, zero conversations logged, zero events recorded. Four months of commits since the June advice to "recruit 10 users" went into the Arena, group chat, voice review scaffolds and a rebrand. Every number in `BUSINESS_MODEL.md` is an assumption. The earlier plan's success bar ("≥5 of 10 hand-recruited users return for Layer 2") is also **too weak**: ten hand-picked, polite users returning is not evidence anyone will pay.
+Zero users, zero conversations logged, zero events recorded. Four months of commits since the June advice to "recruit 10 users" went into the Arena, group chat, voice review scaffolds and a rebrand. Every number in `docs/strategy/BUSINESS_MODEL.md` is an assumption. The earlier plan's success bar ("≥5 of 10 hand-recruited users return for Layer 2") is also **too weak**: ten hand-picked, polite users returning is not evidence anyone will pay.
 
 ### P2 — The "no one has AI + roadmap + exams" claim is stale; differentiation has shrunk to the voice teach-back
 Your docs (including the one I edited today) still lean on "nobody combines gated progression + AI mentor + verified profile." Today: roadmap.sh has an AI tutor with generated courses, quizzes and unlimited chat at $10/month (3.2M active learners claimed) [S1]; Boot.dev is a gamified, backend-focused, XP/quest-gated product with 1M+ students claimed [S3]; CodeSignal's Cosmo does adaptive AI tutoring [S4]. *Gating* is a design choice anyone can copy; the data moat requires users you don't have. See §7.
@@ -95,7 +95,7 @@ Verified rates [S13]: `gpt-oss-120b` $0.15 / $0.60 per million input/output toke
 | Heavy Pro user at the 30/day cap | ~$1–2/month | 900 messages/month |
 | Whisper STT, 6.25 min of audio per graded exam | < $0.01 | $0.04/hr × 0.104 hr ≈ $0.004 |
 | Graded voice exam, all-in | ~$0.08–0.09 | your spec's recommended stack (two stronger grading runs, cached examiner prompts) |
-| Fixed hosting | ~$100–160/month | `BUSINESS_MODEL.md`, not re-verified |
+| Fixed hosting | ~$100–160/month | `docs/strategy/BUSINESS_MODEL.md`, not re-verified |
 
 **Conclusion: AI cost is a rounding error against a $10–15 price.** The real unit-economics costs are **your hours**: rubric authoring (~2–3 hours/layer per your spec), calibration, support, instructor onboarding, and sales/outreach. At $15/month, 10 paying users cover hosting; 100 paying users is $1,500/month before Stripe. That doesn't replace a junior developer salary, so don't plan your life around the B2C outcome in year one.
 
@@ -111,7 +111,7 @@ See §6 (the three riskiest) and the problems above.
 
 ---
 
-## 5. Where I'm overturning the previous opinion (`STARTUP_ADVISOR_ANALYSIS.md`)
+## 5. Where I'm overturning the previous opinion (`docs/strategy/STARTUP_ADVISOR_ANALYSIS.md`)
 
 | Previous position | This review |
 |---|---|
@@ -142,7 +142,7 @@ See §6 (the three riskiest) and the problems above.
 **CONTINUE**
 - Backend path only; Layers 1–3 only.
 - Server-side exam integrity; the Groq decision (revisit only on quality complaints).
-- The pre-pilot hardening checklist in `ADVISORY_BOARD_REPORT.md` §9 (helmet, cooldown, bank review, Redis).
+- The pre-pilot hardening checklist in `docs/strategy/ADVISORY_BOARD_REPORT.md` §9 (helmet, cooldown, bank review, Redis).
 - Treating gating as a hypothesis to defend with data, not a belief.
 
 ---

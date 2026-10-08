@@ -1,5 +1,5 @@
 // Speech-to-text wrapper — scaffold only, not implemented.
-// See VISION.md > "Voice AI Progress Review" prerequisites: pick an STT vendor and
+// See docs/strategy/VISION.md > "Voice AI Progress Review" prerequisites: pick an STT vendor and
 // prototype cost-per-session before committing (determines pricing tier feasibility).
 //
 // Candidate vendors to evaluate: OpenAI Whisper API, Deepgram, AssemblyAI.
@@ -14,5 +14,5 @@
 // this keeps the free version viable without adding a new per-user cost the free tier can't absorb.
 
 export const transcribeAudio = async () => {
-  throw new Error("Not implemented — see VISION.md > Voice AI Progress Review");
+  throw new Error("Not implemented — see docs/strategy/VISION.md > Voice AI Progress Review");
 };

@@ -1,5 +1,5 @@
 // Voice AI Progress Review — scaffold only, not implemented.
-// See VISION.md > "Voice AI Progress Review" for the full spec.
+// See docs/strategy/VISION.md > "Voice AI Progress Review" for the full spec.
 //
 // Planned responsibilities:
 // - transcribeSession(db, userId, path, layer, audio)   -> sends recorded audio to STT (see agent/transcriptionService.js), stores raw transcript
@@ -10,13 +10,13 @@
 // Async v1 only (record -> review after). Live/sync follow-up questioning is a later iteration.
 
 export const transcribeSession = async () => {
-  throw new Error("Not implemented — see VISION.md > Voice AI Progress Review");
+  throw new Error("Not implemented — see docs/strategy/VISION.md > Voice AI Progress Review");
 };
 
 export const reviewTranscript = async () => {
-  throw new Error("Not implemented — see VISION.md > Voice AI Progress Review");
+  throw new Error("Not implemented — see docs/strategy/VISION.md > Voice AI Progress Review");
 };
 
 export const getVoiceReviewHistory = async () => {
-  throw new Error("Not implemented — see VISION.md > Voice AI Progress Review");
+  throw new Error("Not implemented — see docs/strategy/VISION.md > Voice AI Progress Review");
 };

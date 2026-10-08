@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { motion as Motion } from "motion/react";
 import { Lock, Target, Bot, Check, Github } from "lucide-react";
 
-// Copy follows VISION.md (problem → solution → who it's for). Everything on
+// Copy follows docs/strategy/VISION.md (problem → solution → who it's for). Everything on
 // this page must be true today: no invented user counts, no placeholder
 // socials, and roadmap items only for work that's built or actually planned.
 

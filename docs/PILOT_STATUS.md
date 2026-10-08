@@ -1,6 +1,6 @@
 # Pilot Status
 
-> Updated: 2026-10-02 · Tracks the pre-pilot checklist (`ADVISORY_BOARD_REPORT.md` §9) and the fixes from `docs/STARTUP_CRITIQUE_2026-10.md`.
+> Updated: 2026-10-02 · Tracks the pre-pilot checklist (`docs/strategy/ADVISORY_BOARD_REPORT.md` §9) and the fixes from `docs/STARTUP_CRITIQUE_2026-10.md`.
 
 The technical prep for the pilot is mostly done. What's left is mostly yours: content review, setup, and talking to users.
 
@@ -26,7 +26,7 @@ The technical prep for the pilot is mostly done. What's left is mostly yours: co
 | 2 | Hand-check every question marked `reviewed: false` | You | About 135 questions. A wrong answer key on a gated exam destroys trust |
 | 3 | Make yourself admin so you can read the funnel | You | `npm run admin:grant -- you@example.com` |
 | 4 | ~~Pick one product name~~ | Done | Vahoha. README, VISION and strategy docs updated 2026-10-02 |
-| 5 | Remove "AI-proctored" and "hard to fake" claims | You or Claude | `VISION.md` §5; see `docs/EXAM_INTEGRITY.md` |
+| 5 | Remove "AI-proctored" and "hard to fake" claims | You or Claude | `docs/strategy/VISION.md` §5; see `docs/EXAM_INTEGRITY.md` |
 | 6 | Confirm Redis is on in production | You | Auth rate-limit counters depend on it |
 | 7 | Check Groq limits for about 10 concurrent users | You | Move to the paid tier if the free tier rate-limits |
 | 8 | Create the $29 one-off product in Polar | You | For the payment test in `docs/OUTREACH_KIT.md` |

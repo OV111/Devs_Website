@@ -266,7 +266,7 @@ The risk is time-to-revenue. The mitigation is launching with Free + Pro as earl
 | 6. Launch with Free + Pro only | ❌ Not started (flip `BILLING_ENFORCED` and add gates) |
 
 ### Step 4 — Pilot and Instrument
-No one can pay for what nobody has validated. The events are now recorded server-side (signup, path selected, exam started, exam submitted with score, mentor message, teach-back, active day). Recruit users by hand (`GROWTH_PLAYBOOK.md`, `docs/OUTREACH_KIT.md`) and read the funnel for Layer 1 → Layer 2 return. Do not rely on that number alone: ten polite hand-picked users returning is not evidence anyone will pay, so also collect a real payment.
+No one can pay for what nobody has validated. The events are now recorded server-side (signup, path selected, exam started, exam submitted with score, mentor message, teach-back, active day). Recruit users by hand (`docs/strategy/GROWTH_PLAYBOOK.md`, `docs/OUTREACH_KIT.md`) and read the funnel for Layer 1 → Layer 2 return. Do not rely on that number alone: ten polite hand-picked users returning is not evidence anyone will pay, so also collect a real payment.
 
 ### Step 5 — Billing and Feature Gating
 Checkout, the webhook handler and subscription state are built on Polar (`backend/modules/billing`: `checkoutService`, `webhookService`, `subscriptionService`, `featureGateService`). **What remains is gating:** deciding what Pro actually unlocks (candidates: higher mentor cap, detailed exam review and the topic-level mastery map, library entries marked non-free, Arena submission cap, voice-exam extras) and calling `canAccess(db, userId, "pro")` from those routes. All roadmaps stay free by decision.

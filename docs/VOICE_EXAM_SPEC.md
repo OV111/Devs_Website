@@ -1,7 +1,7 @@
 # Voice Exam — Product & Technical Spec
 
 > **Status: DRAFT for approval. No implementation exists.** Written 2026-10-01.
-> Sources read: `VISION.md` (repo root, not `docs/`), `docs/ROADMAP_BUILD_PLAN.md`, `docs/FUTURE_IDEAS.md`, `ARCHITECTURE.md`, `BUSINESS_MODEL.md`, and the live exam / teach-back / mastery / mentor code.
+> Sources read: `docs/strategy/VISION.md` (repo root, not `docs/`), `docs/ROADMAP_BUILD_PLAN.md`, `docs/FUTURE_IDEAS.md`, `docs/ARCHITECTURE.md`, `docs/strategy/BUSINESS_MODEL.md`, and the live exam / teach-back / mastery / mentor code.
 > Tooling note: the Product Management `write-spec` skill and the `frontend-design` skill are **not installed** in this environment. The spec follows a write-spec-style structure by hand; §16 describes screens in prose rather than a designed mockup.
 > **Decisions recorded 2026-10-01:** (1) **soft gate** — MCQ still unlocks the next layer, voice exam adds "verified" status; (2) **Free tier gets ≥3 graded voice exams/month** (quota per account across all tracks — to confirm); (3) every core prompt covers all `mustHave` concepts (Q2 = A); (4) examiner TTS **deferred**, and where used it should be a **free option** (browser `speechSynthesis` or self-hosted open-source), not a paid vendor; (5) human senior mentors / exemplar answers are a **future idea** (§20), not V1.
 > Pricing figures in §11–12 are approximate list prices from memory — **re-verify every number before committing to a provider.**
@@ -15,7 +15,7 @@ These are facts from the repo, not assumptions. Several contradict the brief or 
 | # | Finding | Consequence |
 |---|---|---|
 | F1 | **MCQ is per layer, not per mini-topic.** `examEngineService.generateAttempt` serves one 15-question exam per layer; questions carry a `topic` tag; pass = 80% overall (`PASS_THRESHOLD`). Layer completion is written as `userProgress.layerProgress.<layer> = "done"` on MCQ pass. | "Unlocks only after all MCQs in the layer are passed" must be defined against this. See Open Question Q4. |
-| F2 | **There is no billing, tier or feature-gate code anywhere in the backend** (`grep` for subscription/tier/stripe/featureGate: nothing). `BUSINESS_MODEL.md` Step 3 (Stripe + `featureGateService`) is unbuilt. | Free/Pro/Edu limits cannot be enforced yet. Phase 6 is blocked on billing; earlier phases gate by allow-list/flag. | **Update 2026-10-02: resolved in part.** Polar billing, subscription state and `featureGateService.canAccess()` now exist (`backend/modules/billing`); nothing is gated yet.
+| F2 | **There is no billing, tier or feature-gate code anywhere in the backend** (`grep` for subscription/tier/stripe/featureGate: nothing). `docs/strategy/BUSINESS_MODEL.md` Step 3 (Stripe + `featureGateService`) is unbuilt. | Free/Pro/Edu limits cannot be enforced yet. Phase 6 is blocked on billing; earlier phases gate by allow-list/flag. | **Update 2026-10-02: resolved in part.** Polar billing, subscription state and `featureGateService.canAccess()` now exist (`backend/modules/billing`); nothing is gated yet.
 | F3 | **Teach-back already exists as a one-topic slice**: `teachBackEvaluatorService` (0–3 level rubric, Groq `openai/gpt-oss-120b`, temp 0.1), `submitTeachBack` + follow-up, `teach_back_rubrics` (4 rubrics total), `teach_back_sessions`, browser dictation (`useSpeechDictation`), and `TeachBackCard` which **reads the mentor's reply aloud via browser `speechSynthesis`**. | Reuse the ideas, not the code: the voice exam needs concept-level 0/1/2 scoring with verified quotes, a turn log and a state machine. The spoken mentor reply is the behaviour you said you do not want. |
 | F4 | **Teach-back writes a pseudo-exam into `examHistory`** (`saveExamResult` inside `submitTeachBack`/`FollowUp`). | The voice exam must **not** write `examHistory` — it would double-count in `loadTopicEvidence`. It gets its own collection and a dedicated evidence adapter (§12). |
 | F5 | **Rubric keys are inconsistent.** One rubric uses `layer: "layer-6"` (not a real layer id; real ids look like `api-dev-1`, `node-dev-6`); the other three use `api-dev-1` at *mini-topic* granularity ("DNS — domain resolution…"). | New rubrics are keyed by real `layerId` and live in a new collection. The old four are left alone. |
@@ -23,7 +23,7 @@ These are facts from the repo, not assumptions. Several contradict the brief or 
 | F7 | **LLM endpoints still have no rate limit**, `helmet` is not mounted, no input validation lib on old routes (`docs`/audit 2026-09-24). Zod and `express-rate-limit` *are* installed. | Voice endpoints cost real money per call; per-user rate limits + Zod are a **hard prerequisite**, not a nice-to-have. | **Update 2026-10-02: resolved in part.** `helmet` is mounted and the mentor and teach-back routes have per-user rate limits (`middleware/aiRateLimit.js`); voice endpoints would reuse them.
 | F8 | **Dependencies:** `openai`, `groq-sdk`, `cloudinary`, `bullmq`, `zod`, `express-rate-limit` are installed. **No `multer`/busboy, no S3/R2 SDK.** | Audio upload needs one new dependency; Cloudinary can store audio (as `video` resource type) as a no-new-vendor V1. |
 | F9 | **Mastery pipeline already ranks teach-back evidence above MCQ** (`deriveTopicStatus`: teach-back <60 ⇒ `shaky`). `deriveNextAction` is a pure function. | The voice exam plugs in as a third evidence source with one small adapter — no rewrite of mastery or the mentor. |
-| F10 | **Docs drift:** `VISION.md` still describes the roadmap/exam as unbuilt; both are built. Exam banks exist for 4 backend tracks (40 layers × 15 Qs). | Don't trust status tables; this spec is based on code. |
+| F10 | **Docs drift:** `docs/strategy/VISION.md` still describes the roadmap/exam as unbuilt; both are built. Exam banks exist for 4 backend tracks (40 layers × 15 Qs). | Don't trust status tables; this spec is based on code. |
 
 ---
 
@@ -292,7 +292,7 @@ Assumptions per **graded** exam: 4 min explanation + 3 × 45 s answers ≈ **6.2
 - **Practice mode** (browser STT, one cheap grade, no TTS, no storage) ≈ **$0.01**.
 - **Storage:** 6 min Opus ≈ 1–2 MB; negligible at 30-day retention.
 - **Per Pro user/month:** realistic 4 graded + 6 practice ≈ **$0.40**; abuse ceiling (one graded/day = 30) ≈ **$2.70** before practice caps.
-- **Budget reality:** `BUSINESS_MODEL.md` already allocates ~$3–5/user/month to the mentor. The $6 cap is shared, so the voice exam gets a **soft sub-budget of ~$1.50/user/month**, enforced by a per-user monthly `cost.usd` meter that blocks practice first, then raises a flag on graded attempts.
+- **Budget reality:** `docs/strategy/BUSINESS_MODEL.md` already allocates ~$3–5/user/month to the mentor. The $6 cap is shared, so the voice exam gets a **soft sub-budget of ~$1.50/user/month**, enforced by a per-user monthly `cost.usd` meter that blocks practice first, then raises a flag on graded attempts.
 - **Free tier:** 3 graded exams/month ≈ $0.27 per active exam-taker on the recommended stack (≈ $0.03 on the all-Groq/free-TTS stack). At 1,000 active free users ≈ $270 (≈ $30 on the cheap stack) — use the cheap stack for free users. Quota is **per account across all tracks**, otherwise 172 tracks make it unbounded. Practice for free users gets a small monthly cap.
 - **Edu:** price per student per cohort ≥ 5× estimated per-student cost; confirm after Phase 5 gives real per-exam cost telemetry.
 
@@ -414,7 +414,7 @@ Each phase leaves the app working and ships something testable. **Phase 1 delibe
 
 Raised 2026-10-01. Concept: besides the AI mentor, **real senior engineers** take part — e.g. listening to the best voice answers of top-rated students, and top students getting an opportunity out of it. Exact shape is undecided; candidates: (1) anonymised, consented **exemplar answers** played to learners as "how a top student explained X"; (2) human reviewers for flagged/top-scoring exams (also the human calibration set for §5/Phase 5); (3) an opportunity for top students (recognition, paid mentoring, mentor pipeline, employer visibility); (4) a human in the post-fail review gate.
 
-Notes: this **conflicts with `BUSINESS_MODEL.md`** ("no human instructors — the AI agent is the mentor"); recorded there as a possible future direction rather than a decision. Requires per-clip learner consent. Design hook already in the data model: attempts store per-concept scores, verified quotes and STT segment timestamps, which is most of what exemplars/reviews would need. Overlaps the Edu tier and the long-term employer marketplace.
+Notes: this **conflicts with `docs/strategy/BUSINESS_MODEL.md`** ("no human instructors — the AI agent is the mentor"); recorded there as a possible future direction rather than a decision. Requires per-clip learner consent. Design hook already in the data model: attempts store per-concept scores, verified quotes and STT segment timestamps, which is most of what exemplars/reviews would need. Overlaps the Edu tier and the long-term employer marketplace.
 
 ---
 

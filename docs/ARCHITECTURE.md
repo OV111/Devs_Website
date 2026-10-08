@@ -106,7 +106,7 @@ Single-instance Express 5 + MongoDB (native driver) + Redis/BullMQ, with WebSock
 
 - **One process.** HTTP, WebSocket and the BullMQ worker share one instance; the WebSocket `rooms` map and the rate-limit counters are in memory. Pin to one instance, or move counters to Redis before scaling out.
 - **Funnel query loads the whole signup cohort into memory** (`getFunnel`). Fine for a pilot; use an aggregation pipeline before thousands of users.
-- **The Arena executes submitted code** inside an `isolated-vm` isolate. In production it fails closed (submissions refused) if that native addon did not build, unless `ALLOW_UNSAFE_RUNNER=true`. The isolate has not had an independent security review (see `Security.md`).
+- **The Arena executes submitted code** inside an `isolated-vm` isolate. In production it fails closed (submissions refused) if that native addon did not build, unless `ALLOW_UNSAFE_RUNNER=true`. The isolate has not had an independent security review (see `docs/Security.md`).
 - **Rate limits are per process,** so a restart resets them.
 
 ## Open fixes, in priority order

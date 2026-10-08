@@ -1,6 +1,6 @@
 # Future Ideas — Not Scoped, Not Committed
 
-> Moved out of VISION.md 2026-09-30 to keep that document investor-readable. These are speculative concepts kept so the idea isn't lost — none are in scope until the MVP loop (see `ROADMAP_BUILD_PLAN.md`) is validated with real users.
+> Moved out of docs/strategy/VISION.md 2026-09-30 to keep that document investor-readable. These are speculative concepts kept so the idea isn't lost — none are in scope until the MVP loop (see `ROADMAP_BUILD_PLAN.md`) is validated with real users.
 
 ---
 
@@ -200,7 +200,7 @@ MCQ tests recognition and is gameable; explaining a concept out loud (or in writ
 ### Why this was risky to build early (reasoning, still relevant to scope decisions)
 
 - This is scope on top of an MVP loop (roadmap + exam engine) that isn't yet fully validated with real users — the mandate is "build the loop, get real users through it, then decide what's next."
-- Real-time voice adds a new cost axis on top of an AI agent cost model that's already the primary margin risk (see `BUSINESS_MODEL.md`).
+- Real-time voice adds a new cost axis on top of an AI agent cost model that's already the primary margin risk (see `docs/strategy/BUSINESS_MODEL.md`).
 - It needs real infra — a speech-to-text pipeline, turn-taking/interruption logic, and either a TTS voice or a "listen only" mode.
 
 **Where this fits:** a Pro-tier or higher differentiator, built out further only after the core exam-based loop has proven the Layer 1 → Layer 2 return rate is healthy — not a replacement for the MCQ exam.

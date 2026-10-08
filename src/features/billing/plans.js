@@ -1,14 +1,14 @@
 /**
  * Plan catalogue — the single source of truth for the pricing and billing UI.
  *
- * Everything here is a HYPOTHESIS taken from BUSINESS_MODEL.md (2026-10-01), not
+ * Everything here is a HYPOTHESIS taken from docs/strategy/BUSINESS_MODEL.md (2026-10-01), not
  * a shipped entitlement: there is no Stripe, no subscription state and no feature
  * gate yet, so nothing below is enforced. Two consequences shape this file:
  *
  *   1. `soon: true` marks a feature that is planned but not built. The UI shows a
  *      "Soon" tag instead of a check, so the page never advertises something that
  *      does not exist.
- *   2. Prices live here and nowhere else. BUSINESS_MODEL.md says the $15 price is
+ *   2. Prices live here and nowhere else. docs/strategy/BUSINESS_MODEL.md says the $15 price is
  *      still an open willingness-to-pay question — changing it is a one-line edit.
  *
  * When billing is built, the backend's `featureGateService` should read the same

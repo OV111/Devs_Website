@@ -33,7 +33,7 @@ Browser ──GET /api/billing/subscription──▶ plan, status, renewal date
 ## First-time setup (sandbox)
 
 1. Create a sandbox account at <https://sandbox.polar.sh> and an organization. Sandbox is fully isolated from production and uses Stripe test cards.
-2. **Products → New product:** "Pro", recurring, monthly, price **$15** (still an open pricing decision — see `BUSINESS_MODEL.md`). Copy the product id.
+2. **Products → New product:** "Pro", recurring, monthly, price **$15** (still an open pricing decision — see `docs/strategy/BUSINESS_MODEL.md`). Copy the product id.
 3. **Settings → Developers → New Access Token** with at least the scopes `checkouts:write`, `customer_sessions:write`, `subscriptions:read`. Copy it once (it is shown once).
 4. **Webhooks:** Polar must be able to reach your server, so `localhost` will not work. Run a tunnel (`ngrok http 3000`, or `cloudflared tunnel --url http://localhost:3000`) and add an endpoint:
    - URL: `https://<tunnel-host>/api/billing/webhook`

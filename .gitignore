@@ -53,3 +53,17 @@ uploads/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# Mentor eval run output
+backend/evals/results/
+
+
+# Generated per-track roadmap files (scripts/splitRoadmaps.js)
+public/roadmaps/
+
+# Local-only folders
+ui-ux-pro-max-skill/
+backups/
+
+# PostHog wizard output
+.posthog/

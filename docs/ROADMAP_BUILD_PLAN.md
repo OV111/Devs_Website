@@ -2,7 +2,7 @@
 
 > **Update 2026-10-02:** the Current State table below was rewritten against the code; the phase text further down is the original plan and is kept for reference. Live status: `docs/PILOT_STATUS.md`.
 
-> Moved out of VISION.md 2026-09-30 to keep that document investor-readable. This is the working build-status and phase-plan doc — update it as phases complete. `VISION.md` should stay a business/product doc; this is where implementation reality lives.
+> Moved out of docs/strategy/VISION.md 2026-09-30 to keep that document investor-readable. This is the working build-status and phase-plan doc — update it as phases complete. `docs/strategy/VISION.md` should stay a business/product doc; this is where implementation reality lives.
 > Last audit: 2026-09-27 (AI Mentor re-audit) / 2026-09-26 (Phase E verification pass, architecture health) / 2026-06-11 (original audit).
 
 ---
@@ -263,7 +263,7 @@ One real user (not the founder) on production: signs up → picks Backend → st
 | 13 | Company Portal & Talent Marketplace | Separate company auth, talent search, paid tiers | 500+ verified developer profiles with completed paths |
 | 14 | Platform Intelligence | Learning analytics, content quality signals, drop-off analytics, A/B infra | Enough users for the data to mean anything; start logging raw events earlier (cheap) so the data exists when this opens |
 
-Detailed specs for these phases (award tables, company-portal pricing, capstone flow, weekly-challenge mechanics) were written in earlier versions of `VISION.md` and remain valid as design references — see `git log --follow VISION.md` rather than re-deriving them.
+Detailed specs for these phases (award tables, company-portal pricing, capstone flow, weekly-challenge mechanics) were written in earlier versions of `docs/strategy/VISION.md` and remain valid as design references — see `git log --follow docs/strategy/VISION.md` rather than re-deriving them.
 
 ---
 

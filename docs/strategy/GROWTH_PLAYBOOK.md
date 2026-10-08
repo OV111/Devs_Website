@@ -5,7 +5,7 @@
 > **Prepared by:** Startup Co-Founder & Product Strategy Advisor
 > **Scope:** How to launch, how to get real users, and which discipline to use when (sales vs marketing vs growth)
 >
-> **What changed in this update:** the learning loop this playbook told you to build in Week 1 is now built (roadmap, exam engine, AI mentor). The plan therefore starts at *Week 0: pre-pilot hardening*, then goes straight to recruiting. Acquisition tactics (sections 2–3) are unchanged because they never depended on the build state. The pricing and timeline in Week 3 and the table below were revised: there is still no billing code, and the $15 price was set when AI costs were higher (see `BUSINESS_MODEL.md`). **Also decide the product name first** (homepage says Vahoha, everything else says Vahoha).
+> **What changed in this update:** the learning loop this playbook told you to build in Week 1 is now built (roadmap, exam engine, AI mentor). The plan therefore starts at *Week 0: pre-pilot hardening*, then goes straight to recruiting. Acquisition tactics (sections 2–3) are unchanged because they never depended on the build state. The pricing and timeline in Week 3 and the table below were revised: there is still no billing code, and the $15 price was set when AI costs were higher (see `docs/strategy/BUSINESS_MODEL.md`). **Also decide the product name first** (homepage says Vahoha, everything else says Vahoha).
 >
 > **Update 2026-10-02:** the Week 0 hardening is mostly done (helmet, cooldown, rate limits on LLM routes, server-side event tracking and an admin funnel). Billing now exists on Polar (not Stripe, which doesn't support Armenia) but is inert. The product name is **Vahoha**. Recruiting now has a working kit: `docs/OUTREACH_KIT.md` (DM scripts, interview questions, payment test, Day-21 decision). The plan also changed in one important way: **test payment before wiring gates**, and don't treat "10 users returned" as enough evidence anyone will pay.
 
@@ -24,7 +24,7 @@
 
 ### Week 0 — Pre-Pilot Hardening (mostly done)
 
-Status of the checklist from `ADVISORY_BOARD_REPORT.md` §9 (full list and owners in `docs/PILOT_STATUS.md`):
+Status of the checklist from `docs/strategy/ADVISORY_BOARD_REPORT.md` §9 (full list and owners in `docs/PILOT_STATUS.md`):
 
 - ✅ `helmet` mounted · ✅ exam cooldown back on · ✅ rate limits on the mentor and teach-back routes · ✅ 7 core events recorded server-side, with an admin funnel · ✅ product name decided (Vahoha)
 - ❌ Seed exam banks for one track's Layers 1–3 and **hand-check every question** (new questions are flagged `reviewed: false`)
@@ -85,7 +85,7 @@ This builds an audience before you need one. When you launch on Reddit or Produc
 | Month 2–3 | Widen to 50 users, decide on a second path from data |
 | Month 4–6 | Revisit Awards / Teams / employer conversations only if retention supports them |
 
-You do not need funding to get to Month 3. Fixed hosting is on the order of $100–160/month (see `BUSINESS_MODEL.md`) and AI inference is now cheap, so a handful of paying users covers costs. The real starting line is **retention evidence**, not revenue.
+You do not need funding to get to Month 3. Fixed hosting is on the order of $100–160/month (see `docs/strategy/BUSINESS_MODEL.md`) and AI inference is now cheap, so a handful of paying users covers costs. The real starting line is **retention evidence**, not revenue.
 
 ---
 

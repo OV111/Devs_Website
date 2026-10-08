@@ -14,7 +14,7 @@ No unproctored online exam is cheat-proof; HackerRank and CodeSignal accept the 
 - `COOLDOWN_ENABLED = false` (temporary flag, never switched back on).
 - `TIME_LIMIT_SECS = 600` for the whole exam (about 40s per question).
 - No tab-switch or paste logging. No proctoring.
-- `VISION.md` §5 claims "AI-proctored exam record." **False today; remove it.**
+- `docs/strategy/VISION.md` §5 claims "AI-proctored exam record." **False today; remove it.**
 
 ## Existing ideas in the repo
 

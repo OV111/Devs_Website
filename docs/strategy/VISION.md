@@ -1,6 +1,6 @@
 # Vahoha (formerly DevsWebs) — Vision
 
-> Living document. Business/product framing only — build status, phase plans, and architecture detail live in `docs/ROADMAP_BUILD_PLAN.md`, `ARCHITECTURE.md`, `BUSINESS_MODEL.md`, and `STARTUP_ADVISOR_ANALYSIS.md`.
+> Living document. Business/product framing only — build status, phase plans, and architecture detail live in `docs/ROADMAP_BUILD_PLAN.md`, `docs/ARCHITECTURE.md`, `docs/strategy/BUSINESS_MODEL.md`, and `docs/strategy/STARTUP_ADVISOR_ANALYSIS.md`.
 > Last updated: 2026-10-02. Corrected against the code and against `docs/STARTUP_CRITIQUE_2026-10.md`: exam-integrity and "no competitor" claims were overstated, traction and billing status were stale.
 
 ---
@@ -51,6 +51,19 @@ Learn → Build → Break → Fix → Get evaluated → Defend your decisions
 
 Much of this already exists: exams, Coding Challenges, Capstone repository review, and the Capstone technical defense (questions about your own code, answered under a timer). What is added over time is *Break* (realistic failure scenarios), *Fix* rounds after a review, and a weakness → targeted challenge → reassessment loop on the existing mastery data. Progress should come from evidence of ability (challenges, projects, defense answers, repeated performance), kept distinct from content completion. Status per item (MVP / V2 / future / experiment) is in `docs/ROADMAP_BUILD_PLAN.md`. None of this changes the pilot plan in section 10.
 
+### The learner journey, in short
+
+1. **Roadmap**: pick a track and see what to learn.
+2. **AI mentor**: guides you, knowing where you are and where you are weak.
+3. **Coding challenges**: small problems that build skill.
+4. **Exams**: gate each layer and feed mastery.
+5. **Capstone**: a bigger project, with repository review and a technical defense.
+6. **Build Teams**: build a real project with others; merged PRs become public evidence.
+7. **XP and profile**: the work shows up as a public profile.
+8. **Recruiter view**: recruiters see the evidence.
+
+Billing and readiness run across all of it. Stages 6-8 are built but not yet run end to end with real users.
+
 ---
 
 ## 4. Target users
@@ -91,7 +104,7 @@ Freemium SaaS, expanding later into a two-sided marketplace (developers prove sk
 | Employer Access *(future)* | $299/month | Hiring managers/recruiters | Search verified profiles + progression data |
 | Featured Company *(future)* | $599/month | Actively hiring companies | Above + visibility to developers on-platform |
 
-Pricing logic: the original reasoning ("below Cursor and Copilot, covers Claude API cost") no longer holds. The mentor runs on Groq `gpt-oss-120b`, a heavy user costs roughly $1–2/month, so price is a **willingness-to-pay question, not a cost question**, and roadmap.sh Pro is about $10. $15 is a hypothesis to test with a $29 early-access payment (`docs/OUTREACH_KIT.md`). Billing exists (Polar, sandbox-verified) but is switched off: everything is free during the pilot. Unit economics live in `BUSINESS_MODEL.md`.
+Pricing logic: the original reasoning ("below Cursor and Copilot, covers Claude API cost") no longer holds. The mentor runs on Groq `gpt-oss-120b`, a heavy user costs roughly $1–2/month, so price is a **willingness-to-pay question, not a cost question**, and roadmap.sh Pro is about $10. $15 is a hypothesis to test with a $29 early-access payment (`docs/OUTREACH_KIT.md`). Billing exists (Polar, sandbox-verified) but is switched off: everything is free during the pilot. Unit economics live in `docs/strategy/BUSINESS_MODEL.md`.
 
 The employer-facing tiers are Phase 13+ and explicitly gated on reaching 500+ verified developer profiles first — there's no employer product worth selling without a real pool of verified supply.
 
@@ -142,7 +155,7 @@ Build status lives in `docs/PILOT_STATUS.md` and `docs/ROADMAP_BUILD_PLAN.md`.
 
 ## 11. Metrics
 
-The few numbers that actually define success, pulled from the unit-economics model in `BUSINESS_MODEL.md`. The first one is measured by the pilot funnel (`GET /api/admin/funnel`); the rest need paying users and are unmeasured:
+The few numbers that actually define success, pulled from the unit-economics model in `docs/strategy/BUSINESS_MODEL.md`. The first one is measured by the pilot funnel (`GET /api/admin/funnel`); the rest need paying users and are unmeasured:
 
 - **Layer 1 → Layer 2 completion rate** — the core product-health signal; if this is low, the loop isn't working regardless of anything else.
 - **MRR growth rate** — target >15%/month once paid tiers are live; below 10% is a warning sign.

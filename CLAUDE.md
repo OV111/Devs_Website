@@ -98,7 +98,7 @@ Top 3 fixes to prioritize:
 `npm run dev` (frontend), `npm start` (backend), `npm run lint`, `npm run build`, `npm run test:unit`, `npm run admin:grant -- <email>`.
 
 ## Current focus
-Pilot first: finish `docs/PILOT_STATUS.md` pre-pilot items and talk to users. New features are frozen until pilot data says otherwise. Build Teams is built but has never been run end to end. Its admin UI is `src/features/teams/TeamAdminPage.jsx` (the user writes it; the router already imports it, so `vite build` fails until it exists).
+Make existing features work correctly, then deploy, then find users. No new features: the goal is fixing, testing end to end, and deploying what is already built (track it in `docs/PILOT_STATUS.md`). Users come after deploy. Build Teams is built but has never been run end to end. Its admin UI is `src/features/teams/TeamAdminPage.jsx` (the user writes it; the router already imports it, so `vite build` fails until it exists).
 
 ## Conventions
 - Teams UI uses the scoped Linear-style theme in `src/features/teams/teams-theme.css` (`.teams-theme` wrapper and `t-*` classes, purple as the single accent). Don't use global styles there.

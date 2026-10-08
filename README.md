@@ -244,7 +244,7 @@ Backend on Render (`render.yaml`), frontend on Vercel (`vercel.json`), database 
 
 | Doc | What it is |
 |---|---|
-| `VISION.md` | Business and product framing |
+| `docs/strategy/VISION.md` | Business and product framing |
 | `docs/PILOT_STATUS.md` | What's done, what's left before the first user |
 | `docs/STARTUP_CRITIQUE_2026-10.md` | Brutally honest review of the project |
 | `docs/STARTUP_REVIEW_2026-10.md` | Competitive review and 90-day plan |
@@ -255,8 +255,8 @@ Backend on Render (`render.yaml`), frontend on Vercel (`vercel.json`), database 
 | `docs/VOICE_EXAM_SPEC.md` | Spoken teach-back exam spec |
 | `docs/BILLING.md`, `docs/DEPLOYMENT.md` | Operations |
 | `docs/FUTURE_IDEAS.md` | Unscoped ideas, parked until the pilot |
-| `ARCHITECTURE.md`, `Security.md`, `ISSUES.md` | Technical status |
-| `BUSINESS_MODEL.md`, `GROWTH_PLAYBOOK.md`, `ADVISORY_BOARD_REPORT.md`, `STARTUP_ADVISOR_ANALYSIS.md` | Strategy |
+| `docs/ARCHITECTURE.md`, `docs/Security.md`, `docs/ISSUES.md` | Technical status |
+| `docs/strategy/BUSINESS_MODEL.md`, `docs/strategy/GROWTH_PLAYBOOK.md`, `docs/strategy/ADVISORY_BOARD_REPORT.md`, `docs/strategy/STARTUP_ADVISOR_ANALYSIS.md` | Strategy |
 
 ---
 

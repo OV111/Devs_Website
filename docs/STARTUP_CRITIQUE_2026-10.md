@@ -4,7 +4,7 @@
 
 Verdict: the engineering is strong, there is no evidence anyone wants this, and the main credential claim is false today.
 
-This review was written from the critic's side: it looks for why the startup fails, not for what to praise. Sources read: `README.md`, `VISION.md`, `BUSINESS_MODEL.md`, `GROWTH_PLAYBOOK.md`, `docs/STARTUP_REVIEW_2026-10.md`, `git log` since June 2026, and `backend/services/examEngineService.js`. The app was not run, and no user or usage data exists to check.
+This review was written from the critic's side: it looks for why the startup fails, not for what to praise. Sources read: `README.md`, `docs/strategy/VISION.md`, `docs/strategy/BUSINESS_MODEL.md`, `docs/strategy/GROWTH_PLAYBOOK.md`, `docs/STARTUP_REVIEW_2026-10.md`, `git log` since June 2026, and `backend/services/examEngineService.js`. The app was not run, and no user or usage data exists to check.
 
 ## 1. Top 5 fatal risks, ranked
 
@@ -16,11 +16,11 @@ The biggest risk is that you are writing strategy instead of talking to users. I
 2. **The credential is easy to fake, and the long-term plan depends on it.** `examEngineService.js:28` sets `QUESTIONS_PER_EXAM = 15` and serves the _whole_ bank every attempt.
    - Every attempt shows the same 15 questions. Only the answer order is shuffled.
    - Nothing proctors the exam. ChatGPT open in another tab passes it.
-   - `VISION.md` §5 promises "verified, hard-to-fake proof… AI-proctored exam record". That is false today.
-   - Without that promise, the employer tier, Teams, certificates and the data moat in `VISION.md` §6 all fall apart.
-3. **No proof that anyone will pay.** "Keanu" (`STARTUP_ADVISOR_ANALYSIS.md:107`) is a persona an AI wrote, not a person. Nowhere in the docs is there a quote, survey or payment from a real user.
-4. **Better-funded products already do this.** roadmap.sh has an AI tutor and quizzes for $10/month and 3.2M learners. Boot.dev owns gamified backend learning, the niche you picked. `BUSINESS_MODEL.md` still says "no one has combined…" and "This cannot [be copied]." roadmap.sh already did it.
-5. **Users leave when the product works.** Your user is job-hunting. Once hired, they cancel. The 5% monthly churn target in `BUSINESS_MODEL.md` ignores this. Learn-to-code subscriptions lose many users each month even when those users are happy.
+   - `docs/strategy/VISION.md` §5 promises "verified, hard-to-fake proof… AI-proctored exam record". That is false today.
+   - Without that promise, the employer tier, Teams, certificates and the data moat in `docs/strategy/VISION.md` §6 all fall apart.
+3. **No proof that anyone will pay.** "Keanu" (`docs/strategy/STARTUP_ADVISOR_ANALYSIS.md:107`) is a persona an AI wrote, not a person. Nowhere in the docs is there a quote, survey or payment from a real user.
+4. **Better-funded products already do this.** roadmap.sh has an AI tutor and quizzes for $10/month and 3.2M learners. Boot.dev owns gamified backend learning, the niche you picked. `docs/strategy/BUSINESS_MODEL.md` still says "no one has combined…" and "This cannot [be copied]." roadmap.sh already did it.
+5. **Users leave when the product works.** Your user is job-hunting. Once hired, they cancel. The 5% monthly churn target in `docs/strategy/BUSINESS_MODEL.md` ignores this. Learn-to-code subscriptions lose many users each month even when those users are happy.
 
 ## 2. Problem
 
@@ -40,7 +40,7 @@ No one knows who pays first, and the docs give no reason to switch.
 
 ## 4. Revenue
 
-Most of the revenue numbers in `BUSINESS_MODEL.md` fall apart under scrutiny. The cost side is the only part that holds: AI cost is close to zero, so margin is not the problem; demand is.
+Most of the revenue numbers in `docs/strategy/BUSINESS_MODEL.md` fall apart under scrutiny. The cost side is the only part that holds: AI cost is close to zero, so margin is not the problem; demand is.
 
 | Claim in the docs                                                              | Problem                                                                                                                         |
 | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -71,7 +71,7 @@ Competitor details come from `docs/STARTUP_REVIEW_2026-10.md` §7 and its source
 Too much has been built, and the core loop still lacks the pieces that would prove it works.
 
 - **Overbuilt:** the Arena with its code sandbox (your biggest attack surface), group chat, community proposals, blogs, 15 authored paths, and a 9-phase voice exam spec.
-- **Missing:** event tracking, billing, a public profile (the viral loop in `BUSINESS_MODEL.md` depends on it), real exam integrity, and one product name (since decided: Vahoha, formerly DevsWebs).
+- **Missing:** event tracking, billing, a public profile (the viral loop in `docs/strategy/BUSINESS_MODEL.md` depends on it), real exam integrity, and one product name (since decided: Vahoha, formerly DevsWebs).
 - **Too hard to build solo:** the voice exam with calibration (grades must closely match human graders, κ ≥ 0.7) and per-layer rubric authoring, plus the employer marketplace.
 
 ## 7. Moat

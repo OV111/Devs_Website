@@ -6,7 +6,7 @@
 > **Date:** 2026-10-01 (supersedes the 2026-06-03 edition)
 > **Prepared by:** Virtual C-Suite Advisory Board
 > **Project:** Vahoha — AI-Integrated Developer Learning Platform (homepage now brands it **Vahoha**; see Decision Log)
-> **Basis:** `git log` through 2026-10-01, `backend/app.js` route mounts, `docs/ROADMAP_BUILD_PLAN.md`, `VISION.md` (2026-09-30), and a read of the services named below. Nothing here was verified by running the app or against production data, so "built" means "code exists and is mounted", not "tested with real users".
+> **Basis:** `git log` through 2026-10-01, `backend/app.js` route mounts, `docs/ROADMAP_BUILD_PLAN.md`, `docs/strategy/VISION.md` (2026-09-30), and a read of the services named below. Nothing here was verified by running the app or against production data, so "built" means "code exists and is mounted", not "tested with real users".
 
 ---
 
@@ -49,7 +49,7 @@ The June report said the risk was **last-mile paralysis**: excellent services wi
 
 **The one question that matters now:** *Will a person who is not you finish Layer 1, come back for Layer 2, and tell you what confused them?* You cannot answer it today.
 
-**What the docs now get right.** `VISION.md` was cleaned up on 2026-09-30 and honestly states "zero real users yet; zero revenue yet". `docs/ROADMAP_BUILD_PLAN.md` holds the build detail. That separation is good. Keep it.
+**What the docs now get right.** `docs/strategy/VISION.md` was cleaned up on 2026-09-30 and honestly states "zero real users yet; zero revenue yet". `docs/ROADMAP_BUILD_PLAN.md` holds the build detail. That separation is good. Keep it.
 
 **What to fix.**
 
@@ -145,7 +145,7 @@ signup · path_selected · layer_opened · exam_started · exam_submitted{score,
 
 One `userEvents` collection and a 20-line helper is enough.
 
-**Pass threshold.** 80 is a better starting point than the 90 in the June docs, and `BUSINESS_MODEL.md` still referenced 90/100 until this update. Keep it configurable. Review the first 20 attempts by hand: if everyone passes, the bank is too easy; if almost no one does, the bank is wrong more often than the learners are.
+**Pass threshold.** 80 is a better starting point than the 90 in the June docs, and `docs/strategy/BUSINESS_MODEL.md` still referenced 90/100 until this update. Keep it configurable. Review the first 20 attempts by hand: if everyone passes, the bank is too easy; if almost no one does, the bank is wrong more often than the learners are.
 
 **Question-bank quality is the credibility risk.** The bank was LLM-generated (`examSeeder.js`); your own plan says "review once by hand". Confirm that review happened. A wrong answer key on a gated exam is the fastest way to turn the "earn it" promise into "this is broken" on Reddit.
 
@@ -155,7 +155,7 @@ One `userEvents` collection and a 20-line helper is enough.
 
 ## 5. CMO Advisor — Positioning, ICP & Distribution
 
-The ICP (**Keanu**, 24, self-taught, in the job gap) and positioning are still right. The detailed channel plan lives in `GROWTH_PLAYBOOK.md`, which was refreshed alongside this report.
+The ICP (**Keanu**, 24, self-taught, in the job gap) and positioning are still right. The detailed channel plan lives in `docs/strategy/GROWTH_PLAYBOOK.md`, which was refreshed alongside this report.
 
 Two changes:
 
@@ -205,7 +205,7 @@ The first-hire advice stands: the thing to hand off first is **curriculum conten
 Practical guardrails:
 
 - Time-box building to ~50% of the week until the pilot has run.
-- Treat the DMs in `GROWTH_PLAYBOOK.md` as a daily task with a number (5 a day), not a mood.
+- Treat the DMs in `docs/strategy/GROWTH_PLAYBOOK.md` as a daily task with a number (5 a day), not a mood.
 - Building in public is still the accountability mechanism. Start it the day the name is chosen.
 
 ---
@@ -255,7 +255,7 @@ The June "8-day MVP loop" is done. The remaining path is short:
 | `backend/controllers/authController.js` | `secure: true`; still calls `connectDB()` directly |
 | `backend/routes/auth.routes.js` | Redis counters + `express-rate-limit` fallback on login/signup/reset |
 | `docs/ROADMAP_BUILD_PLAN.md` | Source of truth for build status |
-| `VISION.md` | Business/product framing, last updated 2026-09-30 |
+| `docs/strategy/VISION.md` | Business/product framing, last updated 2026-09-30 |
 
 ---
 

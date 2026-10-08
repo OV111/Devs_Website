@@ -23,7 +23,7 @@ const readSecret = (value) => {
  *   - environment is "sandbox" unless POLAR_ENVIRONMENT is exactly "production",
  *     so a forgotten variable can never charge a real card;
  *   - gates are NOT enforced unless BILLING_ENFORCED is exactly "true" — the
- *     pilot runs everything free (see BUSINESS_MODEL.md).
+ *     pilot runs everything free (see docs/strategy/BUSINESS_MODEL.md).
  */
 export const getBillingConfig = (env = process.env) => ({
   accessToken: readSecret(env.POLAR_ACCESS_TOKEN),

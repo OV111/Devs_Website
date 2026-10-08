@@ -6,7 +6,7 @@ import {
   getVoiceReviewHistory,
 } from "../controllers/voiceReviewController.js";
 
-// Voice AI Progress Review — scaffold only, not implemented. See VISION.md.
+// Voice AI Progress Review — scaffold only, not implemented. See docs/strategy/VISION.md.
 
 const router = Router();
 
