@@ -10,6 +10,7 @@ import RoadmapHero from "./components/RoadmapHero";
 import FloatingLoad from "./components/FloatingLoad";
 import TrackOnboardingPanel from "./components/TrackOnboardingPanel";
 import "./roadmap.css";
+import posthog, { isPostHogConfigured } from "@/lib/posthog";
 
 export default function RoadmapPage() {
   const { selectedCategory, selectedTrack, submitOnboarding, closePanel } = useRoadmapStore();
@@ -27,6 +28,15 @@ export default function RoadmapPage() {
     setSaving(false);
     setPanelOpen(false);
     if (ok) {
+      if (isPostHogConfigured) {
+        posthog.capture("track_onboarding_completed", {
+          track_id: answers.track?.id,
+          skill_level: answers.skillLevel,
+          goal: answers.goal,
+          background: answers.background,
+          weekly_time: answers.weeklyTime,
+        });
+      }
       toast.success("Got it — your mentor will use this to calibrate its answers.");
     } else {
       toast.error("Couldn't save that — your progress on the path itself is unaffected, but try Start Path again to set your level.");

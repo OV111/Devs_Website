@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { API_BASE_URL, setAccessToken, clearAccessToken } from "../../constants/api";
+import posthog, { isPostHogConfigured } from "../lib/posthog";
 
 const useAuthStore = create((set) => ({
   auth: false,
@@ -35,6 +36,7 @@ const useAuthStore = create((set) => ({
     set((state) => ({ auth: true, session: state.session + 1 }));
   },
   logout: async () => {
+    if (isPostHogConfigured) posthog.reset();
     clearAccessToken();
     set({ auth: false });
     try {

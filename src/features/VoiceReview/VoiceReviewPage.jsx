@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useRef } from "react";
 import { Mic, Square, RotateCcw, AlertTriangle } from "lucide-react";
 import useVoiceReviewStore from "@/stores/useVoiceReviewStore";
+import posthog, { isPostHogConfigured } from "@/lib/posthog";
 
 // Voice AI Progress Review — frontend capture only, for now.
-// Uses the browser's built-in Web Speech API (free, client-side) per VISION.md's
+// Uses the browser's built-in Web Speech API (free, client-side) per docs/strategy/VISION.md's
 // free-tier decision. Nothing here is sent to the backend yet — voiceReviewService.js
 // and the /api/voice-review routes are still unimplemented stubs.
 
@@ -61,11 +62,13 @@ const VoiceReviewPage = () => {
     recognitionRef.current = recognition;
     recognition.start();
     setRecording(true);
+    if (isPostHogConfigured) posthog.capture("voice_review_started");
   }, [SpeechRecognitionImpl, isSupported, transcript, setError, setRecording, setTranscript]);
 
   const handleStop = useCallback(() => {
     recognitionRef.current?.stop();
     setRecording(false);
+    if (isPostHogConfigured) posthog.capture("voice_review_stopped");
   }, [setRecording]);
 
   const handleReset = useCallback(() => {

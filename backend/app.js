@@ -43,7 +43,17 @@ export function createApp(db) {
 
   // Security headers for everything below. Mounted after /api-docs on purpose:
   // helmet's default CSP blocks the inline scripts Swagger UI relies on.
-  app.use(helmet());
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          scriptSrc: ["'self'", "https://*.posthog.com"],
+          connectSrc: ["'self'", "https://*.posthog.com"],
+          workerSrc: ["'self'", "blob:"],
+        },
+      },
+    }),
+  );
 
   app.use(
     cors({

@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL, authHeaders } from "../../../../constants/api";
+import posthog, { isPostHogConfigured } from "@/lib/posthog";
 
 /**
  * Propose a new coding challenge.
@@ -279,6 +280,17 @@ export default function ProposeChallenge() {
         throw new Error(data.message || `Request failed (${res.status})`);
       }
       setResult({ slug: data.slug ?? data.data?.slug, status: data.status ?? data.data?.status ?? "pending" });
+      if (isPostHogConfigured) {
+        posthog.capture("challenge_proposal_submitted", {
+          challenge_type: type,
+          difficulty,
+          track_id: body.trackId,
+          layer_id: body.layerId,
+          starter_file_count: body.starterFiles.length,
+          hidden_test_count: body.hiddenTests.length,
+          hint_count: body.hints.length,
+        });
+      }
     } catch (err) {
       setServerError(err.message || "Something went wrong");
     } finally {
