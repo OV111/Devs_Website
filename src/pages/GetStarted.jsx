@@ -361,7 +361,7 @@ const GetStarted = () => {
                 className={`w-full min-h-11 mt-2 py-2.5 px-4 rounded-md text-base sm:text-sm font-semibold text-white transition-colors duration-150 ${
                   isLoading
                     ? "bg-purple-300 dark:bg-purple-950 cursor-not-allowed"
-                    : "bg-purple-600 hover:bg-purple-500 active:bg-purple-700 cursor-pointer"
+                    : "bg-[#7E57FF] hover:bg-[#7E57FF]/90 active:bg-[#7E57FF]/80 cursor-pointer"
                 }`}
               >
                 {isLoading

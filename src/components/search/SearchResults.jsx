@@ -13,7 +13,7 @@ function TagIcon() {
 
 function SectionLabel({ children }) {
   return (
-    <p className="px-3 pt-2 pb-1 text-[10px] font-semibold uppercase tracking-widest text-white/30 select-none">
+    <p className="px-3 pt-2 pb-1.5 text-[11px] font-semibold uppercase tracking-widest text-neutral-400 select-none">
       {children}
     </p>
   );
@@ -22,7 +22,7 @@ function SectionLabel({ children }) {
 function SkeletonRow() {
   return (
     <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl">
-      <div className="h-7 w-7 rounded-full bg-white/10 animate-pulse shrink-0" />
+      <div className="h-8 w-8 rounded-full bg-white/10 animate-pulse shrink-0" />
       <div className="flex-1 space-y-1.5">
         <div className="h-2.5 w-3/5 rounded-full bg-white/10 animate-pulse" />
         <div className="h-2 w-2/5 rounded-full bg-white/5 animate-pulse" />
@@ -86,10 +86,23 @@ export default function SearchResults({ query = "", onSelect, boundaryRef }) {
   const categories = items.filter((item) => item.type === "category");
 
   if (!open) return null;
-  
+
+  const select = (item) => {
+    setOpen(false);
+    onSelect?.(item);
+  };
+
+  // Anchored to the right edge of the search wrapper and 360px wide on desktop, so it is
+  // never as narrow as the 220px animated input it hangs under (full width inside the mobile menu).
   return (
-    <div className="absolute top-[calc(100%+8px)] w-full max-w-[400px] z-50 overflow-hidden rounded-2xl border border-white/10 bg-[#0d0d18]/95 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.7)] backdrop-blur-2xl ring-1 ring-white/5">
-      <div className="max-h-80 overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:w-[7px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-thumb]:rounded-full">
+    <div
+      id="search-results"
+      className="absolute right-0 top-[calc(100%+8px)] z-50 w-full md:w-[360px] overflow-hidden rounded-xl border border-neutral-800 bg-neutral-950 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.8)]"
+    >
+      <div
+        className="max-h-80 overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:w-1 [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.2)_transparent] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-thumb]:rounded-full"
+        aria-busy={isLoading}
+      >
         {isLoading ? (
           <div className="space-y-0.5 p-2">
             <SkeletonRow />
@@ -102,67 +115,46 @@ export default function SearchResults({ query = "", onSelect, boundaryRef }) {
               <div>
                 <SectionLabel>Users</SectionLabel>
                 {users.map((user) => (
-                  <button
+                  <ResultRow
                     key={`${user.type}-${user.id || user.username}`}
-                    type="button"
-                    onClick={() => { setOpen(false); onSelect?.(user); }}
-                    className="group flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left transition-all duration-150 hover:bg-white/[0.07] focus-visible:bg-white/[0.07] focus:outline-none"
-                  >
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-600/40 to-blue-600/25 text-[11px] font-bold uppercase text-violet-300 ring-1 ring-violet-400/25">
-                      {user.title?.[0] ?? "?"}
-                    </span>
-                    <span className="flex-1 min-w-0">
-                      <span className="block truncate text-sm font-medium text-white/80 transition-colors group-hover:text-white">
-                        {user.title}
+                    onClick={() => select(user)}
+                    icon={
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-600/40 to-blue-600/25 text-xs font-bold uppercase text-violet-300 ring-1 ring-violet-400/25">
+                        {user.title?.[0] ?? "?"}
                       </span>
-                      <span className="block truncate text-xs text-white/35 transition-colors group-hover:text-white/55">
-                        @{user.username}
-                      </span>
-                    </span>
-                    <svg className="shrink-0 text-white/20 opacity-0 transition-opacity group-hover:opacity-100" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M9 18l6-6-6-6"/>
-                    </svg>
-                  </button>
+                    }
+                    title={user.title}
+                    subtitle={`@${user.username}`}
+                  />
                 ))}
-                {categories.length > 0 && (
-                  <div>
-                    <SectionLabel>Categories</SectionLabel>
-                    {categories.map((category) => (
-                      <button
-                      key={`${category.type}-${category.id || category.title}`}
-                      type="button"
-                      onClick={() => { setOpen(false); onSelect?.(category); }}
-                      className="group flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left transition-all duration-150 hover:bg-white/[0.07] focus-visible:bg-white/[0.07] focus:outline-none"
-                      >
-                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-400 ring-1 ring-violet-400/20 transition-colors duration-150 group-hover:bg-purple-500/25 group-hover:ring-violet-400/40">
-                          <TagIcon />
-                        </span>
-                        <span className="flex-1 min-w-0">
-                          <span className="block truncate text-sm font-medium text-white/80 transition-colors group-hover:text-white">
-                            {category.title}
-                          </span>
-                        </span>
-                        <svg className="shrink-0 text-white/20 opacity-0 transition-opacity group-hover:opacity-100" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M9 18l6-6-6-6"/>
-                        </svg>
-                      </button>
-                    ))}
-                  </div>
-                )}
               </div>
             )}
 
-            {categories.length > 0 && users.length > 0 && (
-              <div className="my-1.5 mx-2 h-px bg-white/[0.06]" />
+            {users.length > 0 && categories.length > 0 && <div className="mx-2 my-1.5 h-px bg-neutral-800" />}
+
+            {categories.length > 0 && (
+              <div>
+                <SectionLabel>Categories</SectionLabel>
+                {categories.map((category) => (
+                  <ResultRow
+                    key={`${category.type}-${category.id || category.title}`}
+                    onClick={() => select(category)}
+                    icon={
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-violet-500/15 text-violet-400 ring-1 ring-violet-400/20 transition-colors duration-150 group-hover:bg-purple-500/25 group-hover:ring-violet-400/40">
+                        <TagIcon />
+                      </span>
+                    }
+                    title={category.title}
+                  />
+                ))}
+              </div>
             )}
 
-
             {items.length === 0 && (
-              <div className="flex flex-col items-center gap-2 py-8 px-4 text-center">
-                <span className="text-xl text-white/20">⌕</span>
-                <p className="text-sm text-white/35">
-                  No results for{" "}
-                  <span className="font-medium text-white/55">"{query}"</span>
+              <div className="flex flex-col items-center gap-2 px-4 py-8 text-center">
+                <span className="text-xl text-neutral-500" aria-hidden="true">⌕</span>
+                <p className="text-sm text-neutral-400">
+                  No results for <span className="font-medium text-neutral-200">"{query}"</span>
                 </p>
               </div>
             )}
@@ -170,5 +162,28 @@ export default function SearchResults({ query = "", onSelect, boundaryRef }) {
         )}
       </div>
     </div>
+  );
+}
+
+function ResultRow({ icon, title, subtitle, onClick }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="group flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left transition-colors duration-150 hover:bg-white/[0.07] focus-visible:bg-white/[0.07] focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400/60"
+    >
+      {icon}
+      <span className="min-w-0 flex-1">
+        <span className="block truncate text-sm font-medium text-neutral-100">{title}</span>
+        {subtitle && <span className="block truncate text-xs text-neutral-400">{subtitle}</span>}
+      </span>
+      <svg
+        className="shrink-0 text-neutral-500 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+        width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+      >
+        <path d="M9 18l6-6-6-6" />
+      </svg>
+    </button>
   );
 }
