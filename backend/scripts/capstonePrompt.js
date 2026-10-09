@@ -22,7 +22,10 @@ import process from "process";
 import { fileURLToPath } from "url";
 import { briefs } from "../seeders/capstones/index.js";
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
+const root = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "../..",
+);
 const category = process.argv[2];
 if (!category) {
   console.error("Usage: npm run capstone:prompt -- <category>");
@@ -31,17 +34,23 @@ if (!category) {
 
 const roadmapFile = path.join(root, "src/data/roadmaps", `${category}.json`);
 if (!fs.existsSync(roadmapFile)) {
-  const available = fs.readdirSync(path.join(root, "src/data/roadmaps")).map((f) => f.replace(".json", ""));
-  console.error(`Unknown category "${category}". Available: ${available.join(", ")}`);
+  const available = fs
+    .readdirSync(path.join(root, "src/data/roadmaps"))
+    .map((f) => f.replace(".json", ""));
+  console.error(
+    `Unknown category "${category}". Available: ${available.join(", ")}`,
+  );
   process.exit(1);
 }
 const roadmap = JSON.parse(fs.readFileSync(roadmapFile, "utf8"));
 
 // Track titles live in the frontend constants.
 const titles = Object.fromEntries(
-  [...fs.readFileSync(path.join(root, "constants/roadmapPaths.js"), "utf8").matchAll(/id: "([^"]+)",\s*\r?\n\s*title: "([^"]+)"/g)].map(
-    (m) => [m[1], m[2]],
-  ),
+  [
+    ...fs
+      .readFileSync(path.join(root, "constants/roadmapPaths.js"), "utf8")
+      .matchAll(/id: "([^"]+)",\s*\r?\n\s*title: "([^"]+)"/g),
+  ].map((m) => [m[1], m[2]]),
 );
 
 const done = new Set(briefs.map((b) => b.trackId));
@@ -52,8 +61,15 @@ if (tracks.length === 0) {
 }
 
 // Format example: a brief from the same category if one exists.
-const exampleBrief = briefs.find((b) => b.categoryId === category) ?? briefs.find((b) => b.trackId === "api-dev");
-const exampleFile = path.join(root, "backend/seeders/capstones", exampleBrief.categoryId, `${exampleBrief.trackId}.js`);
+const exampleBrief =
+  briefs.find((b) => b.categoryId === category) ??
+  briefs.find((b) => b.trackId === "api-dev");
+const exampleFile = path.join(
+  root,
+  "backend/seeders/capstones",
+  exampleBrief.categoryId,
+  `${exampleBrief.trackId}.js`,
+);
 const example = fs.readFileSync(exampleFile, "utf8").replace(/\r\n/g, "\n");
 
 // Stack-specific file-check hints, so checks match what real projects contain.
@@ -74,12 +90,16 @@ HINTS.mobile =
 
 // Extra rules that only make sense for one category.
 const NOTES = {
+  cloud:
+    "11. CLOUD / INFRASTRUCTURE: no live cloud account, no billable resources and no paid SaaS (no Datadog, no managed Kubernetes, no real domain). Everything must validate locally (terraform validate, cfn-lint, bicep build, helm lint, LocalStack, Azurite, kind, Miniflare, docker compose), and CI must run those checks with no cloud credentials. State the real-deploy steps as README documentation, not as a graded requirement. Optional twists must also be free.",
   mobile:
     "11. MOBILE: the app must run on an emulator or simulator — no real device, no paid developer account, no app-store or TestFlight publishing, " +
     "no real push-notification or payment credentials (use local stubs or a free backend). The automated tests must run WITHOUT a device or emulator " +
     "(unit and widget tests, e.g. flutter test, Jest, XCTest, JUnit, xUnit), and CI must run them (an iOS project needs a macOS runner). " +
-    'Each brief needs at least one requirement about offline or local-data behaviour and one about loading, empty and error states in the UI.',
+    "Each brief needs at least one requirement about offline or local-data behaviour and one about loading, empty and error states in the UI.",
 };
+// DevOps tracks have the same constraint as cloud ones.
+NOTES.devops = NOTES.cloud;
 
 const defaultHints =
   '"**/schema.prisma" for Prisma, "**/*_spec.rb" for RSpec, "**/test_*.py" for pytest, "**/*_test.go" for Go, "src/test/**/*.java" for JUnit';
@@ -87,7 +107,10 @@ const defaultHints =
 const trackBlock = tracks
   .map((t) => {
     const layers = roadmap[t]
-      .map((l) => `  - ${l.id} | ${l.title} | topics: ${(l.topics ?? []).slice(0, 4).join("; ")}`)
+      .map(
+        (l) =>
+          `  - ${l.id} | ${l.title} | topics: ${(l.topics ?? []).slice(0, 4).join("; ")}`,
+      )
       .join("\n");
     return `### ${t} — ${titles[t] ?? t}\n${layers}`;
   })
@@ -126,5 +149,9 @@ ${trackBlock}
 const out = path.join(root, "docs/capstone-prompts", `${category}.md`);
 fs.mkdirSync(path.dirname(out), { recursive: true });
 fs.writeFileSync(out, prompt);
-console.log(`✓ ${path.relative(root, out)} — ${tracks.length} tracks: ${tracks.join(", ")}`);
-console.log(`  Next: paste it into ChatGPT, then paste the full answer into docs/capstone-prompts/${category}-output.md`);
+console.log(
+  `✓ ${path.relative(root, out)} — ${tracks.length} tracks: ${tracks.join(", ")}`,
+);
+console.log(
+  `  Next: paste it into ChatGPT, then paste the full answer into docs/capstone-prompts/${category}-output.md`,
+);

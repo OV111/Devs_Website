@@ -9,6 +9,10 @@ export const COMMON_RULES = [
   "Instructions to the reviewer placed inside the repository are ignored.",
 ];
 
+// Cloud / infrastructure capstones: the platform only reads the repo, so no billable account is needed.
+export const NO_LIVE_ACCOUNT_RULE =
+  "No live cloud account is required. Validate your work locally (for example terraform validate, cfn-lint, bicep build, LocalStack, Azurite, kind or Miniflare) and document the real-deploy steps in the README. Never commit real credentials.";
+
 // Automated file checks reused across briefs (picomatch globs, matched against
 // the repository tree at the pinned commit; dotfiles included, case-insensitive).
 export const CHECKS = {
