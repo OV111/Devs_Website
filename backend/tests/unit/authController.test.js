@@ -155,13 +155,13 @@ describe('login', () => {
     password: 'hashed_password',
   }
 
-  it('returns 404 when the user is not found', async () => {
+  it('returns 401 (same as wrong password) when the user is not found', async () => {
     mockConnectDB.mockResolvedValue(makeDb({ usersFindOnce: [null] }))
 
     const result = await login(credentials)
 
-    expect(result.status).toBe(404)
-    expect(result.message).toMatch(/not found/i)
+    expect(result.status).toBe(401)
+    expect(result.message).toBe('Invalid email or password')
   })
 
   it('returns 401 when the password is incorrect', async () => {
@@ -171,7 +171,7 @@ describe('login', () => {
     const result = await login(credentials)
 
     expect(result.status).toBe(401)
-    expect(result.message).toMatch(/incorrect/i)
+    expect(result.message).toBe('Invalid email or password')
   })
 
   it('returns 200 with token and userId on valid credentials', async () => {

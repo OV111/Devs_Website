@@ -159,16 +159,16 @@ describe('login — integration', () => {
     await signUp(BASE_USER)
   })
 
-  it('returns 404 for an email that does not exist', async () => {
+  it('returns 401 for an email that does not exist (no user enumeration)', async () => {
     const result = await login({ email: 'nobody@test.com', password: 'pass' })
-    expect(result.status).toBe(404)
-    expect(result.message).toMatch(/not found/i)
+    expect(result.status).toBe(401)
+    expect(result.message).toBe('Invalid email or password')
   })
 
   it('returns 401 for the correct email but wrong password', async () => {
     const result = await login({ email: BASE_USER.email, password: 'wrongpassword' })
     expect(result.status).toBe(401)
-    expect(result.message).toMatch(/incorrect/i)
+    expect(result.message).toBe('Invalid email or password')
   })
 
   it('returns 200 with a token and userId for valid credentials', async () => {

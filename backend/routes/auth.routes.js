@@ -18,6 +18,8 @@ import {
 } from "../controllers/authController.js";
 import { verifyToken } from "../utils/jwtToken.js";
 import { redisConnection } from "../config/redis.js";
+import { validate } from "../middleware/validate.js";
+import { signupSchema, loginSchema } from "../validation/auth.schemas.js";
 
 // Sends the controller's result as JSON but strips the refresh token first —
 // it must only ever leave the server as the httpOnly cookie already set by
@@ -40,6 +42,7 @@ const SIGNUP_WINDOW_SECONDS = 60 * 60; // 1 hour
 const loginLimiter = rateLimit({
   windowMs: LOGIN_WINDOW_SECONDS * 1000,
   max: LOGIN_MAX_ATTEMPTS,
+  skipSuccessfulRequests: true, // only failed logins count toward the lockout
   standardHeaders: true,
   legacyHeaders: false,
   message: { message: "Too many login attempts. Try again later.", code: 429 },
@@ -48,6 +51,7 @@ const loginLimiter = rateLimit({
 const signupLimiter = rateLimit({
   windowMs: SIGNUP_WINDOW_SECONDS * 1000,
   max: SIGNUP_MAX_ATTEMPTS,
+  skipSuccessfulRequests: true,
   standardHeaders: true,
   legacyHeaders: false,
   message: { message: "Too many sign-up attempts. Try again later.", code: 429 },
@@ -160,7 +164,7 @@ router.post("/accept-cookies", (req, res) => {
  *       500:
  *         description: Server error
  */
-router.post("/get-started", signupLimiter, async (req, res) => {
+router.post("/get-started", signupLimiter, validate({ body: signupSchema }), async (req, res) => {
   try {
     const ip = getClientIp(req);
     const signupKey = `signup:ip:${ip}`;
@@ -180,10 +184,10 @@ router.post("/get-started", signupLimiter, async (req, res) => {
       setRefreshCookie(res, result.refreshToken);
     }
     respondWithoutRefreshToken(res, result);
-  } catch (err) {
+  } catch {
     res
       .status(500)
-      .json({ message: "Server Error.", code: 500, error: err.message });
+      .json({ message: "Server Error.", code: 500 });
   }
 });
 
@@ -215,7 +219,7 @@ router.post("/get-started", signupLimiter, async (req, res) => {
  *       429:
  *         description: Too many failed attempts
  */
-router.post("/login", loginLimiter, async (req, res) => {
+router.post("/login", loginLimiter, validate({ body: loginSchema }), async (req, res) => {
   try {
     const ip = getClientIp(req);
     const email = (req.body.email || "").toLowerCase().trim();
@@ -248,7 +252,7 @@ router.post("/login", loginLimiter, async (req, res) => {
         redisConnection.del(emailKey),
       ]);
       setRefreshCookie(res, result.refreshToken);
-    } else if ([401, 404].includes(result.status)) {
+    } else if (result.status === 401) {
       await Promise.all([
         redisIncr(ipKey, LOGIN_WINDOW_SECONDS),
         redisIncr(emailKey, LOGIN_WINDOW_SECONDS),

@@ -160,17 +160,16 @@ const login = async (data) => {
   // const decoded = verifyToken(localStorage.getItem("JWT"))
   // if !decoded return 403 forbidden
 
-  if (!user) {
-    return {
-      status: 404,
-      message: "User is not Found!",
-    };
-  }
-  const isMatch = await verifyPassword(password, user.password);
+  // Same status and message for "no such user", "OAuth-only account (no
+  // password)" and "wrong password", so the response can't be used to find
+  // out which emails are registered.
+  const isMatch = user?.password
+    ? await verifyPassword(password, user.password)
+    : false;
   if (!isMatch) {
     return {
       status: 401,
-      message: "Password is incorrect",
+      message: "Invalid email or password",
     };
   }
   const defaultStatsOnInsert = buildDefaultUserStats(user._id);
@@ -205,7 +204,12 @@ const googleAuth = async (data) => {
       audience: process.env.GOOGLE_CLIENT_ID,
     });
     const payload = ticket.getPayload();
-    const { email, given_name, family_name, sub: googleId } = payload;
+    const { email, given_name, family_name, sub: googleId, email_verified } = payload;
+    // An unverified Google email must not be trusted to match (or create) an
+    // account that owns that address.
+    if (!email || !email_verified) {
+      return { status: 401, message: "Google email is not verified" };
+    }
 
     let user = await users.findOne({ email });
     if (!user) {
@@ -318,6 +322,13 @@ const githubCallback = async (req, res) => {
 
     const emailData = await emailRes.json();
 
+    // A failed code exchange (bad/denied/expired code) returns no access_token
+    // and no user id. Bail out before the lookup below: with githubId
+    // undefined it would match any user that has no githubId.
+    if (!accessToken || !userData?.id) {
+      return res.redirect(`${process.env.FRONTEND_URL}/oauth-failure?reason=exchange`);
+    }
+
     const emails = Array.isArray(emailData) ? emailData : [];
 
     const primaryEmail =
@@ -346,15 +357,18 @@ const githubCallback = async (req, res) => {
     }
 
     // Sign-in mode
-    let user = await users.findOne({
-      $or: [{ githubId }, { email: primaryEmail }],
-    });
+    // Only match by email when GitHub gave us a verified one: `{ email: null }`
+    // matches every user that has no email, which would log this GitHub user
+    // in as somebody else.
+    const matchers = [{ githubId }];
+    if (primaryEmail) matchers.push({ email: primaryEmail.toLowerCase() });
+    let user = await users.findOne({ $or: matchers });
     if (!user) {
       const baseUsername = sanitizeUsername(githubLogin) || "dev";
       const finalUsername = await findUniqueUsername(users, baseUsername);
       const result = await users.insertOne({
         username: finalUsername,
-        email: primaryEmail,
+        email: primaryEmail ? primaryEmail.toLowerCase() : null,
         githubId,
         githubLogin,
         provider: "github",

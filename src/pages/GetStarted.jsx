@@ -278,15 +278,18 @@ const GetStarted = () => {
                     maxLength={72}
                     {...register("password", {
                       required: "Password is required.",
-                      minLength: {
-                        value: 6,
-                        message: "At least 6 characters.",
-                      },
+                      minLength: isSignedUp
+                        ? { value: 6, message: "At least 6 characters." }
+                        : undefined,
                       maxLength: { value: 72, message: "Max 72 characters." },
-                      pattern: {
-                        value: /^(?=.*[!@#$%^&*])/,
-                        message: "Must include at least one symbol (!@#$%^&*).",
-                      },
+                      // Symbol rule is signup-only: on login it would block
+                      // existing passwords and leak the password policy.
+                      pattern: isSignedUp
+                        ? {
+                            value: /[!@#$%^&*()]/,
+                            message: "Must include at least one symbol (!@#$%^&*()).",
+                          }
+                        : undefined,
                     })}
                     placeholder="••••••••"
                     className={`${inputBase} pr-11 ${errors.password ? inputError : inputNormal}`}
