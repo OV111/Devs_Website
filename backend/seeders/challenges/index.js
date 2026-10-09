@@ -178,6 +178,12 @@ import narrowPhase from "./web-game/narrow-phase.js";
 import raycast from "./web-game/raycast.js";
 import resolveSphereCollision from "./web-game/resolve-sphere-collision.js";
 
+import glslMath from "./web-game/glsl-math.js";
+import imageFilter from "./web-game/image-filter.js";
+import renderShader from "./web-game/render-shader.js";
+import valueNoise from "./web-game/value-noise.js";
+import waveSurface from "./web-game/wave-surface.js";
+
 export const challenges = [
   asyncErrorWrapper,
   streamingFileUpload,
@@ -341,4 +347,9 @@ export const challenges = [
   narrowPhase,
   raycast,
   resolveSphereCollision,
+  glslMath,
+  imageFilter,
+  renderShader,
+  valueNoise,
+  waveSurface,
 ];
