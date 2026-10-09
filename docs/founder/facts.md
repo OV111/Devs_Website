@@ -1,0 +1,1 @@
+- 2026-10-04 /founder:validate-idea: Idea is Build Teams, capstone passers grouped by shared aim, tracked/reviewed/defended tasks, inactive members released, vacancies posted.
