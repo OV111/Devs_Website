@@ -87,6 +87,7 @@ const CatPawButton = ({ className }) => {
                 r={dotR}
                 fill={color}
                 filter={`url(#glow-${i})`}
+                initial={{ cx: keyframes[i].cx[0], cy: keyframes[i].cy[0] }}
                 animate={{
                   cx: keyframes[i].cx,
                   cy: keyframes[i].cy,

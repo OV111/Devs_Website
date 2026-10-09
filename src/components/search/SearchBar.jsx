@@ -1,4 +1,4 @@
-import SearchIcon from "@mui/icons-material/Search";
+import { Search } from "lucide-react";
 export default function SearchBar({
   value,
   onChange,
@@ -18,7 +18,7 @@ export default function SearchBar({
       className="w-full max-w-[480px]"
     >
       <div className="relative flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-1 text-white/10 backdrop-blur">
-        <SearchIcon className="text-white/75" sx={{ fontSize: 20 }} />
+        <Search className="size-5 shrink-0 text-white/75" aria-hidden="true" />
         <input
           type="search"
           value={value}
