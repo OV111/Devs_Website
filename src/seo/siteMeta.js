@@ -11,7 +11,7 @@ export const SITE_NAME = "Vahoha";
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 
 export const DEFAULT_META = {
-  title: "Vahoha: earn your developer roadmap, layer by layer",
+  title: "Vahoha",
   description:
     "Pass a graded exam to unlock each step of your developer roadmap, with an AI mentor that knows your weak spots.",
 };
