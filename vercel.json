@@ -1,3 +1,17 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/categories/fundamentals", "destination": "/foundations", "permanent": true }
+  ],
+  "rewrites": [
+    {
+      "source": "/:section(posts|verify|evidence|candidate|users|my-profile|get-started|forgot-password|reset-password|oauth-success|ai-agent|billing|progress|team|capstone|blogs|libs|coding-challenges|voice-review|roadmaps/exam)/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/:section(get-started|forgot-password|reset-password|oauth-success|ai-agent|billing|progress|team|capstone|blogs|libs|coding-challenges|voice-review|my-profile|users)",
+      "destination": "/index.html"
+    }
+  ]
 }

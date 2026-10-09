@@ -1,5 +1,5 @@
 import useProfileStore from "@/stores/useProfileStore";
-import hexLogo from "@/assets/vahoha_mark_circle.png";
+import hexLogo from "@/assets/vahoha_mark_circle_96.webp";
 import TextType from "@/components/effects/TextType";
 
 function getGreeting() {

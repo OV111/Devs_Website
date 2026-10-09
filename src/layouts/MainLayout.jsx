@@ -4,6 +4,8 @@ import { Outlet, ScrollRestoration } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import LoadingSuspense from "../components/feedback/LoadingSuspense";
+import RouteSeo from "../seo/RouteSeo";
+import PrerenderHandoff from "../seo/PrerenderHandoff";
 const MainLayout = () => {
   // const { pathname } = useLocation();
   // const isAgentChat = pathname === "/ai-agent/chat";
@@ -23,10 +25,12 @@ const MainLayout = () => {
           at the top (or at the #hash target), and Back/Forward restore where
           you were. Replaces per-page window.scrollTo(0, 0) effects. */}
       <ScrollRestoration />
+      <RouteSeo />
       <Navbar />
       <main className="min-h-dvh">
         <Suspense fallback={<LoadingSuspense />}>
           <Outlet />
+          <PrerenderHandoff />
         </Suspense>
       </main>
       <Footer />

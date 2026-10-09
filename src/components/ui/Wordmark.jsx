@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import vahohaMark from "@/assets/vahoha_mark_circle.png";
+import vahohaMark from "@/assets/vahoha_mark_circle_96.webp";
 
 // The brand name is a logo, so it must render identically everywhere: same
 // typeface as the hero headline (Geist), same weight, same tracking. Only the
@@ -25,7 +25,7 @@ const Wordmark = ({ size = "md", className, markOnMobile = false }) => (
   >
     {markOnMobile ? (
       <>
-        <img src={vahohaMark} alt="" className="block h-8 w-8 rounded-full md:hidden" />
+        <img src={vahohaMark} alt="" width={32} height={32} className="block h-8 w-8 rounded-full md:hidden" />
         <span className="hidden md:inline">Vahoha</span>
       </>
     ) : (

@@ -74,7 +74,9 @@ const DataScience = lazy(() => import("./pages/CategoryPages/DataScience"));
 const DevOps = lazy(() => import("./pages/CategoryPages/DevOps"));
 const GameDev = lazy(() => import("./pages/CategoryPages/GameDev"));
 
-const router = createBrowserRouter([
+// Exported on its own so the build-time prerender (src/entry-prerender.jsx)
+// can render the same routes on the server with a static router.
+export const routes = [
   {
     element: <MainLayout />,
     errorElement: <NotFound />,
@@ -175,5 +177,8 @@ const router = createBrowserRouter([
     ],
   },
   { path: "*", element: <NotFound /> },
-]);
+];
+
+// createBrowserRouter touches window, so only create it in the browser.
+const router = typeof window !== "undefined" ? createBrowserRouter(routes) : null;
 export default router;

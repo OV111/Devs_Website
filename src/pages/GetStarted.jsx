@@ -4,7 +4,7 @@ import { Toaster, toast } from "react-hot-toast";
 import { Eye, EyeOff } from "lucide-react";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import useAuthStore from "../stores/useAuthStore";
-import { GoogleLogin } from "@react-oauth/google";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { sanitizeInput } from "../utils/sanitize";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
@@ -363,8 +363,8 @@ const GetStarted = () => {
                 disabled={isLoading}
                 className={`w-full min-h-11 mt-2 py-2.5 px-4 rounded-md text-base sm:text-sm font-semibold text-white transition-colors duration-150 ${
                   isLoading
-                    ? "bg-purple-300 dark:bg-purple-950 cursor-not-allowed"
-                    : "bg-[#7E57FF] hover:bg-[#7E57FF]/90 active:bg-[#7E57FF]/80 cursor-pointer"
+                    ? "bg-fuchsia-300 dark:bg-fuchsia-950 cursor-not-allowed"
+                    : "bg-fuchsia-600 hover:bg-fuchsia-700 active:bg-fuchsia-800 cursor-pointer"
                 }`}
               >
                 {isLoading
@@ -439,4 +439,12 @@ const GetStarted = () => {
   );
 };
 
-export default GetStarted;
+// The provider loads Google's ~100 KB sign-in script. Scoping it to this page
+// (the only one with Google login) keeps it off every other page.
+const GetStartedWithGoogle = () => (
+  <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+    <GetStarted />
+  </GoogleOAuthProvider>
+);
+
+export default GetStartedWithGoogle;
